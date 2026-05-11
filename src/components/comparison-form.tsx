@@ -5,12 +5,8 @@ import { useEffect, useState, useTransition } from "react";
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
+import { type ComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import type { BrainState, ComparisonResult } from "@/types/watch";
-
-interface ComparisonResponse {
-  comparison: ComparisonResult;
-  brain: BrainState;
-}
 
 interface BrainResponse {
   brain: BrainState;
@@ -62,30 +58,12 @@ export function ComparisonForm() {
     setError(null);
     setBrain(null);
 
-    const response = await fetch("/api/compare", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        leftInput: nextLeft,
-        rightInput: nextRight
-      })
-    });
-
-    const payload = (await response.json()) as ComparisonResponse | { error: string };
+    const payload = await requestComparison(nextLeft, nextRight);
 
     if (isErrorResponse(payload)) {
       setResult(null);
       setBrain(null);
       setError(payload.error);
-      return;
-    }
-
-    if (!response.ok) {
-      setResult(null);
-      setBrain(null);
-      setError("The comparison request failed. Try again.");
       return;
     }
 

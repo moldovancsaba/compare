@@ -7,10 +7,9 @@
     "operational-hardening"
   ],
   "known_risks": [
-    "client compare flow needs controlled network and malformed-response handling",
     "Trinity Brain worker needs live Atlas-backed validation before issues #30 and #31 can be closed",
     "example environment files must never contain real service credentials",
-    "npm audit reports a known moderate Next/PostCSS advisory tracked by GitHub issue #19"
+    "npm audit clean pass currently depends on an npm PostCSS override until Next ships a patched transitive dependency"
   ],
   "last_completed_tasks": [
     {
@@ -32,12 +31,20 @@
     {
       "date": "2026-05-11",
       "summary": "Added the Trinity Brain worker bridge, Brain status UI, feedback capture, and sanitized environment template"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Resolved the Next/PostCSS audit advisory with a PostCSS override and hardened client compare error handling"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Added GitHub Actions CI for install, lint, test, typecheck, build, and production dependency audit"
     }
   ],
   "blocked_items": [
     {
-      "item": "Dependency audit clean pass",
-      "reason": "npm audit runs but reports the known Next/PostCSS moderate advisory tracked by issue #19"
+      "item": "Live Trinity Brain validation",
+      "reason": "Issues #30 and #31 still need Atlas-backed worker completion, persistence, and feedback-consumption validation"
     }
   ]
 }

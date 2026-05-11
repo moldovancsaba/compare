@@ -99,7 +99,9 @@ Current status on 2026-05-11:
 - typecheck: pass
 - test: pass
 - build: pass
-- audit: blocked by `next@16.2.6` shipping `postcss@8.4.31` internally. `npm audit --omit=dev` reports two moderate vulnerabilities tied to that upstream dependency chain.
+- audit: pass through a root `postcss` override that patches Next's transitive PostCSS dependency until Next ships an updated internal pin.
+
+GitHub Actions runs install, lint, test, typecheck, build, and production dependency audit gates on pushes to `main` and on pull requests.
 
 ## Documentation map
 - Product overview: `README.md`
@@ -107,7 +109,7 @@ Current status on 2026-05-11:
 - Release history: `10_Release_Notes.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes resolver matching and ambiguity rejection, `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, and repeated-request rate limiting.
+Current automated route coverage includes resolver matching and ambiguity rejection, `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, and client handling for network failures, non-JSON errors, and malformed successful payloads.
 
 ## Codex automation
 {compare} uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.

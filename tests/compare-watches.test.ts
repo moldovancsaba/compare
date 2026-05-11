@@ -4,6 +4,7 @@ import { GET as GET_BRAIN } from "@/app/api/compare/brain/route";
 import { POST as POST_FEEDBACK } from "@/app/api/compare/feedback/route";
 import { POST } from "@/app/api/compare/route";
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
+import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
@@ -296,5 +297,45 @@ describe("POST /api/compare", () => {
     expect(limitedResponse.status).toBe(429);
     expect(limitedResponse.headers.get("Retry-After")).toBeTruthy();
     expect(payload.error).toContain("Too many comparison requests");
+  });
+
+  it("handles network failures as controlled client errors", async () => {
+    const payload = await requestComparison("Rolex Air-King", "Rolex Explorer", async () => {
+      throw new Error("network down");
+    });
+
+    expect(payload).toEqual({
+      error: "The comparison request failed. Try again."
+    });
+  });
+
+  it("handles non-json error responses as controlled client errors", async () => {
+    const payload = await readComparisonResponse(
+      new Response("<html>server error</html>", {
+        status: 500,
+        headers: {
+          "Content-Type": "text/html"
+        }
+      })
+    );
+
+    expect(payload).toEqual({
+      error: "The comparison request failed. Try again."
+    });
+  });
+
+  it("handles malformed successful comparison payloads as controlled client errors", async () => {
+    const payload = await readComparisonResponse(
+      Response.json(
+        {
+          comparison: null
+        },
+        { status: 200 }
+      )
+    );
+
+    expect(payload).toEqual({
+      error: "The comparison request failed. Try again."
+    });
   });
 });
