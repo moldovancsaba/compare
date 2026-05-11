@@ -54,7 +54,9 @@ const savedComparisonSchema = new Schema(
     deterministicResult: { type: Schema.Types.Mixed, required: true },
     brainResult: { type: Schema.Types.Mixed, default: null },
     selectedRecommendation: { type: Schema.Types.Mixed, default: null },
-    traceRef: { type: String, default: null }
+    traceRef: { type: String, default: null },
+    feedbackSummary: { type: Schema.Types.Mixed, default: null },
+    lastFeedbackAt: { type: Date, default: null }
   },
   {
     collection: "saved_comparisons",
@@ -86,7 +88,14 @@ const comparisonFeedbackSchema = new Schema(
     note: { type: String, default: null },
     source: { type: String, default: "comparison_result" },
     processedByTrinity: { type: Boolean, default: false, index: true },
-    processedAt: { type: Date, default: null }
+    processingStatus: {
+      type: String,
+      enum: ["pending", "processed", "skipped"],
+      default: "pending",
+      index: true
+    },
+    processedAt: { type: Date, default: null },
+    processingError: { type: String, default: null }
   },
   {
     collection: "comparison_feedback",

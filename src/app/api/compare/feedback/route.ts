@@ -47,7 +47,8 @@ export async function POST(request: Request) {
       signal: payload.signal,
       note: payload.note || null,
       source: "comparison_result",
-      processedByTrinity: false
+      processedByTrinity: false,
+      processingStatus: "pending"
     });
 
     return NextResponse.json({

@@ -252,6 +252,7 @@ Already started in `{compare}`:
 - `/Users/Shared/Projects/compare/src/components/comparison-result.tsx` lets visitors mark useful, wrong, missing-context, and chosen-watch outcomes without blocking the comparison flow.
 - `/Users/Shared/Projects/compare/src/app/api/compare/route.ts` still returns deterministic `compareWatches` immediately and includes Brain queue status metadata.
 - `/Users/Shared/Projects/compare/scripts/trinity-compare-worker.mjs` claims queued Atlas jobs, invokes Trinity `reason-compare`, writes `comparison_traces`, updates `saved_comparisons`, and marks jobs completed/failed.
+- The same worker now consumes unprocessed `comparison_feedback` records, marks them `processed` or `skipped`, and rolls durable signal counts into `saved_comparisons.feedbackSummary` for later Trinity learning.
 - `npm run brain:worker` runs the continuous local worker; `npm run brain:worker:once` processes one queued job.
 
 Already started in `{trinity}`:

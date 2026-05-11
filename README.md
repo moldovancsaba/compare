@@ -75,9 +75,10 @@ Worker-specific optional environment variables:
 TRINITY_REPO=/Users/Shared/Projects/trinity
 COMPARE_BRAIN_WORKER_POLL_MS=30000
 COMPARE_BRAIN_TRINITY_TIMEOUT_MS=120000
+COMPARE_BRAIN_FEEDBACK_BATCH_SIZE=25
 ```
 
-The worker at `scripts/trinity-compare-worker.mjs` claims `compare_jobs`, invokes `{trinity}` with `reason-compare --adapter compare`, writes `comparison_traces`, updates `saved_comparisons`, and marks jobs `completed` or `failed`.
+The worker at `scripts/trinity-compare-worker.mjs` claims `compare_jobs`, invokes `{trinity}` with `reason-compare --adapter compare`, writes `comparison_traces`, updates `saved_comparisons`, marks jobs `completed` or `failed`, and consumes unprocessed `comparison_feedback` records into each saved comparison's `feedbackSummary`.
 
 ## Supported watches in V1
 - Rolex Air-King 126900

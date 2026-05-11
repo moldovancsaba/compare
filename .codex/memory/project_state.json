@@ -39,12 +39,16 @@
     {
       "date": "2026-05-11",
       "summary": "Added GitHub Actions CI for install, lint, test, typecheck, build, and production dependency audit"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Added Trinity worker feedback consumption and durable saved-comparison feedback summaries"
     }
   ],
   "blocked_items": [
     {
       "item": "Live Trinity Brain validation",
-      "reason": "Issues #30 and #31 still need Atlas-backed worker completion, persistence, and feedback-consumption validation"
+      "reason": "Issues #30 and #31 still need Atlas-backed worker completion and persistence validation; no local .env or .env.local with MONGODB_URI is present"
     }
   ]
 }

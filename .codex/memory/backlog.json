@@ -10,7 +10,7 @@
       "github_issue": 31,
       "title": "Validate Trinity feedback persistence and worker consumption",
       "priority": "high",
-      "reason": "Feedback capture is implemented with fallback behavior, but live persistence and worker processing still need validation."
+      "reason": "Feedback capture and worker-side summary processing are implemented, but live Atlas persistence and consumption still need validation."
     }
   ],
   "selection_policy": "Prefer one issue-scoped task per implementer heartbeat. Choose tasks that can be verified locally, committed, and pushed directly to origin/main without force pushes."

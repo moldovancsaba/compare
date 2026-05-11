@@ -78,6 +78,37 @@ describe("compareWatches", () => {
   });
 });
 
+describe("Trinity feedback summaries", () => {
+  it("rolls visitor feedback into durable signal counts", async () => {
+    // The worker helper is plain Node ESM so the runtime script can execute without a TS build step.
+    // @ts-expect-error TypeScript does not resolve declarations for this local .mjs worker helper.
+    const { applyFeedbackSignal } = await import("../scripts/trinity-feedback-summary.mjs");
+    const firstSummary = applyFeedbackSignal(null, {
+      signal: "helpful",
+      createdAt: "2026-05-11T18:00:00.000Z",
+      traceRef: "trace-1"
+    });
+    const secondSummary = applyFeedbackSignal(firstSummary, {
+      signal: "chose_right",
+      createdAt: "2026-05-11T18:05:00.000Z",
+      note: "Explorer fit better."
+    });
+
+    expect(secondSummary.total).toBe(2);
+    expect(secondSummary.bySignal).toEqual({
+      helpful: 1,
+      chose_right: 1
+    });
+    expect(secondSummary.choiceCounts).toEqual({
+      left: 0,
+      right: 1
+    });
+    expect(secondSummary.sentimentScore).toBe(2);
+    expect(secondSummary.latestSignal).toBe("chose_right");
+    expect(secondSummary.latestNote).toBe("Explorer fit better.");
+  });
+});
+
 describe("POST /api/compare", () => {
   beforeEach(() => {
     resetRateLimitForTests();

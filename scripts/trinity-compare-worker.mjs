@@ -8,6 +8,8 @@ import path from "node:path";
 
 import mongoose from "mongoose";
 
+import { applyFeedbackSignal } from "./trinity-feedback-summary.mjs";
+
 const DEFAULT_TRINITY_REPO = "/Users/Shared/Projects/trinity";
 const DEFAULT_DB_NAME = "compare";
 const DEFAULT_POLL_INTERVAL_MS = 30_000;
@@ -80,10 +82,51 @@ const savedComparisonSchema = new mongoose.Schema(
     deterministicResult: { type: mongoose.Schema.Types.Mixed, required: true },
     brainResult: { type: mongoose.Schema.Types.Mixed, default: null },
     selectedRecommendation: { type: mongoose.Schema.Types.Mixed, default: null },
-    traceRef: { type: String, default: null }
+    traceRef: { type: String, default: null },
+    feedbackSummary: { type: mongoose.Schema.Types.Mixed, default: null },
+    lastFeedbackAt: { type: Date, default: null }
   },
   {
     collection: "saved_comparisons",
+    timestamps: true
+  }
+);
+
+const comparisonFeedbackSchema = new mongoose.Schema(
+  {
+    comparisonRef: { type: String, required: true, index: true },
+    leftWatchId: { type: String, required: true, index: true },
+    rightWatchId: { type: String, required: true, index: true },
+    traceRef: { type: String, default: null, index: true },
+    signal: {
+      type: String,
+      enum: [
+        "helpful",
+        "not_helpful",
+        "chose_left",
+        "chose_right",
+        "opposite_preferred",
+        "bad_recommendation",
+        "missing_context",
+        "wrong_spec"
+      ],
+      required: true,
+      index: true
+    },
+    note: { type: String, default: null },
+    source: { type: String, default: "comparison_result" },
+    processedByTrinity: { type: Boolean, default: false, index: true },
+    processingStatus: {
+      type: String,
+      enum: ["pending", "processed", "skipped"],
+      default: "pending",
+      index: true
+    },
+    processedAt: { type: Date, default: null },
+    processingError: { type: String, default: null }
+  },
+  {
+    collection: "comparison_feedback",
     timestamps: true
   }
 );
@@ -93,6 +136,8 @@ const ComparisonTrace =
   mongoose.models.ComparisonTrace || mongoose.model("ComparisonTrace", comparisonTraceSchema);
 const SavedComparison =
   mongoose.models.SavedComparison || mongoose.model("SavedComparison", savedComparisonSchema);
+const ComparisonFeedback =
+  mongoose.models.ComparisonFeedback || mongoose.model("ComparisonFeedback", comparisonFeedbackSchema);
 
 main().catch(async (error) => {
   log("error", error.stack || error.message || String(error));
@@ -112,8 +157,15 @@ async function main() {
   log("info", `Connected to MongoDB database ${process.env.MONGODB_DB_NAME || DEFAULT_DB_NAME}.`);
 
   if (runOnce) {
-    const processed = await processNextJob();
-    log("info", processed ? "Processed one compare job." : "No queued compare jobs found.");
+    const processedJob = await processNextJob();
+    const processedFeedback = await processFeedbackBatch();
+    log(
+      "info",
+      [
+        processedJob ? "Processed one compare job." : "No queued compare jobs found.",
+        `Processed ${processedFeedback.processed} feedback record(s); skipped ${processedFeedback.skipped}.`
+      ].join(" ")
+    );
     await disconnect();
     return;
   }
@@ -124,6 +176,7 @@ async function main() {
 
   while (true) {
     await processNextJob();
+    await processFeedbackBatch();
     await sleep(numberEnv("COMPARE_BRAIN_WORKER_POLL_MS", DEFAULT_POLL_INTERVAL_MS));
   }
 }
@@ -200,6 +253,70 @@ async function processNextJob() {
     return true;
   }
 }
+
+async function processFeedbackBatch() {
+  const feedbackRecords = await ComparisonFeedback.find({
+    processedByTrinity: false,
+    processingStatus: { $ne: "skipped" }
+  })
+    .sort({ createdAt: 1 })
+    .limit(numberEnv("COMPARE_BRAIN_FEEDBACK_BATCH_SIZE", 25));
+
+  const result = {
+    processed: 0,
+    skipped: 0
+  };
+
+  for (const feedback of feedbackRecords) {
+    const savedComparison = await SavedComparison.findOne({ comparisonRef: feedback.comparisonRef });
+    if (!savedComparison) {
+      await ComparisonFeedback.updateOne(
+        { _id: feedback._id },
+        {
+          $set: {
+            processingStatus: "skipped",
+            processedAt: new Date(),
+            processingError: "No saved comparison found for feedback comparisonRef."
+          }
+        }
+      );
+      result.skipped += 1;
+      continue;
+    }
+
+    const feedbackSummary = applyFeedbackSignal(savedComparison.feedbackSummary, feedback);
+    await Promise.all([
+      SavedComparison.updateOne(
+        { _id: savedComparison._id },
+        {
+          $set: {
+            feedbackSummary,
+            lastFeedbackAt: feedback.createdAt || new Date()
+          }
+        }
+      ),
+      ComparisonFeedback.updateOne(
+        { _id: feedback._id },
+        {
+          $set: {
+            processedByTrinity: true,
+            processingStatus: "processed",
+            processedAt: new Date(),
+            processingError: null
+          }
+        }
+      )
+    ]);
+    result.processed += 1;
+  }
+
+  if (result.processed || result.skipped) {
+    log("info", `Feedback batch processed=${result.processed} skipped=${result.skipped}.`);
+  }
+
+  return result;
+}
+
 
 function buildTrinityPayload(job) {
   const result = job.deterministicResult || {};
