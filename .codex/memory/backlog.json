@@ -19,12 +19,6 @@
       "reason": "The UI should fail gracefully when transport or platform errors occur."
     },
     {
-      "github_issue": 13,
-      "title": "Add API route tests for validation, unsupported inputs, and duplicate watch handling",
-      "priority": "medium",
-      "reason": "The API is the core backend contract and currently lacks route-level coverage."
-    },
-    {
       "github_issue": 15,
       "title": "Add GitHub Actions CI for lint, test, and build",
       "priority": "medium",
