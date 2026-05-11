@@ -1,73 +1,60 @@
-# Welcome to your Lovable project
+# SpecDiff
 
-## Project info
+SpecDiff is a Next.js webapp that compares enthusiast products by consequences instead of raw spec tables. V1 is intentionally narrow: mechanical watches only.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## What it does
+- Accepts two watch names or supported product URLs.
+- Resolves them against a curated mechanical watch catalog.
+- Generates:
+  - Key Differences
+  - Real-World Impact
+  - Who Should Buy Which
+  - Overpriced Features
+  - Hidden Downsides
+  - Better Value Alternative
+- Highlights what is meaningful versus mostly marketing.
 
-## How can I edit this code?
+## Why it exists
+Most comparison content is bloated, repetitive, and detached from real ownership. SpecDiff compresses the usual review-tab spiral into one focused screen that explains what changes on wrist and why that matters.
 
-There are several ways of editing your application.
+## Stack
+- Next.js 16 App Router
+- React 19
+- TypeScript strict mode
+- Tailwind CSS 4
+- Mongoose connection utility for MongoDB Atlas
+- Vitest for unit tests
 
-**Use Lovable**
+## Local setup
+1. Install dependencies with `npm install`.
+2. Start the app with `npm run dev`.
+3. Open `http://localhost:3000`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Optional environment variables:
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+MONGODB_URI=
+MONGODB_DB_NAME=specdiff
 ```
 
-**Edit a file directly in GitHub**
+V1 does not require MongoDB to run because it ships with a curated watch catalog. The database hook is present so later persistence can be added without changing the app shape.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Supported watches in V1
+- Rolex Air-King 126900
+- Rolex Explorer 124270
+- Tudor Black Bay 54
+- Tudor Black Bay 58
+- Tudor Pelagos 39
+- Omega Seamaster Aqua Terra 38
 
-**Use GitHub Codespaces**
+## Quality gates
+- `npm run lint`
+- `npm run test`
+- `npm run build`
+- `npm audit --omit=dev`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Current status on 2026-05-11:
+- lint: pass
+- test: pass
+- build: pass
+- audit: blocked by `next@16.2.6` shipping `postcss@8.4.31` internally. `npm audit --omit=dev` reports two moderate vulnerabilities tied to that upstream dependency chain.
