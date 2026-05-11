@@ -5,7 +5,7 @@ SpecDiff is a narrow V1 product for comparing mechanical watches by real ownersh
 
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`.
-- API: `/api/compare` validates requests, resolves watches, blocks duplicate comparisons, and returns comparison output.
+- API: `/api/compare` applies basic per-client rate limiting, validates requests, resolves watches, blocks duplicate comparisons, and returns comparison output.
 - Domain logic: `src/lib/services/compare-watches.ts` builds deterministic comparison sections.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated catalog.
 - Persistence readiness: `src/lib/db.ts` and `src/lib/models/watch.ts` are scaffolding for future MongoDB-backed persistence.
@@ -32,7 +32,7 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/specd
 
 ## Current High-Risk Areas
 - Watch resolution is a trust-critical path and needs stronger ambiguity handling.
-- Compare API needs rate limiting before public traffic.
+- Compare API rate limiting is currently in-memory per runtime instance; move it to shared infrastructure before scaled public traffic.
 - Client error handling should cover network and malformed-response failures.
 - Comparison output needs regression fixtures for stable product copy and section changes.
 - Project board mutation depends on valid GitHub project tooling.

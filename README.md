@@ -79,7 +79,7 @@ Current status on 2026-05-11:
 - Release history: `10_Release_Notes.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, and malformed JSON.
+Current automated route coverage includes `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, and repeated-request rate limiting.
 
 ## Codex automation
 SpecDiff uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.

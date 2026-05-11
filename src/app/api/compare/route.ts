@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 
@@ -10,6 +11,22 @@ const requestSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const rateLimit = checkRateLimit(resolveClientKey(request));
+
+  if (rateLimit.limited) {
+    return NextResponse.json(
+      {
+        error: "Too many comparison requests. Wait a moment and try again."
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1000)))
+        }
+      }
+    );
+  }
+
   try {
     const body = await request.json();
     const { leftInput, rightInput } = requestSchema.parse(body);

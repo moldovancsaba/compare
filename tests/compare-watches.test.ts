@@ -1,15 +1,17 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import { POST } from "@/app/api/compare/route";
+import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 
-function compareRequest(body: unknown): Request {
+function compareRequest(body: unknown, ip = "203.0.113.10"): Request {
   return new Request("http://localhost/api/compare", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "x-forwarded-for": ip
     },
     body: JSON.stringify(body)
   });
@@ -46,6 +48,10 @@ describe("compareWatches", () => {
 });
 
 describe("POST /api/compare", () => {
+  beforeEach(() => {
+    resetRateLimitForTests();
+  });
+
   it("returns a comparison for two supported watches", async () => {
     const response = await POST(
       compareRequest({
@@ -109,7 +115,8 @@ describe("POST /api/compare", () => {
       new Request("http://localhost/api/compare", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "x-forwarded-for": "203.0.113.15"
         },
         body: "{"
       })
@@ -119,5 +126,25 @@ describe("POST /api/compare", () => {
 
     expect(response.status).toBe(400);
     expect(payload.error).toContain("comparison request was invalid");
+  });
+
+  it("rate limits repeated comparison requests from the same client", async () => {
+    const requestBody = {
+      leftInput: "Rolex Air-King",
+      rightInput: "Rolex Explorer"
+    };
+
+    for (let index = 0; index < compareRateLimit.limit; index += 1) {
+      const response = await POST(compareRequest(requestBody, "203.0.113.200"));
+
+      expect(response.status).toBe(200);
+    }
+
+    const limitedResponse = await POST(compareRequest(requestBody, "203.0.113.200"));
+    const payload = await limitedResponse.json();
+
+    expect(limitedResponse.status).toBe(429);
+    expect(limitedResponse.headers.get("Retry-After")).toBeTruthy();
+    expect(payload.error).toContain("Too many comparison requests");
   });
 });
