@@ -9,6 +9,7 @@ SpecDiff is a Next.js web app that compares enthusiast products by consequences 
 ## What it does
 - Accepts two watch names or supported product URLs.
 - Resolves them against a curated mechanical watch catalog.
+- Rejects weak or ambiguous inputs instead of guessing when a match is not clear.
 - Generates:
   - Key Differences
   - Real-World Impact
@@ -79,7 +80,7 @@ Current status on 2026-05-11:
 - Release history: `10_Release_Notes.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, and repeated-request rate limiting.
+Current automated route coverage includes resolver matching and ambiguity rejection, `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, and repeated-request rate limiting.
 
 ## Codex automation
 SpecDiff uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.

@@ -5,6 +5,7 @@
 - Corrected the documented technical background, including actual TypeScript, ESLint, and frontend architecture details.
 - Added an explicit app version source and surfaced `v0.1.1` in the web UI.
 - Added basic per-client `/api/compare` rate limiting with `429` and `Retry-After` responses.
+- Hardened watch resolution so generic brand-only and ambiguous model inputs fail closed instead of selecting the first catalog match.
 - Preserved the current upstream audit blocker caused by the stable Next dependency tree.
 
 ## v0.1.0 - 2026-05-11

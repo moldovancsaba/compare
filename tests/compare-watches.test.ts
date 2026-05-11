@@ -29,6 +29,24 @@ describe("resolveWatch", () => {
 
     expect(match?.id).toBe("tudor-pelagos-39");
   });
+
+  it("matches a reference even when the brand is omitted", () => {
+    const match = resolveWatch("124270 explorer");
+
+    expect(match?.id).toBe("rolex-explorer-124270");
+  });
+
+  it("does not resolve generic brand-only input", () => {
+    const match = resolveWatch("Rolex");
+
+    expect(match).toBeNull();
+  });
+
+  it("does not pick a watch when the model input is ambiguous", () => {
+    const match = resolveWatch("Tudor Black Bay");
+
+    expect(match).toBeNull();
+  });
 });
 
 describe("compareWatches", () => {
