@@ -4,6 +4,7 @@ import { GET as GET_BRAIN } from "@/app/api/compare/brain/route";
 import { POST as POST_FEEDBACK } from "@/app/api/compare/feedback/route";
 import { POST } from "@/app/api/compare/route";
 import { hashLogValue, sanitizeLogContext } from "@/lib/observability/logger";
+import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observability/telemetry";
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
@@ -290,6 +291,49 @@ describe("structured logging", () => {
   it("uses stable hashes for client identifiers", () => {
     expect(hashLogValue("203.0.113.10")).toBe(hashLogValue("203.0.113.10"));
     expect(hashLogValue("203.0.113.10")).not.toBe("203.0.113.10");
+  });
+});
+
+describe("telemetry", () => {
+  it("keeps only allowlisted scalar telemetry properties", () => {
+    expect(
+      sanitizeTelemetryProperties({
+        brainStatus: "queued",
+        hasNote: true,
+        leftInput: "Rolex Air-King",
+        nested: { raw: "private" } as never,
+        remainingRequests: 12,
+        traceAttached: false
+      })
+    ).toEqual({
+      brainStatus: "queued",
+      hasNote: true,
+      remainingRequests: 12,
+      traceAttached: false
+    });
+  });
+
+  it("does not require MongoDB to record telemetry", async () => {
+    const previousMongoUri = process.env.MONGODB_URI;
+
+    try {
+      delete process.env.MONGODB_URI;
+
+      await expect(
+        recordTelemetryEvent({
+          event: "compare.completed",
+          comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+          clientKeyHash: hashLogValue("203.0.113.30"),
+          status: "completed"
+        })
+      ).resolves.toBe(false);
+    } finally {
+      if (previousMongoUri === undefined) {
+        delete process.env.MONGODB_URI;
+      } else {
+        process.env.MONGODB_URI = previousMongoUri;
+      }
+    }
   });
 });
 

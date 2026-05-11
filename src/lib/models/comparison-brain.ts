@@ -103,8 +103,26 @@ const comparisonFeedbackSchema = new Schema(
   }
 );
 
+const analyticsEventSchema = new Schema(
+  {
+    event: { type: String, required: true, index: true },
+    comparisonRef: { type: String, default: null, index: true },
+    leftWatchId: { type: String, default: null, index: true },
+    rightWatchId: { type: String, default: null, index: true },
+    clientKeyHash: { type: String, default: null, index: true },
+    status: { type: String, default: null, index: true },
+    reason: { type: String, default: null, index: true },
+    properties: { type: Schema.Types.Mixed, default: {} }
+  },
+  {
+    collection: "analytics_events",
+    timestamps: true
+  }
+);
+
 export const CompareJobModel = models.CompareJob || model("CompareJob", compareJobSchema);
 export const ComparisonTraceModel = models.ComparisonTrace || model("ComparisonTrace", comparisonTraceSchema);
 export const SavedComparisonModel = models.SavedComparison || model("SavedComparison", savedComparisonSchema);
 export const ComparisonFeedbackModel =
   models.ComparisonFeedback || model("ComparisonFeedback", comparisonFeedbackSchema);
+export const AnalyticsEventModel = models.AnalyticsEvent || model("AnalyticsEvent", analyticsEventSchema);

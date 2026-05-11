@@ -9,7 +9,7 @@
 - Domain logic: `src/lib/services/compare-watches.ts` builds deterministic comparison sections.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated catalog.
 - Persistence readiness: `src/lib/db.ts` and `src/lib/models/watch.ts` are scaffolding for future MongoDB-backed persistence.
-- Observability: `src/lib/observability/logger.ts` emits structured JSON events with redaction for user inputs, URLs/URIs, notes, credentials, authorization-like fields, and raw error messages.
+- Observability: `src/lib/observability/logger.ts` emits structured JSON events with redaction for user inputs, URLs/URIs, notes, credentials, authorization-like fields, and raw error messages. `src/lib/observability/telemetry.ts` optionally records durable allowlisted analytics events in MongoDB when Atlas is configured.
 - Tests: Vitest currently covers resolver basics, ambiguity rejection, comparison output shape, and `/api/compare` route behavior.
 
 ## Automation Architecture
@@ -35,5 +35,5 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 ## Current High-Risk Areas
 - Watch resolution is a trust-critical path and still needs broader fuzzy matching coverage.
 - Compare API rate limiting is currently in-memory per runtime instance; move it to shared infrastructure before scaled public traffic.
-- Structured telemetry still needs durable aggregation for comparison usage, resolver misses, and error rates.
+- Durable telemetry currently captures compare outcomes, resolver misses, Brain polls, and feedback signals; the next analytics step is adding product-facing aggregation views and retention policy.
 - Project board mutation depends on valid GitHub project tooling.

@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { enqueueTrinityCompareJob } from "@/lib/services/brain-queue";
 import { hashLogValue, logWarn } from "@/lib/observability/logger";
+import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
@@ -21,6 +22,15 @@ export async function POST(request: Request) {
     logWarn("compare.rate_limited", {
       clientKeyHash,
       resetAt: new Date(rateLimit.resetAt).toISOString()
+    });
+    await recordTelemetryEvent({
+      event: "compare.rate_limited",
+      clientKeyHash,
+      status: "blocked",
+      reason: "rate_limited",
+      properties: {
+        resetAt: new Date(rateLimit.resetAt).toISOString()
+      }
     });
 
     return NextResponse.json(
@@ -49,6 +59,16 @@ export async function POST(request: Request) {
         leftResolved: Boolean(left),
         rightResolved: Boolean(right)
       });
+      await recordTelemetryEvent({
+        event: "compare.unsupported_input",
+        clientKeyHash,
+        status: "rejected",
+        reason: "unsupported_input",
+        properties: {
+          leftResolved: Boolean(left),
+          rightResolved: Boolean(right)
+        }
+      });
 
       return NextResponse.json(
         {
@@ -63,6 +83,15 @@ export async function POST(request: Request) {
       logWarn("compare.duplicate_watch", {
         clientKeyHash,
         watchId: left.id
+      });
+      await recordTelemetryEvent({
+        event: "compare.duplicate_watch",
+        comparisonRef: `compare:${left.id}:vs:${right.id}`,
+        leftWatchId: left.id,
+        rightWatchId: right.id,
+        clientKeyHash,
+        status: "rejected",
+        reason: "duplicate_watch"
       });
 
       return NextResponse.json(
@@ -80,6 +109,18 @@ export async function POST(request: Request) {
       deterministicResult: comparison,
       requestedBy: clientKey
     });
+    await recordTelemetryEvent({
+      event: "compare.completed",
+      comparisonRef: brain.comparisonRef,
+      leftWatchId: left.id,
+      rightWatchId: right.id,
+      clientKeyHash,
+      status: "completed",
+      properties: {
+        brainStatus: brain.status,
+        remainingRequests: rateLimit.remaining
+      }
+    });
 
     return NextResponse.json({
       comparison,
@@ -89,6 +130,12 @@ export async function POST(request: Request) {
     logWarn("compare.invalid_request", {
       clientKeyHash,
       error
+    });
+    await recordTelemetryEvent({
+      event: "compare.invalid_request",
+      clientKeyHash,
+      status: "rejected",
+      reason: "invalid_request"
     });
 
     return NextResponse.json(

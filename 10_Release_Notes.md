@@ -6,6 +6,7 @@
 - Added an explicit app version source and surfaced `v0.1.1` in the web UI.
 - Added basic per-client `/api/compare` rate limiting with `429` and `Retry-After` responses.
 - Hardened watch resolution so generic brand-only and ambiguous model inputs fail closed instead of selecting the first catalog match.
+- Added MongoDB-backed allowlisted telemetry for compare outcomes, resolver misses, Brain polling, and feedback signals.
 - Preserved the current upstream audit blocker caused by the stable Next dependency tree.
 
 ## v0.1.0 - 2026-05-11

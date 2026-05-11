@@ -4,6 +4,7 @@ import { z } from "zod";
 import { connectToDatabase } from "@/lib/db";
 import { ComparisonFeedbackModel } from "@/lib/models/comparison-brain";
 import { logInfo, logWarn } from "@/lib/observability/logger";
+import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 
 const feedbackSchema = z.object({
   comparisonRef: z.string().trim().min(8),
@@ -32,6 +33,19 @@ export async function POST(request: Request) {
       logWarn("feedback.persistence_unavailable", {
         comparisonRef: payload.comparisonRef,
         signal: payload.signal
+      });
+      await recordTelemetryEvent({
+        event: "feedback.persistence_unavailable",
+        comparisonRef: payload.comparisonRef,
+        leftWatchId: payload.leftWatchId,
+        rightWatchId: payload.rightWatchId,
+        status: "unavailable",
+        reason: "missing_database_connection",
+        properties: {
+          feedbackSignal: payload.signal,
+          hasNote: Boolean(payload.note),
+          traceAttached: Boolean(payload.traceRef)
+        }
       });
 
       return NextResponse.json(
@@ -62,6 +76,18 @@ export async function POST(request: Request) {
       signal: payload.signal,
       hasNote: Boolean(payload.note)
     });
+    await recordTelemetryEvent({
+      event: "feedback.recorded",
+      comparisonRef: payload.comparisonRef,
+      leftWatchId: payload.leftWatchId,
+      rightWatchId: payload.rightWatchId,
+      status: "recorded",
+      properties: {
+        feedbackSignal: payload.signal,
+        hasNote: Boolean(payload.note),
+        traceAttached: Boolean(payload.traceRef)
+      }
+    });
 
     return NextResponse.json({
       feedback: {
@@ -72,6 +98,11 @@ export async function POST(request: Request) {
   } catch (error) {
     logWarn("feedback.invalid_request", {
       error
+    });
+    await recordTelemetryEvent({
+      event: "feedback.invalid_request",
+      status: "rejected",
+      reason: "invalid_request"
     });
 
     return NextResponse.json(

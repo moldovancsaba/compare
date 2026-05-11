@@ -37,6 +37,7 @@ Most comparison content is bloated, repetitive, and detached from real ownership
 - Zod 4 for input validation
 - Mongoose connection utility for optional MongoDB Atlas persistence
 - Redacted JSON logging for compare, Brain, and feedback operational events
+- Optional MongoDB-backed analytics events for compare outcomes, resolver misses, Brain polls, and feedback signals
 - Vitest for unit tests
 
 ## Local setup
@@ -116,6 +117,8 @@ Current automated route coverage includes resolver matching and ambiguity reject
 Comparison-output regression coverage lives in `tests/compare-watches.test.ts`. The fixture suite pins representative watch pairs across field, explorer, dive, and dress-sport styles, then asserts stable section structure, buyer picks, better-value alternatives, hidden-downside titles, and a few high-signal phrasing fragments. The intent is to catch meaningful rule drift without turning every sentence into a brittle snapshot.
 
 Structured operational logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers so production failures can be diagnosed without logging user-submitted comparison text or secrets.
+
+Durable telemetry lives in `src/lib/observability/telemetry.ts` and writes allowlisted event metadata to `analytics_events` only when MongoDB is configured. It records statuses and watch IDs, hashed client identifiers, feedback signal categories, Brain status, and resolver-miss flags; raw user inputs and notes are intentionally excluded.
 
 ## Codex automation
 {compare} uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.
