@@ -1,4 +1,5 @@
 import { ComparisonForm } from "@/components/comparison-form";
+import { appVersionLabel } from "@/lib/config/app";
 
 export default function HomePage() {
   return (
@@ -17,7 +18,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="pill-muted text-accent eyebrow eyebrow-wide px-4 py-2">
-            V1 watch vertical
+            {appVersionLabel} watch vertical
           </div>
         </div>
         <ComparisonForm />

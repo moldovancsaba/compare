@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Current phase
-V1 foundation build for SpecDiff.
+V1.0.1 hardening and documentation alignment for SpecDiff.
 
 ## Completed in this baseline
 - Repository reset from previous unrelated app.
@@ -9,7 +9,8 @@ V1 foundation build for SpecDiff.
 - Mechanical watch comparison ontology created.
 - Consequence-focused comparison engine implemented.
 - API route and single-screen UI implemented.
-- Initial unit tests and project documentation created.
+- UI styling primitives extracted into a shared token layer.
+- Initial unit tests and project documentation created, then updated to match the live codebase.
 
 ## Next recommended milestones
 1. Expand the watch catalog with richer normalization and reference coverage.

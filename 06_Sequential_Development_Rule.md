@@ -6,5 +6,5 @@ Work proceeds in one verified slice at a time.
 - Establish the first production-ready SpecDiff baseline for mechanical watch comparisons.
 
 ## Enforcement
-- Do not start follow-on features until this baseline passes lint, test, build, and audit.
+- Do not start follow-on features until this baseline passes lint, typecheck, test, build, and audit.
 - Update documentation in the same slice as the code change.

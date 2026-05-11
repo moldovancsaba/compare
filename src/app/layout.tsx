@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Space_Grotesk } from "next/font/google";
 
+import { appName, appVersionLabel } from "@/lib/config/app";
+
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -14,8 +16,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "SpecDiff",
-  description: "Compare mechanical watches by real-world consequences, not SEO fluff."
+  title: appName,
+  description: `${appName} ${appVersionLabel} compares mechanical watches by real-world consequences, not SEO fluff.`
 };
 
 export default function RootLayout({

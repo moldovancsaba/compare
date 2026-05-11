@@ -11,6 +11,7 @@ Every implementation report must state only what was actually executed in the cu
 
 ## Current mandatory gates
 - `npm run lint`
+- `npm run typecheck`
 - `npm run test`
 - `npm run build`
 - `npm audit --omit=dev`

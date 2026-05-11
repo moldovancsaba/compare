@@ -1,6 +1,10 @@
 # SpecDiff
 
-SpecDiff is a Next.js webapp that compares enthusiast products by consequences instead of raw spec tables. V1 is intentionally narrow: mechanical watches only.
+SpecDiff is a Next.js web app that compares enthusiast products by consequences instead of raw spec tables. Release `v0.1.1` is intentionally narrow: mechanical watches only.
+
+## Version
+- Project version: `0.1.1`
+- Current release label: `v0.1.1`
 
 ## What it does
 - Accepts two watch names or supported product URLs.
@@ -17,12 +21,20 @@ SpecDiff is a Next.js webapp that compares enthusiast products by consequences i
 ## Why it exists
 Most comparison content is bloated, repetitive, and detached from real ownership. SpecDiff compresses the usual review-tab spiral into one focused screen that explains what changes on wrist and why that matters.
 
+## Product shape
+- Single-screen comparison experience with a server-rendered landing page and client-side form interactions.
+- Deterministic comparison engine built around a curated watch catalog instead of speculative scraping.
+- API endpoint at `/api/compare`.
+- Tokenized visual system documented in `design-tokens.md`.
+
 ## Stack
 - Next.js 16 App Router
 - React 19
-- TypeScript strict mode
+- TypeScript 5.9 in strict mode
 - Tailwind CSS 4
-- Mongoose connection utility for MongoDB Atlas
+- CSS variable and utility-class design system layered in `src/app/globals.css`
+- Zod 4 for input validation
+- Mongoose connection utility for optional MongoDB Atlas persistence
 - Vitest for unit tests
 
 ## Local setup
@@ -49,12 +61,20 @@ V1 does not require MongoDB to run because it ships with a curated watch catalog
 
 ## Quality gates
 - `npm run lint`
+- `npm run typecheck`
 - `npm run test`
 - `npm run build`
 - `npm audit --omit=dev`
 
 Current status on 2026-05-11:
 - lint: pass
+- typecheck: pass
 - test: pass
 - build: pass
 - audit: blocked by `next@16.2.6` shipping `postcss@8.4.31` internally. `npm audit --omit=dev` reports two moderate vulnerabilities tied to that upstream dependency chain.
+
+## Documentation map
+- Product overview: `README.md`
+- Technical background: `02_Technology_Stack.md`
+- Release history: `10_Release_Notes.md`
+- Design primitives: `design-tokens.md`

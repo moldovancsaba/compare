@@ -27,16 +27,18 @@ Build and maintain SpecDiff as a production-grade Next.js webapp that compares m
 - [08_AI_Verification_Protocol.md](./08_AI_Verification_Protocol.md)
 - [09_Dev_Log_Lessons.md](./09_Dev_Log_Lessons.md)
 - [10_Release_Notes.md](./10_Release_Notes.md)
+- [design-tokens.md](./design-tokens.md)
 
 ## Current Architecture Snapshot
 - Frontend: Next.js 16 App Router
-- Styling: Tailwind CSS 4 with CSS variable driven theming
+- Styling: Tailwind CSS 4 with CSS variable driven theming plus semantic UI primitives in `src/app/globals.css`
 - Logic: local watch ontology and deterministic implication engine
 - API: `/api/compare`
 - Data source: curated catalog in code for V1, MongoDB-ready connection utility for later persistence
+- UI composition: `comparison-form` orchestrator with separated hero, input, and result components
 - Tests: Vitest unit coverage for resolver and comparison engine
 
 ## Definition Of Ready For Any Future Task
 - Existing docs are re-read.
 - V1 constraints are still respected.
-- Build, lint, test, and audit gates are re-run after code changes.
+- Build, lint, typecheck, test, and audit gates are re-run after code changes.

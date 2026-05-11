@@ -1,20 +1,38 @@
 # Technology Stack
 
+Current documented release: `v0.1.1`
+
 ## Runtime
 - Node.js: validated locally on v24.15.0
 - npm: validated locally on v11.12.1
 
 ## Application stack
+- Product: SpecDiff `0.1.1`
 - Next.js 16.2.6
 - React 19.2.6
-- TypeScript 6.0.3 in strict mode
+- React DOM 19.2.6
+- TypeScript 5.9.3 in strict mode
 - Tailwind CSS 4.3.0
+- PostCSS 8.5.14 with `@tailwindcss/postcss` 4.3.0
 - Mongoose 9.6.2
 - Zod 4.4.3
 
+## Frontend architecture
+- App Router entrypoints under `src/app`
+- Server-rendered page shell with client-side comparison form
+- CSS variable driven design tokens and semantic utility classes in `src/app/globals.css`
+- Presentational UI split across `comparison-hero`, `comparison-input-form`, and `comparison-result`
+
+## Domain and data layer
+- Curated watch catalog in `src/lib/data/watch-catalog.ts`
+- Watch resolution utility in `src/lib/utils/resolve-watch.ts`
+- Deterministic comparison service in `src/lib/services/compare-watches.ts`
+- Optional MongoDB-ready connection utility in `src/lib/db.ts`
+
 ## Testing and quality
-- ESLint 10.3.0 with `eslint-config-next` 16.2.6
+- ESLint 9.39.1 with `eslint-config-next` 16.2.6
 - Vitest 4.1.5
+- TypeScript `tsc --noEmit` for type verification
 
 ## Deployment target
 - Vercel
