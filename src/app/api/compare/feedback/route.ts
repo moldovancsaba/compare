@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { connectToDatabase } from "@/lib/db";
 import { ComparisonFeedbackModel } from "@/lib/models/comparison-brain";
+import { logInfo, logWarn } from "@/lib/observability/logger";
 
 const feedbackSchema = z.object({
   comparisonRef: z.string().trim().min(8),
@@ -28,6 +29,11 @@ export async function POST(request: Request) {
     const connection = await connectToDatabase();
 
     if (!connection) {
+      logWarn("feedback.persistence_unavailable", {
+        comparisonRef: payload.comparisonRef,
+        signal: payload.signal
+      });
+
       return NextResponse.json(
         {
           feedback: {
@@ -51,13 +57,23 @@ export async function POST(request: Request) {
       processingStatus: "pending"
     });
 
+    logInfo("feedback.recorded", {
+      comparisonRef: payload.comparisonRef,
+      signal: payload.signal,
+      hasNote: Boolean(payload.note)
+    });
+
     return NextResponse.json({
       feedback: {
         status: "recorded",
         message: "Feedback saved for Trinity learning."
       }
     });
-  } catch {
+  } catch (error) {
+    logWarn("feedback.invalid_request", {
+      error
+    });
+
     return NextResponse.json(
       {
         error: "The feedback payload was invalid."

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 
 import { connectToDatabase } from "@/lib/db";
 import { CompareJobModel, SavedComparisonModel } from "@/lib/models/comparison-brain";
+import { logError, logInfo, logWarn } from "@/lib/observability/logger";
 import type { BrainState, ComparisonResult, TrinityBrainResult, WatchSpec } from "@/types/watch";
 
 type EnqueueBrainJobInput = {
@@ -27,6 +28,10 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
   const comparisonRef = buildComparisonRef(input.left, input.right);
 
   if (!isTrinityWorkerEnabled()) {
+    logInfo("brain.queue_disabled", {
+      comparisonRef
+    });
+
     return {
       status: "disabled",
       comparisonRef,
@@ -45,6 +50,11 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
   try {
     const connection = await connectToDatabase();
     if (!connection) {
+      logWarn("brain.queue_unavailable", {
+        comparisonRef,
+        reason: "missing_database_connection"
+      });
+
       return {
         status: "unavailable",
         comparisonRef,
@@ -55,6 +65,10 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
     const existingSaved = await SavedComparisonModel.findOne({ comparisonRef }).lean();
     const existingBrainResult = extractBrainResult(existingSaved);
     if (existingBrainResult) {
+      logInfo("brain.result_cache_hit", {
+        comparisonRef
+      });
+
       return completedBrainState(comparisonRef, existingBrainResult, existingSaved?.traceRef ?? null);
     }
 
@@ -89,13 +103,23 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
       )
     ]);
 
+    logInfo("brain.job_queued", {
+      comparisonRef,
+      jobId: String(job._id)
+    });
+
     return {
       status: "queued",
       comparisonRef,
       jobId: String(job._id),
       message: "Trinity Brain is queued for local enrichment."
     };
-  } catch {
+  } catch (error) {
+    logError("brain.queue_failed", {
+      comparisonRef,
+      error
+    });
+
     return {
       status: "unavailable",
       comparisonRef,
@@ -106,6 +130,10 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
 
 export async function getTrinityBrainState(comparisonRef: string): Promise<BrainState> {
   if (!isTrinityWorkerEnabled()) {
+    logInfo("brain.poll_disabled", {
+      comparisonRef
+    });
+
     return {
       status: "disabled",
       comparisonRef,
@@ -116,6 +144,11 @@ export async function getTrinityBrainState(comparisonRef: string): Promise<Brain
   try {
     const connection = await connectToDatabase();
     if (!connection) {
+      logWarn("brain.poll_unavailable", {
+        comparisonRef,
+        reason: "missing_database_connection"
+      });
+
       return {
         status: "unavailable",
         comparisonRef,
@@ -126,11 +159,19 @@ export async function getTrinityBrainState(comparisonRef: string): Promise<Brain
     const savedComparison = await SavedComparisonModel.findOne({ comparisonRef }).lean();
     const brainResult = extractBrainResult(savedComparison);
     if (brainResult) {
+      logInfo("brain.poll_completed", {
+        comparisonRef
+      });
+
       return completedBrainState(comparisonRef, brainResult, savedComparison?.traceRef ?? null);
     }
 
     const job = await CompareJobModel.findOne({ comparisonRef }).sort({ createdAt: -1 }).lean();
     if (!job) {
+      logWarn("brain.poll_missing_job", {
+        comparisonRef
+      });
+
       return {
         status: "unavailable",
         comparisonRef,
@@ -139,6 +180,11 @@ export async function getTrinityBrainState(comparisonRef: string): Promise<Brain
     }
 
     if (job.status === "completed") {
+      logWarn("brain.poll_completed_without_result", {
+        comparisonRef,
+        jobId: String(job._id)
+      });
+
       return {
         status: "unavailable",
         comparisonRef,
@@ -147,6 +193,11 @@ export async function getTrinityBrainState(comparisonRef: string): Promise<Brain
     }
 
     if (job.status === "failed") {
+      logWarn("brain.poll_failed_job", {
+        comparisonRef,
+        jobId: String(job._id)
+      });
+
       return {
         status: "failed",
         comparisonRef,
@@ -169,7 +220,12 @@ export async function getTrinityBrainState(comparisonRef: string): Promise<Brain
       jobId: String(job._id),
       message: "Trinity Brain is queued for local enrichment."
     };
-  } catch {
+  } catch (error) {
+    logError("brain.poll_failed", {
+      comparisonRef,
+      error
+    });
+
     return {
       status: "unavailable",
       comparisonRef,

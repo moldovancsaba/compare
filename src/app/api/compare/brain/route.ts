@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { logWarn } from "@/lib/observability/logger";
 import { getTrinityBrainState } from "@/lib/services/brain-queue";
 
 const querySchema = z.object({
@@ -14,6 +15,10 @@ export async function GET(request: Request) {
   });
 
   if (!parsed.success) {
+    logWarn("brain.invalid_poll_request", {
+      error: parsed.error
+    });
+
     return NextResponse.json(
       {
         error: "A valid comparisonRef is required."

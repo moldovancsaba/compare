@@ -9,6 +9,7 @@
 - Domain logic: `src/lib/services/compare-watches.ts` builds deterministic comparison sections.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated catalog.
 - Persistence readiness: `src/lib/db.ts` and `src/lib/models/watch.ts` are scaffolding for future MongoDB-backed persistence.
+- Observability: `src/lib/observability/logger.ts` emits structured JSON events with redaction for user inputs, URLs/URIs, notes, credentials, authorization-like fields, and raw error messages.
 - Tests: Vitest currently covers resolver basics, ambiguity rejection, comparison output shape, and `/api/compare` route behavior.
 
 ## Automation Architecture
@@ -28,11 +29,11 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 - V1 scope is mechanical watches.
 - Agents may commit and push verified changes directly to `origin/main` without per-step approval.
 - Agents may not force push or delete production code autonomously.
+- Operational logs must preserve event context without exposing raw user-submitted comparison text, notes, credentials, or client IP addresses.
 - Shared memory must be updated after meaningful automation runs.
 
 ## Current High-Risk Areas
 - Watch resolution is a trust-critical path and still needs broader fuzzy matching coverage.
 - Compare API rate limiting is currently in-memory per runtime instance; move it to shared infrastructure before scaled public traffic.
-- Client error handling should cover network and malformed-response failures.
-- Comparison output needs regression fixtures for stable product copy and section changes.
+- Structured telemetry still needs durable aggregation for comparison usage, resolver misses, and error rates.
 - Project board mutation depends on valid GitHub project tooling.

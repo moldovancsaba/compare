@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { GET as GET_BRAIN } from "@/app/api/compare/brain/route";
 import { POST as POST_FEEDBACK } from "@/app/api/compare/feedback/route";
 import { POST } from "@/app/api/compare/route";
+import { hashLogValue, sanitizeLogContext } from "@/lib/observability/logger";
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
@@ -254,6 +255,41 @@ describe("Trinity feedback summaries", () => {
     expect(secondSummary.sentimentScore).toBe(2);
     expect(secondSummary.latestSignal).toBe("chose_right");
     expect(secondSummary.latestNote).toBe("Explorer fit better.");
+  });
+});
+
+describe("structured logging", () => {
+  it("redacts sensitive context before logs are written", () => {
+    const sanitized = sanitizeLogContext({
+      comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+      leftInput: "Rolex Air-King",
+      mongodbUri: "mongodb+srv://user:pass@example.mongodb.net/compare",
+      authorization: "Bearer secret",
+      nested: {
+        note: "private user note",
+        watchId: "rolex-explorer-124270"
+      },
+      error: new Error("database password rejected")
+    });
+
+    expect(sanitized).toEqual({
+      comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+      leftInput: "[redacted]",
+      mongodbUri: "[redacted]",
+      authorization: "[redacted]",
+      nested: {
+        note: "[redacted]",
+        watchId: "rolex-explorer-124270"
+      },
+      error: {
+        name: "Error"
+      }
+    });
+  });
+
+  it("uses stable hashes for client identifiers", () => {
+    expect(hashLogValue("203.0.113.10")).toBe(hashLogValue("203.0.113.10"));
+    expect(hashLogValue("203.0.113.10")).not.toBe("203.0.113.10");
   });
 });
 
