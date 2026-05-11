@@ -78,3 +78,16 @@ Current status on 2026-05-11:
 - Technical background: `02_Technology_Stack.md`
 - Release history: `10_Release_Notes.md`
 - Design primitives: `design-tokens.md`
+
+Current automated route coverage includes `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, and malformed JSON.
+
+## Codex automation
+SpecDiff uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.
+
+The active Codex app automation is `specdiff-complete-audit`, registered as `SpecDiff Autonomous Maintenance Loop` with a 3-hour cadence. It runs in the dedicated `specdiff-autonomous-maintenance` conversation:
+- audit every 3 hours
+- planner 30 minutes later
+- implementer 60 minutes later
+- docs/release 120 minutes later
+
+GitHub remains source control, issue tracking, PR review, and project state. Codex is the orchestrator. By current product-owner instruction, autonomous agents should commit and push verified changes directly to `origin/main`; force pushes remain disallowed.

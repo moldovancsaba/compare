@@ -1,0 +1,35 @@
+{
+  "highest_priority": [
+    {
+      "github_issue": 3,
+      "title": "Improve product resolution for fuzzy names, references, and brand aliases",
+      "priority": "high",
+      "reason": "Input resolution is the trust layer for every comparison."
+    },
+    {
+      "github_issue": 16,
+      "title": "Add server-side rate limiting and abuse protection to the compare API",
+      "priority": "high",
+      "reason": "Public API exposure needs basic abuse controls before traffic grows."
+    },
+    {
+      "github_issue": 26,
+      "title": "Handle network and malformed-response failures in the comparison client",
+      "priority": "medium",
+      "reason": "The UI should fail gracefully when transport or platform errors occur."
+    },
+    {
+      "github_issue": 13,
+      "title": "Add API route tests for validation, unsupported inputs, and duplicate watch handling",
+      "priority": "medium",
+      "reason": "The API is the core backend contract and currently lacks route-level coverage."
+    },
+    {
+      "github_issue": 15,
+      "title": "Add GitHub Actions CI for lint, test, and build",
+      "priority": "medium",
+      "reason": "Keep as optional enforcement only; Codex remains the orchestrator."
+    }
+  ],
+  "selection_policy": "Prefer one issue-scoped task per implementer heartbeat. Choose tasks that can be verified locally, committed, and pushed directly to origin/main without force pushes."
+}

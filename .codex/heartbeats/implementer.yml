@@ -1,0 +1,42 @@
+name: implementer
+conversation:
+  mode: dedicated
+  thread: specdiff-autonomous-maintenance
+schedule:
+  offset: 60m
+  every: 3h
+agent: implementer
+workspace:
+  write: true
+memory:
+  - .codex/memory/project_state.json
+  - .codex/memory/backlog.json
+  - .codex/memory/architecture.md
+tools:
+  - github
+  - filesystem
+  - terminal
+constraints:
+  - never_delete_production_files
+  - never_force_push
+  - never_merge_without_tests
+  - push_verified_changes_to_main
+  - keep_changes_issue_scoped
+consent:
+  approval_prompting: disabled
+  granted_by: product_owner
+  scope: branch_pr_code_execution
+prompt: |
+  Select the highest leverage safe task.
+
+  Then:
+  - implement it
+  - run lint
+  - run tests
+  - run typecheck
+  - run build
+  - commit changes
+  - push to origin/main
+  - update linked issue status
+
+  Never push failing code. Never force push.
