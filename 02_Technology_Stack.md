@@ -7,7 +7,7 @@ Current documented release: `v0.1.1`
 - npm: validated locally on v11.12.1
 
 ## Application stack
-- Product: SpecDiff `0.1.1`
+- Product: {compare} `0.1.1`
 - Next.js 16.2.6
 - React 19.2.6
 - React DOM 19.2.6

@@ -1,6 +1,9 @@
 "use client";
 
-import type { ComparisonResult } from "@/types/watch";
+import { useState } from "react";
+
+import { appName } from "@/lib/config/app";
+import type { BrainRecommendation, BrainState, ComparisonResult } from "@/types/watch";
 
 function SectionCard({
   title,
@@ -45,7 +48,242 @@ function BuyerCard({
   );
 }
 
-export function ComparisonResultView({ result }: { result: ComparisonResult }) {
+function confidencePercent(brain: BrainState): number | null {
+  if (brain.status !== "completed") {
+    return null;
+  }
+
+  const raw = brain.confidence?.combined_confidence ?? brain.confidence?.combinedConfidence;
+  return typeof raw === "number" ? Math.round(raw * 100) : null;
+}
+
+function primaryBrainRecommendation(brain: BrainState): BrainRecommendation | null {
+  if (brain.status !== "completed") {
+    return null;
+  }
+
+  return brain.result.comparison?.whoShouldBuyWhich?.[0] ?? null;
+}
+
+function oppositeCase(brain: BrainState): string {
+  if (brain.status !== "completed") {
+    return "";
+  }
+
+  const recommendations = brain.result.comparison?.whoShouldBuyWhich ?? [];
+  const alternate = recommendations.find((item) => item.pick !== recommendations[0]?.pick);
+  return alternate
+    ? `${alternate.pick} still makes sense for ${alternate.buyerType.toLowerCase()}: ${alternate.reason}`
+    : "The other watch can still be right if your fit, budget, or styling preference changes.";
+}
+
+function BrainStatusCard({ brain }: { brain: BrainState | null }) {
+  const recommendation = brain ? primaryBrainRecommendation(brain) : null;
+  const confidence = brain ? confidencePercent(brain) : null;
+
+  if (!brain || brain.status === "disabled" || brain.status === "unavailable") {
+    return (
+      <section className="surface-card p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="eyebrow eyebrow-wide">Decision Brain</p>
+            <h3 className="title-section mt-3">Deterministic recommendation</h3>
+          </div>
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">offline</span>
+        </div>
+        <p className="body-copy mt-4 text-sm">
+          {brain?.message ??
+            "Trinity Brain is not attached to this response, so the result is using the deterministic compare engine."}
+        </p>
+      </section>
+    );
+  }
+
+  if (brain.status === "queued" || brain.status === "running") {
+    return (
+      <section className="surface-card p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="eyebrow eyebrow-wide">Decision Brain</p>
+            <h3 className="title-section mt-3">{brain.status === "queued" ? "Queued for enrichment" : "Processing"}</h3>
+          </div>
+          <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{brain.status}</span>
+        </div>
+        <p className="body-copy mt-4 text-sm">{brain.message}</p>
+      </section>
+    );
+  }
+
+  if (brain.status === "failed") {
+    return (
+      <section className="surface-card p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="eyebrow eyebrow-wide">Decision Brain</p>
+            <h3 className="title-section mt-3">Enrichment unavailable</h3>
+          </div>
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">fallback</span>
+        </div>
+        <p className="body-copy mt-4 text-sm">
+          The deterministic comparison is still valid. Trinity could not enrich this result.
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="surface-card p-6">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow eyebrow-wide">Decision Brain</p>
+          <h3 className="title-section mt-3">{recommendation?.pick ?? "Brain-enhanced recommendation"}</h3>
+        </div>
+        <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">
+          {confidence ? `${confidence}% confidence` : "enriched"}
+        </span>
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
+        <article className="surface-item p-4">
+          <p className="card-kicker mb-2">Why this pick</p>
+          <p className="body-copy body-copy-strong text-sm">
+            {recommendation?.reason ?? "Trinity returned an enriched comparison without a primary recommendation."}
+          </p>
+        </article>
+        <article className="surface-item p-4">
+          <p className="card-kicker mb-2">When the other wins</p>
+          <p className="body-copy body-copy-strong text-sm">{oppositeCase(brain)}</p>
+        </article>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-3">
+        {brain.traceRef ? <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">trace saved</span> : null}
+        {brain.result.minority_report ? (
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">minority report</span>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+type FeedbackSignal =
+  | "helpful"
+  | "not_helpful"
+  | "chose_left"
+  | "chose_right"
+  | "opposite_preferred"
+  | "bad_recommendation"
+  | "missing_context"
+  | "wrong_spec";
+
+function comparisonRefFor(result: ComparisonResult, brain: BrainState | null): string {
+  return brain?.comparisonRef ?? `compare:${result.left.id}:vs:${result.right.id}`;
+}
+
+function FeedbackButton({
+  children,
+  disabled,
+  onClick
+}: {
+  children: React.ReactNode;
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-left transition disabled:cursor-not-allowed disabled:opacity-60"
+      disabled={disabled}
+      type="button"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: ComparisonResult }) {
+  const [pendingSignal, setPendingSignal] = useState<FeedbackSignal | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const comparisonRef = comparisonRefFor(result, brain);
+  const traceRef = brain?.status === "completed" ? brain.traceRef : null;
+
+  async function submitFeedback(signal: FeedbackSignal) {
+    setPendingSignal(signal);
+    setMessage(null);
+
+    try {
+      const response = await fetch("/api/compare/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comparisonRef,
+          leftWatchId: result.left.id,
+          rightWatchId: result.right.id,
+          traceRef,
+          signal
+        })
+      });
+      const payload = (await response.json()) as
+        | { feedback: { status: string; message: string } }
+        | { error: string };
+
+      if ("feedback" in payload) {
+        setMessage(payload.feedback.message);
+      } else {
+        setMessage(response.ok ? "Feedback received." : "Feedback could not be saved.");
+      }
+    } catch {
+      setMessage("Feedback could not be saved.");
+    } finally {
+      setPendingSignal(null);
+    }
+  }
+
+  return (
+    <section className="surface-card p-6 shadow-none">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow eyebrow-wide">Teach the Brain</p>
+          <h3 className="title-section mt-3">Was this comparison useful?</h3>
+        </div>
+        <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">no account needed</span>
+      </div>
+
+      <div className="mt-5 flex flex-wrap gap-3">
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("helpful")}>
+          Helpful
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("not_helpful")}>
+          Not helpful
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("chose_left")}>
+          Chose {result.left.brand} {result.left.model}
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("chose_right")}>
+          Chose {result.right.brand} {result.right.model}
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("opposite_preferred")}>
+          I prefer the other pick
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("bad_recommendation")}>
+          Bad recommendation
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("missing_context")}>
+          Missing context
+        </FeedbackButton>
+        <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("wrong_spec")}>
+          Wrong spec
+        </FeedbackButton>
+      </div>
+
+      {message ? <p className="body-copy body-copy-soft mt-4 text-sm">{message}</p> : null}
+    </section>
+  );
+}
+
+export function ComparisonResultView({ brain, result }: { brain: BrainState | null; result: ComparisonResult }) {
   return (
     <div className="space-y-8">
       <section className="surface-hero grid gap-4 p-7 lg:grid-cols-[1.1fr_0.9fr]">
@@ -55,7 +293,7 @@ export function ComparisonResultView({ result }: { result: ComparisonResult }) {
             {result.left.brand} {result.left.model} vs {result.right.brand} {result.right.model}
           </h2>
           <p className="body-copy mt-4 max-w-2xl">
-            SpecDiff translates spec deltas into ownership consequences so you can decide faster and ignore the fluff.
+            {appName} translates spec deltas into ownership consequences so you can decide faster and ignore the fluff.
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -67,6 +305,8 @@ export function ComparisonResultView({ result }: { result: ComparisonResult }) {
           ))}
         </div>
       </section>
+
+      <BrainStatusCard brain={brain} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <SectionCard title="Key Differences" items={result.keyDifferences} />
@@ -90,6 +330,8 @@ export function ComparisonResultView({ result }: { result: ComparisonResult }) {
         <SectionCard title="Hidden Downsides" items={result.hiddenDownsides} />
         <SectionCard title="Better Value Alternative" items={result.betterValueAlternative} />
       </div>
+
+      <FeedbackPanel brain={brain} result={result} />
     </div>
   );
 }

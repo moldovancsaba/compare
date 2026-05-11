@@ -1,7 +1,7 @@
-# SpecDiff Architecture
+# {compare} Architecture
 
 ## Product Architecture
-SpecDiff is a narrow V1 product for comparing mechanical watches by real ownership consequences. The user enters two supported watch names or product URLs, the app resolves them against a curated catalog, and the comparison engine returns deterministic sections for practical tradeoffs.
+{compare} is a narrow V1 product for comparing mechanical watches by real ownership consequences. The user enters two supported watch names or product URLs, the app resolves them against a curated catalog, and the comparison engine returns deterministic sections for practical tradeoffs.
 
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`.
@@ -12,7 +12,7 @@ SpecDiff is a narrow V1 product for comparing mechanical watches by real ownersh
 - Tests: Vitest currently covers resolver basics, ambiguity rejection, comparison output shape, and `/api/compare` route behavior.
 
 ## Automation Architecture
-SpecDiff uses Codex as the autonomous orchestration layer. Heartbeats run continuously in the dedicated `specdiff-autonomous-maintenance` conversation and use GitHub for external project state.
+{compare} uses Codex as the autonomous orchestration layer. Heartbeats run continuously in the dedicated `compare-autonomous-maintenance` conversation and use GitHub for external project state.
 
 The heartbeat chain is:
 - Audit every 3 hours.
@@ -22,7 +22,7 @@ The heartbeat chain is:
 
 GitHub Actions are allowed as verification gates, but they are not the scheduler or primary orchestrator.
 
-The active Codex app scheduler entry is `/Users/chappie/.codex/automations/specdiff-complete-audit/automation.toml`. It runs every 3 hours and executes the heartbeat responsibilities in one dedicated automation thread so context is not scattered across multiple chats.
+The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compare-complete-audit/automation.toml`. It runs every 3 hours and executes the heartbeat responsibilities in one dedicated automation thread so context is not scattered across multiple chats.
 
 ## Invariants
 - V1 scope is mechanical watches.

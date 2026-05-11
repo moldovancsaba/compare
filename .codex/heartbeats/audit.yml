@@ -1,7 +1,7 @@
 name: audit
 conversation:
   mode: dedicated
-  thread: specdiff-autonomous-maintenance
+  thread: compare-autonomous-maintenance
 schedule:
   every: 3h
 agent: audit
@@ -25,7 +25,7 @@ consent:
   granted_by: product_owner
   scope: repository_maintenance
 prompt: |
-  Audit the SpecDiff codebase.
+  Audit the {compare} codebase.
 
   Responsibilities:
   - identify bugs

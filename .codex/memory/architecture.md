@@ -1,7 +1,7 @@
-# SpecDiff Codex Runtime Architecture
+# {compare} Codex Runtime Architecture
 
 ## Core Decision
-SpecDiff uses Codex as the orchestration layer. GitHub is source control, issue tracking, PR review, and project state. GitHub Actions may exist as a quality gate, but it is not the autonomous orchestration layer.
+{compare} uses Codex as the orchestration layer. GitHub is source control, issue tracking, PR review, and project state. GitHub Actions may exist as a quality gate, but it is not the autonomous orchestration layer.
 
 ## Runtime Shape
 ```text
@@ -19,9 +19,9 @@ Codex Runtime
 ```
 
 ## Dedicated Conversation
-All recurring SpecDiff heartbeat runs should use the same dedicated conversation:
+All recurring {compare} heartbeat runs should use the same dedicated conversation:
 
-`specdiff-autonomous-maintenance`
+`compare-autonomous-maintenance`
 
 This keeps memory, decisions, blockers, and implementation context in one continuous thread instead of scattering operational state across separate chats.
 

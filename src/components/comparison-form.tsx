@@ -1,14 +1,19 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
-import type { ComparisonResult } from "@/types/watch";
+import type { BrainState, ComparisonResult } from "@/types/watch";
 
 interface ComparisonResponse {
   comparison: ComparisonResult;
+  brain: BrainState;
+}
+
+interface BrainResponse {
+  brain: BrainState;
 }
 
 function isErrorResponse(payload: ComparisonResponse | { error: string }): payload is { error: string } {
@@ -19,11 +24,43 @@ export function ComparisonForm() {
   const [leftInput, setLeftInput] = useState("Rolex Air-King");
   const [rightInput, setRightInput] = useState("Rolex Explorer");
   const [result, setResult] = useState<ComparisonResult | null>(null);
+  const [brain, setBrain] = useState<BrainState | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  useEffect(() => {
+    if (!brain || (brain.status !== "queued" && brain.status !== "running")) {
+      return;
+    }
+
+    let cancelled = false;
+    const timeoutId = window.setTimeout(async () => {
+      try {
+        const response = await fetch(`/api/compare/brain?comparisonRef=${encodeURIComponent(brain.comparisonRef)}`);
+        const payload = (await response.json()) as BrainResponse | { error: string };
+        if (!cancelled && response.ok && "brain" in payload) {
+          setBrain(payload.brain);
+        }
+      } catch {
+        if (!cancelled) {
+          setBrain({
+            status: "unavailable",
+            comparisonRef: brain.comparisonRef,
+            message: "Trinity Brain status is temporarily unavailable."
+          });
+        }
+      }
+    }, 2500);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+  }, [brain]);
+
   async function runComparison(nextLeft: string, nextRight: string) {
     setError(null);
+    setBrain(null);
 
     const response = await fetch("/api/compare", {
       method: "POST",
@@ -40,17 +77,20 @@ export function ComparisonForm() {
 
     if (isErrorResponse(payload)) {
       setResult(null);
+      setBrain(null);
       setError(payload.error);
       return;
     }
 
     if (!response.ok) {
       setResult(null);
+      setBrain(null);
       setError("The comparison request failed. Try again.");
       return;
     }
 
     setResult(payload.comparison);
+    setBrain(payload.brain);
   }
 
   function handleSubmit(formData: FormData) {
@@ -86,7 +126,7 @@ export function ComparisonForm() {
         />
       </section>
 
-      {result ? <ComparisonResultView result={result} /> : null}
+      {result ? <ComparisonResultView brain={brain} result={result} /> : null}
     </div>
   );
 }

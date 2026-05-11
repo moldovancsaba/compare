@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 3,
-      "title": "Improve product resolution for fuzzy names, references, and brand aliases",
+      "github_issue": 30,
+      "title": "Validate Brain recommendation cards with live Trinity worker output",
       "priority": "high",
-      "reason": "Input resolution is the trust layer for every comparison."
+      "reason": "The UI and polling path are implemented, but completed-state behavior still needs Atlas-backed worker validation."
     },
     {
-      "github_issue": 16,
-      "title": "Add server-side rate limiting and abuse protection to the compare API",
+      "github_issue": 31,
+      "title": "Validate Trinity feedback persistence and worker consumption",
       "priority": "high",
-      "reason": "Public API exposure needs basic abuse controls before traffic grows."
+      "reason": "Feedback capture is implemented with fallback behavior, but live persistence and worker processing still need validation."
     },
     {
       "github_issue": 26,

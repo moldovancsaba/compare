@@ -13,7 +13,7 @@ export async function connectToDatabase(): Promise<typeof mongoose | null> {
 
   if (!global.mongooseConnectionPromise) {
     global.mongooseConnectionPromise = mongoose.connect(uri, {
-      dbName: process.env.MONGODB_DB_NAME || "specdiff"
+      dbName: process.env.MONGODB_DB_NAME || "compare"
     });
   }
 

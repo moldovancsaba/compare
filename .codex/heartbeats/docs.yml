@@ -1,7 +1,7 @@
 name: docs
 conversation:
   mode: dedicated
-  thread: specdiff-autonomous-maintenance
+  thread: compare-autonomous-maintenance
 schedule:
   offset: 120m
   every: 3h

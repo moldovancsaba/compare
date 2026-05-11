@@ -1,7 +1,7 @@
 name: implementer
 conversation:
   mode: dedicated
-  thread: specdiff-autonomous-maintenance
+  thread: compare-autonomous-maintenance
 schedule:
   offset: 60m
   every: 3h

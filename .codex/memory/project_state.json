@@ -7,15 +7,15 @@
     "operational-hardening"
   ],
   "known_risks": [
-    "resolver ambiguity can silently misclassify user input",
-    "compare API lacks rate limiting",
     "client compare flow needs controlled network and malformed-response handling",
+    "Trinity Brain worker needs live Atlas-backed validation before issues #30 and #31 can be closed",
+    "example environment files must never contain real service credentials",
     "npm audit reports a known moderate Next/PostCSS advisory tracked by GitHub issue #19"
   ],
   "last_completed_tasks": [
     {
       "date": "2026-05-11",
-      "summary": "Initial SpecDiff app baseline and documentation set created"
+      "summary": "Initial {compare} app baseline and documentation set created"
     },
     {
       "date": "2026-05-11",
@@ -28,6 +28,10 @@
     {
       "date": "2026-05-11",
       "summary": "Added and pushed API route tests for compare success, validation, unsupported inputs, duplicates, and malformed JSON; closed GitHub issue #13"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Added the Trinity Brain worker bridge, Brain status UI, feedback capture, and sanitized environment template"
     }
   ],
   "blocked_items": [

@@ -1,5 +1,7 @@
 "use client";
 
+import { appName } from "@/lib/config/app";
+
 const presets = [
   ["Rolex Air-King", "Rolex Explorer"],
   ["Tudor Black Bay 58", "Tudor Pelagos 39"],
@@ -17,7 +19,7 @@ export function ComparisonHero({
       <div>
         <h1 className="title-hero max-w-3xl">Stop reading specs. Start understanding consequences.</h1>
         <p className="body-copy body-copy-muted mt-5 max-w-2xl">
-          Paste two watch names or catalog URLs. SpecDiff explains what changes on wrist, who each watch suits, and where
+          Paste two watch names or catalog URLs. {appName} explains what changes on wrist, who each watch suits, and where
           marketing noise ends.
         </p>
       </div>

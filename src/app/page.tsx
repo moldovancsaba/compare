@@ -1,5 +1,5 @@
 import { ComparisonForm } from "@/components/comparison-form";
-import { appVersionLabel } from "@/lib/config/app";
+import { appName, appVersionLabel } from "@/lib/config/app";
 
 export default function HomePage() {
   return (
@@ -12,7 +12,7 @@ export default function HomePage() {
       <div className="relative mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12 lg:px-10">
         <div className="mb-10 flex flex-wrap items-center justify-between gap-6">
           <div>
-            <p className="eyebrow eyebrow-xwide">SpecDiff</p>
+            <p className="eyebrow eyebrow-xwide">{appName}</p>
             <p className="body-copy body-copy-soft mt-2 max-w-xl text-sm">
               AI-assisted mechanical watch comparisons that explain ownership tradeoffs in plain English.
             </p>

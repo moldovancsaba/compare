@@ -18,4 +18,4 @@ Every implementation report must state only what was actually executed in the cu
 - `npm audit --omit=dev`
 
 ## Automation evidence
-Recurring Codex heartbeat runs must also update shared memory when they create issues, choose priorities, implement changes, hit blockers, or push verified changes. The dedicated conversation should remain `specdiff-autonomous-maintenance` so the operational history stays together.
+Recurring Codex heartbeat runs must also update shared memory when they create issues, choose priorities, implement changes, hit blockers, or push verified changes. The dedicated conversation should remain `compare-autonomous-maintenance` so the operational history stays together.

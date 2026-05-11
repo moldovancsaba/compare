@@ -1,7 +1,7 @@
 name: planner
 conversation:
   mode: dedicated
-  thread: specdiff-autonomous-maintenance
+  thread: compare-autonomous-maintenance
 schedule:
   offset: 30m
   every: 3h

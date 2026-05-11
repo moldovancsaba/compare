@@ -1,7 +1,7 @@
 # READMEDEV
 
 ## Objective
-Build and maintain SpecDiff as a production-grade Next.js webapp that compares mechanical watches by real-world ownership consequences, not raw spec tables.
+Build and maintain {compare} as a production-grade Next.js webapp that compares mechanical watches by real-world ownership consequences, not raw spec tables.
 
 ## Active Assignment
 - Source of truth for this initial build: the PO brief from 2026-05-11 in this workspace conversation.

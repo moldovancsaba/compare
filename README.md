@@ -1,6 +1,6 @@
-# SpecDiff
+# {compare}
 
-SpecDiff is a Next.js web app that compares enthusiast products by consequences instead of raw spec tables. Release `v0.1.1` is intentionally narrow: mechanical watches only.
+{compare} is a Next.js web app that compares enthusiast products by consequences instead of raw spec tables. Release `v0.1.1` is intentionally narrow: mechanical watches only.
 
 ## Version
 - Project version: `0.1.1`
@@ -20,7 +20,7 @@ SpecDiff is a Next.js web app that compares enthusiast products by consequences 
 - Highlights what is meaningful versus mostly marketing.
 
 ## Why it exists
-Most comparison content is bloated, repetitive, and detached from real ownership. SpecDiff compresses the usual review-tab spiral into one focused screen that explains what changes on wrist and why that matters.
+Most comparison content is bloated, repetitive, and detached from real ownership. {compare} compresses the usual review-tab spiral into one focused screen that explains what changes on wrist and why that matters.
 
 ## Product shape
 - Single-screen comparison experience with a server-rendered landing page and client-side form interactions.
@@ -47,10 +47,37 @@ Optional environment variables:
 
 ```bash
 MONGODB_URI=
-MONGODB_DB_NAME=specdiff
+MONGODB_DB_NAME=compare
+COMPARE_BRAIN_PROVIDER=
 ```
 
+Use `.env.example` as the template and copy values into `.env.local` for local development. Keep `.env.example` free of real credentials.
+
 V1 does not require MongoDB to run because it ships with a curated watch catalog. The database hook is present so later persistence can be added without changing the app shape.
+
+Set `COMPARE_BRAIN_PROVIDER=trinity_worker` only when MongoDB Atlas is configured and a local `{trinity}` worker is available. In that mode `/api/compare` still returns the deterministic comparison immediately, then queues an optional Brain job in MongoDB for local Trinity enrichment.
+
+Run the local Brain worker with:
+
+```bash
+npm run brain:worker
+```
+
+For one queued job only:
+
+```bash
+npm run brain:worker:once
+```
+
+Worker-specific optional environment variables:
+
+```bash
+TRINITY_REPO=/Users/Shared/Projects/trinity
+COMPARE_BRAIN_WORKER_POLL_MS=30000
+COMPARE_BRAIN_TRINITY_TIMEOUT_MS=120000
+```
+
+The worker at `scripts/trinity-compare-worker.mjs` claims `compare_jobs`, invokes `{trinity}` with `reason-compare --adapter compare`, writes `comparison_traces`, updates `saved_comparisons`, and marks jobs `completed` or `failed`.
 
 ## Supported watches in V1
 - Rolex Air-King 126900
@@ -83,9 +110,9 @@ Current status on 2026-05-11:
 Current automated route coverage includes resolver matching and ambiguity rejection, `/api/compare` success, unsupported watch input, duplicate watch input, invalid fields, malformed JSON, and repeated-request rate limiting.
 
 ## Codex automation
-SpecDiff uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.
+{compare} uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.
 
-The active Codex app automation is `specdiff-complete-audit`, registered as `SpecDiff Autonomous Maintenance Loop` with a 3-hour cadence. It runs in the dedicated `specdiff-autonomous-maintenance` conversation:
+The active Codex app automation is `compare-complete-audit`, registered as `{compare} Autonomous Maintenance Loop` with a 3-hour cadence. It runs in the dedicated `compare-autonomous-maintenance` conversation:
 - audit every 3 hours
 - planner 30 minutes later
 - implementer 60 minutes later

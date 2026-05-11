@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Current phase
-V1.0.1 hardening and documentation alignment for SpecDiff.
+V1.0.1 hardening and documentation alignment for {compare}.
 
 ## Completed in this baseline
 - Repository reset from previous unrelated app.

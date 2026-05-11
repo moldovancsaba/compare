@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { enqueueTrinityCompareJob } from "@/lib/services/brain-queue";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
@@ -11,7 +12,8 @@ const requestSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const rateLimit = checkRateLimit(resolveClientKey(request));
+  const clientKey = resolveClientKey(request);
+  const rateLimit = checkRateLimit(clientKey);
 
   if (rateLimit.limited) {
     return NextResponse.json(
@@ -38,7 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "SpecDiff V1 currently supports its curated mechanical watch catalog. Try Rolex Air-King, Rolex Explorer, Tudor Black Bay 54, Tudor Black Bay 58, Tudor Pelagos 39, or Omega Aqua Terra 38."
+            "{compare} V1 currently supports its curated mechanical watch catalog. Try Rolex Air-King, Rolex Explorer, Tudor Black Bay 54, Tudor Black Bay 58, Tudor Pelagos 39, or Omega Aqua Terra 38."
         },
         { status: 404 }
       );
@@ -53,8 +55,17 @@ export async function POST(request: Request) {
       );
     }
 
+    const comparison = compareWatches(left, right);
+    const brain = await enqueueTrinityCompareJob({
+      left,
+      right,
+      deterministicResult: comparison,
+      requestedBy: clientKey
+    });
+
     return NextResponse.json({
-      comparison: compareWatches(left, right)
+      comparison,
+      brain
     });
   } catch {
     return NextResponse.json(
