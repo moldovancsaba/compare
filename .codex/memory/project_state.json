@@ -43,12 +43,15 @@
     {
       "date": "2026-05-11",
       "summary": "Added Trinity worker feedback consumption and durable saved-comparison feedback summaries"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Configured local and Vercel MongoDB environments, live-validated Trinity Brain output and feedback processing, and closed GitHub issues #30 and #31"
+    },
+    {
+      "date": "2026-05-11",
+      "summary": "Added fixture-backed comparison-output regression tests and documented the regression strategy for issue #14"
     }
   ],
-  "blocked_items": [
-    {
-      "item": "Live Trinity Brain validation",
-      "reason": "Issues #30 and #31 still need Atlas-backed worker completion and persistence validation; no local .env or .env.local with MONGODB_URI is present"
-    }
-  ]
+  "blocked_items": []
 }

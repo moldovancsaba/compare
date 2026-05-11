@@ -1,16 +1,34 @@
 {
   "highest_priority": [
     {
-      "github_issue": 30,
-      "title": "Validate Brain recommendation cards with live Trinity worker output",
+      "github_issue": 18,
+      "title": "Add structured logging and production-safe error handling across the compare path",
       "priority": "high",
-      "reason": "The UI and polling path are implemented, but completed-state behavior still needs Atlas-backed worker validation."
+      "reason": "Now that Mongo-backed Brain and feedback flows are live, operational failures need structured visibility without leaking user input or credentials."
     },
     {
-      "github_issue": 31,
-      "title": "Validate Trinity feedback persistence and worker consumption",
+      "github_issue": 17,
+      "title": "Add structured telemetry for comparison usage, resolution misses, and errors",
       "priority": "high",
-      "reason": "Feedback capture and worker-side summary processing are implemented, but live Atlas persistence and consumption still need validation."
+      "reason": "Usage and resolver-miss signals will guide catalog expansion and UX fixes without guessing from anecdotes."
+    },
+    {
+      "github_issue": 7,
+      "title": "Add MongoDB persistence for submitted comparisons and analytics events",
+      "priority": "high",
+      "reason": "The Atlas environment is now configured, so durable comparison history can move from optional Brain artifacts into the main product path."
+    },
+    {
+      "github_issue": 8,
+      "title": "Create shareable saved comparison pages with stable slugs",
+      "priority": "medium",
+      "reason": "Saved comparison pages build directly on persistence and unlock SEO, sharing, and internal-linking work."
+    },
+    {
+      "github_issue": 11,
+      "title": "Improve input UX with guided examples, validation, and unsupported-source messaging",
+      "priority": "medium",
+      "reason": "Clearer input guidance reduces resolver misses and makes the narrow V1 catalog feel intentional rather than broken."
     }
   ],
   "selection_policy": "Prefer one issue-scoped task per implementer heartbeat. Choose tasks that can be verified locally, committed, and pushed directly to origin/main without force pushes."

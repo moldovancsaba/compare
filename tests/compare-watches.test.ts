@@ -8,6 +8,7 @@ import { readComparisonResponse, requestComparison } from "@/lib/services/compar
 import { compareWatches } from "@/lib/services/compare-watches";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
+import type { ComparisonResult, WatchSpec } from "@/types/watch";
 
 function compareRequest(body: unknown, ip = "203.0.113.10"): Request {
   return new Request("http://localhost/api/compare", {
@@ -28,6 +29,106 @@ function feedbackRequest(body: unknown): Request {
     },
     body: JSON.stringify(body)
   });
+}
+
+function watchById(id: string): WatchSpec {
+  const watch = watchCatalog.find((candidate) => candidate.id === id);
+
+  if (!watch) {
+    throw new Error(`Missing watch fixture: ${id}`);
+  }
+
+  return watch;
+}
+
+type ComparisonRegressionFixture = {
+  name: string;
+  leftId: string;
+  rightId: string;
+  expectedBuyerPicks: Record<string, string>;
+  expectedBetterValueAlternative: string;
+  expectedHiddenDownsideTitles: string[];
+  expectedFragments: string[];
+};
+
+const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
+  {
+    name: "Rolex Air-King 126900 vs Rolex Explorer 124270",
+    leftId: "rolex-air-king-126900",
+    rightId: "rolex-explorer-124270",
+    expectedBuyerPicks: {
+      "One-watch owner": "Rolex Explorer",
+      "Tool-watch enthusiast": "Rolex Air-King",
+      "Value-focused collector": "Rolex Explorer"
+    },
+    expectedBetterValueAlternative: "Omega Seamaster Aqua Terra 38",
+    expectedHiddenDownsideTitles: [
+      "Rolex Air-King dial personality tradeoff",
+      "Rolex Explorer size expectation tradeoff"
+    ],
+    expectedFragments: ["40 mm", "48 mm", "11.5 mm", "$200", "aviation heritage"]
+  },
+  {
+    name: "Tudor Black Bay 54 vs Tudor Black Bay 58",
+    leftId: "tudor-black-bay-54",
+    rightId: "tudor-black-bay-58",
+    expectedBuyerPicks: {
+      "One-watch owner": "Tudor Black Bay 58",
+      "Tool-watch enthusiast": "Tudor Black Bay 54",
+      "Value-focused collector": "Tudor Black Bay 54"
+    },
+    expectedBetterValueAlternative: "Tudor Pelagos 39",
+    expectedHiddenDownsideTitles: ["Tudor Black Bay 58 fit downside"],
+    expectedFragments: ["39 mm", "47.5 mm", "11.2 mm", "$300", "heritage riveted bracelet"]
+  },
+  {
+    name: "Omega Seamaster Aqua Terra 38 vs Tudor Pelagos 39",
+    leftId: "omega-aqua-terra-38",
+    rightId: "tudor-pelagos-39",
+    expectedBuyerPicks: {
+      "One-watch owner": "Omega Seamaster Aqua Terra 38",
+      "Tool-watch enthusiast": "Tudor Pelagos 39",
+      "Value-focused collector": "Tudor Pelagos 39"
+    },
+    expectedBetterValueAlternative: "Tudor Black Bay 54",
+    expectedHiddenDownsideTitles: [
+      "Omega Seamaster Aqua Terra 38 fit downside",
+      "Omega Seamaster Aqua Terra 38 profile downside",
+      "Omega Seamaster Aqua Terra 38 dial tradeoff"
+    ],
+    expectedFragments: ["39 mm", "47 mm", "11.8 mm", "$1,700", "Master Chronometer"]
+  },
+  {
+    name: "Rolex Explorer 124270 vs Omega Seamaster Aqua Terra 38",
+    leftId: "rolex-explorer-124270",
+    rightId: "omega-aqua-terra-38",
+    expectedBuyerPicks: {
+      "One-watch owner": "Rolex Explorer",
+      "Tool-watch enthusiast": "Omega Seamaster Aqua Terra 38",
+      "Value-focused collector": "Omega Seamaster Aqua Terra 38"
+    },
+    expectedBetterValueAlternative: "Tudor Black Bay 54",
+    expectedHiddenDownsideTitles: [
+      "Rolex Explorer size expectation tradeoff",
+      "Omega Seamaster Aqua Terra 38 fit downside",
+      "Omega Seamaster Aqua Terra 38 profile downside",
+      "Omega Seamaster Aqua Terra 38 dial tradeoff"
+    ],
+    expectedFragments: ["38 mm", "45 mm", "11.5 mm", "$650", "mountain expedition DNA"]
+  }
+];
+
+function flattenedComparisonCopy(result: ComparisonResult): string {
+  return [
+    ...result.keyDifferences,
+    ...result.realWorldImpact,
+    ...result.overpricedFeatures,
+    ...result.hiddenDownsides,
+    ...result.betterValueAlternative,
+    ...result.signalVsFluff
+  ]
+    .map((block) => `${block.title} ${block.summary}`)
+    .join("\n");
 }
 
 describe("resolveWatch", () => {
@@ -76,6 +177,53 @@ describe("compareWatches", () => {
     expect(result.betterValueAlternative.length).toBeGreaterThan(0);
     expect(result.signalVsFluff.length).toBe(2);
   });
+
+  it.each(comparisonRegressionFixtures)(
+    "keeps regression-critical output stable for $name",
+    ({
+      leftId,
+      rightId,
+      expectedBuyerPicks,
+      expectedBetterValueAlternative,
+      expectedHiddenDownsideTitles,
+      expectedFragments
+    }) => {
+      const result = compareWatches(watchById(leftId), watchById(rightId));
+      const copy = flattenedComparisonCopy(result);
+
+      expect(result.keyDifferences.map((block) => block.title)).toEqual([
+        "Wrist presence",
+        "Use-case bias",
+        "Capability gap",
+        "Price delta"
+      ]);
+      expect(result.realWorldImpact.map((block) => block.title)).toEqual([
+        "All-day comfort",
+        "Temperature and swelling",
+        "Perceived heft"
+      ]);
+      expect(result.signalVsFluff.map((block) => block.title)).toEqual([
+        "Meaningful difference",
+        "Mostly marketing"
+      ]);
+
+      for (const [buyerType, pick] of Object.entries(expectedBuyerPicks)) {
+        expect(result.whoShouldBuyWhich).toContainEqual(
+          expect.objectContaining({
+            buyerType,
+            pick
+          })
+        );
+      }
+
+      expect(result.betterValueAlternative[0]?.title).toBe(expectedBetterValueAlternative);
+      expect(result.hiddenDownsides.map((block) => block.title)).toEqual(expectedHiddenDownsideTitles);
+
+      for (const fragment of expectedFragments) {
+        expect(copy).toContain(fragment);
+      }
+    }
+  );
 });
 
 describe("Trinity feedback summaries", () => {
