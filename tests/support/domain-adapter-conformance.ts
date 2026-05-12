@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import type {
   ComparisonDomainAdapter,
   ComparisonEntity,
+  DataSourcePolicy,
   EvidenceItem,
   GenericComparisonResult
 } from "@/types/comparison";
@@ -24,6 +25,28 @@ function expectEntity(entity: ComparisonEntity, domain: string) {
   expectNonEmptyString(entity.label);
   expectNonEmptyString(entity.slug);
   expect(Array.isArray(entity.aliases)).toBe(true);
+}
+
+function expectDataPolicy(dataPolicy: DataSourcePolicy) {
+  expectNonEmptyString(dataPolicy.summary);
+  expect(dataPolicy.sourceTiers.length).toBeGreaterThan(0);
+  expectNonEmptyString(dataPolicy.freshness.cadence);
+  expect(dataPolicy.curationRules.length).toBeGreaterThan(0);
+  expect(dataPolicy.blockedSourceTypes.length).toBeGreaterThan(0);
+  expectNonEmptyString(dataPolicy.missingDataPolicy);
+
+  for (const sourceTier of dataPolicy.sourceTiers) {
+    expect([
+      "official_source",
+      "curated_fixture",
+      "expert_rule",
+      "community_signal",
+      "market_signal",
+      "user_supplied"
+    ]).toContain(sourceTier.tier);
+    expectNonEmptyString(sourceTier.description);
+    expect(["high", "medium", "low"]).toContain(sourceTier.defaultConfidence);
+  }
 }
 
 function expectInsightArray(items: Array<{ title: string; summary: string }>, sectionName: string) {
@@ -112,6 +135,7 @@ export function describeDomainAdapterConformance(
       expectNonEmptyString(adapter.inputHints.rightLabel);
       expectNonEmptyString(adapter.inputHints.placeholder);
       expectNonEmptyString(adapter.inputHints.helperText);
+      expectDataPolicy(adapter.dataPolicy);
       expect(adapter.examples.length).toBeGreaterThanOrEqual(2);
 
       for (const example of adapter.examples) {

@@ -1,3 +1,4 @@
+import { serviceDomainAdapter } from "@/lib/domains/service-domain";
 import { watchDomainAdapter } from "@/lib/domains/watch-domain";
 import type {
   ComparisonDomain,
@@ -9,7 +10,8 @@ import type {
 
 const defaultDomain = "watches";
 const domainAdapters = new Map<ComparisonDomain, ComparisonDomainAdapter>([
-  [watchDomainAdapter.domain, watchDomainAdapter]
+  [watchDomainAdapter.domain, watchDomainAdapter],
+  [serviceDomainAdapter.domain, serviceDomainAdapter]
 ]);
 
 export type CompareInputsResult =

@@ -89,6 +89,35 @@ export interface ComparisonDomainOption {
   inputHints: ComparisonDomainInputHints;
 }
 
+export type DataSourceTier =
+  | "official_source"
+  | "curated_fixture"
+  | "expert_rule"
+  | "community_signal"
+  | "market_signal"
+  | "user_supplied";
+
+export interface DataPolicySourceTier {
+  tier: DataSourceTier;
+  description: string;
+  defaultConfidence: EvidenceConfidence;
+}
+
+export interface DataFreshnessPolicy {
+  cadence: string;
+  staleAfterDays?: number;
+  lastReviewed?: string;
+}
+
+export interface DataSourcePolicy {
+  summary: string;
+  sourceTiers: DataPolicySourceTier[];
+  freshness: DataFreshnessPolicy;
+  curationRules: string[];
+  blockedSourceTypes: string[];
+  missingDataPolicy: string;
+}
+
 export interface GenericComparisonResult {
   domain: ComparisonDomain;
   canonicalInputA: string;
@@ -124,6 +153,7 @@ export interface ComparisonDomainAdapter<TEntity extends ComparisonEntity = Comp
   description: string;
   examples: string[];
   inputHints: ComparisonDomainInputHints;
+  dataPolicy: DataSourcePolicy;
   resolve(input: string): ResolveComparisonEntityResult | { status: "resolved"; entity: TEntity };
   compare(left: TEntity, right: TEntity): GenericComparisonResult;
 }

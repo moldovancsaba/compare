@@ -125,10 +125,6 @@ export async function persistSubmittedComparison(
 export async function getSavedComparisonBySlug(slug: string): Promise<SavedComparisonPage | null> {
   const parsed = parseSavedComparisonSlug(slug);
 
-  if (!parsed) {
-    return null;
-  }
-
   try {
     const connection = await connectToDatabase();
     if (!connection) {
@@ -136,13 +132,15 @@ export async function getSavedComparisonBySlug(slug: string): Promise<SavedCompa
     }
 
     const savedComparison = await SavedComparisonModel.findOne({
-      $or: [
-        { publicSlug: slug },
-        {
-          leftWatchId: parsed.leftWatchId,
-          rightWatchId: parsed.rightWatchId
-        }
-      ]
+      $or: parsed
+        ? [
+            { publicSlug: slug },
+            {
+              leftWatchId: parsed.leftWatchId,
+              rightWatchId: parsed.rightWatchId
+            }
+          ]
+        : [{ publicSlug: slug }]
     }).lean<{
       comparisonRef: string;
       publicSlug?: string | null;

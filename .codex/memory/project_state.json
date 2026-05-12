@@ -66,6 +66,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented the universal evidence and confidence model for issue #61, including generic result metadata, watch adapter evidence, UI affordances, conformance tests, and documentation"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented domain data governance for issue #63 and the first non-watch services adapter for issue #62, including curated service fixtures, resolver, deterministic comparison rules, evidence, tests, docs, and UI presets"
     }
   ],
   "blocked_items": []

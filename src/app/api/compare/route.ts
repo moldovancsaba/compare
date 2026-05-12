@@ -110,7 +110,7 @@ export async function POST(request: Request) {
     }
 
     if (comparisonResult.status === "duplicate_entity") {
-      logWarn("compare.duplicate_watch", {
+      logWarn("compare.duplicate_entity", {
         clientKeyHash,
         domain: comparisonResult.domain,
         entityId: comparisonResult.entity.id

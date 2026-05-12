@@ -12,9 +12,9 @@ The current product-development initiative is generic comparison infrastructure 
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector and shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with supported examples, blocks duplicate entities, and returns comparison output.
 - Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, universal evidence/confidence model, adapter-owned UI metadata, and adapter registry.
-- Domain logic: `src/lib/domains/watch-domain.ts` is the first adapter; `src/lib/utils/resolve-watch.ts` handles exact, reference, URL, and conservative typo-tolerant watch resolution; `src/lib/services/compare-watches.ts` remains the watch-specific deterministic rule engine behind that adapter.
-- Data: `src/lib/data/watch-catalog.ts` is the V1 curated watch catalog. Future domains should add their own adapter and source data instead of adding category conditionals to the API or UI shell.
-- Adapter SDK: `docs/domain-adapters.md` defines the adapter contract, registration workflow, and required conformance tests in `tests/support/domain-adapter-conformance.ts`.
+- Domain logic: `src/lib/domains/watch-domain.ts` and `src/lib/domains/service-domain.ts` are the first adapters; `src/lib/services/compare-watches.ts` and `src/lib/services/compare-services.ts` remain domain-specific deterministic rule engines behind those adapters.
+- Data: `src/lib/data/watch-catalog.ts` and `src/lib/data/service-catalog.ts` are curated adapter data sources. Future domains should add their own adapter and source data instead of adding category conditionals to the API or UI shell.
+- Adapter SDK: `docs/domain-adapters.md` defines the adapter contract, registration workflow, and required conformance tests in `tests/support/domain-adapter-conformance.ts`. `docs/data-governance.md` defines source-tier, freshness, curation, blocked-source, and missing-data rules.
 - Persistence: `src/lib/db.ts` connects to optional MongoDB Atlas. Submitted deterministic comparisons are best-effort upserted to `saved_comparisons` with generic entity/domain fields plus legacy watch IDs for compatibility, Brain jobs use `compare_jobs` and `comparison_traces`, feedback uses `comparison_feedback`, and telemetry uses `analytics_events`.
 - Observability: `src/lib/observability/logger.ts` emits structured JSON events with redaction for user inputs, URLs/URIs, notes, credentials, authorization-like fields, and raw error messages. `src/lib/observability/telemetry.ts` optionally records durable allowlisted analytics events in MongoDB when Atlas is configured.
 - Tests: Vitest currently covers resolver basics, typo tolerance, ambiguity rejection, comparison output shape, and `/api/compare` route behavior.
@@ -34,9 +34,10 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 
 ## Invariants
 - The comparison foundation must stay domain-neutral; product/service/category specifics belong in adapters.
-- The live V1 adapter is mechanical watches.
+- The live V1 adapters are mechanical watches and business services.
 - New domains must enter through adapter registration, conformance tests, and data governance rather than conditional logic in the API or UI shell.
 - Every adapter result must expose evidence, confidence, data-quality, and missing-data metadata so the UI can distinguish facts, rules, editorial inference, and known gaps.
+- Every adapter must expose a data policy with source tiers, freshness rules, curation rules, blocked sources, and missing-data behavior.
 - Agents may commit and push verified changes directly to `origin/main` without per-step approval.
 - Agents may not force push or delete production code autonomously.
 - Operational logs must preserve event context without exposing raw user-submitted comparison text, notes, credentials, or client IP addresses.

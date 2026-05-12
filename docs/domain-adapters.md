@@ -12,8 +12,17 @@ Required fields:
 - `description`: short UI description of what the adapter can compare.
 - `examples`: supported example inputs used by recovery UI and tests.
 - `inputHints`: adapter-owned left/right labels, placeholder, and helper text for the comparison form.
+- `dataPolicy`: adapter-owned governance for source tiers, freshness, curation, blocked sources, and missing data.
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
+
+Data-policy requirements:
+- Define every source tier the adapter may use, such as `official_source`, `curated_fixture`, `expert_rule`, `community_signal`, `market_signal`, or `user_supplied`.
+- Assign a default confidence level to each tier.
+- State the freshness cadence and optional stale-after window.
+- Record manual curation rules that prevent claims from drifting into uncited facts.
+- Block low-trust sources that should never drive recommendations.
+- Standardize missing-data behavior and map it to low-confidence evidence when decision-relevant.
 
 Result evidence requirements:
 - `evidenceSummary.overallConfidence`: coarse confidence in the final recommendation.
@@ -47,6 +56,7 @@ Every adapter must pass the shared conformance helper in `tests/support/domain-a
 The conformance suite verifies:
 - stable metadata and examples
 - adapter-owned UI description and input hints
+- adapter-owned data policy for source tiers, freshness, curation, blocked sources, and missing data
 - supported inputs resolve to generic entities
 - unsupported inputs fail closed
 - comparison output is deterministic
@@ -77,6 +87,7 @@ The registry is the only place that should know which domains are live. `/api/co
 
 Adapters own:
 - domain data
+- data source governance and freshness assumptions
 - resolver rules
 - domain-specific scoring and tradeoff rules
 - adapter examples
@@ -101,9 +112,16 @@ Core platform owns:
 3. Implement the domain resolver.
 4. Implement deterministic comparison rules.
 5. Register the adapter in `src/lib/services/compare.ts`.
-6. Add the conformance test.
-7. Add adapter-specific regression tests.
-8. Emit evidence metadata for facts, rules, inferences, sources, and missing data.
-9. Document data source governance, confidence assumptions, and missing-data behavior.
+6. Add adapter-owned `dataPolicy`.
+7. Add the conformance test.
+8. Add adapter-specific regression tests.
+9. Emit evidence metadata for facts, rules, inferences, sources, and missing data.
+10. Document data source governance, confidence assumptions, and missing-data behavior.
+
+## Governance Examples
+
+Watch adapters should treat curated specs and canonical product URLs as facts, but live market price, service cost, resale, and owner-sentiment claims must either have source timestamps or appear as missing-data limitations.
+
+Service adapters should treat service archetypes as curated fixtures unless a specific vendor source is verified. Vendor marketing, legal, compliance, uptime, and security claims need explicit source evidence before they can raise confidence.
 
 Do not add a domain by branching on domain names inside `/api/compare` or shared UI components. If a shared component needs new behavior, expose it through the generic contract or adapter metadata.

@@ -1,28 +1,28 @@
 {
   "highest_priority": [
     {
-      "github_issue": 63,
-      "title": "Define domain data source governance",
-      "priority": "high",
-      "reason": "Evidence and confidence are now in the result contract; adapters need source, freshness, and missing-data governance before more domains are added."
-    },
-    {
-      "github_issue": 62,
-      "title": "Build the first non-watch services comparison adapter",
-      "priority": "high",
-      "reason": "A services adapter proves the platform can compare non-product domains without hard-coded watch assumptions."
-    },
-    {
       "github_issue": 35,
       "title": "Rebuild comparison output around decision confidence",
-      "priority": "medium",
-      "reason": "The generic evidence model supports trust; the next output work should make verdicts and decisions sharper across domains."
+      "priority": "high",
+      "reason": "Two adapters now use the generic contract; the next leverage point is sharpening the output structure and decision confidence across domains."
     },
     {
       "github_issue": 37,
       "title": "Add visible confidence and data-quality indicators",
+      "priority": "high",
+      "reason": "The evidence model and services adapter expose confidence metadata; the remaining UX should make confidence easier to scan and act on."
+    },
+    {
+      "github_issue": 36,
+      "title": "Implement structured comparison output contract",
       "priority": "medium",
-      "reason": "Issue #61 added the first generic indicators; this should be reviewed for any remaining UX depth or project-board closure criteria."
+      "reason": "The result contract is broader now; issue #36 should be reviewed against the implemented generic schema and closed or narrowed."
+    },
+    {
+      "github_issue": 38,
+      "title": "Improve comparison result visual hierarchy",
+      "priority": "medium",
+      "reason": "The result page now supports two domains and more evidence; visual hierarchy should be tightened before adding more adapters."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

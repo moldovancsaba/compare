@@ -14,6 +14,8 @@ import {
   persistSubmittedComparison
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { serviceCatalog } from "@/lib/data/service-catalog";
+import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
@@ -343,14 +345,14 @@ describe("generic comparison foundation", () => {
   it("rejects unsupported domains before touching a product-specific resolver", () => {
     expect(
       compareInputs({
-        domain: "services",
+        domain: "unknown-domain",
         leftInput: "Service A",
         rightInput: "Service B"
       })
     ).toEqual({
       status: "unsupported_domain",
-      domain: "services",
-      supportedDomains: ["watches"]
+      domain: "unknown-domain",
+      supportedDomains: ["watches", "services"]
     });
   });
 });
@@ -482,6 +484,15 @@ describe("submitted comparison persistence", () => {
     expect(parseSavedComparisonSlug("not-a-comparison")).toBeNull();
   });
 
+  it("builds domain-prefixed slugs for non-watch comparisons", () => {
+    const left = serviceCatalog[0];
+    const right = serviceCatalog[1];
+
+    expect(buildSavedComparisonSlug(toServiceComparisonEntity(left), toServiceComparisonEntity(right))).toBe(
+      "services-managed-customer-support-vs-services-ai-support-automation"
+    );
+  });
+
   it("does not require MongoDB to keep comparison requests available", async () => {
     const previousMongoUri = process.env.MONGODB_URI;
     const left = watchById("rolex-air-king-126900");
@@ -540,7 +551,7 @@ describe("compare input validation", () => {
   });
 
   it("rejects unsupported comparison domains before the API round trip", () => {
-    expect(validateComparisonInputs("Rolex Air-King", "Rolex Explorer", "services")).toEqual({
+    expect(validateComparisonInputs("Rolex Air-King", "Rolex Explorer", "unknown-domain")).toEqual({
       valid: false,
       message: "Choose a supported comparison domain."
     });

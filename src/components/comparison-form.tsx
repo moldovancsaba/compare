@@ -150,12 +150,15 @@ export function ComparisonForm() {
     });
   }
 
-  function applyPreset(nextLeft: string, nextRight: string) {
+  function applyPreset(nextLeft: string, nextRight: string, nextDomain: string) {
+    const nextSupportedInputs = supportedInputsForDomain(nextDomain);
+    setActiveDomain(nextDomain);
+    setSupportedInputs(nextSupportedInputs);
     setLeftInput(nextLeft);
     setRightInput(nextRight);
 
     startTransition(() => {
-      void runComparison(nextLeft, nextRight, activeDomain);
+      void runComparison(nextLeft, nextRight, nextDomain);
     });
   }
 

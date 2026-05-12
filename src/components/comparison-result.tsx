@@ -212,7 +212,7 @@ function oppositeCase(brain: BrainState): string {
   const alternate = recommendations.find((item) => item.pick !== recommendations[0]?.pick);
   return alternate
     ? `${alternate.pick} still makes sense for ${alternate.buyerType.toLowerCase()}: ${alternate.reason}`
-    : "The other watch can still be right if your fit, budget, or styling preference changes.";
+    : "The other option can still be right if your context, budget, or preferences change.";
 }
 
 function BrainStatusCard({
