@@ -6,6 +6,7 @@ import {
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { watchDisplayName } from "@/lib/domains/watch-entity";
+import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import type { WatchSpec } from "@/types/watch";
 import type { WatchCollectionProfile } from "@/types/watch-collection";
 import type { WatchPurchaseReport, WatchPurchaseVerdict } from "@/types/watch-purchase";
@@ -110,6 +111,7 @@ export function shouldBuyWatch(
   const status = collectionStatusFor(profile, candidate);
   const closestOwned = closestOverlap(candidate, owned);
   const upgradeVerdict = profile ? analyzeWatchUpgradePath(candidate, profile) : null;
+  const ownershipSimulation = simulateWatchOwnership(candidate);
   const gapInsights = profile ? analyzeWatchCollectionGaps(profile) : [];
   const fillsGap = gapInsights.some((insight) => insight.traits.includes(`missing-style:${candidate.style}`));
   const consequence = buildWatchConsequenceProfile(candidate);
@@ -156,7 +158,8 @@ export function shouldBuyWatch(
       ? `${watchDisplayName(candidate)} overlaps most with ${watchDisplayName(closestOwned)} in the saved collection. ${upgradeVerdict?.summary ?? "Treat the decision as a rotation-fit question, not a pure spec upgrade."}`
       : `${watchDisplayName(candidate)} does not overlap with an owned watch in the saved profile, so the decision is mostly about fit, value, and taste.`,
     emotionalFit: `${candidate.ownership.emotionalCharacter} ${profile?.preferredBrands.includes(candidate.brand) ? "It also matches a saved brand preference." : "Make sure that character is what you want after the first week."}`,
-    ownershipRisk: `${candidate.ownership.serviceReality} ${candidate.ownership.scratchRisk} ${consequence.serviceFriction}.`,
+    ownershipRisk: `${candidate.ownership.serviceReality} ${candidate.ownership.scratchRisk} ${consequence.serviceFriction}. Estimated service planning range: ${ownershipSimulation.estimatedServiceCostUsd.label} on a ${ownershipSimulation.serviceIntervalYears}-year interval.`,
+    ownershipSimulation,
     alternatives: verdict === "buy" ? [] : alternativesFor(candidate, profile),
     profileInfluence
   };

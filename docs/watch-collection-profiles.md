@@ -30,6 +30,7 @@ When context is present, the watch adapter can:
 - produce upgrade-path guidance for compared watches against the closest owned watch
 - produce secondary balance scores with contributors and suggestions
 - produce single-watch should-I-buy reports for supported candidate watches
+- produce conservative five-year ownership simulations for compared watches and should-I-buy candidates
 
 ## Gap And Overlap Analysis
 
@@ -79,6 +80,20 @@ Reports include:
 - overlap analysis against owned watches
 - emotional fit
 - ownership risk
+- five-year ownership simulation with service-cost bands, service interval ranges, durability risk, exit liquidity, friction level, confidence, freshness, assumptions, and warnings
 - alternatives when the candidate is weak or redundant
 
 This is purchase-confidence guidance, not a generic review, dealer recommendation, or investment signal.
+
+## Long-Term Ownership Simulator
+
+The simulator maps structured ownership profile fields to conservative five-year planning bands:
+- service interval range
+- estimated service-cost range in USD
+- durability risk
+- exit liquidity
+- ownership friction
+- confidence and freshness labels
+- visible assumptions and missing-data warnings
+
+The simulator deliberately avoids live market scraping, tax, insurance, financing, regional service quotes, and resale guarantees. Missing ownership metadata produces low-confidence fallback ranges rather than exact-sounding advice.

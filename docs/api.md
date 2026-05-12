@@ -235,6 +235,26 @@ Fields:
     "overlapAnalysis": "...",
     "emotionalFit": "...",
     "ownershipRisk": "...",
+    "ownershipSimulation": {
+      "horizonYears": 5,
+      "serviceIntervalYears": "6-9",
+      "estimatedServiceCostUsd": {
+        "low": 600,
+        "high": 1000,
+        "label": "$600-$1,000"
+      },
+      "durabilityRisk": "low",
+      "exitLiquidity": "stable",
+      "frictionLevel": "low",
+      "confidence": "low",
+      "freshness": "unknown",
+      "assumptions": [
+        "Uses curated ownership metadata, not live dealer listings, invoices, insurance quotes, or tax calculations."
+      ],
+      "warnings": [
+        "Catalog freshness is unknown because this watch row does not carry a reviewed-at timestamp."
+      ]
+    },
     "alternatives": [],
     "profileInfluence": "1 saved collection items and 0 preferred brands influenced this report."
   }
@@ -242,6 +262,8 @@ Fields:
 ```
 
 Verdict values are `buy`, `consider`, and `skip`.
+
+`ownershipSimulation` is a conservative five-year planning aid. It exposes service-cost bands, service interval ranges, durability risk, exit liquidity, friction level, confidence, freshness, assumptions, and warnings. It is not a live market quote or financial forecast.
 
 ### Error Response
 

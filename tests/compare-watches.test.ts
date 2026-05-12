@@ -24,6 +24,7 @@ import {
   normalizeWatchCollectionProfile
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
+import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
@@ -323,12 +324,14 @@ describe("compareWatches", () => {
       "Daily ownership",
       "Emotional fit",
       "Service and resale reality",
+      "Five-year ownership simulation",
       "Scratch anxiety",
       "Enthusiast bias check"
     ]);
     expect(result.ownershipIntelligence[0]?.summary).toContain("Structured profile:");
     expect(result.ownershipIntelligence[2]?.summary).toContain("service burden");
-    expect(result.ownershipIntelligence[3]?.summary).toContain("durability");
+    expect(result.ownershipIntelligence[3]?.summary).toContain("service planning range");
+    expect(result.ownershipIntelligence[4]?.summary).toContain("durability");
     expect(flattenedComparisonCopy(result)).toContain("slides under cuffs");
     expect(flattenedComparisonCopy(result)).toContain("wrist-size sensitivity");
     expect(result.whoShouldBuyWhich.length).toBe(3);
@@ -470,6 +473,7 @@ describe("compareWatches", () => {
         "Daily ownership",
         "Emotional fit",
         "Service and resale reality",
+        "Five-year ownership simulation",
         "Scratch anxiety",
         "Enthusiast bias check"
       ]);
@@ -736,6 +740,12 @@ describe("watch collection profiles", () => {
       expect.objectContaining({
         verdict: "buy",
         candidateWatchId: "tudor-black-bay-54",
+        ownershipSimulation: expect.objectContaining({
+          estimatedServiceCostUsd: expect.objectContaining({
+            label: "$600-$1,000"
+          }),
+          horizonYears: 5
+        }),
         alternatives: []
       })
     );
@@ -761,6 +771,73 @@ describe("watch collection profiles", () => {
       })
     );
     expect(report.overlapAnalysis).toContain("poor-value swap");
+  });
+
+  it("simulates complete ownership data with conservative current confidence", () => {
+    const simulation = simulateWatchOwnership(watchById("tudor-black-bay-54"), {
+      asOf: new Date("2026-05-12T00:00:00.000Z"),
+      lastReviewed: new Date("2026-05-01T00:00:00.000Z")
+    });
+
+    expect(simulation).toEqual(
+      expect.objectContaining({
+        horizonYears: 5,
+        serviceIntervalYears: "6-9",
+        estimatedServiceCostUsd: {
+          low: 600,
+          high: 1000,
+          label: "$600-$1,000"
+        },
+        durabilityRisk: "low",
+        exitLiquidity: "stable",
+        freshness: "current",
+        confidence: "medium",
+        warnings: []
+      })
+    );
+    expect(simulation.assumptions.join(" ")).toContain("not live dealer listings");
+  });
+
+  it("simulates partial ownership data with missing-data warnings", () => {
+    const simulation = simulateWatchOwnership(
+      {
+        ...watchById("tudor-black-bay-54"),
+        ownershipProfile: undefined
+      },
+      {
+        asOf: new Date("2026-05-12T00:00:00.000Z"),
+        lastReviewed: new Date("2026-05-01T00:00:00.000Z")
+      }
+    );
+
+    expect(simulation).toEqual(
+      expect.objectContaining({
+        serviceIntervalYears: "5-10",
+        estimatedServiceCostUsd: {
+          low: 600,
+          high: 1500,
+          label: "$600-$1,500"
+        },
+        freshness: "current",
+        confidence: "low",
+        warnings: expect.arrayContaining([expect.stringContaining("Structured ownership profile is missing")])
+      })
+    );
+  });
+
+  it("marks stale ownership simulations as dated and low confidence", () => {
+    const simulation = simulateWatchOwnership(watchById("tudor-black-bay-54"), {
+      asOf: new Date("2026-05-12T00:00:00.000Z"),
+      lastReviewed: new Date("2025-01-01T00:00:00.000Z")
+    });
+
+    expect(simulation).toEqual(
+      expect.objectContaining({
+        freshness: "dated",
+        confidence: "low",
+        warnings: expect.arrayContaining([expect.stringContaining("stale")])
+      })
+    );
   });
 });
 
@@ -984,6 +1061,11 @@ describe("POST /api/compare", () => {
     expect(payload.comparison.left.id).toBe("rolex-air-king-126900");
     expect(payload.comparison.right.id).toBe("rolex-explorer-124270");
     expect(payload.comparison.keyDifferences.length).toBeGreaterThan(0);
+    expect(payload.comparison.ownershipIntelligence).toContainEqual(
+      expect.objectContaining({
+        title: "Five-year ownership simulation"
+      })
+    );
     expect(payload.savedComparison).toEqual({
       publicSlug: "rolex-air-king-126900-vs-rolex-explorer-124270",
       path: "/compare/rolex-air-king-126900-vs-rolex-explorer-124270",
@@ -1299,7 +1381,13 @@ describe("POST /api/compare", () => {
     expect(payload.report).toEqual(
       expect.objectContaining({
         verdict: "buy",
-        candidateWatchId: "tudor-black-bay-54"
+        candidateWatchId: "tudor-black-bay-54",
+        ownershipSimulation: expect.objectContaining({
+          horizonYears: 5,
+          estimatedServiceCostUsd: expect.objectContaining({
+            label: "$600-$1,000"
+          })
+        })
       })
     );
   });

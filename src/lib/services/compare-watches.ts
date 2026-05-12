@@ -2,6 +2,7 @@ import { watchCatalog } from "@/lib/data/watch-catalog";
 import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
+import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
 import type {
@@ -472,6 +473,8 @@ function buildOwnershipIntelligence(
   const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
   const collectionContext = buildCollectionContextInsight(left, right, profile);
   const upgradePath = buildUpgradePathInsight(left, right, profile);
+  const leftSimulation = simulateWatchOwnership(left);
+  const rightSimulation = simulateWatchOwnership(right);
 
   return [
     ...(collectionContext ? [collectionContext] : []),
@@ -509,6 +512,28 @@ function buildOwnershipIntelligence(
           "This result does not query manufacturer service prices, independent watchmaker quotes, or recent auction outcomes.",
           [left, right]
         )
+      ]
+    },
+    {
+      title: "Five-year ownership simulation",
+      summary: `${displayName(left)}: service planning range ${leftSimulation.estimatedServiceCostUsd.label}, ${leftSimulation.serviceIntervalYears}-year service interval, ${leftSimulation.durabilityRisk} durability risk, ${leftSimulation.exitLiquidity} exit liquidity, ${leftSimulation.frictionLevel} friction. ${displayName(right)}: service planning range ${rightSimulation.estimatedServiceCostUsd.label}, ${rightSimulation.serviceIntervalYears}-year service interval, ${rightSimulation.durabilityRisk} durability risk, ${rightSimulation.exitLiquidity} exit liquidity, ${rightSimulation.frictionLevel} friction. Assumptions are conservative and do not use live market data.`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:five-year-ownership-simulation",
+          "Five-year ownership simulator",
+          "Simulator maps structured ownership metadata to broad service, durability, liquidity, and friction bands; it avoids exact price predictions.",
+          [left, right]
+        ),
+        ...(leftSimulation.warnings.length || rightSimulation.warnings.length
+          ? [
+              missingDataEvidence(
+                "watch:ownership-simulation-warning",
+                "Ownership simulation warnings",
+                [...leftSimulation.warnings, ...rightSimulation.warnings].join(" "),
+                [left, right]
+              )
+            ]
+          : [])
       ]
     },
     {

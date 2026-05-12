@@ -1,3 +1,5 @@
+import type { WatchOwnershipSimulation } from "@/types/watch-ownership";
+
 export type WatchPurchaseVerdict = "buy" | "consider" | "skip";
 
 export interface WatchPurchaseReport {
@@ -9,6 +11,7 @@ export interface WatchPurchaseReport {
   overlapAnalysis: string;
   emotionalFit: string;
   ownershipRisk: string;
+  ownershipSimulation: WatchOwnershipSimulation;
   alternatives: Array<{
     watchId: string;
     reason: string;

@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 47,
-      "title": "Add long-term ownership simulator",
-      "priority": "high",
-      "reason": "Single-watch buy guidance is now available; long-term ownership simulation can add cost, service, resale, and friction context to that purchase surface."
-    },
-    {
       "github_issue": 48,
       "title": "Add market positioning engine",
+      "priority": "high",
+      "reason": "Ownership simulation is now available; market-positioning guidance can build on cost, friction, and resale context to separate hype from substance."
+    },
+    {
+      "github_issue": 49,
+      "title": "Add marketing-vs-reality expansion",
       "priority": "medium",
-      "reason": "Market-positioning guidance should follow ownership simulation so hype/substance claims have cost and ownership context."
+      "reason": "The comparison output already has a compact Marketing vs Reality section; the next depth step is a fuller myth/spec-inflation layer after market positioning."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

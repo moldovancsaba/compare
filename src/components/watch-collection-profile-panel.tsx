@@ -321,6 +321,29 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
             </div>
             <h4 className="title-section">{purchaseReport.headline}</h4>
             <p className="body-copy body-copy-strong mt-3 text-sm">{purchaseReport.rationale}</p>
+            <div className="mt-4 surface-item p-4">
+              <p className="card-kicker mb-2">Five-year ownership simulation</p>
+              <p className="body-copy body-copy-strong text-sm">
+                Service range {purchaseReport.ownershipSimulation.estimatedServiceCostUsd.label},{" "}
+                {purchaseReport.ownershipSimulation.serviceIntervalYears}-year service interval,{" "}
+                {purchaseReport.ownershipSimulation.durabilityRisk} durability risk,{" "}
+                {purchaseReport.ownershipSimulation.exitLiquidity} exit liquidity,{" "}
+                {purchaseReport.ownershipSimulation.frictionLevel} friction.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                  {purchaseReport.ownershipSimulation.confidence} confidence
+                </span>
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                  {purchaseReport.ownershipSimulation.freshness} freshness
+                </span>
+              </div>
+              {purchaseReport.ownershipSimulation.warnings.length ? (
+                <p className="body-copy body-copy-faint mt-3 text-xs">
+                  {purchaseReport.ownershipSimulation.warnings.join(" ")}
+                </p>
+              ) : null}
+            </div>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {[
                 ["Value", purchaseReport.valueAssessment],

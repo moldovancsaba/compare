@@ -59,6 +59,7 @@ The watch profile panel can show:
 - upgrade-path verdicts
 - balance guidance across versatility, redundancy, formality, complication diversity, and ownership risk
 - single-watch should-I-buy guidance
+- conservative five-year ownership simulation for service planning, durability risk, exit liquidity, and ownership friction
 
 Scores are decision aids, not grades. They are meant to reveal concentration and missing contrast before a purchase.
 
@@ -70,9 +71,12 @@ The watch profile panel includes a single-watch purchase check. Choose a support
 - collection overlap analysis
 - emotional-fit notes
 - ownership-risk notes
+- five-year ownership simulation with service-cost bands, interval assumptions, confidence, freshness, and warnings
 - alternatives when the candidate is weak or redundant
 
 The report uses the saved local collection profile when available. If no profile exists, the report still works, but collection-overlap confidence is lower.
+
+Ownership simulations use curated catalog metadata and broad ranges. They do not use live dealer listings, regional service quotes, taxes, insurance, or resale guarantees.
 
 ## Persistence
 
