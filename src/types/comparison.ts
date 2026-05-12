@@ -1,5 +1,7 @@
 export type ComparisonDomain = string;
 
+export type ComparisonContext = Record<string, unknown>;
+
 export interface ComparisonEntity {
   id: string;
   domain: ComparisonDomain;
@@ -187,5 +189,5 @@ export interface ComparisonDomainAdapter<TEntity extends ComparisonEntity = Comp
   inputHints: ComparisonDomainInputHints;
   dataPolicy: DataSourcePolicy;
   resolve(input: string): ResolveComparisonEntityResult | { status: "resolved"; entity: TEntity };
-  compare(left: TEntity, right: TEntity): GenericComparisonResult;
+  compare(left: TEntity, right: TEntity, context?: ComparisonContext): GenericComparisonResult;
 }

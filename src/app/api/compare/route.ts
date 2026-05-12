@@ -11,7 +11,8 @@ import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
 const requestSchema = z.object({
   domain: z.string().trim().min(2).optional(),
   leftInput: z.string().trim().min(2),
-  rightInput: z.string().trim().min(2)
+  rightInput: z.string().trim().min(2),
+  context: z.record(z.string(), z.unknown()).optional()
 });
 
 export async function POST(request: Request) {
@@ -49,11 +50,12 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { domain, leftInput, rightInput } = requestSchema.parse(body);
+    const { context, domain, leftInput, rightInput } = requestSchema.parse(body);
     const comparisonResult = compareInputs({
       domain,
       leftInput,
-      rightInput
+      rightInput,
+      context
     });
 
     if (comparisonResult.status === "unsupported_domain") {

@@ -15,6 +15,7 @@ Required fields:
 - `dataPolicy`: adapter-owned governance for source tiers, freshness, curation, blocked sources, and missing data.
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
+- Optional comparison context: adapters may read their own context keys, such as the watch adapter's local collection profile, but shared platform code should treat context as opaque.
 
 Resolver requirements:
 - Resolve exact supported names, aliases, references, and source URLs when an adapter supports them.
@@ -118,6 +119,7 @@ Core platform owns:
 - Brain queue contracts
 - feedback contracts
 - generic result rendering
+- opaque context transport from client/API to adapters
 - conformance requirements
 
 ## Adding A Domain

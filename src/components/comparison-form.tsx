@@ -5,11 +5,14 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
+import { WatchCollectionProfilePanel } from "@/components/watch-collection-profile-panel";
+import { normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
 import { supportedComparisonDomainOptions, supportedInputsForDomain } from "@/lib/services/compare";
 import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { GenericComparisonResult } from "@/types/comparison";
 import type { BrainState } from "@/types/watch";
+import type { WatchCollectionProfile } from "@/types/watch-collection";
 
 interface BrainResponse {
   brain: BrainState;
@@ -22,6 +25,11 @@ function isErrorResponse(payload: ComparisonClientResult): payload is Extract<Co
 const domainOptions = supportedComparisonDomainOptions();
 const defaultDomain = domainOptions[0]?.domain ?? "watches";
 const supportedInputOptions = supportedInputsForDomain(defaultDomain);
+const watchCollectionStorageKey = "compare.watchCollectionProfile.v1";
+const emptyWatchCollectionProfile: WatchCollectionProfile = {
+  items: [],
+  preferredBrands: []
+};
 
 export function ComparisonForm() {
   const [activeDomain, setActiveDomain] = useState(defaultDomain);
@@ -32,12 +40,34 @@ export function ComparisonForm() {
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [supportedInputs, setSupportedInputs] = useState(supportedInputOptions);
+  const [watchCollectionProfile, setWatchCollectionProfile] = useState<WatchCollectionProfile>(() => {
+    if (typeof window === "undefined") {
+      return emptyWatchCollectionProfile;
+    }
+
+    const savedProfile = window.localStorage.getItem(watchCollectionStorageKey);
+
+    if (!savedProfile) {
+      return emptyWatchCollectionProfile;
+    }
+
+    try {
+      return normalizeWatchCollectionProfile(JSON.parse(savedProfile)) ?? emptyWatchCollectionProfile;
+    } catch {
+      window.localStorage.removeItem(watchCollectionStorageKey);
+      return emptyWatchCollectionProfile;
+    }
+  });
   const [isBrainRefreshing, setIsBrainRefreshing] = useState(false);
   const [isPending, startTransition] = useTransition();
   const inlineValidation = useMemo(
     () => validateComparisonInputs(leftInput, rightInput, activeDomain),
     [activeDomain, leftInput, rightInput]
   );
+
+  useEffect(() => {
+    window.localStorage.setItem(watchCollectionStorageKey, JSON.stringify(watchCollectionProfile));
+  }, [watchCollectionProfile]);
 
   useEffect(() => {
     if (!brain || (brain.status !== "queued" && brain.status !== "running")) {
@@ -114,7 +144,11 @@ export function ComparisonForm() {
     setError(null);
     setBrain(null);
 
-    const payload = await requestComparison(nextLeft, nextRight, nextDomain);
+    const context =
+      nextDomain === "watches" && (watchCollectionProfile.items.length || watchCollectionProfile.preferredBrands.length)
+        ? { watchCollectionProfile }
+        : undefined;
+    const payload = await requestComparison(nextLeft, nextRight, nextDomain, context);
 
     if (isErrorResponse(payload)) {
       setResult(null);
@@ -228,6 +262,12 @@ export function ComparisonForm() {
           onSubmit={handleSubmit}
         />
       </section>
+
+      <WatchCollectionProfilePanel
+        activeDomain={activeDomain}
+        profile={watchCollectionProfile}
+        onChange={setWatchCollectionProfile}
+      />
 
       {result ? (
         <ComparisonResultView

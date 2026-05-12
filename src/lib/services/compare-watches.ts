@@ -1,4 +1,5 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
@@ -11,6 +12,7 @@ import type {
   VerdictPick,
   WatchSpec
 } from "@/types/watch";
+import type { WatchCollectionProfile } from "@/types/watch-collection";
 
 function displayName(watch: WatchSpec): string {
   return `${watch.brand} ${watch.model}`;
@@ -400,12 +402,43 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
   ];
 }
 
-function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightBlock[] {
+function buildCollectionContextInsight(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile: WatchCollectionProfile | null | undefined
+): InsightBlock | null {
+  const summary = summarizeCollectionContext(left, right, profile);
+
+  if (!summary) {
+    return null;
+  }
+
+  return {
+    title: "Collection context",
+    summary: `${summary} Treat this as early personalization: it can flag ownership overlap, but it is not yet a full collection-gap or upgrade-path model.`,
+    evidence: [
+      editorialEvidence(
+        "watch:user-collection-context",
+        "User-supplied collection context",
+        "Collection context is read from the accountless local profile submitted with the comparison request.",
+        [left, right]
+      )
+    ]
+  };
+}
+
+function buildOwnershipIntelligence(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile?: WatchCollectionProfile | null
+): InsightBlock[] {
   const resaleWinner = pickHigher(left, right, collectorScore);
   const dailyWinner = pickHigher(left, right, dailyWearScore);
   const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
+  const collectionContext = buildCollectionContextInsight(left, right, profile);
 
   return [
+    ...(collectionContext ? [collectionContext] : []),
     {
       title: "Daily ownership",
       summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience} ${ownershipProfileSummary(dailyWinner)}`,
@@ -452,8 +485,12 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
   ];
 }
 
-function buildBuyerRecommendations(left: WatchSpec, right: WatchSpec): BuyerRecommendation[] {
-  return [
+function buildBuyerRecommendations(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile?: WatchCollectionProfile | null
+): BuyerRecommendation[] {
+  const recommendations: BuyerRecommendation[] = [
     {
       buyerType: "One-watch owner",
       pick: left.style === "dress-sport" || left.style === "explorer" ? displayName(left) : displayName(right),
@@ -470,9 +507,29 @@ function buildBuyerRecommendations(left: WatchSpec, right: WatchSpec): BuyerReco
       reason: "If both scratch the same emotional itch, the lower-priced option usually leaves less regret and more room for a second watch later."
     }
   ];
+
+  const leftStatus = collectionStatusFor(profile, left);
+  const rightStatus = collectionStatusFor(profile, right);
+
+  if (leftStatus || rightStatus) {
+    const unownedCompared = !leftStatus ? left : !rightStatus ? right : null;
+    recommendations.push({
+      buyerType: "Collection-aware buyer",
+      pick: unownedCompared ? displayName(unownedCompared) : "Pause before buying either",
+      reason: unownedCompared
+        ? `${displayName(unownedCompared)} adds a new slot relative to the saved collection context, while the other compared watch is already marked ${leftStatus ?? rightStatus}.`
+        : "Both compared watches already appear in your saved collection context, so this should be treated as an overlap or upgrade-path decision before spending again."
+    });
+  }
+
+  return recommendations;
 }
 
-function buildRecommendationSignals(left: WatchSpec, right: WatchSpec): RecommendationSignal[] {
+function buildRecommendationSignals(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile?: WatchCollectionProfile | null
+): RecommendationSignal[] {
   const bestOverall = pickHigher(left, right, (watch) => dailyWearScore(watch) + valueScore(watch) + versatilityScore(watch));
   const dailyPick = pickHigher(left, right, dailyWearScore);
   const valuePick = pickHigher(left, right, valueScore);
@@ -491,6 +548,8 @@ function buildRecommendationSignals(left: WatchSpec, right: WatchSpec): Recommen
     dailyWearScore(left) + valueScore(left) + versatilityScore(left) -
       (dailyWearScore(right) + valueScore(right) + versatilityScore(right))
   );
+
+  const collectionSignal = buildCollectionSignal(left, right, profile);
 
   if (bestOverallGap <= 1) {
     return [
@@ -515,7 +574,8 @@ function buildRecommendationSignals(left: WatchSpec, right: WatchSpec): Recommen
         pick: displayName(riskierFit),
         reason: `${displayName(riskierFit)} is the riskier fit if you want low visual presence, easy cuff clearance, and low-maintenance ownership.`,
         confidence: "medium"
-      }
+      },
+      ...(collectionSignal ? [collectionSignal] : [])
     ];
   }
 
@@ -554,8 +614,44 @@ function buildRecommendationSignals(left: WatchSpec, right: WatchSpec): Recommen
       pick: displayName(riskierFit),
       reason: `${displayName(riskierFit)} is the option to question if you want low visual presence, easy cuff clearance, and minimal ownership friction.`,
       confidence: "medium"
-    }
+    },
+    ...(collectionSignal ? [collectionSignal] : [])
   ];
+}
+
+function buildCollectionSignal(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile: WatchCollectionProfile | null | undefined
+): RecommendationSignal | null {
+  const leftStatus = collectionStatusFor(profile, left);
+  const rightStatus = collectionStatusFor(profile, right);
+
+  if (!leftStatus && !rightStatus) {
+    return null;
+  }
+
+  if (leftStatus && rightStatus) {
+    return {
+      kind: "avoid_if",
+      label: "Collection overlap check",
+      pick: "Pause before buying either",
+      reason:
+        "Both compared watches already appear in your saved collection context. Treat this as an upgrade or redundancy decision before adding another watch.",
+      confidence: "medium"
+    };
+  }
+
+  const unowned = leftStatus ? right : left;
+  const owned = leftStatus ? left : right;
+
+  return {
+    kind: "best_collector",
+    label: "Collection-aware pick",
+    pick: displayName(unowned),
+    reason: `${displayName(unowned)} is the cleaner addition because ${displayName(owned)} is already marked ${leftStatus ?? rightStatus} in your saved profile.`,
+    confidence: "medium"
+  };
 }
 
 function buildOverpricedFeatures(left: WatchSpec, right: WatchSpec): InsightBlock[] {
@@ -741,7 +837,11 @@ function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummar
   };
 }
 
-export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonResult {
+export function compareWatches(
+  left: WatchSpec,
+  right: WatchSpec,
+  collectionProfile?: WatchCollectionProfile | null
+): ComparisonResult {
   return {
     domain: "watches",
     canonicalInputA: displayName(left),
@@ -762,11 +862,11 @@ export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonRes
       signalVsFluff: "Marketing vs Reality"
     },
     evidenceSummary: buildEvidenceSummary(left, right),
-    recommendationSignals: buildRecommendationSignals(left, right),
+    recommendationSignals: buildRecommendationSignals(left, right, collectionProfile),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
-    ownershipIntelligence: buildOwnershipIntelligence(left, right),
-    whoShouldBuyWhich: buildBuyerRecommendations(left, right),
+    ownershipIntelligence: buildOwnershipIntelligence(left, right, collectionProfile),
+    whoShouldBuyWhich: buildBuyerRecommendations(left, right, collectionProfile),
     overpricedFeatures: buildOverpricedFeatures(left, right),
     hiddenDownsides: buildHiddenDownsides(left, right),
     betterValueAlternative: buildBetterValueAlternative(left, right),

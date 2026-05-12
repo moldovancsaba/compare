@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 42,
-      "title": "Add user collection profiles",
-      "priority": "high",
-      "reason": "Recommendation confidence is now shared; user-owned context is the next dependency for personalized comparisons and collection-aware decisions."
-    },
-    {
       "github_issue": 43,
       "title": "Add collection gap analysis",
+      "priority": "high",
+      "reason": "Collection profile storage and adapter context are now available; gap analysis is the next collector-intelligence layer."
+    },
+    {
+      "github_issue": 44,
+      "title": "Add upgrade path intelligence",
       "priority": "medium",
-      "reason": "Gap analysis depends on collection profiles and should follow them."
+      "reason": "Upgrade-path recommendations should build on the saved collection profile and the forthcoming gap/overlap rules."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

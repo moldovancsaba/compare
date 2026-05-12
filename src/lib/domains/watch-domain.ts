@@ -1,4 +1,5 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { watchCollectionProfileFromContext } from "@/lib/domains/watch-collection";
 import { toWatchComparisonEntity, watchDisplayName } from "@/lib/domains/watch-entity";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { resolveWatchDetailed } from "@/lib/utils/resolve-watch";
@@ -77,7 +78,7 @@ export const watchDomainAdapter: ComparisonDomainAdapter<WatchComparisonEntity> 
       entity: toWatchComparisonEntity(resolution.watch)
     };
   },
-  compare(left, right) {
+  compare(left, right, context) {
     const leftWatch = watchCatalog.find((watch) => watch.id === left.watchId);
     const rightWatch = watchCatalog.find((watch) => watch.id === right.watchId);
 
@@ -85,6 +86,6 @@ export const watchDomainAdapter: ComparisonDomainAdapter<WatchComparisonEntity> 
       throw new Error("Resolved watch entity is missing from the catalog.");
     }
 
-    return compareWatches(leftWatch, rightWatch);
+    return compareWatches(leftWatch, rightWatch, watchCollectionProfileFromContext(context));
   }
 };

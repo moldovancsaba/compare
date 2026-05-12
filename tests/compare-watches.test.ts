@@ -15,6 +15,7 @@ import {
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { serviceCatalog } from "@/lib/data/service-catalog";
+import { normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
@@ -367,6 +368,38 @@ describe("compareWatches", () => {
     );
   });
 
+  it("uses saved collection context when present", () => {
+    const result = compareWatches(watchById("rolex-air-king-126900"), watchById("rolex-explorer-124270"), {
+      preferredBrands: ["Rolex"],
+      items: [
+        {
+          watchId: "rolex-explorer-124270",
+          status: "owned"
+        }
+      ]
+    });
+
+    expect(result.ownershipIntelligence[0]).toEqual(
+      expect.objectContaining({
+        title: "Collection context",
+        summary: expect.stringContaining("Rolex Explorer is marked owned")
+      })
+    );
+    expect(result.whoShouldBuyWhich).toContainEqual(
+      expect.objectContaining({
+        buyerType: "Collection-aware buyer",
+        pick: "Rolex Air-King"
+      })
+    );
+    expect(result.recommendationSignals).toContainEqual(
+      expect.objectContaining({
+        kind: "best_collector",
+        label: "Collection-aware pick",
+        pick: "Rolex Air-King"
+      })
+    );
+  });
+
   it("degrades visibly when structured ownership metadata is missing", () => {
     const left = watchById("rolex-air-king-126900");
     const right = {
@@ -475,6 +508,50 @@ describe("generic comparison foundation", () => {
       status: "unsupported_domain",
       domain: "unknown-domain",
       supportedDomains: ["watches", "services"]
+    });
+  });
+
+  it("passes adapter-owned collection context through generic comparison", () => {
+    const result = compareInputs({
+      leftInput: "Rolex Air-King",
+      rightInput: "Rolex Explorer",
+      context: {
+        watchCollectionProfile: {
+          items: [{ watchId: "rolex-explorer-124270", status: "owned" }],
+          preferredBrands: ["Rolex"]
+        }
+      }
+    });
+
+    expect(result.status).toBe("completed");
+    if (result.status !== "completed") {
+      return;
+    }
+
+    expect(result.comparison.ownershipIntelligence[0]?.title).toBe("Collection context");
+  });
+});
+
+describe("watch collection profiles", () => {
+  it("normalizes accountless watch collection profile input", () => {
+    expect(
+      normalizeWatchCollectionProfile({
+        preferredBrands: [" Rolex ", "Rolex", "Omega"],
+        items: [
+          { watchId: "rolex-explorer-124270", status: "owned", note: "Daily watch" },
+          { watchId: "rolex-explorer-124270", status: "wishlist" },
+          { watchId: "unknown", status: "owned" },
+          { watchId: "rolex-air-king-126900", status: "invalid" }
+        ]
+      })
+    ).toEqual({
+      preferredBrands: ["Rolex", "Omega"],
+      items: [
+        {
+          watchId: "rolex-explorer-124270",
+          status: "wishlist"
+        }
+      ]
     });
   });
 });

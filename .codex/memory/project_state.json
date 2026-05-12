@@ -94,6 +94,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #41 by adding cross-domain recommendation signals with default picks, buyer-priority tradeoffs, confidence, and avoid-if guidance"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #42 by adding accountless watch collection profiles, local browser persistence, adapter context transport, and collection-aware comparison guidance"
     }
   ],
   "blocked_items": []

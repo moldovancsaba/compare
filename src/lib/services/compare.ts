@@ -4,6 +4,7 @@ import type {
   ComparisonDomain,
   ComparisonDomainAdapter,
   ComparisonDomainOption,
+  ComparisonContext,
   ComparisonEntity,
   GenericComparisonResult
 } from "@/types/comparison";
@@ -65,6 +66,7 @@ export function getComparisonDomainAdapter(domain: ComparisonDomain = defaultDom
 }
 
 export function compareInputs({
+  context,
   domain = defaultDomain,
   leftInput,
   rightInput
@@ -72,6 +74,7 @@ export function compareInputs({
   domain?: ComparisonDomain;
   leftInput: string;
   rightInput: string;
+  context?: ComparisonContext;
 }): CompareInputsResult {
   const adapter = getComparisonDomainAdapter(domain);
 
@@ -118,6 +121,6 @@ export function compareInputs({
     domain,
     left,
     right,
-    comparison: adapter.compare(left, right)
+    comparison: adapter.compare(left, right, context)
   };
 }
