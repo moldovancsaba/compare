@@ -130,6 +130,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #48 by adding model-level watch market positioning across comparison and should-I-buy surfaces"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #49 by adding deterministic marketing-vs-reality analysis for myth pressure, spec inflation, supported claims, and buyer cautions"
     }
   ],
   "blocked_items": []
