@@ -14,7 +14,7 @@ Required fields:
 - `inputHints`: adapter-owned left/right labels, placeholder, and helper text for the comparison form.
 - `dataPolicy`: adapter-owned governance for source tiers, freshness, curation, blocked sources, and missing data.
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
-- `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
+- `compare(left, right, context?)`: returns a deterministic `GenericComparisonResult`.
 - Optional comparison context: adapters may read their own context keys, such as the watch adapter's local collection profile, but shared platform code should treat context as opaque.
 
 Resolver requirements:

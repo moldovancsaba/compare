@@ -1,6 +1,8 @@
 # Release Notes
 
 ## Unreleased
+
+## v0.2.0 - 2026-05-12
 - Added a generic comparison entity/result contract and domain adapter registry so the core system is no longer hard-coded to watches.
 - Moved the watch-specific resolver and rule engine behind the first domain adapter while preserving the existing watch comparison behavior.
 - Updated `/api/compare`, saved comparison persistence, Brain queue payloads, feedback, and result rendering to use generic entity/domain fields with watch IDs retained only for compatibility.
@@ -22,6 +24,7 @@
 - Added watch upgrade-path intelligence that classifies meaningful, lateral, emotional, and poor-value paths against owned watches.
 - Added explainable watch collection balance scoring for versatility, redundancy, formality, complication diversity, and ownership risk.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
+- Bumped the app release to `v0.2.0` and aligned README, user manual, API documentation, release notes, and developer onboarding language with the current domain-adapter platform.
 
 ## v0.1.1 - 2026-05-11
 - Updated `README.md` and the governance docs to match the live codebase and verification process.

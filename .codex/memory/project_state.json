@@ -110,6 +110,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #45 by adding explainable watch collection balance scoring for versatility, redundancy, formality, complication diversity, and ownership risk"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Bumped the app to v0.2.0 and synchronized README, user manual, API documentation, developer onboarding, release notes, and domain-adapter docs"
     }
   ],
   "blocked_items": []

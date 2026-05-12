@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: appName,
-  description: `${appName} ${appVersionLabel} compares mechanical watches by real-world consequences, not SEO fluff.`
+  description: `${appName} ${appVersionLabel} turns supported comparison domains into verdict-led, evidence-aware decision guidance.`
 };
 
 export default function RootLayout({
