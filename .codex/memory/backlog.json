@@ -1,16 +1,10 @@
 {
   "highest_priority": [
     {
-      "github_issue": 40,
-      "title": "Translate domain attributes into real-world consequences",
-      "priority": "high",
-      "reason": "Structured ownership metadata is now available for watches; the next step is a reusable consequence layer that translates traits into decision impacts."
-    },
-    {
       "github_issue": 41,
       "title": "Add cross-domain strong opinion and recommendation system",
       "priority": "high",
-      "reason": "Once consequence contracts are stable, recommendation strength should become a shared cross-domain behavior."
+      "reason": "Consequence rules are now explicit for watches; recommendation strength should become a shared cross-domain behavior."
     },
     {
       "github_issue": 42,

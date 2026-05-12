@@ -15,6 +15,7 @@
 - Added resolver disambiguation suggestions so ambiguous or unsupported inputs fail closed with useful recovery options instead of guessing.
 - Refined the editorial UI hierarchy with a restrained surface system, clearer first-viewport positioning, and a decision scan panel for faster result trust.
 - Added structured watch ownership metadata for comfort, service burden, durability, reliability, resale stability, bracelet quality, and strap versatility.
+- Added deterministic watch consequence rules for wrist presence, cuff fit, wrist-size sensitivity, service friction, versatility, and travel readiness.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

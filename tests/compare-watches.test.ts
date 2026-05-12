@@ -15,6 +15,7 @@ import {
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { serviceCatalog } from "@/lib/data/service-catalog";
+import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
@@ -221,6 +222,28 @@ describe("resolveWatch", () => {
 });
 
 describe("compareWatches", () => {
+  it("translates watch specs into deterministic consequence profiles", () => {
+    expect(buildWatchConsequenceProfile(watchById("rolex-explorer-124270"))).toEqual(
+      expect.objectContaining({
+        wristPresence: "compact and forgiving on smaller wrists",
+        cuffFit: "slides under cuffs with little drama",
+        wristSizeSensitivity: "low wrist-size sensitivity"
+      })
+    );
+    expect(buildWatchConsequenceProfile(watchById("omega-aqua-terra-38"))).toEqual(
+      expect.objectContaining({
+        cuffFit: "will sit proud enough to matter with fitted cuffs",
+        travelReadiness: "travel-capable, though shorter no-wear windows make rotation less forgiving"
+      })
+    );
+    expect(buildWatchConsequenceProfile(watchById("rolex-air-king-126900"))).toEqual(
+      expect.objectContaining({
+        wristPresence: "noticeably present, especially on sub-17cm wrists",
+        serviceFriction: "service access is strong, but long-term cost expectations remain luxury-grade"
+      })
+    );
+  });
+
   it("requires structured ownership metadata for catalog watches", () => {
     for (const watch of watchCatalog) {
       expect(watch.ownershipProfile).toEqual({
@@ -274,6 +297,8 @@ describe("compareWatches", () => {
     expect(result.ownershipIntelligence[0]?.summary).toContain("Structured profile:");
     expect(result.ownershipIntelligence[2]?.summary).toContain("service burden");
     expect(result.ownershipIntelligence[3]?.summary).toContain("durability");
+    expect(flattenedComparisonCopy(result)).toContain("slides under cuffs");
+    expect(flattenedComparisonCopy(result)).toContain("wrist-size sensitivity");
     expect(result.whoShouldBuyWhich.length).toBe(3);
     expect(result.overpricedFeatures.length).toBeGreaterThan(0);
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);

@@ -1,4 +1,5 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary } from "@/types/comparison";
@@ -299,7 +300,7 @@ function buildKeyDifferences(left: WatchSpec, right: WatchSpec): InsightBlock[] 
   return [
     {
       title: "Wrist presence",
-      summary: `${displayName(larger)} is larger on paper at ${formatMm(larger.caseDiameterMm)} with a ${formatMm(larger.lugToLugMm)} span. ${displayName(thinner)} is the slimmer-feeling watch because its thickness stays at ${formatMm(thinner.caseThicknessMm)}.`,
+      summary: `${displayName(larger)} is larger on paper at ${formatMm(larger.caseDiameterMm)} with a ${formatMm(larger.lugToLugMm)} span, which makes it ${buildWatchConsequenceProfile(larger).wristPresence}. ${displayName(thinner)} is the slimmer-feeling watch because its thickness stays at ${formatMm(thinner.caseThicknessMm)} and ${buildWatchConsequenceProfile(thinner).cuffFit}.`,
       evidence: [
         catalogEvidence(larger, "case-profile", "Case diameter, lug-to-lug, and thickness come from the curated watch catalog."),
         derivedRuleEvidence(
@@ -324,7 +325,7 @@ function buildKeyDifferences(left: WatchSpec, right: WatchSpec): InsightBlock[] 
     },
     {
       title: "Capability gap",
-      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve.`,
+      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve, making it ${buildWatchConsequenceProfile(longerReserve).travelReadiness}.`,
       evidence: [
         catalogEvidence(moreWater, "water-resistance", "Water resistance and power reserve are fixture-backed catalog attributes.")
       ]
@@ -354,7 +355,7 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
   return [
     {
       title: "All-day comfort",
-      summary: `${displayName(thicknessWinner)} will disappear faster during desk work and travel because it is thinner. If you care about sleeve clearance or hate top-heavy watches, that small paper gap is usually noticeable in a week of ownership.`,
+      summary: `${displayName(thicknessWinner)} will disappear faster during desk work and travel because it is thinner and ${buildWatchConsequenceProfile(thicknessWinner).cuffFit}. If you care about sleeve clearance or hate top-heavy watches, that small paper gap is usually noticeable in a week of ownership.`,
       evidence: [
         derivedRuleEvidence(
           "watch:comfort-thickness-rule",
@@ -373,7 +374,7 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
     {
       title: "Perceived heft",
       summary: lighterFeel
-        ? `${displayName(lighterFeel)} gives the more effortless feel on wrist. That matters if you want a watch you stop noticing rather than a watch that constantly reminds you it is there.`
+        ? `${displayName(lighterFeel)} gives the more effortless feel on wrist and has ${buildWatchConsequenceProfile(lighterFeel).wristSizeSensitivity}. That matters if you want a watch you stop noticing rather than a watch that constantly reminds you it is there.`
         : "Both watches land in the balanced range, so the difference is more about shape and bracelet articulation than raw mass."
     }
   ];
@@ -416,7 +417,7 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
     },
     {
       title: "Service and resale reality",
-      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality} ${ownershipProfileSummary(resaleWinner)}`,
+      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality} ${buildWatchConsequenceProfile(resaleWinner).serviceFriction}. ${ownershipProfileSummary(resaleWinner)}`,
       evidence: [
         editorialEvidence(
           "watch:resale-service-inference",

@@ -86,6 +86,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #39 by adding structured watch ownership profiles, deterministic ownership-tradeoff copy, missing-profile degradation, tests, and documentation"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #40 by adding deterministic watch consequence rules for wrist presence, cuff fit, wrist-size sensitivity, service friction, versatility, and travel readiness"
     }
   ],
   "blocked_items": []
