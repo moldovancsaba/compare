@@ -30,6 +30,7 @@ Comparison results include:
 - Better-value or adjacent alternatives
 - Marketing-vs-reality analysis
 - Market-positioning analysis when the active adapter has structured positioning data
+- Transparent watch value scoring when the active adapter supports it
 
 The labels can vary by domain because each adapter owns its presentation language.
 

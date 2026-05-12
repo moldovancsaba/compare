@@ -34,3 +34,16 @@ Controls:
 Scenario state serializes as six digits in control order, each `0` to `5`. For example, `543210` means strict budget sensitivity, high wrist comfort, neutral dress versatility, lower resale importance, low ruggedness, and no brand-neutrality pressure.
 
 Scenario telemetry records only control numbers, compared entity IDs, scenario pick ID, and whether the pick changed from baseline.
+
+## Transparent Value Score
+
+The watch adapter exposes a deterministic value score in comparison output. The score is a decision aid, not a resale estimate or investment rating.
+
+Weights:
+- comfort: 25%
+- capability: 20%
+- versatility: 20%
+- ownership: 20%
+- price discipline: 15%
+
+Component inputs come from curated watch fields such as case size, thickness, lug-to-lug, micro-adjust, water resistance, power reserve, structured ownership metadata, market positioning, and MSRP bands.

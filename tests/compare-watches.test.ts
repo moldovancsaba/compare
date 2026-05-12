@@ -34,6 +34,7 @@ import {
   serializeWatchTradeoffScenario,
   simulateWatchTradeoff
 } from "@/lib/domains/watch-tradeoff-simulator";
+import { calculateWatchValueScore, watchValueScoreWeights } from "@/lib/domains/watch-value-scoring";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
@@ -1126,6 +1127,33 @@ describe("watch collection profiles", () => {
         activeConstraints: expect.arrayContaining(["date convenience", "dress-sport fit"])
       })
     );
+  });
+
+  it("calculates transparent watch value scores from explicit weights", () => {
+    const blackBay54 = calculateWatchValueScore(watchById("tudor-black-bay-54"));
+    const airKing = calculateWatchValueScore(watchById("rolex-air-king-126900"));
+
+    expect(watchValueScoreWeights).toEqual({
+      comfort: 0.25,
+      capability: 0.2,
+      versatility: 0.2,
+      ownership: 0.2,
+      priceDiscipline: 0.15
+    });
+    expect(blackBay54.total).toBeGreaterThan(airKing.total);
+    expect(blackBay54.explanation).toContain("comfort 25%");
+  });
+
+  it("surfaces transparent value scoring in comparison output", () => {
+    const result = compareWatches(watchById("rolex-air-king-126900"), watchById("tudor-black-bay-54"));
+
+    expect(result.overpricedFeatures).toContainEqual(
+      expect.objectContaining({
+        title: "Transparent value score",
+        summary: expect.stringContaining("scores")
+      })
+    );
+    expect(result.betterValueAlternative[0]?.summary).toContain("transparent value score");
   });
 });
 

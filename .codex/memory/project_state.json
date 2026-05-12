@@ -142,6 +142,10 @@
     {
       "date": "2026-05-13",
       "summary": "Implemented issue #28 by adding optional local watch decision-intent profiles that personalize recommendation emphasis"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #6 by adding transparent watch value scoring with explicit weighted components"
     }
   ],
   "blocked_items": []

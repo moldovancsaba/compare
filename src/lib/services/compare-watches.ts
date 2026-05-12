@@ -5,6 +5,7 @@ import { analyzeWatchDecisionIntent } from "@/lib/domains/watch-decision-intent"
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
+import { calculateWatchValueScore } from "@/lib/domains/watch-value-scoring";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
 import type {
@@ -792,8 +793,24 @@ function buildOverpricedFeatures(left: WatchSpec, right: WatchSpec): InsightBloc
   const pricier = left.msrpUsd >= right.msrpUsd ? left : right;
   const cheaper = pricier.id === left.id ? right : left;
   const premiumRatio = pricier.msrpUsd / cheaper.msrpUsd;
+  const leftValue = calculateWatchValueScore(left);
+  const rightValue = calculateWatchValueScore(right);
+  const valueWinner = leftValue.total >= rightValue.total ? left : right;
+  const winningScore = valueWinner.id === left.id ? leftValue : rightValue;
 
   const results: InsightBlock[] = [
+    {
+      title: "Transparent value score",
+      summary: `${displayName(left)} scores ${leftValue.total}/100 (${leftValue.label}); ${displayName(right)} scores ${rightValue.total}/100 (${rightValue.label}). ${displayName(valueWinner)} has the stronger value case because the score weights comfort, capability, versatility, ownership, and price discipline explicitly.`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:transparent-value-score",
+          "Transparent value scoring",
+          `${winningScore.explanation} Scores are deterministic decision aids, not market-price guarantees.`,
+          [left, right]
+        )
+      ]
+    },
     {
       title: `${displayName(pricier)} premium check`,
       summary:
@@ -902,10 +919,12 @@ function buildBetterValueAlternative(
     return [];
   }
 
+  const alternativeScore = calculateWatchValueScore(alternative);
+
   return [
     {
       title: displayName(alternative),
-      summary: `${displayName(alternative)} is the strongest value pivot if both of your original picks feel slightly misaligned. It keeps the enthusiast appeal, lands at ${formatUsd(alternative.msrpUsd)}, and avoids paying full premium money for differences that mostly live in branding or styling.${decisionIntent ? " The ranking also reflects the supplied decision-intent profile." : ""}`
+      summary: `${displayName(alternative)} is the strongest value pivot if both of your original picks feel slightly misaligned. It keeps the enthusiast appeal, lands at ${formatUsd(alternative.msrpUsd)}, and carries a transparent value score of ${alternativeScore.total}/100. It avoids paying full premium money for differences that mostly live in branding or styling.${decisionIntent ? " The ranking also reflects the supplied decision-intent profile." : ""}`
     }
   ];
 }
