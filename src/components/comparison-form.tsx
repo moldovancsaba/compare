@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
+import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { BrainState, ComparisonResult } from "@/types/watch";
 
 interface BrainResponse {
@@ -28,6 +29,10 @@ export function ComparisonForm() {
   const [error, setError] = useState<string | null>(null);
   const [supportedInputs, setSupportedInputs] = useState(supportedInputOptions);
   const [isPending, startTransition] = useTransition();
+  const inlineValidation = useMemo(
+    () => validateComparisonInputs(leftInput, rightInput),
+    [leftInput, rightInput]
+  );
 
   useEffect(() => {
     if (!brain || (brain.status !== "queued" && brain.status !== "running")) {
@@ -60,6 +65,16 @@ export function ComparisonForm() {
   }, [brain]);
 
   async function runComparison(nextLeft: string, nextRight: string) {
+    const validation = validateComparisonInputs(nextLeft, nextRight);
+
+    if (!validation.valid) {
+      setResult(null);
+      setBrain(null);
+      setSavedComparisonPath(null);
+      setError(validation.message);
+      return;
+    }
+
     setError(null);
     setBrain(null);
 
@@ -83,6 +98,15 @@ export function ComparisonForm() {
   function handleSubmit(formData: FormData) {
     const nextLeft = String(formData.get("leftInput") || "").trim();
     const nextRight = String(formData.get("rightInput") || "").trim();
+    const validation = validateComparisonInputs(nextLeft, nextRight);
+
+    if (!validation.valid) {
+      setResult(null);
+      setBrain(null);
+      setSavedComparisonPath(null);
+      setError(validation.message);
+      return;
+    }
 
     startTransition(() => {
       void runComparison(nextLeft, nextRight);
@@ -122,6 +146,7 @@ export function ComparisonForm() {
           leftInput={leftInput}
           rightInput={rightInput}
           supportedInputs={supportedInputs}
+          validationMessage={inlineValidation.valid ? null : inlineValidation.message}
           onLeftInputChange={setLeftInput}
           onRightInputChange={setRightInput}
           onUseSupportedInput={applySupportedInput}

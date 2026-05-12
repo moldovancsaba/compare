@@ -6,6 +6,7 @@ interface ComparisonInputFormProps {
   leftInput: string;
   rightInput: string;
   supportedInputs: string[];
+  validationMessage: string | null;
   onLeftInputChange: (value: string) => void;
   onRightInputChange: (value: string) => void;
   onUseSupportedInput: (value: string) => void;
@@ -49,6 +50,7 @@ export function ComparisonInputForm({
   leftInput,
   rightInput,
   supportedInputs,
+  validationMessage,
   onLeftInputChange,
   onRightInputChange,
   onUseSupportedInput,
@@ -70,9 +72,14 @@ export function ComparisonInputForm({
         value={rightInput}
         onChange={onRightInputChange}
       />
-      <button type="submit" disabled={isPending} className="action-button eyebrow eyebrow-tight w-full px-5 py-4 font-semibold">
+      <button
+        type="submit"
+        disabled={isPending || Boolean(validationMessage)}
+        className="action-button eyebrow eyebrow-tight w-full px-5 py-4 font-semibold"
+      >
         {isPending ? "Analyzing" : "Explain the difference"}
       </button>
+      {validationMessage ? <p className="status-warning p-4 text-sm">{validationMessage}</p> : null}
       <p className="body-copy body-copy-faint text-sm">
         V1 supports curated mechanical watch names and matching official product URLs from the catalog below.
       </p>

@@ -31,6 +31,9 @@
   --status-danger-border: rgba(244, 63, 94, 0.3);
   --status-danger-bg: rgba(244, 63, 94, 0.1);
   --status-danger-text: #ffe4e6;
+  --status-warning-border: rgba(201, 162, 91, 0.34);
+  --status-warning-bg: rgba(201, 162, 91, 0.1);
+  --status-warning-text: #f5efdf;
   --radius-card: 1.75rem;
   --radius-panel: 2rem;
   --radius-hero: 2.25rem;
@@ -255,4 +258,11 @@ input::placeholder {
   border-radius: 1rem;
   background: var(--status-danger-bg);
   color: var(--status-danger-text);
+}
+
+.status-warning {
+  border: 1px solid var(--status-warning-border);
+  border-radius: 1rem;
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
 }

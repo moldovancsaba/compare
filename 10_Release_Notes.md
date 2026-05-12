@@ -10,6 +10,7 @@
 - Added MongoDB-backed saved-comparison persistence for submitted deterministic comparison results.
 - Added stable `/compare/[slug]` pages for MongoDB-backed saved comparison results.
 - Added supported-catalog quick-select examples and resolver-miss recovery data in `/api/compare`.
+- Added inline duplicate and resolver-equivalent input validation before `/api/compare` submission.
 - Cleared the prior Next/PostCSS audit blocker with a root PostCSS override.
 
 ## v0.1.0 - 2026-05-11

@@ -15,6 +15,7 @@ import {
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
+import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { ComparisonResult, WatchSpec } from "@/types/watch";
 
 function compareRequest(body: unknown, ip = "203.0.113.10"): Request {
@@ -385,6 +386,34 @@ describe("submitted comparison persistence", () => {
         process.env.MONGODB_URI = previousMongoUri;
       }
     }
+  });
+});
+
+describe("compare input validation", () => {
+  it("accepts two different resolvable watches", () => {
+    expect(validateComparisonInputs("Rolex Air-King", "Rolex Explorer")).toEqual({
+      valid: true
+    });
+  });
+
+  it("rejects exact duplicate text before the API round trip", () => {
+    expect(validateComparisonInputs("Rolex Explorer", "rolex explorer")).toEqual({
+      valid: false,
+      message: "Choose two different watches so the comparison surfaces meaningful tradeoffs."
+    });
+  });
+
+  it("rejects near-duplicates that resolve to the same catalog watch", () => {
+    expect(validateComparisonInputs("Rolex Explorer", "124270 explorer")).toEqual({
+      valid: false,
+      message: "Both inputs resolve to Rolex Explorer. Choose a different second watch."
+    });
+  });
+
+  it("does not block unsupported inputs so the API can return recovery examples", () => {
+    expect(validateComparisonInputs("Grand Seiko Snowflake", "Rolex Explorer")).toEqual({
+      valid: true
+    });
   });
 });
 
