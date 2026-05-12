@@ -9,7 +9,11 @@ interface ComparisonInputFormProps {
   validationMessage: string | null;
   onLeftInputChange: (value: string) => void;
   onRightInputChange: (value: string) => void;
+  onUseAsLeft: (value: string) => void;
+  onUseAsRight: (value: string) => void;
   onUseSupportedInput: (value: string) => void;
+  onSwapInputs: () => void;
+  onClearInputs: () => void;
   onSubmit: (formData: FormData) => void;
 }
 
@@ -53,7 +57,11 @@ export function ComparisonInputForm({
   validationMessage,
   onLeftInputChange,
   onRightInputChange,
+  onUseAsLeft,
+  onUseAsRight,
   onUseSupportedInput,
+  onSwapInputs,
+  onClearInputs,
   onSubmit
 }: ComparisonInputFormProps) {
   return (
@@ -72,6 +80,14 @@ export function ComparisonInputForm({
         value={rightInput}
         onChange={onRightInputChange}
       />
+      <div className="grid gap-3 sm:grid-cols-2">
+        <button type="button" className="pill-muted body-copy-strong px-4 py-3 text-sm transition" onClick={onSwapInputs}>
+          Swap watches
+        </button>
+        <button type="button" className="pill-muted body-copy-strong px-4 py-3 text-sm transition" onClick={onClearInputs}>
+          Clear inputs
+        </button>
+      </div>
       <button
         type="submit"
         disabled={isPending || Boolean(validationMessage)}
@@ -83,16 +99,33 @@ export function ComparisonInputForm({
       <p className="body-copy body-copy-faint text-sm">
         V1 supports curated mechanical watch names and matching official product URLs from the catalog below.
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="grid gap-3">
         {supportedInputs.map((supportedInput) => (
-          <button
-            key={supportedInput}
-            type="button"
-            className="pill-muted body-copy-strong px-3 py-2 text-xs transition"
-            onClick={() => onUseSupportedInput(supportedInput)}
-          >
-            {supportedInput}
-          </button>
+          <div key={supportedInput} className="catalog-picker-row">
+            <button
+              type="button"
+              className="catalog-picker-name body-copy-strong text-left text-sm transition"
+              onClick={() => onUseSupportedInput(supportedInput)}
+            >
+              {supportedInput}
+            </button>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                onClick={() => onUseAsLeft(supportedInput)}
+              >
+                First
+              </button>
+              <button
+                type="button"
+                className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                onClick={() => onUseAsRight(supportedInput)}
+              >
+                Second
+              </button>
+            </div>
+          </div>
         ))}
       </div>
       {error ? <p className="status-danger p-4 text-sm">{error}</p> : null}

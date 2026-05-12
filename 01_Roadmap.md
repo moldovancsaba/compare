@@ -19,6 +19,7 @@ V1.0.1 hardening and documentation alignment for {compare}.
 - Shareable saved comparison pages added at `/compare/[slug]` for persisted deterministic results.
 - Input recovery improved with supported catalog quick-select examples and API-provided examples on resolver misses.
 - Inline input validation now catches exact duplicates and resolver-equivalent watch selections before an API request.
+- UI controls now expose catalog side-picking, input swap/clear, manual Brain refresh, and optional feedback notes.
 
 ## Next recommended milestones
 1. Expand watch resolution with stronger fuzzy matching and richer reference coverage.

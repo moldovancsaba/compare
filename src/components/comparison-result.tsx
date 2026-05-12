@@ -77,9 +77,28 @@ function oppositeCase(brain: BrainState): string {
     : "The other watch can still be right if your fit, budget, or styling preference changes.";
 }
 
-function BrainStatusCard({ brain }: { brain: BrainState | null }) {
+function BrainStatusCard({
+  brain,
+  isRefreshing = false,
+  onRefresh
+}: {
+  brain: BrainState | null;
+  isRefreshing?: boolean;
+  onRefresh?: () => void;
+}) {
   const recommendation = brain ? primaryBrainRecommendation(brain) : null;
   const confidence = brain ? confidencePercent(brain) : null;
+  const canRefresh = Boolean(onRefresh && brain?.comparisonRef);
+  const refreshButton = canRefresh ? (
+    <button
+      type="button"
+      className="pill-muted eyebrow eyebrow-tight px-3 py-2 transition disabled:cursor-not-allowed disabled:opacity-60"
+      disabled={isRefreshing}
+      onClick={onRefresh}
+    >
+      {isRefreshing ? "Refreshing" : "Refresh"}
+    </button>
+  ) : null;
 
   if (!brain || brain.status === "disabled" || brain.status === "unavailable") {
     return (
@@ -89,7 +108,10 @@ function BrainStatusCard({ brain }: { brain: BrainState | null }) {
             <p className="eyebrow eyebrow-wide">Decision Brain</p>
             <h3 className="title-section mt-3">Deterministic recommendation</h3>
           </div>
-          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">offline</span>
+          <div className="flex flex-wrap gap-2">
+            <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">offline</span>
+            {refreshButton}
+          </div>
         </div>
         <p className="body-copy mt-4 text-sm">
           {brain?.message ??
@@ -107,7 +129,10 @@ function BrainStatusCard({ brain }: { brain: BrainState | null }) {
             <p className="eyebrow eyebrow-wide">Decision Brain</p>
             <h3 className="title-section mt-3">{brain.status === "queued" ? "Queued for enrichment" : "Processing"}</h3>
           </div>
-          <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{brain.status}</span>
+          <div className="flex flex-wrap gap-2">
+            <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{brain.status}</span>
+            {refreshButton}
+          </div>
         </div>
         <p className="body-copy mt-4 text-sm">{brain.message}</p>
       </section>
@@ -122,7 +147,10 @@ function BrainStatusCard({ brain }: { brain: BrainState | null }) {
             <p className="eyebrow eyebrow-wide">Decision Brain</p>
             <h3 className="title-section mt-3">Enrichment unavailable</h3>
           </div>
-          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">fallback</span>
+          <div className="flex flex-wrap gap-2">
+            <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">fallback</span>
+            {refreshButton}
+          </div>
         </div>
         <p className="body-copy mt-4 text-sm">
           The deterministic comparison is still valid. Trinity could not enrich this result.
@@ -138,9 +166,12 @@ function BrainStatusCard({ brain }: { brain: BrainState | null }) {
           <p className="eyebrow eyebrow-wide">Decision Brain</p>
           <h3 className="title-section mt-3">{recommendation?.pick ?? "Brain-enhanced recommendation"}</h3>
         </div>
-        <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">
-          {confidence ? `${confidence}% confidence` : "enriched"}
-        </span>
+        <div className="flex flex-wrap gap-2">
+          <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">
+            {confidence ? `${confidence}% confidence` : "enriched"}
+          </span>
+          {refreshButton}
+        </div>
       </div>
 
       <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
@@ -204,10 +235,18 @@ function FeedbackButton({
 function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: ComparisonResult }) {
   const [pendingSignal, setPendingSignal] = useState<FeedbackSignal | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [note, setNote] = useState("");
   const comparisonRef = comparisonRefFor(result, brain);
   const traceRef = brain?.status === "completed" ? brain.traceRef : null;
+  const trimmedNote = note.trim();
+  const noteIsTooLong = note.length > 1000;
 
   async function submitFeedback(signal: FeedbackSignal) {
+    if (noteIsTooLong) {
+      setMessage("Feedback notes must stay under 1,000 characters.");
+      return;
+    }
+
     setPendingSignal(signal);
     setMessage(null);
 
@@ -222,7 +261,8 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
           leftWatchId: result.left.id,
           rightWatchId: result.right.id,
           traceRef,
-          signal
+          signal,
+          ...(trimmedNote ? { note: trimmedNote } : {})
         })
       });
       const payload = (await response.json()) as
@@ -231,6 +271,7 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
 
       if ("feedback" in payload) {
         setMessage(payload.feedback.message);
+        setNote("");
       } else {
         setMessage(response.ok ? "Feedback received." : "Feedback could not be saved.");
       }
@@ -278,6 +319,21 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
         </FeedbackButton>
       </div>
 
+      <label className="mt-5 block">
+        <span className="eyebrow mb-2 block">Optional note</span>
+        <textarea
+          className="field-input placeholder-muted min-h-28 w-full resize-y px-4 py-3 text-sm"
+          maxLength={1000}
+          placeholder="Add context Trinity should learn from."
+          value={note}
+          onChange={(event) => setNote(event.target.value)}
+        />
+      </label>
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+        <p className="body-copy body-copy-faint text-xs">{note.length}/1000 characters</p>
+        {pendingSignal ? <p className="body-copy body-copy-soft text-xs">Saving {pendingSignal.replaceAll("_", " ")}</p> : null}
+      </div>
+
       {message ? <p className="body-copy body-copy-soft mt-4 text-sm">{message}</p> : null}
     </section>
   );
@@ -285,12 +341,16 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
 
 export function ComparisonResultView({
   brain,
+  isBrainRefreshing = false,
   result,
-  savedComparisonPath
+  savedComparisonPath,
+  onRefreshBrain
 }: {
   brain: BrainState | null;
+  isBrainRefreshing?: boolean;
   result: ComparisonResult;
   savedComparisonPath?: string | null;
+  onRefreshBrain?: () => void;
 }) {
   return (
     <div className="space-y-8">
@@ -319,7 +379,7 @@ export function ComparisonResultView({
         </div>
       </section>
 
-      <BrainStatusCard brain={brain} />
+      <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <SectionCard title="Key Differences" items={result.keyDifferences} />

@@ -547,6 +547,56 @@ describe("POST /api/compare", () => {
     }
   });
 
+  it("accepts optional feedback notes without blocking when MongoDB is unavailable", async () => {
+    const previousMongoUri = process.env.MONGODB_URI;
+
+    try {
+      delete process.env.MONGODB_URI;
+
+      const response = await POST_FEEDBACK(
+        feedbackRequest({
+          comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+          leftWatchId: "rolex-air-king-126900",
+          rightWatchId: "rolex-explorer-124270",
+          traceRef: null,
+          signal: "missing_context",
+          note: "I needed more bracelet fit context."
+        })
+      );
+
+      const payload = await response.json();
+
+      expect(response.status).toBe(202);
+      expect(payload.feedback).toEqual({
+        status: "unavailable",
+        message: "Feedback needs MongoDB Atlas before it can be stored."
+      });
+    } finally {
+      if (previousMongoUri === undefined) {
+        delete process.env.MONGODB_URI;
+      } else {
+        process.env.MONGODB_URI = previousMongoUri;
+      }
+    }
+  });
+
+  it("rejects feedback notes above the supported length", async () => {
+    const response = await POST_FEEDBACK(
+      feedbackRequest({
+        comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+        leftWatchId: "rolex-air-king-126900",
+        rightWatchId: "rolex-explorer-124270",
+        signal: "missing_context",
+        note: "x".repeat(1001)
+      })
+    );
+
+    const payload = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(payload.error).toContain("feedback payload was invalid");
+  });
+
   it("rejects invalid feedback payloads", async () => {
     const response = await POST_FEEDBACK(
       feedbackRequest({

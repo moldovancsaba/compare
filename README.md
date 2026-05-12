@@ -91,7 +91,7 @@ The worker at `scripts/trinity-compare-worker.mjs` claims `compare_jobs`, invoke
 - Tudor Pelagos 39
 - Omega Seamaster Aqua Terra 38
 
-The compare form renders the supported catalog as quick-select examples and catches exact or resolver-equivalent duplicate selections before sending the request. Unsupported inputs still go to `/api/compare`, which returns the same supported list so the client can recover from resolver misses without guessing or logging raw user input.
+The compare form renders the supported catalog as quick-select examples, lets users assign any catalog watch to either side, swap or clear inputs, and catches exact or resolver-equivalent duplicate selections before sending the request. Unsupported inputs still go to `/api/compare`, which returns the same supported list so the client can recover from resolver misses without guessing or logging raw user input.
 
 ## Quality gates
 - `npm run lint`
@@ -115,13 +115,13 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Release history: `10_Release_Notes.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes resolver matching and ambiguity rejection, client-side duplicate input validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, and client handling for network failures, non-JSON errors, and malformed successful payloads.
+Current automated route coverage includes resolver matching and ambiguity rejection, client-side duplicate input validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, optional feedback notes, feedback note length validation, and client handling for network failures, non-JSON errors, and malformed successful payloads.
 
 Comparison-output regression coverage lives in `tests/compare-watches.test.ts`. The fixture suite pins representative watch pairs across field, explorer, dive, and dress-sport styles, then asserts stable section structure, buyer picks, better-value alternatives, hidden-downside titles, and a few high-signal phrasing fragments. The intent is to catch meaningful rule drift without turning every sentence into a brittle snapshot.
 
 Structured operational logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers so production failures can be diagnosed without logging user-submitted comparison text or secrets.
 
-Durable submitted-comparison persistence lives in `src/lib/services/saved-comparisons.ts` and writes deterministic comparison results, stable public slugs, and submission counts to `saved_comparisons` only when MongoDB is configured. The write is best-effort and nonblocking so the main comparison path remains available offline. Saved comparison pages are served at `/compare/[slug]` and render stored deterministic results with submission metadata.
+Durable submitted-comparison persistence lives in `src/lib/services/saved-comparisons.ts` and writes deterministic comparison results, stable public slugs, and submission counts to `saved_comparisons` only when MongoDB is configured. The write is best-effort and nonblocking so the main comparison path remains available offline. Saved comparison pages are served at `/compare/[slug]` and render stored deterministic results with submission metadata. Result pages and live comparison results expose feedback signals plus optional notes for Trinity learning.
 
 Durable telemetry lives in `src/lib/observability/telemetry.ts` and writes allowlisted event metadata to `analytics_events` only when MongoDB is configured. It records statuses and watch IDs, hashed client identifiers, feedback signal categories, Brain status, comparison persistence status, and resolver-miss flags; raw user inputs and notes are intentionally excluded.
 

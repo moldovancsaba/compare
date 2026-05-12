@@ -28,6 +28,7 @@ export function ComparisonForm() {
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [supportedInputs, setSupportedInputs] = useState(supportedInputOptions);
+  const [isBrainRefreshing, setIsBrainRefreshing] = useState(false);
   const [isPending, startTransition] = useTransition();
   const inlineValidation = useMemo(
     () => validateComparisonInputs(leftInput, rightInput),
@@ -63,6 +64,37 @@ export function ComparisonForm() {
       window.clearTimeout(timeoutId);
     };
   }, [brain]);
+
+  async function refreshBrain() {
+    if (!brain?.comparisonRef) {
+      return;
+    }
+
+    setIsBrainRefreshing(true);
+
+    try {
+      const response = await fetch(`/api/compare/brain?comparisonRef=${encodeURIComponent(brain.comparisonRef)}`);
+      const payload = (await response.json()) as BrainResponse | { error: string };
+
+      if (response.ok && "brain" in payload) {
+        setBrain(payload.brain);
+      } else {
+        setBrain({
+          status: "unavailable",
+          comparisonRef: brain.comparisonRef,
+          message: "Trinity Brain status is temporarily unavailable."
+        });
+      }
+    } catch {
+      setBrain({
+        status: "unavailable",
+        comparisonRef: brain.comparisonRef,
+        message: "Trinity Brain status is temporarily unavailable."
+      });
+    } finally {
+      setIsBrainRefreshing(false);
+    }
+  }
 
   async function runComparison(nextLeft: string, nextRight: string) {
     const validation = validateComparisonInputs(nextLeft, nextRight);
@@ -136,6 +168,22 @@ export function ComparisonForm() {
     setRightInput(nextInput);
   }
 
+  function swapInputs() {
+    setLeftInput(rightInput);
+    setRightInput(leftInput);
+    setError(null);
+  }
+
+  function clearInputs() {
+    setLeftInput("");
+    setRightInput("");
+    setResult(null);
+    setBrain(null);
+    setSavedComparisonPath(null);
+    setError(null);
+    setSupportedInputs(supportedInputOptions);
+  }
+
   return (
     <div className="space-y-10">
       <section className="surface-panel surface-shell grid gap-8 p-7 lg:grid-cols-[1.15fr_0.85fr]">
@@ -149,12 +197,24 @@ export function ComparisonForm() {
           validationMessage={inlineValidation.valid ? null : inlineValidation.message}
           onLeftInputChange={setLeftInput}
           onRightInputChange={setRightInput}
+          onUseAsLeft={setLeftInput}
+          onUseAsRight={setRightInput}
           onUseSupportedInput={applySupportedInput}
+          onSwapInputs={swapInputs}
+          onClearInputs={clearInputs}
           onSubmit={handleSubmit}
         />
       </section>
 
-      {result ? <ComparisonResultView brain={brain} result={result} savedComparisonPath={savedComparisonPath} /> : null}
+      {result ? (
+        <ComparisonResultView
+          brain={brain}
+          isBrainRefreshing={isBrainRefreshing}
+          result={result}
+          savedComparisonPath={savedComparisonPath}
+          onRefreshBrain={() => void refreshBrain()}
+        />
+      ) : null}
     </div>
   );
 }

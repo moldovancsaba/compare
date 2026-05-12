@@ -66,11 +66,13 @@ h4 {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: color-mix(in srgb, var(--muted) 85%, transparent);
 }
 
@@ -139,6 +141,25 @@ input::placeholder {
   color: var(--accent);
 }
 
+.catalog-picker-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(9.5rem, 11rem);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.catalog-picker-name {
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  background: var(--white-05);
+  padding: 0.75rem 1rem;
+}
+
+.catalog-picker-name:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent);
+}
+
 .field-input {
   border: 1px solid var(--border-soft);
   border-radius: 1rem;
@@ -171,6 +192,12 @@ input::placeholder {
 .action-button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .catalog-picker-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .text-accent {
