@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { appName } from "@/lib/config/app";
+import {
+  defaultWatchTradeoffScenario,
+  parseWatchTradeoffScenario,
+  serializeWatchTradeoffScenario,
+  simulateWatchTradeoff
+} from "@/lib/domains/watch-tradeoff-simulator";
 import type {
   EvidenceConfidence,
   EvidenceItem,
@@ -11,7 +17,8 @@ import type {
   InsightBlock,
   RecommendationSignalKind
 } from "@/types/comparison";
-import type { BrainRecommendation, BrainState } from "@/types/watch";
+import type { BrainRecommendation, BrainState, WatchSpec } from "@/types/watch";
+import type { WatchTradeoffScenario } from "@/types/watch-tradeoff";
 
 const evidenceKindLabels: Record<EvidenceKind, string> = {
   catalog_fact: "Fact",
@@ -184,6 +191,187 @@ function RecommendationSignalsPanel({ result }: { result: GenericComparisonResul
             <p className="body-copy body-copy-strong mt-3 text-sm">{signal.reason}</p>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+type WatchComparisonResultForTradeoff = GenericComparisonResult & {
+  domain: "watches";
+  left: WatchSpec;
+  right: WatchSpec;
+};
+
+const tradeoffControlLabels: Array<{
+  key: keyof WatchTradeoffScenario;
+  label: string;
+  low: string;
+  high: string;
+}> = [
+  {
+    key: "budgetSensitivity",
+    label: "Budget discipline",
+    low: "relaxed",
+    high: "strict"
+  },
+  {
+    key: "wristComfort",
+    label: "Wrist comfort",
+    low: "secondary",
+    high: "critical"
+  },
+  {
+    key: "dressVersatility",
+    label: "Dress versatility",
+    low: "casual ok",
+    high: "office first"
+  },
+  {
+    key: "resaleImportance",
+    label: "Resale safety",
+    low: "ignore",
+    high: "protect"
+  },
+  {
+    key: "ruggedness",
+    label: "Ruggedness",
+    low: "light use",
+    high: "tool use"
+  },
+  {
+    key: "brandNeutrality",
+    label: "Brand neutrality",
+    low: "status ok",
+    high: "understated"
+  }
+];
+
+function isWatchTradeoffResult(result: GenericComparisonResult): result is WatchComparisonResultForTradeoff {
+  return result.domain === "watches" && "left" in result && "right" in result;
+}
+
+function TradeoffSimulatorPanel({ result }: { result: GenericComparisonResult }) {
+  const [scenario, setScenario] = useState<WatchTradeoffScenario>(() => {
+    if (typeof window === "undefined") {
+      return defaultWatchTradeoffScenario;
+    }
+
+    return parseWatchTradeoffScenario(new URLSearchParams(window.location.hash.replace(/^#/, "")).get("tradeoff"));
+  });
+
+  const simulation = useMemo(() => {
+    if (!isWatchTradeoffResult(result)) {
+      return null;
+    }
+
+    return simulateWatchTradeoff(result.left, result.right, result.verdict.strongerChoice, scenario);
+  }, [result, scenario]);
+
+  useEffect(() => {
+    if (!simulation || !isWatchTradeoffResult(result)) {
+      return;
+    }
+
+    const token = serializeWatchTradeoffScenario(simulation.scenario);
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    params.set("tradeoff", token);
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${params.toString()}`);
+
+    const timeoutId = window.setTimeout(() => {
+      void fetch("/api/compare/tradeoff", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comparisonRef: comparisonRefFor(result, null),
+          leftEntityId: result.leftEntity.id,
+          rightEntityId: result.rightEntity.id,
+          scenarioPickId: simulation.pickId,
+          scenarioChangedPick: simulation.changedFromBaseline,
+          scenario: simulation.scenario
+        })
+      }).catch(() => undefined);
+    }, 600);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [result, simulation]);
+
+  if (!simulation || !isWatchTradeoffResult(result)) {
+    return null;
+  }
+
+  function updateScenario(key: keyof WatchTradeoffScenario, value: number) {
+    setScenario((current) => ({
+      ...current,
+      [key]: value
+    }));
+  }
+
+  return (
+    <section className="surface-card p-6">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow eyebrow-wide">Tradeoff simulator</p>
+          <h3 className="title-section mt-3">Model a different buying scenario</h3>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">watch adapter</span>
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+            tradeoff={serializeWatchTradeoffScenario(simulation.scenario)}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-4">
+          {tradeoffControlLabels.map((control) => (
+            <label key={control.key} className="surface-item p-4">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <span className="card-kicker">{control.label}</span>
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{scenario[control.key]}/5</span>
+              </div>
+              <input
+                className="w-full accent-current"
+                max={5}
+                min={0}
+                type="range"
+                value={scenario[control.key]}
+                onChange={(event) => updateScenario(control.key, Number(event.target.value))}
+              />
+              <div className="mt-2 flex items-center justify-between gap-3">
+                <span className="body-copy body-copy-faint text-xs">{control.low}</span>
+                <span className="body-copy body-copy-faint text-xs">{control.high}</span>
+              </div>
+            </label>
+          ))}
+        </div>
+
+        <div className="surface-panel p-5">
+          <p className="card-kicker mb-2">Scenario pick</p>
+          <h4 className="title-verdict">{simulation.pick}</h4>
+          <p className="body-copy body-copy-strong mt-4 text-sm">{simulation.summary}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className={simulation.changedFromBaseline ? "pill-accent eyebrow eyebrow-tight px-3 py-1" : "pill-muted eyebrow eyebrow-tight px-3 py-1"}>
+              {simulation.changedFromBaseline ? "changed from baseline" : "same as baseline"}
+            </span>
+            {simulation.changedSections.map((section) => (
+              <span key={section} className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                {section}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <article className="surface-item p-4">
+              <p className="card-kicker mb-2">{result.leftEntity.label}</p>
+              <p className="title-section text-xl">{Math.round(simulation.leftScore)}</p>
+            </article>
+            <article className="surface-item p-4">
+              <p className="card-kicker mb-2">{result.rightEntity.label}</p>
+              <p className="title-section text-xl">{Math.round(simulation.rightScore)}</p>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -624,6 +812,8 @@ export function ComparisonResultView({
       <VerdictPanel result={result} />
 
       <RecommendationSignalsPanel result={result} />
+
+      <TradeoffSimulatorPanel result={result} />
 
       <EvidenceSummaryPanel result={result} />
 

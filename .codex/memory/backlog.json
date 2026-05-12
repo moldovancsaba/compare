@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 50,
-      "title": "Define premium subscription gates",
+      "github_issue": 28,
+      "title": "Add a decision-intent profile to personalize comparison recommendations",
       "priority": "high",
-      "reason": "Marketing-vs-reality analysis is now available; premium gates should be defined before deeper premium-only ownership analytics expand the surface area."
+      "reason": "The local tradeoff simulator is now available; the next step is persisting reusable decision intent so future comparisons can start from the user's priorities."
     },
     {
-      "github_issue": 51,
-      "title": "Add advanced ownership analytics",
+      "github_issue": 6,
+      "title": "Add transparent value scoring and tradeoff weighting for watch comparisons",
       "priority": "medium",
-      "reason": "Advanced ownership analytics should follow explicit free/premium boundaries so product depth does not blur monetization rules."
+      "reason": "Transparent scoring should follow the simulator so baseline and scenario recommendations share inspectable weighting language."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

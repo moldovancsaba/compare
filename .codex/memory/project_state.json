@@ -134,6 +134,10 @@
     {
       "date": "2026-05-13",
       "summary": "Implemented issue #49 by adding deterministic marketing-vs-reality analysis for myth pressure, spec inflation, supported claims, and buyer cautions"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #32 by adding a local watch tradeoff simulator with serializable scenario state and allowlisted telemetry"
     }
   ],
   "blocked_items": []

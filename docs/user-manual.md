@@ -20,6 +20,7 @@ The app rejects duplicate, unsupported, or ambiguous inputs. For ambiguous watch
 Comparison results include:
 - Instant verdict
 - Recommendation signals
+- Tradeoff simulator for watch comparisons
 - Evidence and confidence
 - Decision drivers
 - Real-world impact
@@ -31,6 +32,18 @@ Comparison results include:
 - Market-positioning analysis when the active adapter has structured positioning data
 
 The labels can vary by domain because each adapter owns its presentation language.
+
+## Tradeoff Simulator
+
+Watch comparison results include a local tradeoff simulator. It lets users adjust:
+- budget discipline
+- wrist comfort
+- dress versatility
+- resale safety
+- ruggedness
+- brand neutrality
+
+Changing controls updates a scenario recommendation in the browser without replacing the baseline verdict. Scenario state is serialized into the URL hash as a `tradeoff` token so the same what-if setup can be revisited later. The app emits allowlisted numeric telemetry for control changes and scenario picks; it does not store free-text notes through this flow.
 
 ## Watch Collection Profiles
 

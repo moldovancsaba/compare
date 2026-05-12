@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { GET as GET_BRAIN } from "@/app/api/compare/brain/route";
 import { POST as POST_FEEDBACK } from "@/app/api/compare/feedback/route";
 import { POST } from "@/app/api/compare/route";
+import { POST as POST_TRADEOFF } from "@/app/api/compare/tradeoff/route";
 import { POST as POST_SHOULD_BUY } from "@/app/api/watch/should-buy/route";
 import { hashLogValue, sanitizeLogContext } from "@/lib/observability/logger";
 import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observability/telemetry";
@@ -26,6 +27,12 @@ import {
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
+import {
+  defaultWatchTradeoffScenario,
+  parseWatchTradeoffScenario,
+  serializeWatchTradeoffScenario,
+  simulateWatchTradeoff
+} from "@/lib/domains/watch-tradeoff-simulator";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
@@ -56,6 +63,17 @@ function feedbackRequest(body: unknown): Request {
 
 function shouldBuyRequest(body: unknown, ip = "203.0.113.60"): Request {
   return new Request("http://localhost/api/watch/should-buy", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-forwarded-for": ip
+    },
+    body: JSON.stringify(body)
+  });
+}
+
+function tradeoffRequest(body: unknown, ip = "203.0.113.70"): Request {
+  return new Request("http://localhost/api/compare/tradeoff", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -931,6 +949,73 @@ describe("watch collection profiles", () => {
       })
     );
   });
+
+  it("serializes and parses watch tradeoff scenarios", () => {
+    const scenario = {
+      budgetSensitivity: 5,
+      wristComfort: 4,
+      dressVersatility: 3,
+      resaleImportance: 2,
+      ruggedness: 1,
+      brandNeutrality: 0
+    };
+
+    expect(serializeWatchTradeoffScenario(scenario)).toBe("543210");
+    expect(parseWatchTradeoffScenario("543210")).toEqual(scenario);
+    expect(parseWatchTradeoffScenario("bad-token")).toEqual(defaultWatchTradeoffScenario);
+  });
+
+  it("keeps a baseline-like tradeoff scenario on the default recommendation", () => {
+    const result = simulateWatchTradeoff(
+      watchById("rolex-air-king-126900"),
+      watchById("rolex-explorer-124270"),
+      "Rolex Explorer"
+    );
+
+    expect(result.pick).toBe("Rolex Explorer");
+    expect(result.changedFromBaseline).toBe(false);
+    expect(result.changedSections).toContain("Best overall");
+  });
+
+  it("flips a tradeoff scenario toward budget and ruggedness", () => {
+    const result = simulateWatchTradeoff(
+      watchById("rolex-explorer-124270"),
+      watchById("tudor-black-bay-54"),
+      "Rolex Explorer",
+      {
+        budgetSensitivity: 5,
+        wristComfort: 2,
+        dressVersatility: 1,
+        resaleImportance: 0,
+        ruggedness: 5,
+        brandNeutrality: 5
+      }
+    );
+
+    expect(result.pick).toBe("Tudor Black Bay 54");
+    expect(result.changedFromBaseline).toBe(true);
+    expect(result.changedSections).toEqual(expect.arrayContaining(["Best value", "Best tool watch"]));
+  });
+
+  it("preserves a comfort-led scenario when the baseline already fits", () => {
+    const result = simulateWatchTradeoff(
+      watchById("rolex-explorer-124270"),
+      watchById("omega-aqua-terra-38"),
+      "Rolex Explorer",
+      {
+        budgetSensitivity: 1,
+        wristComfort: 5,
+        dressVersatility: 5,
+        resaleImportance: 3,
+        ruggedness: 0,
+        brandNeutrality: 1
+      }
+    );
+
+    expect(result.pick).toBe("Rolex Explorer");
+    expect(result.changedFromBaseline).toBe(false);
+    expect(result.changedSections).toEqual(expect.arrayContaining(["Best daily wear"]));
+  });
 });
 
 describe("Trinity feedback summaries", () => {
@@ -1009,6 +1094,8 @@ describe("telemetry", () => {
         leftInput: "Rolex Air-King",
         nested: { raw: "private" } as never,
         remainingRequests: 12,
+        scenarioBudgetSensitivity: 5,
+        scenarioPickId: "tudor-black-bay-54",
         traceAttached: false
       })
     ).toEqual({
@@ -1016,6 +1103,8 @@ describe("telemetry", () => {
       comparisonPersisted: true,
       hasNote: true,
       remainingRequests: 12,
+      scenarioBudgetSensitivity: 5,
+      scenarioPickId: "tudor-black-bay-54",
       traceAttached: false
     });
   });
@@ -1341,6 +1430,56 @@ describe("POST /api/compare", () => {
 
     expect(response.status).toBe(400);
     expect(payload.error).toContain("feedback payload was invalid");
+  });
+
+  it("accepts tradeoff simulator telemetry without raw user text", async () => {
+    const response = await POST_TRADEOFF(
+      tradeoffRequest({
+        comparisonRef: "compare:rolex-explorer-124270:vs:tudor-black-bay-54",
+        leftEntityId: "rolex-explorer-124270",
+        rightEntityId: "tudor-black-bay-54",
+        scenarioPickId: "tudor-black-bay-54",
+        scenarioChangedPick: true,
+        scenario: {
+          budgetSensitivity: 5,
+          wristComfort: 2,
+          dressVersatility: 1,
+          resaleImportance: 0,
+          ruggedness: 5,
+          brandNeutrality: 5
+        }
+      })
+    );
+
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload.tradeoff.status).toBe("recorded");
+  });
+
+  it("rejects invalid tradeoff simulator telemetry", async () => {
+    const response = await POST_TRADEOFF(
+      tradeoffRequest({
+        comparisonRef: "compare:rolex-explorer-124270:vs:tudor-black-bay-54",
+        leftEntityId: "rolex-explorer-124270",
+        rightEntityId: "tudor-black-bay-54",
+        scenarioPickId: "tudor-black-bay-54",
+        scenarioChangedPick: true,
+        scenario: {
+          budgetSensitivity: 9,
+          wristComfort: 2,
+          dressVersatility: 1,
+          resaleImportance: 0,
+          ruggedness: 5,
+          brandNeutrality: 5
+        }
+      })
+    );
+
+    const payload = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(payload.error).toContain("tradeoff scenario payload was invalid");
   });
 
   it("rejects unsupported watches", async () => {

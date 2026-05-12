@@ -195,6 +195,42 @@ Notes are optional and capped at 1,000 characters.
 
 When MongoDB is unavailable, the endpoint fails gracefully instead of blocking comparison use.
 
+## POST `/api/compare/tradeoff`
+
+Records allowlisted telemetry when a watch tradeoff simulator scenario changes. The simulator itself runs locally in the browser; this endpoint does not recompute recommendations and does not accept raw user notes.
+
+### Request
+
+```json
+{
+  "comparisonRef": "compare:rolex-explorer-124270:vs:tudor-black-bay-54",
+  "leftEntityId": "rolex-explorer-124270",
+  "rightEntityId": "tudor-black-bay-54",
+  "scenarioPickId": "tudor-black-bay-54",
+  "scenarioChangedPick": true,
+  "scenario": {
+    "budgetSensitivity": 5,
+    "wristComfort": 2,
+    "dressVersatility": 1,
+    "resaleImportance": 0,
+    "ruggedness": 5,
+    "brandNeutrality": 5
+  }
+}
+```
+
+### Success Response
+
+```json
+{
+  "tradeoff": {
+    "status": "recorded"
+  }
+}
+```
+
+Scenario controls are integers from `0` to `5`. Invalid payloads return `400`.
+
 ## POST `/api/watch/should-buy`
 
 Creates deterministic single-watch purchase guidance for a supported watch.
