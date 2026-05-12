@@ -96,6 +96,11 @@ describe("comparison domain registry", () => {
       })
     );
     expect(result.comparison.verdict.exceptionCase).toContain("still");
+    expect(result.comparison.recommendationSignals).toContainEqual(
+      expect.objectContaining({
+        kind: "avoid_if"
+      })
+    );
     expect(result.comparison.realWorldImpact.map((block) => block.title)).toContain("Switching cost");
   });
 });

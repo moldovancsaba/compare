@@ -90,6 +90,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #40 by adding deterministic watch consequence rules for wrist presence, cuff fit, wrist-size sensitivity, service friction, versatility, and travel readiness"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #41 by adding cross-domain recommendation signals with default picks, buyer-priority tradeoffs, confidence, and avoid-if guidance"
     }
   ],
   "blocked_items": []

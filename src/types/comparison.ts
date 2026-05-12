@@ -58,6 +58,22 @@ export interface BuyerRecommendation {
   evidence?: EvidenceItem[];
 }
 
+export type RecommendationSignalKind =
+  | "best_overall"
+  | "best_daily"
+  | "best_value"
+  | "best_collector"
+  | "avoid_if"
+  | "no_clear_winner";
+
+export interface RecommendationSignal {
+  kind: RecommendationSignalKind;
+  label: string;
+  pick: string;
+  reason: string;
+  confidence: EvidenceConfidence;
+}
+
 export interface VerdictPick {
   label: string;
   pick: string;
@@ -141,6 +157,7 @@ export interface GenericComparisonResult {
   verdict: ComparisonVerdict;
   sectionLabels: ComparisonSectionLabels;
   evidenceSummary: EvidenceSummary;
+  recommendationSignals: RecommendationSignal[];
   keyDifferences: InsightBlock[];
   realWorldImpact: InsightBlock[];
   ownershipIntelligence: InsightBlock[];

@@ -3,7 +3,14 @@
 import { useState } from "react";
 
 import { appName } from "@/lib/config/app";
-import type { EvidenceConfidence, EvidenceItem, EvidenceKind, GenericComparisonResult, InsightBlock } from "@/types/comparison";
+import type {
+  EvidenceConfidence,
+  EvidenceItem,
+  EvidenceKind,
+  GenericComparisonResult,
+  InsightBlock,
+  RecommendationSignalKind
+} from "@/types/comparison";
 import type { BrainRecommendation, BrainState } from "@/types/watch";
 
 const evidenceKindLabels: Record<EvidenceKind, string> = {
@@ -18,6 +25,15 @@ const evidenceConfidenceLabels: Record<EvidenceConfidence, string> = {
   high: "High",
   medium: "Medium",
   low: "Low"
+};
+
+const recommendationSignalKindLabels: Record<RecommendationSignalKind, string> = {
+  best_overall: "Default",
+  best_daily: "Daily",
+  best_value: "Value",
+  best_collector: "Depth",
+  avoid_if: "Avoid",
+  no_clear_winner: "Close"
 };
 
 function evidenceToneClass(confidence: EvidenceConfidence): string {
@@ -132,6 +148,42 @@ function VerdictPanel({ result }: { result: GenericComparisonResult }) {
             </article>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function RecommendationSignalsPanel({ result }: { result: GenericComparisonResult }) {
+  if (!result.recommendationSignals.length) {
+    return null;
+  }
+
+  return (
+    <section className="surface-card p-6">
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow eyebrow-wide">Recommendation signals</p>
+          <h3 className="title-section mt-3">What to do with the verdict</h3>
+        </div>
+        <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{result.recommendationSignals.length} signals</span>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+        {result.recommendationSignals.map((signal) => (
+          <article key={`${signal.kind}-${signal.label}-${signal.pick}`} className="surface-item p-4">
+            <div className="mb-3 flex flex-wrap gap-2">
+              <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">
+                {recommendationSignalKindLabels[signal.kind]}
+              </span>
+              <span className={`${evidenceToneClass(signal.confidence)} eyebrow eyebrow-tight px-3 py-1`}>
+                {evidenceConfidenceLabels[signal.confidence]}
+              </span>
+            </div>
+            <p className="card-kicker mb-2">{signal.label}</p>
+            <h4 className="title-section text-xl">{signal.pick}</h4>
+            <p className="body-copy body-copy-strong mt-3 text-sm">{signal.reason}</p>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -570,6 +622,8 @@ export function ComparisonResultView({
       <DecisionScanPanel result={result} />
 
       <VerdictPanel result={result} />
+
+      <RecommendationSignalsPanel result={result} />
 
       <EvidenceSummaryPanel result={result} />
 

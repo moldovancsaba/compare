@@ -1,6 +1,6 @@
 import { serviceCatalog } from "@/lib/data/service-catalog";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
-import type { EvidenceItem, EvidenceSummary } from "@/types/comparison";
+import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
 import type { ServiceComparisonResult, ServiceSpec } from "@/types/service";
 
 type Rating = "low" | "medium" | "high";
@@ -277,6 +277,82 @@ function buildBuyerRecommendations(left: ServiceSpec, right: ServiceSpec): Servi
   ];
 }
 
+function buildRecommendationSignals(left: ServiceSpec, right: ServiceSpec): RecommendationSignal[] {
+  const bestOverall = pickHigher(left, right, (service) => operationalFitScore(service) + flexibilityScore(service));
+  const leverage = pickHigher(left, right, operationalFitScore);
+  const flexible = pickHigher(left, right, flexibilityScore);
+  const governed = pickHigher(left, right, governanceScore);
+  const riskierFit = pickHigher(left, right, complexityPenalty);
+  const bestOverallGap = Math.abs(
+    operationalFitScore(left) + flexibilityScore(left) - (operationalFitScore(right) + flexibilityScore(right))
+  );
+
+  if (bestOverallGap <= 1) {
+    return [
+      {
+        kind: "no_clear_winner",
+        label: "No clear default",
+        pick: "Context decides",
+        reason:
+          "The service scores are too close for a universal winner. Procurement rules, implementation bandwidth, and operating maturity should decide.",
+        confidence: "medium"
+      },
+      {
+        kind: "best_daily",
+        label: "Best operating leverage",
+        pick: leverage.name,
+        reason: `${leverage.name} removes more recurring work relative to its implementation friction.`,
+        confidence: "medium"
+      },
+      {
+        kind: "avoid_if",
+        label: "Avoid if",
+        pick: riskierFit.name,
+        reason: `${riskierFit.name} is the option to question if you need fast reversibility, low implementation drag, or a simple pilot path.`,
+        confidence: "medium"
+      }
+    ];
+  }
+
+  return [
+    {
+      kind: "best_overall",
+      label: "Choose this by default",
+      pick: bestOverall.name,
+      reason: `${bestOverall.name} has the strongest combined case across operating leverage and manageable adoption friction.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_daily",
+      label: "Best operating leverage",
+      pick: leverage.name,
+      reason: `${leverage.name} removes more recurring work once the underlying process is mature enough to absorb the service.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_value",
+      label: "Lowest reversibility risk",
+      pick: flexible.name,
+      reason: `${flexible.name} is easier to trial, unwind, or replace if the relationship or workflow fit disappoints.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_collector",
+      label: "Best governed fit",
+      pick: governed.name,
+      reason: `${governed.name} is the stronger fit when accountability, compliance posture, and human judgment matter more than raw throughput.`,
+      confidence: "medium"
+    },
+    {
+      kind: "avoid_if",
+      label: "Avoid if",
+      pick: riskierFit.name,
+      reason: `${riskierFit.name} is the option to question if you need low contract risk, low switching cost, and a quick implementation path.`,
+      confidence: "medium"
+    }
+  ];
+}
+
 function buildOverpricedFeatures(left: ServiceSpec, right: ServiceSpec): ServiceComparisonResult["overpricedFeatures"] {
   return [
     {
@@ -408,6 +484,7 @@ export function compareServices(left: ServiceSpec, right: ServiceSpec): ServiceC
       signalVsFluff: "Marketing vs Reality"
     },
     evidenceSummary: buildEvidenceSummary(left, right),
+    recommendationSignals: buildRecommendationSignals(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
     ownershipIntelligence: buildOwnershipIntelligence(left, right),

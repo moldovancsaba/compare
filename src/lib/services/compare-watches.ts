@@ -2,7 +2,7 @@ import { watchCatalog } from "@/lib/data/watch-catalog";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
-import type { EvidenceItem, EvidenceSummary } from "@/types/comparison";
+import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
 import type {
   BuyerRecommendation,
   ComparisonResult,
@@ -153,6 +153,26 @@ function movementOwnershipScore(watch: WatchSpec): number {
 
 function valueScore(watch: WatchSpec): number {
   return dailyWearScore(watch) + toolScore(watch) + movementOwnershipScore(watch) - watch.msrpUsd / 3000;
+}
+
+function collectorScore(watch: WatchSpec): number {
+  let score = valueScore(watch);
+
+  if (watch.brand === "Rolex") {
+    score += 4;
+  }
+
+  if (watch.style === "explorer") {
+    score += 2;
+  }
+
+  if (watch.ownershipProfile?.resaleStability === "strong") {
+    score += 3;
+  } else if (watch.ownershipProfile?.resaleStability === "stable") {
+    score += 1;
+  }
+
+  return score;
 }
 
 function pickHigher(left: WatchSpec, right: WatchSpec, scorer: (watch: WatchSpec) => number): WatchSpec {
@@ -381,19 +401,7 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
 }
 
 function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightBlock[] {
-  const resaleWinner = pickHigher(left, right, (watch) => {
-    let score = valueScore(watch);
-
-    if (watch.brand === "Rolex") {
-      score += 4;
-    }
-
-    if (watch.style === "explorer") {
-      score += 2;
-    }
-
-    return score;
-  });
+  const resaleWinner = pickHigher(left, right, collectorScore);
   const dailyWinner = pickHigher(left, right, dailyWearScore);
   const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
 
@@ -460,6 +468,92 @@ function buildBuyerRecommendations(left: WatchSpec, right: WatchSpec): BuyerReco
       buyerType: "Value-focused collector",
       pick: left.msrpUsd <= right.msrpUsd ? displayName(left) : displayName(right),
       reason: "If both scratch the same emotional itch, the lower-priced option usually leaves less regret and more room for a second watch later."
+    }
+  ];
+}
+
+function buildRecommendationSignals(left: WatchSpec, right: WatchSpec): RecommendationSignal[] {
+  const bestOverall = pickHigher(left, right, (watch) => dailyWearScore(watch) + valueScore(watch) + versatilityScore(watch));
+  const dailyPick = pickHigher(left, right, dailyWearScore);
+  const valuePick = pickHigher(left, right, valueScore);
+  const collectorPick = pickHigher(left, right, collectorScore);
+  const riskierFit = pickHigher(left, right, (watch) => {
+    const consequence = buildWatchConsequenceProfile(watch);
+    return (
+      watch.caseDiameterMm +
+      watch.lugToLugMm / 2 +
+      watch.caseThicknessMm +
+      (consequence.cuffFit.includes("proud") ? 3 : 0) +
+      (watch.ownershipProfile?.serviceExpectation === "high" ? 2 : 0)
+    );
+  });
+  const bestOverallGap = Math.abs(
+    dailyWearScore(left) + valueScore(left) + versatilityScore(left) -
+      (dailyWearScore(right) + valueScore(right) + versatilityScore(right))
+  );
+
+  if (bestOverallGap <= 1) {
+    return [
+      {
+        kind: "no_clear_winner",
+        label: "No clear default",
+        pick: "Context decides",
+        reason:
+          "The deterministic scores are too close for a universal winner. Wrist fit, taste, collection overlap, and tolerance for ownership friction should decide.",
+        confidence: "medium"
+      },
+      {
+        kind: "best_daily",
+        label: "Best daily wearer",
+        pick: displayName(dailyPick),
+        reason: `${displayName(dailyPick)} has the safer daily-use profile once comfort, profile, bracelet adjustment, and reserve are weighted.`,
+        confidence: "medium"
+      },
+      {
+        kind: "avoid_if",
+        label: "Avoid if",
+        pick: displayName(riskierFit),
+        reason: `${displayName(riskierFit)} is the riskier fit if you want low visual presence, easy cuff clearance, and low-maintenance ownership.`,
+        confidence: "medium"
+      }
+    ];
+  }
+
+  return [
+    {
+      kind: "best_overall",
+      label: "Buy this by default",
+      pick: displayName(bestOverall),
+      reason: `${displayName(bestOverall)} has the strongest combined case across daily wear, value discipline, and versatility.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_daily",
+      label: "Best daily wearer",
+      pick: displayName(dailyPick),
+      reason: `${displayName(dailyPick)} is the easier day-to-day choice when comfort, wrist behavior, adjustment, and no-wear tolerance matter more than romance.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_value",
+      label: "Best value discipline",
+      pick: displayName(valuePick),
+      reason: `${displayName(valuePick)} gives more practical ownership upside per retail dollar and asks you to pay less for story alone.`,
+      confidence: "medium"
+    },
+    {
+      kind: "best_collector",
+      label: "Best collector safety",
+      pick: displayName(collectorPick),
+      reason: `${displayName(collectorPick)} has the stronger long-term ownership case once brand liquidity, model versatility, resale stability, and service confidence are considered.`,
+      confidence: "medium"
+    },
+    {
+      kind: "avoid_if",
+      label: "Avoid if",
+      pick: displayName(riskierFit),
+      reason: `${displayName(riskierFit)} is the option to question if you want low visual presence, easy cuff clearance, and minimal ownership friction.`,
+      confidence: "medium"
     }
   ];
 }
@@ -668,6 +762,7 @@ export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonRes
       signalVsFluff: "Marketing vs Reality"
     },
     evidenceSummary: buildEvidenceSummary(left, right),
+    recommendationSignals: buildRecommendationSignals(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
     ownershipIntelligence: buildOwnershipIntelligence(left, right),

@@ -1,16 +1,10 @@
 {
   "highest_priority": [
     {
-      "github_issue": 41,
-      "title": "Add cross-domain strong opinion and recommendation system",
-      "priority": "high",
-      "reason": "Consequence rules are now explicit for watches; recommendation strength should become a shared cross-domain behavior."
-    },
-    {
       "github_issue": 42,
       "title": "Add user collection profiles",
-      "priority": "medium",
-      "reason": "Collection profiles can wait until the shared consequence and recommendation contracts are cleaner."
+      "priority": "high",
+      "reason": "Recommendation confidence is now shared; user-owned context is the next dependency for personalized comparisons and collection-aware decisions."
     },
     {
       "github_issue": 43,

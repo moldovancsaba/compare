@@ -39,6 +39,7 @@ Result evidence requirements:
 - `evidenceSummary.dataQuality`: coarse quality of the underlying adapter data.
 - `evidenceSummary.evidence`: at least one evidence item explaining what the result is based on.
 - `evidenceSummary.limitations`: explicit known gaps, especially missing live data or low-confidence assumptions.
+- `recommendationSignals`: adapter-owned decisive guidance with best-overall, daily-use, value, depth/collector, avoid-if, or no-clear-winner signals.
 - Optional `evidence` arrays on verdict picks, insight blocks, and buyer recommendations for claim-level provenance.
 
 Evidence item kinds:
@@ -73,6 +74,7 @@ The conformance suite verifies:
 - comparison output is deterministic
 - result shape contains all required generic sections
 - verdict includes stronger choice, exception case, confidence rationale, and adapter-owned section labels
+- recommendation signals include explicit picks, avoid-if guidance, and confidence wording
 - result evidence includes valid confidence, data quality, evidence kinds, and limitations
 - duplicate inputs resolve to the same entity so the generic compare service can reject them
 

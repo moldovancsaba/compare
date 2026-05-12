@@ -286,6 +286,19 @@ describe("compareWatches", () => {
       "Best movement/ownership story",
       "Best value"
     ]);
+    expect(result.recommendationSignals.map((signal) => signal.kind)).toEqual([
+      "best_overall",
+      "best_daily",
+      "best_value",
+      "best_collector",
+      "avoid_if"
+    ]);
+    expect(result.recommendationSignals).toContainEqual(
+      expect.objectContaining({
+        kind: "best_overall",
+        pick: "Rolex Explorer"
+      })
+    );
     expect(result.realWorldImpact.length).toBeGreaterThan(0);
     expect(result.ownershipIntelligence.map((block) => block.title)).toEqual([
       "Daily ownership",
@@ -326,6 +339,30 @@ describe("compareWatches", () => {
       expect.objectContaining({
         kind: "derived_rule",
         label: "Wearability rule"
+      })
+    );
+  });
+
+  it("can flip recommendations by buyer priority instead of forcing one universal answer", () => {
+    const result = compareWatches(watchById("rolex-air-king-126900"), watchById("rolex-explorer-124270"));
+
+    expect(result.verdict.bestOverall).toBe("Rolex Explorer");
+    expect(result.recommendationSignals).toContainEqual(
+      expect.objectContaining({
+        kind: "best_overall",
+        pick: "Rolex Explorer"
+      })
+    );
+    expect(result.recommendationSignals).toContainEqual(
+      expect.objectContaining({
+        kind: "avoid_if",
+        pick: "Rolex Air-King"
+      })
+    );
+    expect(result.whoShouldBuyWhich).toContainEqual(
+      expect.objectContaining({
+        buyerType: "Tool-watch enthusiast",
+        pick: "Rolex Air-King"
       })
     );
   });

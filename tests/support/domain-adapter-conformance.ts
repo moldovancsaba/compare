@@ -86,6 +86,21 @@ function expectEvidenceSummary(result: GenericComparisonResult) {
   }
 }
 
+function expectRecommendationSignals(result: GenericComparisonResult) {
+  expect(Array.isArray(result.recommendationSignals)).toBe(true);
+  expect(result.recommendationSignals.length).toBeGreaterThan(0);
+
+  for (const signal of result.recommendationSignals) {
+    expect(["best_overall", "best_daily", "best_value", "best_collector", "avoid_if", "no_clear_winner"]).toContain(
+      signal.kind
+    );
+    expectNonEmptyString(signal.label);
+    expectNonEmptyString(signal.pick);
+    expectNonEmptyString(signal.reason);
+    expect(["high", "medium", "low"]).toContain(signal.confidence);
+  }
+}
+
 function expectComparisonResult(result: GenericComparisonResult, domain: string) {
   expect(result.domain).toBe(domain);
   expectEntity(result.leftEntity, domain);
@@ -101,6 +116,7 @@ function expectComparisonResult(result: GenericComparisonResult, domain: string)
   expectNonEmptyString(result.verdict.summary);
   expect(result.verdict.picks.length).toBeGreaterThan(0);
   expectEvidenceSummary(result);
+  expectRecommendationSignals(result);
 
   expectNonEmptyString(result.sectionLabels.keyDifferences);
   expectNonEmptyString(result.sectionLabels.realWorldImpact);
