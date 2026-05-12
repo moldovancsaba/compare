@@ -28,6 +28,7 @@ When context is present, the watch adapter can:
 - add a recommendation signal when one compared watch is already owned, wishlist, or sold
 - produce local gap/overlap insights for owned watches
 - produce upgrade-path guidance for compared watches against the closest owned watch
+- produce secondary balance scores with contributors and suggestions
 
 ## Gap And Overlap Analysis
 
@@ -53,3 +54,16 @@ When a comparison is submitted with owned watches in the local profile, the watc
 - `poor_value`: higher cost without enough capability or fit improvement
 
 The verdict lists changed traits so users can see whether the advice is about capability, wearability, role coverage, or emotional preference. It is ownership guidance, not financial advice or an automated sell recommendation.
+
+## Balance Scoring
+
+The local profile panel shows deterministic balance guidance as a secondary decision aid, not as a collection grade.
+
+Score dimensions:
+- `versatility`: style-role coverage and practical water-resistance coverage
+- `redundancy`: style and brand concentration
+- `formality`: formal-flex versus casual/tool balance
+- `complication`: date and no-date diversity
+- `ownership_risk`: service-burden, resale-stability, and reliability profile
+
+Each score exposes contributors and a plain-language suggestion. Scores should be used to find concentration, missing contrast, and ownership friction before a purchase; they should not be used for leaderboards, investment ranking, or taste policing.

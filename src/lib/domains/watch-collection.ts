@@ -3,6 +3,8 @@ import { watchDisplayName } from "@/lib/domains/watch-entity";
 import type { ComparisonContext } from "@/types/comparison";
 import type { WatchSpec } from "@/types/watch";
 import type {
+  WatchCollectionBalanceReport,
+  WatchCollectionBalanceScore,
   WatchCollectionInsight,
   WatchCollectionItem,
   WatchCollectionItemStatus,
@@ -398,5 +400,127 @@ export function analyzeWatchUpgradePath(
     referenceWatchIds: [closestOwned.watch.id],
     summary: `${watchDisplayName(candidate)} is a lateral move against ${watchDisplayName(closestOwned.watch)}: appealing, but close enough that taste and rotation overlap matter more than objective upgrade logic.`,
     changedTraits: changedTraits.length ? changedTraits : ["similar role", "similar capability"]
+  };
+}
+
+function clampScore(score: number): number {
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+function uniqueCount(values: string[]): number {
+  return new Set(values).size;
+}
+
+function concentrationPenalty(values: string[]): number {
+  const counts = new Map<string, number>();
+
+  for (const value of values) {
+    counts.set(value, (counts.get(value) ?? 0) + 1);
+  }
+
+  const highestShare = Math.max(...Array.from(counts.values())) / values.length;
+  return highestShare > 0.5 ? (highestShare - 0.5) * 120 : 0;
+}
+
+export function calculateWatchCollectionBalance(profile: WatchCollectionProfile): WatchCollectionBalanceReport {
+  const owned = ownedWatches(profile);
+
+  if (owned.length === 0) {
+    const scores: WatchCollectionBalanceScore[] = [
+      {
+        dimension: "versatility",
+        label: "Versatility",
+        score: 0,
+        contributors: ["No owned watches saved"],
+        suggestion: "Add owned watches before treating balance scores as useful."
+      }
+    ];
+
+    return {
+      overallScore: 0,
+      summary: "Balance scoring needs at least one owned watch. This is setup guidance, not a collection judgment.",
+      scores
+    };
+  }
+
+  const styleCount = uniqueCount(owned.map((watch) => watch.style));
+  const brandCount = uniqueCount(owned.map((watch) => watch.brand));
+  const dateCount = owned.filter((watch) => watch.dateWindow).length;
+  const formalCount = owned.filter((watch) => watch.style === "dress-sport" || watch.style === "explorer").length;
+  const casualCount = owned.length - formalCount;
+  const stableOwnershipCount = owned.filter(
+    (watch) =>
+      watch.ownershipProfile?.serviceExpectation !== "high" &&
+      watch.ownershipProfile?.resaleStability !== "soft" &&
+      watch.ownershipProfile?.reliability !== "standard"
+  ).length;
+  const serviceHeavyCount = owned.filter((watch) => watch.ownershipProfile?.serviceExpectation === "high").length;
+  const stylePenalty = concentrationPenalty(owned.map((watch) => watch.style));
+  const brandPenalty = concentrationPenalty(owned.map((watch) => watch.brand));
+  const versatility = clampScore((styleCount / 4) * 75 + (owned.some((watch) => watch.waterResistanceM >= 150) ? 15 : 0));
+  const redundancy = clampScore(100 - stylePenalty - brandPenalty);
+  const formality = clampScore((Math.min(formalCount, casualCount) / Math.max(formalCount, casualCount, 1)) * 80 + 20);
+  const complication = clampScore(dateCount > 0 && dateCount < owned.length ? 90 : owned.length >= 2 ? 45 : 35);
+  const ownershipRisk = clampScore((stableOwnershipCount / owned.length) * 80 + (serviceHeavyCount === 0 ? 20 : 5));
+
+  const scores: WatchCollectionBalanceScore[] = [
+    {
+      dimension: "versatility",
+      label: "Versatility",
+      score: versatility,
+      contributors: [`${styleCount} of 4 style roles covered`, `${owned.length} owned watches analyzed`],
+      suggestion:
+        styleCount >= 3
+          ? "Versatility is broad enough; the next buy should be about quality of fit, not role coverage."
+          : "Add a watch that solves a missing wearing role before buying another close substitute."
+    },
+    {
+      dimension: "redundancy",
+      label: "Redundancy control",
+      score: redundancy,
+      contributors: [`${brandCount} brands represented`, `style concentration penalty ${Math.round(stylePenalty)}`],
+      suggestion:
+        redundancy >= 75
+          ? "Overlap is controlled; similar future purchases should still justify their rotation role."
+          : "The collection is concentrated enough that another similar watch may create rotation regret."
+    },
+    {
+      dimension: "formality",
+      label: "Formality balance",
+      score: formality,
+      contributors: [`${formalCount} formal-flex watches`, `${casualCount} casual/tool watches`],
+      suggestion:
+        formality >= 70
+          ? "Formal and casual coverage are reasonably balanced."
+          : "Consider whether the next watch should move the collection toward the underrepresented side."
+    },
+    {
+      dimension: "complication",
+      label: "Complication diversity",
+      score: complication,
+      contributors: [`${dateCount} date watches`, `${owned.length - dateCount} no-date watches`],
+      suggestion:
+        complication >= 70
+          ? "Date and no-date ownership experiences are both represented."
+          : "A different date/no-date setup could add practical variety without changing the whole collection identity."
+    },
+    {
+      dimension: "ownership_risk",
+      label: "Ownership risk",
+      score: ownershipRisk,
+      contributors: [`${stableOwnershipCount} lower-friction profiles`, `${serviceHeavyCount} high-service-burden watches`],
+      suggestion:
+        ownershipRisk >= 70
+          ? "Ownership risk looks manageable in the curated profile."
+          : "Future additions should be checked for service burden, resale softness, and reliability before purchase."
+    }
+  ];
+  const overallScore = clampScore(scores.reduce((total, score) => total + score.score, 0) / scores.length);
+
+  return {
+    overallScore,
+    summary:
+      "This score is a decision aid, not a grade. Use it to spot concentration and missing contrast before deciding what belongs in the collection.",
+    scores
   };
 }

@@ -20,6 +20,7 @@
 - Added accountless watch collection profiles with local browser persistence and adapter-owned collection context in watch comparisons.
 - Added deterministic watch collection gap and overlap analysis for missing roles, redundancy, brand concentration, size balance, and complication balance.
 - Added watch upgrade-path intelligence that classifies meaningful, lateral, emotional, and poor-value paths against owned watches.
+- Added explainable watch collection balance scoring for versatility, redundancy, formality, complication diversity, and ownership risk.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

@@ -28,3 +28,24 @@ export interface WatchUpgradeVerdict {
   summary: string;
   changedTraits: string[];
 }
+
+export type WatchCollectionBalanceDimension =
+  | "versatility"
+  | "redundancy"
+  | "formality"
+  | "complication"
+  | "ownership_risk";
+
+export interface WatchCollectionBalanceScore {
+  dimension: WatchCollectionBalanceDimension;
+  label: string;
+  score: number;
+  contributors: string[];
+  suggestion: string;
+}
+
+export interface WatchCollectionBalanceReport {
+  overallScore: number;
+  summary: string;
+  scores: WatchCollectionBalanceScore[];
+}

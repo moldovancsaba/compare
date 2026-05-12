@@ -18,6 +18,7 @@ import { serviceCatalog } from "@/lib/data/service-catalog";
 import {
   analyzeWatchCollectionGaps,
   analyzeWatchUpgradePath,
+  calculateWatchCollectionBalance,
   normalizeWatchCollectionProfile
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
@@ -662,6 +663,54 @@ describe("watch collection profiles", () => {
         changedTraits: expect.arrayContaining(["same-brand overlap"])
       })
     );
+  });
+
+  it("scores balanced and redundant collections with contributors", () => {
+    const balanced = calculateWatchCollectionBalance({
+      preferredBrands: [],
+      items: [
+        { watchId: "rolex-explorer-124270", status: "owned" },
+        { watchId: "tudor-black-bay-54", status: "owned" },
+        { watchId: "omega-aqua-terra-38", status: "owned" }
+      ]
+    });
+    const redundant = calculateWatchCollectionBalance({
+      preferredBrands: [],
+      items: [
+        { watchId: "tudor-black-bay-54", status: "owned" },
+        { watchId: "tudor-black-bay-58", status: "owned" },
+        { watchId: "tudor-pelagos-39", status: "owned" }
+      ]
+    });
+
+    expect(balanced.overallScore).toBeGreaterThan(redundant.overallScore);
+    expect(balanced.scores).toHaveLength(5);
+    expect(balanced.scores).toContainEqual(
+      expect.objectContaining({
+        dimension: "versatility",
+        contributors: expect.arrayContaining(["3 of 4 style roles covered"])
+      })
+    );
+    expect(redundant.scores).toContainEqual(
+      expect.objectContaining({
+        dimension: "redundancy",
+        score: expect.any(Number),
+        contributors: expect.arrayContaining(["1 brands represented"])
+      })
+    );
+  });
+
+  it("keeps balance scoring non-authoritative for empty collections", () => {
+    expect(calculateWatchCollectionBalance({ preferredBrands: [], items: [] })).toEqual({
+      overallScore: 0,
+      summary: expect.stringContaining("not a collection judgment"),
+      scores: [
+        expect.objectContaining({
+          dimension: "versatility",
+          contributors: ["No owned watches saved"]
+        })
+      ]
+    });
   });
 });
 

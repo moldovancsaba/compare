@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 45,
-      "title": "Add collection balance scoring",
-      "priority": "high",
-      "reason": "Collection profile, gap analysis, and upgrade-path verdicts are now available; balance scoring is the next collector-intelligence layer."
-    },
-    {
       "github_issue": 46,
       "title": "Add single-watch should-I-buy evaluation",
+      "priority": "high",
+      "reason": "Collection balance scoring is now available; single-watch evaluation can reuse profile, gap, and upgrade-path context."
+    },
+    {
+      "github_issue": 47,
+      "title": "Add long-term ownership simulator",
       "priority": "medium",
-      "reason": "Single-watch buying advice should reuse collection context after balance scoring clarifies portfolio fit."
+      "reason": "Ownership simulation should follow single-watch buy advice so cost/risk assumptions appear in the right product surface."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

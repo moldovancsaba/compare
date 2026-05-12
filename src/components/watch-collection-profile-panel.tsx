@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { watchCatalog } from "@/lib/data/watch-catalog";
-import { analyzeWatchCollectionGaps } from "@/lib/domains/watch-collection";
+import { analyzeWatchCollectionGaps, calculateWatchCollectionBalance } from "@/lib/domains/watch-collection";
 import { watchDisplayName } from "@/lib/domains/watch-entity";
 import type { WatchCollectionItemStatus, WatchCollectionProfile } from "@/types/watch-collection";
 
@@ -30,6 +30,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
   const savedWatchIds = useMemo(() => new Set(profile.items.map((item) => item.watchId)), [profile.items]);
   const availableWatches = watchCatalog.filter((watch) => !savedWatchIds.has(watch.id));
   const collectionInsights = analyzeWatchCollectionGaps(profile);
+  const balanceReport = calculateWatchCollectionBalance(profile);
   const effectiveSelectedWatchId =
     selectedWatchId && !savedWatchIds.has(selectedWatchId) ? selectedWatchId : (availableWatches[0]?.id ?? "");
 
@@ -207,6 +208,34 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
           })}
         </div>
       ) : null}
+
+      <div className="mt-5 surface-item p-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="card-kicker mb-2">Balance guidance</p>
+            <p className="body-copy body-copy-strong text-sm">{balanceReport.summary}</p>
+          </div>
+          <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{balanceReport.overallScore}/100</span>
+        </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {balanceReport.scores.map((score) => (
+            <article key={score.dimension} className="border-t border-[rgba(232,217,194,0.16)] pt-3">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <p className="card-kicker">{score.label}</p>
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{score.score}/100</span>
+              </div>
+              <p className="body-copy body-copy-strong text-sm">{score.suggestion}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {score.contributors.map((contributor) => (
+                  <span key={contributor} className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                    {contributor}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
 
       <div className="mt-5 grid gap-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
