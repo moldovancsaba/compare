@@ -7,6 +7,7 @@
     "operational-hardening"
   ],
   "known_risks": [
+    "GitHub Project 16 is the SSOT for roadmap and task planning; markdown roadmap files must not become a competing source of truth",
     "Trinity Brain worker needs live Atlas-backed validation before issues #30 and #31 can be closed",
     "example environment files must never contain real service credentials",
     "npm audit clean pass currently depends on an npm PostCSS override until Next ships a patched transitive dependency"
@@ -51,6 +52,10 @@
     {
       "date": "2026-05-11",
       "summary": "Added fixture-backed comparison-output regression tests and documented the regression strategy for issue #14"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Aligned GitHub Project 16 workflow with the reference board and created roadmap issues #35-#58 as board-tracked SSOT items"
     }
   ],
   "blocked_items": []

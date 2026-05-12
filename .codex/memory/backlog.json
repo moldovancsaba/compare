@@ -1,35 +1,35 @@
 {
   "highest_priority": [
     {
-      "github_issue": 18,
-      "title": "Add structured logging and production-safe error handling across the compare path",
+      "github_issue": 35,
+      "title": "Harden the comparison engine for deterministic trust",
       "priority": "high",
-      "reason": "Now that Mongo-backed Brain and feedback flows are live, operational failures need structured visibility without leaking user input or credentials."
+      "reason": "Phase 0 trust work is now the highest-leverage path because output reliability must lead the product roadmap."
     },
     {
-      "github_issue": 17,
-      "title": "Add structured telemetry for comparison usage, resolution misses, and errors",
+      "github_issue": 36,
+      "title": "Improve watch resolver disambiguation and typo tolerance",
       "priority": "high",
-      "reason": "Usage and resolver-miss signals will guide catalog expansion and UX fixes without guessing from anecdotes."
+      "reason": "Resolver misses destroy trust before comparison quality is visible, especially for enthusiast references and variants."
     },
     {
-      "github_issue": 7,
-      "title": "Add MongoDB persistence for submitted comparisons and analytics events",
+      "github_issue": 37,
+      "title": "Rewrite comparison output around purchase confidence",
       "priority": "high",
-      "reason": "The Atlas environment is now configured, so durable comparison history can move from optional Brain artifacts into the main product path."
+      "reason": "The comparison result must feel like buying intelligence, not generic summary text."
     },
     {
-      "github_issue": 8,
-      "title": "Create shareable saved comparison pages with stable slugs",
+      "github_issue": 38,
+      "title": "Establish premium editorial UI for comparison trust",
       "priority": "medium",
-      "reason": "Saved comparison pages build directly on persistence and unlock SEO, sharing, and internal-linking work."
+      "reason": "The interface needs credible visual hierarchy to support the trust-first product direction."
     },
     {
-      "github_issue": 11,
-      "title": "Improve input UX with guided examples, validation, and unsupported-source messaging",
+      "github_issue": 39,
+      "title": "Build the core ownership intelligence layer",
       "priority": "medium",
-      "reason": "Clearer input guidance reduces resolver misses and makes the narrow V1 catalog feel intentional rather than broken."
+      "reason": "Ownership metadata is the foundation for consequence-led recommendations and later collector intelligence."
     }
   ],
-  "selection_policy": "Prefer one issue-scoped task per implementer heartbeat. Choose tasks that can be verified locally, committed, and pushed directly to origin/main without force pushes."
+  "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with Phase 0 trust items before broader roadmap work."
 }
