@@ -15,7 +15,7 @@ import {
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { serviceCatalog } from "@/lib/data/service-catalog";
-import { normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
+import { analyzeWatchCollectionGaps, normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
@@ -553,6 +553,61 @@ describe("watch collection profiles", () => {
         }
       ]
     });
+  });
+
+  it("produces cited gap and overlap insights for a multi-watch collection", () => {
+    const insights = analyzeWatchCollectionGaps({
+      preferredBrands: ["Rolex"],
+      items: [
+        { watchId: "tudor-black-bay-54", status: "owned" },
+        { watchId: "tudor-black-bay-58", status: "owned" },
+        { watchId: "tudor-pelagos-39", status: "owned" }
+      ]
+    });
+
+    expect(insights.length).toBeGreaterThanOrEqual(3);
+    expect(insights).toContainEqual(
+      expect.objectContaining({
+        title: "Missing wearing roles",
+        traits: expect.arrayContaining(["missing-style:dress-sport"])
+      })
+    );
+    expect(insights).toContainEqual(
+      expect.objectContaining({
+        title: "Style overlap",
+        citedWatchIds: expect.arrayContaining(["tudor-black-bay-54", "tudor-black-bay-58", "tudor-pelagos-39"])
+      })
+    );
+    expect(insights).toContainEqual(
+      expect.objectContaining({
+        title: "Brand concentration",
+        traits: expect.arrayContaining(["brand:Tudor"])
+      })
+    );
+  });
+
+  it("degrades gracefully for empty and tiny collections", () => {
+    expect(analyzeWatchCollectionGaps({ preferredBrands: [], items: [] })).toEqual([
+      expect.objectContaining({
+        title: "No owned watches saved yet",
+        citedWatchIds: []
+      })
+    ]);
+
+    expect(
+      analyzeWatchCollectionGaps({
+        preferredBrands: [],
+        items: [{ watchId: "rolex-explorer-124270", status: "owned" }]
+      })
+    ).toEqual([
+      expect.objectContaining({
+        title: "Single-watch baseline",
+        citedWatchIds: ["rolex-explorer-124270"]
+      }),
+      expect.objectContaining({
+        title: "Add contrast before optimizing"
+      })
+    ]);
   });
 });
 

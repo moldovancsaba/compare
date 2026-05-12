@@ -18,6 +18,7 @@
 - Added deterministic watch consequence rules for wrist presence, cuff fit, wrist-size sensitivity, service friction, versatility, and travel readiness.
 - Added cross-domain recommendation signals so adapters expose decisive default picks, buyer-priority tradeoffs, confidence, and avoid-if guidance to the UI.
 - Added accountless watch collection profiles with local browser persistence and adapter-owned collection context in watch comparisons.
+- Added deterministic watch collection gap and overlap analysis for missing roles, redundancy, brand concentration, size balance, and complication balance.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { analyzeWatchCollectionGaps } from "@/lib/domains/watch-collection";
 import { watchDisplayName } from "@/lib/domains/watch-entity";
 import type { WatchCollectionItemStatus, WatchCollectionProfile } from "@/types/watch-collection";
 
@@ -28,6 +29,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
   const [note, setNote] = useState("");
   const savedWatchIds = useMemo(() => new Set(profile.items.map((item) => item.watchId)), [profile.items]);
   const availableWatches = watchCatalog.filter((watch) => !savedWatchIds.has(watch.id));
+  const collectionInsights = analyzeWatchCollectionGaps(profile);
   const effectiveSelectedWatchId =
     selectedWatchId && !savedWatchIds.has(selectedWatchId) ? selectedWatchId : (availableWatches[0]?.id ?? "");
 
@@ -205,6 +207,34 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
           })}
         </div>
       ) : null}
+
+      <div className="mt-5 grid gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="card-kicker">Gap and overlap analysis</p>
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{collectionInsights.length} insights</span>
+        </div>
+        {collectionInsights.map((insight) => (
+          <article key={insight.title} className="surface-item p-4">
+            <p className="card-kicker mb-2">{insight.title}</p>
+            <p className="body-copy body-copy-strong text-sm">{insight.summary}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {insight.citedWatchIds.slice(0, 3).map((watchId) => {
+                const watch = watchCatalog.find((candidate) => candidate.id === watchId);
+                return watch ? (
+                  <span key={watchId} className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                    {watchDisplayName(watch)}
+                  </span>
+                ) : null;
+              })}
+              {insight.traits.slice(0, 3).map((trait) => (
+                <span key={trait} className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                  {trait}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

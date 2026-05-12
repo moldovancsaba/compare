@@ -26,5 +26,19 @@ When context is present, the watch adapter can:
 - show a `Collection context` ownership-intelligence block
 - add a collection-aware buyer recommendation
 - add a recommendation signal when one compared watch is already owned, wishlist, or sold
+- produce local gap/overlap insights for owned watches
 
-Collection profiles do not yet perform gap analysis, upgrade-path analysis, redundancy scoring, or portfolio valuation. Those belong to later Project 16 issues.
+## Gap And Overlap Analysis
+
+The local profile panel runs deterministic collection analysis over owned catalog watches.
+
+Current insight families:
+- missing wearing roles by watch style
+- redundant style coverage
+- brand concentration
+- size balance gaps
+- date/no-date complication balance
+
+Every insight includes cited watch IDs and traits so the UI can show why the recommendation appeared. Empty collections and one-watch collections degrade into low-confidence setup prompts instead of pretending there is enough data for a full diagnosis.
+
+Collection profiles do not yet perform upgrade-path analysis, collection scoring, or portfolio valuation. Those belong to later Project 16 issues.

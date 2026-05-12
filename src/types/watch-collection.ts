@@ -11,3 +11,10 @@ export interface WatchCollectionProfile {
   items: WatchCollectionItem[];
   preferredBrands: string[];
 }
+
+export interface WatchCollectionInsight {
+  title: string;
+  summary: string;
+  citedWatchIds: string[];
+  traits: string[];
+}
