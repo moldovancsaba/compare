@@ -275,6 +275,8 @@ Verdict values are `buy`, `consider`, and `skip`.
 
 `marketPositioning` is a deterministic watch-adapter analysis of hype level, collector respect, saturation, brand cachet, substance signals, and caution signals. Claims are model-level curated inferences, not live forum scraping or blanket brand stereotypes.
 
+`marketingReality` expands the same adapter-owned evidence into myth checks, spec-inflation checks, supported-claim notes, and buyer cautions. It is deterministic purchase-pressure guidance, not live owner sentiment or dealer-copy analysis.
+
 ### Error Response
 
 ```json

@@ -6,7 +6,7 @@ import {
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { watchDisplayName } from "@/lib/domains/watch-entity";
-import { analyzeWatchMarketPositioning } from "@/lib/domains/watch-market-positioning";
+import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import type { WatchSpec } from "@/types/watch";
 import type { WatchCollectionProfile } from "@/types/watch-collection";
@@ -114,6 +114,7 @@ export function shouldBuyWatch(
   const upgradeVerdict = profile ? analyzeWatchUpgradePath(candidate, profile) : null;
   const ownershipSimulation = simulateWatchOwnership(candidate);
   const marketPositioning = analyzeWatchMarketPositioning(candidate);
+  const marketingReality = analyzeWatchMarketingReality(candidate);
   const gapInsights = profile ? analyzeWatchCollectionGaps(profile) : [];
   const fillsGap = gapInsights.some((insight) => insight.traits.includes(`missing-style:${candidate.style}`));
   const consequence = buildWatchConsequenceProfile(candidate);
@@ -163,6 +164,7 @@ export function shouldBuyWatch(
     ownershipRisk: `${candidate.ownership.serviceReality} ${candidate.ownership.scratchRisk} ${consequence.serviceFriction}. Estimated service planning range: ${ownershipSimulation.estimatedServiceCostUsd.label} on a ${ownershipSimulation.serviceIntervalYears}-year interval.`,
     ownershipSimulation,
     marketPositioning,
+    marketingReality,
     alternatives: verdict === "buy" ? [] : alternativesFor(candidate, profile),
     profileInfluence
   };

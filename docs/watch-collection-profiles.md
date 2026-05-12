@@ -32,6 +32,7 @@ When context is present, the watch adapter can:
 - produce single-watch should-I-buy reports for supported candidate watches
 - produce conservative five-year ownership simulations for compared watches and should-I-buy candidates
 - produce model-level market-positioning analysis for hype, collector respect, saturation, brand cachet, liquidity context, substance signals, and caution signals
+- produce marketing-reality checks for myth pressure, spec inflation, supported substance, and buyer cautions
 
 ## Gap And Overlap Analysis
 
@@ -83,6 +84,7 @@ Reports include:
 - ownership risk
 - five-year ownership simulation with service-cost bands, service interval ranges, durability risk, exit liquidity, friction level, confidence, freshness, assumptions, and warnings
 - market positioning with hype-versus-substance, collector reputation, liquidity context, confidence, and warnings
+- marketing reality with myth checks, spec-inflation checks, buyer cautions, confidence, and warnings
 - alternatives when the candidate is weak or redundant
 
 This is purchase-confidence guidance, not a generic review, dealer recommendation, or investment signal.
@@ -114,3 +116,13 @@ Current positioning traits:
 - liquidity context from structured ownership metadata
 
 This layer is designed to explain reputation and narrative pressure without turning into unsupported opinion. It does not scrape forums in the request path, does not make defamatory claims, and does not infer a watch's reputation from brand alone. Missing positioning metadata produces low-confidence warnings.
+
+## Marketing Reality
+
+Marketing-reality analysis expands market positioning into purchase-pressure guidance. The watch adapter compares curated marketing claims against practical ownership signals and returns:
+- myth pressure from hype, saturation, and fixture-backed ownership notes
+- spec-inflation checks that separate useful capability from story-led claims
+- supported claims when a marketing phrase overlaps with structured substance signals
+- buyer cautions for claims that should not justify extra spend by themselves
+
+This analysis is deterministic and adapter-owned. It does not use live social sentiment, dealer copy, or brand stereotypes.

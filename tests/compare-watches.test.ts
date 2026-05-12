@@ -24,7 +24,7 @@ import {
   normalizeWatchCollectionProfile
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
-import { analyzeWatchMarketPositioning } from "@/lib/domains/watch-market-positioning";
+import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
@@ -353,7 +353,7 @@ describe("compareWatches", () => {
     expect(result.overpricedFeatures.length).toBeGreaterThan(0);
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);
     expect(result.betterValueAlternative.length).toBeGreaterThan(0);
-    expect(result.signalVsFluff.length).toBe(3);
+    expect(result.signalVsFluff.length).toBe(5);
     expect(result.evidenceSummary.overallConfidence).toBe("medium");
     expect(result.evidenceSummary.dataQuality).toBe("medium");
   });
@@ -495,7 +495,9 @@ describe("compareWatches", () => {
       expect(result.signalVsFluff.map((block) => block.title)).toEqual([
         "Meaningful difference",
         "Market positioning",
-        "Mostly marketing"
+        "Mostly marketing",
+        "Spec inflation check",
+        "What to ignore"
       ]);
       expect(result.verdict.picks).toContainEqual(
         expect.objectContaining({
@@ -899,6 +901,35 @@ describe("watch collection profiles", () => {
       })
     );
     expect(report.hypeVsSubstance).toContain("will not infer hype");
+  });
+
+  it("expands marketing reality into myth and spec-inflation checks", () => {
+    const blackBay58 = analyzeWatchMarketingReality(watchById("tudor-black-bay-58"));
+    const aquaTerra = analyzeWatchMarketingReality(watchById("omega-aqua-terra-38"));
+    const comparison = compareWatches(watchById("tudor-black-bay-58"), watchById("omega-aqua-terra-38"));
+
+    expect(blackBay58.mythCheck).toContain("market saturation also makes scarcity-coded language weaker");
+    expect(blackBay58.specInflationCheck).toContain("bracelet story");
+    expect(aquaTerra.realitySummary).toContain("Master Chronometer");
+    expect(comparison.signalVsFluff).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ title: "Mostly marketing" }),
+        expect.objectContaining({ title: "Spec inflation check" }),
+        expect.objectContaining({ title: "What to ignore" })
+      ])
+    );
+  });
+
+  it("returns marketing-reality analysis in should-I-buy reports", () => {
+    const report = shouldBuyWatch(watchById("omega-aqua-terra-38"));
+
+    expect(report.marketingReality).toEqual(
+      expect.objectContaining({
+        confidence: "medium",
+        realitySummary: expect.stringContaining("Master Chronometer"),
+        buyerCaution: expect.stringContaining("Do not pay extra")
+      })
+    );
   });
 });
 

@@ -1,5 +1,5 @@
 import type { WatchOwnershipSimulation } from "@/types/watch-ownership";
-import type { WatchMarketPositioningAnalysis } from "@/types/watch-market";
+import type { WatchMarketPositioningAnalysis, WatchMarketingRealityAnalysis } from "@/types/watch-market";
 
 export type WatchPurchaseVerdict = "buy" | "consider" | "skip";
 
@@ -14,6 +14,7 @@ export interface WatchPurchaseReport {
   ownershipRisk: string;
   ownershipSimulation: WatchOwnershipSimulation;
   marketPositioning: WatchMarketPositioningAnalysis;
+  marketingReality: WatchMarketingRealityAnalysis;
   alternatives: Array<{
     watchId: string;
     reason: string;

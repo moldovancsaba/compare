@@ -2,7 +2,7 @@ import { watchCatalog } from "@/lib/data/watch-catalog";
 import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
-import { analyzeWatchMarketPositioning } from "@/lib/domains/watch-market-positioning";
+import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
@@ -856,6 +856,8 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
   ];
   const leftMarket = analyzeWatchMarketPositioning(left);
   const rightMarket = analyzeWatchMarketPositioning(right);
+  const leftMarketingReality = analyzeWatchMarketingReality(left);
+  const rightMarketingReality = analyzeWatchMarketingReality(right);
 
   return [
     {
@@ -896,7 +898,7 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
     },
     {
       title: "Mostly marketing",
-      summary: `${displayName(left)}: ${left.ownership.marketingReality} ${displayName(right)}: ${right.ownership.marketingReality}`,
+      summary: `${displayName(left)}: ${leftMarketingReality.mythCheck} ${displayName(right)}: ${rightMarketingReality.mythCheck}`,
       evidence: [
         editorialEvidence(
           "watch:marketing-reality-notes",
@@ -904,6 +906,40 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
           "Marketing-vs-reality copy comes from curated fixture notes and deterministic adapter rules.",
           [left, right]
         )
+      ]
+    },
+    {
+      title: "Spec inflation check",
+      summary: `${displayName(left)}: ${leftMarketingReality.specInflationCheck} ${displayName(right)}: ${rightMarketingReality.specInflationCheck}`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:spec-inflation-check",
+          "Spec-inflation rule",
+          "The adapter separates practical specs that change ownership from claims that mostly create narrative pressure.",
+          [left, right]
+        )
+      ]
+    },
+    {
+      title: "What to ignore",
+      summary: `${displayName(left)}: ${leftMarketingReality.buyerCaution} ${displayName(right)}: ${rightMarketingReality.buyerCaution}`,
+      evidence: [
+        editorialEvidence(
+          "watch:marketing-buyer-caution",
+          "Marketing buyer-caution rule",
+          "Buyer cautions combine curated marketing claims with structured market-positioning substance and caution signals.",
+          [left, right]
+        ),
+        ...(leftMarketingReality.warnings.length || rightMarketingReality.warnings.length
+          ? [
+              missingDataEvidence(
+                "watch:marketing-reality-warning",
+                "Marketing-reality warnings",
+                [...leftMarketingReality.warnings, ...rightMarketingReality.warnings].join(" "),
+                [left, right]
+              )
+            ]
+          : [])
       ]
     }
   ];

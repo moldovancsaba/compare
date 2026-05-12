@@ -20,3 +20,13 @@ export interface WatchMarketPositioningAnalysis {
   positioningSummary: string;
   warnings: string[];
 }
+
+export interface WatchMarketingRealityAnalysis {
+  confidence: EvidenceConfidence;
+  mythCheck: string;
+  specInflationCheck: string;
+  realitySummary: string;
+  buyerCaution: string;
+  supportedClaims: string[];
+  warnings: string[];
+}
