@@ -15,6 +15,22 @@ Required fields:
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
 
+Result evidence requirements:
+- `evidenceSummary.overallConfidence`: coarse confidence in the final recommendation.
+- `evidenceSummary.dataQuality`: coarse quality of the underlying adapter data.
+- `evidenceSummary.evidence`: at least one evidence item explaining what the result is based on.
+- `evidenceSummary.limitations`: explicit known gaps, especially missing live data or low-confidence assumptions.
+- Optional `evidence` arrays on verdict picks, insight blocks, and buyer recommendations for claim-level provenance.
+
+Evidence item kinds:
+- `catalog_fact`: fixture-backed, database-backed, or otherwise structured facts controlled by the adapter.
+- `derived_rule`: deterministic rules that translate data into consequences.
+- `editorial_inference`: qualitative interpretation from curated metadata or expert rules.
+- `external_source`: a cited external source reference.
+- `missing_data`: an explicit absence that lowers confidence or limits the recommendation.
+
+Confidence levels are `high`, `medium`, or `low`. Use `low` for known gaps and subjective claims that should not be presented as facts.
+
 Entity requirements:
 - `id`: stable entity id inside the domain.
 - `domain`: the adapter domain.
@@ -35,6 +51,7 @@ The conformance suite verifies:
 - unsupported inputs fail closed
 - comparison output is deterministic
 - result shape contains all required generic sections
+- result evidence includes valid confidence, data quality, evidence kinds, and limitations
 - duplicate inputs resolve to the same entity so the generic compare service can reject them
 
 Example:
@@ -86,6 +103,7 @@ Core platform owns:
 5. Register the adapter in `src/lib/services/compare.ts`.
 6. Add the conformance test.
 7. Add adapter-specific regression tests.
-8. Document data source governance, confidence assumptions, and missing-data behavior.
+8. Emit evidence metadata for facts, rules, inferences, sources, and missing data.
+9. Document data source governance, confidence assumptions, and missing-data behavior.
 
 Do not add a domain by branching on domain names inside `/api/compare` or shared UI components. If a shared component needs new behavior, expose it through the generic contract or adapter metadata.

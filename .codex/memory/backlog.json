@@ -1,34 +1,28 @@
 {
   "highest_priority": [
     {
-      "github_issue": 59,
-      "title": "Define the domain adapter SDK and conformance test harness",
+      "github_issue": 63,
+      "title": "Define domain data source governance",
       "priority": "high",
-      "reason": "The adapter foundation exists, but future domains need a documented SDK and conformance tests before new adapters are added."
-    },
-    {
-      "github_issue": 60,
-      "title": "Add generic domain selector and adapter-aware input UX",
-      "priority": "high",
-      "reason": "The UI must expose domains and adapter examples instead of behaving like a watch-only shell."
-    },
-    {
-      "github_issue": 61,
-      "title": "Create a universal evidence and confidence model",
-      "priority": "high",
-      "reason": "Trust across arbitrary products, services, and domains depends on visible provenance, data quality, and uncertainty."
+      "reason": "Evidence and confidence are now in the result contract; adapters need source, freshness, and missing-data governance before more domains are added."
     },
     {
       "github_issue": 62,
       "title": "Build the first non-watch services comparison adapter",
-      "priority": "medium",
+      "priority": "high",
       "reason": "A services adapter proves the platform can compare non-product domains without hard-coded watch assumptions."
     },
     {
-      "github_issue": 63,
-      "title": "Define domain data source governance",
+      "github_issue": 35,
+      "title": "Rebuild comparison output around decision confidence",
       "priority": "medium",
-      "reason": "Each adapter needs clear source, freshness, and missing-data rules before the platform broadens."
+      "reason": "The generic evidence model supports trust; the next output work should make verdicts and decisions sharper across domains."
+    },
+    {
+      "github_issue": 37,
+      "title": "Add visible confidence and data-quality indicators",
+      "priority": "medium",
+      "reason": "Issue #61 added the first generic indicators; this should be reviewed for any remaining UX depth or project-board closure criteria."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

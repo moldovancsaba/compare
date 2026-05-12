@@ -1,6 +1,7 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
+import type { EvidenceItem, EvidenceSummary } from "@/types/comparison";
 import type {
   BuyerRecommendation,
   ComparisonResult,
@@ -12,6 +13,58 @@ import type {
 
 function displayName(watch: WatchSpec): string {
   return `${watch.brand} ${watch.model}`;
+}
+
+function catalogEvidence(watch: WatchSpec, id: string, detail: string): EvidenceItem {
+  return {
+    id: `${watch.id}:${id}`,
+    kind: "catalog_fact",
+    confidence: "high",
+    label: `${displayName(watch)} catalog facts`,
+    detail,
+    source: {
+      label: `${displayName(watch)} canonical product reference`,
+      url: watch.productUrl
+    },
+    freshness: "unknown",
+    appliesTo: [watch.id]
+  };
+}
+
+function derivedRuleEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
+  return {
+    id,
+    kind: "derived_rule",
+    confidence: "medium",
+    label,
+    detail,
+    freshness: "current",
+    appliesTo: watches.map((watch) => watch.id)
+  };
+}
+
+function editorialEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
+  return {
+    id,
+    kind: "editorial_inference",
+    confidence: "medium",
+    label,
+    detail,
+    freshness: "current",
+    appliesTo: watches.map((watch) => watch.id)
+  };
+}
+
+function missingDataEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
+  return {
+    id,
+    kind: "missing_data",
+    confidence: "low",
+    label,
+    detail,
+    freshness: "unknown",
+    appliesTo: watches.map((watch) => watch.id)
+  };
 }
 
 function pickStyleMeaning(style: WatchSpec["style"]): string {
@@ -146,7 +199,15 @@ function buildVerdict(left: WatchSpec, right: WatchSpec): ComparisonVerdict {
     {
       label: "Best overall",
       pick: displayName(bestOverall),
-      reason: `${displayName(bestOverall)} is ${ownershipCharacter(bestOverall)} while still avoiding the biggest daily-use compromises.`
+      reason: `${displayName(bestOverall)} is ${ownershipCharacter(bestOverall)} while still avoiding the biggest daily-use compromises.`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:best-overall-score",
+          "Weighted ownership scoring",
+          "Best overall weighs daily wear, value, and versatility higher than isolated specification wins.",
+          [left, right]
+        )
+      ]
     },
     {
       label: "Best daily wear",
@@ -183,6 +244,14 @@ function buildVerdict(left: WatchSpec, right: WatchSpec): ComparisonVerdict {
         ? `${displayName(bestOverall)} is the stronger recommendation for most buyers.`
         : `${displayName(bestOverall)} is the safer default, but the decision is taste-sensitive.`,
     summary: `${displayName(other)} still has a real case if you specifically want something ${ownershipCharacter(other)}. The reason to pick ${displayName(bestOverall)} is not a bigger spec number; it is the lower-friction ownership profile.`,
+    evidence: [
+      derivedRuleEvidence(
+        "watch:verdict-confidence",
+        "Deterministic confidence rule",
+        "Verdict confidence is based on the gap between daily-wear and value scores, with compact explorer-style watches receiving a versatility bonus.",
+        [left, right]
+      )
+    ],
     picks
   };
 }
@@ -197,19 +266,49 @@ function buildKeyDifferences(left: WatchSpec, right: WatchSpec): InsightBlock[] 
   return [
     {
       title: "Wrist presence",
-      summary: `${displayName(larger)} is larger on paper at ${formatMm(larger.caseDiameterMm)} with a ${formatMm(larger.lugToLugMm)} span. ${displayName(thinner)} is the slimmer-feeling watch because its thickness stays at ${formatMm(thinner.caseThicknessMm)}.`
+      summary: `${displayName(larger)} is larger on paper at ${formatMm(larger.caseDiameterMm)} with a ${formatMm(larger.lugToLugMm)} span. ${displayName(thinner)} is the slimmer-feeling watch because its thickness stays at ${formatMm(thinner.caseThicknessMm)}.`,
+      evidence: [
+        catalogEvidence(larger, "case-profile", "Case diameter, lug-to-lug, and thickness come from the curated watch catalog."),
+        derivedRuleEvidence(
+          "watch:wrist-presence-rule",
+          "Wearability rule",
+          "Case diameter and lug-to-lug estimate visual presence; thickness estimates cuff and desk comfort.",
+          [left, right]
+        )
+      ]
     },
     {
       title: "Use-case bias",
-      summary: `${displayName(left)} ${pickStyleMeaning(left.style)}, while ${displayName(right)} ${pickStyleMeaning(right.style)}.`
+      summary: `${displayName(left)} ${pickStyleMeaning(left.style)}, while ${displayName(right)} ${pickStyleMeaning(right.style)}.`,
+      evidence: [
+        editorialEvidence(
+          "watch:style-positioning",
+          "Style positioning inference",
+          "Use-case bias is inferred from the adapter's style taxonomy and ownership notes.",
+          [left, right]
+        )
+      ]
     },
     {
       title: "Capability gap",
-      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve.`
+      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve.`,
+      evidence: [
+        catalogEvidence(moreWater, "water-resistance", "Water resistance and power reserve are fixture-backed catalog attributes.")
+      ]
     },
     {
       title: "Price delta",
-      summary: `The retail spread is ${formatUsd(priceGap)}. That matters because enthusiast buyers usually feel price increases most when the extra spend mostly buys finishing, branding, or dial character rather than comfort or capability.`
+      summary: `The retail spread is ${formatUsd(priceGap)}. That matters because enthusiast buyers usually feel price increases most when the extra spend mostly buys finishing, branding, or dial character rather than comfort or capability.`,
+      evidence: [
+        catalogEvidence(left, "retail-price", "Retail price is read from the curated catalog fixture."),
+        catalogEvidence(right, "retail-price", "Retail price is read from the curated catalog fixture."),
+        missingDataEvidence(
+          "watch:live-market-price-gap",
+          "Live market prices not used",
+          "The deterministic engine does not use live dealer listings, secondary-market sales, or regional discounts.",
+          [left, right]
+        )
+      ]
     }
   ];
 }
@@ -222,7 +321,15 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
   return [
     {
       title: "All-day comfort",
-      summary: `${displayName(thicknessWinner)} will disappear faster during desk work and travel because it is thinner. If you care about sleeve clearance or hate top-heavy watches, that small paper gap is usually noticeable in a week of ownership.`
+      summary: `${displayName(thicknessWinner)} will disappear faster during desk work and travel because it is thinner. If you care about sleeve clearance or hate top-heavy watches, that small paper gap is usually noticeable in a week of ownership.`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:comfort-thickness-rule",
+          "Comfort consequence rule",
+          "Lower thickness is treated as a proxy for easier cuff clearance and lower top-heavy feel.",
+          [left, right]
+        )
+      ]
     },
     {
       title: "Temperature and swelling",
@@ -259,7 +366,15 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
   return [
     {
       title: "Daily ownership",
-      summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience}`
+      summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience}`,
+      evidence: [
+        editorialEvidence(
+          "watch:daily-ownership-notes",
+          "Curated ownership note",
+          "Daily ownership comes from adapter fixture notes, not live owner telemetry.",
+          [dailyWinner]
+        )
+      ]
     },
     {
       title: "Emotional fit",
@@ -267,7 +382,21 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
     },
     {
       title: "Service and resale reality",
-      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality}`
+      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality}`,
+      evidence: [
+        editorialEvidence(
+          "watch:resale-service-inference",
+          "Ownership-risk inference",
+          "Service and resale commentary is based on curated brand and model-level ownership notes.",
+          [left, right]
+        ),
+        missingDataEvidence(
+          "watch:no-live-service-quotes",
+          "Live service quotes not used",
+          "This result does not query manufacturer service prices, independent watchmaker quotes, or recent auction outcomes.",
+          [left, right]
+        )
+      ]
     },
     {
       title: "Scratch anxiety",
@@ -424,13 +553,63 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
   return [
     {
       title: "Meaningful difference",
-      summary: `For ${displayName(left)} versus ${displayName(right)}, the specs that genuinely change ownership are ${meaningfulSignals.join(", ")}. Those influence comfort and confidence every day.`
+      summary: `For ${displayName(left)} versus ${displayName(right)}, the specs that genuinely change ownership are ${meaningfulSignals.join(", ")}. Those influence comfort and confidence every day.`,
+      evidence: [
+        derivedRuleEvidence(
+          "watch:signal-vs-fluff-rule",
+          "Signal hierarchy rule",
+          "The adapter treats comfort, fit adjustment, practical resistance, and legibility as higher-signal than pure marketing claims.",
+          [left, right]
+        )
+      ]
     },
     {
       title: "Mostly marketing",
-      summary: `${displayName(left)}: ${left.ownership.marketingReality} ${displayName(right)}: ${right.ownership.marketingReality}`
+      summary: `${displayName(left)}: ${left.ownership.marketingReality} ${displayName(right)}: ${right.ownership.marketingReality}`,
+      evidence: [
+        editorialEvidence(
+          "watch:marketing-reality-notes",
+          "Marketing reality inference",
+          "Marketing-vs-reality copy comes from curated fixture notes and deterministic adapter rules.",
+          [left, right]
+        )
+      ]
     }
   ];
+}
+
+function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummary {
+  return {
+    overallConfidence: "medium",
+    dataQuality: "medium",
+    evidence: [
+      catalogEvidence(left, "fixture-backed-specs", "Core specs, retail price, aliases, and ownership notes are read from the curated watch fixture."),
+      catalogEvidence(right, "fixture-backed-specs", "Core specs, retail price, aliases, and ownership notes are read from the curated watch fixture."),
+      derivedRuleEvidence(
+        "watch:ownership-consequence-rules",
+        "Consequence rules",
+        "The adapter converts size, thickness, resistance, adjustment, and movement attributes into daily-use consequences.",
+        [left, right]
+      ),
+      editorialEvidence(
+        "watch:curated-ownership-inference",
+        "Curated ownership inference",
+        "Emotional fit, enthusiast bias, and marketing reality are deterministic interpretations of curated adapter metadata.",
+        [left, right]
+      ),
+      missingDataEvidence(
+        "watch:missing-live-market-data",
+        "No live market evidence",
+        "The result does not yet include live market prices, sold listings, service invoices, owner surveys, or regional availability.",
+        [left, right]
+      )
+    ],
+    limitations: [
+      "No live market pricing, service quotes, owner surveys, or regional availability are used in this deterministic result.",
+      "Subjective ownership character is inferred from curated adapter metadata and should be treated as editorial guidance.",
+      "Fixture freshness is currently unknown because catalog rows do not carry per-source verification timestamps."
+    ]
+  };
 }
 
 export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonResult {
@@ -443,6 +622,7 @@ export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonRes
     left,
     right,
     verdict: buildVerdict(left, right),
+    evidenceSummary: buildEvidenceSummary(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
     ownershipIntelligence: buildOwnershipIntelligence(left, right),

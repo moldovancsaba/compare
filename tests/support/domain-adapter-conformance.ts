@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import type { ComparisonDomainAdapter, ComparisonEntity, GenericComparisonResult } from "@/types/comparison";
+import type {
+  ComparisonDomainAdapter,
+  ComparisonEntity,
+  EvidenceItem,
+  GenericComparisonResult
+} from "@/types/comparison";
 
 export interface DomainAdapterConformanceFixture {
   validInputs: readonly [string, string];
@@ -31,6 +36,33 @@ function expectInsightArray(items: Array<{ title: string; summary: string }>, se
   }
 }
 
+function expectEvidenceItem(item: EvidenceItem) {
+  expectNonEmptyString(item.id);
+  expect(["catalog_fact", "derived_rule", "editorial_inference", "external_source", "missing_data"]).toContain(item.kind);
+  expect(["high", "medium", "low"]).toContain(item.confidence);
+  expectNonEmptyString(item.label);
+  expectNonEmptyString(item.detail);
+
+  if (item.source) {
+    expectNonEmptyString(item.source.label);
+  }
+
+  if (item.freshness) {
+    expect(["current", "dated", "unknown"]).toContain(item.freshness);
+  }
+}
+
+function expectEvidenceSummary(result: GenericComparisonResult) {
+  expect(["high", "medium", "low"]).toContain(result.evidenceSummary.overallConfidence);
+  expect(["high", "medium", "low"]).toContain(result.evidenceSummary.dataQuality);
+  expect(result.evidenceSummary.evidence.length).toBeGreaterThan(0);
+  expect(Array.isArray(result.evidenceSummary.limitations)).toBe(true);
+
+  for (const item of result.evidenceSummary.evidence) {
+    expectEvidenceItem(item);
+  }
+}
+
 function expectComparisonResult(result: GenericComparisonResult, domain: string) {
   expect(result.domain).toBe(domain);
   expectEntity(result.leftEntity, domain);
@@ -42,6 +74,7 @@ function expectComparisonResult(result: GenericComparisonResult, domain: string)
   expectNonEmptyString(result.verdict.headline);
   expectNonEmptyString(result.verdict.summary);
   expect(result.verdict.picks.length).toBeGreaterThan(0);
+  expectEvidenceSummary(result);
 
   for (const pick of result.verdict.picks) {
     expectNonEmptyString(pick.label);

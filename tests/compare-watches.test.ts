@@ -234,6 +234,30 @@ describe("compareWatches", () => {
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);
     expect(result.betterValueAlternative.length).toBeGreaterThan(0);
     expect(result.signalVsFluff.length).toBe(2);
+    expect(result.evidenceSummary.overallConfidence).toBe("medium");
+    expect(result.evidenceSummary.dataQuality).toBe("medium");
+  });
+
+  it("emits mixed evidence types including low-confidence missing data", () => {
+    const result = compareWatches(watchById("rolex-air-king-126900"), watchById("rolex-explorer-124270"));
+    const evidenceKinds = result.evidenceSummary.evidence.map((item) => item.kind);
+
+    expect(evidenceKinds).toEqual(
+      expect.arrayContaining(["catalog_fact", "derived_rule", "editorial_inference", "missing_data"])
+    );
+    expect(result.evidenceSummary.evidence).toContainEqual(
+      expect.objectContaining({
+        kind: "missing_data",
+        confidence: "low"
+      })
+    );
+    expect(result.evidenceSummary.limitations.join(" ")).toContain("No live market pricing");
+    expect(result.keyDifferences.flatMap((block) => block.evidence ?? [])).toContainEqual(
+      expect.objectContaining({
+        kind: "derived_rule",
+        label: "Wearability rule"
+      })
+    );
   });
 
   it.each(comparisonRegressionFixtures)(

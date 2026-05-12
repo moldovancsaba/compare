@@ -8,6 +8,7 @@
 - Re-centered Project 16 around the generic comparison infrastructure initiative, with labels for core platform, watch adapter, and future-domain work.
 - Added the domain adapter SDK documentation and shared conformance test harness, with the watch adapter as the reference passing adapter.
 - Added adapter-owned UI metadata and a comparison-domain selector so the form is driven by registered domains instead of watch-specific copy.
+- Added a universal evidence and confidence model so result UI can distinguish facts, rules, editorial inference, and known missing data across domains.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

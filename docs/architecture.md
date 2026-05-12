@@ -11,7 +11,7 @@ The current product-development initiative is generic comparison infrastructure 
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector and shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with supported examples, blocks duplicate entities, and returns comparison output.
-- Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, adapter-owned UI metadata, and adapter registry.
+- Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, universal evidence/confidence model, adapter-owned UI metadata, and adapter registry.
 - Domain logic: `src/lib/domains/watch-domain.ts` is the first adapter; `src/lib/utils/resolve-watch.ts` handles exact, reference, URL, and conservative typo-tolerant watch resolution; `src/lib/services/compare-watches.ts` remains the watch-specific deterministic rule engine behind that adapter.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated watch catalog. Future domains should add their own adapter and source data instead of adding category conditionals to the API or UI shell.
 - Adapter SDK: `docs/domain-adapters.md` defines the adapter contract, registration workflow, and required conformance tests in `tests/support/domain-adapter-conformance.ts`.
@@ -36,6 +36,7 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 - The comparison foundation must stay domain-neutral; product/service/category specifics belong in adapters.
 - The live V1 adapter is mechanical watches.
 - New domains must enter through adapter registration, conformance tests, and data governance rather than conditional logic in the API or UI shell.
+- Every adapter result must expose evidence, confidence, data-quality, and missing-data metadata so the UI can distinguish facts, rules, editorial inference, and known gaps.
 - Agents may commit and push verified changes directly to `origin/main` without per-step approval.
 - Agents may not force push or delete production code autonomously.
 - Operational logs must preserve event context without exposing raw user-submitted comparison text, notes, credentials, or client IP addresses.

@@ -3,15 +3,60 @@
 import { useState } from "react";
 
 import { appName } from "@/lib/config/app";
-import type { GenericComparisonResult } from "@/types/comparison";
+import type { EvidenceConfidence, EvidenceItem, EvidenceKind, GenericComparisonResult, InsightBlock } from "@/types/comparison";
 import type { BrainRecommendation, BrainState } from "@/types/watch";
+
+const evidenceKindLabels: Record<EvidenceKind, string> = {
+  catalog_fact: "Fact",
+  derived_rule: "Rule",
+  editorial_inference: "Inference",
+  external_source: "Source",
+  missing_data: "Gap"
+};
+
+const evidenceConfidenceLabels: Record<EvidenceConfidence, string> = {
+  high: "High",
+  medium: "Medium",
+  low: "Low"
+};
+
+function evidenceToneClass(confidence: EvidenceConfidence): string {
+  switch (confidence) {
+    case "high":
+      return "pill-accent";
+    case "medium":
+      return "pill-muted";
+    case "low":
+      return "border border-[rgba(232,217,194,0.2)] bg-[rgba(120,53,15,0.28)] text-[var(--paper)]";
+  }
+}
+
+function EvidencePills({ evidence }: { evidence?: EvidenceItem[] }) {
+  if (!evidence?.length) {
+    return null;
+  }
+
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {evidence.slice(0, 3).map((item) => (
+        <span
+          key={item.id}
+          className={`${evidenceToneClass(item.confidence)} eyebrow eyebrow-tight px-3 py-1`}
+          title={item.detail}
+        >
+          {evidenceKindLabels[item.kind]} · {evidenceConfidenceLabels[item.confidence]}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 function SectionCard({
   title,
   items
 }: {
   title: string;
-  items: Array<{ title: string; summary: string }>;
+  items: InsightBlock[];
 }) {
   return (
     <section className="surface-card p-6">
@@ -24,6 +69,7 @@ function SectionCard({
           <article key={`${title}-${item.title}`} className="surface-item p-4">
             <h4 className="card-kicker mb-2">{item.title}</h4>
             <p className="body-copy body-copy-strong text-sm">{item.summary}</p>
+            <EvidencePills evidence={item.evidence} />
           </article>
         ))}
       </div>
@@ -68,10 +114,74 @@ function VerdictPanel({ result }: { result: GenericComparisonResult }) {
               <p className="card-kicker mb-2">{item.label}</p>
               <h4 className="title-section text-xl">{item.pick}</h4>
               <p className="body-copy body-copy-strong mt-3 text-sm">{item.reason}</p>
+              <EvidencePills evidence={item.evidence} />
             </article>
           ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+function EvidenceSummaryPanel({ result }: { result: GenericComparisonResult }) {
+  const summary = result.evidenceSummary;
+
+  return (
+    <section className="surface-card p-6">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow eyebrow-wide">Evidence & confidence</p>
+          <h3 className="title-section mt-3">What this result is based on</h3>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <span className={`${evidenceToneClass(summary.overallConfidence)} eyebrow eyebrow-tight px-3 py-1`}>
+            {evidenceConfidenceLabels[summary.overallConfidence]} confidence
+          </span>
+          <span className={`${evidenceToneClass(summary.dataQuality)} eyebrow eyebrow-tight px-3 py-1`}>
+            {evidenceConfidenceLabels[summary.dataQuality]} data quality
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-3 lg:grid-cols-2">
+        {summary.evidence.slice(0, 6).map((item) => (
+          <article key={item.id} className="surface-item p-4">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <span className={`${evidenceToneClass(item.confidence)} eyebrow eyebrow-tight px-3 py-1`}>
+                {evidenceKindLabels[item.kind]}
+              </span>
+              <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                {evidenceConfidenceLabels[item.confidence]}
+              </span>
+            </div>
+            <h4 className="card-kicker mb-2">{item.label}</h4>
+            <p className="body-copy body-copy-strong text-sm">{item.detail}</p>
+            {item.source?.url ? (
+              <a
+                className="body-copy body-copy-soft mt-3 inline-flex text-xs underline decoration-[rgba(232,217,194,0.3)] underline-offset-4"
+                href={item.source.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {item.source.label}
+              </a>
+            ) : null}
+          </article>
+        ))}
+      </div>
+
+      {summary.limitations.length ? (
+        <div className="mt-5 surface-item p-4">
+          <p className="card-kicker mb-3">Known limits</p>
+          <ul className="space-y-2">
+            {summary.limitations.map((limitation) => (
+              <li key={limitation} className="body-copy body-copy-muted text-sm">
+                {limitation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -415,6 +525,8 @@ export function ComparisonResultView({
       </section>
 
       <VerdictPanel result={result} />
+
+      <EvidenceSummaryPanel result={result} />
 
       <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
 
