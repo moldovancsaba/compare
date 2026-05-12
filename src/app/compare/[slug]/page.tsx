@@ -68,7 +68,7 @@ export default async function SavedComparisonPage({ params }: SavedComparisonPag
           <div>
             <p className="eyebrow eyebrow-xwide">{appName}</p>
             <h1 className="title-section mt-3 text-4xl">
-              {result.left.brand} {result.left.model} vs {result.right.brand} {result.right.model}
+              {result.leftEntity.label} vs {result.rightEntity.label}
             </h1>
           </div>
           <div className="surface-panel grid gap-3 p-4 sm:grid-cols-3">

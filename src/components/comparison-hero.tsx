@@ -15,12 +15,12 @@ export function ComparisonHero({
 }) {
   return (
     <div className="space-y-6">
-      <div className="pill-accent inline-flex px-4 py-2 eyebrow eyebrow-xwide">Buying confidence, not spec tables</div>
+      <div className="pill-accent inline-flex px-4 py-2 eyebrow eyebrow-xwide">Decision confidence, not spec tables</div>
       <div>
-        <h1 className="title-hero max-w-3xl">Stop reading twelve reviews to compare two watches.</h1>
+        <h1 className="title-hero max-w-3xl">Compare anything through a trusted decision lens.</h1>
         <p className="body-copy body-copy-muted mt-5 max-w-2xl">
-          Paste two watch names or catalog URLs. {appName} explains the real differences: wearability, ownership friction,
-          value, hidden tradeoffs, and which watch actually fits your life.
+          The current live adapter is tuned for mechanical watches. Underneath, {appName} now compares domain entities
+          through the same structure: verdict, tradeoffs, hidden downsides, and practical consequences.
         </p>
       </div>
       <div className="grid max-w-2xl gap-3 sm:grid-cols-3">

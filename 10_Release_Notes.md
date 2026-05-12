@@ -1,5 +1,11 @@
 # Release Notes
 
+## Unreleased
+- Added a generic comparison entity/result contract and domain adapter registry so the core system is no longer hard-coded to watches.
+- Moved the watch-specific resolver and rule engine behind the first domain adapter while preserving the existing watch comparison behavior.
+- Updated `/api/compare`, saved comparison persistence, Brain queue payloads, feedback, and result rendering to use generic entity/domain fields with watch IDs retained only for compatibility.
+- Updated the homepage/form copy to describe the domain-based foundation while keeping mechanical watches as the first live adapter.
+
 ## v0.1.1 - 2026-05-11
 - Updated `README.md` and the governance docs to match the live codebase and verification process.
 - Corrected the documented technical background, including actual TypeScript, ESLint, and frontend architecture details.

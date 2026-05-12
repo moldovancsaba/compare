@@ -3,17 +3,20 @@ import { createHash } from "node:crypto";
 import { connectToDatabase } from "@/lib/db";
 import { CompareJobModel, SavedComparisonModel } from "@/lib/models/comparison-brain";
 import { logError, logInfo, logWarn } from "@/lib/observability/logger";
-import type { BrainState, ComparisonResult, TrinityBrainResult, WatchSpec } from "@/types/watch";
+import type { ComparisonEntity, GenericComparisonResult } from "@/types/comparison";
+import type { BrainState, TrinityBrainResult } from "@/types/watch";
 
 type EnqueueBrainJobInput = {
-  left: WatchSpec;
-  right: WatchSpec;
-  deterministicResult: ComparisonResult;
+  left: ComparisonEntity;
+  right: ComparisonEntity;
+  deterministicResult: GenericComparisonResult;
   requestedBy: string;
 };
 
-export function buildComparisonRef(left: WatchSpec, right: WatchSpec): string {
-  return `compare:${left.id}:vs:${right.id}`;
+export function buildComparisonRef(left: ComparisonEntity, right: ComparisonEntity): string {
+  return left.domain === "watches" && right.domain === "watches"
+    ? `compare:${left.id}:vs:${right.id}`
+    : `compare:${left.domain}:${left.id}:vs:${right.domain}:${right.id}`;
 }
 
 function stableHash(value: unknown): string {
@@ -42,8 +45,10 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
   const requestHash = stableHash({
     contractVersion: "compare.brain-job.v1",
     comparisonRef,
-    leftWatchId: input.left.id,
-    rightWatchId: input.right.id,
+    leftEntityId: input.left.id,
+    rightEntityId: input.right.id,
+    leftDomain: input.left.domain,
+    rightDomain: input.right.domain,
     deterministicResult: input.deterministicResult
   });
 
@@ -74,8 +79,12 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
 
     const savedComparison = {
       comparisonRef,
-      leftWatchId: input.left.id,
-      rightWatchId: input.right.id,
+      leftWatchId: input.left.domain === "watches" ? input.left.id : null,
+      rightWatchId: input.right.domain === "watches" ? input.right.id : null,
+      leftEntityId: input.left.id,
+      rightEntityId: input.right.id,
+      leftDomain: input.left.domain,
+      rightDomain: input.right.domain,
       deterministicResult: input.deterministicResult
     };
 
@@ -87,8 +96,12 @@ export async function enqueueTrinityCompareJob(input: EnqueueBrainJobInput): Pro
             comparisonRef,
             requestHash,
             status: "queued",
-            leftWatchId: input.left.id,
-            rightWatchId: input.right.id,
+            leftWatchId: input.left.domain === "watches" ? input.left.id : null,
+            rightWatchId: input.right.domain === "watches" ? input.right.id : null,
+            leftEntityId: input.left.id,
+            rightEntityId: input.right.id,
+            leftDomain: input.left.domain,
+            rightDomain: input.right.domain,
             decisionProfile: null,
             requestedBy: input.requestedBy,
             deterministicResult: input.deterministicResult

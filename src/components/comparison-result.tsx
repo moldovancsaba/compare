@@ -3,7 +3,8 @@
 import { useState } from "react";
 
 import { appName } from "@/lib/config/app";
-import type { BrainRecommendation, BrainState, ComparisonResult } from "@/types/watch";
+import type { GenericComparisonResult } from "@/types/comparison";
+import type { BrainRecommendation, BrainState } from "@/types/watch";
 
 function SectionCard({
   title,
@@ -48,7 +49,7 @@ function BuyerCard({
   );
 }
 
-function VerdictPanel({ result }: { result: ComparisonResult }) {
+function VerdictPanel({ result }: { result: GenericComparisonResult }) {
   return (
     <section className="surface-card p-6">
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -234,8 +235,13 @@ type FeedbackSignal =
   | "missing_context"
   | "wrong_spec";
 
-function comparisonRefFor(result: ComparisonResult, brain: BrainState | null): string {
-  return brain?.comparisonRef ?? `compare:${result.left.id}:vs:${result.right.id}`;
+function comparisonRefFor(result: GenericComparisonResult, brain: BrainState | null): string {
+  return (
+    brain?.comparisonRef ??
+    (result.domain === "watches"
+      ? `compare:${result.leftEntity.id}:vs:${result.rightEntity.id}`
+      : `compare:${result.leftEntity.domain}:${result.leftEntity.id}:vs:${result.rightEntity.domain}:${result.rightEntity.id}`)
+  );
 }
 
 function FeedbackButton({
@@ -259,7 +265,7 @@ function FeedbackButton({
   );
 }
 
-function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: ComparisonResult }) {
+function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: GenericComparisonResult }) {
   const [pendingSignal, setPendingSignal] = useState<FeedbackSignal | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [note, setNote] = useState("");
@@ -285,8 +291,10 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
         },
         body: JSON.stringify({
           comparisonRef,
-          leftWatchId: result.left.id,
-          rightWatchId: result.right.id,
+          leftEntityId: result.leftEntity.id,
+          rightEntityId: result.rightEntity.id,
+          leftDomain: result.leftEntity.domain,
+          rightDomain: result.rightEntity.domain,
           traceRef,
           signal,
           ...(trimmedNote ? { note: trimmedNote } : {})
@@ -327,10 +335,10 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
           Not helpful
         </FeedbackButton>
         <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("chose_left")}>
-          Chose {result.left.brand} {result.left.model}
+          Chose {result.leftEntity.label}
         </FeedbackButton>
         <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("chose_right")}>
-          Chose {result.right.brand} {result.right.model}
+          Chose {result.rightEntity.label}
         </FeedbackButton>
         <FeedbackButton disabled={pendingSignal !== null} onClick={() => void submitFeedback("opposite_preferred")}>
           I prefer the other pick
@@ -375,7 +383,7 @@ export function ComparisonResultView({
 }: {
   brain: BrainState | null;
   isBrainRefreshing?: boolean;
-  result: ComparisonResult;
+  result: GenericComparisonResult;
   savedComparisonPath?: string | null;
   onRefreshBrain?: () => void;
 }) {
@@ -385,7 +393,7 @@ export function ComparisonResultView({
         <div>
           <p className="eyebrow eyebrow-wide">Comparison ready</p>
           <h2 className="title-section mt-4 text-4xl">
-            {result.left.brand} {result.left.model} vs {result.right.brand} {result.right.model}
+            {result.leftEntity.label} vs {result.rightEntity.label}
           </h2>
           <p className="body-copy mt-4 max-w-2xl">
             {appName} turns ownership consequences into a buying decision so you can stop researching and choose with less regret risk.

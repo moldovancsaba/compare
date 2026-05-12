@@ -5,17 +5,14 @@ import { enqueueTrinityCompareJob } from "@/lib/services/brain-queue";
 import { hashLogValue, logWarn } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
-import { watchCatalog } from "@/lib/data/watch-catalog";
-import { compareWatches } from "@/lib/services/compare-watches";
+import { compareInputs } from "@/lib/services/compare";
 import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
-import { resolveWatch } from "@/lib/utils/resolve-watch";
 
 const requestSchema = z.object({
+  domain: z.string().trim().min(2).optional(),
   leftInput: z.string().trim().min(2),
   rightInput: z.string().trim().min(2)
 });
-
-const supportedInputs = watchCatalog.map((watch) => `${watch.brand} ${watch.model}`);
 
 export async function POST(request: Request) {
   const clientKey = resolveClientKey(request);
@@ -52,16 +49,43 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { leftInput, rightInput } = requestSchema.parse(body);
+    const { domain, leftInput, rightInput } = requestSchema.parse(body);
+    const comparisonResult = compareInputs({
+      domain,
+      leftInput,
+      rightInput
+    });
 
-    const left = resolveWatch(leftInput);
-    const right = resolveWatch(rightInput);
+    if (comparisonResult.status === "unsupported_domain") {
+      logWarn("compare.unsupported_domain", {
+        clientKeyHash,
+        domain: comparisonResult.domain
+      });
+      await recordTelemetryEvent({
+        event: "compare.unsupported_domain",
+        clientKeyHash,
+        status: "rejected",
+        reason: "unsupported_domain",
+        properties: {
+          domain: comparisonResult.domain
+        }
+      });
 
-    if (!left || !right) {
+      return NextResponse.json(
+        {
+          error: "This comparison domain is not supported yet.",
+          supportedDomains: comparisonResult.supportedDomains
+        },
+        { status: 404 }
+      );
+    }
+
+    if (comparisonResult.status === "unresolved_input") {
       logWarn("compare.unsupported_input", {
         clientKeyHash,
-        leftResolved: Boolean(left),
-        rightResolved: Boolean(right)
+        domain: comparisonResult.domain,
+        leftResolved: comparisonResult.leftResolved,
+        rightResolved: comparisonResult.rightResolved
       });
       await recordTelemetryEvent({
         event: "compare.unsupported_input",
@@ -69,45 +93,49 @@ export async function POST(request: Request) {
         status: "rejected",
         reason: "unsupported_input",
         properties: {
-          leftResolved: Boolean(left),
-          rightResolved: Boolean(right)
+          domain: comparisonResult.domain,
+          leftResolved: comparisonResult.leftResolved,
+          rightResolved: comparisonResult.rightResolved
         }
       });
 
       return NextResponse.json(
         {
           error:
-            "{compare} V1 currently supports its curated mechanical watch catalog. Use one of the supported examples below or paste a matching catalog URL.",
-          supportedInputs
+            "{compare} could not resolve one or both inputs in the selected comparison domain. Use one of the supported examples below or paste a matching source URL.",
+          supportedInputs: comparisonResult.supportedInputs
         },
         { status: 404 }
       );
     }
 
-    if (left.id === right.id) {
+    if (comparisonResult.status === "duplicate_entity") {
       logWarn("compare.duplicate_watch", {
         clientKeyHash,
-        watchId: left.id
+        domain: comparisonResult.domain,
+        entityId: comparisonResult.entity.id
       });
       await recordTelemetryEvent({
-        event: "compare.duplicate_watch",
-        comparisonRef: `compare:${left.id}:vs:${right.id}`,
-        leftWatchId: left.id,
-        rightWatchId: right.id,
+        event: "compare.duplicate_entity",
+        comparisonRef: `compare:${comparisonResult.domain}:${comparisonResult.entity.id}:vs:${comparisonResult.entity.id}`,
         clientKeyHash,
         status: "rejected",
-        reason: "duplicate_watch"
+        reason: "duplicate_entity",
+        properties: {
+          domain: comparisonResult.domain,
+          entityId: comparisonResult.entity.id
+        }
       });
 
       return NextResponse.json(
         {
-          error: "Choose two different watches so the comparison surfaces meaningful tradeoffs."
+          error: "Choose two different things so the comparison surfaces meaningful tradeoffs."
         },
         { status: 400 }
       );
     }
 
-    const comparison = compareWatches(left, right);
+    const { comparison, left, right } = comparisonResult;
     const submittedComparison = await persistSubmittedComparison({
       left,
       right,
@@ -123,11 +151,12 @@ export async function POST(request: Request) {
     await recordTelemetryEvent({
       event: "compare.completed",
       comparisonRef: brain.comparisonRef,
-      leftWatchId: left.id,
-      rightWatchId: right.id,
+      leftWatchId: left.domain === "watches" ? left.id : undefined,
+      rightWatchId: right.domain === "watches" ? right.id : undefined,
       clientKeyHash,
       status: "completed",
       properties: {
+        domain: comparisonResult.domain,
         brainStatus: brain.status,
         comparisonPersisted: submittedComparison.persisted,
         remainingRequests: rateLimit.remaining

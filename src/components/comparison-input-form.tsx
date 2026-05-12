@@ -68,21 +68,21 @@ export function ComparisonInputForm({
     <form action={onSubmit} className="surface-form space-y-5 p-6">
       <InputField
         id="leftInput"
-        label="First watch"
-        placeholder="Rolex Air-King or a supported product URL"
+        label="First input"
+        placeholder="Rolex Air-King or a supported source URL"
         value={leftInput}
         onChange={onLeftInputChange}
       />
       <InputField
         id="rightInput"
-        label="Second watch"
-        placeholder="Rolex Explorer or a supported product URL"
+        label="Second input"
+        placeholder="Rolex Explorer or a supported source URL"
         value={rightInput}
         onChange={onRightInputChange}
       />
       <div className="grid gap-3 sm:grid-cols-2">
         <button type="button" className="pill-muted body-copy-strong px-4 py-3 text-sm transition" onClick={onSwapInputs}>
-          Swap watches
+          Swap inputs
         </button>
         <button type="button" className="pill-muted body-copy-strong px-4 py-3 text-sm transition" onClick={onClearInputs}>
           Clear inputs
@@ -97,7 +97,8 @@ export function ComparisonInputForm({
       </button>
       {validationMessage ? <p className="status-warning p-4 text-sm">{validationMessage}</p> : null}
       <p className="body-copy body-copy-faint text-sm">
-        V1 supports curated mechanical watch names and matching official product URLs from the catalog below.
+        The first adapter supports curated mechanical watch names and matching source URLs. The comparison core is now
+        domain-based, so services and other categories can be added as adapters.
       </p>
       <div className="grid gap-3">
         {supportedInputs.map((supportedInput) => (

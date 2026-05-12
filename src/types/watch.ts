@@ -1,3 +1,12 @@
+import type {
+  BuyerRecommendation,
+  ComparisonEntity,
+  ComparisonVerdict,
+  GenericComparisonResult,
+  InsightBlock,
+  VerdictPick
+} from "@/types/comparison";
+
 export interface WatchSpec {
   id: string;
   brand: string;
@@ -35,46 +44,20 @@ export interface WatchSpec {
   };
 }
 
-export interface InsightBlock {
-  title: string;
-  summary: string;
-}
+export type WatchComparisonEntity = ComparisonEntity & {
+  domain: "watches";
+  watchId: string;
+};
 
-export interface BuyerRecommendation {
-  buyerType: string;
-  pick: string;
-  reason: string;
-}
-
-export interface VerdictPick {
-  label: string;
-  pick: string;
-  reason: string;
-}
-
-export interface ComparisonVerdict {
-  bestOverall: string;
-  confidence: "clear" | "contextual" | "close";
-  headline: string;
-  summary: string;
-  picks: VerdictPick[];
-}
-
-export interface ComparisonResult {
-  canonicalInputA: string;
-  canonicalInputB: string;
+export interface ComparisonResult extends GenericComparisonResult {
+  domain: "watches";
+  leftEntity: WatchComparisonEntity;
+  rightEntity: WatchComparisonEntity;
   left: WatchSpec;
   right: WatchSpec;
-  verdict: ComparisonVerdict;
-  keyDifferences: InsightBlock[];
-  realWorldImpact: InsightBlock[];
-  ownershipIntelligence: InsightBlock[];
-  whoShouldBuyWhich: BuyerRecommendation[];
-  overpricedFeatures: InsightBlock[];
-  hiddenDownsides: InsightBlock[];
-  betterValueAlternative: InsightBlock[];
-  signalVsFluff: InsightBlock[];
 }
+
+export type { BuyerRecommendation, ComparisonVerdict, InsightBlock, VerdictPick };
 
 export interface BrainRecommendation {
   buyerType: string;

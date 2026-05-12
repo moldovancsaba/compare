@@ -14,6 +14,8 @@ import {
   persistSubmittedComparison
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
+import { compareInputs } from "@/lib/services/compare";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { ComparisonResult, WatchSpec } from "@/types/watch";
@@ -278,6 +280,39 @@ describe("compareWatches", () => {
   );
 });
 
+describe("generic comparison foundation", () => {
+  it("compares through the domain registry instead of the API importing watch-specific rules", () => {
+    const result = compareInputs({
+      leftInput: "Rolex Air-King",
+      rightInput: "Rolex Explorer"
+    });
+
+    expect(result.status).toBe("completed");
+    if (result.status !== "completed") {
+      return;
+    }
+
+    expect(result.domain).toBe("watches");
+    expect(result.left.label).toBe("Rolex Air-King");
+    expect(result.right.label).toBe("Rolex Explorer");
+    expect(result.comparison.leftEntity).toEqual(expect.objectContaining({ domain: "watches" }));
+  });
+
+  it("rejects unsupported domains before touching a product-specific resolver", () => {
+    expect(
+      compareInputs({
+        domain: "services",
+        leftInput: "Service A",
+        rightInput: "Service B"
+      })
+    ).toEqual({
+      status: "unsupported_domain",
+      domain: "services",
+      supportedDomains: ["watches"]
+    });
+  });
+});
+
 describe("Trinity feedback summaries", () => {
   it("rolls visitor feedback into durable signal counts", async () => {
     // The worker helper is plain Node ESM so the runtime script can execute without a TS build step.
@@ -394,7 +429,9 @@ describe("submitted comparison persistence", () => {
     const left = watchById("rolex-air-king-126900");
     const right = watchById("rolex-explorer-124270");
 
-    expect(buildSavedComparisonSlug(left, right)).toBe("rolex-air-king-126900-vs-rolex-explorer-124270");
+    expect(buildSavedComparisonSlug(toWatchComparisonEntity(left), toWatchComparisonEntity(right))).toBe(
+      "rolex-air-king-126900-vs-rolex-explorer-124270"
+    );
     expect(parseSavedComparisonSlug("rolex-air-king-126900-vs-rolex-explorer-124270")).toEqual({
       leftWatchId: "rolex-air-king-126900",
       rightWatchId: "rolex-explorer-124270"
@@ -413,8 +450,8 @@ describe("submitted comparison persistence", () => {
 
       await expect(
         persistSubmittedComparison({
-          left,
-          right,
+          left: toWatchComparisonEntity(left),
+          right: toWatchComparisonEntity(right),
           deterministicResult: compareWatches(left, right),
           clientKeyHash: hashLogValue("203.0.113.40")
         })
@@ -443,14 +480,14 @@ describe("compare input validation", () => {
   it("rejects exact duplicate text before the API round trip", () => {
     expect(validateComparisonInputs("Rolex Explorer", "rolex explorer")).toEqual({
       valid: false,
-      message: "Choose two different watches so the comparison surfaces meaningful tradeoffs."
+      message: "Choose two different things so the comparison surfaces meaningful tradeoffs."
     });
   });
 
   it("rejects near-duplicates that resolve to the same catalog watch", () => {
     expect(validateComparisonInputs("Rolex Explorer", "124270 explorer")).toEqual({
       valid: false,
-      message: "Both inputs resolve to Rolex Explorer. Choose a different second watch."
+      message: "Both inputs resolve to Rolex Explorer. Choose something different for the second input."
     });
   });
 
@@ -568,8 +605,10 @@ describe("POST /api/compare", () => {
       const response = await POST_FEEDBACK(
         feedbackRequest({
           comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
-          leftWatchId: "rolex-air-king-126900",
-          rightWatchId: "rolex-explorer-124270",
+          leftEntityId: "rolex-air-king-126900",
+          rightEntityId: "rolex-explorer-124270",
+          leftDomain: "watches",
+          rightDomain: "watches",
           traceRef: null,
           signal: "helpful"
         })
@@ -600,8 +639,10 @@ describe("POST /api/compare", () => {
       const response = await POST_FEEDBACK(
         feedbackRequest({
           comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
-          leftWatchId: "rolex-air-king-126900",
-          rightWatchId: "rolex-explorer-124270",
+          leftEntityId: "rolex-air-king-126900",
+          rightEntityId: "rolex-explorer-124270",
+          leftDomain: "watches",
+          rightDomain: "watches",
           traceRef: null,
           signal: "missing_context",
           note: "I needed more bracelet fit context."
@@ -628,8 +669,10 @@ describe("POST /api/compare", () => {
     const response = await POST_FEEDBACK(
       feedbackRequest({
         comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
-        leftWatchId: "rolex-air-king-126900",
-        rightWatchId: "rolex-explorer-124270",
+        leftEntityId: "rolex-air-king-126900",
+          rightEntityId: "rolex-explorer-124270",
+          leftDomain: "watches",
+          rightDomain: "watches",
         signal: "missing_context",
         note: "x".repeat(1001)
       })
@@ -645,8 +688,10 @@ describe("POST /api/compare", () => {
     const response = await POST_FEEDBACK(
       feedbackRequest({
         comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
-        leftWatchId: "rolex-air-king-126900",
-        rightWatchId: "rolex-explorer-124270",
+        leftEntityId: "rolex-air-king-126900",
+          rightEntityId: "rolex-explorer-124270",
+          leftDomain: "watches",
+          rightDomain: "watches",
         signal: "liked_the_blue_one"
       })
     );
@@ -668,7 +713,7 @@ describe("POST /api/compare", () => {
     const payload = await response.json();
 
     expect(response.status).toBe(404);
-    expect(payload.error).toContain("curated mechanical watch catalog");
+    expect(payload.error).toContain("could not resolve one or both inputs");
     expect(payload.supportedInputs).toEqual([
       "Rolex Air-King",
       "Rolex Explorer",
@@ -690,7 +735,7 @@ describe("POST /api/compare", () => {
     const payload = await response.json();
 
     expect(response.status).toBe(400);
-    expect(payload.error).toContain("Choose two different watches");
+    expect(payload.error).toContain("Choose two different things");
   });
 
   it("rejects invalid request fields", async () => {

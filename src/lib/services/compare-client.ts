@@ -1,9 +1,10 @@
-import type { BrainState, ComparisonResult } from "@/types/watch";
+import type { GenericComparisonResult } from "@/types/comparison";
+import type { BrainState } from "@/types/watch";
 
 const GENERIC_COMPARE_ERROR = "The comparison request failed. Try again.";
 
 export interface ComparisonResponse {
-  comparison: ComparisonResult;
+  comparison: GenericComparisonResult;
   brain: BrainState;
   savedComparison?: {
     publicSlug: string;

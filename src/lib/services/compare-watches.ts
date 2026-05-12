@@ -1,4 +1,5 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type {
   BuyerRecommendation,
@@ -434,8 +435,11 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
 
 export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonResult {
   return {
+    domain: "watches",
     canonicalInputA: displayName(left),
     canonicalInputB: displayName(right),
+    leftEntity: toWatchComparisonEntity(left),
+    rightEntity: toWatchComparisonEntity(right),
     left,
     right,
     verdict: buildVerdict(left, right),

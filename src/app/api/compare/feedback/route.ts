@@ -8,8 +8,12 @@ import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 
 const feedbackSchema = z.object({
   comparisonRef: z.string().trim().min(8),
-  leftWatchId: z.string().trim().min(2),
-  rightWatchId: z.string().trim().min(2),
+  leftEntityId: z.string().trim().min(2),
+  rightEntityId: z.string().trim().min(2),
+  leftDomain: z.string().trim().min(2),
+  rightDomain: z.string().trim().min(2),
+  leftWatchId: z.string().trim().min(2).optional(),
+  rightWatchId: z.string().trim().min(2).optional(),
   traceRef: z.string().trim().min(1).nullable().optional(),
   signal: z.enum([
     "helpful",
@@ -37,8 +41,8 @@ export async function POST(request: Request) {
       await recordTelemetryEvent({
         event: "feedback.persistence_unavailable",
         comparisonRef: payload.comparisonRef,
-        leftWatchId: payload.leftWatchId,
-        rightWatchId: payload.rightWatchId,
+        leftWatchId: payload.leftDomain === "watches" ? payload.leftEntityId : payload.leftWatchId,
+        rightWatchId: payload.rightDomain === "watches" ? payload.rightEntityId : payload.rightWatchId,
         status: "unavailable",
         reason: "missing_database_connection",
         properties: {
@@ -61,8 +65,12 @@ export async function POST(request: Request) {
 
     await ComparisonFeedbackModel.create({
       comparisonRef: payload.comparisonRef,
-      leftWatchId: payload.leftWatchId,
-      rightWatchId: payload.rightWatchId,
+      leftWatchId: payload.leftDomain === "watches" ? payload.leftEntityId : payload.leftWatchId ?? null,
+      rightWatchId: payload.rightDomain === "watches" ? payload.rightEntityId : payload.rightWatchId ?? null,
+      leftEntityId: payload.leftEntityId,
+      rightEntityId: payload.rightEntityId,
+      leftDomain: payload.leftDomain,
+      rightDomain: payload.rightDomain,
       traceRef: payload.traceRef ?? null,
       signal: payload.signal,
       note: payload.note || null,
@@ -79,8 +87,8 @@ export async function POST(request: Request) {
     await recordTelemetryEvent({
       event: "feedback.recorded",
       comparisonRef: payload.comparisonRef,
-      leftWatchId: payload.leftWatchId,
-      rightWatchId: payload.rightWatchId,
+      leftWatchId: payload.leftDomain === "watches" ? payload.leftEntityId : payload.leftWatchId,
+      rightWatchId: payload.rightDomain === "watches" ? payload.rightEntityId : payload.rightWatchId,
       status: "recorded",
       properties: {
         feedbackSignal: payload.signal,

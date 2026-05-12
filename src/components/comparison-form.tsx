@@ -5,10 +5,11 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
-import { watchCatalog } from "@/lib/data/watch-catalog";
+import { supportedInputsForDomain } from "@/lib/services/compare";
 import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
-import type { BrainState, ComparisonResult } from "@/types/watch";
+import type { GenericComparisonResult } from "@/types/comparison";
+import type { BrainState } from "@/types/watch";
 
 interface BrainResponse {
   brain: BrainState;
@@ -18,12 +19,12 @@ function isErrorResponse(payload: ComparisonClientResult): payload is Extract<Co
   return "error" in payload;
 }
 
-const supportedInputOptions = watchCatalog.map((watch) => `${watch.brand} ${watch.model}`);
+const supportedInputOptions = supportedInputsForDomain();
 
 export function ComparisonForm() {
   const [leftInput, setLeftInput] = useState("Rolex Air-King");
   const [rightInput, setRightInput] = useState("Rolex Explorer");
-  const [result, setResult] = useState<ComparisonResult | null>(null);
+  const [result, setResult] = useState<GenericComparisonResult | null>(null);
   const [brain, setBrain] = useState<BrainState | null>(null);
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);

@@ -2,12 +2,12 @@ import { connectToDatabase } from "@/lib/db";
 import { SavedComparisonModel } from "@/lib/models/comparison-brain";
 import { logWarn } from "@/lib/observability/logger";
 import { buildComparisonRef } from "@/lib/services/brain-queue";
-import type { ComparisonResult, WatchSpec } from "@/types/watch";
+import type { ComparisonEntity, GenericComparisonResult } from "@/types/comparison";
 
 type PersistSubmittedComparisonInput = {
-  left: WatchSpec;
-  right: WatchSpec;
-  deterministicResult: ComparisonResult;
+  left: ComparisonEntity;
+  right: ComparisonEntity;
+  deterministicResult: GenericComparisonResult;
   clientKeyHash: string;
 };
 
@@ -20,7 +20,7 @@ export type PersistSubmittedComparisonResult = {
 export type SavedComparisonPage = {
   comparisonRef: string;
   publicSlug: string;
-  deterministicResult: ComparisonResult;
+  deterministicResult: GenericComparisonResult;
   brainResult: unknown | null;
   traceRef: string | null;
   submissionCount: number;
@@ -32,8 +32,10 @@ function watchSlugFromId(watchId: string): string | null {
   return watchId.match(/^[a-z0-9]+(?:-[a-z0-9]+)*$/) ? watchId : null;
 }
 
-export function buildSavedComparisonSlug(left: WatchSpec, right: WatchSpec): string {
-  return `${left.slug}-vs-${right.slug}`;
+export function buildSavedComparisonSlug(left: ComparisonEntity, right: ComparisonEntity): string {
+  return left.domain === "watches" && right.domain === "watches"
+    ? `${left.slug}-vs-${right.slug}`
+    : `${left.domain}-${left.slug}-vs-${right.domain}-${right.slug}`;
 }
 
 export function parseSavedComparisonSlug(slug: string): { leftWatchId: string; rightWatchId: string } | null {
@@ -80,8 +82,12 @@ export async function persistSubmittedComparison(
       {
         $set: {
           publicSlug,
-          leftWatchId: input.left.id,
-          rightWatchId: input.right.id,
+          leftWatchId: input.left.domain === "watches" ? input.left.id : null,
+          rightWatchId: input.right.domain === "watches" ? input.right.id : null,
+          leftEntityId: input.left.id,
+          rightEntityId: input.right.id,
+          leftDomain: input.left.domain,
+          rightDomain: input.right.domain,
           deterministicResult: input.deterministicResult,
           lastSubmittedAt: now,
           lastSubmittedByHash: input.clientKeyHash
@@ -140,7 +146,7 @@ export async function getSavedComparisonBySlug(slug: string): Promise<SavedCompa
     }).lean<{
       comparisonRef: string;
       publicSlug?: string | null;
-      deterministicResult: ComparisonResult;
+      deterministicResult: GenericComparisonResult;
       brainResult?: unknown | null;
       traceRef?: string | null;
       submissionCount?: number | null;

@@ -1,4 +1,4 @@
-import { resolveWatch } from "@/lib/utils/resolve-watch";
+import { getComparisonDomainAdapter } from "@/lib/services/compare";
 
 export type ComparisonInputValidation =
   | {
@@ -25,24 +25,30 @@ export function validateComparisonInputs(leftInput: string, rightInput: string):
   if (left.length < 2 || right.length < 2) {
     return {
       valid: false,
-      message: "Enter two supported watch names or catalog URLs."
+      message: "Enter two supported names, references, or source URLs."
     };
   }
 
   if (normalizeInput(left) === normalizeInput(right)) {
     return {
       valid: false,
-      message: "Choose two different watches so the comparison surfaces meaningful tradeoffs."
+      message: "Choose two different things so the comparison surfaces meaningful tradeoffs."
     };
   }
 
-  const leftWatch = resolveWatch(left);
-  const rightWatch = resolveWatch(right);
+  const adapter = getComparisonDomainAdapter();
+  const leftEntity = adapter?.resolve(left);
+  const rightEntity = adapter?.resolve(right);
 
-  if (leftWatch && rightWatch && leftWatch.id === rightWatch.id) {
+  if (
+    leftEntity?.status === "resolved" &&
+    rightEntity?.status === "resolved" &&
+    leftEntity.entity.id === rightEntity.entity.id &&
+    leftEntity.entity.domain === rightEntity.entity.domain
+  ) {
     return {
       valid: false,
-      message: `Both inputs resolve to ${leftWatch.brand} ${leftWatch.model}. Choose a different second watch.`
+      message: `Both inputs resolve to ${leftEntity.entity.label}. Choose something different for the second input.`
     };
   }
 
