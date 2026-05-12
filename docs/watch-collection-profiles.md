@@ -27,6 +27,7 @@ When context is present, the watch adapter can:
 - add a collection-aware buyer recommendation
 - add a recommendation signal when one compared watch is already owned, wishlist, or sold
 - produce local gap/overlap insights for owned watches
+- produce upgrade-path guidance for compared watches against the closest owned watch
 
 ## Gap And Overlap Analysis
 
@@ -41,4 +42,14 @@ Current insight families:
 
 Every insight includes cited watch IDs and traits so the UI can show why the recommendation appeared. Empty collections and one-watch collections degrade into low-confidence setup prompts instead of pretending there is enough data for a full diagnosis.
 
-Collection profiles do not yet perform upgrade-path analysis, collection scoring, or portfolio valuation. Those belong to later Project 16 issues.
+Collection profiles do not yet perform collection scoring or portfolio valuation. Those belong to later Project 16 issues.
+
+## Upgrade Path Guidance
+
+When a comparison is submitted with owned watches in the local profile, the watch adapter compares each candidate against the closest owned watch and classifies the path as:
+- `meaningful`: clear capability, fit, or role improvement
+- `lateral`: similar enough that taste and rotation overlap dominate
+- `emotional`: mostly a brand/status or preference-led upgrade
+- `poor_value`: higher cost without enough capability or fit improvement
+
+The verdict lists changed traits so users can see whether the advice is about capability, wearability, role coverage, or emotional preference. It is ownership guidance, not financial advice or an automated sell recommendation.

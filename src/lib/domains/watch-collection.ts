@@ -6,7 +6,8 @@ import type {
   WatchCollectionInsight,
   WatchCollectionItem,
   WatchCollectionItemStatus,
-  WatchCollectionProfile
+  WatchCollectionProfile,
+  WatchUpgradeVerdict
 } from "@/types/watch-collection";
 
 const collectionStatuses = new Set<WatchCollectionItemStatus>(["owned", "wishlist", "sold"]);
@@ -233,4 +234,169 @@ export function analyzeWatchCollectionGaps(profile: WatchCollectionProfile): Wat
   }
 
   return insights.slice(0, 5);
+}
+
+function overlapScore(candidate: WatchSpec, owned: WatchSpec): number {
+  let score = 0;
+
+  if (candidate.style === owned.style) {
+    score += 5;
+  }
+
+  if (candidate.brand === owned.brand) {
+    score += 2;
+  }
+
+  if (Math.abs(candidate.caseDiameterMm - owned.caseDiameterMm) <= 2) {
+    score += 2;
+  }
+
+  if (candidate.dateWindow === owned.dateWindow) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function capabilityGains(candidate: WatchSpec, owned: WatchSpec): string[] {
+  const gains: string[] = [];
+
+  if (candidate.waterResistanceM >= owned.waterResistanceM + 50) {
+    gains.push("water resistance");
+  }
+
+  if (candidate.microAdjust && !owned.microAdjust) {
+    gains.push("bracelet adjustment");
+  }
+
+  if (candidate.powerReserveHours >= owned.powerReserveHours + 10) {
+    gains.push("power reserve");
+  }
+
+  if ((candidate.antiMagneticGauss ?? 0) > (owned.antiMagneticGauss ?? 0) * 2) {
+    gains.push("anti-magnetism");
+  }
+
+  return gains;
+}
+
+function fitGains(candidate: WatchSpec, owned: WatchSpec): string[] {
+  const gains: string[] = [];
+
+  if (candidate.caseDiameterMm <= owned.caseDiameterMm - 2) {
+    gains.push("smaller diameter");
+  }
+
+  if (candidate.caseThicknessMm <= owned.caseThicknessMm - 0.5) {
+    gains.push("lower thickness");
+  }
+
+  if (candidate.weightFeel === "light" && owned.weightFeel !== "light") {
+    gains.push("lighter wrist feel");
+  }
+
+  return gains;
+}
+
+function brandStatusGain(candidate: WatchSpec, owned: WatchSpec): boolean {
+  return candidate.brand === "Rolex" && owned.brand !== "Rolex";
+}
+
+export function analyzeWatchUpgradePath(
+  candidate: WatchSpec,
+  profile: WatchCollectionProfile
+): WatchUpgradeVerdict | null {
+  const owned = ownedWatches(profile).filter((watch) => watch.id !== candidate.id);
+
+  if (owned.length === 0) {
+    return null;
+  }
+
+  const closestOwned = owned
+    .map((watch) => ({
+      watch,
+      overlap: overlapScore(candidate, watch)
+    }))
+    .sort((a, b) => b.overlap - a.overlap)[0];
+
+  if (!closestOwned) {
+    return null;
+  }
+
+  const capability = capabilityGains(candidate, closestOwned.watch);
+  const fit = fitGains(candidate, closestOwned.watch);
+  const fillsMissingStyle = !owned.some((watch) => watch.style === candidate.style);
+  const changedTraits = [
+    ...capability,
+    ...fit,
+    ...(fillsMissingStyle ? [`new ${candidate.style} role`] : []),
+    ...(brandStatusGain(candidate, closestOwned.watch) ? ["brand/status step-up"] : [])
+  ];
+  const pricePremium = candidate.msrpUsd - closestOwned.watch.msrpUsd;
+  const highOverlap = closestOwned.overlap >= 7;
+  const preferredStatusStep =
+    brandStatusGain(candidate, closestOwned.watch) && profile.preferredBrands.includes(candidate.brand);
+
+  if (
+    ((candidate.brand === "Rolex" && closestOwned.watch.brand === "Rolex" && pricePremium > 0) || pricePremium > 750) &&
+    capability.length === 0 &&
+    fit.length === 0 &&
+    candidate.brand === closestOwned.watch.brand
+  ) {
+    return {
+      classification: "poor_value",
+      candidateWatchId: candidate.id,
+      referenceWatchIds: [closestOwned.watch.id],
+      summary: `${watchDisplayName(candidate)} looks like a poor-value swap against ${watchDisplayName(closestOwned.watch)} because it asks for more money without adding clear capability or fit improvement.`,
+      changedTraits: ["same-brand overlap", `price premium:${pricePremium}`]
+    };
+  }
+
+  if (highOverlap && changedTraits.length === 0 && pricePremium > 1000) {
+    return {
+      classification: "poor_value",
+      candidateWatchId: candidate.id,
+      referenceWatchIds: [closestOwned.watch.id],
+      summary: `${watchDisplayName(candidate)} looks like a poor-value swap against ${watchDisplayName(closestOwned.watch)} because it overlaps heavily without adding clear capability, fit, or role improvement.`,
+      changedTraits: ["high overlap", `price premium:${pricePremium}`]
+    };
+  }
+
+  if (preferredStatusStep) {
+    return {
+      classification: "emotional",
+      candidateWatchId: candidate.id,
+      referenceWatchIds: [closestOwned.watch.id],
+      summary: `${watchDisplayName(candidate)} is mostly an emotional or status upgrade over ${watchDisplayName(closestOwned.watch)}. Your saved brand preference makes that understandable, but the practical ownership gain is limited.`,
+      changedTraits: ["brand/status step-up"]
+    };
+  }
+
+  if (capability.length + fit.length >= 2 || fillsMissingStyle) {
+    return {
+      classification: "meaningful",
+      candidateWatchId: candidate.id,
+      referenceWatchIds: [closestOwned.watch.id],
+      summary: `${watchDisplayName(candidate)} is a meaningful upgrade path because it changes ${changedTraits.join(", ")} relative to ${watchDisplayName(closestOwned.watch)}.`,
+      changedTraits
+    };
+  }
+
+  if (brandStatusGain(candidate, closestOwned.watch)) {
+    return {
+      classification: "emotional",
+      candidateWatchId: candidate.id,
+      referenceWatchIds: [closestOwned.watch.id],
+      summary: `${watchDisplayName(candidate)} is mostly an emotional or status upgrade over ${watchDisplayName(closestOwned.watch)}. That can be valid, but the practical ownership gain is limited.`,
+      changedTraits: ["brand/status step-up"]
+    };
+  }
+
+  return {
+    classification: "lateral",
+    candidateWatchId: candidate.id,
+    referenceWatchIds: [closestOwned.watch.id],
+    summary: `${watchDisplayName(candidate)} is a lateral move against ${watchDisplayName(closestOwned.watch)}: appealing, but close enough that taste and rotation overlap matter more than objective upgrade logic.`,
+    changedTraits: changedTraits.length ? changedTraits : ["similar role", "similar capability"]
+  };
 }

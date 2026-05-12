@@ -15,7 +15,11 @@ import {
 } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { serviceCatalog } from "@/lib/data/service-catalog";
-import { analyzeWatchCollectionGaps, normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
+import {
+  analyzeWatchCollectionGaps,
+  analyzeWatchUpgradePath,
+  normalizeWatchCollectionProfile
+} from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
@@ -385,6 +389,12 @@ describe("compareWatches", () => {
         summary: expect.stringContaining("Rolex Explorer is marked owned")
       })
     );
+    expect(result.ownershipIntelligence[1]).toEqual(
+      expect.objectContaining({
+        title: "Upgrade path guidance",
+        summary: expect.stringContaining("poor-value path")
+      })
+    );
     expect(result.whoShouldBuyWhich).toContainEqual(
       expect.objectContaining({
         buyerType: "Collection-aware buyer",
@@ -608,6 +618,50 @@ describe("watch collection profiles", () => {
         title: "Add contrast before optimizing"
       })
     ]);
+  });
+
+  it("classifies upgrade path verdicts with changed traits", () => {
+    const meaningful = analyzeWatchUpgradePath(watchById("tudor-black-bay-54"), {
+      preferredBrands: [],
+      items: [{ watchId: "tudor-black-bay-58", status: "owned" }]
+    });
+    const lateral = analyzeWatchUpgradePath(watchById("tudor-black-bay-58"), {
+      preferredBrands: [],
+      items: [{ watchId: "tudor-black-bay-54", status: "owned" }]
+    });
+    const emotional = analyzeWatchUpgradePath(watchById("rolex-air-king-126900"), {
+      preferredBrands: ["Rolex"],
+      items: [{ watchId: "tudor-black-bay-54", status: "owned" }]
+    });
+    const poorValue = analyzeWatchUpgradePath(watchById("rolex-air-king-126900"), {
+      preferredBrands: [],
+      items: [{ watchId: "rolex-explorer-124270", status: "owned" }]
+    });
+
+    expect(meaningful).toEqual(
+      expect.objectContaining({
+        classification: "meaningful",
+        changedTraits: expect.arrayContaining(["bracelet adjustment", "smaller diameter"])
+      })
+    );
+    expect(lateral).toEqual(
+      expect.objectContaining({
+        classification: "lateral",
+        changedTraits: expect.arrayContaining(["similar role"])
+      })
+    );
+    expect(emotional).toEqual(
+      expect.objectContaining({
+        classification: "emotional",
+        changedTraits: ["brand/status step-up"]
+      })
+    );
+    expect(poorValue).toEqual(
+      expect.objectContaining({
+        classification: "poor_value",
+        changedTraits: expect.arrayContaining(["same-brand overlap"])
+      })
+    );
   });
 });
 

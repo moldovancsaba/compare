@@ -1,5 +1,5 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
-import { collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
+import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
@@ -427,6 +427,41 @@ function buildCollectionContextInsight(
   };
 }
 
+function buildUpgradePathInsight(
+  left: WatchSpec,
+  right: WatchSpec,
+  profile: WatchCollectionProfile | null | undefined
+): InsightBlock | null {
+  if (!profile) {
+    return null;
+  }
+
+  const leftVerdict = analyzeWatchUpgradePath(left, profile);
+  const rightVerdict = analyzeWatchUpgradePath(right, profile);
+  const verdicts = [leftVerdict, rightVerdict].filter((verdict): verdict is NonNullable<typeof verdict> =>
+    Boolean(verdict)
+  );
+
+  if (!verdicts.length) {
+    return null;
+  }
+
+  return {
+    title: "Upgrade path guidance",
+    summary: verdicts
+      .map((verdict) => `${displayName(verdict.candidateWatchId === left.id ? left : right)}: ${verdict.classification.replace("_", "-")} path. ${verdict.summary}`)
+      .join(" "),
+    evidence: [
+      editorialEvidence(
+        "watch:upgrade-path-context",
+        "Collection upgrade-path context",
+        "Upgrade guidance compares each candidate against the closest owned watch in the submitted local collection profile.",
+        [left, right]
+      )
+    ]
+  };
+}
+
 function buildOwnershipIntelligence(
   left: WatchSpec,
   right: WatchSpec,
@@ -436,9 +471,11 @@ function buildOwnershipIntelligence(
   const dailyWinner = pickHigher(left, right, dailyWearScore);
   const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
   const collectionContext = buildCollectionContextInsight(left, right, profile);
+  const upgradePath = buildUpgradePathInsight(left, right, profile);
 
   return [
     ...(collectionContext ? [collectionContext] : []),
+    ...(upgradePath ? [upgradePath] : []),
     {
       title: "Daily ownership",
       summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience} ${ownershipProfileSummary(dailyWinner)}`,
