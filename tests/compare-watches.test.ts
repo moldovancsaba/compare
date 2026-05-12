@@ -546,6 +546,14 @@ describe("POST /api/compare", () => {
 
     expect(response.status).toBe(404);
     expect(payload.error).toContain("curated mechanical watch catalog");
+    expect(payload.supportedInputs).toEqual([
+      "Rolex Air-King",
+      "Rolex Explorer",
+      "Tudor Black Bay 54",
+      "Tudor Black Bay 58",
+      "Omega Seamaster Aqua Terra 38",
+      "Tudor Pelagos 39"
+    ]);
   });
 
   it("rejects duplicate watch comparisons", async () => {

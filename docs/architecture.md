@@ -5,7 +5,7 @@
 
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`, including shareable saved comparison pages at `/compare/[slug]`.
-- API: `/api/compare` applies basic per-client rate limiting, validates requests, resolves watches, rejects ambiguous inputs, blocks duplicate comparisons, and returns comparison output.
+- API: `/api/compare` applies basic per-client rate limiting, validates requests, resolves watches, rejects ambiguous inputs with supported examples, blocks duplicate comparisons, and returns comparison output.
 - Domain logic: `src/lib/services/compare-watches.ts` builds deterministic comparison sections.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated catalog.
 - Persistence: `src/lib/db.ts` connects to optional MongoDB Atlas. Submitted deterministic comparisons are best-effort upserted to `saved_comparisons` with stable public slugs, Brain jobs use `compare_jobs` and `comparison_traces`, feedback uses `comparison_feedback`, and telemetry uses `analytics_events`.

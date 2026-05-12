@@ -5,16 +5,19 @@ import { useEffect, useState, useTransition } from "react";
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
-import { type ComparisonResponse, requestComparison } from "@/lib/services/compare-client";
+import { watchCatalog } from "@/lib/data/watch-catalog";
+import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
 import type { BrainState, ComparisonResult } from "@/types/watch";
 
 interface BrainResponse {
   brain: BrainState;
 }
 
-function isErrorResponse(payload: ComparisonResponse | { error: string }): payload is { error: string } {
+function isErrorResponse(payload: ComparisonClientResult): payload is Extract<ComparisonClientResult, { error: string }> {
   return "error" in payload;
 }
+
+const supportedInputOptions = watchCatalog.map((watch) => `${watch.brand} ${watch.model}`);
 
 export function ComparisonForm() {
   const [leftInput, setLeftInput] = useState("Rolex Air-King");
@@ -23,6 +26,7 @@ export function ComparisonForm() {
   const [brain, setBrain] = useState<BrainState | null>(null);
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [supportedInputs, setSupportedInputs] = useState(supportedInputOptions);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -66,12 +70,14 @@ export function ComparisonForm() {
       setBrain(null);
       setSavedComparisonPath(null);
       setError(payload.error);
+      setSupportedInputs(payload.supportedInputs ?? supportedInputOptions);
       return;
     }
 
     setResult(payload.comparison);
     setBrain(payload.brain);
     setSavedComparisonPath(payload.savedComparison?.persisted ? payload.savedComparison.path : null);
+    setSupportedInputs(supportedInputOptions);
   }
 
   function handleSubmit(formData: FormData) {
@@ -92,6 +98,20 @@ export function ComparisonForm() {
     });
   }
 
+  function applySupportedInput(nextInput: string) {
+    if (!leftInput.trim()) {
+      setLeftInput(nextInput);
+      return;
+    }
+
+    if (!rightInput.trim() || rightInput === leftInput) {
+      setRightInput(nextInput);
+      return;
+    }
+
+    setRightInput(nextInput);
+  }
+
   return (
     <div className="space-y-10">
       <section className="surface-panel surface-shell grid gap-8 p-7 lg:grid-cols-[1.15fr_0.85fr]">
@@ -101,8 +121,10 @@ export function ComparisonForm() {
           isPending={isPending}
           leftInput={leftInput}
           rightInput={rightInput}
+          supportedInputs={supportedInputs}
           onLeftInputChange={setLeftInput}
           onRightInputChange={setRightInput}
+          onUseSupportedInput={applySupportedInput}
           onSubmit={handleSubmit}
         />
       </section>

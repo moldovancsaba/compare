@@ -9,6 +9,7 @@
 - Added MongoDB-backed allowlisted telemetry for compare outcomes, resolver misses, Brain polling, and feedback signals.
 - Added MongoDB-backed saved-comparison persistence for submitted deterministic comparison results.
 - Added stable `/compare/[slug]` pages for MongoDB-backed saved comparison results.
+- Added supported-catalog quick-select examples and resolver-miss recovery data in `/api/compare`.
 - Cleared the prior Next/PostCSS audit blocker with a root PostCSS override.
 
 ## v0.1.0 - 2026-05-11

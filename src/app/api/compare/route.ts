@@ -5,6 +5,7 @@ import { enqueueTrinityCompareJob } from "@/lib/services/brain-queue";
 import { hashLogValue, logWarn } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
+import { watchCatalog } from "@/lib/data/watch-catalog";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
@@ -13,6 +14,8 @@ const requestSchema = z.object({
   leftInput: z.string().trim().min(2),
   rightInput: z.string().trim().min(2)
 });
+
+const supportedInputs = watchCatalog.map((watch) => `${watch.brand} ${watch.model}`);
 
 export async function POST(request: Request) {
   const clientKey = resolveClientKey(request);
@@ -74,7 +77,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "{compare} V1 currently supports its curated mechanical watch catalog. Try Rolex Air-King, Rolex Explorer, Tudor Black Bay 54, Tudor Black Bay 58, Tudor Pelagos 39, or Omega Aqua Terra 38."
+            "{compare} V1 currently supports its curated mechanical watch catalog. Use one of the supported examples below or paste a matching catalog URL.",
+          supportedInputs
         },
         { status: 404 }
       );

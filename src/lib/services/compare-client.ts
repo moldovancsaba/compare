@@ -12,7 +12,12 @@ export interface ComparisonResponse {
   };
 }
 
-export type ComparisonClientResult = ComparisonResponse | { error: string };
+export interface ComparisonErrorResponse {
+  error: string;
+  supportedInputs?: string[];
+}
+
+export type ComparisonClientResult = ComparisonResponse | ComparisonErrorResponse;
 
 type FetchCompare = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
@@ -20,7 +25,11 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object";
 }
 
-function isErrorPayload(value: unknown): value is { error: string } {
+function isStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((item) => typeof item === "string");
+}
+
+function isErrorPayload(value: unknown): value is ComparisonErrorResponse {
   return isRecord(value) && typeof value.error === "string";
 }
 
@@ -40,8 +49,11 @@ export async function readComparisonResponse(response: Response): Promise<Compar
   const payload = await readJsonSafely(response);
 
   if (!response.ok) {
+    const supportedInputs = isRecord(payload) && isStringArray(payload.supportedInputs) ? payload.supportedInputs : undefined;
+
     return {
-      error: isErrorPayload(payload) ? payload.error : GENERIC_COMPARE_ERROR
+      error: isErrorPayload(payload) ? payload.error : GENERIC_COMPARE_ERROR,
+      ...(supportedInputs ? { supportedInputs } : {})
     };
   }
 

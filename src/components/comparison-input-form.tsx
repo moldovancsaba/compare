@@ -5,8 +5,10 @@ interface ComparisonInputFormProps {
   isPending: boolean;
   leftInput: string;
   rightInput: string;
+  supportedInputs: string[];
   onLeftInputChange: (value: string) => void;
   onRightInputChange: (value: string) => void;
+  onUseSupportedInput: (value: string) => void;
   onSubmit: (formData: FormData) => void;
 }
 
@@ -46,8 +48,10 @@ export function ComparisonInputForm({
   isPending,
   leftInput,
   rightInput,
+  supportedInputs,
   onLeftInputChange,
   onRightInputChange,
+  onUseSupportedInput,
   onSubmit
 }: ComparisonInputFormProps) {
   return (
@@ -70,8 +74,20 @@ export function ComparisonInputForm({
         {isPending ? "Analyzing" : "Explain the difference"}
       </button>
       <p className="body-copy body-copy-faint text-sm">
-        V1 uses a curated enthusiast watch catalog so the comparison logic stays grounded instead of hand-wavy.
+        V1 supports curated mechanical watch names and matching official product URLs from the catalog below.
       </p>
+      <div className="flex flex-wrap gap-2">
+        {supportedInputs.map((supportedInput) => (
+          <button
+            key={supportedInput}
+            type="button"
+            className="pill-muted body-copy-strong px-3 py-2 text-xs transition"
+            onClick={() => onUseSupportedInput(supportedInput)}
+          >
+            {supportedInput}
+          </button>
+        ))}
+      </div>
       {error ? <p className="status-danger p-4 text-sm">{error}</p> : null}
     </form>
   );
