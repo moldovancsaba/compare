@@ -1,28 +1,28 @@
 {
   "highest_priority": [
     {
-      "github_issue": 39,
-      "title": "Build reusable domain intelligence layer contracts",
-      "priority": "high",
-      "reason": "Adapters now duplicate scoring and consequence patterns; reusable intelligence contracts should define the next stable extension surface."
-    },
-    {
       "github_issue": 40,
       "title": "Translate domain attributes into real-world consequences",
       "priority": "high",
-      "reason": "Attribute-to-consequence translation is the next layer after the current adapter-specific reasoning proves the pattern."
+      "reason": "Structured ownership metadata is now available for watches; the next step is a reusable consequence layer that translates traits into decision impacts."
     },
     {
       "github_issue": 41,
       "title": "Add cross-domain strong opinion and recommendation system",
-      "priority": "medium",
+      "priority": "high",
       "reason": "Once consequence contracts are stable, recommendation strength should become a shared cross-domain behavior."
     },
     {
       "github_issue": 42,
       "title": "Add user collection profiles",
       "priority": "medium",
-      "reason": "Collection profiles can wait until the shared intelligence layer and recommendation contracts are cleaner."
+      "reason": "Collection profiles can wait until the shared consequence and recommendation contracts are cleaner."
+    },
+    {
+      "github_issue": 43,
+      "title": "Add collection gap analysis",
+      "priority": "medium",
+      "reason": "Gap analysis depends on collection profiles and should follow them."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

@@ -137,4 +137,6 @@ Watch adapters should treat curated specs and canonical product URLs as facts, b
 
 Service adapters should treat service archetypes as curated fixtures unless a specific vendor source is verified. Vendor marketing, legal, compliance, uptime, and security claims need explicit source evidence before they can raise confidence.
 
+Watch ownership metadata should use structured traits for service burden, comfort, durability, reliability, resale stability, bracelet quality, and strap versatility. If a watch is missing that profile, comparison copy must visibly lower confidence with missing-data evidence instead of pretending qualitative notes are complete.
+
 Do not add a domain by branching on domain names inside `/api/compare` or shared UI components. If a shared component needs new behavior, expose it through the generic contract or adapter metadata.

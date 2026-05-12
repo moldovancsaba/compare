@@ -33,6 +33,15 @@ export interface WatchSpec {
   weightFeel: "light" | "balanced" | "substantial";
   notes: string[];
   marketingClaims: string[];
+  ownershipProfile?: {
+    serviceExpectation: "low" | "medium" | "high";
+    comfort: "compact" | "balanced" | "substantial";
+    durability: "dress" | "everyday" | "tool";
+    reliability: "standard" | "strong" | "exceptional";
+    resaleStability: "soft" | "stable" | "strong";
+    braceletQuality: "basic" | "solid" | "excellent";
+    strapVersatility: "limited" | "moderate" | "high";
+  };
   ownership: {
     dailyExperience: string;
     emotionalCharacter: string;

@@ -30,6 +30,15 @@ export const watchCatalog: WatchSpec[] = [
       "Smooth bezel keeps it less flashy than polished alternatives."
     ],
     marketingClaims: ["aviation heritage", "crown shield for magnetic resistance"],
+    ownershipProfile: {
+      serviceExpectation: "high",
+      comfort: "balanced",
+      durability: "tool",
+      reliability: "strong",
+      resaleStability: "stable",
+      braceletQuality: "excellent",
+      strapVersatility: "moderate"
+    },
     ownership: {
       dailyExperience: "Feels like a louder Rolex tool watch: easy to wear mechanically, harder to make disappear visually.",
       emotionalCharacter: "Confident, quirky, and slightly contrarian; it rewards buyers who want personality more than purity.",
@@ -69,6 +78,15 @@ export const watchCatalog: WatchSpec[] = [
       "One of the easiest luxury watches to wear daily with formal clothes."
     ],
     marketingClaims: ["mountain expedition DNA", "timeless 3-6-9 dial"],
+    ownershipProfile: {
+      serviceExpectation: "high",
+      comfort: "compact",
+      durability: "everyday",
+      reliability: "strong",
+      resaleStability: "strong",
+      braceletQuality: "excellent",
+      strapVersatility: "high"
+    },
     ownership: {
       dailyExperience: "The rare luxury watch that can be worn for a week without thinking about it; compact size is the feature.",
       emotionalCharacter: "Quiet, disciplined, and self-assured rather than flashy; it feels like the default answer for one-watch minimalists.",
@@ -107,6 +125,15 @@ export const watchCatalog: WatchSpec[] = [
       "Bezel action is practical but the faux-aged lume is a style choice."
     ],
     marketingClaims: ["1954 inspired proportions", "vintage purity"],
+    ownershipProfile: {
+      serviceExpectation: "medium",
+      comfort: "compact",
+      durability: "tool",
+      reliability: "strong",
+      resaleStability: "stable",
+      braceletQuality: "excellent",
+      strapVersatility: "high"
+    },
     ownership: {
       dailyExperience: "Small, thin, and low-friction for a diver; it gives tool-watch capability without the usual slab-sided bulk.",
       emotionalCharacter: "Warm, vintage-coded, and charming, with enough restraint to avoid feeling like costume nostalgia.",
@@ -145,6 +172,15 @@ export const watchCatalog: WatchSpec[] = [
       "No quick micro-adjust is the biggest daily-use miss."
     ],
     marketingClaims: ["big crown spirit", "heritage riveted bracelet"],
+    ownershipProfile: {
+      serviceExpectation: "medium",
+      comfort: "balanced",
+      durability: "tool",
+      reliability: "strong",
+      resaleStability: "stable",
+      braceletQuality: "solid",
+      strapVersatility: "moderate"
+    },
     ownership: {
       dailyExperience: "A handsome everyday diver, but the bracelet adjustment gap is the kind of annoyance that grows in summer.",
       emotionalCharacter: "Classic, confident, and familiar; it feels like the safest Tudor heritage diver until fit becomes the issue.",
@@ -184,6 +220,15 @@ export const watchCatalog: WatchSpec[] = [
       "Best for buyers who want one watch for office and weekends."
     ],
     marketingClaims: ["Master Chronometer", "teak dial inspired by yacht decks"],
+    ownershipProfile: {
+      serviceExpectation: "high",
+      comfort: "balanced",
+      durability: "everyday",
+      reliability: "exceptional",
+      resaleStability: "soft",
+      braceletQuality: "solid",
+      strapVersatility: "moderate"
+    },
     ownership: {
       dailyExperience: "More polished than toolish; it moves from office to weekend easily but asks you to tolerate visible bracelet wear.",
       emotionalCharacter: "Refined, technical, and slightly dressier; it suits buyers who want competence without Rolex signaling.",
@@ -222,6 +267,15 @@ export const watchCatalog: WatchSpec[] = [
       "Tool-forward finishing is less jewelry-like in hand."
     ],
     marketingClaims: ["professional dive DNA", "grade 2 titanium comfort"],
+    ownershipProfile: {
+      serviceExpectation: "medium",
+      comfort: "compact",
+      durability: "tool",
+      reliability: "strong",
+      resaleStability: "stable",
+      braceletQuality: "excellent",
+      strapVersatility: "high"
+    },
     ownership: {
       dailyExperience: "The most no-nonsense wearing experience here: light, grippy, legible, and clearly built for active use.",
       emotionalCharacter: "Modern, tactical, and deliberately less jewelry-like; it is for buyers who want capability over polish.",

@@ -171,6 +171,33 @@ function ownershipCharacter(watch: WatchSpec): string {
   }
 }
 
+function ownershipProfileSummary(watch: WatchSpec): string {
+  const profile = watch.ownershipProfile;
+
+  if (!profile) {
+    return "Structured ownership metadata is incomplete, so this claim stays lower confidence.";
+  }
+
+  return `Structured profile: ${profile.comfort} comfort, ${profile.serviceExpectation} service burden, ${profile.durability} durability, ${profile.resaleStability} resale stability, ${profile.braceletQuality} bracelet quality, and ${profile.strapVersatility} strap versatility.`;
+}
+
+function ownershipProfileEvidence(watch: WatchSpec): EvidenceItem {
+  if (!watch.ownershipProfile) {
+    return missingDataEvidence(
+      `${watch.id}:missing-ownership-profile`,
+      "Missing structured ownership profile",
+      "This watch has qualitative ownership notes but is missing structured ownership profile metadata.",
+      [watch]
+    );
+  }
+
+  return catalogEvidence(
+    watch,
+    "structured-ownership-profile",
+    "Structured ownership profile covers comfort, service burden, durability, reliability, resale, bracelet quality, and strap versatility."
+  );
+}
+
 function confidenceFor(left: WatchSpec, right: WatchSpec, bestOverall: WatchSpec): ComparisonVerdict["confidence"] {
   const gap = Math.abs(dailyWearScore(left) + valueScore(left) - (dailyWearScore(right) + valueScore(right)));
 
@@ -372,14 +399,15 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
   return [
     {
       title: "Daily ownership",
-      summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience}`,
+      summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience} ${ownershipProfileSummary(dailyWinner)}`,
       evidence: [
         editorialEvidence(
           "watch:daily-ownership-notes",
           "Curated ownership note",
           "Daily ownership comes from adapter fixture notes, not live owner telemetry.",
           [dailyWinner]
-        )
+        ),
+        ownershipProfileEvidence(dailyWinner)
       ]
     },
     {
@@ -388,7 +416,7 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
     },
     {
       title: "Service and resale reality",
-      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality}`,
+      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality} ${ownershipProfileSummary(resaleWinner)}`,
       evidence: [
         editorialEvidence(
           "watch:resale-service-inference",
@@ -406,7 +434,7 @@ function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightB
     },
     {
       title: "Scratch anxiety",
-      summary: `${displayName(left)}: ${left.ownership.scratchRisk} ${displayName(right)}: ${right.ownership.scratchRisk}`
+      summary: `${displayName(left)}: ${left.ownership.scratchRisk} ${ownershipProfileSummary(left)} ${displayName(right)}: ${right.ownership.scratchRisk} ${ownershipProfileSummary(right)}`
     },
     {
       title: "Enthusiast bias check",
@@ -589,8 +617,8 @@ function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummar
     overallConfidence: "medium",
     dataQuality: "medium",
     evidence: [
-      catalogEvidence(left, "fixture-backed-specs", "Core specs, retail price, aliases, and ownership notes are read from the curated watch fixture."),
-      catalogEvidence(right, "fixture-backed-specs", "Core specs, retail price, aliases, and ownership notes are read from the curated watch fixture."),
+      catalogEvidence(left, "fixture-backed-specs", "Core specs, retail price, aliases, ownership notes, and structured ownership profile are read from the curated watch fixture."),
+      catalogEvidence(right, "fixture-backed-specs", "Core specs, retail price, aliases, ownership notes, and structured ownership profile are read from the curated watch fixture."),
       derivedRuleEvidence(
         "watch:ownership-consequence-rules",
         "Consequence rules",

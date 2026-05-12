@@ -221,6 +221,20 @@ describe("resolveWatch", () => {
 });
 
 describe("compareWatches", () => {
+  it("requires structured ownership metadata for catalog watches", () => {
+    for (const watch of watchCatalog) {
+      expect(watch.ownershipProfile).toEqual({
+        serviceExpectation: expect.stringMatching(/^(low|medium|high)$/),
+        comfort: expect.stringMatching(/^(compact|balanced|substantial)$/),
+        durability: expect.stringMatching(/^(dress|everyday|tool)$/),
+        reliability: expect.stringMatching(/^(standard|strong|exceptional)$/),
+        resaleStability: expect.stringMatching(/^(soft|stable|strong)$/),
+        braceletQuality: expect.stringMatching(/^(basic|solid|excellent)$/),
+        strapVersatility: expect.stringMatching(/^(limited|moderate|high)$/)
+      });
+    }
+  });
+
   it("returns all required output sections", () => {
     const left = watchCatalog[0];
     const right = watchCatalog[1];
@@ -257,6 +271,9 @@ describe("compareWatches", () => {
       "Scratch anxiety",
       "Enthusiast bias check"
     ]);
+    expect(result.ownershipIntelligence[0]?.summary).toContain("Structured profile:");
+    expect(result.ownershipIntelligence[2]?.summary).toContain("service burden");
+    expect(result.ownershipIntelligence[3]?.summary).toContain("durability");
     expect(result.whoShouldBuyWhich.length).toBe(3);
     expect(result.overpricedFeatures.length).toBeGreaterThan(0);
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);
@@ -284,6 +301,23 @@ describe("compareWatches", () => {
       expect.objectContaining({
         kind: "derived_rule",
         label: "Wearability rule"
+      })
+    );
+  });
+
+  it("degrades visibly when structured ownership metadata is missing", () => {
+    const left = watchById("rolex-air-king-126900");
+    const right = {
+      ...watchById("rolex-explorer-124270"),
+      ownershipProfile: undefined
+    };
+    const result = compareWatches(left, right);
+
+    expect(flattenedComparisonCopy(result)).toContain("Structured ownership metadata is incomplete");
+    expect(result.ownershipIntelligence.flatMap((block) => block.evidence ?? [])).toContainEqual(
+      expect.objectContaining({
+        kind: "missing_data",
+        label: "Missing structured ownership profile"
       })
     );
   });

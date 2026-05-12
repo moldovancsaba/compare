@@ -14,6 +14,7 @@
 - Added verdict-led decision output fields and adapter-owned section labels so results show stronger choice, exception case, confidence rationale, and domain-appropriate section hierarchy.
 - Added resolver disambiguation suggestions so ambiguous or unsupported inputs fail closed with useful recovery options instead of guessing.
 - Refined the editorial UI hierarchy with a restrained surface system, clearer first-viewport positioning, and a decision scan panel for faster result trust.
+- Added structured watch ownership metadata for comfort, service burden, durability, reliability, resale stability, bracelet quality, and strap versatility.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

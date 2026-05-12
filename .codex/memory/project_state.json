@@ -82,6 +82,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #38 by tightening the editorial UI hierarchy, removing atmospheric decoration, reducing rounded demo styling, and adding a decision scan panel to comparison results"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #39 by adding structured watch ownership profiles, deterministic ownership-tradeoff copy, missing-profile degradation, tests, and documentation"
     }
   ],
   "blocked_items": []
