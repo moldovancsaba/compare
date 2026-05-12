@@ -34,9 +34,9 @@
   --status-warning-border: rgba(201, 162, 91, 0.34);
   --status-warning-bg: rgba(201, 162, 91, 0.1);
   --status-warning-text: #f5efdf;
-  --radius-card: 1.75rem;
-  --radius-panel: 2rem;
-  --radius-hero: 2.25rem;
+  --radius-card: 0.5rem;
+  --radius-panel: 0.75rem;
+  --radius-hero: 0.75rem;
 }
 
 * {
@@ -51,8 +51,10 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(201, 162, 91, 0.08), transparent 34%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas) 44%, var(--canvas-bottom) 100%);
+  background-size: 100% 100%, 44px 44px, 100% 100%;
   color: var(--paper);
   font-family: var(--font-sans), sans-serif;
 }
@@ -113,13 +115,13 @@ textarea::placeholder {
 
 .surface-form {
   border: 1px solid var(--border-soft);
-  border-radius: 1.875rem;
+  border-radius: var(--radius-panel);
   background: var(--black-20);
 }
 
 .surface-item {
   border: 1px solid var(--border-faint);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-card);
   background: var(--white-04);
 }
 
@@ -150,7 +152,7 @@ textarea::placeholder {
 
 .catalog-picker-name {
   border: 1px solid var(--border-soft);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: var(--white-05);
   padding: 0.75rem 1rem;
 }
@@ -162,7 +164,7 @@ textarea::placeholder {
 
 .field-input {
   border: 1px solid var(--border-soft);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: var(--white-06);
   color: var(--paper);
   outline: none;
@@ -206,18 +208,6 @@ textarea::placeholder {
 
 .placeholder-muted::placeholder {
   color: var(--muted);
-}
-
-.ambient-orb-gold {
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-}
-
-.ambient-orb-sky {
-  background: rgba(14, 165, 233, 0.1);
-}
-
-.ambient-orb-emerald {
-  background: rgba(16, 185, 129, 0.08);
 }
 
 /* Typography primitives */
@@ -282,14 +272,14 @@ textarea::placeholder {
 
 .status-danger {
   border: 1px solid var(--status-danger-border);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: var(--status-danger-bg);
   color: var(--status-danger-text);
 }
 
 .status-warning {
   border: 1px solid var(--status-warning-border);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: var(--status-warning-bg);
   color: var(--status-warning-text);
 }

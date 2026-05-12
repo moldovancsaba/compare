@@ -1,12 +1,6 @@
 {
   "highest_priority": [
     {
-      "github_issue": 38,
-      "title": "Establish adapter-aware editorial UI for comparison trust",
-      "priority": "high",
-      "reason": "The result page now has adapter-owned labels, confidence metadata, and resolver recovery; the next trust step is improving the editorial hierarchy around those signals."
-    },
-    {
       "github_issue": 39,
       "title": "Build reusable domain intelligence layer contracts",
       "priority": "high",
@@ -15,7 +9,7 @@
     {
       "github_issue": 40,
       "title": "Translate domain attributes into real-world consequences",
-      "priority": "medium",
+      "priority": "high",
       "reason": "Attribute-to-consequence translation is the next layer after the current adapter-specific reasoning proves the pattern."
     },
     {
@@ -23,6 +17,12 @@
       "title": "Add cross-domain strong opinion and recommendation system",
       "priority": "medium",
       "reason": "Once consequence contracts are stable, recommendation strength should become a shared cross-domain behavior."
+    },
+    {
+      "github_issue": 42,
+      "title": "Add user collection profiles",
+      "priority": "medium",
+      "reason": "Collection profiles can wait until the shared intelligence layer and recommendation contracts are cleaner."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

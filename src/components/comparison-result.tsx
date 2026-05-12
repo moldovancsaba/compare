@@ -137,6 +137,32 @@ function VerdictPanel({ result }: { result: GenericComparisonResult }) {
   );
 }
 
+function DecisionScanPanel({ result }: { result: GenericComparisonResult }) {
+  const limitation = result.evidenceSummary.limitations[0] ?? "No major evidence limitation is attached to this result.";
+
+  return (
+    <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <article className="surface-card p-4 shadow-none">
+        <p className="card-kicker mb-2">Recommendation</p>
+        <p className="title-section text-xl">{result.verdict.strongerChoice}</p>
+      </article>
+      <article className="surface-card p-4 shadow-none">
+        <p className="card-kicker mb-2">Confidence</p>
+        <p className="title-section text-xl capitalize">{result.verdict.confidence}</p>
+        <p className="body-copy body-copy-faint mt-2 text-xs leading-5">{result.verdict.confidenceRationale}</p>
+      </article>
+      <article className="surface-card p-4 shadow-none">
+        <p className="card-kicker mb-2">Data quality</p>
+        <p className="title-section text-xl capitalize">{result.evidenceSummary.dataQuality}</p>
+      </article>
+      <article className="surface-card p-4 shadow-none">
+        <p className="card-kicker mb-2">Caveat</p>
+        <p className="body-copy body-copy-strong text-sm leading-6">{limitation}</p>
+      </article>
+    </section>
+  );
+}
+
 function EvidenceSummaryPanel({ result }: { result: GenericComparisonResult }) {
   const summary = result.evidenceSummary;
 
@@ -540,6 +566,8 @@ export function ComparisonResultView({
           </div>
         </div>
       </section>
+
+      <DecisionScanPanel result={result} />
 
       <VerdictPanel result={result} />
 

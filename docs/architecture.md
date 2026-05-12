@@ -9,7 +9,7 @@ The current product-development initiative is generic comparison infrastructure 
 - `scope: future-domain` for services, SaaS, or later comparison domains.
 
 ## Application Layers
-- UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector and shareable saved comparison pages at `/compare/[slug]`.
+- UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector, editorial result hierarchy, decision scan panel, and shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with adapter suggestions, blocks duplicate entities, and returns comparison output.
 - Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, verdict-led decision output fields, universal evidence/confidence model, adapter-owned UI metadata, and adapter registry.
 - Domain logic: `src/lib/domains/watch-domain.ts` and `src/lib/domains/service-domain.ts` are the first adapters; `src/lib/services/compare-watches.ts` and `src/lib/services/compare-services.ts` remain domain-specific deterministic rule engines behind those adapters.

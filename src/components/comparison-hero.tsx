@@ -34,7 +34,7 @@ export function ComparisonHero({
     <div className="space-y-6">
       <div className="pill-accent inline-flex px-4 py-2 eyebrow eyebrow-xwide">Decision confidence, not spec tables</div>
       <div>
-        <h1 className="title-hero max-w-3xl">Compare anything through a trusted decision lens.</h1>
+        <h1 className="title-hero max-w-3xl">Decision intelligence for comparisons that deserve a real answer.</h1>
         <p className="body-copy body-copy-muted mt-5 max-w-2xl">
           {appName} compares domain entities through the same structure: verdict, tradeoffs, hidden downsides,
           evidence, and practical consequences. Watches and business services are the first live adapters.
