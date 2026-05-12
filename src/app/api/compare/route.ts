@@ -6,6 +6,7 @@ import { hashLogValue, logWarn } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
 import { compareWatches } from "@/lib/services/compare-watches";
+import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 
 const requestSchema = z.object({
@@ -103,6 +104,12 @@ export async function POST(request: Request) {
     }
 
     const comparison = compareWatches(left, right);
+    const submittedComparison = await persistSubmittedComparison({
+      left,
+      right,
+      deterministicResult: comparison,
+      clientKeyHash
+    });
     const brain = await enqueueTrinityCompareJob({
       left,
       right,
@@ -118,6 +125,7 @@ export async function POST(request: Request) {
       status: "completed",
       properties: {
         brainStatus: brain.status,
+        comparisonPersisted: submittedComparison.persisted,
         remainingRequests: rateLimit.remaining
       }
     });

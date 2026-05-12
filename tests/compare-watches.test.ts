@@ -8,6 +8,7 @@ import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observa
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
+import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 import type { ComparisonResult, WatchSpec } from "@/types/watch";
@@ -299,6 +300,7 @@ describe("telemetry", () => {
     expect(
       sanitizeTelemetryProperties({
         brainStatus: "queued",
+        comparisonPersisted: true,
         hasNote: true,
         leftInput: "Rolex Air-King",
         nested: { raw: "private" } as never,
@@ -307,6 +309,7 @@ describe("telemetry", () => {
       })
     ).toEqual({
       brainStatus: "queued",
+      comparisonPersisted: true,
       hasNote: true,
       remainingRequests: 12,
       traceAttached: false
@@ -327,6 +330,36 @@ describe("telemetry", () => {
           status: "completed"
         })
       ).resolves.toBe(false);
+    } finally {
+      if (previousMongoUri === undefined) {
+        delete process.env.MONGODB_URI;
+      } else {
+        process.env.MONGODB_URI = previousMongoUri;
+      }
+    }
+  });
+});
+
+describe("submitted comparison persistence", () => {
+  it("does not require MongoDB to keep comparison requests available", async () => {
+    const previousMongoUri = process.env.MONGODB_URI;
+    const left = watchById("rolex-air-king-126900");
+    const right = watchById("rolex-explorer-124270");
+
+    try {
+      delete process.env.MONGODB_URI;
+
+      await expect(
+        persistSubmittedComparison({
+          left,
+          right,
+          deterministicResult: compareWatches(left, right),
+          clientKeyHash: hashLogValue("203.0.113.40")
+        })
+      ).resolves.toEqual({
+        comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+        persisted: false
+      });
     } finally {
       if (previousMongoUri === undefined) {
         delete process.env.MONGODB_URI;

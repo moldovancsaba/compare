@@ -7,7 +7,8 @@
 - Added basic per-client `/api/compare` rate limiting with `429` and `Retry-After` responses.
 - Hardened watch resolution so generic brand-only and ambiguous model inputs fail closed instead of selecting the first catalog match.
 - Added MongoDB-backed allowlisted telemetry for compare outcomes, resolver misses, Brain polling, and feedback signals.
-- Preserved the current upstream audit blocker caused by the stable Next dependency tree.
+- Added MongoDB-backed saved-comparison persistence for submitted deterministic comparison results.
+- Cleared the prior Next/PostCSS audit blocker with a root PostCSS override.
 
 ## v0.1.0 - 2026-05-11
 - Replaced the previous repository contents with the initial {compare} codebase.

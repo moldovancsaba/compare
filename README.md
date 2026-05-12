@@ -38,6 +38,7 @@ Most comparison content is bloated, repetitive, and detached from real ownership
 - Mongoose connection utility for optional MongoDB Atlas persistence
 - Redacted JSON logging for compare, Brain, and feedback operational events
 - Optional MongoDB-backed analytics events for compare outcomes, resolver misses, Brain polls, and feedback signals
+- Optional MongoDB-backed saved comparisons for submitted deterministic comparison results
 - Vitest for unit tests
 
 ## Local setup
@@ -55,7 +56,7 @@ COMPARE_BRAIN_PROVIDER=
 
 Use `.env.example` as the template and copy values into `.env.local` for local development. Keep `.env.example` free of real credentials.
 
-V1 does not require MongoDB to run because it ships with a curated watch catalog. The database hook is present so later persistence can be added without changing the app shape.
+V1 does not require MongoDB to run because it ships with a curated watch catalog. When MongoDB is configured, submitted deterministic comparisons are upserted into `saved_comparisons` with submission metadata. When MongoDB is absent or unavailable, the compare API continues to return the immediate deterministic result.
 
 Set `COMPARE_BRAIN_PROVIDER=trinity_worker` only when MongoDB Atlas is configured and a local `{trinity}` worker is available. In that mode `/api/compare` still returns the deterministic comparison immediately, then queues an optional Brain job in MongoDB for local Trinity enrichment.
 
@@ -118,7 +119,9 @@ Comparison-output regression coverage lives in `tests/compare-watches.test.ts`. 
 
 Structured operational logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers so production failures can be diagnosed without logging user-submitted comparison text or secrets.
 
-Durable telemetry lives in `src/lib/observability/telemetry.ts` and writes allowlisted event metadata to `analytics_events` only when MongoDB is configured. It records statuses and watch IDs, hashed client identifiers, feedback signal categories, Brain status, and resolver-miss flags; raw user inputs and notes are intentionally excluded.
+Durable submitted-comparison persistence lives in `src/lib/services/saved-comparisons.ts` and writes deterministic comparison results plus submission counts to `saved_comparisons` only when MongoDB is configured. The write is best-effort and nonblocking so the main comparison path remains available offline.
+
+Durable telemetry lives in `src/lib/observability/telemetry.ts` and writes allowlisted event metadata to `analytics_events` only when MongoDB is configured. It records statuses and watch IDs, hashed client identifiers, feedback signal categories, Brain status, comparison persistence status, and resolver-miss flags; raw user inputs and notes are intentionally excluded.
 
 ## Codex automation
 {compare} uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.

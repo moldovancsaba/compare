@@ -17,6 +17,7 @@ export type TelemetryEventInput = {
 
 const allowedPropertyKeys = new Set([
   "brainStatus",
+  "comparisonPersisted",
   "feedbackSignal",
   "hasNote",
   "leftResolved",
