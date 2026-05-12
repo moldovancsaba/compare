@@ -1,25 +1,27 @@
 # Product Strategy
 
 ## Positioning
-{compare} is not a generic AI comparison tool. The commercially viable product is high-trust buying intelligence for expensive enthusiast purchases, starting with mechanical watches.
+{compare} is not a generic AI comparison tool. The commercially viable product is high-trust comparison intelligence: generic comparison infrastructure with domain-specific adapters for products, services, and other decision domains.
 
-The product competes with decision fatigue, not with review sites. Users should leave with fewer open tabs, less uncertainty, and a clearer sense of which purchase will create less regret.
+The product competes with decision fatigue, not with review sites. Users should leave with fewer open tabs, less uncertainty, and a clearer sense of which choice will create less regret.
 
 ## Mission
-Become the shortest path to purchase confidence for watch buyers.
+Become the shortest path to decision confidence for high-consideration choices.
 
 ## What Users Pay For
 Users do not pay for specs, summaries, or AI output. They pay for:
-- Confidence before an expensive purchase.
+- Confidence before an expensive or risky decision.
 - Reduced regret risk.
 - Faster decisions.
 - Identity validation.
-- Collection fit.
-- Long-term ownership clarity.
+- Fit with their context.
+- Long-term consequence clarity.
 
 ## Strategic Constraints
-- Watches only until the watch experience feels obsessively good.
-- Depth beats breadth.
+- Generic infrastructure, domain-specific intelligence.
+- Every domain must be an adapter with its own schema, resolver, rules, examples, data policy, and tests.
+- Watches remain the first adapter and quality benchmark, not the product boundary.
+- Depth beats breadth inside each adapter.
 - Trust beats traffic.
 - Editorial judgment beats generic completion.
 - Automation must amplify product truth, not replace it.
@@ -27,7 +29,7 @@ Users do not pay for specs, summaries, or AI output. They pay for:
 
 ## Free Product
 The free product should build trust and discovery:
-- Basic watch comparisons.
+- Basic comparisons in supported domains.
 - Shareable saved comparison pages.
 - Limited history.
 - Limited monthly comparisons.
@@ -35,30 +37,30 @@ The free product should build trust and discovery:
 
 ## Premium Product
 Premium should sell purchase confidence, not feature volume:
-- Ownership intelligence for service, scratches, resale, liquidity, and comfort.
-- Personal recommendation profiles for wrist presence, visual clutter, versatility, and brand signaling.
-- Collection planning for overlap detection, missing categories, rotation balance, and purchase sequencing.
-- Upgrade analysis that explains whether a new watch meaningfully changes ownership.
-- Long-term ownership simulation for service cost, durability risk, resale behavior, and market liquidity.
+- Advanced domain intelligence, such as ownership intelligence for watches and switching-cost intelligence for services.
+- Personal recommendation profiles that capture preference, context, risk tolerance, and constraints.
+- Portfolio or stack planning where the domain supports it.
+- Upgrade/change analysis that explains whether a new choice meaningfully improves the user's situation.
+- Long-term consequence simulation with clearly labeled uncertainty.
 
 ## Moat
 The moat is not AI. The moat is:
-- Proprietary ownership intelligence.
-- Structured enthusiast ontology.
+- Proprietary domain intelligence.
+- Structured comparison ontology.
 - Consistently trusted recommendations.
 - Accumulated user preference profiles.
 - Auditable editorial provenance.
 
 ## Anti-Goals
 - Do not become an AI-generated review site.
-- Do not chase broad product categories before watches are excellent.
+- Do not add domains without adapter-level depth and data governance.
 - Do not optimize for affiliate clicks over trust.
 - Do not present unsupported confidence.
 - Do not let generic LLM phrasing become the product voice.
 
 ## Near-Term Product Priorities
-1. Add source-backed editorial provenance for ownership claims.
-2. Improve watch resolver depth and catalog reference coverage.
-3. Add collection-profile primitives.
-4. Add "should I upgrade?" comparison mode.
-5. Add ownership-cost and resale-risk fields with clearly labeled uncertainty.
+1. Define the domain adapter SDK and conformance test harness.
+2. Add a generic domain selector and adapter-aware input UX.
+3. Create the universal evidence and confidence model.
+4. Build the first non-watch services comparison adapter.
+5. Define domain data source governance.

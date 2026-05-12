@@ -3,6 +3,11 @@
 ## Product Architecture
 {compare} is a domain-based comparison system. The live V1 adapter compares mechanical watches by real ownership consequences, but the foundation is no longer watch-shaped: inputs resolve to generic comparison entities, domain adapters own product/service/category-specific resolution, and the API/UI consume a shared comparison result contract.
 
+The current product-development initiative is generic comparison infrastructure with domain-specific adapters. GitHub Project 16 is the SSOT for that initiative. Board items should be labeled by scope:
+- `scope: core-platform` for generic API, UI shell, persistence, evidence, adapter SDK, and shared tests.
+- `scope: watch-adapter` for watch-specific resolver, catalog, ownership, and recommendation work.
+- `scope: future-domain` for services, SaaS, or later comparison domains.
+
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`, including shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with supported examples, blocks duplicate entities, and returns comparison output.
@@ -29,6 +34,7 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 ## Invariants
 - The comparison foundation must stay domain-neutral; product/service/category specifics belong in adapters.
 - The live V1 adapter is mechanical watches.
+- New domains must enter through adapter registration, conformance tests, and data governance rather than conditional logic in the API or UI shell.
 - Agents may commit and push verified changes directly to `origin/main` without per-step approval.
 - Agents may not force push or delete production code autonomously.
 - Operational logs must preserve event context without exposing raw user-submitted comparison text, notes, credentials, or client IP addresses.

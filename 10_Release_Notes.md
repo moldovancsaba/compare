@@ -5,6 +5,7 @@
 - Moved the watch-specific resolver and rule engine behind the first domain adapter while preserving the existing watch comparison behavior.
 - Updated `/api/compare`, saved comparison persistence, Brain queue payloads, feedback, and result rendering to use generic entity/domain fields with watch IDs retained only for compatibility.
 - Updated the homepage/form copy to describe the domain-based foundation while keeping mechanical watches as the first live adapter.
+- Re-centered Project 16 around the generic comparison infrastructure initiative, with labels for core platform, watch adapter, and future-domain work.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

@@ -1,35 +1,35 @@
 {
   "highest_priority": [
     {
-      "github_issue": 35,
-      "title": "Harden the comparison engine for deterministic trust",
+      "github_issue": 59,
+      "title": "Define the domain adapter SDK and conformance test harness",
       "priority": "high",
-      "reason": "Phase 0 trust work is now the highest-leverage path because output reliability must lead the product roadmap."
+      "reason": "The adapter foundation exists, but future domains need a documented SDK and conformance tests before new adapters are added."
     },
     {
-      "github_issue": 36,
-      "title": "Improve watch resolver disambiguation and typo tolerance",
+      "github_issue": 60,
+      "title": "Add generic domain selector and adapter-aware input UX",
       "priority": "high",
-      "reason": "Resolver misses destroy trust before comparison quality is visible, especially for enthusiast references and variants."
+      "reason": "The UI must expose domains and adapter examples instead of behaving like a watch-only shell."
     },
     {
-      "github_issue": 37,
-      "title": "Rewrite comparison output around purchase confidence",
+      "github_issue": 61,
+      "title": "Create a universal evidence and confidence model",
       "priority": "high",
-      "reason": "The comparison result must feel like buying intelligence, not generic summary text."
+      "reason": "Trust across arbitrary products, services, and domains depends on visible provenance, data quality, and uncertainty."
     },
     {
-      "github_issue": 38,
-      "title": "Establish premium editorial UI for comparison trust",
+      "github_issue": 62,
+      "title": "Build the first non-watch services comparison adapter",
       "priority": "medium",
-      "reason": "The interface needs credible visual hierarchy to support the trust-first product direction."
+      "reason": "A services adapter proves the platform can compare non-product domains without hard-coded watch assumptions."
     },
     {
-      "github_issue": 39,
-      "title": "Build the core ownership intelligence layer",
+      "github_issue": 63,
+      "title": "Define domain data source governance",
       "priority": "medium",
-      "reason": "Ownership metadata is the foundation for consequence-led recommendations and later collector intelligence."
+      "reason": "Each adapter needs clear source, freshness, and missing-data rules before the platform broadens."
     }
   ],
-  "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with Phase 0 trust items before broader roadmap work."
+  "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."
 }

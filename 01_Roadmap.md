@@ -1,114 +1,116 @@
 # {compare} Product Roadmap
 
 ## Positioning
-{compare} is high-trust buying intelligence for enthusiast products, starting with mechanical watches.
+{compare} is high-trust comparison intelligence for products, services, and other decision domains.
+
+The core product is not a watch app. The core product is a domain-based comparison system:
+- Generic comparison infrastructure.
+- Domain-specific adapters.
+- Evidence-backed verdicts.
+- Practical tradeoff reasoning.
+
+Mechanical watches remain the first live adapter and quality benchmark, but they are not the system boundary.
 
 It is not:
 - A generic AI comparison tool.
 - SEO review spam.
 - A universal shopping assistant.
 
-The roadmap is ordered by trust creation, differentiation, retention, monetization, and defensibility. The first milestone is simple: users trust the comparison verdict.
+The roadmap is ordered by platform generality, trust creation, differentiation, retention, monetization, and defensibility. The first milestone is simple: users trust the comparison verdict in one adapter while the system can safely add another adapter without rewriting the core.
 
-## Phase 0: Stabilization
-Goal: stop the app feeling like a prototype.
+## Phase 0: Domain Platform Stabilization
+Goal: stop the app being product-hardcoded and make the adapter architecture real.
 
 Success criteria:
-- Users trust the output enough to retry comparisons.
-- Users share saved results.
-- Users bookmark the site.
+- The API, UI shell, persistence, Brain queue, feedback, and telemetry operate on generic entities/domains.
+- Watches run as the first adapter, not as the core architecture.
+- New domains can be added through a documented adapter contract.
+- Users understand which comparison domains are currently supported.
 
-### 0.1 Comparison Engine Hardening
+### 0.1 Domain Adapter SDK and Conformance Tests
 Deliverables:
-- Proper error handling.
-- Deterministic comparison outputs.
-- Better comparison formatting.
-- Confidence scoring.
-- Structured outputs.
+- Adapter contract.
+- Required adapter metadata.
+- Resolver conformance tests.
+- Result-shape conformance tests.
+- Watch adapter as the reference adapter.
 
-Why it matters: inconsistent or synthetic-feeling output kills trust before any premium feature can matter.
+Why it matters: without an SDK, every new comparison category becomes a one-off rewrite.
 
-### 0.2 Watch Resolver Improvement
+### 0.2 Generic Domain Selector and Adapter-Aware Input UX
+Deliverables:
+- Domain selector.
+- Adapter-provided input labels.
+- Adapter-provided examples.
+- Generic unsupported-domain states.
+- Generic unresolved-input recovery.
+
+Why it matters: users need to understand what {compare} can compare right now without the UI pretending every domain already exists.
+
+### 0.3 Universal Evidence and Confidence Model
+Deliverables:
+- Claim provenance.
+- Source references.
+- Data freshness.
+- Confidence levels.
+- Inference labels.
+
+Why it matters: comparing anything only works if users trust why a conclusion exists.
+
+### 0.4 Domain-Neutral Output Hardening
+Deliverables:
+- Deterministic comparison sections.
+- Adapter-specific section labels.
+- Stable verdict structure.
+- Duplicate-entity handling.
+- Generic persistence and feedback contracts.
+
+Why it matters: the foundation must not regress into watch-specific assumptions.
+
+## Phase 1: Second Domain Proof
+Goal: prove {compare} can compare non-watch, non-product domains without weakening trust.
+
+### 1.1 Services/SaaS Adapter
+Deliverables:
+- Service entity schema.
+- Pricing and contract-risk attributes.
+- Switching-cost reasoning.
+- Support/integration tradeoffs.
+- Deterministic services comparison fixtures.
+
+Why it matters: services prove the system can compare beyond physical products.
+
+### 1.2 Domain Data Source Governance
+Deliverables:
+- Source tiers.
+- Freshness rules.
+- Manual curation policy.
+- Missing-data behavior.
+- Adapter data requirements.
+
+Why it matters: broad comparison dies if each adapter invents its own data standards.
+
+### 1.3 Cross-Domain Resolver Disambiguation
 Deliverables:
 - Fuzzy matching.
-- Nickname support.
-- Reference-number support.
 - Typo tolerance.
-- Disambiguation prompts.
+- Entity aliases.
+- Ambiguous result prompts.
+- Adapter-specific suggestions.
 
-Example:
-- Did you mean Rolex Explorer 36?
-- Did you mean Rolex Explorer 40?
+Why it matters: search failure destroys trust in every domain.
 
-Why it matters: search failure destroys trust immediately.
-
-### 0.3 Comparison Output Rewrite
+### 1.4 Domain-Specific Intelligence Packs
 Deliverables:
-- Instant Verdict.
-- Daily Wear Experience.
-- Ownership Tradeoffs.
-- Best For.
-- Hidden Downsides.
-- Marketing vs Reality.
+- Watch ownership intelligence.
+- Service switching-cost intelligence.
+- Domain-specific tradeoff dimensions.
+- Reusable scoring primitives.
 
-Why it matters: the output structure becomes the product identity.
+Why it matters: the product should be generic in infrastructure, not generic in reasoning.
 
-### 0.4 Premium Editorial UI
-Deliverables:
-- Typography overhaul.
-- Spacing refinement.
-- Luxury editorial aesthetic.
-- Stronger comparison hierarchy.
-- Visual confidence.
-
-Why it matters: luxury and enthusiast users judge quality visually.
-
-## Phase 1: Trust Engine
-Goal: make users feel the app actually understands watches.
-
-### 1.1 Ownership Intelligence Layer
-Deliverables:
-- Service-cost expectations.
-- Scratch visibility.
-- Comfort profile.
-- Movement reliability.
-- Resale stability.
-- Bracelet quality.
-- Strap versatility.
-
-Why it matters: this is where the app becomes useful instead of descriptive.
-
-### 1.2 Real-World Consequence Engine
-Deliverables:
-- Wearability implications.
-- Comfort implications.
-- Daily usability implications.
-- Versatility implications.
-- Ownership-friction implications.
-
-Example: not "41 mm case"; instead, "wears large on sub-17 cm wrists and sits high under cuffs."
-
-### 1.3 Strong Opinion System
-Deliverables:
-- Rank.
-- Conclude.
-- Recommend.
-- Reject.
-
-Example: "The Explorer is objectively the stronger one-watch collection choice."
-
-Why it matters: weak conclusions feel useless.
-
-### 1.4 Comparison Confidence Score
-Deliverables:
-- Certainty level.
-- Data quality.
-- Ownership confidence.
-
-Why it matters: confidence is trust only when uncertainty is visible.
-
-## Phase 2: Collector Intelligence
-Goal: transition from comparison tool to ownership advisor.
+## Phase 2: Watch Adapter Depth
+Goal: keep watches as the quality benchmark while the platform generalizes.
 
 ### 2.1 User Collection Profiles
 Deliverables:
