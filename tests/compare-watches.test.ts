@@ -174,6 +174,18 @@ describe("resolveWatch", () => {
     expect(match?.id).toBe("rolex-explorer-124270");
   });
 
+  it("tolerates a single typo in a distinctive model token", () => {
+    const match = resolveWatch("Rolex Explrer");
+
+    expect(match?.id).toBe("rolex-explorer-124270");
+  });
+
+  it("tolerates a single typo in a distinctive alias token", () => {
+    const match = resolveWatch("Tudor Pelgos 39");
+
+    expect(match?.id).toBe("tudor-pelagos-39");
+  });
+
   it("does not resolve generic brand-only input", () => {
     const match = resolveWatch("Rolex");
 
@@ -182,6 +194,12 @@ describe("resolveWatch", () => {
 
   it("does not pick a watch when the model input is ambiguous", () => {
     const match = resolveWatch("Tudor Black Bay");
+
+    expect(match).toBeNull();
+  });
+
+  it("keeps ambiguous family inputs unresolved even with typo-tolerant scoring", () => {
+    const match = resolveWatch("Tudor Blak Bay");
 
     expect(match).toBeNull();
   });

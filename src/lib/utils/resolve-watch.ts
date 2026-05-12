@@ -40,6 +40,51 @@ function hasEveryInputToken(inputTokens: Set<string>, terms: string[]): boolean 
   return Array.from(inputTokens).every((token) => terms.includes(token));
 }
 
+function editDistance(left: string, right: string): number {
+  const rows = Array.from({ length: left.length + 1 }, (_, index) => [index]);
+
+  for (let column = 1; column <= right.length; column += 1) {
+    rows[0][column] = column;
+  }
+
+  for (let row = 1; row <= left.length; row += 1) {
+    for (let column = 1; column <= right.length; column += 1) {
+      const cost = left[row - 1] === right[column - 1] ? 0 : 1;
+      rows[row][column] = Math.min(
+        rows[row - 1][column] + 1,
+        rows[row][column - 1] + 1,
+        rows[row - 1][column - 1] + cost
+      );
+    }
+  }
+
+  return rows[left.length][right.length];
+}
+
+function isTypoMatch(inputToken: string, targetToken: string): boolean {
+  if (inputToken === targetToken) {
+    return true;
+  }
+
+  if (inputToken.length < 4 || targetToken.length < 4) {
+    return false;
+  }
+
+  return editDistance(inputToken, targetToken) <= 1;
+}
+
+function countMatchedTokens(inputTokens: Set<string>, targetTokens: string[], typoTolerance = false): number {
+  return targetTokens.filter((targetToken) =>
+    typoTolerance
+      ? Array.from(inputTokens).some((inputToken) => isTypoMatch(inputToken, targetToken))
+      : inputTokens.has(targetToken)
+  ).length;
+}
+
+function hasEveryFuzzyToken(source: Set<string>, terms: string[]): boolean {
+  return terms.every((term) => Array.from(source).some((token) => isTypoMatch(token, term)));
+}
+
 function scoreWatch(input: string, watch: WatchSpec): number {
   const normalizedInput = normalize(input);
   const inputTokens = new Set(tokenize(input));
@@ -68,23 +113,27 @@ function scoreWatch(input: string, watch: WatchSpec): number {
 
   if (aliasTokenSets.some((tokens) => hasEveryToken(inputTokens, tokens))) {
     score += 30;
+  } else if (aliasTokenSets.some((tokens) => hasEveryFuzzyToken(inputTokens, tokens))) {
+    score += 24;
   }
 
   if (hasEveryToken(inputTokens, brandTokens)) {
     score += 8;
+  } else if (hasEveryFuzzyToken(inputTokens, brandTokens)) {
+    score += 6;
   }
 
-  const matchedModelTokens = modelTokens.filter((token) => inputTokens.has(token)).length;
+  const matchedModelTokens = countMatchedTokens(inputTokens, modelTokens, true);
   if (matchedModelTokens === modelTokens.length) {
     score += 24;
   } else if (matchedModelTokens > 0) {
     score += matchedModelTokens * 4;
   }
 
-  const matchedSlugTokens = slugTokens.filter((token) => inputTokens.has(token)).length;
+  const matchedSlugTokens = countMatchedTokens(inputTokens, slugTokens);
   score += matchedSlugTokens * 2;
 
-  const matchedUrlTokens = productUrlTokens.filter((token) => inputTokens.has(token)).length;
+  const matchedUrlTokens = countMatchedTokens(inputTokens, productUrlTokens);
   score += matchedUrlTokens;
 
   if (hasEveryInputToken(inputTokens, [...brandTokens, ...modelTokens, ...referenceTokens, ...slugTokens, ...productUrlTokens])) {
