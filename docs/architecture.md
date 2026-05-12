@@ -4,11 +4,11 @@
 {compare} is a narrow V1 product for comparing mechanical watches by real ownership consequences. The user enters two supported watch names or product URLs, the app resolves them against a curated catalog, and the comparison engine returns deterministic sections for practical tradeoffs.
 
 ## Application Layers
-- UI: Next.js App Router pages and React components in `src/app` and `src/components`.
+- UI: Next.js App Router pages and React components in `src/app` and `src/components`, including shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, resolves watches, rejects ambiguous inputs, blocks duplicate comparisons, and returns comparison output.
 - Domain logic: `src/lib/services/compare-watches.ts` builds deterministic comparison sections.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated catalog.
-- Persistence: `src/lib/db.ts` connects to optional MongoDB Atlas. Submitted deterministic comparisons are best-effort upserted to `saved_comparisons`, Brain jobs use `compare_jobs` and `comparison_traces`, feedback uses `comparison_feedback`, and telemetry uses `analytics_events`.
+- Persistence: `src/lib/db.ts` connects to optional MongoDB Atlas. Submitted deterministic comparisons are best-effort upserted to `saved_comparisons` with stable public slugs, Brain jobs use `compare_jobs` and `comparison_traces`, feedback uses `comparison_feedback`, and telemetry uses `analytics_events`.
 - Observability: `src/lib/observability/logger.ts` emits structured JSON events with redaction for user inputs, URLs/URIs, notes, credentials, authorization-like fields, and raw error messages. `src/lib/observability/telemetry.ts` optionally records durable allowlisted analytics events in MongoDB when Atlas is configured.
 - Tests: Vitest currently covers resolver basics, ambiguity rejection, comparison output shape, and `/api/compare` route behavior.
 
@@ -35,6 +35,6 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 ## Current High-Risk Areas
 - Watch resolution is a trust-critical path and still needs broader fuzzy matching coverage.
 - Compare API rate limiting is currently in-memory per runtime instance; move it to shared infrastructure before scaled public traffic.
-- Saved comparisons now persist submitted deterministic results when MongoDB is configured; the next product step is stable public slugs and shareable saved-comparison pages.
+- Saved comparisons now persist submitted deterministic results and stable public routes when MongoDB is configured; the next product step is richer SEO metadata and aggregation over saved-page demand.
 - Durable telemetry currently captures compare outcomes, resolver misses, Brain polls, persistence status, and feedback signals; the next analytics step is adding product-facing aggregation views and retention policy.
 - Project board mutation depends on valid GitHub project tooling.

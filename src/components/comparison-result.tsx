@@ -283,7 +283,15 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
   );
 }
 
-export function ComparisonResultView({ brain, result }: { brain: BrainState | null; result: ComparisonResult }) {
+export function ComparisonResultView({
+  brain,
+  result,
+  savedComparisonPath
+}: {
+  brain: BrainState | null;
+  result: ComparisonResult;
+  savedComparisonPath?: string | null;
+}) {
   return (
     <div className="space-y-8">
       <section className="surface-hero grid gap-4 p-7 lg:grid-cols-[1.1fr_0.9fr]">
@@ -295,6 +303,11 @@ export function ComparisonResultView({ brain, result }: { brain: BrainState | nu
           <p className="body-copy mt-4 max-w-2xl">
             {appName} translates spec deltas into ownership consequences so you can decide faster and ignore the fluff.
           </p>
+          {savedComparisonPath ? (
+            <a className="pill-accent eyebrow eyebrow-tight mt-5 inline-flex px-4 py-2" href={savedComparisonPath}>
+              Open saved comparison
+            </a>
+          ) : null}
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           {result.signalVsFluff.map((item) => (

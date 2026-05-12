@@ -132,7 +132,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       comparison,
-      brain
+      brain,
+      savedComparison: {
+        publicSlug: submittedComparison.publicSlug,
+        path: `/compare/${submittedComparison.publicSlug}`,
+        persisted: submittedComparison.persisted
+      }
     });
   } catch (error) {
     logWarn("compare.invalid_request", {

@@ -5,6 +5,11 @@ const GENERIC_COMPARE_ERROR = "The comparison request failed. Try again.";
 export interface ComparisonResponse {
   comparison: ComparisonResult;
   brain: BrainState;
+  savedComparison?: {
+    publicSlug: string;
+    path: string;
+    persisted: boolean;
+  };
 }
 
 export type ComparisonClientResult = ComparisonResponse | { error: string };

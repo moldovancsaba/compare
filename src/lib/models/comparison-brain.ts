@@ -49,6 +49,7 @@ const comparisonTraceSchema = new Schema(
 const savedComparisonSchema = new Schema(
   {
     comparisonRef: { type: String, required: true, unique: true },
+    publicSlug: { type: String, unique: true, sparse: true },
     leftWatchId: { type: String, required: true, index: true },
     rightWatchId: { type: String, required: true, index: true },
     deterministicResult: { type: Schema.Types.Mixed, required: true },

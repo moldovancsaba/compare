@@ -21,6 +21,7 @@ export function ComparisonForm() {
   const [rightInput, setRightInput] = useState("Rolex Explorer");
   const [result, setResult] = useState<ComparisonResult | null>(null);
   const [brain, setBrain] = useState<BrainState | null>(null);
+  const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -63,12 +64,14 @@ export function ComparisonForm() {
     if (isErrorResponse(payload)) {
       setResult(null);
       setBrain(null);
+      setSavedComparisonPath(null);
       setError(payload.error);
       return;
     }
 
     setResult(payload.comparison);
     setBrain(payload.brain);
+    setSavedComparisonPath(payload.savedComparison?.persisted ? payload.savedComparison.path : null);
   }
 
   function handleSubmit(formData: FormData) {
@@ -104,7 +107,7 @@ export function ComparisonForm() {
         />
       </section>
 
-      {result ? <ComparisonResultView brain={brain} result={result} /> : null}
+      {result ? <ComparisonResultView brain={brain} result={result} savedComparisonPath={savedComparisonPath} /> : null}
     </div>
   );
 }

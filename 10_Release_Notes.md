@@ -8,6 +8,7 @@
 - Hardened watch resolution so generic brand-only and ambiguous model inputs fail closed instead of selecting the first catalog match.
 - Added MongoDB-backed allowlisted telemetry for compare outcomes, resolver misses, Brain polling, and feedback signals.
 - Added MongoDB-backed saved-comparison persistence for submitted deterministic comparison results.
+- Added stable `/compare/[slug]` pages for MongoDB-backed saved comparison results.
 - Cleared the prior Next/PostCSS audit blocker with a root PostCSS override.
 
 ## v0.1.0 - 2026-05-11

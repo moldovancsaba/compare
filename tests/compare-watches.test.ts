@@ -8,7 +8,11 @@ import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observa
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
-import { persistSubmittedComparison } from "@/lib/services/saved-comparisons";
+import {
+  buildSavedComparisonSlug,
+  parseSavedComparisonSlug,
+  persistSubmittedComparison
+} from "@/lib/services/saved-comparisons";
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { resolveWatch } from "@/lib/utils/resolve-watch";
 import type { ComparisonResult, WatchSpec } from "@/types/watch";
@@ -341,6 +345,19 @@ describe("telemetry", () => {
 });
 
 describe("submitted comparison persistence", () => {
+  it("builds stable saved-comparison slugs from catalog slugs", () => {
+    const left = watchById("rolex-air-king-126900");
+    const right = watchById("rolex-explorer-124270");
+
+    expect(buildSavedComparisonSlug(left, right)).toBe("rolex-air-king-126900-vs-rolex-explorer-124270");
+    expect(parseSavedComparisonSlug("rolex-air-king-126900-vs-rolex-explorer-124270")).toEqual({
+      leftWatchId: "rolex-air-king-126900",
+      rightWatchId: "rolex-explorer-124270"
+    });
+    expect(parseSavedComparisonSlug("rolex-explorer-124270-vs-rolex-explorer-124270")).toBeNull();
+    expect(parseSavedComparisonSlug("not-a-comparison")).toBeNull();
+  });
+
   it("does not require MongoDB to keep comparison requests available", async () => {
     const previousMongoUri = process.env.MONGODB_URI;
     const left = watchById("rolex-air-king-126900");
@@ -358,6 +375,7 @@ describe("submitted comparison persistence", () => {
         })
       ).resolves.toEqual({
         comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
+        publicSlug: "rolex-air-king-126900-vs-rolex-explorer-124270",
         persisted: false
       });
     } finally {
@@ -389,6 +407,11 @@ describe("POST /api/compare", () => {
     expect(payload.comparison.left.id).toBe("rolex-air-king-126900");
     expect(payload.comparison.right.id).toBe("rolex-explorer-124270");
     expect(payload.comparison.keyDifferences.length).toBeGreaterThan(0);
+    expect(payload.savedComparison).toEqual({
+      publicSlug: "rolex-air-king-126900-vs-rolex-explorer-124270",
+      path: "/compare/rolex-air-king-126900-vs-rolex-explorer-124270",
+      persisted: expect.any(Boolean)
+    });
     expect(payload.brain).toEqual({
       status: "disabled",
       comparisonRef: "compare:rolex-air-king-126900:vs:rolex-explorer-124270",
