@@ -240,7 +240,7 @@ export function ComparisonForm() {
 
   return (
     <div className="space-y-10">
-      <section className="surface-panel surface-shell grid gap-8 p-7 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="surface-panel surface-shell grid gap-8 p-7 layout-form-shell">
         <ComparisonHero onApplyPreset={applyPreset} />
         <ComparisonInputForm
           activeDomain={activeDomain}

@@ -43,7 +43,7 @@ function evidenceToneClass(confidence: EvidenceConfidence): string {
     case "medium":
       return "pill-muted";
     case "low":
-      return "border border-[rgba(232,217,194,0.2)] bg-[rgba(120,53,15,0.28)] text-[var(--paper)]";
+      return "pill-low-confidence";
   }
 }
 
@@ -114,10 +114,10 @@ function BuyerCard({
 function VerdictPanel({ result }: { result: GenericComparisonResult }) {
   return (
     <section className="surface-card p-6">
-      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="grid gap-6 layout-verdict">
         <div>
           <p className="eyebrow eyebrow-wide">Instant verdict</p>
-          <h3 className="mt-3 font-serif text-3xl leading-tight text-[var(--paper)]">{result.verdict.headline}</h3>
+          <h3 className="title-verdict mt-3">{result.verdict.headline}</h3>
           <p className="body-copy body-copy-muted mt-4 text-sm">{result.verdict.summary}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{result.verdict.confidence} confidence</span>
@@ -250,7 +250,7 @@ function EvidenceSummaryPanel({ result }: { result: GenericComparisonResult }) {
             <p className="body-copy body-copy-strong text-sm">{item.detail}</p>
             {item.source?.url ? (
               <a
-                className="body-copy body-copy-soft mt-3 inline-flex text-xs underline decoration-[rgba(232,217,194,0.3)] underline-offset-4"
+                className="source-link mt-3 inline-flex text-xs"
                 href={item.source.url}
                 rel="noreferrer"
                 target="_blank"
@@ -404,7 +404,7 @@ function BrainStatusCard({
         </div>
       </div>
 
-      <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
+      <div className="mt-5 grid gap-4 layout-two-even">
         <article className="surface-item p-4">
           <p className="card-kicker mb-2">Why this pick</p>
           <p className="body-copy body-copy-strong text-sm">
@@ -591,7 +591,7 @@ export function ComparisonResultView({
 }) {
   return (
     <div className="space-y-8">
-      <section className="surface-hero grid gap-4 p-7 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="surface-hero grid gap-4 p-7 layout-result-hero">
         <div>
           <p className="eyebrow eyebrow-wide">Comparison ready</p>
           <h2 className="title-section mt-4 text-4xl">

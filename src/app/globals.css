@@ -34,6 +34,10 @@
   --status-warning-border: rgba(201, 162, 91, 0.34);
   --status-warning-bg: rgba(201, 162, 91, 0.1);
   --status-warning-text: #f5efdf;
+  --status-low-border: rgba(232, 217, 194, 0.2);
+  --status-low-bg: rgba(120, 53, 15, 0.28);
+  --link-underline: rgba(232, 217, 194, 0.3);
+  --divider-muted: rgba(232, 217, 194, 0.16);
   --radius-card: 0.5rem;
   --radius-panel: 0.75rem;
   --radius-hero: 0.75rem;
@@ -143,6 +147,13 @@ textarea::placeholder {
   color: var(--accent);
 }
 
+.pill-low-confidence {
+  border: 1px solid var(--status-low-border);
+  border-radius: 999px;
+  background: var(--status-low-bg);
+  color: var(--paper);
+}
+
 .catalog-picker-row {
   display: grid;
   grid-template-columns: 1fr minmax(9.5rem, 11rem);
@@ -196,6 +207,44 @@ textarea::placeholder {
   opacity: 0.7;
 }
 
+.divider-muted {
+  border-top: 1px solid var(--divider-muted);
+}
+
+@media (min-width: 1024px) {
+  .layout-form-shell {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .layout-result-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .layout-verdict {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .layout-two-even {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .layout-collection-summary {
+    grid-template-columns: 1fr 0.7fr;
+  }
+
+  .layout-collection-pick {
+    grid-template-columns: 1fr 0.55fr;
+  }
+
+  .layout-collection-add {
+    grid-template-columns: 1fr auto;
+  }
+
+  .layout-collection-row {
+    grid-template-columns: 1fr 0.45fr auto;
+  }
+}
+
 @media (max-width: 640px) {
   .catalog-picker-row {
     grid-template-columns: 1fr;
@@ -240,6 +289,13 @@ textarea::placeholder {
   font-size: 1.5rem;
 }
 
+.title-verdict {
+  color: var(--paper);
+  font-family: var(--font-serif), serif;
+  font-size: 1.875rem;
+  line-height: 1.25;
+}
+
 .body-copy {
   font-size: 1rem;
   line-height: 2rem;
@@ -268,6 +324,13 @@ textarea::placeholder {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+}
+
+.source-link {
+  color: var(--text-soft);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-underline);
+  text-underline-offset: 4px;
 }
 
 .status-danger {

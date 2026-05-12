@@ -6,9 +6,10 @@ This project keeps visual primitives in `src/app/globals.css` and avoids encodin
 
 - Color tokens: `--canvas`, `--paper`, `--muted`, `--accent`, semantic text tokens, and status tokens.
 - Surface classes: `surface-card`, `surface-panel`, `surface-hero`, `surface-form`, `surface-item`.
-- Typography classes: `eyebrow`, `title-hero`, `title-section`, `body-copy`, `card-kicker`.
-- Controls: `pill-accent`, `pill-muted`, `field-input`, `action-button`.
-- Feedback: `status-danger`.
+- Layout classes: `layout-form-shell`, `layout-result-hero`, `layout-verdict`, `layout-two-even`, and `layout-collection-*`.
+- Typography classes: `eyebrow`, `title-hero`, `title-section`, `title-verdict`, `body-copy`, `card-kicker`.
+- Controls: `pill-accent`, `pill-muted`, `pill-low-confidence`, `field-input`, `action-button`.
+- Feedback: `status-danger`, `status-warning`, `source-link`, `divider-muted`.
 
 ## Rules
 

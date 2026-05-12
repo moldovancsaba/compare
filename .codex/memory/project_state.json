@@ -114,6 +114,10 @@
     {
       "date": "2026-05-12",
       "summary": "Bumped the app to v0.2.0 and synchronized README, user manual, API documentation, developer onboarding, release notes, and domain-adapter docs"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Consolidated hard-coded component styling into global design-system primitives and updated release notes/design token docs"
     }
   ],
   "blocked_items": []

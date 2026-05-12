@@ -105,7 +105,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
         <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">stored in this browser</span>
       </div>
 
-      <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_0.7fr]">
+      <div className="mt-5 grid gap-3 layout-collection-summary">
         <label>
           <span className="eyebrow mb-2 block">Preferred brands</span>
           <input
@@ -123,7 +123,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
         </div>
       </div>
 
-      <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_0.55fr]">
+      <div className="mt-5 grid gap-3 layout-collection-pick">
         <select
           className="field-input w-full px-4 py-3 text-sm"
           value={effectiveSelectedWatchId}
@@ -152,7 +152,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
         </select>
       </div>
 
-      <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_auto]">
+      <div className="mt-3 grid gap-3 layout-collection-add">
         <input
           className="field-input placeholder-muted w-full px-4 py-3 text-sm"
           maxLength={240}
@@ -180,7 +180,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
             }
 
             return (
-              <article key={item.watchId} className="surface-item grid gap-3 p-4 lg:grid-cols-[1fr_0.45fr_auto]">
+              <article key={item.watchId} className="surface-item grid gap-3 p-4 layout-collection-row">
                 <div>
                   <p className="card-kicker mb-2">{watchDisplayName(watch)}</p>
                   {item.note ? <p className="body-copy body-copy-faint text-xs">{item.note}</p> : null}
@@ -219,7 +219,7 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {balanceReport.scores.map((score) => (
-            <article key={score.dimension} className="border-t border-[rgba(232,217,194,0.16)] pt-3">
+            <article key={score.dimension} className="divider-muted pt-3">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <p className="card-kicker">{score.label}</p>
                 <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{score.score}/100</span>
