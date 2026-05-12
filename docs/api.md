@@ -195,6 +195,63 @@ Notes are optional and capped at 1,000 characters.
 
 When MongoDB is unavailable, the endpoint fails gracefully instead of blocking comparison use.
 
+## POST `/api/watch/should-buy`
+
+Creates deterministic single-watch purchase guidance for a supported watch.
+
+### Request
+
+```json
+{
+  "candidateInput": "Tudor Black Bay 54",
+  "context": {
+    "watchCollectionProfile": {
+      "items": [
+        {
+          "watchId": "rolex-explorer-124270",
+          "status": "owned"
+        }
+      ],
+      "preferredBrands": []
+    }
+  }
+}
+```
+
+Fields:
+- `candidateInput`: required supported watch name, alias, reference, or source URL.
+- `context.watchCollectionProfile`: optional local collection profile.
+
+### Success Response
+
+```json
+{
+  "report": {
+    "candidateWatchId": "tudor-black-bay-54",
+    "verdict": "buy",
+    "headline": "Tudor Black Bay 54 is a defensible buy.",
+    "rationale": "The candidate improves purchase confidence through useful fit, role, or ownership signals without obvious collection redundancy.",
+    "valueAssessment": "...",
+    "overlapAnalysis": "...",
+    "emotionalFit": "...",
+    "ownershipRisk": "...",
+    "alternatives": [],
+    "profileInfluence": "1 saved collection items and 0 preferred brands influenced this report."
+  }
+}
+```
+
+Verdict values are `buy`, `consider`, and `skip`.
+
+### Error Response
+
+```json
+{
+  "error": "{compare} could not resolve this watch. Use a supported watch name, reference, alias, or source URL.",
+  "suggestions": ["Tudor Black Bay 54", "Tudor Black Bay 58"]
+}
+```
+
 ## Versioning
 
 The API version follows the application release in `package.json`. Current API documentation targets `v0.2.0`.

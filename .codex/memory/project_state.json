@@ -118,6 +118,10 @@
     {
       "date": "2026-05-12",
       "summary": "Consolidated hard-coded component styling into global design-system primitives and updated release notes/design token docs"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #46 by adding single-watch should-I-buy API/UI guidance with buy, consider, and skip verdicts"
     }
   ],
   "blocked_items": []

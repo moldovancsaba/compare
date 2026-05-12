@@ -29,6 +29,7 @@ When context is present, the watch adapter can:
 - produce local gap/overlap insights for owned watches
 - produce upgrade-path guidance for compared watches against the closest owned watch
 - produce secondary balance scores with contributors and suggestions
+- produce single-watch should-I-buy reports for supported candidate watches
 
 ## Gap And Overlap Analysis
 
@@ -67,3 +68,17 @@ Score dimensions:
 - `ownership_risk`: service-burden, resale-stability, and reliability profile
 
 Each score exposes contributors and a plain-language suggestion. Scores should be used to find concentration, missing contrast, and ownership friction before a purchase; they should not be used for leaderboards, investment ranking, or taste policing.
+
+## Should-I-Buy Reports
+
+The watch profile panel can evaluate one supported watch through `/api/watch/should-buy`.
+
+Reports include:
+- `buy`, `consider`, or `skip` verdict
+- value assessment
+- overlap analysis against owned watches
+- emotional fit
+- ownership risk
+- alternatives when the candidate is weak or redundant
+
+This is purchase-confidence guidance, not a generic review, dealer recommendation, or investment signal.

@@ -6,6 +6,7 @@ import { watchCatalog } from "@/lib/data/watch-catalog";
 import { analyzeWatchCollectionGaps, calculateWatchCollectionBalance } from "@/lib/domains/watch-collection";
 import { watchDisplayName } from "@/lib/domains/watch-entity";
 import type { WatchCollectionItemStatus, WatchCollectionProfile } from "@/types/watch-collection";
+import type { WatchPurchaseReport } from "@/types/watch-purchase";
 
 interface WatchCollectionProfilePanelProps {
   activeDomain: string;
@@ -26,6 +27,10 @@ function nowIso(): string {
 export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }: WatchCollectionProfilePanelProps) {
   const [selectedWatchId, setSelectedWatchId] = useState(watchCatalog[0]?.id ?? "");
   const [selectedStatus, setSelectedStatus] = useState<WatchCollectionItemStatus>("owned");
+  const [purchaseCandidateId, setPurchaseCandidateId] = useState(watchCatalog[0]?.id ?? "");
+  const [purchaseReport, setPurchaseReport] = useState<WatchPurchaseReport | null>(null);
+  const [purchaseError, setPurchaseError] = useState<string | null>(null);
+  const [isCheckingPurchase, setIsCheckingPurchase] = useState(false);
   const [note, setNote] = useState("");
   const savedWatchIds = useMemo(() => new Set(profile.items.map((item) => item.watchId)), [profile.items]);
   const availableWatches = watchCatalog.filter((watch) => !savedWatchIds.has(watch.id));
@@ -93,6 +98,45 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
       ...profile,
       items: profile.items.filter((item) => item.watchId !== watchId)
     });
+  }
+
+  async function checkPurchase() {
+    const candidate = watchCatalog.find((watch) => watch.id === purchaseCandidateId);
+
+    if (!candidate) {
+      return;
+    }
+
+    setIsCheckingPurchase(true);
+    setPurchaseError(null);
+
+    try {
+      const response = await fetch("/api/watch/should-buy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          candidateInput: watchDisplayName(candidate),
+          context: {
+            watchCollectionProfile: profile
+          }
+        })
+      });
+      const payload = (await response.json()) as { report: WatchPurchaseReport } | { error: string };
+
+      if (response.ok && "report" in payload) {
+        setPurchaseReport(payload.report);
+      } else {
+        setPurchaseReport(null);
+        setPurchaseError("error" in payload ? payload.error : "Purchase guidance could not be created.");
+      }
+    } catch {
+      setPurchaseReport(null);
+      setPurchaseError("Purchase guidance could not be created.");
+    } finally {
+      setIsCheckingPurchase(false);
+    }
   }
 
   return (
@@ -235,6 +279,79 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
             </article>
           ))}
         </div>
+      </div>
+
+      <div className="mt-5 surface-item p-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="card-kicker mb-2">Should I buy this?</p>
+            <p className="body-copy body-copy-strong text-sm">
+              Ownership guidance for one candidate using the saved collection context.
+            </p>
+          </div>
+          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">watch only</span>
+        </div>
+        <div className="mt-4 grid gap-3 layout-collection-add">
+          <select
+            className="field-input w-full px-4 py-3 text-sm"
+            value={purchaseCandidateId}
+            onChange={(event) => setPurchaseCandidateId(event.target.value)}
+          >
+            {watchCatalog.map((watch) => (
+              <option key={watch.id} value={watch.id}>
+                {watchDisplayName(watch)}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="action-button eyebrow eyebrow-tight px-5 py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={isCheckingPurchase}
+            onClick={() => void checkPurchase()}
+          >
+            {isCheckingPurchase ? "Checking" : "Check"}
+          </button>
+        </div>
+        {purchaseError ? <p className="status-danger mt-4 p-4 text-sm">{purchaseError}</p> : null}
+        {purchaseReport ? (
+          <article className="mt-4 surface-panel p-4">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="card-kicker">{purchaseReport.verdict}</p>
+              <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">ownership guidance</span>
+            </div>
+            <h4 className="title-section">{purchaseReport.headline}</h4>
+            <p className="body-copy body-copy-strong mt-3 text-sm">{purchaseReport.rationale}</p>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {[
+                ["Value", purchaseReport.valueAssessment],
+                ["Overlap", purchaseReport.overlapAnalysis],
+                ["Emotional fit", purchaseReport.emotionalFit],
+                ["Risk", purchaseReport.ownershipRisk]
+              ].map(([label, copy]) => (
+                <div key={label} className="divider-muted pt-3">
+                  <p className="card-kicker mb-2">{label}</p>
+                  <p className="body-copy body-copy-strong text-sm">{copy}</p>
+                </div>
+              ))}
+            </div>
+            {purchaseReport.alternatives.length ? (
+              <div className="mt-4 divider-muted pt-3">
+                <p className="card-kicker mb-2">Alternatives</p>
+                <div className="grid gap-2">
+                  {purchaseReport.alternatives.map((alternative) => {
+                    const watch = watchCatalog.find((candidate) => candidate.id === alternative.watchId);
+
+                    return watch ? (
+                      <p key={alternative.watchId} className="body-copy body-copy-strong text-sm">
+                        {watchDisplayName(watch)}: {alternative.reason}
+                      </p>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            ) : null}
+          </article>
+        ) : null}
       </div>
 
       <div className="mt-5 grid gap-3">

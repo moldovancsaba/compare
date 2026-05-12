@@ -58,8 +58,21 @@ The watch profile panel can show:
 - date/no-date balance
 - upgrade-path verdicts
 - balance guidance across versatility, redundancy, formality, complication diversity, and ownership risk
+- single-watch should-I-buy guidance
 
 Scores are decision aids, not grades. They are meant to reveal concentration and missing contrast before a purchase.
+
+## Should-I-Buy Guidance
+
+The watch profile panel includes a single-watch purchase check. Choose a supported watch and run the check to get:
+- a `buy`, `consider`, or `skip` verdict
+- value assessment
+- collection overlap analysis
+- emotional-fit notes
+- ownership-risk notes
+- alternatives when the candidate is weak or redundant
+
+The report uses the saved local collection profile when available. If no profile exists, the report still works, but collection-overlap confidence is lower.
 
 ## Persistence
 

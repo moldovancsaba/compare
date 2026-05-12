@@ -23,6 +23,7 @@
 - Added deterministic watch collection gap and overlap analysis for missing roles, redundancy, brand concentration, size balance, and complication balance.
 - Added watch upgrade-path intelligence that classifies meaningful, lateral, emotional, and poor-value paths against owned watches.
 - Added explainable watch collection balance scoring for versatility, redundancy, formality, complication diversity, and ownership risk.
+- Added single-watch should-I-buy analysis with buy/consider/skip verdicts, collection-aware overlap, ownership risk, value assessment, emotional fit, and alternatives.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 - Bumped the app release to `v0.2.0` and aligned README, user manual, API documentation, release notes, and developer onboarding language with the current domain-adapter platform.
 - Consolidated hard-coded component styling into global design-system primitives for low-confidence pills, source links, editorial layout grids, collection layouts, dividers, and verdict typography.

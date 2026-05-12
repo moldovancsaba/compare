@@ -3,11 +3,13 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { GET as GET_BRAIN } from "@/app/api/compare/brain/route";
 import { POST as POST_FEEDBACK } from "@/app/api/compare/feedback/route";
 import { POST } from "@/app/api/compare/route";
+import { POST as POST_SHOULD_BUY } from "@/app/api/watch/should-buy/route";
 import { hashLogValue, sanitizeLogContext } from "@/lib/observability/logger";
 import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observability/telemetry";
 import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
+import { shouldBuyWatch } from "@/lib/services/should-buy-watch";
 import {
   buildSavedComparisonSlug,
   parseSavedComparisonSlug,
@@ -45,6 +47,17 @@ function feedbackRequest(body: unknown): Request {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+}
+
+function shouldBuyRequest(body: unknown, ip = "203.0.113.60"): Request {
+  return new Request("http://localhost/api/watch/should-buy", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-forwarded-for": ip
     },
     body: JSON.stringify(body)
   });
@@ -712,6 +725,43 @@ describe("watch collection profiles", () => {
       ]
     });
   });
+
+  it("creates a buy-oriented single-watch purchase report", () => {
+    const report = shouldBuyWatch(watchById("tudor-black-bay-54"), {
+      preferredBrands: [],
+      items: [{ watchId: "rolex-explorer-124270", status: "owned" }]
+    });
+
+    expect(report).toEqual(
+      expect.objectContaining({
+        verdict: "buy",
+        candidateWatchId: "tudor-black-bay-54",
+        alternatives: []
+      })
+    );
+    expect(report.overlapAnalysis).toContain("meaningful upgrade path");
+    expect(report.profileInfluence).toContain("saved collection");
+  });
+
+  it("uses profile overlap to create a skip-oriented purchase report", () => {
+    const report = shouldBuyWatch(watchById("rolex-air-king-126900"), {
+      preferredBrands: [],
+      items: [{ watchId: "rolex-explorer-124270", status: "owned" }]
+    });
+
+    expect(report).toEqual(
+      expect.objectContaining({
+        verdict: "skip",
+        candidateWatchId: "rolex-air-king-126900",
+        alternatives: expect.arrayContaining([
+          expect.objectContaining({
+            watchId: expect.any(String)
+          })
+        ])
+      })
+    );
+    expect(report.overlapAnalysis).toContain("poor-value swap");
+  });
 });
 
 describe("Trinity feedback summaries", () => {
@@ -1229,6 +1279,42 @@ describe("POST /api/compare", () => {
     expect(limitedResponse.status).toBe(429);
     expect(limitedResponse.headers.get("Retry-After")).toBeTruthy();
     expect(payload.error).toContain("Too many comparison requests");
+  });
+
+  it("returns single-watch should-I-buy guidance", async () => {
+    const response = await POST_SHOULD_BUY(
+      shouldBuyRequest({
+        candidateInput: "Tudor Black Bay 54",
+        context: {
+          watchCollectionProfile: {
+            items: [{ watchId: "rolex-explorer-124270", status: "owned" }],
+            preferredBrands: []
+          }
+        }
+      })
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload.report).toEqual(
+      expect.objectContaining({
+        verdict: "buy",
+        candidateWatchId: "tudor-black-bay-54"
+      })
+    );
+  });
+
+  it("returns suggestions for unresolved should-I-buy input", async () => {
+    const response = await POST_SHOULD_BUY(
+      shouldBuyRequest({
+        candidateInput: "Tudor Black Bay"
+      })
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(404);
+    expect(payload.error).toContain("could not resolve this watch");
+    expect(payload.suggestions).toEqual(["Tudor Black Bay 54", "Tudor Black Bay 58"]);
   });
 
   it("handles network failures as controlled client errors", async () => {

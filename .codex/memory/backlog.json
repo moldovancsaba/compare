@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 46,
-      "title": "Add single-watch should-I-buy evaluation",
-      "priority": "high",
-      "reason": "Collection balance scoring is now available; single-watch evaluation can reuse profile, gap, and upgrade-path context."
-    },
-    {
       "github_issue": 47,
       "title": "Add long-term ownership simulator",
+      "priority": "high",
+      "reason": "Single-watch buy guidance is now available; long-term ownership simulation can add cost, service, resale, and friction context to that purchase surface."
+    },
+    {
+      "github_issue": 48,
+      "title": "Add market positioning engine",
       "priority": "medium",
-      "reason": "Ownership simulation should follow single-watch buy advice so cost/risk assumptions appear in the right product surface."
+      "reason": "Market-positioning guidance should follow ownership simulation so hype/substance claims have cost and ownership context."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."
