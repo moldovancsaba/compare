@@ -1,7 +1,7 @@
-# SpecDiff Product Roadmap
+# {compare} Product Roadmap
 
 ## Positioning
-SpecDiff is high-trust buying intelligence for enthusiast products, starting with mechanical watches.
+{compare} is high-trust buying intelligence for enthusiast products, starting with mechanical watches.
 
 It is not:
 - A generic AI comparison tool.
