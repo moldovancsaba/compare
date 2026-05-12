@@ -33,6 +33,8 @@ export type CompareInputsResult =
       leftResolved: boolean;
       rightResolved: boolean;
       supportedInputs: string[];
+      leftSuggestions: string[];
+      rightSuggestions: string[];
     }
   | {
       status: "duplicate_entity";
@@ -85,12 +87,18 @@ export function compareInputs({
   const rightResolution = adapter.resolve(rightInput);
 
   if (leftResolution.status !== "resolved" || rightResolution.status !== "resolved") {
+    const leftSuggestions = leftResolution.status === "unresolved" ? (leftResolution.suggestions ?? []) : [];
+    const rightSuggestions = rightResolution.status === "unresolved" ? (rightResolution.suggestions ?? []) : [];
+    const supportedInputs = Array.from(new Set([...leftSuggestions, ...rightSuggestions, ...adapter.examples]));
+
     return {
       status: "unresolved_input",
       domain,
       leftResolved: leftResolution.status === "resolved",
       rightResolved: rightResolution.status === "resolved",
-      supportedInputs: adapter.examples
+      supportedInputs,
+      leftSuggestions,
+      rightSuggestions
     };
   }
 

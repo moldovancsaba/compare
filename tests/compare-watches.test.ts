@@ -18,7 +18,7 @@ import { serviceCatalog } from "@/lib/data/service-catalog";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { compareInputs } from "@/lib/services/compare";
-import { resolveWatch } from "@/lib/utils/resolve-watch";
+import { resolveWatch, resolveWatchDetailed } from "@/lib/utils/resolve-watch";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { ComparisonResult, WatchSpec } from "@/types/watch";
 
@@ -198,6 +198,19 @@ describe("resolveWatch", () => {
     const match = resolveWatch("Tudor Black Bay");
 
     expect(match).toBeNull();
+  });
+
+  it("returns disambiguation suggestions for ambiguous model families", () => {
+    const resolution = resolveWatchDetailed("Tudor Black Bay");
+
+    expect(resolution).toEqual({
+      status: "unresolved",
+      reason: "ambiguous",
+      suggestions: expect.arrayContaining([
+        expect.objectContaining({ id: "tudor-black-bay-54" }),
+        expect.objectContaining({ id: "tudor-black-bay-58" })
+      ])
+    });
   });
 
   it("keeps ambiguous family inputs unresolved even with typo-tolerant scoring", () => {
@@ -787,6 +800,15 @@ describe("POST /api/compare", () => {
 
     expect(response.status).toBe(404);
     expect(payload.error).toContain("could not resolve one or both inputs");
+    expect(payload.leftSuggestions).toEqual([
+      "Rolex Air-King",
+      "Rolex Explorer",
+      "Tudor Black Bay 54",
+      "Tudor Black Bay 58",
+      "Omega Seamaster Aqua Terra 38",
+      "Tudor Pelagos 39"
+    ]);
+    expect(payload.rightSuggestions).toEqual([]);
     expect(payload.supportedInputs).toEqual([
       "Rolex Air-King",
       "Rolex Explorer",
@@ -795,6 +817,21 @@ describe("POST /api/compare", () => {
       "Omega Seamaster Aqua Terra 38",
       "Tudor Pelagos 39"
     ]);
+  });
+
+  it("returns resolver suggestions for ambiguous watch inputs", async () => {
+    const response = await POST(
+      compareRequest({
+        leftInput: "Tudor Black Bay",
+        rightInput: "Rolex Explorer"
+      })
+    );
+
+    const payload = await response.json();
+
+    expect(response.status).toBe(404);
+    expect(payload.leftSuggestions).toEqual(["Tudor Black Bay 54", "Tudor Black Bay 58"]);
+    expect(payload.supportedInputs.slice(0, 2)).toEqual(["Tudor Black Bay 54", "Tudor Black Bay 58"]);
   });
 
   it("rejects duplicate watch comparisons", async () => {

@@ -10,7 +10,7 @@ The current product-development initiative is generic comparison infrastructure 
 
 ## Application Layers
 - UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector and shareable saved comparison pages at `/compare/[slug]`.
-- API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with supported examples, blocks duplicate entities, and returns comparison output.
+- API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with adapter suggestions, blocks duplicate entities, and returns comparison output.
 - Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, verdict-led decision output fields, universal evidence/confidence model, adapter-owned UI metadata, and adapter registry.
 - Domain logic: `src/lib/domains/watch-domain.ts` and `src/lib/domains/service-domain.ts` are the first adapters; `src/lib/services/compare-watches.ts` and `src/lib/services/compare-services.ts` remain domain-specific deterministic rule engines behind those adapters.
 - Data: `src/lib/data/watch-catalog.ts` and `src/lib/data/service-catalog.ts` are curated adapter data sources. Future domains should add their own adapter and source data instead of adding category conditionals to the API or UI shell.
@@ -38,6 +38,7 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 - New domains must enter through adapter registration, conformance tests, and data governance rather than conditional logic in the API or UI shell.
 - Every adapter result must expose evidence, confidence, data-quality, and missing-data metadata so the UI can distinguish facts, rules, editorial inference, and known gaps.
 - Every adapter result must expose stronger choice, exception case, confidence rationale, and section labels so the UI stays verdict-led without hard-coded domain language.
+- Resolvers must fail closed with suggestions for ambiguous or unsupported inputs instead of guessing between close variants.
 - Every adapter must expose a data policy with source tiers, freshness rules, curation rules, blocked sources, and missing-data behavior.
 - Agents may commit and push verified changes directly to `origin/main` without per-step approval.
 - Agents may not force push or delete production code autonomously.

@@ -95,7 +95,9 @@ export async function POST(request: Request) {
         properties: {
           domain: comparisonResult.domain,
           leftResolved: comparisonResult.leftResolved,
-          rightResolved: comparisonResult.rightResolved
+          rightResolved: comparisonResult.rightResolved,
+          leftSuggestionCount: comparisonResult.leftSuggestions.length,
+          rightSuggestionCount: comparisonResult.rightSuggestions.length
         }
       });
 
@@ -103,7 +105,9 @@ export async function POST(request: Request) {
         {
           error:
             "{compare} could not resolve one or both inputs in the selected comparison domain. Use one of the supported examples below or paste a matching source URL.",
-          supportedInputs: comparisonResult.supportedInputs
+          supportedInputs: comparisonResult.supportedInputs,
+          leftSuggestions: comparisonResult.leftSuggestions,
+          rightSuggestions: comparisonResult.rightSuggestions
         },
         { status: 404 }
       );

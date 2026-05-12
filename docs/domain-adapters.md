@@ -16,6 +16,12 @@ Required fields:
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
 
+Resolver requirements:
+- Resolve exact supported names, aliases, references, and source URLs when an adapter supports them.
+- Tolerate only bounded typos that still produce one clear best match.
+- Return `status: "unresolved"` with `suggestions` when input is ambiguous or unsupported.
+- Never silently choose between close variants; ambiguity must produce a recovery path.
+
 Data-policy requirements:
 - Define every source tier the adapter may use, such as `official_source`, `curated_fixture`, `expert_rule`, `community_signal`, `market_signal`, or `user_supplied`.
 - Assign a default confidence level to each tier.
@@ -63,6 +69,7 @@ The conformance suite verifies:
 - adapter-owned data policy for source tiers, freshness, curation, blocked sources, and missing data
 - supported inputs resolve to generic entities
 - unsupported inputs fail closed
+- ambiguous inputs return suggestions instead of guessing when the adapter can identify close candidates
 - comparison output is deterministic
 - result shape contains all required generic sections
 - verdict includes stronger choice, exception case, confidence rationale, and adapter-owned section labels

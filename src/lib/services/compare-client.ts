@@ -17,6 +17,8 @@ export interface ComparisonErrorResponse {
   error: string;
   supportedInputs?: string[];
   supportedDomains?: string[];
+  leftSuggestions?: string[];
+  rightSuggestions?: string[];
 }
 
 export type ComparisonClientResult = ComparisonResponse | ComparisonErrorResponse;
@@ -54,11 +56,16 @@ export async function readComparisonResponse(response: Response): Promise<Compar
     const supportedInputs = isRecord(payload) && isStringArray(payload.supportedInputs) ? payload.supportedInputs : undefined;
     const supportedDomains =
       isRecord(payload) && isStringArray(payload.supportedDomains) ? payload.supportedDomains : undefined;
+    const leftSuggestions = isRecord(payload) && isStringArray(payload.leftSuggestions) ? payload.leftSuggestions : undefined;
+    const rightSuggestions =
+      isRecord(payload) && isStringArray(payload.rightSuggestions) ? payload.rightSuggestions : undefined;
 
     return {
       error: isErrorPayload(payload) ? payload.error : GENERIC_COMPARE_ERROR,
       ...(supportedInputs ? { supportedInputs } : {}),
-      ...(supportedDomains ? { supportedDomains } : {})
+      ...(supportedDomains ? { supportedDomains } : {}),
+      ...(leftSuggestions ? { leftSuggestions } : {}),
+      ...(rightSuggestions ? { rightSuggestions } : {})
     };
   }
 

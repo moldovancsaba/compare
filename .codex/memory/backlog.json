@@ -1,28 +1,28 @@
 {
   "highest_priority": [
     {
-      "github_issue": 36,
-      "title": "Add cross-domain resolver disambiguation and typo tolerance",
-      "priority": "high",
-      "reason": "Issue #37 sharpened output confidence; the next trust-critical path is resolving ambiguous or typo-prone inputs without guessing."
-    },
-    {
       "github_issue": 38,
       "title": "Establish adapter-aware editorial UI for comparison trust",
       "priority": "high",
-      "reason": "The result page now has adapter-owned labels and more trust metadata; the next UI step is improving the editorial hierarchy around those signals."
+      "reason": "The result page now has adapter-owned labels, confidence metadata, and resolver recovery; the next trust step is improving the editorial hierarchy around those signals."
     },
     {
       "github_issue": 39,
       "title": "Build reusable domain intelligence layer contracts",
-      "priority": "medium",
-      "reason": "Resolver and UI work should be followed by reusable domain intelligence contracts so new adapters do not duplicate scoring and consequence patterns."
+      "priority": "high",
+      "reason": "Adapters now duplicate scoring and consequence patterns; reusable intelligence contracts should define the next stable extension surface."
     },
     {
       "github_issue": 40,
       "title": "Translate domain attributes into real-world consequences",
       "priority": "medium",
       "reason": "Attribute-to-consequence translation is the next layer after the current adapter-specific reasoning proves the pattern."
+    },
+    {
+      "github_issue": 41,
+      "title": "Add cross-domain strong opinion and recommendation system",
+      "priority": "medium",
+      "reason": "Once consequence contracts are stable, recommendation strength should become a shared cross-domain behavior."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

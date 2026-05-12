@@ -1,7 +1,7 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { toWatchComparisonEntity, watchDisplayName } from "@/lib/domains/watch-entity";
 import { compareWatches } from "@/lib/services/compare-watches";
-import { resolveWatch } from "@/lib/utils/resolve-watch";
+import { resolveWatchDetailed } from "@/lib/utils/resolve-watch";
 import type { ComparisonDomainAdapter } from "@/types/comparison";
 import type { WatchComparisonEntity } from "@/types/watch";
 
@@ -55,19 +55,26 @@ export const watchDomainAdapter: ComparisonDomainAdapter<WatchComparisonEntity> 
       "Missing live pricing, service quotes, owner telemetry, or freshness timestamps must appear as low-confidence missing-data evidence and result limitations."
   },
   resolve(input) {
-    const watch = resolveWatch(input);
+    const resolution = resolveWatchDetailed(input);
 
-    if (!watch) {
+    if (resolution.status === "unresolved") {
+      const suggestions =
+        resolution.suggestions.length > 0
+          ? resolution.suggestions.map(watchDisplayName)
+          : watchCatalog.slice(0, 6).map(watchDisplayName);
       return {
         status: "unresolved",
-        reason: "No supported watch matched this input.",
-        suggestions: watchCatalog.slice(0, 6).map(watchDisplayName)
+        reason:
+          resolution.reason === "ambiguous"
+            ? "Multiple supported watches matched this input. Choose a specific reference or model variant."
+            : "No supported watch matched this input.",
+        suggestions
       };
     }
 
     return {
       status: "resolved",
-      entity: toWatchComparisonEntity(watch)
+      entity: toWatchComparisonEntity(resolution.watch)
     };
   },
   compare(left, right) {

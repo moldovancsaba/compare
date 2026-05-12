@@ -74,6 +74,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented issue #37 by adding verdict-led decision output fields, adapter-owned section labels, UI rendering for stronger choice/exception case/confidence rationale, and conformance coverage"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #36 by adding detailed watch resolver outcomes, ambiguity suggestions, API recovery suggestion payloads, and focused resolver/API tests"
     }
   ],
   "blocked_items": []

@@ -6,6 +6,17 @@ interface RankedWatch {
   score: number;
 }
 
+export type WatchResolution =
+  | {
+      status: "resolved";
+      watch: WatchSpec;
+    }
+  | {
+      status: "unresolved";
+      reason: "no_match" | "ambiguous";
+      suggestions: WatchSpec[];
+    };
+
 function normalize(value: string): string {
   return value
     .toLowerCase()
@@ -143,23 +154,45 @@ function scoreWatch(input: string, watch: WatchSpec): number {
   return score;
 }
 
-export function resolveWatch(input: string): WatchSpec | null {
-  const ranked: RankedWatch[] = watchCatalog
+function rankedWatches(input: string): RankedWatch[] {
+  return watchCatalog
     .map((watch) => ({
       watch,
       score: scoreWatch(input, watch)
     }))
     .sort((left, right) => right.score - left.score);
+}
 
+export function resolveWatchDetailed(input: string): WatchResolution {
+  const ranked = rankedWatches(input);
   const [best, secondBest] = ranked;
 
   if (!best || best.score < 20) {
-    return null;
+    return {
+      status: "unresolved",
+      reason: "no_match",
+      suggestions: ranked.filter((candidate) => candidate.score > 0).slice(0, 4).map((candidate) => candidate.watch)
+    };
   }
 
-  if (secondBest && best.score === secondBest.score) {
-    return null;
+  const closeCandidates = ranked.filter((candidate) => candidate.score >= Math.max(20, best.score - 4));
+
+  if ((secondBest && best.score === secondBest.score) || closeCandidates.length > 1) {
+    return {
+      status: "unresolved",
+      reason: "ambiguous",
+      suggestions: closeCandidates.slice(0, 4).map((candidate) => candidate.watch)
+    };
   }
 
-  return best.watch;
+  return {
+    status: "resolved",
+    watch: best.watch
+  };
+}
+
+export function resolveWatch(input: string): WatchSpec | null {
+  const resolution = resolveWatchDetailed(input);
+
+  return resolution.status === "resolved" ? resolution.watch : null;
 }
