@@ -39,6 +39,15 @@ export const watchCatalog: WatchSpec[] = [
       cautionSignals: ["polarizing dial", "less universal demand than core Rolex sports models"],
       positioningSummary: "A contrarian Rolex sports watch: more interesting than the default, less liquid than the icons."
     },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 6900,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: -3.2,
+      liquidityTier: "medium",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/rolex",
+      confidence: "medium"
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "balanced",
@@ -96,6 +105,15 @@ export const watchCatalog: WatchSpec[] = [
       cautionSignals: ["can feel too restrained", "status premium is embedded in retail pricing"],
       positioningSummary: "A high-trust one-watch benchmark whose reputation is driven more by versatility than novelty."
     },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 8350,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: 1.4,
+      liquidityTier: "high",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/rolex",
+      confidence: "medium"
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "compact",
@@ -152,6 +170,15 @@ export const watchCatalog: WatchSpec[] = [
       cautionSignals: ["vintage styling may age with taste", "liquidity trails Rolex"],
       positioningSummary: "An enthusiast-favorite compact diver where the excitement is backed by real wearability."
     },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 3650,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: -4.8,
+      liquidityTier: "medium",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/tudor",
+      confidence: "medium"
+    },
     ownershipProfile: {
       serviceExpectation: "medium",
       comfort: "compact",
@@ -207,6 +234,15 @@ export const watchCatalog: WatchSpec[] = [
       substanceSignals: ["well-judged proportions", "broad recognition", "modern in-house movement"],
       cautionSignals: ["normalized hype cycle", "no quick micro-adjust", "many adjacent Black Bay variants"],
       positioningSummary: "A former hype leader that remains good, but no longer feels like the obvious insider pick."
+    },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 3200,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: -6.5,
+      liquidityTier: "medium",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/tudor",
+      confidence: "medium"
     },
     ownershipProfile: {
       serviceExpectation: "medium",
@@ -265,6 +301,15 @@ export const watchCatalog: WatchSpec[] = [
       cautionSignals: ["softer resale stability", "less emotional pull for some collectors"],
       positioningSummary: "A rational high-spec alternative whose market weakness can be an advantage when bought carefully."
     },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 4700,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: -5.8,
+      liquidityTier: "medium",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/omega",
+      confidence: "medium"
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "balanced",
@@ -320,6 +365,15 @@ export const watchCatalog: WatchSpec[] = [
       substanceSignals: ["titanium comfort", "tool-forward finishing", "T-fit bracelet"],
       cautionSignals: ["less jewelry-like presence", "narrower buyer pool than heritage divers"],
       positioningSummary: "A substance-heavy modern diver that earns respect from capability-focused collectors."
+    },
+    secondaryMarket: {
+      estimatedMarketPriceUsd: 4100,
+      marketPriceDate: "2026-05-01",
+      oneYearTrendPercent: -2.6,
+      liquidityTier: "medium",
+      sourceLabel: "Curated secondary-market snapshot",
+      sourceUrl: "https://watchcharts.com/watches/brand_index/tudor",
+      confidence: "medium"
     },
     ownershipProfile: {
       serviceExpectation: "medium",

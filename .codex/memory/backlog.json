@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 34,
-      "title": "Add secondary-market ownership intelligence to watch comparisons",
-      "priority": "high",
-      "reason": "Transparent scoring is now available; secondary-market ownership intelligence can feed explicit value reasoning with liquidity and discount/premium context."
-    },
-    {
       "github_issue": 53,
       "title": "Add smart discovery for overlooked alternatives",
+      "priority": "high",
+      "reason": "Secondary-market ownership intelligence is now available; smart discovery can now rank overlooked alternatives by fit, value, and ownership economics."
+    },
+    {
+      "github_issue": 24,
+      "title": "Add a new-watch ingestion workflow from curated source URLs to normalized entries",
       "priority": "medium",
-      "reason": "Smart discovery should follow market intelligence so overlooked alternatives can be ranked by both fit and ownership economics."
+      "reason": "Curated ingestion becomes important after smart discovery because alternative quality depends on catalog growth without hard-coded TypeScript churn."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

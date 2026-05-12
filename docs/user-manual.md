@@ -25,6 +25,7 @@ Comparison results include:
 - Decision drivers
 - Real-world impact
 - Ownership or adoption tradeoffs
+- Secondary-market ownership context for watches when curated dated data exists
 - Best-fit buyer lenses
 - Hidden downsides
 - Better-value or adjacent alternatives

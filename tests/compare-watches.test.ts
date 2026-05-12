@@ -28,6 +28,7 @@ import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { analyzeWatchDecisionIntent, normalizeWatchDecisionIntentProfile } from "@/lib/domains/watch-decision-intent";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
+import { analyzeWatchSecondaryMarket } from "@/lib/domains/watch-secondary-market";
 import {
   defaultWatchTradeoffScenario,
   parseWatchTradeoffScenario,
@@ -360,13 +361,14 @@ describe("compareWatches", () => {
       "Emotional fit",
       "Service and resale reality",
       "Five-year ownership simulation",
+      "Secondary-market ownership",
       "Scratch anxiety",
       "Enthusiast bias check"
     ]);
     expect(result.ownershipIntelligence[0]?.summary).toContain("Structured profile:");
     expect(result.ownershipIntelligence[2]?.summary).toContain("service burden");
     expect(result.ownershipIntelligence[3]?.summary).toContain("service planning range");
-    expect(result.ownershipIntelligence[4]?.summary).toContain("durability");
+    expect(result.ownershipIntelligence[5]?.summary).toContain("durability");
     expect(flattenedComparisonCopy(result)).toContain("slides under cuffs");
     expect(flattenedComparisonCopy(result)).toContain("wrist-size sensitivity");
     expect(result.whoShouldBuyWhich.length).toBe(3);
@@ -509,6 +511,7 @@ describe("compareWatches", () => {
         "Emotional fit",
         "Service and resale reality",
         "Five-year ownership simulation",
+        "Secondary-market ownership",
         "Scratch anxiety",
         "Enthusiast bias check"
       ]);
@@ -1154,6 +1157,55 @@ describe("watch collection profiles", () => {
       })
     );
     expect(result.betterValueAlternative[0]?.summary).toContain("transparent value score");
+  });
+
+  it("analyzes premium, discount, missing, and stale secondary-market snapshots", () => {
+    const premium = analyzeWatchSecondaryMarket(watchById("rolex-explorer-124270"), {
+      asOf: new Date("2026-05-13T00:00:00.000Z")
+    });
+    const discount = analyzeWatchSecondaryMarket(watchById("tudor-black-bay-58"), {
+      asOf: new Date("2026-05-13T00:00:00.000Z")
+    });
+    const missing = analyzeWatchSecondaryMarket({
+      ...watchById("tudor-black-bay-58"),
+      secondaryMarket: undefined
+    });
+    const stale = analyzeWatchSecondaryMarket(watchById("tudor-black-bay-58"), {
+      asOf: new Date("2027-01-01T00:00:00.000Z")
+    });
+
+    expect(premium.premiumOrDiscount).toContain("premium to retail");
+    expect(discount.premiumOrDiscount).toContain("discount to retail");
+    expect(missing).toEqual(
+      expect.objectContaining({
+        hasData: false,
+        warnings: expect.arrayContaining([expect.stringContaining("missing")])
+      })
+    );
+    expect(stale).toEqual(
+      expect.objectContaining({
+        freshness: "dated",
+        confidence: "low",
+        warnings: expect.arrayContaining([expect.stringContaining("stale")])
+      })
+    );
+  });
+
+  it("surfaces secondary-market ownership intelligence when both watches have data", () => {
+    const result = compareWatches(watchById("rolex-explorer-124270"), watchById("tudor-black-bay-58"));
+
+    expect(result.ownershipIntelligence).toContainEqual(
+      expect.objectContaining({
+        title: "Secondary-market ownership",
+        summary: expect.stringContaining("not investment advice"),
+        evidence: expect.arrayContaining([
+          expect.objectContaining({
+            kind: "external_source",
+            label: expect.stringContaining("secondary-market snapshot")
+          })
+        ])
+      })
+    );
   });
 });
 

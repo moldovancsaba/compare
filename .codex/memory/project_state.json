@@ -146,6 +146,10 @@
     {
       "date": "2026-05-13",
       "summary": "Implemented issue #6 by adding transparent watch value scoring with explicit weighted components"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #34 by adding manually curated secondary-market ownership intelligence with freshness and liquidity context"
     }
   ],
   "blocked_items": []

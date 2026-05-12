@@ -35,6 +35,15 @@ export interface WatchSpec {
   notes: string[];
   marketingClaims: string[];
   marketPositioning?: WatchMarketPositioningProfile;
+  secondaryMarket?: {
+    estimatedMarketPriceUsd: number;
+    marketPriceDate: string;
+    oneYearTrendPercent: number;
+    liquidityTier: "low" | "medium" | "high";
+    sourceLabel: string;
+    sourceUrl: string;
+    confidence: "low" | "medium" | "high";
+  };
   ownershipProfile?: {
     serviceExpectation: "low" | "medium" | "high";
     comfort: "compact" | "balanced" | "substantial";

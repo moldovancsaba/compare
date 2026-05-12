@@ -47,3 +47,17 @@ Weights:
 - price discipline: 15%
 
 Component inputs come from curated watch fields such as case size, thickness, lug-to-lug, micro-adjust, water resistance, power reserve, structured ownership metadata, market positioning, and MSRP bands.
+
+## Secondary-Market Ownership
+
+Secondary-market intelligence uses manually curated dated snapshots. It does not scrape live listings and must not be framed as investment advice.
+
+Required fields when present:
+- estimated market price in USD
+- market-price date
+- one-year trend percentage
+- liquidity tier
+- source label and URL
+- confidence label
+
+The adapter shows premium/discount to retail, trend, liquidity, freshness, source, and uncertainty only when enough data exists. Stale snapshots lower confidence and surface warnings.

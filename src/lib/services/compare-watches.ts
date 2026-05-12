@@ -5,6 +5,7 @@ import { analyzeWatchDecisionIntent } from "@/lib/domains/watch-decision-intent"
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
+import { analyzeWatchSecondaryMarket } from "@/lib/domains/watch-secondary-market";
 import { calculateWatchValueScore } from "@/lib/domains/watch-value-scoring";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
@@ -241,6 +242,32 @@ function marketPositioningEvidence(watch: WatchSpec): EvidenceItem {
     "structured-market-positioning",
     "Structured market-positioning profile covers hype level, collector respect, saturation, brand cachet, substance signals, and caution signals."
   );
+}
+
+function secondaryMarketEvidence(watch: WatchSpec): EvidenceItem {
+  if (!watch.secondaryMarket) {
+    return missingDataEvidence(
+      `${watch.id}:missing-secondary-market`,
+      "Missing secondary-market snapshot",
+      "This watch is missing a manually curated dated secondary-market snapshot.",
+      [watch]
+    );
+  }
+
+  return {
+    id: `${watch.id}:secondary-market-snapshot`,
+    kind: "external_source",
+    confidence: watch.secondaryMarket.confidence,
+    label: `${displayName(watch)} secondary-market snapshot`,
+    detail: `Estimated market price is ${formatUsd(watch.secondaryMarket.estimatedMarketPriceUsd)} as of ${watch.secondaryMarket.marketPriceDate}.`,
+    source: {
+      label: watch.secondaryMarket.sourceLabel,
+      url: watch.secondaryMarket.sourceUrl,
+      accessedAt: watch.secondaryMarket.marketPriceDate
+    },
+    freshness: analyzeWatchSecondaryMarket(watch).freshness,
+    appliesTo: [watch.id]
+  };
 }
 
 function confidenceFor(left: WatchSpec, right: WatchSpec, bestOverall: WatchSpec): ComparisonVerdict["confidence"] {
@@ -523,6 +550,8 @@ function buildOwnershipIntelligence(
   const intentInsight = buildDecisionIntentInsight(left, right, decisionIntent);
   const leftSimulation = simulateWatchOwnership(left);
   const rightSimulation = simulateWatchOwnership(right);
+  const leftMarket = analyzeWatchSecondaryMarket(left);
+  const rightMarket = analyzeWatchSecondaryMarket(right);
 
   return [
     ...(collectionContext ? [collectionContext] : []),
@@ -585,6 +614,28 @@ function buildOwnershipIntelligence(
           : [])
       ]
     },
+    ...(leftMarket.hasData && rightMarket.hasData
+      ? [
+          {
+            title: "Secondary-market ownership",
+            summary: `${displayName(left)} ${leftMarket.premiumOrDiscount}; ${leftMarket.trendNote} ${leftMarket.liquidityNote} ${displayName(right)} ${rightMarket.premiumOrDiscount}; ${rightMarket.trendNote} ${rightMarket.liquidityNote} This is ownership-risk context, not investment advice.`,
+            evidence: [
+              secondaryMarketEvidence(left),
+              secondaryMarketEvidence(right),
+              ...(leftMarket.warnings.length || rightMarket.warnings.length
+                ? [
+                    missingDataEvidence(
+                      "watch:secondary-market-warning",
+                      "Secondary-market warnings",
+                      [...leftMarket.warnings, ...rightMarket.warnings].join(" "),
+                      [left, right]
+                    )
+                  ]
+                : [])
+            ]
+          }
+        ]
+      : []),
     {
       title: "Scratch anxiety",
       summary: `${displayName(left)}: ${left.ownership.scratchRisk} ${ownershipProfileSummary(left)} ${displayName(right)}: ${right.ownership.scratchRisk} ${ownershipProfileSummary(right)}`
@@ -1036,6 +1087,8 @@ function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummar
       catalogEvidence(right, "fixture-backed-specs", "Core specs, retail price, aliases, ownership notes, and structured ownership profile are read from the curated watch fixture."),
       marketPositioningEvidence(left),
       marketPositioningEvidence(right),
+      secondaryMarketEvidence(left),
+      secondaryMarketEvidence(right),
       derivedRuleEvidence(
         "watch:ownership-consequence-rules",
         "Consequence rules",

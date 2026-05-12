@@ -5,6 +5,7 @@
 - Added a local watch tradeoff simulator with six buyer-priority controls, serializable URL state, scenario recommendations, and allowlisted telemetry.
 - Added optional local watch decision-intent profiles that personalize recommendation emphasis without requiring accounts.
 - Added transparent watch value scoring with explicit comfort, capability, versatility, ownership, and price-discipline weights.
+- Added manually curated secondary-market ownership intelligence with premium/discount, trend, liquidity, freshness, source, and warning output.
 
 ## v0.2.0 - 2026-05-12
 - Added a generic comparison entity/result contract and domain adapter registry so the core system is no longer hard-coded to watches.
