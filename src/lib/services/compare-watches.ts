@@ -239,6 +239,12 @@ function buildVerdict(left: WatchSpec, right: WatchSpec): ComparisonVerdict {
   return {
     bestOverall: displayName(bestOverall),
     confidence,
+    strongerChoice: displayName(bestOverall),
+    exceptionCase: `${displayName(other)} is still the better emotional pick if you specifically want something ${ownershipCharacter(other)}.`,
+    confidenceRationale:
+      confidence === "clear"
+        ? "The deterministic daily-wear, value, and versatility scores create enough separation for a strong recommendation."
+        : "The scoring gap is not large enough to erase taste, wrist fit, and collection-context preferences.",
     headline:
       confidence === "clear"
         ? `${displayName(bestOverall)} is the stronger recommendation for most buyers.`
@@ -622,6 +628,16 @@ export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonRes
     left,
     right,
     verdict: buildVerdict(left, right),
+    sectionLabels: {
+      keyDifferences: "Decision Drivers",
+      realWorldImpact: "Daily Wear Experience",
+      ownershipIntelligence: "Ownership Tradeoffs",
+      whoShouldBuyWhich: "Best For",
+      overpricedFeatures: "Overpriced Features",
+      hiddenDownsides: "Hidden Downsides",
+      betterValueAlternative: "Better Value Alternative",
+      signalVsFluff: "Marketing vs Reality"
+    },
     evidenceSummary: buildEvidenceSummary(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),

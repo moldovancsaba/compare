@@ -68,10 +68,24 @@ export interface VerdictPick {
 export interface ComparisonVerdict {
   bestOverall: string;
   confidence: "clear" | "contextual" | "close";
+  strongerChoice: string;
+  exceptionCase: string;
+  confidenceRationale: string;
   headline: string;
   summary: string;
   picks: VerdictPick[];
   evidence?: EvidenceItem[];
+}
+
+export interface ComparisonSectionLabels {
+  keyDifferences: string;
+  realWorldImpact: string;
+  ownershipIntelligence: string;
+  whoShouldBuyWhich: string;
+  overpricedFeatures: string;
+  hiddenDownsides: string;
+  betterValueAlternative: string;
+  signalVsFluff: string;
 }
 
 export interface ComparisonDomainInputHints {
@@ -125,6 +139,7 @@ export interface GenericComparisonResult {
   leftEntity: ComparisonEntity;
   rightEntity: ComparisonEntity;
   verdict: ComparisonVerdict;
+  sectionLabels: ComparisonSectionLabels;
   evidenceSummary: EvidenceSummary;
   keyDifferences: InsightBlock[];
   realWorldImpact: InsightBlock[];

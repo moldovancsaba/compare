@@ -118,6 +118,12 @@ function buildVerdict(left: ServiceSpec, right: ServiceSpec): ServiceComparisonR
   return {
     bestOverall: bestOverall.name,
     confidence,
+    strongerChoice: bestOverall.name,
+    exceptionCase: `${other.name} is still the better fit if its delivery model maps more closely to your team's operating maturity and risk tolerance.`,
+    confidenceRationale:
+      confidence === "clear"
+        ? "Operational fit and reversibility create enough separation for a strong service recommendation."
+        : "The service tradeoffs are close enough that team maturity, procurement constraints, and implementation bandwidth can change the answer.",
     headline:
       confidence === "clear"
         ? `${bestOverall.name} is the stronger default for this service decision.`
@@ -391,6 +397,16 @@ export function compareServices(left: ServiceSpec, right: ServiceSpec): ServiceC
     left,
     right,
     verdict: buildVerdict(left, right),
+    sectionLabels: {
+      keyDifferences: "Decision Drivers",
+      realWorldImpact: "Operating Experience",
+      ownershipIntelligence: "Adoption Tradeoffs",
+      whoShouldBuyWhich: "Best For",
+      overpricedFeatures: "Overbuying Risk",
+      hiddenDownsides: "Hidden Downsides",
+      betterValueAlternative: "Adjacent Alternative",
+      signalVsFluff: "Marketing vs Reality"
+    },
     evidenceSummary: buildEvidenceSummary(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),

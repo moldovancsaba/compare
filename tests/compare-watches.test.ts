@@ -215,6 +215,19 @@ describe("compareWatches", () => {
 
     expect(result.keyDifferences.length).toBeGreaterThan(0);
     expect(result.verdict.bestOverall).toBeTruthy();
+    expect(result.verdict.strongerChoice).toBeTruthy();
+    expect(result.verdict.exceptionCase).toContain("still");
+    expect(result.verdict.confidenceRationale).toBeTruthy();
+    expect(result.sectionLabels).toEqual({
+      keyDifferences: "Decision Drivers",
+      realWorldImpact: "Daily Wear Experience",
+      ownershipIntelligence: "Ownership Tradeoffs",
+      whoShouldBuyWhich: "Best For",
+      overpricedFeatures: "Overpriced Features",
+      hiddenDownsides: "Hidden Downsides",
+      betterValueAlternative: "Better Value Alternative",
+      signalVsFluff: "Marketing vs Reality"
+    });
     expect(result.verdict.picks.map((pick) => pick.label)).toEqual([
       "Best overall",
       "Best daily wear",

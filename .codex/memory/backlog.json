@@ -1,28 +1,28 @@
 {
   "highest_priority": [
     {
-      "github_issue": 35,
-      "title": "Rebuild comparison output around decision confidence",
-      "priority": "high",
-      "reason": "Two adapters now use the generic contract; the next leverage point is sharpening the output structure and decision confidence across domains."
-    },
-    {
-      "github_issue": 37,
-      "title": "Add visible confidence and data-quality indicators",
-      "priority": "high",
-      "reason": "The evidence model and services adapter expose confidence metadata; the remaining UX should make confidence easier to scan and act on."
-    },
-    {
       "github_issue": 36,
-      "title": "Implement structured comparison output contract",
-      "priority": "medium",
-      "reason": "The result contract is broader now; issue #36 should be reviewed against the implemented generic schema and closed or narrowed."
+      "title": "Add cross-domain resolver disambiguation and typo tolerance",
+      "priority": "high",
+      "reason": "Issue #37 sharpened output confidence; the next trust-critical path is resolving ambiguous or typo-prone inputs without guessing."
     },
     {
       "github_issue": 38,
-      "title": "Improve comparison result visual hierarchy",
+      "title": "Establish adapter-aware editorial UI for comparison trust",
+      "priority": "high",
+      "reason": "The result page now has adapter-owned labels and more trust metadata; the next UI step is improving the editorial hierarchy around those signals."
+    },
+    {
+      "github_issue": 39,
+      "title": "Build reusable domain intelligence layer contracts",
       "priority": "medium",
-      "reason": "The result page now supports two domains and more evidence; visual hierarchy should be tightened before adding more adapters."
+      "reason": "Resolver and UI work should be followed by reusable domain intelligence contracts so new adapters do not duplicate scoring and consequence patterns."
+    },
+    {
+      "github_issue": 40,
+      "title": "Translate domain attributes into real-world consequences",
+      "priority": "medium",
+      "reason": "Attribute-to-consequence translation is the next layer after the current adapter-specific reasoning proves the pattern."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

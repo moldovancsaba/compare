@@ -107,6 +107,20 @@ function VerdictPanel({ result }: { result: GenericComparisonResult }) {
             <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{result.verdict.confidence} confidence</span>
             <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">decision first</span>
           </div>
+          <div className="mt-5 grid gap-3">
+            <article className="surface-item p-4">
+              <p className="card-kicker mb-2">Stronger choice</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.strongerChoice}</p>
+            </article>
+            <article className="surface-item p-4">
+              <p className="card-kicker mb-2">Exception case</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.exceptionCase}</p>
+            </article>
+            <article className="surface-item p-4">
+              <p className="card-kicker mb-2">Why this confidence</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.confidenceRationale}</p>
+            </article>
+          </div>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           {result.verdict.picks.map((item) => (
@@ -506,7 +520,7 @@ export function ComparisonResultView({
             {result.leftEntity.label} vs {result.rightEntity.label}
           </h2>
           <p className="body-copy mt-4 max-w-2xl">
-            {appName} turns ownership consequences into a buying decision so you can stop researching and choose with less regret risk.
+            {appName} turns domain consequences into a buying decision so you can stop researching and choose with less regret risk.
           </p>
           {savedComparisonPath ? (
             <a className="pill-accent eyebrow eyebrow-tight mt-5 inline-flex px-4 py-2" href={savedComparisonPath}>
@@ -514,13 +528,16 @@ export function ComparisonResultView({
             </a>
           ) : null}
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {result.signalVsFluff.map((item) => (
-            <article key={item.title} className="surface-card p-4 shadow-none">
-              <p className="eyebrow">{item.title}</p>
-              <p className="body-copy body-copy-strong mt-3 text-sm">{item.summary}</p>
-            </article>
-          ))}
+        <div>
+          <p className="eyebrow eyebrow-wide mb-3">{result.sectionLabels.signalVsFluff}</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {result.signalVsFluff.map((item) => (
+              <article key={item.title} className="surface-card p-4 shadow-none">
+                <p className="eyebrow">{item.title}</p>
+                <p className="body-copy body-copy-strong mt-3 text-sm">{item.summary}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -531,15 +548,15 @@ export function ComparisonResultView({
       <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <SectionCard title="Key Differences" items={result.keyDifferences} />
-        <SectionCard title="Real-World Impact" items={result.realWorldImpact} />
+        <SectionCard title={result.sectionLabels.keyDifferences} items={result.keyDifferences} />
+        <SectionCard title={result.sectionLabels.realWorldImpact} items={result.realWorldImpact} />
       </div>
 
-      <SectionCard title="Ownership Intelligence" items={result.ownershipIntelligence} />
+      <SectionCard title={result.sectionLabels.ownershipIntelligence} items={result.ownershipIntelligence} />
 
       <section className="surface-card p-6 shadow-none">
         <div className="mb-5 flex items-center justify-between gap-4">
-          <h3 className="title-section">Who Should Buy Which</h3>
+          <h3 className="title-section">{result.sectionLabels.whoShouldBuyWhich}</h3>
           <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">buyer lenses</span>
         </div>
         <div className="grid gap-4 lg:grid-cols-3">
@@ -550,9 +567,9 @@ export function ComparisonResultView({
       </section>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <SectionCard title="Overpriced Features" items={result.overpricedFeatures} />
-        <SectionCard title="Hidden Downsides" items={result.hiddenDownsides} />
-        <SectionCard title="Better Value Alternative" items={result.betterValueAlternative} />
+        <SectionCard title={result.sectionLabels.overpricedFeatures} items={result.overpricedFeatures} />
+        <SectionCard title={result.sectionLabels.hiddenDownsides} items={result.hiddenDownsides} />
+        <SectionCard title={result.sectionLabels.betterValueAlternative} items={result.betterValueAlternative} />
       </div>
 
       <FeedbackPanel brain={brain} result={result} />

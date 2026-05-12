@@ -87,6 +87,15 @@ describe("comparison domain registry", () => {
         confidence: "low"
       })
     );
+    expect(result.comparison.sectionLabels).toEqual(
+      expect.objectContaining({
+        realWorldImpact: "Operating Experience",
+        ownershipIntelligence: "Adoption Tradeoffs",
+        whoShouldBuyWhich: "Best For",
+        signalVsFluff: "Marketing vs Reality"
+      })
+    );
+    expect(result.comparison.verdict.exceptionCase).toContain("still");
     expect(result.comparison.realWorldImpact.map((block) => block.title)).toContain("Switching cost");
   });
 });

@@ -70,6 +70,10 @@
     {
       "date": "2026-05-12",
       "summary": "Implemented domain data governance for issue #63 and the first non-watch services adapter for issue #62, including curated service fixtures, resolver, deterministic comparison rules, evidence, tests, docs, and UI presets"
+    },
+    {
+      "date": "2026-05-12",
+      "summary": "Implemented issue #37 by adding verdict-led decision output fields, adapter-owned section labels, UI rendering for stronger choice/exception case/confidence rationale, and conformance coverage"
     }
   ],
   "blocked_items": []

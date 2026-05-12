@@ -94,10 +94,22 @@ function expectComparisonResult(result: GenericComparisonResult, domain: string)
   expectNonEmptyString(result.canonicalInputB);
   expectNonEmptyString(result.verdict.bestOverall);
   expect(["clear", "contextual", "close"]).toContain(result.verdict.confidence);
+  expectNonEmptyString(result.verdict.strongerChoice);
+  expectNonEmptyString(result.verdict.exceptionCase);
+  expectNonEmptyString(result.verdict.confidenceRationale);
   expectNonEmptyString(result.verdict.headline);
   expectNonEmptyString(result.verdict.summary);
   expect(result.verdict.picks.length).toBeGreaterThan(0);
   expectEvidenceSummary(result);
+
+  expectNonEmptyString(result.sectionLabels.keyDifferences);
+  expectNonEmptyString(result.sectionLabels.realWorldImpact);
+  expectNonEmptyString(result.sectionLabels.ownershipIntelligence);
+  expectNonEmptyString(result.sectionLabels.whoShouldBuyWhich);
+  expectNonEmptyString(result.sectionLabels.overpricedFeatures);
+  expectNonEmptyString(result.sectionLabels.hiddenDownsides);
+  expectNonEmptyString(result.sectionLabels.betterValueAlternative);
+  expectNonEmptyString(result.sectionLabels.signalVsFluff);
 
   for (const pick of result.verdict.picks) {
     expectNonEmptyString(pick.label);

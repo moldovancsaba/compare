@@ -25,6 +25,10 @@ Data-policy requirements:
 - Standardize missing-data behavior and map it to low-confidence evidence when decision-relevant.
 
 Result evidence requirements:
+- `sectionLabels`: adapter-owned presentation labels for each generic section so domain language stays precise.
+- `verdict.strongerChoice`: the recommended option stated directly.
+- `verdict.exceptionCase`: when the other option is still the better fit.
+- `verdict.confidenceRationale`: why the recommendation has clear, contextual, or close confidence.
 - `evidenceSummary.overallConfidence`: coarse confidence in the final recommendation.
 - `evidenceSummary.dataQuality`: coarse quality of the underlying adapter data.
 - `evidenceSummary.evidence`: at least one evidence item explaining what the result is based on.
@@ -61,6 +65,7 @@ The conformance suite verifies:
 - unsupported inputs fail closed
 - comparison output is deterministic
 - result shape contains all required generic sections
+- verdict includes stronger choice, exception case, confidence rationale, and adapter-owned section labels
 - result evidence includes valid confidence, data quality, evidence kinds, and limitations
 - duplicate inputs resolve to the same entity so the generic compare service can reject them
 
@@ -93,6 +98,7 @@ Adapters own:
 - adapter examples
 - adapter-owned UI copy for domain selector descriptions and input hints
 - section copy that depends on domain expertise
+- section labels and verdict framing for domain-specific decision confidence
 - domain regression fixtures
 
 Core platform owns:
