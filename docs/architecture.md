@@ -9,9 +9,9 @@ The current product-development initiative is generic comparison infrastructure 
 - `scope: future-domain` for services, SaaS, or later comparison domains.
 
 ## Application Layers
-- UI: Next.js App Router pages and React components in `src/app` and `src/components`, including shareable saved comparison pages at `/compare/[slug]`.
+- UI: Next.js App Router pages and React components in `src/app` and `src/components`, including an adapter-aware domain selector and shareable saved comparison pages at `/compare/[slug]`.
 - API: `/api/compare` applies basic per-client rate limiting, validates requests, delegates resolution/comparison to a domain adapter, rejects unresolved inputs with supported examples, blocks duplicate entities, and returns comparison output.
-- Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract and adapter registry.
+- Comparison core: `src/types/comparison.ts` and `src/lib/services/compare.ts` define the generic entity/result contract, adapter-owned UI metadata, and adapter registry.
 - Domain logic: `src/lib/domains/watch-domain.ts` is the first adapter; `src/lib/utils/resolve-watch.ts` handles exact, reference, URL, and conservative typo-tolerant watch resolution; `src/lib/services/compare-watches.ts` remains the watch-specific deterministic rule engine behind that adapter.
 - Data: `src/lib/data/watch-catalog.ts` is the V1 curated watch catalog. Future domains should add their own adapter and source data instead of adding category conditionals to the API or UI shell.
 - Adapter SDK: `docs/domain-adapters.md` defines the adapter contract, registration workflow, and required conformance tests in `tests/support/domain-adapter-conformance.ts`.

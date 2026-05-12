@@ -35,6 +35,21 @@ export interface ComparisonVerdict {
   picks: VerdictPick[];
 }
 
+export interface ComparisonDomainInputHints {
+  leftLabel: string;
+  rightLabel: string;
+  placeholder: string;
+  helperText: string;
+}
+
+export interface ComparisonDomainOption {
+  domain: ComparisonDomain;
+  label: string;
+  description: string;
+  examples: string[];
+  inputHints: ComparisonDomainInputHints;
+}
+
 export interface GenericComparisonResult {
   domain: ComparisonDomain;
   canonicalInputA: string;
@@ -66,7 +81,9 @@ export type ResolveComparisonEntityResult =
 export interface ComparisonDomainAdapter<TEntity extends ComparisonEntity = ComparisonEntity> {
   domain: ComparisonDomain;
   label: string;
+  description: string;
   examples: string[];
+  inputHints: ComparisonDomainInputHints;
   resolve(input: string): ResolveComparisonEntityResult | { status: "resolved"; entity: TEntity };
   compare(left: TEntity, right: TEntity): GenericComparisonResult;
 }

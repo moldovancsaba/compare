@@ -8,7 +8,14 @@ import type { WatchComparisonEntity } from "@/types/watch";
 export const watchDomainAdapter: ComparisonDomainAdapter<WatchComparisonEntity> = {
   domain: "watches",
   label: "Mechanical watches",
+  description: "Curated mechanical watch comparisons with ownership, wearability, and tradeoff reasoning.",
   examples: watchCatalog.map(watchDisplayName),
+  inputHints: {
+    leftLabel: "First watch",
+    rightLabel: "Second watch",
+    placeholder: "Rolex Air-King or a supported source URL",
+    helperText: "This adapter supports curated mechanical watch names, references, aliases, and matching source URLs."
+  },
   resolve(input) {
     const watch = resolveWatch(input);
 

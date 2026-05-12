@@ -514,6 +514,13 @@ describe("compare input validation", () => {
       valid: true
     });
   });
+
+  it("rejects unsupported comparison domains before the API round trip", () => {
+    expect(validateComparisonInputs("Rolex Air-King", "Rolex Explorer", "services")).toEqual({
+      valid: false,
+      message: "Choose a supported comparison domain."
+    });
+  });
 });
 
 describe("POST /api/compare", () => {
@@ -809,7 +816,7 @@ describe("POST /api/compare", () => {
   });
 
   it("handles network failures as controlled client errors", async () => {
-    const payload = await requestComparison("Rolex Air-King", "Rolex Explorer", async () => {
+    const payload = await requestComparison("Rolex Air-King", "Rolex Explorer", undefined, async () => {
       throw new Error("network down");
     });
 

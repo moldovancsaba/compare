@@ -14,11 +14,11 @@ export default function HomePage() {
           <div>
             <p className="eyebrow eyebrow-xwide">{appName}</p>
             <p className="body-copy body-copy-soft mt-2 max-w-xl text-sm">
-              The shortest path to purchase confidence for mechanical watch comparisons.
+              The shortest path to decision confidence across supported comparison domains.
             </p>
           </div>
           <div className="pill-muted text-accent eyebrow eyebrow-wide px-4 py-2">
-            {appVersionLabel} watch vertical
+            {appVersionLabel} adapter platform
           </div>
         </div>
         <ComparisonForm />

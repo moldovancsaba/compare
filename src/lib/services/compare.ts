@@ -2,6 +2,7 @@ import { watchDomainAdapter } from "@/lib/domains/watch-domain";
 import type {
   ComparisonDomain,
   ComparisonDomainAdapter,
+  ComparisonDomainOption,
   ComparisonEntity,
   GenericComparisonResult
 } from "@/types/comparison";
@@ -39,6 +40,16 @@ export type CompareInputsResult =
 
 export function supportedComparisonDomains(): string[] {
   return Array.from(domainAdapters.keys());
+}
+
+export function supportedComparisonDomainOptions(): ComparisonDomainOption[] {
+  return Array.from(domainAdapters.values()).map((adapter) => ({
+    domain: adapter.domain,
+    label: adapter.label,
+    description: adapter.description,
+    examples: adapter.examples,
+    inputHints: adapter.inputHints
+  }));
 }
 
 export function supportedInputsForDomain(domain: ComparisonDomain = defaultDomain): string[] {

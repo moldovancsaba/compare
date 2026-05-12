@@ -16,6 +16,7 @@ export interface ComparisonResponse {
 export interface ComparisonErrorResponse {
   error: string;
   supportedInputs?: string[];
+  supportedDomains?: string[];
 }
 
 export type ComparisonClientResult = ComparisonResponse | ComparisonErrorResponse;
@@ -51,10 +52,13 @@ export async function readComparisonResponse(response: Response): Promise<Compar
 
   if (!response.ok) {
     const supportedInputs = isRecord(payload) && isStringArray(payload.supportedInputs) ? payload.supportedInputs : undefined;
+    const supportedDomains =
+      isRecord(payload) && isStringArray(payload.supportedDomains) ? payload.supportedDomains : undefined;
 
     return {
       error: isErrorPayload(payload) ? payload.error : GENERIC_COMPARE_ERROR,
-      ...(supportedInputs ? { supportedInputs } : {})
+      ...(supportedInputs ? { supportedInputs } : {}),
+      ...(supportedDomains ? { supportedDomains } : {})
     };
   }
 
@@ -74,6 +78,7 @@ export async function readComparisonResponse(response: Response): Promise<Compar
 export async function requestComparison(
   leftInput: string,
   rightInput: string,
+  domain?: string,
   fetchCompare: FetchCompare = fetch
 ): Promise<ComparisonClientResult> {
   try {
@@ -83,6 +88,7 @@ export async function requestComparison(
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        ...(domain ? { domain } : {}),
         leftInput,
         rightInput
       })

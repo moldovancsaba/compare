@@ -7,6 +7,7 @@
 - Updated the homepage/form copy to describe the domain-based foundation while keeping mechanical watches as the first live adapter.
 - Re-centered Project 16 around the generic comparison infrastructure initiative, with labels for core platform, watch adapter, and future-domain work.
 - Added the domain adapter SDK documentation and shared conformance test harness, with the watch adapter as the reference passing adapter.
+- Added adapter-owned UI metadata and a comparison-domain selector so the form is driven by registered domains instead of watch-specific copy.
 - Added conservative typo tolerance for distinctive watch resolver tokens while preserving fail-closed behavior for ambiguous model families.
 
 ## v0.1.1 - 2026-05-11

@@ -18,7 +18,11 @@ function normalizeInput(value: string): string {
     .trim();
 }
 
-export function validateComparisonInputs(leftInput: string, rightInput: string): ComparisonInputValidation {
+export function validateComparisonInputs(
+  leftInput: string,
+  rightInput: string,
+  domain?: string
+): ComparisonInputValidation {
   const left = leftInput.trim();
   const right = rightInput.trim();
 
@@ -36,7 +40,14 @@ export function validateComparisonInputs(leftInput: string, rightInput: string):
     };
   }
 
-  const adapter = getComparisonDomainAdapter();
+  const adapter = getComparisonDomainAdapter(domain);
+  if (!adapter) {
+    return {
+      valid: false,
+      message: "Choose a supported comparison domain."
+    };
+  }
+
   const leftEntity = adapter?.resolve(left);
   const rightEntity = adapter?.resolve(right);
 

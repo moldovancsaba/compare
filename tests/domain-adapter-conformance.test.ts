@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import { watchDomainAdapter } from "@/lib/domains/watch-domain";
-import { compareInputs, getComparisonDomainAdapter, supportedComparisonDomains } from "@/lib/services/compare";
+import {
+  compareInputs,
+  getComparisonDomainAdapter,
+  supportedComparisonDomainOptions,
+  supportedComparisonDomains
+} from "@/lib/services/compare";
 import { describeDomainAdapterConformance } from "./support/domain-adapter-conformance";
 
 describeDomainAdapterConformance(watchDomainAdapter, {
@@ -14,6 +19,13 @@ describe("comparison domain registry", () => {
   it("registers the watch adapter as the default live domain", () => {
     expect(supportedComparisonDomains()).toContain("watches");
     expect(getComparisonDomainAdapter()).toBe(watchDomainAdapter);
+    expect(supportedComparisonDomainOptions()).toContainEqual({
+      domain: "watches",
+      label: "Mechanical watches",
+      description: watchDomainAdapter.description,
+      examples: watchDomainAdapter.examples,
+      inputHints: watchDomainAdapter.inputHints
+    });
   });
 
   it("keeps duplicate handling in the generic compare service", () => {

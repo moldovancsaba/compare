@@ -1,14 +1,15 @@
 # {compare}
 
-{compare} is a Next.js web app for high-trust buying intelligence around expensive enthusiast purchases. Release `v0.1.1` is intentionally narrow: mechanical watches only.
+{compare} is a Next.js web app for high-trust comparison intelligence across decision domains. Release `v0.1.1` ships mechanical watches as the first live adapter while the UI and API use a domain-based comparison foundation.
 
 ## Version
 - Project version: `0.1.1`
 - Current release label: `v0.1.1`
 
 ## What it does
-- Accepts two watch names or supported product URLs.
-- Resolves them against a curated mechanical watch catalog.
+- Lets users choose the active comparison domain.
+- Accepts two supported names or source URLs for that domain.
+- Resolves mechanical-watch inputs against a curated watch catalog.
 - Rejects weak or ambiguous inputs instead of guessing when a match is not clear.
 - Leads with an instant verdict and ranked buyer picks instead of making users interpret every section themselves.
 - Adds ownership intelligence for service reality, resale behavior, scratch anxiety, enthusiast bias, and marketing-vs-reality.
@@ -29,8 +30,9 @@ Most comparison content is bloated, repetitive, and detached from real ownership
 The business direction is trust-first purchase confidence, not generic AI summaries, SEO content, or affiliate-driven review sludge.
 
 ## Product shape
-- Single-screen comparison experience with a server-rendered landing page and client-side form interactions.
+- Single-screen comparison experience with a server-rendered landing page and client-side, adapter-aware form interactions.
 - Deterministic comparison engine built around a curated watch catalog instead of speculative scraping.
+- Domain adapter registry that exposes supported domains, examples, and input guidance to the UI.
 - API endpoint at `/api/compare`.
 - Tokenized visual system documented in `design-tokens.md`.
 
@@ -97,7 +99,7 @@ The worker at `scripts/trinity-compare-worker.mjs` claims `compare_jobs`, invoke
 - Tudor Pelagos 39
 - Omega Seamaster Aqua Terra 38
 
-The compare form renders the supported catalog as quick-select examples, lets users assign any catalog watch to either side, swap or clear inputs, and catches exact or resolver-equivalent duplicate selections before sending the request. The watch resolver tolerates obvious one-character typos in distinctive brand, model, or alias tokens while still rejecting broad ambiguous families such as "Tudor Black Bay." Unsupported inputs still go to `/api/compare`, which returns the same supported list so the client can recover from resolver misses without guessing or logging raw user input.
+The compare form renders a domain selector from the adapter registry. The current live domain is Mechanical watches, with adapter-provided labels, helper text, placeholders, and quick-select examples. Users can assign any catalog watch to either side, swap or clear inputs, and catch exact or resolver-equivalent duplicate selections before sending the request. The watch resolver tolerates obvious one-character typos in distinctive brand, model, or alias tokens while still rejecting broad ambiguous families such as "Tudor Black Bay." Unsupported inputs still go to `/api/compare`, which returns the same supported list so the client can recover from resolver misses without guessing or logging raw user input.
 
 ## Quality gates
 - `npm run lint`
@@ -122,7 +124,7 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Product strategy: `11_Product_Strategy.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes resolver matching, typo tolerance, ambiguity rejection, opinionated verdict output, ownership-intelligence output, client-side duplicate input validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, optional feedback notes, feedback note length validation, and client handling for network failures, non-JSON errors, and malformed successful payloads.
+Current automated route coverage includes resolver matching, typo tolerance, ambiguity rejection, opinionated verdict output, ownership-intelligence output, adapter metadata conformance, client-side duplicate input validation, unsupported-domain validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, optional feedback notes, feedback note length validation, and client handling for network failures, non-JSON errors, and malformed successful payloads.
 
 Comparison-output regression coverage lives in `tests/compare-watches.test.ts`. The fixture suite pins representative watch pairs across field, explorer, dive, and dress-sport styles, then asserts stable section structure, buyer picks, better-value alternatives, hidden-downside titles, and a few high-signal phrasing fragments. The intent is to catch meaningful rule drift without turning every sentence into a brittle snapshot.
 

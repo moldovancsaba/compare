@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { ComparisonHero } from "@/components/comparison-hero";
 import { ComparisonInputForm } from "@/components/comparison-input-form";
 import { ComparisonResultView } from "@/components/comparison-result";
-import { supportedInputsForDomain } from "@/lib/services/compare";
+import { supportedComparisonDomainOptions, supportedInputsForDomain } from "@/lib/services/compare";
 import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { GenericComparisonResult } from "@/types/comparison";
@@ -19,9 +19,12 @@ function isErrorResponse(payload: ComparisonClientResult): payload is Extract<Co
   return "error" in payload;
 }
 
-const supportedInputOptions = supportedInputsForDomain();
+const domainOptions = supportedComparisonDomainOptions();
+const defaultDomain = domainOptions[0]?.domain ?? "watches";
+const supportedInputOptions = supportedInputsForDomain(defaultDomain);
 
 export function ComparisonForm() {
+  const [activeDomain, setActiveDomain] = useState(defaultDomain);
   const [leftInput, setLeftInput] = useState("Rolex Air-King");
   const [rightInput, setRightInput] = useState("Rolex Explorer");
   const [result, setResult] = useState<GenericComparisonResult | null>(null);
@@ -32,8 +35,8 @@ export function ComparisonForm() {
   const [isBrainRefreshing, setIsBrainRefreshing] = useState(false);
   const [isPending, startTransition] = useTransition();
   const inlineValidation = useMemo(
-    () => validateComparisonInputs(leftInput, rightInput),
-    [leftInput, rightInput]
+    () => validateComparisonInputs(leftInput, rightInput, activeDomain),
+    [activeDomain, leftInput, rightInput]
   );
 
   useEffect(() => {
@@ -97,8 +100,8 @@ export function ComparisonForm() {
     }
   }
 
-  async function runComparison(nextLeft: string, nextRight: string) {
-    const validation = validateComparisonInputs(nextLeft, nextRight);
+  async function runComparison(nextLeft: string, nextRight: string, nextDomain = activeDomain) {
+    const validation = validateComparisonInputs(nextLeft, nextRight, nextDomain);
 
     if (!validation.valid) {
       setResult(null);
@@ -111,27 +114,28 @@ export function ComparisonForm() {
     setError(null);
     setBrain(null);
 
-    const payload = await requestComparison(nextLeft, nextRight);
+    const payload = await requestComparison(nextLeft, nextRight, nextDomain);
 
     if (isErrorResponse(payload)) {
       setResult(null);
       setBrain(null);
       setSavedComparisonPath(null);
       setError(payload.error);
-      setSupportedInputs(payload.supportedInputs ?? supportedInputOptions);
+      setSupportedInputs(payload.supportedInputs ?? supportedInputsForDomain(nextDomain));
       return;
     }
 
     setResult(payload.comparison);
     setBrain(payload.brain);
     setSavedComparisonPath(payload.savedComparison?.persisted ? payload.savedComparison.path : null);
-    setSupportedInputs(supportedInputOptions);
+    setSupportedInputs(supportedInputsForDomain(nextDomain));
   }
 
   function handleSubmit(formData: FormData) {
+    const nextDomain = String(formData.get("domain") || activeDomain).trim();
     const nextLeft = String(formData.get("leftInput") || "").trim();
     const nextRight = String(formData.get("rightInput") || "").trim();
-    const validation = validateComparisonInputs(nextLeft, nextRight);
+    const validation = validateComparisonInputs(nextLeft, nextRight, nextDomain);
 
     if (!validation.valid) {
       setResult(null);
@@ -142,7 +146,7 @@ export function ComparisonForm() {
     }
 
     startTransition(() => {
-      void runComparison(nextLeft, nextRight);
+      void runComparison(nextLeft, nextRight, nextDomain);
     });
   }
 
@@ -151,8 +155,20 @@ export function ComparisonForm() {
     setRightInput(nextRight);
 
     startTransition(() => {
-      void runComparison(nextLeft, nextRight);
+      void runComparison(nextLeft, nextRight, activeDomain);
     });
+  }
+
+  function changeDomain(nextDomain: string) {
+    const nextSupportedInputs = supportedInputsForDomain(nextDomain);
+    setActiveDomain(nextDomain);
+    setSupportedInputs(nextSupportedInputs);
+    setLeftInput(nextSupportedInputs[0] ?? "");
+    setRightInput(nextSupportedInputs[1] ?? "");
+    setResult(null);
+    setBrain(null);
+    setSavedComparisonPath(null);
+    setError(null);
   }
 
   function applySupportedInput(nextInput: string) {
@@ -182,7 +198,7 @@ export function ComparisonForm() {
     setBrain(null);
     setSavedComparisonPath(null);
     setError(null);
-    setSupportedInputs(supportedInputOptions);
+    setSupportedInputs(supportedInputsForDomain(activeDomain));
   }
 
   return (
@@ -190,12 +206,15 @@ export function ComparisonForm() {
       <section className="surface-panel surface-shell grid gap-8 p-7 lg:grid-cols-[1.15fr_0.85fr]">
         <ComparisonHero onApplyPreset={applyPreset} />
         <ComparisonInputForm
+          activeDomain={activeDomain}
+          domainOptions={domainOptions}
           error={error}
           isPending={isPending}
           leftInput={leftInput}
           rightInput={rightInput}
           supportedInputs={supportedInputs}
           validationMessage={inlineValidation.valid ? null : inlineValidation.message}
+          onDomainChange={changeDomain}
           onLeftInputChange={setLeftInput}
           onRightInputChange={setRightInput}
           onUseAsLeft={setLeftInput}

@@ -9,7 +9,9 @@ Every adapter implements `ComparisonDomainAdapter` from `src/types/comparison.ts
 Required fields:
 - `domain`: stable lowercase slug, such as `watches` or `services`.
 - `label`: human-readable domain name.
+- `description`: short UI description of what the adapter can compare.
 - `examples`: supported example inputs used by recovery UI and tests.
+- `inputHints`: adapter-owned left/right labels, placeholder, and helper text for the comparison form.
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right)`: returns a deterministic `GenericComparisonResult`.
 
@@ -28,6 +30,7 @@ Every adapter must pass the shared conformance helper in `tests/support/domain-a
 
 The conformance suite verifies:
 - stable metadata and examples
+- adapter-owned UI description and input hints
 - supported inputs resolve to generic entities
 - unsupported inputs fail closed
 - comparison output is deterministic
@@ -60,12 +63,14 @@ Adapters own:
 - resolver rules
 - domain-specific scoring and tradeoff rules
 - adapter examples
+- adapter-owned UI copy for domain selector descriptions and input hints
 - section copy that depends on domain expertise
 - domain regression fixtures
 
 Core platform owns:
 - API request/response flow
 - duplicate entity rejection
+- domain selector rendering from adapter metadata
 - persistence contracts
 - Brain queue contracts
 - feedback contracts

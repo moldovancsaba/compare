@@ -1,6 +1,10 @@
 "use client";
 
+import type { ComparisonDomainOption } from "@/types/comparison";
+
 interface ComparisonInputFormProps {
+  activeDomain: string;
+  domainOptions: ComparisonDomainOption[];
   error: string | null;
   isPending: boolean;
   leftInput: string;
@@ -9,6 +13,7 @@ interface ComparisonInputFormProps {
   validationMessage: string | null;
   onLeftInputChange: (value: string) => void;
   onRightInputChange: (value: string) => void;
+  onDomainChange: (domain: string) => void;
   onUseAsLeft: (value: string) => void;
   onUseAsRight: (value: string) => void;
   onUseSupportedInput: (value: string) => void;
@@ -49,12 +54,15 @@ function InputField({
 }
 
 export function ComparisonInputForm({
+  activeDomain,
+  domainOptions,
   error,
   isPending,
   leftInput,
   rightInput,
   supportedInputs,
   validationMessage,
+  onDomainChange,
   onLeftInputChange,
   onRightInputChange,
   onUseAsLeft,
@@ -64,19 +72,41 @@ export function ComparisonInputForm({
   onClearInputs,
   onSubmit
 }: ComparisonInputFormProps) {
+  const selectedDomain = domainOptions.find((option) => option.domain === activeDomain) ?? domainOptions[0];
+  const inputHints = selectedDomain.inputHints;
+
   return (
     <form action={onSubmit} className="surface-form space-y-5 p-6">
+      <div>
+        <label htmlFor="domain" className="eyebrow mb-2 block">
+          Comparison domain
+        </label>
+        <select
+          id="domain"
+          name="domain"
+          className="field-input w-full px-4 py-4 text-base"
+          value={activeDomain}
+          onChange={(event) => onDomainChange(event.target.value)}
+        >
+          {domainOptions.map((option) => (
+            <option key={option.domain} value={option.domain}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <p className="body-copy body-copy-faint mt-2 text-sm">{selectedDomain.description}</p>
+      </div>
       <InputField
         id="leftInput"
-        label="First input"
-        placeholder="Rolex Air-King or a supported source URL"
+        label={inputHints.leftLabel}
+        placeholder={inputHints.placeholder}
         value={leftInput}
         onChange={onLeftInputChange}
       />
       <InputField
         id="rightInput"
-        label="Second input"
-        placeholder="Rolex Explorer or a supported source URL"
+        label={inputHints.rightLabel}
+        placeholder={inputHints.placeholder}
         value={rightInput}
         onChange={onRightInputChange}
       />
@@ -96,10 +126,7 @@ export function ComparisonInputForm({
         {isPending ? "Analyzing" : "Explain the difference"}
       </button>
       {validationMessage ? <p className="status-warning p-4 text-sm">{validationMessage}</p> : null}
-      <p className="body-copy body-copy-faint text-sm">
-        The first adapter supports curated mechanical watch names and matching source URLs. The comparison core is now
-        domain-based, so services and other categories can be added as adapters.
-      </p>
+      <p className="body-copy body-copy-faint text-sm">{inputHints.helperText}</p>
       <div className="grid gap-3">
         {supportedInputs.map((supportedInput) => (
           <div key={supportedInput} className="catalog-picker-row">

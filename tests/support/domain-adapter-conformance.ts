@@ -74,6 +74,11 @@ export function describeDomainAdapterConformance(
     it("exposes stable domain metadata and examples", () => {
       expect(adapter.domain).toMatch(/^[a-z][a-z0-9-]*$/);
       expectNonEmptyString(adapter.label);
+      expectNonEmptyString(adapter.description);
+      expectNonEmptyString(adapter.inputHints.leftLabel);
+      expectNonEmptyString(adapter.inputHints.rightLabel);
+      expectNonEmptyString(adapter.inputHints.placeholder);
+      expectNonEmptyString(adapter.inputHints.helperText);
       expect(adapter.examples.length).toBeGreaterThanOrEqual(2);
 
       for (const example of adapter.examples) {
