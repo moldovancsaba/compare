@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 28,
-      "title": "Add a decision-intent profile to personalize comparison recommendations",
-      "priority": "high",
-      "reason": "The local tradeoff simulator is now available; the next step is persisting reusable decision intent so future comparisons can start from the user's priorities."
-    },
-    {
       "github_issue": 6,
       "title": "Add transparent value scoring and tradeoff weighting for watch comparisons",
+      "priority": "high",
+      "reason": "Decision intent and tradeoff simulation are now available; transparent scoring should make baseline and personalized recommendations inspectable."
+    },
+    {
+      "github_issue": 34,
+      "title": "Add secondary-market ownership intelligence to watch comparisons",
       "priority": "medium",
-      "reason": "Transparent scoring should follow the simulator so baseline and scenario recommendations share inspectable weighting language."
+      "reason": "Secondary-market intelligence should follow transparent scoring so liquidity and discount/premium signals can feed explicit value reasoning."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

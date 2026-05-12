@@ -25,6 +25,7 @@ import {
   normalizeWatchCollectionProfile
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
+import { analyzeWatchDecisionIntent, normalizeWatchDecisionIntentProfile } from "@/lib/domains/watch-decision-intent";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import {
@@ -594,6 +595,40 @@ describe("generic comparison foundation", () => {
 
     expect(result.comparison.ownershipIntelligence[0]?.title).toBe("Collection context");
   });
+
+  it("passes adapter-owned decision intent through generic comparison", () => {
+    const result = compareInputs({
+      leftInput: "Rolex Explorer",
+      rightInput: "Tudor Black Bay 54",
+      context: {
+        watchDecisionIntentProfile: {
+          wristSizeBand: "small",
+          primaryUseCase: "sport",
+          budgetSensitivity: 5,
+          comfortPriority: 4,
+          brandCachetTolerance: "low"
+        }
+      }
+    });
+
+    expect(result.status).toBe("completed");
+    if (result.status !== "completed") {
+      return;
+    }
+
+    expect(result.comparison.ownershipIntelligence).toContainEqual(
+      expect.objectContaining({
+        title: "Decision intent",
+        summary: expect.stringContaining("Tudor Black Bay 54")
+      })
+    );
+    expect(result.comparison.whoShouldBuyWhich).toContainEqual(
+      expect.objectContaining({
+        buyerType: "Your decision intent",
+        pick: "Tudor Black Bay 54"
+      })
+    );
+  });
 });
 
 describe("watch collection profiles", () => {
@@ -1015,6 +1050,82 @@ describe("watch collection profiles", () => {
     expect(result.pick).toBe("Rolex Explorer");
     expect(result.changedFromBaseline).toBe(false);
     expect(result.changedSections).toEqual(expect.arrayContaining(["Best daily wear"]));
+  });
+
+  it("normalizes short decision-intent profiles", () => {
+    expect(
+      normalizeWatchDecisionIntentProfile({
+        wristSizeBand: "small",
+        primaryUseCase: "daily",
+        budgetSensitivity: 9,
+        comfortPriority: "4",
+        stylePreference: "understated",
+        brandCachetTolerance: "low",
+        dateWindowPreference: "prefer_no_date",
+        ignored: "raw note"
+      })
+    ).toEqual({
+      wristSizeBand: "small",
+      primaryUseCase: "daily",
+      budgetSensitivity: 5,
+      comfortPriority: 4,
+      stylePreference: "understated",
+      brandCachetTolerance: "low",
+      dateWindowPreference: "prefer_no_date"
+    });
+  });
+
+  it("personalizes decision intent toward compact sport value", () => {
+    const analysis = analyzeWatchDecisionIntent(watchById("rolex-explorer-124270"), watchById("tudor-black-bay-54"), {
+      wristSizeBand: "small",
+      primaryUseCase: "sport",
+      budgetSensitivity: 5,
+      comfortPriority: 4,
+      brandCachetTolerance: "low"
+    });
+
+    expect(analysis).toEqual(
+      expect.objectContaining({
+        pick: "Tudor Black Bay 54",
+        activeConstraints: expect.arrayContaining(["sport-use headroom", "budget discipline"])
+      })
+    );
+  });
+
+  it("personalizes decision intent toward understated daily wear", () => {
+    const analysis = analyzeWatchDecisionIntent(watchById("rolex-explorer-124270"), watchById("tudor-black-bay-54"), {
+      wristSizeBand: "small",
+      primaryUseCase: "daily",
+      stylePreference: "understated",
+      comfortPriority: 5,
+      dateWindowPreference: "prefer_no_date"
+    });
+
+    expect(analysis).toEqual(
+      expect.objectContaining({
+        pick: "Rolex Explorer",
+        activeConstraints: expect.arrayContaining(["low-friction daily wear", "understated style"])
+      })
+    );
+  });
+
+  it("personalizes decision intent toward date convenience when supplied", () => {
+    const analysis = analyzeWatchDecisionIntent(
+      watchById("omega-aqua-terra-38"),
+      watchById("tudor-pelagos-39"),
+      {
+        primaryUseCase: "dress",
+        stylePreference: "dress_sport",
+        dateWindowPreference: "prefer_date"
+      }
+    );
+
+    expect(analysis).toEqual(
+      expect.objectContaining({
+        pick: "Omega Seamaster Aqua Terra 38",
+        activeConstraints: expect.arrayContaining(["date convenience", "dress-sport fit"])
+      })
+    );
   });
 });
 

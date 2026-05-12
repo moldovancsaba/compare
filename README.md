@@ -13,6 +13,7 @@
 - Leads with an instant verdict, stronger choice, exception case, recommendation signals, and confidence rationale.
 - Shows evidence and limitations so users can separate catalog facts, deterministic rules, editorial inference, and missing data.
 - Lets watch users simulate alternate buying priorities without replacing the baseline verdict.
+- Supports optional local watch decision-intent profiles for personalized recommendation emphasis.
 - Supports accountless watch collection profiles stored in the browser.
 - Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, market positioning, and marketing-reality checks.
 - Supports saved comparison pages when MongoDB is configured.

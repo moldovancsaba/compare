@@ -45,6 +45,21 @@ Watch comparison results include a local tradeoff simulator. It lets users adjus
 
 Changing controls updates a scenario recommendation in the browser without replacing the baseline verdict. Scenario state is serialized into the URL hash as a `tradeoff` token so the same what-if setup can be revisited later. The app emits allowlisted numeric telemetry for control changes and scenario picks; it does not store free-text notes through this flow.
 
+## Decision Intent
+
+Mechanical-watch comparisons can include an optional local decision-intent profile. The profile is short and accountless.
+
+Supported intent fields:
+- wrist size band
+- primary use case
+- budget sensitivity
+- style preference
+- comfort priority
+- brand-cachet tolerance
+- date-window preference
+
+The profile is stored in `localStorage` on the current browser. When supplied, the watch adapter adds an intent-aware recommendation, a decision-intent ownership block, and better-value ranking emphasis. The default compare flow still works without any intent profile.
+
 ## Watch Collection Profiles
 
 For mechanical watches, users can maintain an accountless collection profile in the browser.

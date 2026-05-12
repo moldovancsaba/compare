@@ -1,6 +1,7 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
+import { analyzeWatchDecisionIntent } from "@/lib/domains/watch-decision-intent";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
 import { analyzeWatchMarketPositioning, analyzeWatchMarketingReality } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
@@ -15,6 +16,7 @@ import type {
   WatchSpec
 } from "@/types/watch";
 import type { WatchCollectionProfile } from "@/types/watch-collection";
+import type { WatchDecisionIntentProfile } from "@/types/watch-decision-intent";
 
 function displayName(watch: WatchSpec): string {
   return `${watch.brand} ${watch.model}`;
@@ -481,22 +483,50 @@ function buildUpgradePathInsight(
   };
 }
 
+function buildDecisionIntentInsight(
+  left: WatchSpec,
+  right: WatchSpec,
+  decisionIntent?: WatchDecisionIntentProfile | null
+): InsightBlock | null {
+  const analysis = analyzeWatchDecisionIntent(left, right, decisionIntent);
+
+  if (!analysis) {
+    return null;
+  }
+
+  return {
+    title: "Decision intent",
+    summary: `${analysis.summary} Active constraints: ${analysis.activeConstraints.join(", ") || "balanced intent"}.`,
+    evidence: [
+      editorialEvidence(
+        "watch:decision-intent-profile",
+        "User-supplied decision intent",
+        "Decision intent is optional local context submitted with the comparison request; it adjusts emphasis but does not replace baseline rules.",
+        [left, right]
+      )
+    ]
+  };
+}
+
 function buildOwnershipIntelligence(
   left: WatchSpec,
   right: WatchSpec,
-  profile?: WatchCollectionProfile | null
+  profile?: WatchCollectionProfile | null,
+  decisionIntent?: WatchDecisionIntentProfile | null
 ): InsightBlock[] {
   const resaleWinner = pickHigher(left, right, collectorScore);
   const dailyWinner = pickHigher(left, right, dailyWearScore);
   const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
   const collectionContext = buildCollectionContextInsight(left, right, profile);
   const upgradePath = buildUpgradePathInsight(left, right, profile);
+  const intentInsight = buildDecisionIntentInsight(left, right, decisionIntent);
   const leftSimulation = simulateWatchOwnership(left);
   const rightSimulation = simulateWatchOwnership(right);
 
   return [
     ...(collectionContext ? [collectionContext] : []),
     ...(upgradePath ? [upgradePath] : []),
+    ...(intentInsight ? [intentInsight] : []),
     {
       title: "Daily ownership",
       summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience} ${ownershipProfileSummary(dailyWinner)}`,
@@ -568,7 +598,8 @@ function buildOwnershipIntelligence(
 function buildBuyerRecommendations(
   left: WatchSpec,
   right: WatchSpec,
-  profile?: WatchCollectionProfile | null
+  profile?: WatchCollectionProfile | null,
+  decisionIntent?: WatchDecisionIntentProfile | null
 ): BuyerRecommendation[] {
   const recommendations: BuyerRecommendation[] = [
     {
@@ -602,13 +633,24 @@ function buildBuyerRecommendations(
     });
   }
 
+  const intentAnalysis = analyzeWatchDecisionIntent(left, right, decisionIntent);
+
+  if (intentAnalysis) {
+    recommendations.push({
+      buyerType: "Your decision intent",
+      pick: intentAnalysis.pick,
+      reason: `${intentAnalysis.summary} This personalization uses ${intentAnalysis.activeConstraints.join(", ") || "the supplied profile"} as deterministic weighting context.`
+    });
+  }
+
   return recommendations;
 }
 
 function buildRecommendationSignals(
   left: WatchSpec,
   right: WatchSpec,
-  profile?: WatchCollectionProfile | null
+  profile?: WatchCollectionProfile | null,
+  decisionIntent?: WatchDecisionIntentProfile | null
 ): RecommendationSignal[] {
   const bestOverall = pickHigher(left, right, (watch) => dailyWearScore(watch) + valueScore(watch) + versatilityScore(watch));
   const dailyPick = pickHigher(left, right, dailyWearScore);
@@ -630,6 +672,16 @@ function buildRecommendationSignals(
   );
 
   const collectionSignal = buildCollectionSignal(left, right, profile);
+  const intentAnalysis = analyzeWatchDecisionIntent(left, right, decisionIntent);
+  const intentSignal: RecommendationSignal | null = intentAnalysis
+    ? {
+        kind: "best_overall",
+        label: "Intent-aware pick",
+        pick: intentAnalysis.pick,
+        reason: intentAnalysis.summary,
+        confidence: "medium"
+      }
+    : null;
 
   if (bestOverallGap <= 1) {
     return [
@@ -655,6 +707,7 @@ function buildRecommendationSignals(
         reason: `${displayName(riskierFit)} is the riskier fit if you want low visual presence, easy cuff clearance, and low-maintenance ownership.`,
         confidence: "medium"
       },
+      ...(intentSignal ? [intentSignal] : []),
       ...(collectionSignal ? [collectionSignal] : [])
     ];
   }
@@ -695,6 +748,7 @@ function buildRecommendationSignals(
       reason: `${displayName(riskierFit)} is the option to question if you want low visual presence, easy cuff clearance, and minimal ownership friction.`,
       confidence: "medium"
     },
+    ...(intentSignal ? [intentSignal] : []),
     ...(collectionSignal ? [collectionSignal] : [])
   ];
 }
@@ -802,7 +856,12 @@ function buildHiddenDownsides(left: WatchSpec, right: WatchSpec): InsightBlock[]
   return blocks.slice(0, 4);
 }
 
-function scoreAlternative(targets: WatchSpec[], candidate: WatchSpec): number {
+function scoreAlternative(
+  targets: WatchSpec[],
+  candidate: WatchSpec,
+  decisionIntent?: WatchDecisionIntentProfile | null
+): number {
+  const intentAnalysis = analyzeWatchDecisionIntent(candidate, targets[0], decisionIntent);
   return targets.reduce((score, target) => {
     let nextScore = score;
 
@@ -823,15 +882,19 @@ function scoreAlternative(targets: WatchSpec[], candidate: WatchSpec): number {
     }
 
     return nextScore;
-  }, 0);
+  }, intentAnalysis?.leftMatch.score ?? 0);
 }
 
-function buildBetterValueAlternative(left: WatchSpec, right: WatchSpec): InsightBlock[] {
+function buildBetterValueAlternative(
+  left: WatchSpec,
+  right: WatchSpec,
+  decisionIntent?: WatchDecisionIntentProfile | null
+): InsightBlock[] {
   const alternative = watchCatalog
     .filter((watch) => watch.id !== left.id && watch.id !== right.id)
     .map((watch) => ({
       watch,
-      score: scoreAlternative([left, right], watch)
+      score: scoreAlternative([left, right], watch, decisionIntent)
     }))
     .sort((a, b) => b.score - a.score)[0]?.watch;
 
@@ -842,7 +905,7 @@ function buildBetterValueAlternative(left: WatchSpec, right: WatchSpec): Insight
   return [
     {
       title: displayName(alternative),
-      summary: `${displayName(alternative)} is the strongest value pivot if both of your original picks feel slightly misaligned. It keeps the enthusiast appeal, lands at ${formatUsd(alternative.msrpUsd)}, and avoids paying full premium money for differences that mostly live in branding or styling.`
+      summary: `${displayName(alternative)} is the strongest value pivot if both of your original picks feel slightly misaligned. It keeps the enthusiast appeal, lands at ${formatUsd(alternative.msrpUsd)}, and avoids paying full premium money for differences that mostly live in branding or styling.${decisionIntent ? " The ranking also reflects the supplied decision-intent profile." : ""}`
     }
   ];
 }
@@ -984,7 +1047,8 @@ function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummar
 export function compareWatches(
   left: WatchSpec,
   right: WatchSpec,
-  collectionProfile?: WatchCollectionProfile | null
+  collectionProfile?: WatchCollectionProfile | null,
+  decisionIntent?: WatchDecisionIntentProfile | null
 ): ComparisonResult {
   return {
     domain: "watches",
@@ -1006,14 +1070,14 @@ export function compareWatches(
       signalVsFluff: "Marketing vs Reality"
     },
     evidenceSummary: buildEvidenceSummary(left, right),
-    recommendationSignals: buildRecommendationSignals(left, right, collectionProfile),
+    recommendationSignals: buildRecommendationSignals(left, right, collectionProfile, decisionIntent),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
-    ownershipIntelligence: buildOwnershipIntelligence(left, right, collectionProfile),
-    whoShouldBuyWhich: buildBuyerRecommendations(left, right, collectionProfile),
+    ownershipIntelligence: buildOwnershipIntelligence(left, right, collectionProfile, decisionIntent),
+    whoShouldBuyWhich: buildBuyerRecommendations(left, right, collectionProfile, decisionIntent),
     overpricedFeatures: buildOverpricedFeatures(left, right),
     hiddenDownsides: buildHiddenDownsides(left, right),
-    betterValueAlternative: buildBetterValueAlternative(left, right),
+    betterValueAlternative: buildBetterValueAlternative(left, right, decisionIntent),
     signalVsFluff: buildSignalVsFluff(left, right)
   };
 }

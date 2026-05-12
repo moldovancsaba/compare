@@ -138,6 +138,10 @@
     {
       "date": "2026-05-13",
       "summary": "Implemented issue #32 by adding a local watch tradeoff simulator with serializable scenario state and allowlisted telemetry"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #28 by adding optional local watch decision-intent profiles that personalize recommendation emphasis"
     }
   ],
   "blocked_items": []

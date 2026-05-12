@@ -1,6 +1,7 @@
 import type { GenericComparisonResult } from "@/types/comparison";
 import type { BrainState } from "@/types/watch";
 import type { WatchCollectionProfile } from "@/types/watch-collection";
+import type { WatchDecisionIntentProfile } from "@/types/watch-decision-intent";
 
 const GENERIC_COMPARE_ERROR = "The comparison request failed. Try again.";
 
@@ -87,7 +88,7 @@ export async function requestComparison(
   leftInput: string,
   rightInput: string,
   domain?: string,
-  contextOrFetch?: { watchCollectionProfile?: WatchCollectionProfile } | FetchCompare,
+  contextOrFetch?: { watchCollectionProfile?: WatchCollectionProfile; watchDecisionIntentProfile?: WatchDecisionIntentProfile } | FetchCompare,
   fetchCompare: FetchCompare = fetch
 ): Promise<ComparisonClientResult> {
   const context = typeof contextOrFetch === "function" ? undefined : contextOrFetch;

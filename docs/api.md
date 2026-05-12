@@ -28,6 +28,15 @@ Runs a deterministic comparison.
         }
       ],
       "preferredBrands": ["Rolex"]
+    },
+    "watchDecisionIntentProfile": {
+      "wristSizeBand": "small",
+      "primaryUseCase": "daily",
+      "budgetSensitivity": 4,
+      "stylePreference": "understated",
+      "comfortPriority": 5,
+      "brandCachetTolerance": "low",
+      "dateWindowPreference": "prefer_no_date"
     }
   }
 }
@@ -39,7 +48,7 @@ Fields:
 - `rightInput`: required user input for the second item.
 - `context`: optional adapter-owned context. Shared platform code treats this as opaque.
 
-The watch adapter currently accepts `context.watchCollectionProfile`.
+The watch adapter currently accepts `context.watchCollectionProfile` and `context.watchDecisionIntentProfile`.
 
 ### Success Response
 
