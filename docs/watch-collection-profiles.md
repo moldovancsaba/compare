@@ -31,6 +31,7 @@ When context is present, the watch adapter can:
 - produce secondary balance scores with contributors and suggestions
 - produce single-watch should-I-buy reports for supported candidate watches
 - produce conservative five-year ownership simulations for compared watches and should-I-buy candidates
+- produce model-level market-positioning analysis for hype, collector respect, saturation, brand cachet, liquidity context, substance signals, and caution signals
 
 ## Gap And Overlap Analysis
 
@@ -81,6 +82,7 @@ Reports include:
 - emotional fit
 - ownership risk
 - five-year ownership simulation with service-cost bands, service interval ranges, durability risk, exit liquidity, friction level, confidence, freshness, assumptions, and warnings
+- market positioning with hype-versus-substance, collector reputation, liquidity context, confidence, and warnings
 - alternatives when the candidate is weak or redundant
 
 This is purchase-confidence guidance, not a generic review, dealer recommendation, or investment signal.
@@ -97,3 +99,18 @@ The simulator maps structured ownership profile fields to conservative five-year
 - visible assumptions and missing-data warnings
 
 The simulator deliberately avoids live market scraping, tax, insurance, financing, regional service quotes, and resale guarantees. Missing ownership metadata produces low-confidence fallback ranges rather than exact-sounding advice.
+
+## Market Positioning
+
+The watch adapter includes deterministic model-level market positioning for supported watches.
+
+Current positioning traits:
+- hype level
+- collector respect
+- market saturation
+- brand cachet
+- substance signals
+- caution signals
+- liquidity context from structured ownership metadata
+
+This layer is designed to explain reputation and narrative pressure without turning into unsupported opinion. It does not scrape forums in the request path, does not make defamatory claims, and does not infer a watch's reputation from brand alone. Missing positioning metadata produces low-confidence warnings.

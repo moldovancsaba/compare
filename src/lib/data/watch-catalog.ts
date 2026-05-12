@@ -30,6 +30,15 @@ export const watchCatalog: WatchSpec[] = [
       "Smooth bezel keeps it less flashy than polished alternatives."
     ],
     marketingClaims: ["aviation heritage", "crown shield for magnetic resistance"],
+    marketPositioning: {
+      hypeLevel: "moderate",
+      collectorRespect: "niche",
+      marketSaturation: "moderate",
+      brandCachet: "status",
+      substanceSignals: ["modern Rolex movement", "robust case", "distinctive model identity"],
+      cautionSignals: ["polarizing dial", "less universal demand than core Rolex sports models"],
+      positioningSummary: "A contrarian Rolex sports watch: more interesting than the default, less liquid than the icons."
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "balanced",
@@ -78,6 +87,15 @@ export const watchCatalog: WatchSpec[] = [
       "One of the easiest luxury watches to wear daily with formal clothes."
     ],
     marketingClaims: ["mountain expedition DNA", "timeless 3-6-9 dial"],
+    marketPositioning: {
+      hypeLevel: "moderate",
+      collectorRespect: "strong",
+      marketSaturation: "moderate",
+      brandCachet: "status",
+      substanceSignals: ["canonical design", "compact wearability", "strong resale stability"],
+      cautionSignals: ["can feel too restrained", "status premium is embedded in retail pricing"],
+      positioningSummary: "A high-trust one-watch benchmark whose reputation is driven more by versatility than novelty."
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "compact",
@@ -125,6 +143,15 @@ export const watchCatalog: WatchSpec[] = [
       "Bezel action is practical but the faux-aged lume is a style choice."
     ],
     marketingClaims: ["1954 inspired proportions", "vintage purity"],
+    marketPositioning: {
+      hypeLevel: "high",
+      collectorRespect: "strong",
+      marketSaturation: "moderate",
+      brandCachet: "recognized",
+      substanceSignals: ["rare compact diver proportions", "T-fit bracelet", "strong tool-watch capability"],
+      cautionSignals: ["vintage styling may age with taste", "liquidity trails Rolex"],
+      positioningSummary: "An enthusiast-favorite compact diver where the excitement is backed by real wearability."
+    },
     ownershipProfile: {
       serviceExpectation: "medium",
       comfort: "compact",
@@ -172,6 +199,15 @@ export const watchCatalog: WatchSpec[] = [
       "No quick micro-adjust is the biggest daily-use miss."
     ],
     marketingClaims: ["big crown spirit", "heritage riveted bracelet"],
+    marketPositioning: {
+      hypeLevel: "moderate",
+      collectorRespect: "solid",
+      marketSaturation: "high",
+      brandCachet: "recognized",
+      substanceSignals: ["well-judged proportions", "broad recognition", "modern in-house movement"],
+      cautionSignals: ["normalized hype cycle", "no quick micro-adjust", "many adjacent Black Bay variants"],
+      positioningSummary: "A former hype leader that remains good, but no longer feels like the obvious insider pick."
+    },
     ownershipProfile: {
       serviceExpectation: "medium",
       comfort: "balanced",
@@ -220,6 +256,15 @@ export const watchCatalog: WatchSpec[] = [
       "Best for buyers who want one watch for office and weekends."
     ],
     marketingClaims: ["Master Chronometer", "teak dial inspired by yacht decks"],
+    marketPositioning: {
+      hypeLevel: "low",
+      collectorRespect: "solid",
+      marketSaturation: "moderate",
+      brandCachet: "recognized",
+      substanceSignals: ["Master Chronometer movement", "office-to-weekend versatility", "anti-magnetism"],
+      cautionSignals: ["softer resale stability", "less emotional pull for some collectors"],
+      positioningSummary: "A rational high-spec alternative whose market weakness can be an advantage when bought carefully."
+    },
     ownershipProfile: {
       serviceExpectation: "high",
       comfort: "balanced",
@@ -267,6 +312,15 @@ export const watchCatalog: WatchSpec[] = [
       "Tool-forward finishing is less jewelry-like in hand."
     ],
     marketingClaims: ["professional dive DNA", "grade 2 titanium comfort"],
+    marketPositioning: {
+      hypeLevel: "moderate",
+      collectorRespect: "strong",
+      marketSaturation: "moderate",
+      brandCachet: "recognized",
+      substanceSignals: ["titanium comfort", "tool-forward finishing", "T-fit bracelet"],
+      cautionSignals: ["less jewelry-like presence", "narrower buyer pool than heritage divers"],
+      positioningSummary: "A substance-heavy modern diver that earns respect from capability-focused collectors."
+    },
     ownershipProfile: {
       serviceExpectation: "medium",
       comfort: "compact",

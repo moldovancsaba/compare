@@ -255,6 +255,14 @@ Fields:
         "Catalog freshness is unknown because this watch row does not carry a reviewed-at timestamp."
       ]
     },
+    "marketPositioning": {
+      "confidence": "medium",
+      "hypeVsSubstance": "Tudor Black Bay 54 carries high narrative heat. The substance case is rare compact diver proportions, T-fit bracelet, strong tool-watch capability; the caution case is vintage styling may age with taste, liquidity trails Rolex.",
+      "collectorReputation": "Collector respect is strong, while brand cachet is recognized. This is a model-level read, not a blanket claim about Tudor.",
+      "liquidityContext": "Tudor Black Bay 54 has stable but not automatic liquidity; moderate saturation means buyer depth still depends on condition, price, and configuration.",
+      "positioningSummary": "An enthusiast-favorite compact diver where the excitement is backed by real wearability.",
+      "warnings": []
+    },
     "alternatives": [],
     "profileInfluence": "1 saved collection items and 0 preferred brands influenced this report."
   }
@@ -264,6 +272,8 @@ Fields:
 Verdict values are `buy`, `consider`, and `skip`.
 
 `ownershipSimulation` is a conservative five-year planning aid. It exposes service-cost bands, service interval ranges, durability risk, exit liquidity, friction level, confidence, freshness, assumptions, and warnings. It is not a live market quote or financial forecast.
+
+`marketPositioning` is a deterministic watch-adapter analysis of hype level, collector respect, saturation, brand cachet, substance signals, and caution signals. Claims are model-level curated inferences, not live forum scraping or blanket brand stereotypes.
 
 ### Error Response
 

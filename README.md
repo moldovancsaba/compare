@@ -13,11 +13,11 @@
 - Leads with an instant verdict, stronger choice, exception case, recommendation signals, and confidence rationale.
 - Shows evidence and limitations so users can separate catalog facts, deterministic rules, editorial inference, and missing data.
 - Supports accountless watch collection profiles stored in the browser.
-- Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, and five-year ownership simulation.
+- Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, and market positioning.
 - Supports saved comparison pages when MongoDB is configured.
 
 ## Live Domains
-- Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, collection profiles, and collector guidance.
+- Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, market positioning, collection profiles, and collector guidance.
 - Business services: curated service archetypes with switching-cost, contract-risk, implementation-friction, and governance reasoning.
 
 ## Product Shape
@@ -97,7 +97,7 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Design primitives: `design-tokens.md`
 
 ## Testing Coverage
-Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
+Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
 
 ## Operations
 Structured logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers.

@@ -6,6 +6,7 @@ import type {
   InsightBlock,
   VerdictPick
 } from "@/types/comparison";
+import type { WatchMarketPositioningProfile } from "@/types/watch-market";
 
 export interface WatchSpec {
   id: string;
@@ -33,6 +34,7 @@ export interface WatchSpec {
   weightFeel: "light" | "balanced" | "substantial";
   notes: string[];
   marketingClaims: string[];
+  marketPositioning?: WatchMarketPositioningProfile;
   ownershipProfile?: {
     serviceExpectation: "low" | "medium" | "high";
     comfort: "compact" | "balanced" | "substantial";

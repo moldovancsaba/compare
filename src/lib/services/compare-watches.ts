@@ -2,6 +2,7 @@ import { watchCatalog } from "@/lib/data/watch-catalog";
 import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
+import { analyzeWatchMarketPositioning } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
 import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
@@ -219,6 +220,23 @@ function ownershipProfileEvidence(watch: WatchSpec): EvidenceItem {
     watch,
     "structured-ownership-profile",
     "Structured ownership profile covers comfort, service burden, durability, reliability, resale, bracelet quality, and strap versatility."
+  );
+}
+
+function marketPositioningEvidence(watch: WatchSpec): EvidenceItem {
+  if (!watch.marketPositioning) {
+    return missingDataEvidence(
+      `${watch.id}:missing-market-positioning`,
+      "Missing structured market-positioning profile",
+      "This watch is missing model-level hype, collector respect, saturation, brand cachet, and substance/caution signals.",
+      [watch]
+    );
+  }
+
+  return catalogEvidence(
+    watch,
+    "structured-market-positioning",
+    "Structured market-positioning profile covers hype level, collector respect, saturation, brand cachet, substance signals, and caution signals."
   );
 }
 
@@ -836,6 +854,8 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
     "water resistance relative to actual use",
     "dial legibility"
   ];
+  const leftMarket = analyzeWatchMarketPositioning(left);
+  const rightMarket = analyzeWatchMarketPositioning(right);
 
   return [
     {
@@ -848,6 +868,30 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
           "The adapter treats comfort, fit adjustment, practical resistance, and legibility as higher-signal than pure marketing claims.",
           [left, right]
         )
+      ]
+    },
+    {
+      title: "Market positioning",
+      summary: `${displayName(left)}: ${leftMarket.positioningSummary} ${leftMarket.hypeVsSubstance} ${displayName(right)}: ${rightMarket.positioningSummary} ${rightMarket.hypeVsSubstance}`,
+      evidence: [
+        marketPositioningEvidence(left),
+        marketPositioningEvidence(right),
+        editorialEvidence(
+          "watch:market-positioning-inference",
+          "Model-level market positioning inference",
+          "Market positioning is derived from curated model-level traits and structured ownership metadata; it does not scrape forums or make blanket brand claims.",
+          [left, right]
+        ),
+        ...(leftMarket.warnings.length || rightMarket.warnings.length
+          ? [
+              missingDataEvidence(
+                "watch:market-positioning-warning",
+                "Market-positioning warnings",
+                [...leftMarket.warnings, ...rightMarket.warnings].join(" "),
+                [left, right]
+              )
+            ]
+          : [])
       ]
     },
     {
@@ -872,6 +916,8 @@ function buildEvidenceSummary(left: WatchSpec, right: WatchSpec): EvidenceSummar
     evidence: [
       catalogEvidence(left, "fixture-backed-specs", "Core specs, retail price, aliases, ownership notes, and structured ownership profile are read from the curated watch fixture."),
       catalogEvidence(right, "fixture-backed-specs", "Core specs, retail price, aliases, ownership notes, and structured ownership profile are read from the curated watch fixture."),
+      marketPositioningEvidence(left),
+      marketPositioningEvidence(right),
       derivedRuleEvidence(
         "watch:ownership-consequence-rules",
         "Consequence rules",

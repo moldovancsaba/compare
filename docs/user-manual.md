@@ -28,6 +28,7 @@ Comparison results include:
 - Hidden downsides
 - Better-value or adjacent alternatives
 - Marketing-vs-reality analysis
+- Market-positioning analysis when the active adapter has structured positioning data
 
 The labels can vary by domain because each adapter owns its presentation language.
 
@@ -60,6 +61,7 @@ The watch profile panel can show:
 - balance guidance across versatility, redundancy, formality, complication diversity, and ownership risk
 - single-watch should-I-buy guidance
 - conservative five-year ownership simulation for service planning, durability risk, exit liquidity, and ownership friction
+- model-level market positioning for hype versus substance, collector respect, saturation, brand cachet, and liquidity context
 
 Scores are decision aids, not grades. They are meant to reveal concentration and missing contrast before a purchase.
 
@@ -72,11 +74,14 @@ The watch profile panel includes a single-watch purchase check. Choose a support
 - emotional-fit notes
 - ownership-risk notes
 - five-year ownership simulation with service-cost bands, interval assumptions, confidence, freshness, and warnings
+- market-positioning notes with provenance-aware hype/substance and collector-reputation framing
 - alternatives when the candidate is weak or redundant
 
 The report uses the saved local collection profile when available. If no profile exists, the report still works, but collection-overlap confidence is lower.
 
 Ownership simulations use curated catalog metadata and broad ranges. They do not use live dealer listings, regional service quotes, taxes, insurance, or resale guarantees.
+
+Market-positioning notes use curated model-level traits. They intentionally avoid live forum scraping and blanket brand stereotypes.
 
 ## Persistence
 

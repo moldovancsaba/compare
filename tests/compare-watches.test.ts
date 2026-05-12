@@ -24,6 +24,7 @@ import {
   normalizeWatchCollectionProfile
 } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
+import { analyzeWatchMarketPositioning } from "@/lib/domains/watch-market-positioning";
 import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator";
 import { toServiceComparisonEntity } from "@/lib/domains/service-entity";
 import { toWatchComparisonEntity } from "@/lib/domains/watch-entity";
@@ -278,6 +279,20 @@ describe("compareWatches", () => {
     }
   });
 
+  it("requires structured market-positioning metadata for catalog watches", () => {
+    for (const watch of watchCatalog) {
+      expect(watch.marketPositioning).toEqual({
+        hypeLevel: expect.stringMatching(/^(low|moderate|high)$/),
+        collectorRespect: expect.stringMatching(/^(niche|solid|strong)$/),
+        marketSaturation: expect.stringMatching(/^(low|moderate|high)$/),
+        brandCachet: expect.stringMatching(/^(quiet|recognized|status)$/),
+        substanceSignals: expect.arrayContaining([expect.any(String)]),
+        cautionSignals: expect.arrayContaining([expect.any(String)]),
+        positioningSummary: expect.any(String)
+      });
+    }
+  });
+
   it("returns all required output sections", () => {
     const left = watchCatalog[0];
     const right = watchCatalog[1];
@@ -338,7 +353,7 @@ describe("compareWatches", () => {
     expect(result.overpricedFeatures.length).toBeGreaterThan(0);
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);
     expect(result.betterValueAlternative.length).toBeGreaterThan(0);
-    expect(result.signalVsFluff.length).toBe(2);
+    expect(result.signalVsFluff.length).toBe(3);
     expect(result.evidenceSummary.overallConfidence).toBe("medium");
     expect(result.evidenceSummary.dataQuality).toBe("medium");
   });
@@ -479,6 +494,7 @@ describe("compareWatches", () => {
       ]);
       expect(result.signalVsFluff.map((block) => block.title)).toEqual([
         "Meaningful difference",
+        "Market positioning",
         "Mostly marketing"
       ]);
       expect(result.verdict.picks).toContainEqual(
@@ -746,6 +762,10 @@ describe("watch collection profiles", () => {
           }),
           horizonYears: 5
         }),
+        marketPositioning: expect.objectContaining({
+          confidence: "medium",
+          hypeVsSubstance: expect.stringContaining("rare compact diver proportions")
+        }),
         alternatives: []
       })
     );
@@ -838,6 +858,47 @@ describe("watch collection profiles", () => {
         warnings: expect.arrayContaining([expect.stringContaining("stale")])
       })
     );
+  });
+
+  it("explains hype versus substance with model-level positioning", () => {
+    const blackBay58 = analyzeWatchMarketPositioning(watchById("tudor-black-bay-58"));
+    const aquaTerra = analyzeWatchMarketPositioning(watchById("omega-aqua-terra-38"));
+    const comparison = compareWatches(watchById("tudor-black-bay-58"), watchById("omega-aqua-terra-38"));
+
+    expect(blackBay58.hypeVsSubstance).toContain("normalized hype cycle");
+    expect(aquaTerra.hypeVsSubstance).toContain("Master Chronometer movement");
+    expect(blackBay58.collectorReputation).toContain("not a blanket claim about Tudor");
+    expect(comparison.signalVsFluff).toContainEqual(
+      expect.objectContaining({
+        title: "Market positioning",
+        evidence: expect.arrayContaining([
+          expect.objectContaining({
+            kind: "catalog_fact",
+            label: expect.stringContaining("catalog facts")
+          }),
+          expect.objectContaining({
+            kind: "editorial_inference",
+            label: "Model-level market positioning inference"
+          })
+        ])
+      })
+    );
+    expect(flattenedComparisonCopy(comparison)).not.toContain("Tudor watches are");
+  });
+
+  it("degrades market positioning without brand stereotypes when data is missing", () => {
+    const report = analyzeWatchMarketPositioning({
+      ...watchById("rolex-explorer-124270"),
+      marketPositioning: undefined
+    });
+
+    expect(report).toEqual(
+      expect.objectContaining({
+        confidence: "low",
+        warnings: expect.arrayContaining([expect.stringContaining("Structured market-positioning profile is missing")])
+      })
+    );
+    expect(report.hypeVsSubstance).toContain("will not infer hype");
   });
 });
 
@@ -1387,6 +1448,10 @@ describe("POST /api/compare", () => {
           estimatedServiceCostUsd: expect.objectContaining({
             label: "$600-$1,000"
           })
+        }),
+        marketPositioning: expect.objectContaining({
+          confidence: "medium",
+          collectorReputation: expect.stringContaining("not a blanket claim")
         })
       })
     );

@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 48,
-      "title": "Add market positioning engine",
-      "priority": "high",
-      "reason": "Ownership simulation is now available; market-positioning guidance can build on cost, friction, and resale context to separate hype from substance."
-    },
-    {
       "github_issue": 49,
       "title": "Add marketing-vs-reality expansion",
+      "priority": "high",
+      "reason": "Market positioning is now available; the next leverage point is expanding myth, spec-inflation, and marketing-reality analysis with the new positioning context."
+    },
+    {
+      "github_issue": 50,
+      "title": "Add user preference profile foundation",
       "priority": "medium",
-      "reason": "The comparison output already has a compact Marketing vs Reality section; the next depth step is a fuller myth/spec-inflation layer after market positioning."
+      "reason": "Preference profiles become more useful after the core purchase-confidence layers can explain ownership, market positioning, and marketing reality."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

@@ -344,6 +344,27 @@ export function WatchCollectionProfilePanel({ activeDomain, profile, onChange }:
                 </p>
               ) : null}
             </div>
+            <div className="mt-4 surface-item p-4">
+              <p className="card-kicker mb-2">Market positioning</p>
+              <p className="body-copy body-copy-strong text-sm">
+                {purchaseReport.marketPositioning.positioningSummary}
+              </p>
+              <p className="body-copy body-copy-faint mt-3 text-xs">
+                {purchaseReport.marketPositioning.hypeVsSubstance}{" "}
+                {purchaseReport.marketPositioning.collectorReputation}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                  {purchaseReport.marketPositioning.confidence} confidence
+                </span>
+                <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">model-level profile</span>
+              </div>
+              {purchaseReport.marketPositioning.warnings.length ? (
+                <p className="body-copy body-copy-faint mt-3 text-xs">
+                  {purchaseReport.marketPositioning.warnings.join(" ")}
+                </p>
+              ) : null}
+            </div>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {[
                 ["Value", purchaseReport.valueAssessment],
