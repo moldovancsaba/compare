@@ -53,6 +53,7 @@ type ComparisonRegressionFixture = {
   name: string;
   leftId: string;
   rightId: string;
+  expectedBestOverall: string;
   expectedBuyerPicks: Record<string, string>;
   expectedBetterValueAlternative: string;
   expectedHiddenDownsideTitles: string[];
@@ -64,6 +65,7 @@ const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
     name: "Rolex Air-King 126900 vs Rolex Explorer 124270",
     leftId: "rolex-air-king-126900",
     rightId: "rolex-explorer-124270",
+    expectedBestOverall: "Rolex Explorer",
     expectedBuyerPicks: {
       "One-watch owner": "Rolex Explorer",
       "Tool-watch enthusiast": "Rolex Air-King",
@@ -80,6 +82,7 @@ const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
     name: "Tudor Black Bay 54 vs Tudor Black Bay 58",
     leftId: "tudor-black-bay-54",
     rightId: "tudor-black-bay-58",
+    expectedBestOverall: "Tudor Black Bay 54",
     expectedBuyerPicks: {
       "One-watch owner": "Tudor Black Bay 58",
       "Tool-watch enthusiast": "Tudor Black Bay 54",
@@ -93,6 +96,7 @@ const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
     name: "Omega Seamaster Aqua Terra 38 vs Tudor Pelagos 39",
     leftId: "omega-aqua-terra-38",
     rightId: "tudor-pelagos-39",
+    expectedBestOverall: "Tudor Pelagos 39",
     expectedBuyerPicks: {
       "One-watch owner": "Omega Seamaster Aqua Terra 38",
       "Tool-watch enthusiast": "Tudor Pelagos 39",
@@ -110,6 +114,7 @@ const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
     name: "Rolex Explorer 124270 vs Omega Seamaster Aqua Terra 38",
     leftId: "rolex-explorer-124270",
     rightId: "omega-aqua-terra-38",
+    expectedBestOverall: "Rolex Explorer",
     expectedBuyerPicks: {
       "One-watch owner": "Rolex Explorer",
       "Tool-watch enthusiast": "Omega Seamaster Aqua Terra 38",
@@ -128,8 +133,17 @@ const comparisonRegressionFixtures: ComparisonRegressionFixture[] = [
 
 function flattenedComparisonCopy(result: ComparisonResult): string {
   return [
+    {
+      title: result.verdict.headline,
+      summary: result.verdict.summary
+    },
+    ...result.verdict.picks.map((pick) => ({
+      title: `${pick.label} ${pick.pick}`,
+      summary: pick.reason
+    })),
     ...result.keyDifferences,
     ...result.realWorldImpact,
+    ...result.ownershipIntelligence,
     ...result.overpricedFeatures,
     ...result.hiddenDownsides,
     ...result.betterValueAlternative,
@@ -178,7 +192,23 @@ describe("compareWatches", () => {
     const result = compareWatches(left, right);
 
     expect(result.keyDifferences.length).toBeGreaterThan(0);
+    expect(result.verdict.bestOverall).toBeTruthy();
+    expect(result.verdict.picks.map((pick) => pick.label)).toEqual([
+      "Best overall",
+      "Best daily wear",
+      "Best one-watch choice",
+      "Best tool watch",
+      "Best movement/ownership story",
+      "Best value"
+    ]);
     expect(result.realWorldImpact.length).toBeGreaterThan(0);
+    expect(result.ownershipIntelligence.map((block) => block.title)).toEqual([
+      "Daily ownership",
+      "Emotional fit",
+      "Service and resale reality",
+      "Scratch anxiety",
+      "Enthusiast bias check"
+    ]);
     expect(result.whoShouldBuyWhich.length).toBe(3);
     expect(result.overpricedFeatures.length).toBeGreaterThan(0);
     expect(result.hiddenDownsides.length).toBeGreaterThan(0);
@@ -191,6 +221,7 @@ describe("compareWatches", () => {
     ({
       leftId,
       rightId,
+      expectedBestOverall,
       expectedBuyerPicks,
       expectedBetterValueAlternative,
       expectedHiddenDownsideTitles,
@@ -210,10 +241,23 @@ describe("compareWatches", () => {
         "Temperature and swelling",
         "Perceived heft"
       ]);
+      expect(result.ownershipIntelligence.map((block) => block.title)).toEqual([
+        "Daily ownership",
+        "Emotional fit",
+        "Service and resale reality",
+        "Scratch anxiety",
+        "Enthusiast bias check"
+      ]);
       expect(result.signalVsFluff.map((block) => block.title)).toEqual([
         "Meaningful difference",
         "Mostly marketing"
       ]);
+      expect(result.verdict.picks).toContainEqual(
+        expect.objectContaining({
+          label: "Best overall",
+          pick: expectedBestOverall
+        })
+      );
 
       for (const [buyerType, pick] of Object.entries(expectedBuyerPicks)) {
         expect(result.whoShouldBuyWhich).toContainEqual(

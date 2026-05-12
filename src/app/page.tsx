@@ -14,7 +14,7 @@ export default function HomePage() {
           <div>
             <p className="eyebrow eyebrow-xwide">{appName}</p>
             <p className="body-copy body-copy-soft mt-2 max-w-xl text-sm">
-              AI-assisted mechanical watch comparisons that explain ownership tradeoffs in plain English.
+              The shortest path to purchase confidence for mechanical watch comparisons.
             </p>
           </div>
           <div className="pill-muted text-accent eyebrow eyebrow-wide px-4 py-2">

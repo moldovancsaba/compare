@@ -48,6 +48,33 @@ function BuyerCard({
   );
 }
 
+function VerdictPanel({ result }: { result: ComparisonResult }) {
+  return (
+    <section className="surface-card p-6">
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p className="eyebrow eyebrow-wide">Instant verdict</p>
+          <h3 className="mt-3 font-serif text-3xl leading-tight text-[var(--paper)]">{result.verdict.headline}</h3>
+          <p className="body-copy body-copy-muted mt-4 text-sm">{result.verdict.summary}</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="pill-accent eyebrow eyebrow-tight px-3 py-1">{result.verdict.confidence} confidence</span>
+            <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">decision first</span>
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {result.verdict.picks.map((item) => (
+            <article key={item.label} className="surface-item p-4">
+              <p className="card-kicker mb-2">{item.label}</p>
+              <h4 className="title-section text-xl">{item.pick}</h4>
+              <p className="body-copy body-copy-strong mt-3 text-sm">{item.reason}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function confidencePercent(brain: BrainState): number | null {
   if (brain.status !== "completed") {
     return null;
@@ -286,7 +313,7 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Co
     <section className="surface-card p-6 shadow-none">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="eyebrow eyebrow-wide">Teach the Brain</p>
+          <p className="eyebrow eyebrow-wide">Improve this comparison</p>
           <h3 className="title-section mt-3">Was this comparison useful?</h3>
         </div>
         <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">no account needed</span>
@@ -361,7 +388,7 @@ export function ComparisonResultView({
             {result.left.brand} {result.left.model} vs {result.right.brand} {result.right.model}
           </h2>
           <p className="body-copy mt-4 max-w-2xl">
-            {appName} translates spec deltas into ownership consequences so you can decide faster and ignore the fluff.
+            {appName} turns ownership consequences into a buying decision so you can stop researching and choose with less regret risk.
           </p>
           {savedComparisonPath ? (
             <a className="pill-accent eyebrow eyebrow-tight mt-5 inline-flex px-4 py-2" href={savedComparisonPath}>
@@ -379,12 +406,16 @@ export function ComparisonResultView({
         </div>
       </section>
 
+      <VerdictPanel result={result} />
+
       <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <SectionCard title="Key Differences" items={result.keyDifferences} />
         <SectionCard title="Real-World Impact" items={result.realWorldImpact} />
       </div>
+
+      <SectionCard title="Ownership Intelligence" items={result.ownershipIntelligence} />
 
       <section className="surface-card p-6 shadow-none">
         <div className="mb-5 flex items-center justify-between gap-4">

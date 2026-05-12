@@ -1,6 +1,6 @@
 # {compare}
 
-{compare} is a Next.js web app that compares enthusiast products by consequences instead of raw spec tables. Release `v0.1.1` is intentionally narrow: mechanical watches only.
+{compare} is a Next.js web app for high-trust buying intelligence around expensive enthusiast purchases. Release `v0.1.1` is intentionally narrow: mechanical watches only.
 
 ## Version
 - Project version: `0.1.1`
@@ -10,9 +10,13 @@
 - Accepts two watch names or supported product URLs.
 - Resolves them against a curated mechanical watch catalog.
 - Rejects weak or ambiguous inputs instead of guessing when a match is not clear.
+- Leads with an instant verdict and ranked buyer picks instead of making users interpret every section themselves.
+- Adds ownership intelligence for service reality, resale behavior, scratch anxiety, enthusiast bias, and marketing-vs-reality.
 - Generates:
+  - Instant Verdict
   - Key Differences
   - Real-World Impact
+  - Ownership Intelligence
   - Who Should Buy Which
   - Overpriced Features
   - Hidden Downsides
@@ -20,7 +24,9 @@
 - Highlights what is meaningful versus mostly marketing.
 
 ## Why it exists
-Most comparison content is bloated, repetitive, and detached from real ownership. {compare} compresses the usual review-tab spiral into one focused screen that explains what changes on wrist and why that matters.
+Most comparison content is bloated, repetitive, and detached from real ownership. {compare} compresses the usual review-tab spiral into one focused screen that explains what changes on wrist, what is mostly marketing, and which choice creates more buying confidence.
+
+The business direction is trust-first purchase confidence, not generic AI summaries, SEO content, or affiliate-driven review sludge.
 
 ## Product shape
 - Single-screen comparison experience with a server-rendered landing page and client-side form interactions.
@@ -113,9 +119,10 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Product overview: `README.md`
 - Technical background: `02_Technology_Stack.md`
 - Release history: `10_Release_Notes.md`
+- Product strategy: `11_Product_Strategy.md`
 - Design primitives: `design-tokens.md`
 
-Current automated route coverage includes resolver matching and ambiguity rejection, client-side duplicate input validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, optional feedback notes, feedback note length validation, and client handling for network failures, non-JSON errors, and malformed successful payloads.
+Current automated route coverage includes resolver matching and ambiguity rejection, opinionated verdict output, ownership-intelligence output, client-side duplicate input validation, `/api/compare` success, unsupported watch input with supported examples, duplicate watch input, invalid fields, malformed JSON, repeated-request rate limiting, optional feedback notes, feedback note length validation, and client handling for network failures, non-JSON errors, and malformed successful payloads.
 
 Comparison-output regression coverage lives in `tests/compare-watches.test.ts`. The fixture suite pins representative watch pairs across field, explorer, dive, and dress-sport styles, then asserts stable section structure, buyer picks, better-value alternatives, hidden-downside titles, and a few high-signal phrasing fragments. The intent is to catch meaningful rule drift without turning every sentence into a brittle snapshot.
 

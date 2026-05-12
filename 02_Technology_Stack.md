@@ -40,4 +40,4 @@ Current documented release: `v0.1.1`
 ## Notes
 - MongoDB Atlas is the intended persistence layer, but the current V1 baseline uses an in-repo catalog so the core product can run without secrets.
 - Socket.io is intentionally not installed because no real-time feature exists in V1.
-- `npm audit --omit=dev` currently fails because stable `next@16.2.6` depends on `postcss@8.4.31` internally. No stable patched Next release was available during this build.
+- Current dependency audit passes with the root `postcss` override documented in `package.json`.

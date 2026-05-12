@@ -29,7 +29,16 @@ export const watchCatalog: WatchSpec[] = [
       "Dial is visually louder than most Rolex sports watches.",
       "Smooth bezel keeps it less flashy than polished alternatives."
     ],
-    marketingClaims: ["aviation heritage", "crown shield for magnetic resistance"]
+    marketingClaims: ["aviation heritage", "crown shield for magnetic resistance"],
+    ownership: {
+      dailyExperience: "Feels like a louder Rolex tool watch: easy to wear mechanically, harder to make disappear visually.",
+      emotionalCharacter: "Confident, quirky, and slightly contrarian; it rewards buyers who want personality more than purity.",
+      serviceReality: "Modern Rolex service access and parts support are strong, but ownership costs still sit in luxury territory.",
+      resaleBehaviour: "Rolex demand protects downside better than most brands, though the Air-King is less universally liquid than an Explorer or Submariner.",
+      scratchRisk: "Brushed Oyster surfaces hide normal wear well, while polished case accents still show desk-diving marks.",
+      enthusiastBias: "Often underrated by buyers who want canonical Rolex restraint and overrated by buyers chasing oddball scarcity.",
+      marketingReality: "The aviation story is weaker than the daily reality: this is mainly a distinctive, robust sports Rolex."
+    }
   },
   {
     id: "rolex-explorer-124270",
@@ -59,7 +68,16 @@ export const watchCatalog: WatchSpec[] = [
       "Shorter lug span makes it disappear on wrist quickly.",
       "One of the easiest luxury watches to wear daily with formal clothes."
     ],
-    marketingClaims: ["mountain expedition DNA", "timeless 3-6-9 dial"]
+    marketingClaims: ["mountain expedition DNA", "timeless 3-6-9 dial"],
+    ownership: {
+      dailyExperience: "The rare luxury watch that can be worn for a week without thinking about it; compact size is the feature.",
+      emotionalCharacter: "Quiet, disciplined, and self-assured rather than flashy; it feels like the default answer for one-watch minimalists.",
+      serviceReality: "Rolex service is expensive but predictable, and the simple no-date movement keeps the ownership story clean.",
+      resaleBehaviour: "One of the safer liquidity profiles in this catalog because demand extends beyond niche enthusiasts.",
+      scratchRisk: "Oyster bracelet wear is visible over time, but the restrained case and bezel keep scratches from becoming the whole personality.",
+      enthusiastBias: "Praised for purity by minimalists and dismissed as boring by people who want visible wrist presence.",
+      marketingReality: "The expedition mythology matters less than the fact that the watch is unusually easy to live with."
+    }
   },
   {
     id: "tudor-black-bay-54",
@@ -88,7 +106,16 @@ export const watchCatalog: WatchSpec[] = [
       "Vintage sizing makes it wearable for smaller wrists without feeling toy-like.",
       "Bezel action is practical but the faux-aged lume is a style choice."
     ],
-    marketingClaims: ["1954 inspired proportions", "vintage purity"]
+    marketingClaims: ["1954 inspired proportions", "vintage purity"],
+    ownership: {
+      dailyExperience: "Small, thin, and low-friction for a diver; it gives tool-watch capability without the usual slab-sided bulk.",
+      emotionalCharacter: "Warm, vintage-coded, and charming, with enough restraint to avoid feeling like costume nostalgia.",
+      serviceReality: "Tudor ownership costs are friendlier than Rolex, though service still requires real mechanical-watch budgeting.",
+      resaleBehaviour: "Strong enthusiast interest helps, but it will not behave like Rolex liquidity in a softer market.",
+      scratchRisk: "Brushed tool-watch surfaces age honestly; the vintage styling makes normal wear feel less tragic.",
+      enthusiastBias: "Loved by proportion obsessives and sometimes dismissed by buyers who equate size with seriousness.",
+      marketingReality: "The 1954 story is less important than the unusually wearable diver proportions."
+    }
   },
   {
     id: "tudor-black-bay-58",
@@ -117,7 +144,16 @@ export const watchCatalog: WatchSpec[] = [
       "Rivet bracelet look divides buyers.",
       "No quick micro-adjust is the biggest daily-use miss."
     ],
-    marketingClaims: ["big crown spirit", "heritage riveted bracelet"]
+    marketingClaims: ["big crown spirit", "heritage riveted bracelet"],
+    ownership: {
+      dailyExperience: "A handsome everyday diver, but the bracelet adjustment gap is the kind of annoyance that grows in summer.",
+      emotionalCharacter: "Classic, confident, and familiar; it feels like the safest Tudor heritage diver until fit becomes the issue.",
+      serviceReality: "Modern Tudor service is straightforward, but the watch is still a luxury mechanical object, not a cheap beater.",
+      resaleBehaviour: "The BB58 has broad recognition, though its once-hyped status has normalized as Tudor expanded the line.",
+      scratchRisk: "Steel tool-watch finishing can take normal wear, but polished bevels and clasp marks still accumulate quickly.",
+      enthusiastBias: "Enthusiasts often forgive the bracelet because the proportions and dial are so well judged.",
+      marketingReality: "The heritage bracelet story is weaker than the daily problem of not having quick micro-adjust."
+    }
   },
   {
     id: "omega-aqua-terra-38",
@@ -147,7 +183,16 @@ export const watchCatalog: WatchSpec[] = [
       "Polished center links look upscale but scratch quickly.",
       "Best for buyers who want one watch for office and weekends."
     ],
-    marketingClaims: ["Master Chronometer", "teak dial inspired by yacht decks"]
+    marketingClaims: ["Master Chronometer", "teak dial inspired by yacht decks"],
+    ownership: {
+      dailyExperience: "More polished than toolish; it moves from office to weekend easily but asks you to tolerate visible bracelet wear.",
+      emotionalCharacter: "Refined, technical, and slightly dressier; it suits buyers who want competence without Rolex signaling.",
+      serviceReality: "Co-Axial service intervals are a strength, but Omega servicing is still a meaningful long-term cost.",
+      resaleBehaviour: "Typically softer than Rolex at retail, which can be good pre-owned and painful if bought new without discount.",
+      scratchRisk: "Polished center links are the tax: they look premium in the case and collect hairlines almost immediately.",
+      enthusiastBias: "Often recommended as the rational alternative, sometimes more because of specs than emotional pull.",
+      marketingReality: "Master Chronometer matters; the yacht-deck romance matters far less than anti-magnetism and finishing."
+    }
   },
   {
     id: "tudor-pelagos-39",
@@ -176,6 +221,15 @@ export const watchCatalog: WatchSpec[] = [
       "Titanium makes it feel dramatically lighter than steel peers.",
       "Tool-forward finishing is less jewelry-like in hand."
     ],
-    marketingClaims: ["professional dive DNA", "grade 2 titanium comfort"]
+    marketingClaims: ["professional dive DNA", "grade 2 titanium comfort"],
+    ownership: {
+      dailyExperience: "The most no-nonsense wearing experience here: light, grippy, legible, and clearly built for active use.",
+      emotionalCharacter: "Modern, tactical, and deliberately less jewelry-like; it is for buyers who want capability over polish.",
+      serviceReality: "Tudor service costs stay below Rolex territory, but titanium refinishing is not as forgiving as steel.",
+      resaleBehaviour: "Desirable among enthusiasts, but its tool-forward personality narrows the buyer pool compared with safer classics.",
+      scratchRisk: "Titanium marks differently from steel; it hides weight, not necessarily wear.",
+      enthusiastBias: "Praised by spec-focused collectors and sometimes undervalued by buyers who want luxury shine.",
+      marketingReality: "The professional dive language is mostly theater for desk use, but titanium comfort is genuinely meaningful."
+    }
   }
 ];

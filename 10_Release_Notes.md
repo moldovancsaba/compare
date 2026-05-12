@@ -12,6 +12,9 @@
 - Added supported-catalog quick-select examples and resolver-miss recovery data in `/api/compare`.
 - Added inline duplicate and resolver-equivalent input validation before `/api/compare` submission.
 - Exposed catalog side-picking, input swap/clear, manual Brain refresh, and optional feedback notes in the UI.
+- Added opinionated instant verdict output with best-overall, daily-wear, one-watch, tool-watch, ownership-story, and value picks.
+- Added qualitative ownership intelligence to the watch catalog and comparison output.
+- Added product strategy documentation for trust-first purchase confidence, premium ownership intelligence, collection planning, upgrade analysis, and anti-SEO-spam constraints.
 - Cleared the prior Next/PostCSS audit blocker with a root PostCSS override.
 
 ## v0.1.0 - 2026-05-11

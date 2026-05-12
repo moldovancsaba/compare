@@ -24,6 +24,15 @@ export interface WatchSpec {
   weightFeel: "light" | "balanced" | "substantial";
   notes: string[];
   marketingClaims: string[];
+  ownership: {
+    dailyExperience: string;
+    emotionalCharacter: string;
+    serviceReality: string;
+    resaleBehaviour: string;
+    scratchRisk: string;
+    enthusiastBias: string;
+    marketingReality: string;
+  };
 }
 
 export interface InsightBlock {
@@ -37,13 +46,29 @@ export interface BuyerRecommendation {
   reason: string;
 }
 
+export interface VerdictPick {
+  label: string;
+  pick: string;
+  reason: string;
+}
+
+export interface ComparisonVerdict {
+  bestOverall: string;
+  confidence: "clear" | "contextual" | "close";
+  headline: string;
+  summary: string;
+  picks: VerdictPick[];
+}
+
 export interface ComparisonResult {
   canonicalInputA: string;
   canonicalInputB: string;
   left: WatchSpec;
   right: WatchSpec;
+  verdict: ComparisonVerdict;
   keyDifferences: InsightBlock[];
   realWorldImpact: InsightBlock[];
+  ownershipIntelligence: InsightBlock[];
   whoShouldBuyWhich: BuyerRecommendation[];
   overpricedFeatures: InsightBlock[];
   hiddenDownsides: InsightBlock[];

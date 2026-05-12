@@ -1,6 +1,13 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
-import type { BuyerRecommendation, ComparisonResult, InsightBlock, WatchSpec } from "@/types/watch";
+import type {
+  BuyerRecommendation,
+  ComparisonResult,
+  ComparisonVerdict,
+  InsightBlock,
+  VerdictPick,
+  WatchSpec
+} from "@/types/watch";
 
 function displayName(watch: WatchSpec): string {
   return `${watch.brand} ${watch.model}`;
@@ -17,6 +24,166 @@ function pickStyleMeaning(style: WatchSpec["style"]): string {
     case "dress-sport":
       return "bridges office and weekend better than a pure tool watch";
   }
+}
+
+function versatilityScore(watch: WatchSpec): number {
+  let score = 0;
+
+  if (watch.style === "explorer") {
+    score += 5;
+  }
+
+  if (watch.style === "dress-sport") {
+    score += 4;
+  }
+
+  if (watch.caseDiameterMm <= 39) {
+    score += 2;
+  }
+
+  if (watch.caseThicknessMm <= 11.8) {
+    score += 2;
+  }
+
+  if (watch.lugToLugMm <= 46) {
+    score += 2;
+  }
+
+  if (!watch.dateWindow) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function dailyWearScore(watch: WatchSpec): number {
+  let score = versatilityScore(watch);
+
+  if (watch.microAdjust) {
+    score += 2;
+  }
+
+  if (watch.weightFeel === "light") {
+    score += 2;
+  } else if (watch.weightFeel === "balanced") {
+    score += 1;
+  }
+
+  if (watch.powerReserveHours >= 70) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function toolScore(watch: WatchSpec): number {
+  return watch.waterResistanceM / 50 + (watch.microAdjust ? 3 : 0) + (watch.weightFeel === "light" ? 1 : 0);
+}
+
+function movementOwnershipScore(watch: WatchSpec): number {
+  let score = watch.powerReserveHours / 24;
+
+  if (watch.antiMagneticGauss && watch.antiMagneticGauss >= 15000) {
+    score += 3;
+  } else if (watch.antiMagneticGauss && watch.antiMagneticGauss >= 1000) {
+    score += 1;
+  }
+
+  if (watch.frequencyVph >= 28800) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function valueScore(watch: WatchSpec): number {
+  return dailyWearScore(watch) + toolScore(watch) + movementOwnershipScore(watch) - watch.msrpUsd / 3000;
+}
+
+function pickHigher(left: WatchSpec, right: WatchSpec, scorer: (watch: WatchSpec) => number): WatchSpec {
+  return scorer(left) >= scorer(right) ? left : right;
+}
+
+function ownershipCharacter(watch: WatchSpec): string {
+  switch (watch.style) {
+    case "field":
+      return "more expressive and tool-coded";
+    case "explorer":
+      return "quieter, easier to dress around, and more one-watch friendly";
+    case "dive":
+      return "sportier and more weekend-forward";
+    case "dress-sport":
+      return "more polished and office-to-weekend flexible";
+  }
+}
+
+function confidenceFor(left: WatchSpec, right: WatchSpec, bestOverall: WatchSpec): ComparisonVerdict["confidence"] {
+  const gap = Math.abs(dailyWearScore(left) + valueScore(left) - (dailyWearScore(right) + valueScore(right)));
+
+  if (gap >= 6 || bestOverall.style === "explorer") {
+    return "clear";
+  }
+
+  if (gap <= 2) {
+    return "close";
+  }
+
+  return "contextual";
+}
+
+function buildVerdict(left: WatchSpec, right: WatchSpec): ComparisonVerdict {
+  const dailyPick = pickHigher(left, right, dailyWearScore);
+  const toolPick = pickHigher(left, right, toolScore);
+  const movementPick = pickHigher(left, right, movementOwnershipScore);
+  const valuePick = pickHigher(left, right, valueScore);
+  const oneWatchPick = pickHigher(left, right, versatilityScore);
+  const bestOverall = pickHigher(left, right, (watch) => dailyWearScore(watch) + valueScore(watch) + versatilityScore(watch));
+  const other = bestOverall.id === left.id ? right : left;
+  const confidence = confidenceFor(left, right, bestOverall);
+
+  const picks: VerdictPick[] = [
+    {
+      label: "Best overall",
+      pick: displayName(bestOverall),
+      reason: `${displayName(bestOverall)} is ${ownershipCharacter(bestOverall)} while still avoiding the biggest daily-use compromises.`
+    },
+    {
+      label: "Best daily wear",
+      pick: displayName(dailyPick),
+      reason: "Wins the comfort equation: case profile, perceived heft, and bracelet adjustability matter more after the first week than most spec-sheet bragging rights."
+    },
+    {
+      label: "Best one-watch choice",
+      pick: displayName(oneWatchPick),
+      reason: "The safer pick if this has to cover office, travel, weekends, and understated occasions without feeling costume-like."
+    },
+    {
+      label: "Best tool watch",
+      pick: displayName(toolPick),
+      reason: "The more practical hard-use choice when water resistance, bracelet adjustment, and sport-watch confidence matter most."
+    },
+    {
+      label: "Best movement/ownership story",
+      pick: displayName(movementPick),
+      reason: "The stronger ownership case once power reserve, anti-magnetism, and technical resilience are weighted above romance."
+    },
+    {
+      label: "Best value",
+      pick: displayName(valuePick),
+      reason: "Gives more usable ownership upside per retail dollar instead of asking you to pay mainly for branding or mythology."
+    }
+  ];
+
+  return {
+    bestOverall: displayName(bestOverall),
+    confidence,
+    headline:
+      confidence === "clear"
+        ? `${displayName(bestOverall)} is the stronger recommendation for most buyers.`
+        : `${displayName(bestOverall)} is the safer default, but the decision is taste-sensitive.`,
+    summary: `${displayName(other)} still has a real case if you specifically want something ${ownershipCharacter(other)}. The reason to pick ${displayName(bestOverall)} is not a bigger spec number; it is the lower-friction ownership profile.`,
+    picks
+  };
 }
 
 function buildKeyDifferences(left: WatchSpec, right: WatchSpec): InsightBlock[] {
@@ -71,6 +238,47 @@ function buildRealWorldImpact(left: WatchSpec, right: WatchSpec): InsightBlock[]
   ];
 }
 
+function buildOwnershipIntelligence(left: WatchSpec, right: WatchSpec): InsightBlock[] {
+  const resaleWinner = pickHigher(left, right, (watch) => {
+    let score = valueScore(watch);
+
+    if (watch.brand === "Rolex") {
+      score += 4;
+    }
+
+    if (watch.style === "explorer") {
+      score += 2;
+    }
+
+    return score;
+  });
+  const dailyWinner = pickHigher(left, right, dailyWearScore);
+  const emotionalContrast = `${displayName(left)} is ${left.ownership.emotionalCharacter.toLowerCase()}; ${displayName(right)} is ${right.ownership.emotionalCharacter.toLowerCase()}`;
+
+  return [
+    {
+      title: "Daily ownership",
+      summary: `${displayName(dailyWinner)} is the lower-friction daily choice. ${dailyWinner.ownership.dailyExperience}`
+    },
+    {
+      title: "Emotional fit",
+      summary: `${emotionalContrast} This matters because the technically better watch still fails if it feels wrong after the honeymoon.`
+    },
+    {
+      title: "Service and resale reality",
+      summary: `${displayName(resaleWinner)} has the safer long-term ownership case. ${resaleWinner.ownership.resaleBehaviour} ${resaleWinner.ownership.serviceReality}`
+    },
+    {
+      title: "Scratch anxiety",
+      summary: `${displayName(left)}: ${left.ownership.scratchRisk} ${displayName(right)}: ${right.ownership.scratchRisk}`
+    },
+    {
+      title: "Enthusiast bias check",
+      summary: `${displayName(left)}: ${left.ownership.enthusiastBias} ${displayName(right)}: ${right.ownership.enthusiastBias}`
+    }
+  ];
+}
+
 function buildBuyerRecommendations(left: WatchSpec, right: WatchSpec): BuyerRecommendation[] {
   return [
     {
@@ -109,7 +317,7 @@ function buildOverpricedFeatures(left: WatchSpec, right: WatchSpec): InsightBloc
   if (pricier.marketingClaims.length > 0) {
     results.push({
       title: "What sounds bigger than it wears",
-      summary: `${displayName(pricier)} leans on claims like ${pricier.marketingClaims.join(", ")}. Those are not fake, but they matter less than fit, thickness, clasp quality, and dial legibility once the watch is on your wrist.`
+      summary: `${displayName(pricier)} leans on claims like ${pricier.marketingClaims.join(", ")}. ${pricier.ownership.marketingReality}`
     });
   }
 
@@ -219,7 +427,7 @@ function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {
     },
     {
       title: "Mostly marketing",
-      summary: "Heritage storytelling, romanticized origin myths, and marginal movement bragging rights are real parts of the product, but they rarely outweigh better fit or better bracelet execution."
+      summary: `${displayName(left)}: ${left.ownership.marketingReality} ${displayName(right)}: ${right.ownership.marketingReality}`
     }
   ];
 }
@@ -230,8 +438,10 @@ export function compareWatches(left: WatchSpec, right: WatchSpec): ComparisonRes
     canonicalInputB: displayName(right),
     left,
     right,
+    verdict: buildVerdict(left, right),
     keyDifferences: buildKeyDifferences(left, right),
     realWorldImpact: buildRealWorldImpact(left, right),
+    ownershipIntelligence: buildOwnershipIntelligence(left, right),
     whoShouldBuyWhich: buildBuyerRecommendations(left, right),
     overpricedFeatures: buildOverpricedFeatures(left, right),
     hiddenDownsides: buildHiddenDownsides(left, right),
