@@ -61,3 +61,17 @@ Required fields when present:
 - confidence label
 
 The adapter shows premium/discount to retail, trend, liquidity, freshness, source, and uncertainty only when enough data exists. Stale snapshots lower confidence and surface warnings.
+
+## Smart Discovery Alternatives
+
+The watch adapter ranks smart discovery alternatives from the curated catalog only. It does not run affiliate ranking, paid placement, or broad marketplace search.
+
+Recommendation reason codes:
+- `better-value-play`: the candidate's transparent value score meets or beats the strongest compared watch.
+- `lower-regret-price`: the candidate is cheaper than at least one compared watch and clears the value-score floor.
+- `role-contrast`: the candidate offers a different wearing role than both compared watches.
+- `overlooked-enthusiast-fit`: curated market-positioning data shows lower hype pressure or strong collector respect.
+- `manageable-exit-risk`: curated secondary-market data suggests medium liquidity without soft resale-stability metadata.
+- `intent-fit`: the candidate better matches the supplied decision-intent profile than the first compared watch.
+
+Bad-fit filtering removes candidates that violate strict supplied decision-intent constraints, such as high budget sensitivity, low brand-cachet tolerance, high comfort priority, or a no-date preference. If no candidate clears the score and reason-code gates, the adapter returns no smart discovery block rather than padding with weak adjacent options.

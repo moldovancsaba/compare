@@ -1,10 +1,10 @@
 # {compare}
 
-{compare} is a Next.js web app for high-trust comparison intelligence across supported decision domains. Release `v0.2.0` ships a domain-adapter platform with mechanical watches and business services live, plus collector intelligence for watch profiles.
+{compare} is a Next.js web app for high-trust comparison intelligence across supported decision domains. Release `v0.2.1` ships a domain-adapter platform with mechanical watches and business services live, plus collector intelligence for watch profiles.
 
 ## Version
-- Project version: `0.2.0`
-- Current release label: `v0.2.0`
+- Project version: `0.2.1`
+- Current release label: `v0.2.1`
 
 ## What It Does
 - Lets users choose a supported comparison domain.
@@ -16,6 +16,7 @@
 - Supports optional local watch decision-intent profiles for personalized recommendation emphasis.
 - Shows transparent watch value scoring with explicit weighting for comfort, capability, versatility, ownership, and price discipline.
 - Shows curated secondary-market ownership context for supported watches without live scraping or investment framing.
+- Recommends smart discovery alternatives with explicit reason codes for better-value plays, role contrast, hidden-gem fit, manageable exit risk, and decision-intent fit.
 - Supports accountless watch collection profiles stored in the browser.
 - Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, market positioning, and marketing-reality checks.
 - Supports saved comparison pages when MongoDB is configured.
@@ -78,7 +79,7 @@ npm run brain:worker:once
 - `npm run build`
 - `npm audit --omit=dev`
 
-Current status for `v0.2.0`:
+Current status for `v0.2.1`:
 - lint: pass
 - typecheck: pass
 - test: pass
@@ -101,7 +102,7 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Design primitives: `design-tokens.md`
 
 ## Testing Coverage
-Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
+Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, transparent value scoring, smart discovery alternatives, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
 
 ## Operations
 Structured logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers.

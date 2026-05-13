@@ -1159,6 +1159,46 @@ describe("watch collection profiles", () => {
     expect(result.betterValueAlternative[0]?.summary).toContain("transparent value score");
   });
 
+  it("surfaces smart discovery alternatives with explicit reason codes", () => {
+    const result = compareWatches(watchById("rolex-air-king-126900"), watchById("rolex-explorer-124270"));
+    const summaries = result.betterValueAlternative.map((block) => block.summary).join(" ");
+
+    expect(result.betterValueAlternative.length).toBeGreaterThanOrEqual(3);
+    expect(result.betterValueAlternative[0]?.title).toBe("Omega Seamaster Aqua Terra 38");
+    expect(summaries).toContain("Reason codes:");
+    expect(summaries).toContain("better-value-play");
+    expect(summaries).toContain("role-contrast");
+    expect(summaries).toContain("overlooked-enthusiast-fit");
+    expect(summaries).toContain("avoids paid-placement logic");
+  });
+
+  it("filters smart discovery candidates that violate a supplied decision intent", () => {
+    const result = compareWatches(
+      watchById("rolex-air-king-126900"),
+      watchById("rolex-explorer-124270"),
+      null,
+      {
+        primaryUseCase: "sport",
+        budgetSensitivity: 5,
+        comfortPriority: 4,
+        brandCachetTolerance: "low",
+        dateWindowPreference: "prefer_no_date"
+      }
+    );
+
+    expect(result.betterValueAlternative.map((block) => block.title)).not.toContain("Omega Seamaster Aqua Terra 38");
+    expect(result.betterValueAlternative[0]?.title).toBe("Tudor Black Bay 54");
+    expect(result.betterValueAlternative[0]?.summary).toContain("intent-fit");
+    expect(result.betterValueAlternative[0]?.summary).toContain("decision-intent profile");
+  });
+
+  it("keeps bad-fit fallback alternatives out of smart discovery", () => {
+    const result = compareWatches(watchById("tudor-black-bay-54"), watchById("tudor-black-bay-58"));
+
+    expect(result.betterValueAlternative.map((block) => block.title)).toEqual(["Tudor Pelagos 39"]);
+    expect(result.betterValueAlternative[0]?.summary).not.toContain("catalog-adjacent-fit");
+  });
+
   it("analyzes premium, discount, missing, and stale secondary-market snapshots", () => {
     const premium = analyzeWatchSecondaryMarket(watchById("rolex-explorer-124270"), {
       asOf: new Date("2026-05-13T00:00:00.000Z")

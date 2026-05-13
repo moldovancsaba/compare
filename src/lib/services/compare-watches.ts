@@ -924,6 +924,12 @@ function buildHiddenDownsides(left: WatchSpec, right: WatchSpec): InsightBlock[]
   return blocks.slice(0, 4);
 }
 
+interface ScoredAlternative {
+  watch: WatchSpec;
+  reasonCodes: string[];
+  score: number;
+}
+
 function scoreAlternative(
   targets: WatchSpec[],
   candidate: WatchSpec,
@@ -953,31 +959,119 @@ function scoreAlternative(
   }, intentAnalysis?.leftMatch.score ?? 0);
 }
 
+function violatesDiscoveryConstraints(candidate: WatchSpec, decisionIntent?: WatchDecisionIntentProfile | null): boolean {
+  if (!decisionIntent) {
+    return false;
+  }
+
+  if ((decisionIntent.budgetSensitivity ?? 0) >= 4 && candidate.msrpUsd > 5000) {
+    return true;
+  }
+
+  if (decisionIntent.brandCachetTolerance === "low" && candidate.marketPositioning?.brandCachet === "status") {
+    return true;
+  }
+
+  if ((decisionIntent.comfortPriority ?? 0) >= 4 && (candidate.caseThicknessMm > 12 || candidate.weightFeel !== "light")) {
+    return true;
+  }
+
+  if (decisionIntent.dateWindowPreference === "prefer_no_date" && candidate.dateWindow) {
+    return true;
+  }
+
+  return false;
+}
+
+function alternativeReasonCodes(
+  targets: WatchSpec[],
+  candidate: WatchSpec,
+  decisionIntent?: WatchDecisionIntentProfile | null
+): string[] {
+  const codes: string[] = [];
+  const candidateValue = calculateWatchValueScore(candidate);
+  const targetValue = Math.max(...targets.map((target) => calculateWatchValueScore(target).total));
+  const lowerThanAnyTarget = targets.some((target) => candidate.msrpUsd < target.msrpUsd);
+  const roleContrast = targets.every((target) => target.style !== candidate.style);
+  const intentAnalysis = analyzeWatchDecisionIntent(candidate, targets[0], decisionIntent);
+
+  if (candidateValue.total >= targetValue) {
+    codes.push("better-value-play");
+  }
+
+  if (lowerThanAnyTarget && candidateValue.total >= 70) {
+    codes.push("lower-regret-price");
+  }
+
+  if (roleContrast) {
+    codes.push("role-contrast");
+  }
+
+  if (candidate.marketPositioning?.hypeLevel === "low" || candidate.marketPositioning?.collectorRespect === "strong") {
+    codes.push("overlooked-enthusiast-fit");
+  }
+
+  if (candidate.secondaryMarket?.liquidityTier === "medium" && candidate.ownershipProfile?.resaleStability !== "soft") {
+    codes.push("manageable-exit-risk");
+  }
+
+  if (intentAnalysis && intentAnalysis.leftMatch.score > intentAnalysis.rightMatch.score) {
+    codes.push("intent-fit");
+  }
+
+  return codes.length ? codes : ["catalog-adjacent-fit"];
+}
+
+function alternativeClass(reasonCodes: string[]): string {
+  if (reasonCodes.includes("role-contrast")) {
+    return "Role contrast";
+  }
+
+  if (reasonCodes.includes("overlooked-enthusiast-fit")) {
+    return "Hidden gem";
+  }
+
+  return "Better-value play";
+}
+
+function rankSmartDiscoveryAlternatives(
+  left: WatchSpec,
+  right: WatchSpec,
+  decisionIntent?: WatchDecisionIntentProfile | null
+): ScoredAlternative[] {
+  return watchCatalog
+    .filter((watch) => watch.id !== left.id && watch.id !== right.id)
+    .filter((watch) => !violatesDiscoveryConstraints(watch, decisionIntent))
+    .map((watch) => ({
+      watch,
+      reasonCodes: alternativeReasonCodes([left, right], watch, decisionIntent),
+      score: scoreAlternative([left, right], watch, decisionIntent)
+    }))
+    .filter((entry) => entry.score >= 7 && !entry.reasonCodes.includes("catalog-adjacent-fit"))
+    .sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+
+      return calculateWatchValueScore(b.watch).total - calculateWatchValueScore(a.watch).total;
+    });
+}
+
 function buildBetterValueAlternative(
   left: WatchSpec,
   right: WatchSpec,
   decisionIntent?: WatchDecisionIntentProfile | null
 ): InsightBlock[] {
-  const alternative = watchCatalog
-    .filter((watch) => watch.id !== left.id && watch.id !== right.id)
-    .map((watch) => ({
-      watch,
-      score: scoreAlternative([left, right], watch, decisionIntent)
-    }))
-    .sort((a, b) => b.score - a.score)[0]?.watch;
+  const alternatives = rankSmartDiscoveryAlternatives(left, right, decisionIntent);
 
-  if (!alternative) {
-    return [];
-  }
+  return alternatives.slice(0, 3).map(({ reasonCodes, watch }) => {
+    const alternativeScore = calculateWatchValueScore(watch);
 
-  const alternativeScore = calculateWatchValueScore(alternative);
-
-  return [
-    {
-      title: displayName(alternative),
-      summary: `${displayName(alternative)} is the strongest value pivot if both of your original picks feel slightly misaligned. It keeps the enthusiast appeal, lands at ${formatUsd(alternative.msrpUsd)}, and carries a transparent value score of ${alternativeScore.total}/100. It avoids paying full premium money for differences that mostly live in branding or styling.${decisionIntent ? " The ranking also reflects the supplied decision-intent profile." : ""}`
-    }
-  ];
+    return {
+      title: displayName(watch),
+      summary: `${alternativeClass(reasonCodes)}. Reason codes: ${reasonCodes.join(", ")}. ${displayName(watch)} is a strong smart-discovery candidate if both original picks feel slightly misaligned. It lands at ${formatUsd(watch.msrpUsd)}, carries a transparent value score of ${alternativeScore.total}/100, and avoids paid-placement logic.${decisionIntent ? " The ranking also respects the supplied decision-intent profile." : ""}`
+    };
+  });
 }
 
 function buildSignalVsFluff(left: WatchSpec, right: WatchSpec): InsightBlock[] {

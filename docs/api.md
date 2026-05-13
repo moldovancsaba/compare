@@ -1,6 +1,6 @@
 # {compare} API Documentation
 
-Version: `v0.2.0`
+Version: `v0.2.1`
 
 ## Overview
 
@@ -82,7 +82,12 @@ The watch adapter currently accepts `context.watchCollectionProfile` and `contex
     "whoShouldBuyWhich": [],
     "overpricedFeatures": [],
     "hiddenDownsides": [],
-    "betterValueAlternative": [],
+    "betterValueAlternative": [
+      {
+        "title": "Omega Seamaster Aqua Terra 38",
+        "summary": "Role contrast. Reason codes: better-value-play, lower-regret-price, role-contrast, overlooked-enthusiast-fit. ..."
+      }
+    ],
     "signalVsFluff": []
   },
   "brain": {
@@ -98,7 +103,7 @@ The watch adapter currently accepts `context.watchCollectionProfile` and `contex
 }
 ```
 
-The actual `comparison` object contains full verdict, evidence, section, recommendation, and adapter-specific compatibility fields.
+The actual `comparison` object contains full verdict, evidence, section, recommendation, and adapter-specific compatibility fields. For watch comparisons, `betterValueAlternative` is the smart discovery surface: entries include explicit reason codes and are filtered against `watchDecisionIntentProfile` when supplied.
 
 ### Error Responses
 
@@ -333,4 +338,4 @@ Verdict values are `buy`, `consider`, and `skip`.
 
 ## Versioning
 
-The API version follows the application release in `package.json`. Current API documentation targets `v0.2.0`.
+The API version follows the application release in `package.json`. Current API documentation targets `v0.2.1`.

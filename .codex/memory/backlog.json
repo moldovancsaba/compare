@@ -1,16 +1,16 @@
 {
   "highest_priority": [
     {
-      "github_issue": 53,
-      "title": "Add smart discovery for overlooked alternatives",
-      "priority": "high",
-      "reason": "Secondary-market ownership intelligence is now available; smart discovery can now rank overlooked alternatives by fit, value, and ownership economics."
-    },
-    {
       "github_issue": 24,
       "title": "Add a new-watch ingestion workflow from curated source URLs to normalized entries",
+      "priority": "high",
+      "reason": "Smart discovery quality now depends on catalog growth without hard-coded TypeScript churn."
+    },
+    {
+      "github_issue": 55,
+      "title": "Add proprietary ownership dataset foundations",
       "priority": "medium",
-      "reason": "Curated ingestion becomes important after smart discovery because alternative quality depends on catalog growth without hard-coded TypeScript churn."
+      "reason": "Ownership feedback and structured curation are the next leverage point after deterministic discovery, but should stay below ingestion until the catalog workflow is easier to maintain."
     }
   ],
   "selection_policy": "Use GitHub Project 16 as the SSOT. Prefer one issue-scoped task per implementer heartbeat, starting with core platform/domain-adapter initiative work before watch-adapter depth or monetization."

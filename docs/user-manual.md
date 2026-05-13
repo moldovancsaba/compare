@@ -1,6 +1,6 @@
 # {compare} User Manual
 
-Version: `v0.2.0`
+Version: `v0.2.1`
 
 ## Overview
 
@@ -28,7 +28,7 @@ Comparison results include:
 - Secondary-market ownership context for watches when curated dated data exists
 - Best-fit buyer lenses
 - Hidden downsides
-- Better-value or adjacent alternatives
+- Smart discovery alternatives with explicit reason codes
 - Marketing-vs-reality analysis
 - Market-positioning analysis when the active adapter has structured positioning data
 - Transparent watch value scoring when the active adapter supports it
@@ -60,7 +60,21 @@ Supported intent fields:
 - brand-cachet tolerance
 - date-window preference
 
-The profile is stored in `localStorage` on the current browser. When supplied, the watch adapter adds an intent-aware recommendation, a decision-intent ownership block, and better-value ranking emphasis. The default compare flow still works without any intent profile.
+The profile is stored in `localStorage` on the current browser. When supplied, the watch adapter adds an intent-aware recommendation, a decision-intent ownership block, and smart discovery ranking emphasis. The default compare flow still works without any intent profile.
+
+## Smart Discovery
+
+Mechanical-watch comparisons can recommend overlooked alternatives from the curated catalog. These recommendations are not ads, affiliate placements, or broad marketplace search.
+
+Each recommendation includes reason codes such as:
+- `better-value-play`
+- `lower-regret-price`
+- `role-contrast`
+- `overlooked-enthusiast-fit`
+- `manageable-exit-risk`
+- `intent-fit`
+
+When a decision-intent profile is supplied, the watch adapter filters obvious bad fits before ranking alternatives. For example, a highly budget-sensitive, comfort-first, low brand-cachet profile will suppress expensive status-signaling alternatives that do not fit the stated constraints.
 
 ## Watch Collection Profiles
 

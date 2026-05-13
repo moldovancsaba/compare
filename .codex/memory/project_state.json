@@ -150,6 +150,14 @@
     {
       "date": "2026-05-13",
       "summary": "Implemented issue #34 by adding manually curated secondary-market ownership intelligence with freshness and liquidity context"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Implemented issue #53 by adding smart discovery alternatives with explicit reason codes and decision-intent filtering"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Bumped the app to v0.2.1 and synchronized README, user manual, API documentation, watch consequence rules, and release notes"
     }
   ],
   "blocked_items": []

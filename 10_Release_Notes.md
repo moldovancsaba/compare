@@ -1,11 +1,15 @@
 # Release Notes
 
 ## Unreleased
+
+## v0.2.1 - 2026-05-13
 - Added deterministic watch marketing-reality analysis for myth pressure, spec inflation, supported claims, and buyer cautions across comparison and should-I-buy surfaces.
 - Added a local watch tradeoff simulator with six buyer-priority controls, serializable URL state, scenario recommendations, and allowlisted telemetry.
 - Added optional local watch decision-intent profiles that personalize recommendation emphasis without requiring accounts.
 - Added transparent watch value scoring with explicit comfort, capability, versatility, ownership, and price-discipline weights.
 - Added manually curated secondary-market ownership intelligence with premium/discount, trend, liquidity, freshness, source, and warning output.
+- Added smart discovery alternatives with explicit reason codes, decision-intent filtering, and no paid-placement ranking.
+- Bumped the app release to `v0.2.1` and aligned README, user manual, API documentation, watch consequence rules, and release notes.
 
 ## v0.2.0 - 2026-05-12
 - Added a generic comparison entity/result contract and domain adapter registry so the core system is no longer hard-coded to watches.
