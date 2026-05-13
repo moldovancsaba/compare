@@ -10,10 +10,10 @@ This note records how `{compare}` should use `{trinity}` as an AI Brain layer wi
 
 Today the webapp owns the whole compare path:
 
-1. `POST /api/compare` receives `leftInput` and `rightInput`.
-2. `{compare}` resolves both inputs through the local watch catalog.
-3. `{compare}` calls `compareWatches(left, right)`.
-4. The deterministic result is returned to the UI.
+1. `POST /api/compare` receives `domain`, `leftInput`, `rightInput`, and optional adapter-owned `context`.
+2. `{compare}` resolves both inputs through the selected domain adapter.
+3. `{compare}` calls the adapter-owned deterministic comparison engine.
+4. The deterministic generic comparison result is returned to the UI.
 
 This is simple and correct for V1, but it means the comparison engine has no runtime memory, no confidence/escalation layer, no traceable reasoning loop, and no clean path for learning from user feedback.
 
@@ -22,10 +22,10 @@ This is simple and correct for V1, but it means the comparison engine has no run
 Keep these responsibilities in `{compare}`:
 
 - Web UI and API transport.
-- Watch catalog ownership and resolver behavior.
-- Product-specific comparison result schema shown to users.
+- Domain catalog ownership and resolver behavior.
+- Generic comparison result schema plus adapter-owned section language shown to users.
 - Saved comparisons, SEO routes, and buyer-facing presentation.
-- Product governance: what categories are supported and what claims are allowed.
+- Product governance: what comparison domains are supported and what claims are allowed.
 
 Move these responsibilities into `{trinity}` through a dedicated `compare` adapter:
 
@@ -79,9 +79,12 @@ The first adapter request should be normalized evidence, not raw user text.
   "contract_version": "trinity.compare.v1alpha1",
   "project_id": "compare",
   "comparison_ref": "compare:rolex-explorer-124270:tudor-bb54",
+  "domain": "watches",
   "requested_at": "2026-05-11T13:45:00Z",
   "left": {
     "id": "rolex-explorer-124270",
+    "domain": "watches",
+    "label": "Rolex Explorer",
     "brand": "Rolex",
     "model": "Explorer",
     "reference": "124270",
@@ -89,6 +92,8 @@ The first adapter request should be normalized evidence, not raw user text.
   },
   "right": {
     "id": "tudor-black-bay-54",
+    "domain": "watches",
+    "label": "Tudor Black Bay 54",
     "brand": "Tudor",
     "model": "Black Bay 54",
     "reference": "79000N",
@@ -146,16 +151,17 @@ What should not be copied directly:
 - Checklist's company/card/task taxonomy.
 - Its large Prisma model surface.
 - Its webapp control plane.
-- Its product-specific goal/task/flashcard pipeline.
+- Its domain-specific goal/task/flashcard pipeline.
 
 For `{compare}`, the equivalent should be much smaller:
 
 ```text
 CompareRequest / CompareJob
   status: queued | running | completed | failed
-  leftWatchId
-  rightWatchId
-  decisionProfile
+  domain
+  leftEntityId
+  rightEntityId
+  adapterContext
   requestedBy/session key
   createdAt/claimedAt/completedAt
 
@@ -172,8 +178,10 @@ ComparisonTrace
   rawTracePath or compact trace payload
 
 SavedComparison
-  leftWatchId
-  rightWatchId
+  leftEntityId
+  rightEntityId
+  leftDomain
+  rightDomain
   deterministicResult
   brainResult
   selectedRecommendation
@@ -181,8 +189,10 @@ SavedComparison
 
 ComparisonFeedback
   comparisonRef
-  leftWatchId
-  rightWatchId
+  leftEntityId
+  rightEntityId
+  leftDomain
+  rightDomain
   traceRef
   signal: helpful | not_helpful | chose_left | chose_right | opposite_preferred | bad_recommendation | missing_context | wrong_spec
   note
@@ -192,7 +202,7 @@ ComparisonFeedback
 
 The first production-shaped bridge should therefore be:
 
-1. `POST /api/compare` keeps returning deterministic `compareWatches` immediately.
+1. `POST /api/compare` keeps returning the selected adapter's deterministic comparison immediately.
 2. If `COMPARE_BRAIN_PROVIDER=trinity_worker`, persist a `CompareJob` for the same normalized pair.
 3. A local `{trinity}` compare worker claims queued jobs from MongoDB Atlas, calls the dedicated Trinity `compare` adapter, validates the response, and writes a `ComparisonTrace` plus optional enriched comparison result.
 4. The UI can later poll or hydrate the brain-enriched result by `comparisonRef`, but the initial compare experience never blocks on Trinity.
@@ -215,7 +225,7 @@ Pros:
 Cons:
 
 - Not ideal for deployed Vercel-style serverless runtime.
-- Needs timeout handling, JSON validation, and deterministic fallback to `compareWatches`.
+- Needs timeout handling, JSON validation, and deterministic fallback to the selected domain adapter result.
 
 ### Phase 2: Local Trinity Service
 
@@ -250,7 +260,7 @@ Already started in `{compare}`:
 - `/Users/Shared/Projects/compare/src/lib/services/brain-queue.ts` queues Trinity worker jobs behind `COMPARE_BRAIN_PROVIDER=trinity_worker`.
 - `/Users/Shared/Projects/compare/src/app/api/compare/feedback/route.ts` records visitor outcome signals in `comparison_feedback` when MongoDB Atlas is configured.
 - `/Users/Shared/Projects/compare/src/components/comparison-result.tsx` lets visitors mark useful, wrong, missing-context, and chosen-watch outcomes without blocking the comparison flow.
-- `/Users/Shared/Projects/compare/src/app/api/compare/route.ts` still returns deterministic `compareWatches` immediately and includes Brain queue status metadata.
+- `/Users/Shared/Projects/compare/src/app/api/compare/route.ts` still returns the deterministic domain-adapter comparison immediately and includes Brain queue status metadata.
 - `/Users/Shared/Projects/compare/scripts/trinity-compare-worker.mjs` claims queued Atlas jobs, invokes Trinity `reason-compare`, writes `comparison_traces`, updates `saved_comparisons`, and marks jobs completed/failed.
 - The same worker now consumes unprocessed `comparison_feedback` records, marks them `processed` or `skipped`, and rolls durable signal counts into `saved_comparisons.feedbackSummary` for later Trinity learning.
 - `npm run brain:worker` runs the continuous local worker; `npm run brain:worker:once` processes one queued job.

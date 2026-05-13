@@ -22,7 +22,7 @@
 - Supports saved comparison pages when MongoDB is configured.
 
 ## Live Domains
-- Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, collection profiles, and collector guidance.
+- Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, smart discovery alternatives, collection profiles, and collector guidance.
 - Business services: curated service archetypes with switching-cost, contract-risk, implementation-friction, and governance reasoning.
 
 ## Product Shape

@@ -1232,7 +1232,7 @@ export function compareWatches(
       whoShouldBuyWhich: "Best For",
       overpricedFeatures: "Overpriced Features",
       hiddenDownsides: "Hidden Downsides",
-      betterValueAlternative: "Better Value Alternative",
+      betterValueAlternative: "Smart Discovery Alternatives",
       signalVsFluff: "Marketing vs Reality"
     },
     evidenceSummary: buildEvidenceSummary(left, right),

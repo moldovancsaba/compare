@@ -15,7 +15,7 @@ Required fields:
 - `dataPolicy`: adapter-owned governance for source tiers, freshness, curation, blocked sources, and missing data.
 - `resolve(input)`: maps user input to a generic `ComparisonEntity` or fails closed with an unresolved result.
 - `compare(left, right, context?)`: returns a deterministic `GenericComparisonResult`.
-- Optional comparison context: adapters may read their own context keys, such as the watch adapter's local collection profile, but shared platform code should treat context as opaque.
+- Optional comparison context: adapters may read their own context keys, such as the watch adapter's local collection profile and decision-intent profile, but shared platform code should treat context as opaque.
 
 Resolver requirements:
 - Resolve exact supported names, aliases, references, and source URLs when an adapter supports them.
@@ -105,6 +105,7 @@ Adapters own:
 - data source governance and freshness assumptions
 - resolver rules
 - domain-specific scoring and tradeoff rules
+- domain-specific discovery and alternative-ranking rules
 - adapter examples
 - adapter-owned UI copy for domain selector descriptions and input hints
 - section copy that depends on domain expertise

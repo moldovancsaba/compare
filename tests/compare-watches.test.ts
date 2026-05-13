@@ -331,7 +331,7 @@ describe("compareWatches", () => {
       whoShouldBuyWhich: "Best For",
       overpricedFeatures: "Overpriced Features",
       hiddenDownsides: "Hidden Downsides",
-      betterValueAlternative: "Better Value Alternative",
+      betterValueAlternative: "Smart Discovery Alternatives",
       signalVsFluff: "Marketing vs Reality"
     });
     expect(result.verdict.picks.map((pick) => pick.label)).toEqual([
@@ -566,7 +566,7 @@ describe("generic comparison foundation", () => {
     expect(result.comparison.leftEntity).toEqual(expect.objectContaining({ domain: "watches" }));
   });
 
-  it("rejects unsupported domains before touching a product-specific resolver", () => {
+  it("rejects unsupported domains before touching an adapter-owned resolver", () => {
     expect(
       compareInputs({
         domain: "unknown-domain",

@@ -158,6 +158,10 @@
     {
       "date": "2026-05-13",
       "summary": "Bumped the app to v0.2.1 and synchronized README, user manual, API documentation, watch consequence rules, and release notes"
+    },
+    {
+      "date": "2026-05-13",
+      "summary": "Aligned smart discovery section labels, code comments, architecture docs, adapter SDK notes, and Trinity Brain integration docs with the domain-adapter implementation"
     }
   ],
   "blocked_items": []
