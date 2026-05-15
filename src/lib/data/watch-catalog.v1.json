@@ -1,0 +1,483 @@
+{
+  "version": 1,
+  "watches": [
+    {
+      "id": "rolex-air-king-126900",
+      "brand": "Rolex",
+      "model": "Air-King",
+      "reference": "126900",
+      "slug": "rolex-air-king-126900",
+      "aliases": [
+        "air king",
+        "rolex air king",
+        "126900 air king"
+      ],
+      "productUrl": "https://www.rolex.com/watches/air-king/m126900-0001",
+      "msrpUsd": 7450,
+      "caseDiameterMm": 40,
+      "caseThicknessMm": 11.6,
+      "lugToLugMm": 48,
+      "lugWidthMm": 20,
+      "waterResistanceM": 100,
+      "movement": "Rolex 3230",
+      "powerReserveHours": 70,
+      "frequencyVph": 28800,
+      "bracelet": "Oyster bracelet with Oysterclasp and Easylink",
+      "microAdjust": true,
+      "dateWindow": false,
+      "lumeProfile": "Strong Chromalight on hands and markers, dial text is busy at night",
+      "antiMagneticGauss": 1000,
+      "style": "field",
+      "weightFeel": "balanced",
+      "notes": [
+        "Dial is visually louder than most Rolex sports watches.",
+        "Smooth bezel keeps it less flashy than polished alternatives."
+      ],
+      "marketingClaims": [
+        "aviation heritage",
+        "crown shield for magnetic resistance"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "moderate",
+        "collectorRespect": "niche",
+        "marketSaturation": "moderate",
+        "brandCachet": "status",
+        "substanceSignals": [
+          "modern Rolex movement",
+          "robust case",
+          "distinctive model identity"
+        ],
+        "cautionSignals": [
+          "polarizing dial",
+          "less universal demand than core Rolex sports models"
+        ],
+        "positioningSummary": "A contrarian Rolex sports watch: more interesting than the default, less liquid than the icons."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 6900,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": -3.2,
+        "liquidityTier": "medium",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/rolex",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "high",
+        "comfort": "balanced",
+        "durability": "tool",
+        "reliability": "strong",
+        "resaleStability": "stable",
+        "braceletQuality": "excellent",
+        "strapVersatility": "moderate"
+      },
+      "ownership": {
+        "dailyExperience": "Feels like a louder Rolex tool watch: easy to wear mechanically, harder to make disappear visually.",
+        "emotionalCharacter": "Confident, quirky, and slightly contrarian; it rewards buyers who want personality more than purity.",
+        "serviceReality": "Modern Rolex service access and parts support are strong, but ownership costs still sit in luxury territory.",
+        "resaleBehaviour": "Rolex demand protects downside better than most brands, though the Air-King is less universally liquid than an Explorer or Submariner.",
+        "scratchRisk": "Brushed Oyster surfaces hide normal wear well, while polished case accents still show desk-diving marks.",
+        "enthusiastBias": "Often underrated by buyers who want canonical Rolex restraint and overrated by buyers chasing oddball scarcity.",
+        "marketingReality": "The aviation story is weaker than the daily reality: this is mainly a distinctive, robust sports Rolex."
+      }
+    },
+    {
+      "id": "rolex-explorer-124270",
+      "brand": "Rolex",
+      "model": "Explorer",
+      "reference": "124270",
+      "slug": "rolex-explorer-124270",
+      "aliases": [
+        "explorer 36",
+        "rolex explorer",
+        "124270 explorer"
+      ],
+      "productUrl": "https://www.rolex.com/watches/explorer/m124270-0001",
+      "msrpUsd": 7250,
+      "caseDiameterMm": 36,
+      "caseThicknessMm": 11.5,
+      "lugToLugMm": 43,
+      "lugWidthMm": 19,
+      "waterResistanceM": 100,
+      "movement": "Rolex 3230",
+      "powerReserveHours": 70,
+      "frequencyVph": 28800,
+      "bracelet": "Oyster bracelet with Oysterclasp and Easylink",
+      "microAdjust": true,
+      "dateWindow": false,
+      "lumeProfile": "Very legible Chromalight with sparse dial layout",
+      "antiMagneticGauss": 1000,
+      "style": "explorer",
+      "weightFeel": "light",
+      "notes": [
+        "Shorter lug span makes it disappear on wrist quickly.",
+        "One of the easiest luxury watches to wear daily with formal clothes."
+      ],
+      "marketingClaims": [
+        "mountain expedition DNA",
+        "timeless 3-6-9 dial"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "moderate",
+        "collectorRespect": "strong",
+        "marketSaturation": "moderate",
+        "brandCachet": "status",
+        "substanceSignals": [
+          "canonical design",
+          "compact wearability",
+          "strong resale stability"
+        ],
+        "cautionSignals": [
+          "can feel too restrained",
+          "status premium is embedded in retail pricing"
+        ],
+        "positioningSummary": "A high-trust one-watch benchmark whose reputation is driven more by versatility than novelty."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 8350,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": 1.4,
+        "liquidityTier": "high",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/rolex",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "high",
+        "comfort": "compact",
+        "durability": "everyday",
+        "reliability": "strong",
+        "resaleStability": "strong",
+        "braceletQuality": "excellent",
+        "strapVersatility": "high"
+      },
+      "ownership": {
+        "dailyExperience": "The rare luxury watch that can be worn for a week without thinking about it; compact size is the feature.",
+        "emotionalCharacter": "Quiet, disciplined, and self-assured rather than flashy; it feels like the default answer for one-watch minimalists.",
+        "serviceReality": "Rolex service is expensive but predictable, and the simple no-date movement keeps the ownership story clean.",
+        "resaleBehaviour": "One of the safer liquidity profiles in this catalog because demand extends beyond niche enthusiasts.",
+        "scratchRisk": "Oyster bracelet wear is visible over time, but the restrained case and bezel keep scratches from becoming the whole personality.",
+        "enthusiastBias": "Praised for purity by minimalists and dismissed as boring by people who want visible wrist presence.",
+        "marketingReality": "The expedition mythology matters less than the fact that the watch is unusually easy to live with."
+      }
+    },
+    {
+      "id": "tudor-black-bay-54",
+      "brand": "Tudor",
+      "model": "Black Bay 54",
+      "reference": "79000N",
+      "slug": "tudor-black-bay-54",
+      "aliases": [
+        "black bay 54",
+        "bb54",
+        "tudor bb54"
+      ],
+      "productUrl": "https://www.tudorwatch.com/en/watches/black-bay-54/m79000n-0001",
+      "msrpUsd": 4025,
+      "caseDiameterMm": 37,
+      "caseThicknessMm": 11.2,
+      "lugToLugMm": 46,
+      "lugWidthMm": 20,
+      "waterResistanceM": 200,
+      "movement": "Tudor MT5400",
+      "powerReserveHours": 70,
+      "frequencyVph": 28800,
+      "bracelet": "T-fit bracelet or rubber strap depending on configuration",
+      "microAdjust": true,
+      "dateWindow": false,
+      "lumeProfile": "Warm vintage lume tone with excellent low-light legibility",
+      "style": "dive",
+      "weightFeel": "light",
+      "notes": [
+        "Vintage sizing makes it wearable for smaller wrists without feeling toy-like.",
+        "Bezel action is practical but the faux-aged lume is a style choice."
+      ],
+      "marketingClaims": [
+        "1954 inspired proportions",
+        "vintage purity"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "high",
+        "collectorRespect": "strong",
+        "marketSaturation": "moderate",
+        "brandCachet": "recognized",
+        "substanceSignals": [
+          "rare compact diver proportions",
+          "T-fit bracelet",
+          "strong tool-watch capability"
+        ],
+        "cautionSignals": [
+          "vintage styling may age with taste",
+          "liquidity trails Rolex"
+        ],
+        "positioningSummary": "An enthusiast-favorite compact diver where the excitement is backed by real wearability."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 3650,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": -4.8,
+        "liquidityTier": "medium",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/tudor",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "medium",
+        "comfort": "compact",
+        "durability": "tool",
+        "reliability": "strong",
+        "resaleStability": "stable",
+        "braceletQuality": "excellent",
+        "strapVersatility": "high"
+      },
+      "ownership": {
+        "dailyExperience": "Small, thin, and low-friction for a diver; it gives tool-watch capability without the usual slab-sided bulk.",
+        "emotionalCharacter": "Warm, vintage-coded, and charming, with enough restraint to avoid feeling like costume nostalgia.",
+        "serviceReality": "Tudor ownership costs are friendlier than Rolex, though service still requires real mechanical-watch budgeting.",
+        "resaleBehaviour": "Strong enthusiast interest helps, but it will not behave like Rolex liquidity in a softer market.",
+        "scratchRisk": "Brushed tool-watch surfaces age honestly; the vintage styling makes normal wear feel less tragic.",
+        "enthusiastBias": "Loved by proportion obsessives and sometimes dismissed by buyers who equate size with seriousness.",
+        "marketingReality": "The 1954 story is less important than the unusually wearable diver proportions."
+      }
+    },
+    {
+      "id": "tudor-black-bay-58",
+      "brand": "Tudor",
+      "model": "Black Bay 58",
+      "reference": "79030N",
+      "slug": "tudor-black-bay-58",
+      "aliases": [
+        "black bay 58",
+        "bb58",
+        "tudor bb58"
+      ],
+      "productUrl": "https://www.tudorwatch.com/en/watches/black-bay-58/m79030n-0001",
+      "msrpUsd": 4325,
+      "caseDiameterMm": 39,
+      "caseThicknessMm": 11.9,
+      "lugToLugMm": 47.5,
+      "lugWidthMm": 20,
+      "waterResistanceM": 200,
+      "movement": "Tudor MT5402",
+      "powerReserveHours": 70,
+      "frequencyVph": 28800,
+      "bracelet": "Rivet-style bracelet or strap options",
+      "microAdjust": false,
+      "dateWindow": false,
+      "lumeProfile": "High contrast dive layout with generous lume",
+      "style": "dive",
+      "weightFeel": "balanced",
+      "notes": [
+        "Rivet bracelet look divides buyers.",
+        "No quick micro-adjust is the biggest daily-use miss."
+      ],
+      "marketingClaims": [
+        "big crown spirit",
+        "heritage riveted bracelet"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "moderate",
+        "collectorRespect": "solid",
+        "marketSaturation": "high",
+        "brandCachet": "recognized",
+        "substanceSignals": [
+          "well-judged proportions",
+          "broad recognition",
+          "modern in-house movement"
+        ],
+        "cautionSignals": [
+          "normalized hype cycle",
+          "no quick micro-adjust",
+          "many adjacent Black Bay variants"
+        ],
+        "positioningSummary": "A former hype leader that remains good, but no longer feels like the obvious insider pick."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 3200,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": -6.5,
+        "liquidityTier": "medium",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/tudor",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "medium",
+        "comfort": "balanced",
+        "durability": "tool",
+        "reliability": "strong",
+        "resaleStability": "stable",
+        "braceletQuality": "solid",
+        "strapVersatility": "moderate"
+      },
+      "ownership": {
+        "dailyExperience": "A handsome everyday diver, but the bracelet adjustment gap is the kind of annoyance that grows in summer.",
+        "emotionalCharacter": "Classic, confident, and familiar; it feels like the safest Tudor heritage diver until fit becomes the issue.",
+        "serviceReality": "Modern Tudor service is straightforward, but the watch is still a luxury mechanical object, not a cheap beater.",
+        "resaleBehaviour": "The BB58 has broad recognition, though its once-hyped status has normalized as Tudor expanded the line.",
+        "scratchRisk": "Steel tool-watch finishing can take normal wear, but polished bevels and clasp marks still accumulate quickly.",
+        "enthusiastBias": "Enthusiasts often forgive the bracelet because the proportions and dial are so well judged.",
+        "marketingReality": "The heritage bracelet story is weaker than the daily problem of not having quick micro-adjust."
+      }
+    },
+    {
+      "id": "omega-aqua-terra-38",
+      "brand": "Omega",
+      "model": "Seamaster Aqua Terra 38",
+      "reference": "220.10.38.20.03.001",
+      "slug": "omega-aqua-terra-38",
+      "aliases": [
+        "aqua terra 38",
+        "omega aqua terra",
+        "seamaster aqua terra 38"
+      ],
+      "productUrl": "https://www.omegawatches.com/watch-omega-seamaster-aqua-terra-150m-co-axial-master-chronometer-38-mm-22010382003001",
+      "msrpUsd": 6600,
+      "caseDiameterMm": 38,
+      "caseThicknessMm": 12.3,
+      "lugToLugMm": 45,
+      "lugWidthMm": 19,
+      "waterResistanceM": 150,
+      "movement": "Omega 8800",
+      "powerReserveHours": 55,
+      "frequencyVph": 25200,
+      "bracelet": "Three-link brushed and polished bracelet",
+      "microAdjust": false,
+      "dateWindow": true,
+      "lumeProfile": "Adequate lume, but this is more office-sport than true tool watch",
+      "antiMagneticGauss": 15000,
+      "style": "dress-sport",
+      "weightFeel": "balanced",
+      "notes": [
+        "Polished center links look upscale but scratch quickly.",
+        "Best for buyers who want one watch for office and weekends."
+      ],
+      "marketingClaims": [
+        "Master Chronometer",
+        "teak dial inspired by yacht decks"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "low",
+        "collectorRespect": "solid",
+        "marketSaturation": "moderate",
+        "brandCachet": "recognized",
+        "substanceSignals": [
+          "Master Chronometer movement",
+          "office-to-weekend versatility",
+          "anti-magnetism"
+        ],
+        "cautionSignals": [
+          "softer resale stability",
+          "less emotional pull for some collectors"
+        ],
+        "positioningSummary": "A rational high-spec alternative whose market weakness can be an advantage when bought carefully."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 4700,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": -5.8,
+        "liquidityTier": "medium",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/omega",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "high",
+        "comfort": "balanced",
+        "durability": "everyday",
+        "reliability": "exceptional",
+        "resaleStability": "soft",
+        "braceletQuality": "solid",
+        "strapVersatility": "moderate"
+      },
+      "ownership": {
+        "dailyExperience": "More polished than toolish; it moves from office to weekend easily but asks you to tolerate visible bracelet wear.",
+        "emotionalCharacter": "Refined, technical, and slightly dressier; it suits buyers who want competence without Rolex signaling.",
+        "serviceReality": "Co-Axial service intervals are a strength, but Omega servicing is still a meaningful long-term cost.",
+        "resaleBehaviour": "Typically softer than Rolex at retail, which can be good pre-owned and painful if bought new without discount.",
+        "scratchRisk": "Polished center links are the tax: they look premium in the case and collect hairlines almost immediately.",
+        "enthusiastBias": "Often recommended as the rational alternative, sometimes more because of specs than emotional pull.",
+        "marketingReality": "Master Chronometer matters; the yacht-deck romance matters far less than anti-magnetism and finishing."
+      }
+    },
+    {
+      "id": "tudor-pelagos-39",
+      "brand": "Tudor",
+      "model": "Pelagos 39",
+      "reference": "25407N",
+      "slug": "tudor-pelagos-39",
+      "aliases": [
+        "pelagos 39",
+        "tudor pelagos 39",
+        "p39"
+      ],
+      "productUrl": "https://www.tudorwatch.com/en/watches/pelagos/m25407n-0001",
+      "msrpUsd": 4900,
+      "caseDiameterMm": 39,
+      "caseThicknessMm": 11.8,
+      "lugToLugMm": 47,
+      "lugWidthMm": 21,
+      "waterResistanceM": 200,
+      "movement": "Tudor MT5400",
+      "powerReserveHours": 70,
+      "frequencyVph": 28800,
+      "bracelet": "Titanium bracelet with T-fit and included rubber strap",
+      "microAdjust": true,
+      "dateWindow": false,
+      "lumeProfile": "Exceptional full-block lume and matte anti-glare finish",
+      "style": "dive",
+      "weightFeel": "light",
+      "notes": [
+        "Titanium makes it feel dramatically lighter than steel peers.",
+        "Tool-forward finishing is less jewelry-like in hand."
+      ],
+      "marketingClaims": [
+        "professional dive DNA",
+        "grade 2 titanium comfort"
+      ],
+      "marketPositioning": {
+        "hypeLevel": "moderate",
+        "collectorRespect": "strong",
+        "marketSaturation": "moderate",
+        "brandCachet": "recognized",
+        "substanceSignals": [
+          "titanium comfort",
+          "tool-forward finishing",
+          "T-fit bracelet"
+        ],
+        "cautionSignals": [
+          "less jewelry-like presence",
+          "narrower buyer pool than heritage divers"
+        ],
+        "positioningSummary": "A substance-heavy modern diver that earns respect from capability-focused collectors."
+      },
+      "secondaryMarket": {
+        "estimatedMarketPriceUsd": 4100,
+        "marketPriceDate": "2026-05-01",
+        "oneYearTrendPercent": -2.6,
+        "liquidityTier": "medium",
+        "sourceLabel": "Curated secondary-market snapshot",
+        "sourceUrl": "https://watchcharts.com/watches/brand_index/tudor",
+        "confidence": "medium"
+      },
+      "ownershipProfile": {
+        "serviceExpectation": "medium",
+        "comfort": "compact",
+        "durability": "tool",
+        "reliability": "strong",
+        "resaleStability": "stable",
+        "braceletQuality": "excellent",
+        "strapVersatility": "high"
+      },
+      "ownership": {
+        "dailyExperience": "The most no-nonsense wearing experience here: light, grippy, legible, and clearly built for active use.",
+        "emotionalCharacter": "Modern, tactical, and deliberately less jewelry-like; it is for buyers who want capability over polish.",
+        "serviceReality": "Tudor service costs stay below Rolex territory, but titanium refinishing is not as forgiving as steel.",
+        "resaleBehaviour": "Desirable among enthusiasts, but its tool-forward personality narrows the buyer pool compared with safer classics.",
+        "scratchRisk": "Titanium marks differently from steel; it hides weight, not necessarily wear.",
+        "enthusiastBias": "Praised by spec-focused collectors and sometimes undervalued by buyers who want luxury shine.",
+        "marketingReality": "The professional dive language is mostly theater for desk use, but titanium comfort is genuinely meaningful."
+      }
+    }
+  ]
+}

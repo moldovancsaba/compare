@@ -1,6 +1,7 @@
 # Release Notes
 
 ## Unreleased
+- Moved the mechanical-watch catalog into a versioned JSON source of truth with schema validation, duplicate detection, and maintainer-facing validation and ingestion scripts.
 - Added route-specific metadata for persisted saved comparison pages, including canonical, Open Graph, and Twitter fields derived from the saved verdict, plus regression coverage for the metadata builder.
 - Aligned smart discovery section labels, architecture documentation, adapter SDK notes, and Trinity Brain integration docs with the current domain-adapter implementation.
 - Resolved the stale release-governance blocker by restoring the local lockfile install, re-running lint, typecheck, test, build, and production audit successfully, and realigning the documentation with the verified gate status.

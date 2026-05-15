@@ -97,6 +97,7 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - User manual: `docs/user-manual.md`
 - API documentation: `docs/api.md`
 - Architecture: `docs/architecture.md`
+- Watch catalog: `docs/watch-catalog.md`
 - Domain adapter SDK: `docs/domain-adapters.md`
 - Data governance: `docs/data-governance.md`
 - Watch collection profiles: `docs/watch-collection-profiles.md`
@@ -108,6 +109,13 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 
 ## Testing Coverage
 Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, transparent value scoring, smart discovery alternatives, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
+
+## Catalog Maintenance
+The watch adapter source of truth is the versioned JSON document at `src/lib/data/watch-catalog.v1.json`.
+
+- Validate the current catalog with `npm run catalog:validate`.
+- Generate a normalized draft row from curated source URLs with `npm run catalog:ingest -- --manifest ./watch-draft.json --output ./tmp/watch-entry.json`.
+- Maintainer workflow and schema details live in `docs/watch-catalog.md`.
 
 ## Operations
 Structured logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers.
