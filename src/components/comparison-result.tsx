@@ -726,9 +726,9 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Ge
   return (
     <section className="surface-card p-6 shadow-none">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
+      <div>
           <p className="eyebrow eyebrow-wide">Improve this comparison</p>
-          <h3 className="title-section mt-3">Was this comparison useful?</h3>
+          <h3 className="title-section mt-3">Report wrong data or a misleading recommendation</h3>
         </div>
         <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">no account needed</span>
       </div>
@@ -765,7 +765,7 @@ function FeedbackPanel({ brain, result }: { brain: BrainState | null; result: Ge
         <textarea
           className="field-input placeholder-muted min-h-28 w-full resize-y px-4 py-3 text-sm"
           maxLength={1000}
-          placeholder="Add context Trinity should learn from."
+          placeholder="Add correction context, missing facts, or why the recommendation misfired."
           value={note}
           onChange={(event) => setNote(event.target.value)}
         />

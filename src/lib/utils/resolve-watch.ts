@@ -6,6 +6,15 @@ interface RankedWatch {
   score: number;
 }
 
+const supportedWatchUrlHosts = new Set([
+  "rolex.com",
+  "www.rolex.com",
+  "tudorwatch.com",
+  "www.tudorwatch.com",
+  "omegawatches.com",
+  "www.omegawatches.com"
+]);
+
 export type WatchResolution =
   | {
       status: "resolved";
@@ -13,9 +22,78 @@ export type WatchResolution =
     }
   | {
       status: "unresolved";
-      reason: "no_match" | "ambiguous";
+      reason: "no_match" | "ambiguous" | "unsupported_source";
       suggestions: WatchSpec[];
     };
+
+function tryParseUrl(value: string): URL | null {
+  try {
+    return new URL(value);
+  } catch {
+    return null;
+  }
+}
+
+function parseSupportedWatchProductUrl(input: string): WatchResolution | null {
+  const url = tryParseUrl(input.trim());
+
+  if (!url) {
+    return null;
+  }
+
+  if (!supportedWatchUrlHosts.has(url.hostname)) {
+    return {
+      status: "unresolved",
+      reason: "unsupported_source",
+      suggestions: []
+    };
+  }
+
+  const normalizedUrl = url.toString().replace(/\/+$/, "");
+
+  const directMatch = watchCatalog.find((watch) => watch.productUrl.replace(/\/+$/, "") === normalizedUrl);
+  if (directMatch) {
+    return {
+      status: "resolved",
+      watch: directMatch
+    };
+  }
+
+  const referencePatterns = [
+    /(?:^|\/)m?(\d{5}[a-z]?)-(\d{4})$/i,
+    /(?:^|\/)(\d{3}\.\d{2}\.\d{2}\.\d{2}\.\d{2}\.\d{3})$/i,
+    /(?:^|\/)(\d{5}[a-z])-(\d{4})$/i
+  ];
+
+  const path = `${url.pathname}${url.search}`;
+  const referenceCandidates = referencePatterns
+    .flatMap((pattern) => Array.from(path.matchAll(pattern)))
+    .map((match) => match.slice(1).join(".").replace(/\.+/g, " ").trim())
+    .flatMap((reference) => [reference, reference.replace(/\s+/g, ""), reference.replace(/\s+/g, ".")]);
+
+  const matches = watchCatalog.filter((watch) =>
+    referenceCandidates.some((reference) => {
+      const normalizedReference = reference.toLowerCase().replace(/[^a-z0-9.]/g, "");
+      const watchReference = watch.reference.toLowerCase().replace(/[^a-z0-9.]/g, "");
+      return normalizedReference === watchReference || normalizedReference.includes(watchReference);
+    })
+  );
+
+  if (matches.length === 1) {
+    return {
+      status: "resolved",
+      watch: matches[0]
+    };
+  }
+
+  return {
+    status: "unresolved",
+    reason: "unsupported_source",
+    suggestions: watchCatalog
+      .filter((watch) => watch.productUrl.includes(url.hostname.replace(/^www\./, "")))
+      .slice(0, 4)
+  };
+}
 
 function normalize(value: string): string {
   return value
@@ -164,6 +242,12 @@ function rankedWatches(input: string): RankedWatch[] {
 }
 
 export function resolveWatchDetailed(input: string): WatchResolution {
+  const parsedUrlResolution = parseSupportedWatchProductUrl(input);
+
+  if (parsedUrlResolution) {
+    return parsedUrlResolution;
+  }
+
   const ranked = rankedWatches(input);
   const [best, secondBest] = ranked;
 

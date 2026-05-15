@@ -17,10 +17,20 @@ export interface ComparisonResponse {
 
 export interface ComparisonErrorResponse {
   error: string;
+  reason?:
+    | "rate_limited"
+    | "unsupported_domain"
+    | "unsupported_input"
+    | "ambiguous_input"
+    | "unsupported_source"
+    | "duplicate_entity"
+    | "invalid_request"
+    | "unknown";
   supportedInputs?: string[];
   supportedDomains?: string[];
   leftSuggestions?: string[];
   rightSuggestions?: string[];
+  retryAfterSeconds?: number;
 }
 
 export type ComparisonClientResult = ComparisonResponse | ComparisonErrorResponse;
@@ -64,6 +74,12 @@ export async function readComparisonResponse(response: Response): Promise<Compar
 
     return {
       error: isErrorPayload(payload) ? payload.error : GENERIC_COMPARE_ERROR,
+      reason:
+        isRecord(payload) && typeof payload.reason === "string"
+          ? (payload.reason as ComparisonErrorResponse["reason"])
+          : "unknown",
+      retryAfterSeconds:
+        isRecord(payload) && typeof payload.retryAfterSeconds === "number" ? payload.retryAfterSeconds : undefined,
       ...(supportedInputs ? { supportedInputs } : {}),
       ...(supportedDomains ? { supportedDomains } : {}),
       ...(leftSuggestions ? { leftSuggestions } : {}),
@@ -77,7 +93,8 @@ export async function readComparisonResponse(response: Response): Promise<Compar
 
   if (!isComparisonPayload(payload)) {
     return {
-      error: GENERIC_COMPARE_ERROR
+      error: GENERIC_COMPARE_ERROR,
+      reason: "unknown"
     };
   }
 
@@ -111,7 +128,8 @@ export async function requestComparison(
     return readComparisonResponse(response);
   } catch {
     return {
-      error: GENERIC_COMPARE_ERROR
+      error: GENERIC_COMPARE_ERROR,
+      reason: "unknown"
     };
   }
 }

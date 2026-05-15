@@ -7,7 +7,7 @@ import { POST as POST_TRADEOFF } from "@/app/api/compare/tradeoff/route";
 import { POST as POST_SHOULD_BUY } from "@/app/api/watch/should-buy/route";
 import { hashLogValue, sanitizeLogContext } from "@/lib/observability/logger";
 import { recordTelemetryEvent, sanitizeTelemetryProperties } from "@/lib/observability/telemetry";
-import { compareRateLimit, resetRateLimitForTests } from "@/lib/security/rate-limit";
+import { compareRateLimit, resetRateLimitForTests, tradeoffRateLimit } from "@/lib/security/rate-limit";
 import { readComparisonResponse, requestComparison } from "@/lib/services/compare-client";
 import { compareWatches } from "@/lib/services/compare-watches";
 import { shouldBuyWatch } from "@/lib/services/should-buy-watch";
@@ -211,6 +211,16 @@ describe("resolveWatch", () => {
     const match = resolveWatch("https://www.tudorwatch.com/en/watches/pelagos/m25407n-0001");
 
     expect(match?.id).toBe("tudor-pelagos-39");
+  });
+
+  it("keeps unsupported watch source urls unresolved with an explicit source reason", () => {
+    const resolution = resolveWatchDetailed("https://www.seikowatches.com/us-en/products/prospex/spb143j1");
+
+    expect(resolution).toEqual({
+      status: "unresolved",
+      reason: "unsupported_source",
+      suggestions: []
+    });
   });
 
   it("matches a reference even when the brand is omitted", () => {
@@ -1713,6 +1723,37 @@ describe("POST /api/compare", () => {
     expect(payload.error).toContain("tradeoff scenario payload was invalid");
   });
 
+  it("rate limits repeated tradeoff telemetry from the same client", async () => {
+    const requestBody = {
+      comparisonRef: "compare:rolex-explorer-124270:vs:tudor-black-bay-54",
+      leftEntityId: "rolex-explorer-124270",
+      rightEntityId: "tudor-black-bay-54",
+      scenarioPickId: "tudor-black-bay-54",
+      scenarioChangedPick: true,
+      scenario: {
+        budgetSensitivity: 4,
+        wristComfort: 2,
+        dressVersatility: 2,
+        resaleImportance: 1,
+        ruggedness: 4,
+        brandNeutrality: 3
+      }
+    };
+
+    for (let index = 0; index < tradeoffRateLimit.limit; index += 1) {
+      const response = await POST_TRADEOFF(tradeoffRequest(requestBody, "203.0.113.201"));
+
+      expect(response.status).toBe(200);
+    }
+
+    const limitedResponse = await POST_TRADEOFF(tradeoffRequest(requestBody, "203.0.113.201"));
+    const payload = await limitedResponse.json();
+
+    expect(limitedResponse.status).toBe(429);
+    expect(limitedResponse.headers.get("Retry-After")).toBeTruthy();
+    expect(payload.reason).toBe("rate_limited");
+  });
+
   it("rejects unsupported watches", async () => {
     const response = await POST(
       compareRequest({
@@ -1823,6 +1864,7 @@ describe("POST /api/compare", () => {
     expect(limitedResponse.status).toBe(429);
     expect(limitedResponse.headers.get("Retry-After")).toBeTruthy();
     expect(payload.error).toContain("Too many comparison requests");
+    expect(payload.reason).toBe("rate_limited");
   });
 
   it("returns single-watch should-I-buy guidance", async () => {
@@ -1877,7 +1919,8 @@ describe("POST /api/compare", () => {
     });
 
     expect(payload).toEqual({
-      error: "The comparison request failed. Try again."
+      error: "The comparison request failed. Try again.",
+      reason: "unknown"
     });
   });
 
@@ -1892,7 +1935,9 @@ describe("POST /api/compare", () => {
     );
 
     expect(payload).toEqual({
-      error: "The comparison request failed. Try again."
+      error: "The comparison request failed. Try again.",
+      reason: "unknown",
+      retryAfterSeconds: undefined
     });
   });
 
@@ -1907,7 +1952,8 @@ describe("POST /api/compare", () => {
     );
 
     expect(payload).toEqual({
-      error: "The comparison request failed. Try again."
+      error: "The comparison request failed. Try again.",
+      reason: "unknown"
     });
   });
 });

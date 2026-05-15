@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { hashLogValue } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
-import { resolveClientKey } from "@/lib/security/rate-limit";
+import { checkRateLimit, resolveClientKey, tradeoffRateLimit } from "@/lib/security/rate-limit";
 
 const tradeoffSchema = z.object({
   comparisonRef: z.string().trim().min(6).max(240),
@@ -23,6 +23,25 @@ const tradeoffSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    const clientKey = resolveClientKey(request);
+    const rateLimit = await checkRateLimit(clientKey, tradeoffRateLimit);
+
+    if (rateLimit.limited) {
+      return NextResponse.json(
+        {
+          error: "Too many tradeoff updates. Wait a moment and try again.",
+          reason: "rate_limited",
+          retryAfterSeconds: Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1000))
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1000)).toString()
+          }
+        }
+      );
+    }
+
     const body = tradeoffSchema.parse(await request.json());
 
     await recordTelemetryEvent({
@@ -30,7 +49,7 @@ export async function POST(request: Request) {
       comparisonRef: body.comparisonRef,
       leftWatchId: body.leftEntityId,
       rightWatchId: body.rightEntityId,
-      clientKeyHash: hashLogValue(resolveClientKey(request)),
+      clientKeyHash: hashLogValue(clientKey),
       status: "recorded",
       properties: {
         scenarioBudgetSensitivity: body.scenario.budgetSensitivity,

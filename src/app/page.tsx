@@ -17,6 +17,32 @@ export default function HomePage() {
           </div>
         </div>
         <ComparisonForm />
+        <section className="mt-12 grid gap-6 lg:grid-cols-3">
+          <article className="surface-card p-6">
+            <p className="eyebrow eyebrow-wide">Why it exists</p>
+            <h2 className="title-section mt-3">Comparison help, not catalog theater</h2>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              {appName} is built to reduce decision regret. It leads with the stronger choice, then shows the evidence,
+              limits, and exception case without forcing you through generic spec-dump pages.
+            </p>
+          </article>
+          <article className="surface-card p-6">
+            <p className="eyebrow eyebrow-wide">How it stays useful</p>
+            <h2 className="title-section mt-3">Deterministic and source-aware</h2>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              Supported watch comparisons use curated catalog rows, canonical product URLs, deterministic ownership
+              rules, and explicit confidence limits. Unsupported or ambiguous inputs fail closed instead of guessing.
+            </p>
+          </article>
+          <article className="surface-card p-6">
+            <p className="eyebrow eyebrow-wide">What to expect</p>
+            <h2 className="title-section mt-3">Useful for category intent</h2>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              Use it for questions like Rolex Explorer vs Air-King, Pelagos 39 vs Black Bay 54, or whether a more
+              technical but less liquid alternative is actually the smarter buy.
+            </p>
+          </article>
+        </section>
       </div>
     </main>
   );

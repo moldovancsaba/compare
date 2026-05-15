@@ -18,6 +18,7 @@
 - Shows curated secondary-market ownership context for supported watches without live scraping or investment framing.
 - Recommends smart discovery alternatives with explicit reason codes for better-value plays, role contrast, hidden-gem fit, manageable exit risk, and decision-intent fit.
 - Supports accountless watch collection profiles stored in the browser.
+- Supports local recent-comparison history and local saved-intent monitoring for curated watch price/spec deltas.
 - Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, market positioning, and marketing-reality checks.
 - Supports saved comparison pages with route-specific metadata when MongoDB is configured.
 
@@ -108,7 +109,7 @@ GitHub Actions runs install, lint, test, typecheck, build, and production depend
 - Design primitives: `design-tokens.md`
 
 ## Testing Coverage
-Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, transparent value scoring, smart discovery alternatives, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
+Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, transparent value scoring, smart discovery alternatives, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, shared and fallback rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
 
 ## Catalog Maintenance
 The watch adapter source of truth is the versioned JSON document at `src/lib/data/watch-catalog.v1.json`.
@@ -116,6 +117,12 @@ The watch adapter source of truth is the versioned JSON document at `src/lib/dat
 - Validate the current catalog with `npm run catalog:validate`.
 - Generate a normalized draft row from curated source URLs with `npm run catalog:ingest -- --manifest ./watch-draft.json --output ./tmp/watch-entry.json`.
 - Maintainer workflow and schema details live in `docs/watch-catalog.md`.
+
+## Compare Flow Notes
+- Compare API and tradeoff telemetry rate limiting now prefer MongoDB-backed shared buckets when MongoDB is configured and fall back to in-memory buckets otherwise.
+- Unsupported watch source URLs fail closed with explicit source guidance instead of being treated as generic unresolved inputs.
+- The no-account feedback panel doubles as the lightweight community correction path for wrong specs or misleading recommendation reports.
+- Watch comparison rule groups are now split into focused evidence, ownership, and scoring modules under `src/lib/domains/watch-comparison-rules`.
 
 ## Operations
 Structured logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers.

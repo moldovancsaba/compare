@@ -121,17 +121,21 @@ Unresolved input:
 ```json
 {
   "error": "{compare} could not resolve one or both inputs in the selected comparison domain. Use one of the supported examples below or paste a matching source URL.",
+  "reason": "unsupported_input",
   "supportedInputs": ["Rolex Air-King", "Rolex Explorer"],
   "leftSuggestions": [],
   "rightSuggestions": ["Rolex Explorer"]
 }
 ```
 
+Unsupported source URLs use `reason: "unsupported_source"` and may omit suggestions when the source host is outside the supported allowlist.
+
 Duplicate entity:
 
 ```json
 {
-  "error": "Choose two different things so the comparison surfaces meaningful tradeoffs."
+  "error": "Choose two different things so the comparison surfaces meaningful tradeoffs.",
+  "reason": "duplicate_entity"
 }
 ```
 
@@ -139,7 +143,9 @@ Rate limited:
 
 ```json
 {
-  "error": "Too many comparison requests. Wait a moment and try again."
+  "error": "Too many comparison requests. Wait a moment and try again.",
+  "reason": "rate_limited",
+  "retryAfterSeconds": 42
 }
 ```
 
@@ -244,6 +250,8 @@ Records allowlisted telemetry when a watch tradeoff simulator scenario changes. 
 ```
 
 Scenario controls are integers from `0` to `5`. Invalid payloads return `400`.
+
+Rate-limited tradeoff telemetry returns `429` with a user-safe error, `reason: "rate_limited"`, and a `Retry-After` header.
 
 ## POST `/api/watch/should-buy`
 

@@ -1,6 +1,7 @@
 # Release Notes
 
 ## Unreleased
+- Added Mongo-aware shared rate limiting for compare and tradeoff APIs with in-memory fallback, explicit unsupported-source handling for watch URLs, recent-comparison history, local saved-intent monitoring, homepage editorial landing sections, richer watch catalog attributes, and composable watch comparison rule modules.
 - Moved the mechanical-watch catalog into a versioned JSON source of truth with schema validation, duplicate detection, and maintainer-facing validation and ingestion scripts.
 - Added route-specific metadata for persisted saved comparison pages, including canonical, Open Graph, and Twitter fields derived from the saved verdict, plus regression coverage for the metadata builder.
 - Aligned smart discovery section labels, architecture documentation, adapter SDK notes, and Trinity Brain integration docs with the current domain-adapter implementation.

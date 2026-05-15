@@ -15,6 +15,10 @@ Version: `v0.2.1`
 
 The app rejects duplicate, unsupported, or ambiguous inputs. For ambiguous watch families, it returns suggestions rather than silently choosing a variant.
 
+Recent comparisons are stored locally in the browser so repeat users can rerun a prior decision without starting from zero.
+
+Unsupported watch source URLs fail closed with explicit messaging. The current watch adapter accepts supported names, references, aliases, and supported Rolex, Tudor, or Omega product URLs.
+
 ## Result Sections
 
 Comparison results include:
@@ -131,6 +135,19 @@ Market-positioning notes use curated model-level traits. They intentionally avoi
 
 Marketing-reality notes use the same adapter-owned data. They do not accuse brands or infer owner sentiment; they compare curated claims with practical signals such as fit, bracelet adjustment, anti-magnetism, durability, liquidity, and long-term emotional fit.
 
+## Saved-Intent Monitoring
+
+Mechanical-watch comparison results include a local saved-intent monitoring surface.
+
+Users can save a comparison intent in the browser and later see whether the curated catalog changed in ways that matter to the original decision.
+
+The first implementation monitors deterministic catalog deltas such as:
+- retail price changes
+- curated secondary-market snapshot changes
+- spec revisions such as water resistance, power reserve, case diameter, or movement
+
+The monitoring surface is local-first and does not rely on notification infrastructure or live scraping in the request path.
+
 ## Persistence
 
 MongoDB is optional.
@@ -151,3 +168,10 @@ With MongoDB:
 ## Feedback
 
 Result pages include feedback controls. Feedback is optional and is used to improve future comparison reasoning when persistence is configured.
+
+The same panel is also the lightweight community correction path for:
+- wrong specs
+- missing context
+- misleading recommendations
+
+The app automatically attaches comparison context to the report payload so maintainers can triage issues without asking the user to reconstruct the full comparison manually.

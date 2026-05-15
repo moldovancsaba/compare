@@ -5,7 +5,7 @@ import { watchCollectionProfileFromContext } from "@/lib/domains/watch-collectio
 import { watchDisplayName } from "@/lib/domains/watch-entity";
 import { hashLogValue, logWarn } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
-import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
+import { checkRateLimit, resolveClientKey, shouldBuyRateLimit } from "@/lib/security/rate-limit";
 import { shouldBuyWatch } from "@/lib/services/should-buy-watch";
 import { resolveWatchDetailed } from "@/lib/utils/resolve-watch";
 
@@ -17,7 +17,7 @@ const requestSchema = z.object({
 export async function POST(request: Request) {
   const clientKey = resolveClientKey(request);
   const clientKeyHash = hashLogValue(clientKey);
-  const rateLimit = checkRateLimit(`should-buy:${clientKey}`);
+  const rateLimit = await checkRateLimit(clientKey, shouldBuyRateLimit);
 
   if (rateLimit.limited) {
     return NextResponse.json(
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
         event: "watch_purchase.unresolved_input",
         clientKeyHash,
         status: "rejected",
-        reason: "unsupported_input",
+        reason: resolution.reason === "unsupported_source" ? "unsupported_source" : "unsupported_input",
         properties: {
           suggestionCount: suggestions.length
         }
@@ -52,7 +52,10 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "{compare} could not resolve this watch. Use a supported watch name, reference, alias, or source URL.",
+          error:
+            resolution.reason === "unsupported_source"
+              ? "{compare} does not support this watch URL source yet. Use a supported Rolex, Tudor, or Omega product URL, or enter a supported name or reference."
+              : "{compare} could not resolve this watch. Use a supported watch name, reference, alias, or source URL.",
           suggestions
         },
         { status: 404 }

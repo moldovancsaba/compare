@@ -10,6 +10,11 @@ import { normalizeWatchDecisionIntentProfile } from "@/lib/domains/watch-decisio
 import { normalizeWatchCollectionProfile } from "@/lib/domains/watch-collection";
 import { supportedComparisonDomainOptions, supportedInputsForDomain } from "@/lib/services/compare";
 import { type ComparisonClientResult, requestComparison } from "@/lib/services/compare-client";
+import {
+  createMonitoredIntentEntry,
+  evaluateMonitoredIntent,
+  type MonitoredIntentEntry
+} from "@/lib/services/monitored-intents";
 import { validateComparisonInputs } from "@/lib/utils/validate-comparison-inputs";
 import type { GenericComparisonResult } from "@/types/comparison";
 import type { BrainState } from "@/types/watch";
@@ -20,8 +25,48 @@ interface BrainResponse {
   brain: BrainState;
 }
 
+type RecentComparisonEntry = {
+  domain: string;
+  leftInput: string;
+  rightInput: string;
+  savedComparisonPath: string | null;
+  strongerChoice: string;
+  summary: string;
+  recordedAt: string;
+};
+
 function isErrorResponse(payload: ComparisonClientResult): payload is Extract<ComparisonClientResult, { error: string }> {
   return "error" in payload;
+}
+
+function readRecentComparisons(): RecentComparisonEntry[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const saved = window.localStorage.getItem(recentComparisonsStorageKey);
+
+    return saved ? ((JSON.parse(saved) as RecentComparisonEntry[]) ?? []) : [];
+  } catch {
+    window.localStorage.removeItem(recentComparisonsStorageKey);
+    return [];
+  }
+}
+
+function readMonitoredIntents(): MonitoredIntentEntry[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const saved = window.localStorage.getItem(monitoredIntentsStorageKey);
+
+    return saved ? ((JSON.parse(saved) as MonitoredIntentEntry[]) ?? []) : [];
+  } catch {
+    window.localStorage.removeItem(monitoredIntentsStorageKey);
+    return [];
+  }
 }
 
 const domainOptions = supportedComparisonDomainOptions();
@@ -29,6 +74,8 @@ const defaultDomain = domainOptions[0]?.domain ?? "watches";
 const supportedInputOptions = supportedInputsForDomain(defaultDomain);
 const watchCollectionStorageKey = "compare.watchCollectionProfile.v1";
 const watchDecisionIntentStorageKey = "compare.watchDecisionIntentProfile.v1";
+const recentComparisonsStorageKey = "compare.recentComparisons.v1";
+const monitoredIntentsStorageKey = "compare.monitoredIntents.v1";
 const emptyWatchCollectionProfile: WatchCollectionProfile = {
   items: [],
   preferredBrands: []
@@ -55,7 +102,13 @@ export function ComparisonForm() {
   const [brain, setBrain] = useState<BrainState | null>(null);
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [errorReason, setErrorReason] = useState<Extract<ComparisonClientResult, { error: string }>["reason"] | null>(null);
   const [supportedInputs, setSupportedInputs] = useState(supportedInputOptions);
+  const [leftSuggestions, setLeftSuggestions] = useState<string[]>([]);
+  const [rightSuggestions, setRightSuggestions] = useState<string[]>([]);
+  const [retryAfterSeconds, setRetryAfterSeconds] = useState<number | null>(null);
+  const [recentComparisons, setRecentComparisons] = useState<RecentComparisonEntry[]>(() => readRecentComparisons());
+  const [monitoredIntents, setMonitoredIntents] = useState<MonitoredIntentEntry[]>(() => readMonitoredIntents());
   const [watchCollectionProfile, setWatchCollectionProfile] = useState<WatchCollectionProfile>(() => {
     if (typeof window === "undefined") {
       return emptyWatchCollectionProfile;
@@ -106,6 +159,14 @@ export function ComparisonForm() {
   useEffect(() => {
     window.localStorage.setItem(watchDecisionIntentStorageKey, JSON.stringify(watchDecisionIntentProfile));
   }, [watchDecisionIntentProfile]);
+
+  useEffect(() => {
+    window.localStorage.setItem(recentComparisonsStorageKey, JSON.stringify(recentComparisons));
+  }, [recentComparisons]);
+
+  useEffect(() => {
+    window.localStorage.setItem(monitoredIntentsStorageKey, JSON.stringify(monitoredIntents));
+  }, [monitoredIntents]);
 
   useEffect(() => {
     if (!brain || (brain.status !== "queued" && brain.status !== "running")) {
@@ -176,11 +237,19 @@ export function ComparisonForm() {
       setBrain(null);
       setSavedComparisonPath(null);
       setError(validation.message);
+      setErrorReason("invalid_request");
+      setLeftSuggestions([]);
+      setRightSuggestions([]);
+      setRetryAfterSeconds(null);
       return;
     }
 
     setError(null);
+    setErrorReason(null);
     setBrain(null);
+    setLeftSuggestions([]);
+    setRightSuggestions([]);
+    setRetryAfterSeconds(null);
 
     const context =
       nextDomain === "watches"
@@ -200,7 +269,11 @@ export function ComparisonForm() {
       setBrain(null);
       setSavedComparisonPath(null);
       setError(payload.error);
+      setErrorReason(payload.reason ?? "unknown");
       setSupportedInputs(payload.supportedInputs ?? supportedInputsForDomain(nextDomain));
+      setLeftSuggestions(payload.leftSuggestions ?? []);
+      setRightSuggestions(payload.rightSuggestions ?? []);
+      setRetryAfterSeconds(payload.retryAfterSeconds ?? null);
       return;
     }
 
@@ -208,6 +281,32 @@ export function ComparisonForm() {
     setBrain(payload.brain);
     setSavedComparisonPath(payload.savedComparison?.persisted ? payload.savedComparison.path : null);
     setSupportedInputs(supportedInputsForDomain(nextDomain));
+    setError(null);
+    setErrorReason(null);
+    setLeftSuggestions([]);
+    setRightSuggestions([]);
+    setRetryAfterSeconds(null);
+    setRecentComparisons((current) =>
+      [
+        {
+          domain: nextDomain,
+          leftInput: nextLeft,
+          rightInput: nextRight,
+          savedComparisonPath: payload.savedComparison?.persisted ? payload.savedComparison.path : null,
+          strongerChoice: payload.comparison.verdict.strongerChoice,
+          summary: payload.comparison.verdict.summary,
+          recordedAt: new Date().toISOString()
+        },
+        ...current.filter(
+          (entry) =>
+            !(
+              entry.domain === nextDomain &&
+              entry.leftInput === nextLeft &&
+              entry.rightInput === nextRight
+            )
+        )
+      ].slice(0, 8)
+    );
   }
 
   function handleSubmit(formData: FormData) {
@@ -221,6 +320,10 @@ export function ComparisonForm() {
       setBrain(null);
       setSavedComparisonPath(null);
       setError(validation.message);
+      setErrorReason("invalid_request");
+      setLeftSuggestions([]);
+      setRightSuggestions([]);
+      setRetryAfterSeconds(null);
       return;
     }
 
@@ -251,6 +354,10 @@ export function ComparisonForm() {
     setBrain(null);
     setSavedComparisonPath(null);
     setError(null);
+    setErrorReason(null);
+    setLeftSuggestions([]);
+    setRightSuggestions([]);
+    setRetryAfterSeconds(null);
   }
 
   function applySupportedInput(nextInput: string) {
@@ -271,6 +378,7 @@ export function ComparisonForm() {
     setLeftInput(rightInput);
     setRightInput(leftInput);
     setError(null);
+    setErrorReason(null);
   }
 
   function clearInputs() {
@@ -280,7 +388,11 @@ export function ComparisonForm() {
     setBrain(null);
     setSavedComparisonPath(null);
     setError(null);
+    setErrorReason(null);
     setSupportedInputs(supportedInputsForDomain(activeDomain));
+    setLeftSuggestions([]);
+    setRightSuggestions([]);
+    setRetryAfterSeconds(null);
   }
 
   function updateDecisionIntent(nextProfile: WatchDecisionIntentProfile) {
@@ -299,6 +411,20 @@ export function ComparisonForm() {
       ...watchDecisionIntentProfile,
       [key]: value || undefined
     });
+  }
+
+  function saveCurrentIntentForMonitoring() {
+    if (!result || result.domain !== "watches") {
+      return;
+    }
+
+    const entry = createMonitoredIntentEntry(result, savedComparisonPath);
+
+    if (!entry) {
+      return;
+    }
+
+    setMonitoredIntents((current) => [entry, ...current.filter((item) => item.id !== entry.id)].slice(0, 12));
   }
 
   return (
@@ -324,6 +450,188 @@ export function ComparisonForm() {
           onClearInputs={clearInputs}
           onSubmit={handleSubmit}
         />
+
+        {recentComparisons.length ? (
+          <section className="surface-card p-5 shadow-none">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="eyebrow eyebrow-wide">Recent comparisons</p>
+                <h3 className="title-section mt-3">Pick up a recent decision</h3>
+              </div>
+              <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">stored in this browser</span>
+            </div>
+            <div className="mt-5 grid gap-3">
+              {recentComparisons.map((entry) => (
+                <button
+                  key={`${entry.domain}:${entry.leftInput}:${entry.rightInput}`}
+                  type="button"
+                  className="surface-item p-4 text-left transition hover:opacity-90"
+                  onClick={() => {
+                    setActiveDomain(entry.domain);
+                    setLeftInput(entry.leftInput);
+                    setRightInput(entry.rightInput);
+                    startTransition(() => {
+                      void runComparison(entry.leftInput, entry.rightInput, entry.domain);
+                    });
+                  }}
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="body-copy body-copy-strong text-sm">
+                        {entry.leftInput} vs {entry.rightInput}
+                      </p>
+                      <p className="body-copy body-copy-faint mt-2 text-sm">{entry.summary}</p>
+                    </div>
+                    <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                      stronger choice: {entry.strongerChoice}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {!result && !error && !isPending ? (
+          <section className="surface-card p-6 shadow-none">
+            <p className="eyebrow eyebrow-wide">State</p>
+            <h3 className="title-section mt-3">Ready for a comparison</h3>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              Start with two supported inputs in the same domain. The first result screen will lead with the stronger
+              choice, exception case, and evidence limits before any deeper analysis.
+            </p>
+          </section>
+        ) : null}
+
+        {isPending ? (
+          <section className="surface-card p-6 shadow-none">
+            <p className="eyebrow eyebrow-wide">State</p>
+            <h3 className="title-section mt-3">Building the recommendation</h3>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              {activeDomain === "watches"
+                ? "Resolving the watches, checking supported source rules, and running deterministic tradeoff logic."
+                : "Resolving both inputs and preparing the verdict-led comparison."}
+            </p>
+          </section>
+        ) : null}
+
+        {!result && error ? (
+          <section className="surface-card p-6 shadow-none">
+            <p className="eyebrow eyebrow-wide">State</p>
+            <h3 className="title-section mt-3">
+              {errorReason === "rate_limited"
+                ? "Too many requests"
+                : errorReason === "unsupported_source"
+                  ? "Unsupported source URL"
+                  : errorReason === "unsupported_input"
+                    ? "Input needs correction"
+                    : "Comparison could not run"}
+            </h3>
+            <p className="body-copy body-copy-faint mt-3 text-sm">{error}</p>
+            {retryAfterSeconds ? (
+              <p className="body-copy body-copy-soft mt-3 text-sm">Retry after about {retryAfterSeconds} seconds.</p>
+            ) : null}
+
+            {leftSuggestions.length || rightSuggestions.length ? (
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {leftSuggestions.length ? (
+                  <div className="surface-item p-4">
+                    <p className="eyebrow">Suggestions for the first input</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {leftSuggestions.map((suggestion) => (
+                        <button
+                          key={`left-${suggestion}`}
+                          type="button"
+                          className="pill-muted body-copy-strong px-4 py-2 text-sm transition"
+                          onClick={() => setLeftInput(suggestion)}
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+                {rightSuggestions.length ? (
+                  <div className="surface-item p-4">
+                    <p className="eyebrow">Suggestions for the second input</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {rightSuggestions.map((suggestion) => (
+                        <button
+                          key={`right-${suggestion}`}
+                          type="button"
+                          className="pill-muted body-copy-strong px-4 py-2 text-sm transition"
+                          onClick={() => setRightInput(suggestion)}
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </section>
+        ) : null}
+
+        {result?.domain === "watches" ? (
+          <section className="surface-card p-6 shadow-none">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="eyebrow eyebrow-wide">Saved-intent monitoring</p>
+                <h3 className="title-section mt-3">Watch for price or spec changes</h3>
+              </div>
+              <button
+                type="button"
+                className="pill-accent eyebrow eyebrow-tight px-4 py-2"
+                onClick={saveCurrentIntentForMonitoring}
+              >
+                Monitor this comparison
+              </button>
+            </div>
+            <p className="body-copy body-copy-faint mt-3 text-sm">
+              This slice stays local-first and deterministic. It compares saved catalog snapshots against the current
+              curated catalog for price and spec deltas without polling brand sites in the request path.
+            </p>
+            {monitoredIntents.length ? (
+              <div className="mt-5 grid gap-3">
+                {monitoredIntents.map((entry) => {
+                  const changes = evaluateMonitoredIntent(entry);
+
+                  return (
+                    <div key={entry.id} className="surface-item p-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <p className="body-copy body-copy-strong text-sm">
+                            {entry.leftLabel} vs {entry.rightLabel}
+                          </p>
+                          <p className="body-copy body-copy-faint mt-2 text-sm">
+                            Stronger choice at save time: {entry.strongerChoice}
+                          </p>
+                        </div>
+                        <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
+                          {changes.length ? `${changes.length} changes` : "no changes"}
+                        </span>
+                      </div>
+                      <div className="mt-3 grid gap-2">
+                        {changes.length ? (
+                          changes.map((change, index) => (
+                            <p key={`${entry.id}-${change.kind}-${index}`} className="body-copy body-copy-faint text-sm">
+                              <span className="body-copy-strong">{change.watchLabel}</span>: {change.summary}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="body-copy body-copy-faint text-sm">
+                            No monitored price or spec deltas are present against the current curated catalog.
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : null}
+          </section>
+        ) : null}
 
         {activeDomain === "watches" ? (
           <section className="surface-card p-5 shadow-none">

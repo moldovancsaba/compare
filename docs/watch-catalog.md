@@ -20,6 +20,7 @@ Validation currently enforces:
 - aliases must be non-empty, unique within a watch row, and unique across the catalog
 - URLs must be valid URLs
 - secondary-market dates must use `YYYY-MM-DD`
+- richer normalized watch fields such as movement family, case material, bezel type, crystal, clasp type, strap options, accuracy claim, and heritage profile remain serializable and schema-checked
 
 Maintainer check:
 

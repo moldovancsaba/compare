@@ -137,9 +137,26 @@ const analyticsEventSchema = new Schema(
   }
 );
 
+const rateLimitBucketSchema = new Schema(
+  {
+    key: { type: String, required: true, unique: true, index: true },
+    scope: { type: String, required: true, index: true },
+    count: { type: Number, required: true, default: 0 },
+    resetAt: { type: Date, required: true, index: true },
+    lastSeenAt: { type: Date, default: null }
+  },
+  {
+    collection: "rate_limit_buckets",
+    timestamps: true
+  }
+);
+
+rateLimitBucketSchema.index({ resetAt: 1 }, { expireAfterSeconds: 0 });
+
 export const CompareJobModel = models.CompareJob || model("CompareJob", compareJobSchema);
 export const ComparisonTraceModel = models.ComparisonTrace || model("ComparisonTrace", comparisonTraceSchema);
 export const SavedComparisonModel = models.SavedComparison || model("SavedComparison", savedComparisonSchema);
 export const ComparisonFeedbackModel =
   models.ComparisonFeedback || model("ComparisonFeedback", comparisonFeedbackSchema);
 export const AnalyticsEventModel = models.AnalyticsEvent || model("AnalyticsEvent", analyticsEventSchema);
+export const RateLimitBucketModel = models.RateLimitBucket || model("RateLimitBucket", rateLimitBucketSchema);

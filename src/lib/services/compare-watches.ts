@@ -1,4 +1,26 @@
 import { watchCatalog } from "@/lib/data/watch-catalog";
+import {
+  catalogEvidence,
+  collectorScore,
+  confidenceFor,
+  dailyWearScore,
+  derivedRuleEvidence,
+  displayName,
+  editorialEvidence,
+  marketPositioningEvidence,
+  missingDataEvidence,
+  movementOwnershipScore,
+  movementSummary,
+  ownershipCharacter,
+  ownershipProfileEvidence,
+  ownershipProfileSummary,
+  pickHigher,
+  pickStyleMeaning,
+  secondaryMarketEvidence,
+  toolScore,
+  valueScore,
+  versatilityScore
+} from "@/lib/domains/watch-comparison-support";
 import { analyzeWatchUpgradePath, collectionStatusFor, summarizeCollectionContext } from "@/lib/domains/watch-collection";
 import { buildWatchConsequenceProfile } from "@/lib/domains/watch-consequences";
 import { analyzeWatchDecisionIntent } from "@/lib/domains/watch-decision-intent";
@@ -8,7 +30,7 @@ import { simulateWatchOwnership } from "@/lib/domains/watch-ownership-simulator"
 import { analyzeWatchSecondaryMarket } from "@/lib/domains/watch-secondary-market";
 import { calculateWatchValueScore } from "@/lib/domains/watch-value-scoring";
 import { formatHours, formatMm, formatUsd } from "@/lib/utils/format";
-import type { EvidenceItem, EvidenceSummary, RecommendationSignal } from "@/types/comparison";
+import type { EvidenceSummary, RecommendationSignal } from "@/types/comparison";
 import type {
   BuyerRecommendation,
   ComparisonResult,
@@ -19,270 +41,6 @@ import type {
 } from "@/types/watch";
 import type { WatchCollectionProfile } from "@/types/watch-collection";
 import type { WatchDecisionIntentProfile } from "@/types/watch-decision-intent";
-
-function displayName(watch: WatchSpec): string {
-  return `${watch.brand} ${watch.model}`;
-}
-
-function catalogEvidence(watch: WatchSpec, id: string, detail: string): EvidenceItem {
-  return {
-    id: `${watch.id}:${id}`,
-    kind: "catalog_fact",
-    confidence: "high",
-    label: `${displayName(watch)} catalog facts`,
-    detail,
-    source: {
-      label: `${displayName(watch)} canonical product reference`,
-      url: watch.productUrl
-    },
-    freshness: "unknown",
-    appliesTo: [watch.id]
-  };
-}
-
-function derivedRuleEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
-  return {
-    id,
-    kind: "derived_rule",
-    confidence: "medium",
-    label,
-    detail,
-    freshness: "current",
-    appliesTo: watches.map((watch) => watch.id)
-  };
-}
-
-function editorialEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
-  return {
-    id,
-    kind: "editorial_inference",
-    confidence: "medium",
-    label,
-    detail,
-    freshness: "current",
-    appliesTo: watches.map((watch) => watch.id)
-  };
-}
-
-function missingDataEvidence(id: string, label: string, detail: string, watches: WatchSpec[]): EvidenceItem {
-  return {
-    id,
-    kind: "missing_data",
-    confidence: "low",
-    label,
-    detail,
-    freshness: "unknown",
-    appliesTo: watches.map((watch) => watch.id)
-  };
-}
-
-function pickStyleMeaning(style: WatchSpec["style"]): string {
-  switch (style) {
-    case "field":
-      return "leans more casual and instrument-like";
-    case "explorer":
-      return "wears like a one-watch minimalist sports piece";
-    case "dive":
-      return "reads as a sport watch first, even with formal clothes";
-    case "dress-sport":
-      return "bridges office and weekend better than a pure tool watch";
-  }
-}
-
-function versatilityScore(watch: WatchSpec): number {
-  let score = 0;
-
-  if (watch.style === "explorer") {
-    score += 5;
-  }
-
-  if (watch.style === "dress-sport") {
-    score += 4;
-  }
-
-  if (watch.caseDiameterMm <= 39) {
-    score += 2;
-  }
-
-  if (watch.caseThicknessMm <= 11.8) {
-    score += 2;
-  }
-
-  if (watch.lugToLugMm <= 46) {
-    score += 2;
-  }
-
-  if (!watch.dateWindow) {
-    score += 1;
-  }
-
-  return score;
-}
-
-function dailyWearScore(watch: WatchSpec): number {
-  let score = versatilityScore(watch);
-
-  if (watch.microAdjust) {
-    score += 2;
-  }
-
-  if (watch.weightFeel === "light") {
-    score += 2;
-  } else if (watch.weightFeel === "balanced") {
-    score += 1;
-  }
-
-  if (watch.powerReserveHours >= 70) {
-    score += 1;
-  }
-
-  return score;
-}
-
-function toolScore(watch: WatchSpec): number {
-  return watch.waterResistanceM / 50 + (watch.microAdjust ? 3 : 0) + (watch.weightFeel === "light" ? 1 : 0);
-}
-
-function movementOwnershipScore(watch: WatchSpec): number {
-  let score = watch.powerReserveHours / 24;
-
-  if (watch.antiMagneticGauss && watch.antiMagneticGauss >= 15000) {
-    score += 3;
-  } else if (watch.antiMagneticGauss && watch.antiMagneticGauss >= 1000) {
-    score += 1;
-  }
-
-  if (watch.frequencyVph >= 28800) {
-    score += 1;
-  }
-
-  return score;
-}
-
-function valueScore(watch: WatchSpec): number {
-  return dailyWearScore(watch) + toolScore(watch) + movementOwnershipScore(watch) - watch.msrpUsd / 3000;
-}
-
-function collectorScore(watch: WatchSpec): number {
-  let score = valueScore(watch);
-
-  if (watch.brand === "Rolex") {
-    score += 4;
-  }
-
-  if (watch.style === "explorer") {
-    score += 2;
-  }
-
-  if (watch.ownershipProfile?.resaleStability === "strong") {
-    score += 3;
-  } else if (watch.ownershipProfile?.resaleStability === "stable") {
-    score += 1;
-  }
-
-  return score;
-}
-
-function pickHigher(left: WatchSpec, right: WatchSpec, scorer: (watch: WatchSpec) => number): WatchSpec {
-  return scorer(left) >= scorer(right) ? left : right;
-}
-
-function ownershipCharacter(watch: WatchSpec): string {
-  switch (watch.style) {
-    case "field":
-      return "more expressive and tool-coded";
-    case "explorer":
-      return "quieter, easier to dress around, and more one-watch friendly";
-    case "dive":
-      return "sportier and more weekend-forward";
-    case "dress-sport":
-      return "more polished and office-to-weekend flexible";
-  }
-}
-
-function ownershipProfileSummary(watch: WatchSpec): string {
-  const profile = watch.ownershipProfile;
-
-  if (!profile) {
-    return "Structured ownership metadata is incomplete, so this claim stays lower confidence.";
-  }
-
-  return `Structured profile: ${profile.comfort} comfort, ${profile.serviceExpectation} service burden, ${profile.durability} durability, ${profile.resaleStability} resale stability, ${profile.braceletQuality} bracelet quality, and ${profile.strapVersatility} strap versatility.`;
-}
-
-function ownershipProfileEvidence(watch: WatchSpec): EvidenceItem {
-  if (!watch.ownershipProfile) {
-    return missingDataEvidence(
-      `${watch.id}:missing-ownership-profile`,
-      "Missing structured ownership profile",
-      "This watch has qualitative ownership notes but is missing structured ownership profile metadata.",
-      [watch]
-    );
-  }
-
-  return catalogEvidence(
-    watch,
-    "structured-ownership-profile",
-    "Structured ownership profile covers comfort, service burden, durability, reliability, resale, bracelet quality, and strap versatility."
-  );
-}
-
-function marketPositioningEvidence(watch: WatchSpec): EvidenceItem {
-  if (!watch.marketPositioning) {
-    return missingDataEvidence(
-      `${watch.id}:missing-market-positioning`,
-      "Missing structured market-positioning profile",
-      "This watch is missing model-level hype, collector respect, saturation, brand cachet, and substance/caution signals.",
-      [watch]
-    );
-  }
-
-  return catalogEvidence(
-    watch,
-    "structured-market-positioning",
-    "Structured market-positioning profile covers hype level, collector respect, saturation, brand cachet, substance signals, and caution signals."
-  );
-}
-
-function secondaryMarketEvidence(watch: WatchSpec): EvidenceItem {
-  if (!watch.secondaryMarket) {
-    return missingDataEvidence(
-      `${watch.id}:missing-secondary-market`,
-      "Missing secondary-market snapshot",
-      "This watch is missing a manually curated dated secondary-market snapshot.",
-      [watch]
-    );
-  }
-
-  return {
-    id: `${watch.id}:secondary-market-snapshot`,
-    kind: "external_source",
-    confidence: watch.secondaryMarket.confidence,
-    label: `${displayName(watch)} secondary-market snapshot`,
-    detail: `Estimated market price is ${formatUsd(watch.secondaryMarket.estimatedMarketPriceUsd)} as of ${watch.secondaryMarket.marketPriceDate}.`,
-    source: {
-      label: watch.secondaryMarket.sourceLabel,
-      url: watch.secondaryMarket.sourceUrl,
-      accessedAt: watch.secondaryMarket.marketPriceDate
-    },
-    freshness: analyzeWatchSecondaryMarket(watch).freshness,
-    appliesTo: [watch.id]
-  };
-}
-
-function confidenceFor(left: WatchSpec, right: WatchSpec, bestOverall: WatchSpec): ComparisonVerdict["confidence"] {
-  const gap = Math.abs(dailyWearScore(left) + valueScore(left) - (dailyWearScore(right) + valueScore(right)));
-
-  if (gap >= 6 || bestOverall.style === "explorer") {
-    return "clear";
-  }
-
-  if (gap <= 2) {
-    return "close";
-  }
-
-  return "contextual";
-}
 
 function buildVerdict(left: WatchSpec, right: WatchSpec): ComparisonVerdict {
   const dailyPick = pickHigher(left, right, dailyWearScore);
@@ -396,7 +154,7 @@ function buildKeyDifferences(left: WatchSpec, right: WatchSpec): InsightBlock[] 
     },
     {
       title: "Capability gap",
-      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve, making it ${buildWatchConsequenceProfile(longerReserve).travelReadiness}.`,
+      summary: `${displayName(moreWater)} offers the stronger hard-use spec headline with ${moreWater.waterResistanceM}m water resistance. ${displayName(longerReserve)} also wins the practical no-wear window with a ${formatHours(longerReserve.powerReserveHours)} power reserve, making it ${buildWatchConsequenceProfile(longerReserve).travelReadiness}. ${displayName(longerReserve)} movement summary: ${movementSummary(longerReserve)}`,
       evidence: [
         catalogEvidence(moreWater, "water-resistance", "Water resistance and power reserve are fixture-backed catalog attributes.")
       ]

@@ -79,7 +79,17 @@
         "scratchRisk": "Brushed Oyster surfaces hide normal wear well, while polished case accents still show desk-diving marks.",
         "enthusiastBias": "Often underrated by buyers who want canonical Rolex restraint and overrated by buyers chasing oddball scarcity.",
         "marketingReality": "The aviation story is weaker than the daily reality: this is mainly a distinctive, robust sports Rolex."
-      }
+      },
+      "movementFamily": "Rolex 32xx",
+      "caseMaterial": "steel",
+      "bezelType": "smooth",
+      "crystal": "sapphire",
+      "claspType": "Oysterclasp",
+      "strapOptions": [
+        "oyster bracelet"
+      ],
+      "accuracyClaimSecondsPerDay": "-2/+2 Superlative Chronometer",
+      "heritageProfile": "Modernized aviation-adjacent sports Rolex with Milgauss-era personality."
     },
     {
       "id": "rolex-explorer-124270",
@@ -159,7 +169,17 @@
         "scratchRisk": "Oyster bracelet wear is visible over time, but the restrained case and bezel keep scratches from becoming the whole personality.",
         "enthusiastBias": "Praised for purity by minimalists and dismissed as boring by people who want visible wrist presence.",
         "marketingReality": "The expedition mythology matters less than the fact that the watch is unusually easy to live with."
-      }
+      },
+      "movementFamily": "Rolex 32xx",
+      "caseMaterial": "steel",
+      "bezelType": "smooth",
+      "crystal": "sapphire",
+      "claspType": "Oysterclasp",
+      "strapOptions": [
+        "oyster bracelet"
+      ],
+      "accuracyClaimSecondsPerDay": "-2/+2 Superlative Chronometer",
+      "heritageProfile": "Canonical expedition Rolex with restrained one-watch heritage."
     },
     {
       "id": "tudor-black-bay-54",
@@ -238,7 +258,18 @@
         "scratchRisk": "Brushed tool-watch surfaces age honestly; the vintage styling makes normal wear feel less tragic.",
         "enthusiastBias": "Loved by proportion obsessives and sometimes dismissed by buyers who equate size with seriousness.",
         "marketingReality": "The 1954 story is less important than the unusually wearable diver proportions."
-      }
+      },
+      "movementFamily": "Tudor MT54xx",
+      "caseMaterial": "steel",
+      "bezelType": "rotating-60",
+      "crystal": "sapphire",
+      "claspType": "T-fit clasp",
+      "strapOptions": [
+        "steel bracelet",
+        "rubber strap"
+      ],
+      "accuracyClaimSecondsPerDay": "COSC chronometer",
+      "heritageProfile": "Compact vintage-coded dive watch rooted in 1950s Tudor proportions."
     },
     {
       "id": "tudor-black-bay-58",
@@ -318,7 +349,19 @@
         "scratchRisk": "Steel tool-watch finishing can take normal wear, but polished bevels and clasp marks still accumulate quickly.",
         "enthusiastBias": "Enthusiasts often forgive the bracelet because the proportions and dial are so well judged.",
         "marketingReality": "The heritage bracelet story is weaker than the daily problem of not having quick micro-adjust."
-      }
+      },
+      "movementFamily": "Tudor MT54xx",
+      "caseMaterial": "steel",
+      "bezelType": "rotating-60",
+      "crystal": "sapphire",
+      "claspType": "Folding clasp",
+      "strapOptions": [
+        "steel bracelet",
+        "fabric strap",
+        "soft-touch strap"
+      ],
+      "accuracyClaimSecondsPerDay": "COSC chronometer",
+      "heritageProfile": "Heritage diver tuned around late-1950s size cues and broad enthusiast familiarity."
     },
     {
       "id": "omega-aqua-terra-38",
@@ -398,7 +441,19 @@
         "scratchRisk": "Polished center links are the tax: they look premium in the case and collect hairlines almost immediately.",
         "enthusiastBias": "Often recommended as the rational alternative, sometimes more because of specs than emotional pull.",
         "marketingReality": "Master Chronometer matters; the yacht-deck romance matters far less than anti-magnetism and finishing."
-      }
+      },
+      "movementFamily": "Omega 88xx Co-Axial",
+      "caseMaterial": "steel",
+      "bezelType": "smooth",
+      "crystal": "sapphire",
+      "claspType": "Butterfly clasp",
+      "strapOptions": [
+        "steel bracelet",
+        "rubber strap",
+        "leather strap"
+      ],
+      "accuracyClaimSecondsPerDay": "Master Chronometer 0/+5",
+      "heritageProfile": "Modern yacht-club sport watch built around anti-magnetism and office versatility."
     },
     {
       "id": "tudor-pelagos-39",
@@ -477,7 +532,18 @@
         "scratchRisk": "Titanium marks differently from steel; it hides weight, not necessarily wear.",
         "enthusiastBias": "Praised by spec-focused collectors and sometimes undervalued by buyers who want luxury shine.",
         "marketingReality": "The professional dive language is mostly theater for desk use, but titanium comfort is genuinely meaningful."
-      }
+      },
+      "movementFamily": "Tudor MT54xx",
+      "caseMaterial": "titanium",
+      "bezelType": "rotating-60",
+      "crystal": "sapphire",
+      "claspType": "T-fit clasp",
+      "strapOptions": [
+        "titanium bracelet",
+        "rubber strap"
+      ],
+      "accuracyClaimSecondsPerDay": "COSC chronometer",
+      "heritageProfile": "Modern capability-first Tudor diver with lightweight professional-tool framing."
     }
   ]
 }

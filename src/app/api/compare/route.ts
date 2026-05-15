@@ -18,7 +18,7 @@ const requestSchema = z.object({
 export async function POST(request: Request) {
   const clientKey = resolveClientKey(request);
   const clientKeyHash = hashLogValue(clientKey);
-  const rateLimit = checkRateLimit(clientKey);
+  const rateLimit = await checkRateLimit(clientKey);
 
   if (rateLimit.limited) {
     logWarn("compare.rate_limited", {
@@ -37,7 +37,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        error: "Too many comparison requests. Wait a moment and try again."
+        error: "Too many comparison requests. Wait a moment and try again.",
+        reason: "rate_limited",
+        retryAfterSeconds: Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1000))
       },
       {
         status: 429,
@@ -76,6 +78,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error: "This comparison domain is not supported yet.",
+          reason: "unsupported_domain",
           supportedDomains: comparisonResult.supportedDomains
         },
         { status: 404 }
@@ -107,6 +110,10 @@ export async function POST(request: Request) {
         {
           error:
             "{compare} could not resolve one or both inputs in the selected comparison domain. Use one of the supported examples below or paste a matching source URL.",
+          reason:
+            comparisonResult.leftSuggestions.length === 0 && comparisonResult.rightSuggestions.length === 0
+              ? "unsupported_source"
+              : "unsupported_input",
           supportedInputs: comparisonResult.supportedInputs,
           leftSuggestions: comparisonResult.leftSuggestions,
           rightSuggestions: comparisonResult.rightSuggestions
@@ -135,7 +142,8 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "Choose two different things so the comparison surfaces meaningful tradeoffs."
+          error: "Choose two different things so the comparison surfaces meaningful tradeoffs.",
+          reason: "duplicate_entity"
         },
         { status: 400 }
       );
@@ -192,7 +200,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        error: "The comparison request was invalid. Check both inputs and try again."
+        error: "The comparison request was invalid. Check both inputs and try again.",
+        reason: "invalid_request"
       },
       { status: 400 }
     );
