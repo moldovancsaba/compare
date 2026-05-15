@@ -86,6 +86,9 @@ Current status for `v0.2.1`:
 - build: pass
 - audit: pass
 
+Verification note:
+- Quality-gate commands require installed dependencies in `node_modules`.
+
 GitHub Actions runs install, lint, test, typecheck, build, and production dependency audit gates on pushes to `main` and on pull requests.
 
 ## Documentation Map

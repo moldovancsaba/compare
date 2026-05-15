@@ -12,6 +12,3 @@ A task is complete only when all applicable items below are true in the current 
 8. If git commit, tag, push, or deployment are required, they must be explicitly executed and logged before they are claimed.
 
 For this initial baseline, git and deployment are tracked as pending until executed.
-
-Known blocker on 2026-05-11:
-- The security audit gate is not fully satisfiable on stable Next 16.2.6 because `npm audit --omit=dev` reports an upstream `postcss` vulnerability inside Next itself.

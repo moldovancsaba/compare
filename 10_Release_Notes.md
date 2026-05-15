@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Aligned smart discovery section labels, architecture documentation, adapter SDK notes, and Trinity Brain integration docs with the current domain-adapter implementation.
+- Resolved the stale release-governance blocker by restoring the local lockfile install, re-running lint, typecheck, test, build, and production audit successfully, and realigning the documentation with the verified gate status.
 
 ## v0.2.1 - 2026-05-13
 - Added deterministic watch marketing-reality analysis for myth pressure, spec inflation, supported claims, and buyer cautions across comparison and should-I-buy surfaces.

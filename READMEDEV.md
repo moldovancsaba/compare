@@ -19,6 +19,7 @@ Build and maintain {compare} as a production-grade, domain-adapter comparison pl
 7. Codex heartbeats are the orchestration layer; GitHub Actions are verification gates, not the autonomous scheduler.
 8. Autonomous agents may create commits, push verified changes directly to `origin/main`, update issues, and update docs without per-step approval. Force pushes remain disallowed.
 9. If a future task depends on missing SSOT context or unavailable credentials, record the blocker in shared memory.
+10. In a fresh or stripped workspace, run `npm ci` before interpreting missing local executables as product failures.
 
 ## Required Documents
 - [README.md](./README.md)
