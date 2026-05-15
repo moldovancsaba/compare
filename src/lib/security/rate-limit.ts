@@ -84,7 +84,13 @@ export async function checkRateLimit(
   key: string,
   options: RateLimitOptions = compareRateLimit
 ): Promise<RateLimitResult> {
-  const connection = await connectToDatabase();
+  let connection = null;
+
+  try {
+    connection = await connectToDatabase();
+  } catch {
+    return checkInMemoryRateLimit(key, options);
+  }
 
   if (!connection) {
     return checkInMemoryRateLimit(key, options);

@@ -521,6 +521,8 @@ export function ComparisonForm() {
             <h3 className="title-section mt-3">
               {errorReason === "rate_limited"
                 ? "Too many requests"
+                : errorReason === "service_unavailable"
+                  ? "Service temporarily unavailable"
                 : errorReason === "unsupported_source"
                   ? "Unsupported source URL"
                   : errorReason === "unsupported_input"

@@ -1941,6 +1941,24 @@ describe("POST /api/compare", () => {
     });
   });
 
+  it("preserves structured service-unavailable comparison errors", async () => {
+    const payload = await readComparisonResponse(
+      Response.json(
+        {
+          error: "The comparison service is temporarily unavailable. Try again in a moment.",
+          reason: "service_unavailable"
+        },
+        { status: 500 }
+      )
+    );
+
+    expect(payload).toEqual({
+      error: "The comparison service is temporarily unavailable. Try again in a moment.",
+      reason: "service_unavailable",
+      retryAfterSeconds: undefined
+    });
+  });
+
   it("handles malformed successful comparison payloads as controlled client errors", async () => {
     const payload = await readComparisonResponse(
       Response.json(

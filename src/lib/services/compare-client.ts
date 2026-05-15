@@ -25,6 +25,7 @@ export interface ComparisonErrorResponse {
     | "unsupported_source"
     | "duplicate_entity"
     | "invalid_request"
+    | "service_unavailable"
     | "unknown";
   supportedInputs?: string[];
   supportedDomains?: string[];

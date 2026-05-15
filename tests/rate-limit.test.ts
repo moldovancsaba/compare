@@ -39,6 +39,25 @@ describe("checkRateLimit", () => {
     expect(findOneAndUpdateMock).not.toHaveBeenCalled();
   });
 
+  it("falls back to in-memory limiting when the shared datastore lookup throws", async () => {
+    connectToDatabaseMock.mockRejectedValue(new Error("mongo unavailable"));
+
+    const { checkRateLimit, compareRateLimit, resetRateLimitForTests } = await import("@/lib/security/rate-limit");
+
+    resetRateLimitForTests();
+
+    for (let index = 0; index < compareRateLimit.limit; index += 1) {
+      const result = await checkRateLimit("203.0.113.213");
+
+      expect(result.limited).toBe(false);
+    }
+
+    const limited = await checkRateLimit("203.0.113.213");
+
+    expect(limited.limited).toBe(true);
+    expect(findOneAndUpdateMock).not.toHaveBeenCalled();
+  });
+
   it("uses the shared bucket when a database connection is available", async () => {
     connectToDatabaseMock.mockResolvedValue({});
     findOneAndUpdateMock.mockReturnValue({

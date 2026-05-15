@@ -193,9 +193,16 @@ textarea::placeholder {
   border-radius: 999px;
   background: var(--accent);
   color: var(--ink);
+  font-weight: 700;
+  text-shadow: none;
   transition:
     filter 150ms ease,
     opacity 150ms ease;
+}
+
+.action-button.eyebrow,
+.action-button .eyebrow {
+  color: var(--ink);
 }
 
 .action-button:hover {

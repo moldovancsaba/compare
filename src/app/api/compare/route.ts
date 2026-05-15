@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 
 import { enqueueTrinityCompareJob } from "@/lib/services/brain-queue";
-import { hashLogValue, logWarn } from "@/lib/observability/logger";
+import { hashLogValue, logError, logWarn } from "@/lib/observability/logger";
 import { recordTelemetryEvent } from "@/lib/observability/telemetry";
 import { checkRateLimit, resolveClientKey } from "@/lib/security/rate-limit";
 import { compareInputs } from "@/lib/services/compare";
@@ -187,6 +187,27 @@ export async function POST(request: Request) {
       }
     });
   } catch (error) {
+    if (!(error instanceof ZodError) && !(error instanceof SyntaxError)) {
+      logError("compare.request_failed", {
+        clientKeyHash,
+        error
+      });
+      await recordTelemetryEvent({
+        event: "compare.request_failed",
+        clientKeyHash,
+        status: "failed",
+        reason: "service_unavailable"
+      });
+
+      return NextResponse.json(
+        {
+          error: "The comparison service is temporarily unavailable. Try again in a moment.",
+          reason: "service_unavailable"
+        },
+        { status: 500 }
+      );
+    }
+
     logWarn("compare.invalid_request", {
       clientKeyHash,
       error
