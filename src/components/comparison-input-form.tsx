@@ -74,9 +74,19 @@ export function ComparisonInputForm({
 }: ComparisonInputFormProps) {
   const selectedDomain = domainOptions.find((option) => option.domain === activeDomain) ?? domainOptions[0];
   const inputHints = selectedDomain.inputHints;
+  const quickExamples = supportedInputs.slice(0, 6);
+  const remainingExamples = supportedInputs.slice(6);
+  const nextQuickFillTarget = !leftInput.trim() ? inputHints.leftLabel : !rightInput.trim() ? inputHints.rightLabel : inputHints.rightLabel;
 
   return (
     <form action={onSubmit} className="surface-form space-y-5 p-6">
+      <div className="space-y-2">
+        <p className="eyebrow">Comparison workspace</p>
+        <h2 className="title-section">What are you deciding between?</h2>
+        <p className="body-copy body-copy-faint text-sm">
+          Enter two options in the same domain. Use examples only if you need help finding supported names.
+        </p>
+      </div>
       <div>
         <label htmlFor="domain" className="eyebrow mb-2 block">
           Comparison domain
@@ -123,38 +133,104 @@ export function ComparisonInputForm({
         disabled={isPending || Boolean(validationMessage)}
         className="action-button eyebrow eyebrow-tight w-full px-5 py-4 font-semibold"
       >
-        {isPending ? "Analyzing" : "Explain the difference"}
+        {isPending ? "Analyzing" : "Get the recommendation"}
       </button>
       {validationMessage ? <p className="status-warning p-4 text-sm">{validationMessage}</p> : null}
       <p className="body-copy body-copy-faint text-sm">{inputHints.helperText}</p>
-      <div className="grid gap-3">
-        {supportedInputs.map((supportedInput) => (
-          <div key={supportedInput} className="catalog-picker-row">
-            <button
-              type="button"
-              className="catalog-picker-name body-copy-strong text-left text-sm transition"
-              onClick={() => onUseSupportedInput(supportedInput)}
-            >
-              {supportedInput}
-            </button>
-            <div className="grid grid-cols-2 gap-2">
+      <div className="space-y-3">
+        <div>
+          <p className="eyebrow mb-3">Quick examples</p>
+          <p className="body-copy body-copy-faint mb-3 text-sm">
+            Tap one to fill <span className="body-copy-strong">{nextQuickFillTarget.toLowerCase()}</span>. Tap a second
+            example to complete the pair.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {quickExamples.map((supportedInput) => (
               <button
+                key={supportedInput}
                 type="button"
-                className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
-                onClick={() => onUseAsLeft(supportedInput)}
+                className="pill-muted body-copy-strong px-4 py-2 text-sm transition"
+                onClick={() => onUseSupportedInput(supportedInput)}
               >
-                First
+                {supportedInput}
               </button>
-              <button
-                type="button"
-                className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
-                onClick={() => onUseAsRight(supportedInput)}
-              >
-                Second
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <details className="surface-item p-4">
+          <summary className="disclosure-trigger">
+            <span>Browse supported examples</span>
+            <span className="body-copy body-copy-faint text-xs">{supportedInputs.length} available</span>
+          </summary>
+          <div className="mt-4 grid gap-3">
+            <p className="body-copy body-copy-faint text-sm">
+              Use the main button to place an example automatically, or target it directly as the first or second input.
+            </p>
+            {quickExamples.map((supportedInput) => (
+              <div key={`picker-${supportedInput}`} className="catalog-picker-row">
+                <button
+                  type="button"
+                  className="catalog-picker-name body-copy-strong text-left text-sm transition"
+                  onClick={() => onUseSupportedInput(supportedInput)}
+                >
+                  {supportedInput}
+                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                    onClick={() => onUseAsLeft(supportedInput)}
+                  >
+                    First
+                  </button>
+                  <button
+                    type="button"
+                    className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                    onClick={() => onUseAsRight(supportedInput)}
+                  >
+                    Second
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {remainingExamples.length ? (
+              <div className="divider-muted pt-4">
+                <p className="eyebrow mb-3">More supported options</p>
+                <div className="grid gap-3">
+                  {remainingExamples.map((supportedInput) => (
+                    <div key={supportedInput} className="catalog-picker-row">
+                      <button
+                        type="button"
+                        className="catalog-picker-name body-copy-strong text-left text-sm transition"
+                        onClick={() => onUseSupportedInput(supportedInput)}
+                      >
+                        {supportedInput}
+                      </button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                          onClick={() => onUseAsLeft(supportedInput)}
+                        >
+                          First
+                        </button>
+                        <button
+                          type="button"
+                          className="pill-muted eyebrow eyebrow-tight px-3 py-2 text-xs transition"
+                          onClick={() => onUseAsRight(supportedInput)}
+                        >
+                          Second
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </details>
       </div>
       {error ? <p className="status-danger p-4 text-sm">{error}</p> : null}
     </form>

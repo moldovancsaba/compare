@@ -9,7 +9,7 @@ export default function HomePage() {
           <div>
             <p className="eyebrow eyebrow-xwide">{appName}</p>
             <p className="body-copy body-copy-soft mt-2 max-w-xl text-sm">
-              The shortest path to decision confidence across supported comparison domains.
+              Start with the decision. Open the deeper reasoning only when you need it.
             </p>
           </div>
           <div className="pill-muted text-accent eyebrow eyebrow-wide px-4 py-2">

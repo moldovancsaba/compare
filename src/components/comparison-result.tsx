@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { appName } from "@/lib/config/app";
 import {
   defaultWatchTradeoffScenario,
   parseWatchTradeoffScenario,
@@ -100,6 +99,33 @@ function SectionCard({
   );
 }
 
+function DisclosureSection({
+  title,
+  kicker,
+  description,
+  defaultOpen = false,
+  children
+}: {
+  title: string;
+  kicker: string;
+  description?: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <details className="surface-card p-6" open={defaultOpen}>
+      <summary className="disclosure-trigger">
+        <div>
+          <p className="eyebrow eyebrow-wide">{kicker}</p>
+          <h3 className="title-section mt-3">{title}</h3>
+          {description ? <p className="body-copy body-copy-faint mt-2 text-sm">{description}</p> : null}
+        </div>
+      </summary>
+      <div className="mt-5">{children}</div>
+    </details>
+  );
+}
+
 function BuyerCard({
   buyerType,
   pick,
@@ -166,16 +192,7 @@ function RecommendationSignalsPanel({ result }: { result: GenericComparisonResul
   }
 
   return (
-    <section className="surface-card p-6">
-      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="eyebrow eyebrow-wide">Recommendation signals</p>
-          <h3 className="title-section mt-3">What to do with the verdict</h3>
-        </div>
-        <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">{result.recommendationSignals.length} signals</span>
-      </div>
-
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {result.recommendationSignals.map((signal) => (
           <article key={`${signal.kind}-${signal.label}-${signal.pick}`} className="surface-item p-4">
             <div className="mb-3 flex flex-wrap gap-2">
@@ -191,8 +208,7 @@ function RecommendationSignalsPanel({ result }: { result: GenericComparisonResul
             <p className="body-copy body-copy-strong mt-3 text-sm">{signal.reason}</p>
           </article>
         ))}
-      </div>
-    </section>
+    </div>
   );
 }
 
@@ -314,12 +330,12 @@ function TradeoffSimulatorPanel({ result }: { result: GenericComparisonResult })
         <div>
           <p className="eyebrow eyebrow-wide">Tradeoff simulator</p>
           <h3 className="title-section mt-3">Model a different buying scenario</h3>
+          <p className="body-copy body-copy-faint mt-2 text-sm">
+            Use this only if the default recommendation is close to your real constraints.
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">watch adapter</span>
-          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">
-            tradeoff={serializeWatchTradeoffScenario(simulation.scenario)}
-          </span>
         </div>
       </div>
 
@@ -777,17 +793,30 @@ export function ComparisonResultView({
   savedComparisonPath?: string | null;
   onRefreshBrain?: () => void;
 }) {
+  const limitation =
+    result.evidenceSummary.limitations[0] ?? "No major evidence limitation is attached to this result.";
+
   return (
     <div className="space-y-8">
       <section className="surface-hero grid gap-4 p-7 layout-result-hero">
         <div>
-          <p className="eyebrow eyebrow-wide">Comparison ready</p>
+          <p className="eyebrow eyebrow-wide">Decision ready</p>
           <h2 className="title-section mt-4 text-4xl">
             {result.leftEntity.label} vs {result.rightEntity.label}
           </h2>
           <p className="body-copy mt-4 max-w-2xl">
-            {appName} turns domain consequences into a buying decision so you can stop researching and choose with less regret risk.
+            {result.verdict.headline}
           </p>
+          <p className="body-copy body-copy-soft mt-4 max-w-2xl text-sm">{result.verdict.summary}</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="pill-accent eyebrow eyebrow-tight px-4 py-2">{result.verdict.strongerChoice}</span>
+            <span className="pill-muted eyebrow eyebrow-tight px-4 py-2 capitalize">
+              {result.verdict.confidence} confidence
+            </span>
+            <span className="pill-muted eyebrow eyebrow-tight px-4 py-2 capitalize">
+              {result.evidenceSummary.dataQuality} data quality
+            </span>
+          </div>
           {savedComparisonPath ? (
             <a className="pill-accent eyebrow eyebrow-tight mt-5 inline-flex px-4 py-2" href={savedComparisonPath}>
               Open saved comparison
@@ -795,14 +824,23 @@ export function ComparisonResultView({
           ) : null}
         </div>
         <div>
-          <p className="eyebrow eyebrow-wide mb-3">{result.sectionLabels.signalVsFluff}</p>
           <div className="grid gap-3 sm:grid-cols-2">
-            {result.signalVsFluff.map((item) => (
-              <article key={item.title} className="surface-card p-4 shadow-none">
-                <p className="eyebrow">{item.title}</p>
-                <p className="body-copy body-copy-strong mt-3 text-sm">{item.summary}</p>
-              </article>
-            ))}
+            <article className="surface-card p-4 shadow-none">
+              <p className="card-kicker mb-2">Stronger choice</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.strongerChoice}</p>
+            </article>
+            <article className="surface-card p-4 shadow-none">
+              <p className="card-kicker mb-2">Exception case</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.exceptionCase}</p>
+            </article>
+            <article className="surface-card p-4 shadow-none">
+              <p className="card-kicker mb-2">Why this confidence</p>
+              <p className="body-copy body-copy-strong text-sm">{result.verdict.confidenceRationale}</p>
+            </article>
+            <article className="surface-card p-4 shadow-none">
+              <p className="card-kicker mb-2">Main caveat</p>
+              <p className="body-copy body-copy-strong text-sm">{limitation}</p>
+            </article>
           </div>
         </div>
       </section>
@@ -811,38 +849,74 @@ export function ComparisonResultView({
 
       <VerdictPanel result={result} />
 
-      <RecommendationSignalsPanel result={result} />
-
-      <TradeoffSimulatorPanel result={result} />
-
-      <EvidenceSummaryPanel result={result} />
-
-      <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
-
       <div className="grid gap-6 lg:grid-cols-2">
         <SectionCard title={result.sectionLabels.keyDifferences} items={result.keyDifferences} />
         <SectionCard title={result.sectionLabels.realWorldImpact} items={result.realWorldImpact} />
       </div>
 
-      <SectionCard title={result.sectionLabels.ownershipIntelligence} items={result.ownershipIntelligence} />
+      <DisclosureSection
+        kicker="Decision detail"
+        title="More ways to interrogate this recommendation"
+        description="Open only the layers you need instead of reading a full report every time."
+      >
+        <div className="space-y-6">
+          <div>
+            <p className="eyebrow mb-3">{result.sectionLabels.signalVsFluff}</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {result.signalVsFluff.map((item) => (
+                <article key={item.title} className="surface-item p-4">
+                  <p className="eyebrow">{item.title}</p>
+                  <p className="body-copy body-copy-strong mt-3 text-sm">{item.summary}</p>
+                </article>
+              ))}
+            </div>
+          </div>
 
-      <section className="surface-card p-6 shadow-none">
-        <div className="mb-5 flex items-center justify-between gap-4">
-          <h3 className="title-section">{result.sectionLabels.whoShouldBuyWhich}</h3>
-          <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">buyer lenses</span>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {result.whoShouldBuyWhich.map((item) => (
-            <BuyerCard key={item.buyerType} {...item} />
-          ))}
-        </div>
-      </section>
+          <div>
+            <p className="eyebrow mb-3">Recommendation signals</p>
+            <RecommendationSignalsPanel result={result} />
+          </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <SectionCard title={result.sectionLabels.overpricedFeatures} items={result.overpricedFeatures} />
-        <SectionCard title={result.sectionLabels.hiddenDownsides} items={result.hiddenDownsides} />
-        <SectionCard title={result.sectionLabels.betterValueAlternative} items={result.betterValueAlternative} />
-      </div>
+          <section className="surface-card p-6 shadow-none">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <h3 className="title-section">{result.sectionLabels.whoShouldBuyWhich}</h3>
+              <span className="pill-muted eyebrow eyebrow-tight px-3 py-1">buyer lenses</span>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {result.whoShouldBuyWhich.map((item) => (
+                <BuyerCard key={item.buyerType} {...item} />
+              ))}
+            </div>
+          </section>
+
+          <SectionCard title={result.sectionLabels.ownershipIntelligence} items={result.ownershipIntelligence} />
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            <SectionCard title={result.sectionLabels.overpricedFeatures} items={result.overpricedFeatures} />
+            <SectionCard title={result.sectionLabels.hiddenDownsides} items={result.hiddenDownsides} />
+            <SectionCard title={result.sectionLabels.betterValueAlternative} items={result.betterValueAlternative} />
+          </div>
+        </div>
+      </DisclosureSection>
+
+      <DisclosureSection
+        kicker="Scenario testing"
+        title="Model exceptions and alternate constraints"
+        description="Adjust this only when your real buying context differs from the default comparison."
+      >
+        <div className="space-y-6">
+          <TradeoffSimulatorPanel result={result} />
+          <BrainStatusCard brain={brain} isRefreshing={isBrainRefreshing} onRefresh={onRefreshBrain} />
+        </div>
+      </DisclosureSection>
+
+      <DisclosureSection
+        kicker="Trust layer"
+        title="Inspect evidence, limits, and confidence"
+        description="The recommendation should be fast to read. The support should still be easy to audit."
+      >
+        <EvidenceSummaryPanel result={result} />
+      </DisclosureSection>
 
       <FeedbackPanel brain={brain} result={result} />
     </div>

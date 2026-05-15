@@ -49,8 +49,8 @@ function hasWatchDecisionIntentProfile(profile: WatchDecisionIntentProfile): boo
 
 export function ComparisonForm() {
   const [activeDomain, setActiveDomain] = useState(defaultDomain);
-  const [leftInput, setLeftInput] = useState("Rolex Air-King");
-  const [rightInput, setRightInput] = useState("Rolex Explorer");
+  const [leftInput, setLeftInput] = useState("");
+  const [rightInput, setRightInput] = useState("");
   const [result, setResult] = useState<GenericComparisonResult | null>(null);
   const [brain, setBrain] = useState<BrainState | null>(null);
   const [savedComparisonPath, setSavedComparisonPath] = useState<string | null>(null);
