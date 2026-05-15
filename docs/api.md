@@ -327,6 +327,8 @@ Verdict values are `buy`, `consider`, and `skip`.
 
 `marketingReality` expands the same adapter-owned evidence into myth checks, spec-inflation checks, supported-claim notes, and buyer cautions. It is deterministic purchase-pressure guidance, not live owner sentiment or dealer-copy analysis.
 
+When `savedComparison.persisted` is `true`, the returned `savedComparison.path` points to a persisted `/compare/[slug]` page that emits route-specific title, description, canonical, Open Graph, and Twitter metadata for sharing and indexing.
+
 ### Error Response
 
 ```json

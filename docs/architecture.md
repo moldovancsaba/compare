@@ -50,6 +50,6 @@ The active Codex app scheduler entry is `/Users/chappie/.codex/automations/compa
 ## Current High-Risk Areas
 - Watch resolution is a trust-critical path; it now handles obvious single-token typos, but broader nickname coverage and explicit disambiguation prompts still need product work.
 - Compare API rate limiting is currently in-memory per runtime instance; move it to shared infrastructure before scaled public traffic.
-- Saved comparisons now persist submitted deterministic results and stable public routes when MongoDB is configured; the next product step is richer SEO metadata and aggregation over saved-page demand.
+- Saved comparisons now persist submitted deterministic results, stable public routes, and route-specific canonical/social metadata when MongoDB is configured; the next product step is aggregation over saved-page demand.
 - Durable telemetry currently captures compare outcomes, resolver misses, Brain polls, persistence status, and feedback signals; the next analytics step is adding product-facing aggregation views and retention policy.
 - Project board mutation depends on valid GitHub project tooling.

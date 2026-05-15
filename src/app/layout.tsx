@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Space_Grotesk } from "next/font/google";
 
-import { appName, appVersionLabel } from "@/lib/config/app";
+import { appMetadataBase, appName, appVersionLabel } from "@/lib/config/app";
 
 import "./globals.css";
 
@@ -16,6 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: appMetadataBase,
   title: appName,
   description: `${appName} ${appVersionLabel} turns supported comparison domains into verdict-led, evidence-aware decision guidance.`
 };

@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 import { ComparisonResultView } from "@/components/comparison-result";
 import { appName } from "@/lib/config/app";
+import {
+  buildSavedComparisonMetadata,
+  buildSavedComparisonStructuredData
+} from "@/lib/metadata/saved-comparison";
 import { getSavedComparisonBySlug } from "@/lib/services/saved-comparisons";
 import type { BrainConfidenceBundle, BrainState, TrinityBrainResult } from "@/types/watch";
 
@@ -12,6 +18,8 @@ type SavedComparisonPageProps = {
     slug: string;
   }>;
 };
+
+const loadSavedComparison = cache(async (slug: string) => getSavedComparisonBySlug(slug));
 
 function brainStateFromSavedComparison(
   comparisonRef: string,
@@ -46,9 +54,22 @@ function formatSavedDate(value: string | null): string {
   }).format(new Date(value));
 }
 
+export async function generateMetadata({ params }: SavedComparisonPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const savedComparison = await loadSavedComparison(slug);
+
+  if (!savedComparison) {
+    return {
+      title: `${appName} comparison not found`
+    };
+  }
+
+  return buildSavedComparisonMetadata(savedComparison);
+}
+
 export default async function SavedComparisonPage({ params }: SavedComparisonPageProps) {
   const { slug } = await params;
-  const savedComparison = await getSavedComparisonBySlug(slug);
+  const savedComparison = await loadSavedComparison(slug);
 
   if (!savedComparison) {
     notFound();
@@ -60,9 +81,15 @@ export default async function SavedComparisonPage({ params }: SavedComparisonPag
     savedComparison.brainResult,
     savedComparison.traceRef
   );
+  const structuredData = buildSavedComparisonStructuredData(savedComparison);
 
   return (
     <main className="app-shell min-h-screen">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="relative mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12 lg:px-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-6">
           <div>

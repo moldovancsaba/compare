@@ -19,7 +19,7 @@
 - Recommends smart discovery alternatives with explicit reason codes for better-value plays, role contrast, hidden-gem fit, manageable exit risk, and decision-intent fit.
 - Supports accountless watch collection profiles stored in the browser.
 - Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, market positioning, and marketing-reality checks.
-- Supports saved comparison pages when MongoDB is configured.
+- Supports saved comparison pages with route-specific metadata when MongoDB is configured.
 
 ## Live Domains
 - Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, smart discovery alternatives, collection profiles, and collector guidance.
@@ -52,9 +52,11 @@ Optional environment variables:
 MONGODB_URI=
 MONGODB_DB_NAME=compare
 COMPARE_BRAIN_PROVIDER=
+NEXT_PUBLIC_APP_ORIGIN=http://localhost:3000
 ```
 
 Use `.env.example` as the template and copy values into `.env.local` for local development. Keep `.env.example` free of real credentials.
+Set `NEXT_PUBLIC_APP_ORIGIN` to the canonical public origin so saved comparison pages emit correct canonical, Open Graph, and Twitter metadata.
 
 The app does not require MongoDB to run. Without MongoDB, `/api/compare` still returns deterministic comparison results. With MongoDB, submitted comparisons can be saved to `saved_comparisons`, feedback can be recorded, telemetry can be written, and Brain jobs can be queued.
 

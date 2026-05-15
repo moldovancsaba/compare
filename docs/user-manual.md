@@ -143,6 +143,7 @@ Without MongoDB:
 With MongoDB:
 - submitted comparisons can be saved
 - stable `/compare/[slug]` pages can be served
+- saved comparison pages emit page-specific title, description, canonical, and social metadata
 - feedback can be recorded
 - telemetry can be written
 - Brain enrichment jobs can be queued
