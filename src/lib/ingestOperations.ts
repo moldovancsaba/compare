@@ -1,5 +1,5 @@
 import type { AnyBulkWriteOperation, Db, Document } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter, normalizeCatalogProject } from "@/lib/mongodb";
 import type { Borough, Provider } from "@/types/provider";
 import type { MeetupGroup } from "@/types/meetup";
 import type { SiteDoc } from "@/types/site";
@@ -35,9 +35,24 @@ function stripId<T extends object>(doc: T): T {
   return o as T;
 }
 
+function withCatalogProject<T extends { catalogProject?: string }>(doc: T): T & { catalogProject: string } {
+  return { ...doc, catalogProject: normalizeCatalogProject(doc) } as T & { catalogProject: string };
+}
+
+function scopedIdFilter(id: string) {
+  return buildCatalogScopeFilter({ id });
+}
+
+function scopedIdFilterMap(ids: string[]) {
+  return buildCatalogScopeFilter({ id: { $in: ids } });
+}
+
 async function loadExistingProvidersById(db: Db, ids: string[]) {
   if (ids.length === 0) return new Map<string, Provider & { _id?: unknown }>();
-  const rows = (await db.collection(COL.providers).find({ id: { $in: ids } }).toArray()) as unknown as (Provider & { _id?: unknown })[];
+  const rows = (await db
+    .collection(COL.providers)
+    .find(scopedIdFilterMap(ids))
+    .toArray()) as unknown as (Provider & { _id?: unknown })[];
   return new Map(rows.map((row) => [row.id, row]));
 }
 
@@ -53,10 +68,10 @@ async function validateCatalogImageUniqueness(
   const [providers, meetups, fingerprints] = await Promise.all([
     input.providers
       ? Promise.resolve(input.providers)
-      : (db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>),
+      : (db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>),
     input.meetups
       ? Promise.resolve(input.meetups)
-      : (db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>),
+      : (db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>),
     listCatalogMediaFingerprints(db),
   ]);
   const index = buildCatalogImageUniquenessIndex({ providers, meetups, fingerprints });
@@ -85,7 +100,7 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
 
   // --- reads (return data on success) ---
   if (resource === "providers" && action === "list") {
-    const rows = (await db.collection(COL.providers).find({}).toArray()) as unknown as (Provider & {
+    const rows = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as (Provider & {
       _id?: unknown;
     })[];
     return { ok: true, data: rows.map((row) => stripId(normalizeProviderFreshness(row))) };
@@ -94,13 +109,13 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
   if (resource === "provider" && action === "get") {
     const id = op.id;
     if (typeof id !== "string" || !id) return { ok: false, error: "provider.get requires id string" };
-    const doc = (await db.collection(COL.providers).findOne({ id })) as unknown as (Provider & { _id?: unknown }) | null;
+    const doc = (await db.collection(COL.providers).findOne(scopedIdFilter(id))) as unknown as (Provider & { _id?: unknown }) | null;
     if (!doc) return { ok: false, error: "provider not found" };
     return { ok: true, data: stripId(normalizeProviderFreshness(doc)) };
   }
 
   if (resource === "meetupGroups" && action === "list") {
-    const rows = (await db.collection(COL.meetupGroups).find({}).toArray()) as unknown as (MeetupGroup & {
+    const rows = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as (MeetupGroup & {
       _id?: unknown;
     })[];
     return { ok: true, data: rows.map(stripId) };
@@ -109,7 +124,7 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
   if (resource === "meetupGroup" && action === "get") {
     const id = op.id;
     if (typeof id !== "string" || !id) return { ok: false, error: "meetupGroup.get requires id string" };
-    const doc = (await db.collection(COL.meetupGroups).findOne({ id })) as unknown as MeetupGroup | null;
+    const doc = (await db.collection(COL.meetupGroups).findOne(scopedIdFilter(id))) as unknown as MeetupGroup | null;
     if (!doc) return { ok: false, error: "meetupGroup not found" };
     return { ok: true, data: stripId(doc) };
   }
@@ -143,10 +158,10 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     const ids = documents.map((raw) => (raw as Provider).id);
     const existingById = await loadExistingProvidersById(db, ids);
     const nowIso = new Date().toISOString();
-    const meetups = (await db.collection(COL.meetupGroups).find({}).toArray()) as unknown as MeetupGroup[];
+    const meetups = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as MeetupGroup[];
     const preparedProviders = documents.map((raw) => {
       const { _id, ...rest } = raw as unknown as Provider & { _id?: unknown };
-      return withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso);
+      return withCatalogProject(withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso));
     });
     for (const provider of preparedProviders) {
       const duplicateError = await validateCatalogImageUniqueness(db, {
@@ -157,10 +172,11 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       });
       if (duplicateError) return { ok: false, error: duplicateError };
     }
-    await db.collection(COL.providers).deleteMany({});
-    await db.collection(COL.mediaFingerprints).deleteMany({ entityKind: "provider" });
+    await db.collection(COL.providers).deleteMany(buildCatalogScopeFilter({}));
+    await db.collection(COL.mediaFingerprints).deleteMany(buildCatalogScopeFilter({ entityKind: "provider" }));
     if (documents.length > 0) {
-      await db.collection(COL.providers).insertMany(preparedProviders as unknown as Document[]);
+      const scoped = preparedProviders.map(withCatalogProject);
+      await db.collection(COL.providers).insertMany(scoped as unknown as Document[]);
       for (const provider of preparedProviders) {
         await syncCatalogImageFingerprintForEntity(db, { entityKind: "provider", document: provider });
       }
@@ -183,10 +199,10 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       const meetupErr = validateMeetupDocument(rest);
       if (meetupErr) return { ok: false, error: meetupErr };
     }
-    const providers = (await db.collection(COL.providers).find({}).toArray()) as unknown as Provider[];
+    const providers = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as Provider[];
     const normalizedMeetups = documents.map((raw) => {
       const { _id, ...rest } = raw as unknown as MeetupGroup & { _id?: unknown };
-      return rest as MeetupGroup;
+      return withCatalogProject(rest) as MeetupGroup;
     });
     for (const meetup of normalizedMeetups) {
       const duplicateError = await validateCatalogImageUniqueness(db, {
@@ -197,8 +213,8 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       });
       if (duplicateError) return { ok: false, error: duplicateError };
     }
-    await db.collection(COL.meetupGroups).deleteMany({});
-    await db.collection(COL.mediaFingerprints).deleteMany({ entityKind: "meetupGroup" });
+    await db.collection(COL.meetupGroups).deleteMany(buildCatalogScopeFilter({}));
+    await db.collection(COL.mediaFingerprints).deleteMany(buildCatalogScopeFilter({ entityKind: "meetupGroup" }));
     if (documents.length > 0) {
       await db.collection(COL.meetupGroups).insertMany(normalizedMeetups as unknown as Document[]);
       for (const meetup of normalizedMeetups) {
@@ -215,7 +231,7 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     for (const id of ids) {
       if (typeof id !== "string" || !id) return { ok: false, error: "providers.deleteMany: each id must be a non-empty string" };
     }
-    const r = await db.collection(COL.providers).deleteMany({ id: { $in: ids } });
+    const r = await db.collection(COL.providers).deleteMany(scopedIdFilterMap(ids));
     return { ok: true, data: { deletedCount: r.deletedCount } };
   }
 
@@ -226,7 +242,7 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     for (const id of ids) {
       if (typeof id !== "string" || !id) return { ok: false, error: "meetupGroups.deleteMany: each id must be a non-empty string" };
     }
-    const r = await db.collection(COL.meetupGroups).deleteMany({ id: { $in: ids } });
+    const r = await db.collection(COL.meetupGroups).deleteMany(scopedIdFilterMap(ids));
     return { ok: true, data: { deletedCount: r.deletedCount } };
   }
 
@@ -251,11 +267,15 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (imgErr) return { ok: false, error: imgErr };
     const providerErr = validateProviderDocument(rest);
     if (providerErr) return { ok: false, error: providerErr };
-    const existing = (await db.collection(COL.providers).findOne({ id: rest.id })) as unknown as (Provider & { _id?: unknown }) | null;
-    const prepared = withProviderFreshness(rest as Provider, existing, new Date().toISOString());
+    const existing = (await db.collection(COL.providers).findOne(scopedIdFilter(rest.id))) as unknown as (Provider & { _id?: unknown }) | null;
+    const prepared = withProviderFreshness(withCatalogProject(rest as Provider), existing, new Date().toISOString());
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "provider", document: prepared });
     if (duplicateError) return { ok: false, error: duplicateError };
-    await db.collection(COL.providers).replaceOne({ id: rest.id }, prepared as Provider, { upsert: true });
+    await db.collection(COL.providers).replaceOne(
+      scopedIdFilter(rest.id),
+      prepared as Provider,
+      { upsert: true },
+    );
     await syncCatalogImageFingerprintForEntity(db, { entityKind: "provider", document: prepared });
     return { ok: true };
   }
@@ -267,17 +287,26 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (!isPlainObject(patchIn)) return { ok: false, error: "provider.patch requires patch object" };
     const { id: _drop, ...patch } = patchIn as { id?: string };
     if (Object.keys(patch).length === 0) return { ok: false, error: "provider.patch patch must not be empty" };
-    const cur = (await db.collection(COL.providers).findOne({ id })) as unknown as (Provider & { _id?: unknown }) | null;
+    const cur = (await db.collection(COL.providers).findOne(scopedIdFilter(id))) as unknown as (Provider & { _id?: unknown }) | null;
     const { _id: _currentId, ...currentDoc } = (cur ?? {}) as Provider & { _id?: unknown };
     const merged: Partial<Provider> = { ...currentDoc, ...patch };
     const imgErr = validateProviderImages(merged);
     if (imgErr) return { ok: false, error: imgErr };
     const providerErr = validateProviderDocument(merged);
     if (providerErr) return { ok: false, error: providerErr };
-    const prepared = withProviderFreshness(merged as Provider, cur, new Date().toISOString());
+    const prepared = withCatalogProject(withProviderFreshness(merged as Provider, cur, new Date().toISOString()));
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "provider", document: prepared });
     if (duplicateError) return { ok: false, error: duplicateError };
-    await db.collection(COL.providers).updateOne({ id }, { $set: { ...patch, publishedAt: prepared.publishedAt, updatedAt: prepared.updatedAt } });
+    await db
+      .collection(COL.providers)
+      .updateOne(scopedIdFilter(id), {
+        $set: {
+          ...patch,
+          catalogProject: prepared.catalogProject,
+          publishedAt: prepared.publishedAt,
+          updatedAt: prepared.updatedAt,
+        },
+      });
     await syncCatalogImageFingerprintForEntity(db, { entityKind: "provider", document: prepared });
     return { ok: true };
   }
@@ -285,7 +314,7 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
   if (resource === "provider" && action === "delete") {
     const id = op.id;
     if (typeof id !== "string" || !id) return { ok: false, error: "provider.delete requires id string" };
-    await db.collection(COL.providers).deleteOne({ id });
+    await db.collection(COL.providers).deleteOne(scopedIdFilter(id));
     await removeCatalogMediaFingerprintsForEntity(db, "provider", id);
     return { ok: true };
   }
@@ -298,8 +327,8 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     const ids = documents.map((raw) => (raw as Provider).id);
     const existingById = await loadExistingProvidersById(db, ids);
     const nowIso = new Date().toISOString();
-    const currentProviders = (await db.collection(COL.providers).find({}).toArray()) as unknown as Provider[];
-    const currentMeetups = (await db.collection(COL.meetupGroups).find({}).toArray()) as unknown as MeetupGroup[];
+    const currentProviders = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as Provider[];
+    const currentMeetups = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as MeetupGroup[];
     const nextProvidersById = new Map(currentProviders.map((provider) => [provider.id, provider]));
     const writes: AnyBulkWriteOperation<Document>[] = [];
     const preparedProviders: Provider[] = [];
@@ -311,12 +340,12 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       if (imgErr) return { ok: false, error: imgErr };
       const providerErr = validateProviderDocument(rest);
       if (providerErr) return { ok: false, error: providerErr };
-      const prepared = withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso);
+      const prepared = withCatalogProject(withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso));
       nextProvidersById.set(rest.id, prepared);
       preparedProviders.push(prepared);
       writes.push({
         replaceOne: {
-          filter: { id: rest.id },
+          filter: scopedIdFilter(rest.id),
           replacement: prepared as unknown as Document,
           upsert: true,
         },
@@ -348,12 +377,13 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (imgErr) return { ok: false, error: imgErr };
     const meetupErr = validateMeetupDocument(rest);
     if (meetupErr) return { ok: false, error: meetupErr };
-    const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: rest as MeetupGroup });
+    const scopedRest = withCatalogProject(rest);
+    const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: scopedRest as MeetupGroup });
     if (duplicateError) return { ok: false, error: duplicateError };
-    await db.collection(COL.meetupGroups).replaceOne({ id: rest.id }, rest as MeetupGroup, {
+    await db.collection(COL.meetupGroups).replaceOne(scopedIdFilter(rest.id), scopedRest as MeetupGroup, {
       upsert: true,
     });
-    await syncCatalogImageFingerprintForEntity(db, { entityKind: "meetupGroup", document: rest as MeetupGroup });
+    await syncCatalogImageFingerprintForEntity(db, { entityKind: "meetupGroup", document: scopedRest as MeetupGroup });
     return { ok: true };
   }
 
@@ -364,23 +394,24 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (!isPlainObject(patchIn)) return { ok: false, error: "meetupGroup.patch requires patch object" };
     const { id: _drop, ...patch } = patchIn as { id?: string };
     if (Object.keys(patch).length === 0) return { ok: false, error: "meetupGroup.patch patch must not be empty" };
-    const cur = (await db.collection(COL.meetupGroups).findOne({ id })) as unknown as MeetupGroup | null;
+    const cur = (await db.collection(COL.meetupGroups).findOne(scopedIdFilter(id))) as unknown as MeetupGroup | null;
     const merged: Partial<MeetupGroup> = { ...(cur ?? {}), ...patch };
     const imgErr = validateMeetupCover(merged);
     if (imgErr) return { ok: false, error: imgErr };
     const meetupErr = validateMeetupDocument(merged);
     if (meetupErr) return { ok: false, error: meetupErr };
-    const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: merged as MeetupGroup });
+    const scopedMerged = withCatalogProject(merged as MeetupGroup);
+    const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: scopedMerged as MeetupGroup });
     if (duplicateError) return { ok: false, error: duplicateError };
-    await db.collection(COL.meetupGroups).updateOne({ id }, { $set: patch });
-    await syncCatalogImageFingerprintForEntity(db, { entityKind: "meetupGroup", document: merged as MeetupGroup });
+    await db.collection(COL.meetupGroups).updateOne(scopedIdFilter(id), { $set: { ...patch, catalogProject: scopedMerged.catalogProject } });
+    await syncCatalogImageFingerprintForEntity(db, { entityKind: "meetupGroup", document: scopedMerged as MeetupGroup });
     return { ok: true };
   }
 
   if (resource === "meetupGroup" && action === "delete") {
     const id = op.id;
     if (typeof id !== "string" || !id) return { ok: false, error: "meetupGroup.delete requires id string" };
-    await db.collection(COL.meetupGroups).deleteOne({ id });
+    await db.collection(COL.meetupGroups).deleteOne(scopedIdFilter(id));
     await removeCatalogMediaFingerprintsForEntity(db, "meetupGroup", id);
     return { ok: true };
   }
@@ -390,8 +421,8 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (!Array.isArray(documents) || documents.length === 0) {
       return { ok: false, error: "meetupGroups.upsertMany requires non-empty documents array" };
     }
-    const currentProviders = (await db.collection(COL.providers).find({}).toArray()) as unknown as Provider[];
-    const currentMeetups = (await db.collection(COL.meetupGroups).find({}).toArray()) as unknown as MeetupGroup[];
+      const currentProviders = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as Provider[];
+    const currentMeetups = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as MeetupGroup[];
     const nextMeetupsById = new Map(currentMeetups.map((meetup) => [meetup.id, meetup]));
     const writes: AnyBulkWriteOperation<Document>[] = [];
     const normalizedMeetups: MeetupGroup[] = [];
@@ -403,12 +434,12 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       if (imgErr) return { ok: false, error: imgErr };
       const meetupErr = validateMeetupDocument(rest);
       if (meetupErr) return { ok: false, error: meetupErr };
-      const prepared = rest as MeetupGroup;
+      const prepared = withCatalogProject(rest) as MeetupGroup;
       nextMeetupsById.set(rest.id, prepared);
       normalizedMeetups.push(prepared);
       writes.push({
         replaceOne: {
-          filter: { id: rest.id },
+          filter: scopedIdFilter(rest.id),
           replacement: prepared as unknown as Document,
           upsert: true,
         },

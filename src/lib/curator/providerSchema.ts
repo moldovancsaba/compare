@@ -56,6 +56,7 @@ const recurringProgram = z
 export const curatedProviderSchema = z
   .object({
     id: z.string().min(4).max(80).regex(/^prov-[a-z0-9-]+$/),
+    catalogProject: z.string().trim().min(1).max(80).optional(),
     name: z.string().min(2).max(160),
     category,
     borough,

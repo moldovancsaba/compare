@@ -22,6 +22,10 @@ function stripQuotes(v) {
   return s;
 }
 
+function stripEscapedNewline(v) {
+  return stripQuotes(v).replace(/\\n/g, "").trim();
+}
+
 function vercel(args, timeoutMs = 120_000) {
   const env = { ...process.env, CI: "1" };
   const r = spawnSync("vercel", args, {
@@ -41,7 +45,7 @@ function vercel(args, timeoutMs = 120_000) {
 }
 
 function addSecret(name) {
-  const v = stripQuotes(process.env[name] ?? "");
+  const v = stripEscapedNewline(process.env[name] ?? "");
   if (!v) {
     console.log("skip (empty):", name);
     return;
@@ -70,7 +74,7 @@ function addSecret(name) {
 }
 
 function addPlain(name) {
-  const v = stripQuotes(process.env[name] ?? "");
+  const v = stripEscapedNewline(process.env[name] ?? "");
   if (!v) {
     console.log("skip (empty):", name);
     return;
@@ -113,6 +117,7 @@ const secrets = [
   "CURATOR_OPENAI_API_KEY",
 ];
 const plain = [
+  "MONGODB_DB_NAME",
   "MONGODB_DB",
   "CURATOR_ENABLED",
   "CURATOR_OPENAI_MODEL",

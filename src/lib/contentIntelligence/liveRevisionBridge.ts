@@ -3,7 +3,7 @@ import {
   buildMeetupLiveRevisionPayload,
   buildProviderLiveRevisionPayload,
 } from "@/lib/contentIntelligence/liveRevisionExport";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter } from "@/lib/mongodb";
 import type { Db } from "mongodb";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Provider } from "@/types/provider";
@@ -37,11 +37,11 @@ export async function createLiveListingRevisionPacket(
 
   const providerDoc =
     input.listingType === "provider"
-      ? ((await db.collection(COL.providers).findOne({ id: input.listingId })) as unknown as Provider | null)
+      ? ((await db.collection(COL.providers).findOne(buildCatalogScopeFilter({ id: input.listingId })) as unknown) as Provider | null)
       : null;
   const meetupDoc =
     input.listingType === "meetupGroup"
-      ? ((await db.collection(COL.meetupGroups).findOne({ id: input.listingId })) as unknown as MeetupGroup | null)
+      ? ((await db.collection(COL.meetupGroups).findOne(buildCatalogScopeFilter({ id: input.listingId })) as unknown) as MeetupGroup | null)
       : null;
 
   if ((input.listingType === "provider" && !providerDoc) || (input.listingType === "meetupGroup" && !meetupDoc)) {

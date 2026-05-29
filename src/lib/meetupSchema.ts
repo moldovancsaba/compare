@@ -48,6 +48,7 @@ const palette = z.enum(["teal", "orange", "beige", "charcoal"]);
 export const curatedMeetupSchema = z
   .object({
     id: z.string().min(7).max(100).regex(/^meetup-[a-z0-9-]+$/),
+    catalogProject: z.string().trim().min(1).max(80).optional(),
     name: z.string().min(2).max(160),
     borough,
     neighborhood: z.string().min(2).max(80),

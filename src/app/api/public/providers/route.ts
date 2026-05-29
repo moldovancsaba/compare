@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDb, COL } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { Provider } from "@/types/provider";
 import { normalizeProviderFreshness } from "@/lib/providerFreshness";
 import { deriveNextOccurrence } from "@/lib/providerSchedule";
@@ -15,7 +15,9 @@ export async function GET() {
   if (!db) {
     return NextResponse.json({ error: "Database not configured (MONGODB_URI)" }, { status: 503 });
   }
-  const rows = (await db.collection(COL.providers).find({}).toArray()) as unknown as (Provider & { _id?: unknown })[];
+  const rows = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as (Provider & {
+    _id?: unknown;
+  })[];
   const providers = rows
     .map((row) => {
       const normalized = normalizeProviderFreshness(row);

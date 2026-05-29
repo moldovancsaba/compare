@@ -1,4 +1,4 @@
-import { COL, getDb } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter, getDb } from "@/lib/mongodb";
 import { buildCatalogSnapshot } from "@/lib/catalogIntelligence";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Provider } from "@/types/provider";
@@ -8,8 +8,8 @@ export async function loadRangeScoutScoringContext() {
   if (!db) throw new Error("No database");
 
   const [providers, meetups] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+    db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
   ]);
 
   const snapshot = buildCatalogSnapshot(providers, providers, meetups, meetups);

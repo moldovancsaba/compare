@@ -122,6 +122,7 @@ export interface UpcomingOccurrence {
 
 export interface Provider {
   id: string;
+  catalogProject?: string;
   name: string;
   category: Category;
   borough: Borough;

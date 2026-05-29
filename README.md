@@ -35,7 +35,7 @@ npm install
 2. Configure env values in `.env.local`:
 
 - `MONGODB_URI`
-- `MONGODB_DB` optional, defaults to `rangescout`
+- `MONGODB_DB` optional, defaults to `compare`
 - `ADMIN_PASSWORD`
 - `ADMIN_SESSION_SECRET`
 - `INGEST_API_KEY`

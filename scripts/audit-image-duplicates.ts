@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import dotenv from "dotenv";
-import { getDb, COL } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import {
   buildCatalogImageUniquenessIndex,
   computePerceptualHashDistance,
@@ -28,8 +28,8 @@ async function main() {
   if (!db) throw new Error("No database connection available");
 
   const [providers, meetups, fingerprints] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+    db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
     listCatalogMediaFingerprints(db),
   ]);
 

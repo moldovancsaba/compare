@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDb, COL } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import { requireAdmin } from "@/lib/requireAdmin";
 import type { Provider } from "@/types/provider";
 import { applyIngestOperation } from "@/lib/ingestOperations";
@@ -9,7 +9,7 @@ export async function GET() {
   if (denied) return denied;
   const db = await getDb();
   if (!db) return NextResponse.json({ error: "No database" }, { status: 503 });
-  const rows = await db.collection(COL.providers).find({}).toArray();
+  const rows = await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray();
   return NextResponse.json(rows);
 }
 

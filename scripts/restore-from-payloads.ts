@@ -8,17 +8,18 @@ import path from "node:path";
 import fs from "node:fs";
 import { MongoClient } from "mongodb";
 import { applyIngestOperation } from "../src/lib/ingestOperations";
+import { getCatalogScope, getMongoDbName } from "../src/lib/mongodb";
 import payloadFiles from "./lib/payload-files.cjs";
 
 loadEnv({ path: path.join(process.cwd(), ".env") });
 loadEnv({ path: path.join(process.cwd(), ".env.local"), override: true });
 
 const uri = process.env.MONGODB_URI;
-const dbName = (process.env.MONGODB_DB_NAME ?? process.env.MONGODB_DB ?? "rangescout").trim();
 if (!uri) {
   console.error("Missing MONGODB_URI");
   process.exit(1);
 }
+const dbName = getMongoDbName();
 
 const files = payloadFiles.listPayloadFiles("catalog");
 
@@ -45,7 +46,13 @@ async function main() {
 
   const providers = await db.collection("providers").countDocuments();
   const meetups = await db.collection("meetupGroups").countDocuments();
+  const catalogScope = getCatalogScope();
   console.log(`\nDone: ${ok} ops ok, ${fail} failed. providers=${providers} meetupGroups=${meetups}`);
+  if (catalogScope.length === 1) {
+    console.log(`Catalog scope: ${catalogScope[0]}`);
+  } else {
+    console.log(`Catalog scope: ${catalogScope.join(",")}`);
+  }
   await client.close();
 }
 

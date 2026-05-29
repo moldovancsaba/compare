@@ -1,5 +1,5 @@
 import type { Db } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter } from "@/lib/mongodb";
 import { inferPublishedAt } from "@/lib/providerFreshness";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Provider } from "@/types/provider";
@@ -135,8 +135,14 @@ export async function buildCatalogWatchdogReportFromDb(
   options: { nowIso?: string; config?: Partial<CatalogWatchdogConfig> } = {},
 ) {
   const [providers, meetups] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Array<Provider & { _id?: unknown }>>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db
+      .collection(COL.providers)
+      .find(buildCatalogScopeFilter({}))
+      .toArray() as unknown as Promise<Array<Provider & { _id?: unknown }>>,
+    db
+      .collection(COL.meetupGroups)
+      .find(buildCatalogScopeFilter({}))
+      .toArray() as unknown as Promise<MeetupGroup[]>,
   ]);
   return buildCatalogWatchdogReport({
     providers,

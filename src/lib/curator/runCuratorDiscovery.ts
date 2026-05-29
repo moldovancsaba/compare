@@ -1,6 +1,6 @@
 import type { Db } from "mongodb";
 import type { Provider } from "@/types/provider";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter } from "@/lib/mongodb";
 import { applyIngestOperation } from "@/lib/ingestOperations";
 import { CURATOR_SEARCH_QUERIES } from "@/lib/curator/constants";
 import { serperSearch } from "@/lib/curator/serperSearch";
@@ -68,7 +68,7 @@ export async function runCuratorDiscovery(db: Db): Promise<CuratorDiscoveryResul
 
   const existing = (await db
     .collection(COL.providers)
-    .find({})
+    .find(buildCatalogScopeFilter({}))
     .project({ id: 1, name: 1 })
     .toArray()) as { id?: string; name?: string }[];
 

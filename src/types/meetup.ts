@@ -44,6 +44,7 @@ export type MeetupIcon =
 
 export interface MeetupGroup {
   id: string;
+  catalogProject?: string;
   name: string;
   borough: Borough;
   neighborhood: string;

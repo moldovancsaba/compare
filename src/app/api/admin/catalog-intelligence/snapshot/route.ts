@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { COL, getDb } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, COL, getDb } from "@/lib/mongodb";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { buildCatalogSnapshot } from "@/lib/catalogIntelligence";
 import type { MeetupGroup } from "@/types/meetup";
@@ -16,8 +16,8 @@ export async function GET(request: Request) {
   const origin = url.origin;
 
   const [privateProviders, privateMeetups, publicProvidersResponse, publicMeetupsResponse] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+    db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
     fetch(`${origin}/api/public/providers`, { cache: "no-store" }),
     fetch(`${origin}/api/public/meetup-groups`, { cache: "no-store" }),
   ]);

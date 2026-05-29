@@ -1,5 +1,5 @@
 import type { Db } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter, normalizeCatalogProject } from "@/lib/mongodb";
 import { syncCatalogImageFingerprintForEntity } from "@/lib/contentIntelligence/catalogImageUniqueness";
 import type { UploadedImageResult } from "@/lib/contentIntelligence/mediaPipeline";
 import type { PublishGateResult } from "@/lib/contentIntelligence/publishGate";
@@ -64,7 +64,7 @@ function inferCandidateDomainFromDraft(draftPayload: Provider | MeetupGroup) {
 
 async function verifyPrivatePublish(db: Db, entityKind: "provider" | "meetupGroup", id: string) {
   const collection = entityKind === "provider" ? COL.providers : COL.meetupGroups;
-  const doc = await db.collection(collection).findOne({ id });
+  const doc = await db.collection(collection).findOne(buildCatalogScopeFilter({ id }));
   return {
     verified: Boolean(doc),
     checkedAt: new Date().toISOString(),
@@ -189,17 +189,21 @@ export async function publishApprovedDraft(
 
   const collection = input.entityKind === "provider" ? COL.providers : COL.meetupGroups;
   const id = input.draftPayload.id;
-  await db.collection(collection).replaceOne({ id }, input.draftPayload as never, { upsert: true });
+  const draftPayload = {
+    ...input.draftPayload,
+    catalogProject: normalizeCatalogProject(input.draftPayload as { catalogProject?: string }),
+  };
+  await db.collection(collection).replaceOne(buildCatalogScopeFilter({ id }), draftPayload as never, { upsert: true });
   if (input.entityKind === "provider") {
     await syncCatalogImageFingerprintForEntity(db, {
       entityKind: "provider",
-      document: input.draftPayload as Provider,
+      document: draftPayload as Provider,
       mediaResult: input.mediaResult,
     });
   } else {
     await syncCatalogImageFingerprintForEntity(db, {
       entityKind: "meetupGroup",
-      document: input.draftPayload as MeetupGroup,
+      document: draftPayload as MeetupGroup,
       mediaResult: input.mediaResult,
     });
   }

@@ -1,5 +1,5 @@
 import type { Db } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter, normalizeCatalogProject } from "@/lib/mongodb";
 import type { UploadedImageResult } from "@/lib/contentIntelligence/mediaPipeline";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Provider } from "@/types/provider";
@@ -7,6 +7,7 @@ import type { Provider } from "@/types/provider";
 export type CatalogImageEntityKind = "provider" | "meetupGroup";
 
 export interface CatalogMediaFingerprint {
+  catalogProject?: string;
   entityKind: CatalogImageEntityKind;
   entityId: string;
   imageField: "image" | "coverImageUrl";
@@ -25,6 +26,7 @@ export interface CatalogMediaFingerprint {
 }
 
 export interface CatalogImageRemediationQueueItem {
+  catalogProject?: string;
   queueId: string;
   entityKind: CatalogImageEntityKind;
   entityId: string;
@@ -274,24 +276,33 @@ export function buildCatalogMediaFingerprintFromResult(input: {
 }
 
 export async function listCatalogMediaFingerprints(db: Db) {
-  return (await db.collection(COL.mediaFingerprints).find({}).toArray()) as unknown as CatalogMediaFingerprint[];
+  return (await db
+    .collection(COL.mediaFingerprints)
+    .find(buildCatalogScopeFilter({}))
+    .toArray()) as unknown as CatalogMediaFingerprint[];
 }
 
-export async function removeCatalogMediaFingerprintsForEntity(
-  db: Db,
-  entityKind: CatalogImageEntityKind,
-  entityId: string,
-) {
-  await db.collection(COL.mediaFingerprints).deleteMany({ entityKind, entityId });
+export async function removeCatalogMediaFingerprintsForEntity(db: Db, entityKind: CatalogImageEntityKind, entityId: string) {
+  await db
+    .collection(COL.mediaFingerprints)
+    .deleteMany(buildCatalogScopeFilter({ entityKind, entityId }));
 }
 
 export async function upsertCatalogMediaFingerprint(db: Db, record: CatalogMediaFingerprint) {
   const { createdAt, ...rest } = record;
+  const scopedRecord = {
+    ...rest,
+    catalogProject: normalizeCatalogProject(record),
+  };
   await db.collection(COL.mediaFingerprints).updateOne(
-    { entityKind: record.entityKind, entityId: record.entityId, imageField: record.imageField },
+    buildCatalogScopeFilter({
+      entityKind: scopedRecord.entityKind,
+      entityId: scopedRecord.entityId,
+      imageField: scopedRecord.imageField,
+    }),
     {
       $set: {
-        ...rest,
+        ...scopedRecord,
         refreshedAt: new Date().toISOString(),
       },
       $setOnInsert: {
@@ -357,6 +368,7 @@ export async function enqueueCatalogImageRemediation(
   const nowIso = new Date().toISOString();
   const queueId = item.queueId ?? `${item.entityKind}:${item.entityId}:${item.duplicateKind}`;
   const record: CatalogImageRemediationQueueItem = {
+    catalogProject: normalizeCatalogProject({}),
     queueId,
     status: item.status ?? "queued",
     attempts: item.attempts ?? 0,
@@ -366,7 +378,7 @@ export async function enqueueCatalogImageRemediation(
   };
   const { createdAt, ...rest } = record;
   await db.collection(COL.imageRemediationQueue).updateOne(
-    { queueId },
+    buildCatalogScopeFilter({ queueId }),
     {
       $set: {
         ...rest,
@@ -382,7 +394,11 @@ export async function enqueueCatalogImageRemediation(
 }
 
 export async function listCatalogImageRemediationQueue(db: Db) {
-  return (await db.collection(COL.imageRemediationQueue).find({}).sort({ updatedAt: -1, createdAt: -1 }).toArray()) as unknown as CatalogImageRemediationQueueItem[];
+  return (await db
+    .collection(COL.imageRemediationQueue)
+    .find(buildCatalogScopeFilter({}))
+    .sort({ updatedAt: -1, createdAt: -1 })
+    .toArray()) as unknown as CatalogImageRemediationQueueItem[];
 }
 
 export async function updateCatalogImageRemediationQueueItem(
@@ -399,6 +415,10 @@ export async function updateCatalogImageRemediationQueueItem(
     ...patch,
     updatedAt: new Date().toISOString(),
   };
-  await db.collection(COL.imageRemediationQueue).updateOne({ queueId }, { $set: nextPatch });
-  return (await db.collection(COL.imageRemediationQueue).findOne({ queueId })) as unknown as CatalogImageRemediationQueueItem | null;
+  await db
+    .collection(COL.imageRemediationQueue)
+    .updateOne(buildCatalogScopeFilter({ queueId }), { $set: nextPatch });
+  return (await db
+    .collection(COL.imageRemediationQueue)
+    .findOne(buildCatalogScopeFilter({ queueId }))) as unknown as CatalogImageRemediationQueueItem | null;
 }

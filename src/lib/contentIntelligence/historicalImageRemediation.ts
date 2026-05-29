@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import type { Db } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter, normalizeCatalogProject } from "@/lib/mongodb";
 import {
   buildCatalogImageUniquenessIndex,
   computePerceptualHashDistance,
@@ -62,8 +62,8 @@ function hashBuffer(arrayBuffer: ArrayBuffer) {
 
 async function loadCatalogSnapshot(db: Db) {
   const [providers, meetups, fingerprints] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+    db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
     listCatalogMediaFingerprints(db),
   ]);
   return { providers, meetups, fingerprints };
@@ -197,12 +197,18 @@ async function patchHistoricalEntityImage(
 ) {
   if (input.entityKind === "provider") {
     const next = withProviderFreshness({ ...input.entity, image: input.uploadedUrl }, input.entity, new Date().toISOString());
-    await db.collection(COL.providers).replaceOne({ id: next.id }, next, { upsert: true });
-    return next;
+    const scoped = { ...next, catalogProject: normalizeCatalogProject(input.entity) };
+    await db.collection(COL.providers).replaceOne(buildCatalogScopeFilter({ id: next.id }), scoped as never, { upsert: true });
+    return scoped;
   }
   const next = { ...input.entity, coverImageUrl: input.uploadedUrl };
-  await db.collection(COL.meetupGroups).replaceOne({ id: next.id }, next, { upsert: true });
-  return next;
+  const scoped = { ...next, catalogProject: normalizeCatalogProject(input.entity) };
+  await db.collection(COL.meetupGroups).replaceOne(
+    buildCatalogScopeFilter({ id: next.id }),
+    scoped as never,
+    { upsert: true },
+  );
+  return scoped;
 }
 
 export async function runHistoricalDuplicateImageRemediation(

@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
-import { COL, getDb } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, COL, getDb } from "@/lib/mongodb";
 import { listCatalogMediaFingerprints } from "@/lib/contentIntelligence/catalogImageUniqueness";
 import { prepareRangeScoutReviewPacket } from "@/lib/contentIntelligence/prepareReviewPacket";
 import { requireIngestKey } from "@/lib/requireIngestKey";
@@ -18,8 +18,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const origin = new URL(request.url).origin;
     const [providers, meetups, fingerprintRows] = await Promise.all([
-      db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-      db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+      db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+      db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
       listCatalogMediaFingerprints(db),
     ]);
 

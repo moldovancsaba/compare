@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { COL, getDb } from "@/lib/mongodb";
+import { buildCatalogScopeFilter, COL, getDb } from "@/lib/mongodb";
 import { listCatalogMediaFingerprints } from "@/lib/contentIntelligence/catalogImageUniqueness";
 import { buildDedupeIndexForGate, buildImageUniquenessIndexForGate, runRangeScoutPublishGate } from "@/lib/contentIntelligence/publishGate";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -16,8 +16,8 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const [providers, meetups, fingerprints] = await Promise.all([
-      db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-      db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+      db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+      db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
       listCatalogMediaFingerprints(db),
     ]);
     const result = await runRangeScoutPublishGate({

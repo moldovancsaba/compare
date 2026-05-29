@@ -6,12 +6,14 @@
  */
 import { config as loadEnv } from "dotenv";
 import path from "node:path";
+import { buildCatalogScopeFilter } from "../src/lib/mongodb";
 
 loadEnv({ path: path.join(process.cwd(), ".env") });
 loadEnv({ path: path.join(process.cwd(), ".env.local"), override: true });
 import { MongoClient } from "mongodb";
 import { NEIGHBORHOODS, BOROUGHS } from "../src/data/locations";
 import { DEFAULT_SITE } from "../src/types/site";
+import { getMongoDbName } from "../src/lib/mongodb";
 
 const uri = process.env.MONGODB_URI;
 if (!uri) {
@@ -19,15 +21,15 @@ if (!uri) {
   process.exit(1);
 }
 
-const dbName = (process.env.MONGODB_DB_NAME ?? process.env.MONGODB_DB ?? "rangescout").trim();
+const dbName = getMongoDbName();
 
 async function main() {
   const client = new MongoClient(uri);
   await client.connect();
   const db = client.db(dbName);
 
-  await db.collection("providers").deleteMany({});
-  await db.collection("meetupGroups").deleteMany({});
+  await db.collection("providers").deleteMany(buildCatalogScopeFilter({}));
+  await db.collection("meetupGroups").deleteMany(buildCatalogScopeFilter({}));
 
   const locs = BOROUGHS.map((borough) => ({ borough, neighborhoods: NEIGHBORHOODS[borough] }));
   await db.collection("locations").deleteMany({});

@@ -1,5 +1,5 @@
 import type { Db } from "mongodb";
-import { COL } from "@/lib/mongodb";
+import { COL, buildCatalogScopeFilter } from "@/lib/mongodb";
 import { listCatalogMediaFingerprints } from "@/lib/contentIntelligence/catalogImageUniqueness";
 import { sendChecklistDestinationOutcome } from "@/lib/contentIntelligence/checklistBridge";
 import type { UploadedImageResult } from "@/lib/contentIntelligence/mediaPipeline";
@@ -32,8 +32,8 @@ export async function runRangeScoutPublishService(
   options: { origin?: string } = {},
 ) {
   const [providers, meetups, fingerprints] = await Promise.all([
-    db.collection(COL.providers).find({}).toArray() as unknown as Promise<Provider[]>,
-    db.collection(COL.meetupGroups).find({}).toArray() as unknown as Promise<MeetupGroup[]>,
+    db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<Provider[]>,
+    db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray() as unknown as Promise<MeetupGroup[]>,
     listCatalogMediaFingerprints(db),
   ]);
 
