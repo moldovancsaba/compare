@@ -158,7 +158,7 @@ export function buildScarcityReport(
 
 export function renderScarcityMarkdown(data: ScarcityReport) {
   const lines: string[] = [];
-  lines.push("# ClassScout Scarcity Report");
+  lines.push("# RangeScout Scarcity Report");
   lines.push("");
   lines.push(`Generated: ${data.generatedAt}`);
   lines.push(`Live rows: providers=${data.providersCount}, meetupGroups=${data.meetupCount}`);

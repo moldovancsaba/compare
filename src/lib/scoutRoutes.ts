@@ -23,9 +23,30 @@ const CATEGORY_TO_SLUG: Record<Category, string> = {
   "Drop-In Activities": "hunting-grounds",
 };
 
-const SLUG_TO_CATEGORY: Record<string, Category> = Object.fromEntries(
-  Object.entries(CATEGORY_TO_SLUG).map(([category, slug]) => [slug, category as Category]),
-) as Record<string, Category>;
+const ROUTE_ALIASES: Record<string, Category | ScoutPageKey> = {
+  ...Object.fromEntries(Object.entries(CATEGORY_TO_SLUG).map(([category, slug]) => [slug, category as Category])),
+  // legacy / compatibility slugs
+  classes: "Classes",
+  "kids-classes": "Classes",
+  camps: "Camps",
+  "birthday-parties": "Birthday Parties",
+  competitions: "Birthday Parties",
+  "drop-in-activities": "Drop-In Activities",
+  "range-scout": "Camps",
+  "hunting-grounds": "Drop-In Activities",
+  "meet-up-groups": "Meet-Up Groups",
+  "sports-clubs": "Meet-Up Groups",
+  clubs: "Meet-Up Groups",
+  "this-week": "This Week",
+  saved: "Saved",
+  calculator: "Calculator",
+  "my-account": "My Account",
+  "neighborhood-guides": "Neighborhood Guide",
+  // canonical aliases
+  training: "Classes",
+};
+
+const SLUG_TO_CATEGORY = ROUTE_ALIASES as Record<string, Category | ScoutPageKey>;
 
 const VIEW_HREFS: Record<ScoutPageKey, string> = {
   Home: "/",
@@ -56,18 +77,9 @@ export function getLocalizedHrefForView(
 export function getViewFromPathname(pathname: string): ScoutPageKey {
   const normalized = stripLocaleFromPathname(pathname).replace(/\/+$/, "") || "/";
   if (normalized === "/") return "Home";
-  const slug = normalized.slice(1);
-  if (slug in SLUG_TO_CATEGORY) return SLUG_TO_CATEGORY[slug];
-  if (slug === "classes") return "Classes";
-  if (slug === "camps") return "Camps";
-  if (slug === "birthday-parties") return "Birthday Parties";
-  if (slug === "drop-in-activities") return "Drop-In Activities";
-  if (slug === "this-week") return "This Week";
-  if (slug === "clubs" || slug === "meet-up-groups") return "Meet-Up Groups";
-  if (slug === "saved") return "Saved";
-  if (slug === "calculator") return "Calculator";
-  if (slug === "my-account") return "My Account";
-  if (slug === "neighborhood-guides") return "Neighborhood Guide";
+  const slug = normalized.slice(1).toLowerCase();
+  const route = SLUG_TO_CATEGORY[slug];
+  if (route) return route as ScoutPageKey;
   return "Home";
 }
 

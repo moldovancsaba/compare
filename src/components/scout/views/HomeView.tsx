@@ -287,7 +287,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <Stack gap="sm" align="center" ta="center">
           <Title order={2}>{s.howItWorksSectionTitle}</Title>
           <Text size="sm" c="dimmed" maw={640}>
-            Use ClassScout to browse local options quickly, save strong fits, and compare plans without starting from scratch.
+            Use RangeScout to scan regional competitions, ranges, clubs, and training lanes, save your best fits, and act fast.
           </Text>
         </Stack>
         <FeatureBand

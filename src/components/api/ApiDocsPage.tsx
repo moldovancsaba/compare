@@ -134,7 +134,7 @@ const PROVIDER_FIELDS = `interface Provider {
   id: string;
   name: string;
   category: "Classes" | "Camps" | "Birthday Parties" | "Drop-In Activities";
-  borough: "Manhattan" | "Brooklyn" | "Queens" | "Bronx" | "Staten Island";
+  borough: "Germany" | "France" | "Spain" | "Italy" | "Poland";
   neighborhood: string;
   address: string;
   activityTypes: string[];
@@ -345,7 +345,7 @@ const INGEST_BATCH = `{
       "resource": "locations",
       "action": "replace",
       "locations": [
-        { "borough": "Manhattan", "neighborhoods": ["Upper West Side"] }
+        { "borough": "France", "neighborhoods": ["Brittany"] }
       ]
     }
   ]
@@ -384,7 +384,7 @@ const INGEST_OPERATION_VARIANTS = `// Single-document provider operations
 { "resource": "site", "action": "patch", "patch": { "homeHeroTitle": "New headline" } }
 { "resource": "site", "action": "put", "document": { "_id": "main", "...": "full SiteDoc" } }
 { "resource": "locations", "action": "list" }
-{ "resource": "locations", "action": "replace", "locations": [{ "borough": "Bronx", "neighborhoods": ["Riverdale"] }] }`;
+{ "resource": "locations", "action": "replace", "locations": [{ "borough": "Germany", "neighborhoods": ["Bavaria"] }] }`;
 
 const INGEST_RESPONSE = `{
   "ok": true,
@@ -404,13 +404,13 @@ const nav = [
 ];
 
 export function ApiDocsPage({ origin }: { origin: string }) {
-  const base = origin || "https://classscout.vercel.app";
+  const base = origin || "https://rangescout.vercel.app";
 
   return (
     <DocsPageShell
       title="HTTP API reference"
-      eyebrow="ClassScout NYC"
-      lead={`Catalog, machine ingest, and admin endpoints. All paths are relative to your deployment (for example ${base}).`}
+      eyebrow="RangeScout EU"
+      lead={`Catalog, machine ingest, and admin endpoints for sport shooting discovery. All paths are relative to your deployment (for example ${base}).`}
       meta={
         <Group gap="sm">
           <Button component={Link} href="/" variant="light" color="dark" size="xs">
@@ -434,7 +434,7 @@ export function ApiDocsPage({ origin }: { origin: string }) {
     >
           <Section id="overview" title="Overview">
             <p>
-              ClassScout exposes JSON APIs for the public catalog, a <strong>machine ingest</strong> pipeline secured by{" "}
+              RangeScout exposes JSON APIs for the public catalog, a <strong>machine ingest</strong> pipeline secured by{" "}
               <InlineCode>INGEST_API_KEY</InlineCode>, and{" "}
               <strong>browser session</strong> APIs for the admin console. Unless noted, request and response bodies use{" "}
               <InlineCode>application/json</InlineCode> with UTF-8.

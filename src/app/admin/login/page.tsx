@@ -38,27 +38,27 @@ export default function AdminLoginPage() {
       <Paper withBorder radius="xl" p="xl" mt="xl">
         <form onSubmit={submit}>
           <Stack gap="md">
-        <Title order={1} size="h3">
-          Class Scout Admin
-        </Title>
-        <Text size="sm" c="dimmed">
-          Use the value of <Code>ADMIN_PASSWORD</Code> from <Code>.env</Code> or <Code>.env.local</Code> locally, or from your
-          host&apos;s environment. <Code>.env.example</Code> is not loaded by the app. For local dev, run <Code>npm run
-          env:generate</Code> to write a strong password into <Code>.env.local</Code>.
-        </Text>
-        <PasswordInput
-          type="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <Button type="submit" fullWidth disabled={busy || !password} loading={busy}>
-          {busy ? "Signing in…" : "Sign in"}
-        </Button>
-        <Button component={Link} href="/" variant="subtle" color="teal" fullWidth>
-          Back to site
-        </Button>
+            <Title order={1} size="h3">
+              RangeScout Admin
+            </Title>
+            <Text size="sm" c="dimmed">
+              Use the value of <Code>ADMIN_PASSWORD</Code> from <Code>.env</Code> or <Code>.env.local</Code> locally, or from your
+              host&apos;s environment. <Code>.env.example</Code> is not loaded by the app. For local dev, run <Code>npm run
+              env:generate</Code> to write a strong password into <Code>.env.local</Code>.
+            </Text>
+            <PasswordInput
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <Button type="submit" fullWidth disabled={busy || !password} loading={busy}>
+              {busy ? "Signing in…" : "Sign in"}
+            </Button>
+            <Button component={Link} href="/" variant="subtle" color="teal" fullWidth>
+              Back to site
+            </Button>
           </Stack>
         </form>
       </Paper>

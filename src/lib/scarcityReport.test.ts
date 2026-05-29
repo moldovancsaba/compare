@@ -80,7 +80,7 @@ describe("scarcity report", () => {
   it("renders markdown with recommendations", () => {
     const markdown = renderScarcityMarkdown(buildScarcityReport(providers, meetups, { generatedAt: "2026-05-20T00:00:00.000Z" }));
 
-    expect(markdown).toContain("# ClassScout Scarcity Report");
+    expect(markdown).toContain("# RangeScout Scarcity Report");
     expect(markdown).toContain("## Recommended next focuses");
     expect(markdown).toContain("Classes / France / Brittany");
   });

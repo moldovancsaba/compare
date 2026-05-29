@@ -332,7 +332,7 @@ export default function AdminDashboard() {
         <Group justify="space-between" align="center" px="lg" py="md" gap="md" wrap="wrap">
           <Group gap="md" align="baseline">
             <Anchor component={Link} href="/" c="dark.8" underline="never">
-              <Title order={3}>Class Scout NYC</Title>
+              <Title order={3}>RangeScout EU</Title>
             </Anchor>
             <Text c="dimmed">Admin</Text>
           </Group>

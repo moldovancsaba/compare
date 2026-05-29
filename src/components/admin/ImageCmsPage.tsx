@@ -74,13 +74,13 @@ function slotKey(view: SiteLocationHeroImage["view"], borough: BoroughChoice, ne
 
 function defaultAlt(view: SiteLocationHeroImage["view"], borough: BoroughChoice, neighborhood = ""): string {
   if (neighborhood.trim()) return `${view} in ${neighborhood}`;
-  if (borough === "All") return `${view} across NYC`;
+  if (borough === "All") return `${view} across Europe`;
   return `${view} in ${borough}`;
 }
 
 function slotTitle(view: SiteLocationHeroImage["view"], borough: BoroughChoice, neighborhood = ""): string {
   if (neighborhood.trim()) return `${view} in ${neighborhood}`;
-  if (borough === "All") return `${view} across NYC`;
+  if (borough === "All") return `${view} across Europe`;
   return `${view} in ${borough}`;
 }
 
@@ -331,7 +331,7 @@ export default function ImageCmsPage() {
           <form onSubmit={signIn}>
             <Stack gap="md">
               <Title order={1} size="h3">
-                Class Scout Image CMS
+                RangeScout Image CMS
               </Title>
               <Text size="sm" c="dimmed">
                 Sign in with the admin password to edit site imagery.
@@ -506,7 +506,11 @@ export default function ImageCmsPage() {
                             <div>
                               <Text fw={600}>{item.title}</Text>
                               <Text size="sm" c="dimmed">
-                                {item.neighborhood?.trim() ? `${item.neighborhood}, ${item.borough}` : item.borough === "All" ? "All NYC" : item.borough}
+                                {item.neighborhood?.trim()
+                                  ? `${item.neighborhood}, ${item.borough}`
+                                  : item.borough === "All"
+                                    ? "All Europe"
+                                    : item.borough}
                               </Text>
                             </div>
                             {previewable(item.imageUrl) ? (

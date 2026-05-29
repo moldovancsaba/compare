@@ -141,7 +141,7 @@ export function buildCatalogAuditReport(args: {
 
 export function renderCatalogAuditMarkdown(report: CatalogAuditReport) {
   const lines: string[] = [];
-  lines.push("# ClassScout Live Catalog Audit");
+  lines.push("# RangeScout Live Catalog Audit");
   lines.push("");
   lines.push(`Generated: ${report.generatedAt}`);
   lines.push(`Live rows: providers=${report.providersCount}, meetupGroups=${report.meetupCount}`);

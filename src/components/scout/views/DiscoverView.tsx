@@ -100,7 +100,7 @@ export function DiscoverView({
     ? neighborhood
       ? `This week in ${neighborhood}`
       : borough === "All"
-        ? "This week across NYC"
+        ? "This week across Europe"
         : `This week in ${borough}`
     : neighborhood
       ? `${category ? DISPLAY_LABELS[category] : "Listings"} in ${neighborhood}`
