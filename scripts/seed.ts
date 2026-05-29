@@ -19,7 +19,7 @@ if (!uri) {
   process.exit(1);
 }
 
-const dbName = process.env.MONGODB_DB ?? "rangescout";
+const dbName = (process.env.MONGODB_DB_NAME ?? process.env.MONGODB_DB ?? "rangescout").trim();
 
 async function main() {
   const client = new MongoClient(uri);

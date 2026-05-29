@@ -7,6 +7,17 @@ export function getMongoUri(): string | undefined {
   return process.env.MONGODB_URI;
 }
 
+function resolveMongoDbName(value: string | undefined, fallback: string): string {
+  return (value ?? fallback).trim();
+}
+
+export function getMongoDbName(): string {
+  return resolveMongoDbName(
+    process.env.MONGODB_DB_NAME ?? process.env.MONGODB_DB,
+    "rangescout"
+  );
+}
+
 export async function getMongoClient(): Promise<MongoClient | null> {
   const uri = getMongoUri();
   if (!uri) return null;
@@ -19,7 +30,7 @@ export async function getMongoClient(): Promise<MongoClient | null> {
 export async function getDb(): Promise<Db | null> {
   const c = await getMongoClient();
   if (!c) return null;
-  const name = process.env.MONGODB_DB ?? "rangescout";
+  const name = getMongoDbName();
   return c.db(name);
 }
 
