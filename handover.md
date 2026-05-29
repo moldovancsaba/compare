@@ -244,3 +244,116 @@ Then set dependencies in issue body or comments (depends-on) and order by status
 2. Add dependencies in issue bodies as above.
 3. On Monday UTC start, map A into project with strict `Status=In Progress` only when previous dependency marked Done.
 
+
+## Pending GitHub Artifact Work (run in one pass once GraphQL quota is available)
+
+### Scope to execute in GitHub directly
+- [ ] Project: `PVT_kwHOACGtF84BXVW4` (`{compare} - Hungarian Shooting OS`)
+- [ ] Ensure issue dependency relationships for localization track:
+  - #80 depends on #79 and #81
+  - #81 depends on #79
+  - #82 depends on #79 and #81
+  - #83 depends on #79 and #81
+  - #84 depends on #79, #81, #82, #83, #80
+- [ ] Confirm localization labels/milestones on these issues:
+  - #79 → milestone `Phase 6 - Localization Foundation`
+  - #81 → milestone `Phase 6 - Localization Foundation`
+  - #80 → milestone `Phase 7 - Localization Delivery`
+  - #82 → milestone `Phase 7 - Localization Delivery`
+  - #83 → milestone `Phase 7 - Localization Delivery`
+  - #84 → milestone `Phase 8 - Localization Operations`
+- [ ] Update project status sequencing and execution order:
+  - 79: `In Progress (NOW)`
+  - 81: `In Progress (NOW)`
+  - 83: `Todo (NEXT)`
+  - 80: `Todo (NEXT)`
+  - 82: `Backlog (SOONER)`
+  - 84: `Roadmap (LATER)`
+  - optional: add Number field `Execution Order` in project and set: 79=1, 81=2, 80=3, 83=4, 82=5, 84=6
+
+### GraphQL mutation script (copy/paste)
+Use `gh api graphql` after token reset. This avoids manual UI drift and is safe to rerun with current IDs.
+
+```bash
+# 1) Resolve issue node IDs from REST payloads if they ever change
+for n in 79 80 81 82 83 84; do
+  node=$(gh api repos/moldovancsaba/compare/issues/$n --jq '.node_id')
+  echo "$n $node"
+done
+
+# 2) Add dependency links (issue A blockedBy issue B)
+# 79 depends on none
+# 81 depends on 79
+# 80 depends on 79 + 81
+# 82 depends on 79 + 81
+# 83 depends on 79 + 81
+# 84 depends on 79 + 81 + 80 + 82 + 83
+cat >/tmp/block.graphql <<'GQL'
+mutation($issueId: ID!, $blockingIssueId: ID!) {
+  addBlockedBy(input: { issueId: $issueId, blockingIssueId: $blockingIssueId }) {
+    issue { number title }
+    blockingIssue { number title }
+  }
+}
+GQL
+
+# replace ISSUE and BLOCKER with node IDs above
+for pair in "80 79" "80 81" "81 79" "82 79" "82 81" "83 79" "83 81" "84 79" "84 81" "84 80" "84 82" "84 83"; do
+  set -- $pair
+  issue=$1
+  blocker=$2
+  issueNode=$(gh api repos/moldovancsaba/compare/issues/$issue --jq '.node_id')
+  blockerNode=$(gh api repos/moldovancsaba/compare/issues/$blocker --jq '.node_id')
+  gh api graphql -F issueId="$issueNode" -F blockingIssueId="$blockerNode" -f query=@/tmp/block.graphql > /dev/null
+
+done
+
+# 3) Ensure labels (if missing) and attach them
+# Labels required by governance:
+for label in "initiative: localization" "track: localization" "scope: localization" "type: i18n" "priority: p1" "accessibility" "dependencies"; do
+  gh label create "$label" -R moldovancsaba/compare --force || true
+done
+
+# 4) Milestones check is already correct for current issue set, re-assert when needed
+# 79 and 81 -> 6, 80/82/83 -> 7, 84 -> 8
+
+gh issue edit 79 81 --repo moldovancsaba/compare --milestone "Phase 6 - Localization Foundation"
+gh issue edit 80 82 83 --repo moldovancsaba/compare --milestone "Phase 7 - Localization Delivery"
+gh issue edit 84 --repo moldovancsaba/compare --milestone "Phase 8 - Localization Operations"
+
+# 5) Project board execution sequencing and status values (requires item IDs)
+# Project item IDs in this run:
+# 79 -> PVTI_lAHOACGtF84BXVW4zguMZc8
+# 80 -> PVTI_lAHOACGtF84BXVW4zguMddQ
+# 81 -> PVTI_lAHOACGtF84BXVW4zguMdaY
+# 82 -> PVTI_lAHOACGtF84BXVW4zguMdcE
+# 83 -> PVTI_lAHOACGtF84BXVW4zguMdbQ
+# 84 -> PVTI_lAHOACGtF84BXVW4zguMdek
+
+# status field id = PVTF_lAHOACGtF84BXVW4zhSi3y4
+# execution order field id (after creation): from gh project field-list output (Number field)
+# options: f75ad846 Todo, 532b72d5 Backlog, 392fb27d Roadmap, 47fc9ee4 In Progress
+# sequence field (if added): create via gh project field-create then set with --number
+
+gh project field-create PVT_kwHOACGtF84BXVW4 --owner @me --name "Execution Order" --data-type number
+
+# Update execution state + order (replace item IDs if items changed):
+# set status
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMZc8 --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id 47fc9ee4
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdaY --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id 47fc9ee4
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdbQ --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id f75ad846
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMddQ --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id f75ad846
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdcE --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id 532b72d5
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdek --field-id PVTF_lAHOACGtF84BXVW4zhSi3y4 --single-select-option-id 392fb27d
+
+# set numeric execution order
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMZc8 --field-id <execution-order-field-id> --number 1
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdaY --field-id <execution-order-field-id> --number 2
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMddQ --field-id <execution-order-field-id> --number 3
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdbQ --field-id <execution-order-field-id> --number 4
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdcE --field-id <execution-order-field-id> --number 5
+gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW4zguMdek --field-id <execution-order-field-id> --number 6
+```
+
+### Conflict-safe note
+`handover.md` is a shared doc; append-only updates are preferred to full replacement so concurrent collaborators can merge with minimal conflicts.
