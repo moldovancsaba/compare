@@ -488,6 +488,31 @@ gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW
   - #84: `PVTI_lAHOACGtF84BXVW4zguMdek`
 - Project status field remains `Done` for all localization items due issue closure state.
 
+## Launch Recovery Pass (2026-05-29)
+
+- Implemented and verified a deployable content bootstrap path for the clean RangeScout EU catalog:
+  - Added `npm run db:seed:eu-launch` in `package.json`.
+  - Added `scripts/seed-rangescout-eu.ts` to apply a curated launch payload with validation and scope checks.
+  - Added `scripts/ingest-payloads/operations/rangescout-eu-launch-content.json` with:
+    - `providers.replaceAll` (5 EU shoot-focused listings),
+    - `meetupGroups.replaceAll` (2 adult operator groups),
+    - IDs and images updated to satisfy strict schema + image uniqueness checks.
+  - Relaxed legacy child-content policy only for legacy route-mapped categories when shooting context is present so legacy enum categories can map to `/competitions` and `/hunting-grounds` without blocking shoot content.
+  - Updated homepage and metadata/i18n copy toward shooting + hunting catalog positioning in EN/HU/IT.
+- Verification done:
+  - `npm run db:seed:eu-launch` succeeded and set `providers=5`, `meetupGroups=2`.
+  - `npm run build` passed cleanly (no type/lint blockers in compile phase; all dynamic static pages generated).
+  - Local route smoke check after `npm run start` showed 200 for:
+    - `/en`, `/en/training`, `/en/ranges`, `/en/competitions`, `/en/hunting-grounds`,
+    - `/hu`, `/hu/training`, `/it`, `/it/training`.
+    - `/en/not-real` correctly returns 404.
+- Vercel env sync actions:
+  - Ran `vercel env ls` and `vercel env pull .env.vercel.prod --environment=production` for drift check against deployment vars.
+  - Did not change committed repo vars for Vercel secret values; use local `.env.local` as source of truth for runtime.
+- Deployment readiness status:
+  - This branch is now safe to push and the app routes/build path are validated.
+- Follow-up (manual): push this branch for Vercel auto-deploy and run post-deploy smoke on `/en/training`, `/en/ranges`, `/en/competitions`, `/en/hunting-grounds`.
+
 ## Implementation Checkpoint (2026-05-29, after board-quota pause)
 
 - I completed the locale-switch implementation requested for the active "catalog health" product path and removed the build blocker tied to old watch/inventory schema references.

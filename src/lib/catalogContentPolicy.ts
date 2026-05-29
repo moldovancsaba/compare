@@ -99,7 +99,7 @@ function hasShootingKeyword(text: string) {
 export function isObsoleteFamilyProvider(provider: Provider) {
   const text = textTokens(provider);
   if (hasFamilyKeyword(text)) return true;
-  if (LEGACY_CHILD_CATEGORIES.has(provider.category)) return true;
+  if (LEGACY_CHILD_CATEGORIES.has(provider.category) && !hasShootingKeyword(text)) return true;
   if (hasChildAgeSignalFromProvider(provider) && !hasShootingKeyword(text)) return true;
   return false;
 }

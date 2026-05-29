@@ -38,7 +38,8 @@
     "mommypoppins:lead-export": "npx tsx scripts/export-mommypoppins-leads.ts --write-dir docs/reports",
     "checklist:mission": "npx tsx scripts/export-checklist-mission.ts --write-dir docs/reports",
     "checklist:sync": "node -r ./scripts/load-env.cjs --import tsx ./scripts/sync-checklist-mission.ts",
-    "catalog:watchdog": "npx tsx scripts/report-catalog-watchdog.ts --write-dir docs/reports"
+    "catalog:watchdog": "npx tsx scripts/report-catalog-watchdog.ts --write-dir docs/reports",
+    "db:seed:eu-launch": "npx tsx scripts/seed-rangescout-eu.ts"
   },
   "dependencies": {
     "@doneisbetter/gds-admin": "https://github.com/sovereignsquad/general-design-system/releases/download/gds-v2.6.4/doneisbetter-gds-admin-2.6.4.tgz",

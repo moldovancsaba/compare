@@ -137,7 +137,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <Stack gap="sm" align="center" ta="center">
           <Title order={2}>{s.homeCategoriesTitle}</Title>
           <Text size="sm" c="dimmed" maw={720}>
-            Start with the lane you need, then narrow by country, region, audience, and timing.
+            Discover trainers, ranges, competitions, and hunting access by country and region.
           </Text>
         </Stack>
         <SimpleGrid mt="lg" cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg">
@@ -200,7 +200,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
             </Group>
             <Text size="sm" c="dimmed">
               {borough === "All"
-                ? "Browse every country at once in Discover, or pick a country above to explore its regions."
+                ? "Browse every EU region, or pick a country above to narrow down operators and clubs."
                 : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, borough)}
             </Text>
             <Group gap="xs" wrap="wrap">
@@ -236,10 +236,10 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <section>
           <Group mb="lg" justify="space-between" align="flex-end">
             <Stack gap={4}>
-              <Title order={2}>{s.guidesSectionTitle}</Title>
-              <Text size="sm" c="dimmed">
-                Region-focused ideas for clubs, hunters, and sport shooters who want a quicker way into local picks.
-              </Text>
+            <Title order={2}>{s.guidesSectionTitle}</Title>
+            <Text size="sm" c="dimmed">
+                Region-guided recommendations for operators, hunters, and sport shooters.
+            </Text>
             </Stack>
             <Button
               variant="subtle"

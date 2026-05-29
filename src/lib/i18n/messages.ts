@@ -5,22 +5,22 @@ type LocaleRecord = Record<AppLocale, string>;
 
 const METADATA = {
   title: {
-    en: "RangeScout EU — Discover Sport Shooting Venues Across Europe",
+    en: "RANGESCOUT EU — Discover Shooting and Hunting Venues Across Europe",
     hu: "RangeScout EU — Fedezd fel a lősport helyszíneket Európában",
-    it: "RangeScout EU — Scopri i luoghi per lo shooting sport in Europa",
+    it: "RANGESCOUT EU — Scopri le migliori location per tiro sportivo e caccia in Europa",
   },
   description: {
-    en: "Curated EU sport shooting training, ranges, competitions, hunting grounds, and clubs by country and region. Save favorites and estimate costs.",
+    en: "Find curated sport shooting venues, competitions, ranges, hunting grounds, and clubs across Europe with country-first browsing for EU operators and members.",
     hu: "Összegyűjtöttünk európai lősport- és vadászati helyszíneket: tréningeket, tartózkodási helyszíneket, versenyeket és klubokat régiónként.",
-    it: "Scopri l'élite di allenamenti, poligoni, competizioni, aree venatorie e club europei per regione. Salva i preferiti e stima i costi.",
+    it: "Scopri palestre e campi per lo shooting sport, club e accessi venatori in tutta Europa con filtro per paese e regione.",
   },
   openGraphTitle: {
-    en: "RangeScout EU — Sport Shooting Directory",
+    en: "RANGESCOUT EU — Shooting & Hunting Directory",
     hu: "RangeScout EU — Lősport címtár",
-    it: "RangeScout EU — Directory dello shooting sport",
+    it: "RANGESCOUT EU — Directory sportivo venatorio",
   },
   openGraphDescription: {
-    en: "Curated EU sport shooting training, ranges, competitions, hunting grounds, and clubs by country and region.",
+    en: "A curated EU catalog of shooting training, ranges, competitions, hunting areas, and clubs arranged country-first.",
     hu: "Összegyűjtött európai lősport-térképek ország és régió szerint.",
     it: "Selezione curata di allenamenti, poligoni, competizioni, aree venatorie e club per paese e regione.",
   },
@@ -34,14 +34,14 @@ export const siteCopy = {
       it: "RangeScout EU",
     },
     brandTagline: {
-      en: "Curated shooting venues and clubs",
+      en: "Your EU catalog for shooting and hunting venues.",
       hu: "Kiválasztott lő- és vadászati helyszínek",
-      it: "Strutture e club di tiro selezionati",
+      it: "Il tuo catalogo UE per luoghi di tiro e caccia",
     },
     brandSubtitle: {
-      en: "Fast country-first browsing for training, ranges, competitions, hunting grounds, and clubs.",
-      hu: "Gyors, ország szerint felépülő böngészés tréningekhez, pályákhoz, versenyekhez, vadászati helyekhez és klubokhoz.",
-      it: "Navigazione rapida per paese per sessioni, campi da tiro, gare, aree venatorie e club.",
+      en: "Rangescout EU — Fast, country-first browsing for training, ranges, competitions, hunting access, and clubs.",
+      hu: "RANGESCOUT EU\nGyors, ország szerint felépülő böngészés tréningekhez, pályákhoz, versenyekhez, vadászati helyekhez és klubokhoz.",
+      it: "Rangescout EU — Navigazione rapida per paese per allenamenti, poligoni, gare, accessi venatori e club.",
     },
   },
   sidebar: {
