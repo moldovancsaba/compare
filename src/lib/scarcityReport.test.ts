@@ -6,10 +6,10 @@ import type { Provider } from "@/types/provider";
 const providers: Provider[] = [
   {
     id: "prov-1",
-    name: "Queens Camp",
+    name: "Bavaria Camp",
     category: "Camps",
-    borough: "Queens",
-    neighborhood: "Astoria",
+    borough: "Germany",
+    neighborhood: "Bavaria",
     address: "1 Example St",
     activityTypes: ["Sports"],
     ageRanges: ["6–8"],
@@ -27,10 +27,10 @@ const providers: Provider[] = [
   },
   {
     id: "prov-2",
-    name: "Brooklyn Birthday",
+    name: "Catalonia Birthday",
     category: "Birthday Parties",
-    borough: "Brooklyn",
-    neighborhood: "DUMBO",
+    borough: "Spain",
+    neighborhood: "Catalonia",
     address: "2 Example St",
     activityTypes: ["Art"],
     ageRanges: ["3–5"],
@@ -51,9 +51,9 @@ const providers: Provider[] = [
 const meetups: MeetupGroup[] = [
   {
     id: "meetup-1",
-    name: "Queens Parents",
-    borough: "Queens",
-    neighborhood: "Astoria",
+    name: "Bavaria Parents",
+    borough: "Germany",
+    neighborhood: "Bavaria",
     groupType: "Parent Meetup",
     ageRange: "All ages",
     cadence: "Monthly",
@@ -82,6 +82,6 @@ describe("scarcity report", () => {
 
     expect(markdown).toContain("# ClassScout Scarcity Report");
     expect(markdown).toContain("## Recommended next focuses");
-    expect(markdown).toContain("Classes / Bronx");
+    expect(markdown).toContain("Classes / France / Brittany");
   });
 });

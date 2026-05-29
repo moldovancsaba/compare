@@ -4,27 +4,27 @@ import { getDiscoverHref, parseDiscoverState } from "@/lib/scoutRoutes";
 describe("scoutRoutes", () => {
   it("serializes and parses discover state with query, sort, and date mode", () => {
     const href = getDiscoverHref("This Week", {
-      borough: "Queens",
-      neighborhood: "Astoria",
-      filters: { ages: ["3–5"], times: ["Weekend"], activity: "Art" },
+      borough: "Germany",
+      neighborhood: "Bavaria",
+      filters: { ages: ["Beginner"], times: ["Weekend"], activity: "Rifle" },
       q: "robotics",
       sort: "upcoming",
       dateMode: "this-week",
     });
 
-    const params = new URL(href, "https://classscout.vercel.app").searchParams;
+    const params = new URL(href, "https://rangescout.example.com").searchParams;
     const parsed = parseDiscoverState(params);
     expect(parsed).toMatchObject({
-      borough: "Queens",
-      neighborhood: "Astoria",
+      borough: "Germany",
+      neighborhood: "Bavaria",
       q: "robotics",
       sort: "upcoming",
       dateMode: "this-week",
     });
     expect(parsed.filters).toEqual({
-      ages: ["3–5"],
+      ages: ["Beginner"],
       times: ["Weekend"],
-      activity: "Art",
+      activity: "Rifle",
     });
   });
 });
