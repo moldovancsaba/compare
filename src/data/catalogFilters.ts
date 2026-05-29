@@ -24,4 +24,4 @@ export const ACTIVITY_TYPES = [
 
 export const AGE_RANGES: AgeRange[] = ["Youth", "Beginner", "Licensed Adult", "Competition", "Hunter Prep"];
 
-export const DAY_TIME_TAGS: DayTimeTag[] = ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "Seasonal"];
+export const DAY_TIME_TAGS: DayTimeTag[] = ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "Seasonal", "After-school"];

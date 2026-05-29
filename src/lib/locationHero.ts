@@ -63,6 +63,10 @@ const BOROUGH_THEMES: Record<Borough, BoroughTheme> = {
     landmark: "Training grounds + membership clubs",
     boroughLine: "Fast-growing sport shooting infrastructure with accessible training and practical licensing lanes.",
   },
+  HU: {
+    landmark: "Budapest clubs + county circuits",
+    boroughLine: "PractiScore-ready competition and training surface with cross-discipline operator mix and practical membership pathways.",
+  },
 };
 
 const CATEGORY_LINES: Record<HeroKind, { eyebrow: string; cityTitle: string; cityDescription: string }> = {

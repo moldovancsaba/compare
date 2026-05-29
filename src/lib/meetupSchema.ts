@@ -1,11 +1,48 @@
 import { z } from "zod";
 import { isImgBbHttpsImageUrl } from "@/lib/imgbbUrl";
 
-const borough = z.enum(["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"]);
-const groupType = z.enum(["Parent Meetup", "Mom Group", "Playdate Group", "New Parents", "Neighborhood Families"]);
-const ageRange = z.enum(["0–2", "0–3", "0–5", "0–6", "2–5", "2–8", "3–5", "All ages"]);
-const cadence = z.enum(["Weekly", "Monthly", "Weekend", "Pop-up"]);
-const icon = z.enum(["stroller", "skyline", "heart", "coffee", "playground", "community"]);
+const borough = z.enum([
+  "Manhattan",
+  "Brooklyn",
+  "Queens",
+  "Bronx",
+  "Staten Island",
+  "Germany",
+  "France",
+  "Spain",
+  "Italy",
+  "Poland",
+  "HU",
+]);
+const groupType = z.enum([
+  "Parent Meetup",
+  "Mom Group",
+  "Playdate Group",
+  "New Parents",
+  "Neighborhood Families",
+  "Sport Shooting Club",
+  "Hunting Association",
+  "IPSC Team",
+  "Clay Club",
+  "Airgun Academy",
+]);
+const ageRange = z.enum([
+  "0–2",
+  "0–3",
+  "0–5",
+  "0–6",
+  "2–5",
+  "2–8",
+  "3–5",
+  "All ages",
+  "Youth",
+  "Beginner",
+  "Licensed Adult",
+  "Competition",
+  "All levels",
+]);
+const cadence = z.enum(["Weekly", "Monthly", "Weekend", "Pop-up", "Seasonal", "Competition Calendar"]);
+const icon = z.enum(["stroller", "skyline", "heart", "coffee", "playground", "community", "target", "forest", "shield", "trophy", "scope"]);
 const palette = z.enum(["teal", "orange", "beige", "charcoal"]);
 
 export const curatedMeetupSchema = z

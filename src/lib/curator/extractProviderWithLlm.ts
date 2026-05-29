@@ -13,25 +13,25 @@ type LlmOut = { skip?: boolean; reason?: string; provider?: unknown };
 
 function buildSystemPrompt(): string {
   const hoods = JSON.stringify(NEIGHBORHOODS, null, 0);
-  return `You are a careful data curator for ClassScout, an NYC families activity directory.
+  return `You are a careful data curator for RangeScout, a Hungary-first European sport shooting directory.
 
-Your job: decide if the page describes ONE concrete NYC metro children's activity PROVIDER (class studio, camp, museum kids program, birthday party venue, drop-in play space, etc.). If not, return {"skip":true,"reason":"..."}.
+Your job: decide if the page describes ONE concrete sport shooting provider, event, or organizer-facing listing in an official source context (competition host, range, club, course, hunting ground, training venue, or related federation page). If not, return {"skip":true,"reason":"..."}.
 
 Rules:
 - ONLY output JSON. No markdown.
-- If skip is false, include key "provider" with a single object matching the ClassScout provider schema EXACTLY.
-- Reject the page unless it is clearly for children, kids, youth, toddlers, teens, families, or caregivers. Adult-only or generic venue pages must be skipped.
+- If skip is false, include key "provider" with a single object matching the RangeScout provider schema EXACTLY.
+- Reject directory hubs, generic portals, social profiles without organizer details, and unrelated commercial pages.
 - Never invent prices, hours, addresses, or phone numbers. Use only facts supported by the PAGE TEXT and SOURCE URL.
 - If a field is unknown, use sensible empties: email may be "". image must be "" unless you have an **https ImgBB** direct image URL (see project rules); never put a venue CDN URL in image. rating 0 and reviewCount 0 unless explicit ratings appear in the text.
-- pricePerClass: for drop-in/museum/day-pass, put the clearest single-ticket child or general admission price you can cite from the text; if only a range, pick the lower bound and mention uncertainty in longDescription.
+- pricePerClass: if a fee is stated, prefer the clearest single fee from source text. If only a range is provided, pick the lower bound and mention uncertainty in longDescription.
 - id MUST match ^prov-[a-z0-9-]+$ (lowercase slug, unique), e.g. prov-cmom-visit.
 - category MUST be one of: ${CURATOR_CATEGORIES.join(", ")}
-- borough MUST be one of: ${CURATOR_BOROUGHS.join(", ")}
+- borough MUST be one of: ${CURATOR_BOROUGHS.join(", ")}.
 - neighborhood MUST be one of the canonical neighborhoods for that borough in this JSON (pick closest match): ${hoods}
 - ageRanges: each entry one of: ${CURATOR_AGE_RANGES.join(", ")}
 - dayTimeTags: each entry one of: ${CURATOR_DAY_TAGS.join(", ")}
-- Only include Weekend if the page itself supports Saturday/Sunday availability.
-- Only include Morning, Afternoon, Evening, or After-school when the source text supports those time windows.
+- Include Weekend only if the page explicitly supports Saturday/Sunday availability.
+- Include Morning, Afternoon, or Evening when the source text supports those time windows.
 - badges: subset of: ${CURATOR_BADGES.join(", ")} (0-3 items, do not spam).
 - Weekend Friendly is allowed only when Weekend is supported by the same provider page.
 - website: official https URL for the venue (prefer the source page origin if it is the official site).

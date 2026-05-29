@@ -1,4 +1,4 @@
-const DEFAULT_USER_AGENT = "ClassScoutResearchBot/1.0 (+https://classscout.vercel.app)";
+const DEFAULT_USER_AGENT = "RangeScoutResearchBot/1.0 (+https://rangescout.vercel.app)";
 
 export function slugify(value: string) {
   return value

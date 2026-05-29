@@ -1,4 +1,4 @@
-import { NEIGHBORHOODS } from "@/data/locations";
+import { BOROUGHS, NEIGHBORHOODS } from "@/data/locations";
 import { validateMeetupDocument } from "@/lib/meetupValidation";
 import { validateProviderDocument } from "@/lib/providerValidation";
 import type { CuratedMeetup } from "@/lib/meetupSchema";
@@ -83,14 +83,25 @@ const FEATURED_BADGES: FeaturedBadge[] = [
   "Popular",
   "New",
   "Staff Pick",
-  "Great for Toddlers",
+  "Competition Ready",
   "Weekend Friendly",
   "Beginner Friendly",
   "Licence Support",
 ];
-const MEETUP_GROUP_TYPES: MeetupGroupType[] = ["Parent Meetup", "Mom Group", "Playdate Group", "New Parents", "Neighborhood Families"];
-const MEETUP_CADENCES: MeetupCadence[] = ["Weekly", "Monthly", "Weekend", "Pop-up"];
-const MEETUP_ICONS: MeetupIcon[] = ["stroller", "skyline", "heart", "coffee", "playground", "community"];
+const MEETUP_GROUP_TYPES: MeetupGroupType[] = [
+  "Parent Meetup",
+  "Mom Group",
+  "Playdate Group",
+  "New Parents",
+  "Neighborhood Families",
+  "Sport Shooting Club",
+  "Hunting Association",
+  "IPSC Team",
+  "Clay Club",
+  "Airgun Academy",
+];
+const MEETUP_CADENCES: MeetupCadence[] = ["Weekly", "Monthly", "Weekend", "Pop-up", "Seasonal", "Competition Calendar"];
+const MEETUP_ICONS: MeetupIcon[] = ["stroller", "skyline", "heart", "coffee", "playground", "community", "target", "forest", "shield", "trophy", "scope"];
 
 function slugify(value: string) {
   return value
@@ -103,20 +114,7 @@ function slugify(value: string) {
 
 function normalizeBorough(value?: string): Borough | null {
   const normalized = (value ?? "").trim().toLowerCase();
-  const supported: Borough[] = [
-    "Manhattan",
-    "Brooklyn",
-    "Queens",
-    "Bronx",
-    "Staten Island",
-    "Germany",
-    "France",
-    "Spain",
-    "Italy",
-    "Poland",
-  ];
-
-  return supported.find((item) => item.toLowerCase() === normalized) ?? null;
+  return BOROUGHS.find((item) => item.toLowerCase() === normalized) ?? null;
 }
 
 function normalizeNeighborhood(borough: Borough | null, value?: string) {
@@ -130,6 +128,33 @@ function resolveCategory(value?: string): Category | null {
 
 function normalizeAgeRanges(values?: string[]) {
   return (values ?? []).filter((value): value is AgeRange => AGE_RANGES.includes(value as AgeRange));
+}
+
+function inferMeetupGroupType(input: NormalizedListingInput): MeetupGroupType {
+  const searchable = [input.title, input.categoryHint, ...(input.activityTypesRaw ?? []), ...(input.descriptionFacts ?? [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  if (/\b(sport shooting|ipsc|competition|match|cup|range)\b/.test(searchable)) return "Sport Shooting Club";
+  if (/\b(hunting|forest|wild|venison)\b/.test(searchable)) return "Hunting Association";
+  if (/\bipsc/.test(searchable)) return "IPSC Team";
+  if (/\bclay|skeet|trap|shotgun/.test(searchable)) return "Clay Club";
+  if (/\bairgun/.test(searchable)) return "Airgun Academy";
+  if (/\bclub|association|team/.test(searchable)) return "Sport Shooting Club";
+  return MEETUP_GROUP_TYPES.includes("Neighborhood Families") ? "Neighborhood Families" : "Parent Meetup";
+}
+
+function inferMeetupIcon(input: NormalizedListingInput): MeetupIcon {
+  const searchable = [input.title, ...(input.activityTypesRaw ?? []), ...(input.descriptionFacts ?? [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  if (/\bcompetition|match|cup/.test(searchable)) return "trophy";
+  if (/\bipsc|target/.test(searchable)) return "target";
+  if (/\bhunting|outdoor|forest/.test(searchable)) return "forest";
+  if (/\bdefens|idpa|practical/.test(searchable)) return "shield";
+  if (/\bteam|association|club/.test(searchable)) return "scope";
+  return "community";
 }
 
 function deriveScheduleSignals(scheduleBlocks: NormalizedScheduleBlock[]) {
@@ -254,6 +279,8 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
   const scheduleSignals = deriveScheduleSignals(input.scheduleBlocks ?? []);
   const activityTypes = (input.activityTypesRaw ?? []).filter(Boolean);
   const image = input.imageCandidates?.find((candidate) => candidate.uploadedUrl)?.uploadedUrl ?? "";
+  const baseDescription = input.descriptionFacts?.join(" ") || `${input.title.trim()} is an officially sourced compare listing in ${neighborhood}.`;
+  const longDescription = `${baseDescription} ${input.title.trim()} supports verified schedule and contact details captured from the source.`.slice(0, 140);
 
   return {
     id: `prov-${slugify(input.title)}`,
@@ -267,7 +294,7 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
     dayTimeTags: scheduleSignals.timeTags,
     pricePerClass: 0,
     shortDescription: (input.descriptionFacts?.[0] ?? `${input.title.trim()} in ${neighborhood}.`).slice(0, 400),
-    longDescription: input.descriptionFacts?.join(" ") || `${input.title.trim()} is an officially sourced compare listing in ${neighborhood}.`,
+    longDescription: longDescription.length >= 40 ? longDescription : `${longDescription} This listing includes verified discovery metadata.`,
     rating: 0,
     reviewCount: 0,
     badges: scheduleSignals.badges.filter((badge): badge is FeaturedBadge => FEATURED_BADGES.includes(badge)),
@@ -282,15 +309,19 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
 function resolveMeetupDraft(input: NormalizedListingInput): CuratedMeetup {
   const borough = normalizeBorough(input.boroughRaw) ?? "Germany";
   const neighborhood = normalizeNeighborhood(borough, input.neighborhoodRaw) ?? NEIGHBORHOODS[borough][0];
-  const icon = input.activityTypesRaw?.some((item) => item.toLowerCase().includes("play")) ? "playground" : "community";
-  const cadence = buildRecurringPrograms(input).some((program) => program.cadence === "Weekends") ? "Weekend" : "Weekly";
+  const groupType = inferMeetupGroupType(input);
+  const icon = inferMeetupIcon(input);
+  const recurringPrograms = buildRecurringPrograms(input);
+  const hasRecurring = recurringPrograms.length > 0;
+  const recurringContainsWeekends = recurringPrograms.some((program) => program.cadence === "Weekends");
+  const cadence = recurringContainsWeekends ? "Weekend" : hasRecurring ? "Weekly" : "Weekly";
 
   return {
     id: `meetup-${slugify(input.title)}`,
     name: input.title.trim(),
     borough: borough as never,
     neighborhood: neighborhood as never,
-    groupType: MEETUP_GROUP_TYPES.includes("Neighborhood Families") ? "Neighborhood Families" : "Parent Meetup",
+    groupType,
     ageRange: normalizeAgeRanges(input.ageRangesRaw)[0] === "0–2" ? "0–2" : "0–5",
     cadence: MEETUP_CADENCES.includes(cadence) ? cadence : "Weekly",
     instagram: input.contactFacts?.instagram ?? "",

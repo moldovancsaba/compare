@@ -91,10 +91,12 @@ function scoreAuthority(url: URL) {
   if (
     host.endsWith(".org") ||
     host.endsWith(".gov") ||
-    host.endsWith(".nyc") ||
-    host.includes("ymca") ||
-    host.includes("museum") ||
-    host.includes("library")
+    host.includes(".hu") ||
+    host.includes("mssz") ||
+    host.includes("mdlsz") ||
+    host.includes("ipsc") ||
+    host.includes("idpa") ||
+    host.includes("practiscore")
   ) {
     return { grade: "official" as const, score: 95 };
   }
@@ -105,7 +107,7 @@ function scoreAuthority(url: URL) {
 }
 
 function inferListingKind(text: string) {
-  if (/\b(parent meetup|playdate group|mom group|new parents|family meetup)\b/i.test(text)) {
+  if (/\b(club|association|meetup|group|hunting|shooting team|competitor)\b/i.test(text)) {
     return "meetupGroup" as const;
   }
   return "provider" as const;
@@ -113,32 +115,32 @@ function inferListingKind(text: string) {
 
 function inferCategory(text: string, targetCategory: string) {
   const hay = text.toLowerCase();
-  if (hay.includes("birthday")) return "Birthday Parties";
-  if (hay.includes("camp")) return "Camps";
-  if (hay.includes("drop-in") || hay.includes("open play") || hay.includes("drop in")) return "Drop-In Activities";
+  if (hay.includes("cup") || hay.includes("match") || hay.includes("tournament") || hay.includes("competition")) {
+    return "Birthday Parties";
+  }
+  if (hay.includes("range") || hay.includes("facility")) {
+    return "Camps";
+  }
+  if (hay.includes("hunting") || hay.includes("hunt") || hay.includes("field") || hay.includes("club")) {
+    return "Drop-In Activities";
+  }
+  if (hay.includes("course") || hay.includes("training") || hay.includes("class")) {
+    return "Classes";
+  }
   if (targetCategory === "Meet-Up Groups") return "Meet-Up Groups";
   return "Classes";
 }
 
 const ACTIVITY_KEYWORDS: Record<string, string[]> = {
-  Sports: ["sport", "athletic"],
-  Dance: ["dance", "ballet", "hip hop"],
-  Gymnastics: ["gymnastics"],
-  Art: ["art", "painting", "drawing", "craft"],
-  Music: ["music", "sing", "piano", "guitar", "drum"],
-  STEM: ["stem", "robot", "coding", "engineering"],
-  "Martial Arts": ["martial arts", "karate", "taekwondo", "mma", "jiu jitsu"],
-  Swimming: ["swim", "swimming", "aquatic"],
-  Theater: ["theater", "theatre", "acting", "drama"],
-  Language: ["spanish", "language", "mandarin", "bilingual"],
-  Tutoring: ["tutoring", "academic support"],
-  "Indoor Play": ["indoor play", "play space", "open play"],
-  "Outdoor Activities": ["outdoor", "park", "garden"],
-  Yoga: ["yoga"],
-  Soccer: ["soccer"],
-  Basketball: ["basketball"],
-  Science: ["science"],
-  "Birthday Entertainment": ["birthday"],
+  Rifle: ["rifle", "precision rifle", "small-bore", "air rifle", "long range"],
+  Pistol: ["pistol", "handgun", "air pistol", "service pistol"],
+  Shotgun: ["shotgun", "clay", "skeet", "trap", "sport clay"],
+  IPSC: ["ipsc", "practical", "practi", "action stage", "dynamic"],
+  IDPA: ["idpa", "defensive", "defence", "self defense", "self-defence"],
+  Hunting: ["hunting", "hunter", "hunting grounds", "game season"],
+  "Course / Clinic": ["course", "training", "lesson", "clinic", "instructor", "licence"],
+  Range: ["range", "lőtér", "shooting lane", "booking", "open lane"],
+  Regulations: ["rules", "licence", "practiscore", "registration", "entry"],
 };
 
 function inferActivityTypes(text: string) {
@@ -146,26 +148,30 @@ function inferActivityTypes(text: string) {
   return Object.entries(ACTIVITY_KEYWORDS)
     .filter(([, keywords]) => keywords.some((keyword) => hay.includes(keyword)))
     .map(([activity]) => activity)
-    .slice(0, 6);
+    .slice(0, 8);
 }
 
 function inferAgeRanges(text: string) {
   const hay = text.toLowerCase();
   const ages = new Set<string>();
-  if (/\b(infant|baby|babies|toddler|0[-–]2)\b/.test(hay)) ages.add("0–2");
-  if (/\b(preschool|pre-k|ages? 3 ?[-–] ?5|3 ?[-–] ?5)\b/.test(hay)) ages.add("3–5");
-  if (/\b(kindergarten|ages? 5 ?[-–] ?8|6 ?[-–] ?8|elementary)\b/.test(hay)) ages.add("6–8");
-  if (/\b(ages? 9 ?[-–] ?12|9 ?[-–] ?12|middle school)\b/.test(hay)) ages.add("9–12");
-  if (/\b(teen|teens|ages? 13|high school)\b/.test(hay)) ages.add("Teens");
+  if (/\bbeginner|new shooter|first class|newcomer|alapszint/.test(hay)) ages.add("Beginner");
+  if (/\byouth|junior|teen|teenage|ifjúság|fiatal/.test(hay)) ages.add("Youth");
+  if (/\bcompetition|advanced|elite|ranking|osztályos/.test(hay)) ages.add("Competition");
+  if (/\blicensed|licence|licensed|membership|hunter/.test(hay)) ages.add("Licensed Adult");
+  if (/\bhunter prep|hunter examination|vadászat/.test(hay)) ages.add("Hunter Prep");
+  if (ages.size === 0) ages.add("Licensed Adult");
   return [...ages];
 }
 
 function inferKidsRelevance(text: string) {
   const hay = text.toLowerCase();
-  let score = 0;
-  if (/\b(kids|children|child|family|families|youth|toddler|teen)\b/.test(hay)) score += 55;
-  if (/\b(class|program|camp|party|drop-in|lesson|workshop|meetup)\b/.test(hay)) score += 25;
-  if (/\b(nyc|new york|brooklyn|queens|bronx|manhattan|staten island)\b/.test(hay)) score += 20;
+  let score = 30;
+  if (/\b(competition|match|cup|tournament|range|club|course|training|registration|federation|practiscore|mssz|mdlsz|ipsc|idpa|shotgun|rifle|pistol|hunting)\b/i.test(hay)) {
+    score += 55;
+  }
+  if (/\b(official|calendar|event|notice|document|rule|score|member|registration)\b/i.test(hay)) {
+    score += 10;
+  }
   return Math.min(score, 100);
 }
 
@@ -218,7 +224,7 @@ function isDuplicateUrl(url: string, dedupeIndex: CatalogDedupeSupportIndex) {
 }
 
 function isWeakCandidate(authorityGrade: DiscoveryArtifact["authorityGrade"], kidsRelevanceScore: number) {
-  return authorityGrade === "reject" || authorityGrade === "weak" || kidsRelevanceScore < 45;
+  return authorityGrade === "reject" || authorityGrade === "weak" || kidsRelevanceScore < 40;
 }
 
 export async function discoverRangeScoutCandidates(input: {
@@ -285,7 +291,7 @@ export async function discoverRangeScoutCandidates(input: {
 
       const prefilterReasons: string[] = [];
       if (isWeakCandidate(authority.grade, kidsRelevanceScore)) {
-        prefilterReasons.push(authority.grade === "weak" ? "weak_source_authority" : "low_family_relevance");
+        prefilterReasons.push(authority.grade === "weak" ? "weak_source_authority" : "low_shooting_relevance");
       }
       if (!page.ogImage) prefilterReasons.push("missing_official_image_candidate");
       if (scoreResult.score < 60) prefilterReasons.push("low_preliminary_scarcity_score");
@@ -319,7 +325,10 @@ export async function discoverRangeScoutCandidates(input: {
     }
   }
 
-  artifacts.sort((left, right) => right.scoreResult.score - left.scoreResult.score || right.officialnessScore - left.officialnessScore);
+  artifacts.sort(
+    (left, right) =>
+      right.scoreResult.score - left.scoreResult.score || right.officialnessScore - left.officialnessScore || right.kidsRelevanceScore - left.kidsRelevanceScore,
+  );
   return {
     targets,
     artifacts: artifacts.slice(0, input.maxCandidates ?? 6),

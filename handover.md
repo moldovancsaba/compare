@@ -26,10 +26,29 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
   - Removed lint warning by deleting unused variable path (`countDistribution`).
   - fixed duplicate counter math and row counts.
   - made collection functions deterministic for unsupported hints and promise handling.
+- RangeScout production-shift implementation updates (content-plane + intake):
+  - Added EU+HU geographies to `src/data/locations.ts` while retaining legacy NYC values for compatibility with existing discover/seed data.
+  - Added Hungarian source seed extension path in `src/lib/shootingIngestion/sourceSeeds.ts` via:
+    - `SHOOTING_SOURCE_SEEDS_JSON` (inline JSON array)
+    - `SHOOTING_SOURCE_SEEDS_FILE` (path to JSON file)
+    - dedupe and shape validation during ingestion.
+  - Updated adapter, curator constants, and schema enums to support `Competition Ready`, `After-school` weekday signaling, and extended meetup enums for shooting workflows.
+  - Fixed `RangeScout` adapter draft validation issues (stable recurring-program signal handling and long description min-length guard).
+  - Updated scarcity/report tests to avoid hardcoded EU-neighborhood assumptions after geographies were widened.
 - Validation:
   - `npm run lint`
   - `npm test`
   - script smoke run: `npm run shooting:sources:inventory`, `npm run shooting:sources:classify`, `npm run shooting:collect:leads`
+
+## Execution-ready follow-up (implementation-focused)
+
+- Immediate backlog still needed before product release:
+  - Add a first-class competition normalization schema + extractor mapping (`CompetitionRecord`, discipline mapping, registration readiness fields).
+  - Build PractiScore readiness bridge (federation IDs, registration intent, membership checks).
+  - Implement scout-source routing for `cups`/`series`/`events` and enrich `collectCompetitionLeads` with dedupe + confidence scoring.
+  - Add observability metrics for seed-level failures and recovery for blocked/401/timeout sources.
+
+- Board actions are still paused by user request (no project-item mutations until quota / preferred window).
 
 ## Current GitHub mutation state (2026-05-29)
 

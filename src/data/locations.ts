@@ -1,7 +1,19 @@
 import type { Borough } from "@/types/provider";
 
-/** EU operating countries (fixed set for filters, ingest, and Mongo `locations`). */
-export const BOROUGHS: Borough[] = ["Germany", "France", "Spain", "Italy", "Poland"];
+/** Operating regions for compare (legacy + EU rollout); retained as curated runtime choices. */
+export const BOROUGHS: Borough[] = [
+  "Manhattan",
+  "Brooklyn",
+  "Queens",
+  "Bronx",
+  "Staten Island",
+  "Germany",
+  "France",
+  "Spain",
+  "Italy",
+  "Poland",
+  "HU",
+];
 
 /**
  * Recognized regions per country (Discover / Clubs chips, admin locations, seed).
@@ -17,4 +29,5 @@ export const NEIGHBORHOODS: Record<Borough, string[]> = {
   Spain: ["Andalusia", "Catalonia", "Castile and Leon", "Valencian Community", "Aragon"],
   Italy: ["Lombardy", "Tuscany", "Veneto", "Piedmont", "Emilia-Romagna"],
   Poland: ["Masovian", "Lesser Poland", "Silesian", "Pomeranian", "Lower Silesian"],
+  HU: ["Budapest", "Pest", "Bács-Kiskun", "Heves", "Borsod-Abaúj-Zemplén", "Zala"],
 };

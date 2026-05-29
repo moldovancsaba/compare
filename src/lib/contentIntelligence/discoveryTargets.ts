@@ -22,7 +22,7 @@ function slugify(value: string) {
 
 function keywordForRecommendation(recommendation: ScarcityRecommendation) {
   if (recommendation.category === "Meet-Up Groups") {
-    return "parent meetup playgroup";
+    return "shooting group meetup";
   }
 
   const activity = recommendation.details?.activity.find((item) => item.count === 0)?.name ?? recommendation.details?.activity[0]?.name;
@@ -30,24 +30,24 @@ function keywordForRecommendation(recommendation: ScarcityRecommendation) {
 
   switch (recommendation.category) {
     case "Classes":
-      return "kids class";
+      return "shooting course training";
     case "Camps":
-      return "kids camp";
+      return "shooting range competition venue";
     case "Birthday Parties":
-      return "kids birthday party";
+      return "competition cup match entry";
     case "Drop-In Activities":
-      return "kids drop in";
+      return "hunting ground group session";
     default:
-      return "family program";
+      return "sport shooting program";
   }
 }
 
 function queryForRecommendation(recommendation: ScarcityRecommendation) {
   const keyword = keywordForRecommendation(recommendation);
   if (recommendation.category === "Meet-Up Groups") {
-    return `${recommendation.borough} ${recommendation.neighborhood} NYC families ${keyword} official`;
+    return `${recommendation.borough} ${recommendation.neighborhood} hunting club shooting ${keyword} official`;
   }
-  return `${recommendation.borough} ${recommendation.neighborhood} NYC kids ${keyword} official`;
+  return `${recommendation.borough} ${recommendation.neighborhood} competition ${keyword} official`;
 }
 
 function buildScarcityTargets(recommendation: ScarcityRecommendation) {

@@ -49,33 +49,26 @@ function inferNeighborhood(text: string, borough: string, fallback?: string) {
 function inferAgeRanges(text: string, fallback: string[]) {
   const ages = new Set(fallback);
   const lower = text.toLowerCase();
-  if (/\b(infant|baby|babies|toddler|0[-–]2)\b/.test(lower)) ages.add("0–2");
-  if (/\b(preschool|pre-k|3 ?[-–] ?5|ages? 3 ?to ?5)\b/.test(lower)) ages.add("3–5");
-  if (/\b(ages? 5 ?[-–] ?8|6 ?[-–] ?8|elementary)\b/.test(lower)) ages.add("6–8");
-  if (/\b(ages? 9 ?[-–] ?12|9 ?[-–] ?12|middle school)\b/.test(lower)) ages.add("9–12");
-  if (/\b(teen|teens|high school|ages? 13)\b/.test(lower)) ages.add("Teens");
+  if (/\b(beginner|entry|intro|first class|new shooter|newcomer|newcomers|novice)\b/.test(lower)) ages.add("Beginner");
+  if (/\b(youth|junior|teen|teens|16|17|18|under.?18|13 ?[-–] ?17)\b/.test(lower)) ages.add("Youth");
+  if (/\b(licen[sc]e|licensed|membership|hunter|hunterly|licence)\b/.test(lower)) ages.add("Licensed Adult");
+  if (/\b(competi|match|ranking|advanced|elite|team|championship)\b/.test(lower)) ages.add("Competition");
+  if (/\b(hunter prep|hunter qualification|hunter.?exam|vadaszat|hunting)\b/.test(lower)) ages.add("Hunter Prep");
   return [...ages];
 }
 
 const ACTIVITY_KEYWORDS: Array<[string, RegExp]> = [
-  ["Sports", /\bsport|athletic\b/i],
-  ["Dance", /\bdance|ballet|hip hop\b/i],
-  ["Gymnastics", /\bgymnastics\b/i],
-  ["Art", /\bart|craft|painting|drawing\b/i],
-  ["Music", /\bmusic|sing|piano|guitar|drum\b/i],
-  ["STEM", /\bstem|coding|robot|engineering\b/i],
-  ["Martial Arts", /\bkarate|taekwondo|jiu jitsu|martial arts|mma\b/i],
-  ["Swimming", /\bswim|swimming|aquatic\b/i],
-  ["Theater", /\btheater|theatre|acting|drama\b/i],
-  ["Language", /\blanguage|spanish|mandarin|bilingual\b/i],
-  ["Tutoring", /\btutoring|academic support\b/i],
-  ["Indoor Play", /\bindoor play|play space|open play\b/i],
-  ["Outdoor Activities", /\boutdoor|garden|park\b/i],
-  ["Yoga", /\byoga\b/i],
-  ["Soccer", /\bsoccer\b/i],
-  ["Basketball", /\bbasketball\b/i],
-  ["Science", /\bscience\b/i],
-  ["Birthday Entertainment", /\bbirthday\b/i],
+  ["Rifle", /\brifle|small[- ]?bore|air rifle|precision\b/i],
+  ["Pistol", /\bpistol|handgun|air pistol|service pistol\b/i],
+  ["Shotgun", /\bshotgun|skeet|trap|clay\b/i],
+  ["IPSC", /\bipsc|practical|dynamic\b/i],
+  ["IDPA", /\bidpa|defensiv|self.?defense\b/i],
+  ["Field Shooting", /\bfield\s+shoot|hunting\s+shoot|outdoor\s+shoot/i],
+  ["Long Range", /\blong\s+range|1000m|300m|distance\s+rifle\b/i],
+  ["Range Training", /\btraining|course|clinic|coaching|lessons?\b/i],
+  ["Competitions", /\bcompetition|cup|match|tournament|championship\b/i],
+  ["Hunter Safety", /\bhunter safety|hunting\s+license|szabad.?s?f|szabadulás|vadászat\b/i],
+  ["Registration", /\bregister|registration|sign[\- ]?up|signup|jelentkeze/i],
 ];
 
 function inferActivityTypes(text: string, fallback: string[]) {
@@ -88,9 +81,10 @@ function inferActivityTypes(text: string, fallback: string[]) {
 
 function inferCategory(text: string, fallback: string) {
   const lower = text.toLowerCase();
-  if (lower.includes("birthday")) return "Birthday Parties";
-  if (lower.includes("camp")) return "Camps";
-  if (lower.includes("drop-in") || lower.includes("drop in") || lower.includes("open play")) return "Drop-In Activities";
+  if (lower.includes("competition") || lower.includes("match") || lower.includes("cup")) return "Birthday Parties";
+  if (lower.includes("range") || lower.includes("facility") || lower.includes("facility")) return "Camps";
+  if (lower.includes("club") || lower.includes("hunting") || lower.includes("membership")) return "Drop-In Activities";
+  if (lower.includes("meetup") || lower.includes("association") || lower.includes("group")) return "Meet-Up Groups";
   return fallback || "Classes";
 }
 
@@ -125,7 +119,7 @@ function extractScheduleBlocks(text: string): NormalizedScheduleBlock[] {
 
 function inferDescriptionFacts(text: string) {
   const candidates = splitSentences(text).filter((sentence) =>
-    /\b(kids|children|family|camp|class|program|lesson|party|meetup|workshop|drop-in)\b/i.test(sentence),
+    /\b(shooting|competition|match|range|course|training|registration|club|hunting|licence|discipline)\b/i.test(sentence),
   );
   return candidates.slice(0, 4);
 }

@@ -10,7 +10,8 @@ export type Borough =
   | "France"
   | "Spain"
   | "Italy"
-  | "Poland";
+  | "Poland"
+  | "HU";
 
 /** Discover / Meetups borough filter: one borough or every borough. */
 export type BoroughChoice = Borough | "All";
@@ -42,6 +43,7 @@ export type FeaturedBadge =
   | "New"
   | "Staff Pick"
   | "Great for Toddlers"
+  | "Competition Ready"
   | "Weekend Friendly"
   | "Beginner Friendly"
   | "Licence Support";

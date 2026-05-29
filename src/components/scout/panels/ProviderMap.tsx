@@ -3,6 +3,12 @@ import { useEffect, useState } from "react";
 import { Navigation } from "@/lib/appIcons";
 
 const BOROUGH_CENTERS: Record<string, [number, number]> = {
+  Germany: [51.1657, 10.4515],
+  France: [46.2276, 2.2137],
+  Spain: [40.4637, -3.7492],
+  Italy: [41.8719, 12.5674],
+  Poland: [51.9194, 19.1451],
+  HU: [47.1625, 19.5033],
   Manhattan: [40.7831, -73.9712],
   Brooklyn: [40.6782, -73.9442],
   Queens: [40.7282, -73.7949],
