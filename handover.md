@@ -488,6 +488,25 @@ gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW
   - #84: `PVTI_lAHOACGtF84BXVW4zguMdek`
 - Project status field remains `Done` for all localization items due issue closure state.
 
+## Continuation Checkpoint (2026-05-29)
+
+- `main` remains clean and in sync with `origin/main`.
+- `npm run build` and `npm test --silent` pass locally after all i18n/watch cleanup.
+- Project `#16` on `moldovancsaba` is the active board for this repo and currently contains only legacy localization issues `#79`-`#84`.
+- `gh project item-list 16 --owner moldovancsaba` shows no blockers for deployment:
+  - all localized issues are closed and present on the board with `Done` status.
+- Outstanding open GitHub work is issue `#97` (not yet placed on the board) and is outside the closed `#79`-`#84` localization execution set.
+- Next operator step (if continuing implementation) is to either:
+  - place `#97` on an explicit backlog status for de-scoping, or
+  - close it and decompose into the strict execution issue style used in this repo (or confirm no action needed).
+
+Suggested board command for placement (if requested):
+
+```bash
+gh project item-add 16 --owner moldovancsaba --url https://github.com/moldovancsaba/compare/issues/97
+gh project item-list 16 --owner moldovancsaba --format json | jq -r '.items[] | select(.content.url|contains(\"/issues/97\")) | [.id, .content.url]'
+```
+
 ## Completed in Recovery Pass (2026-05-29)
 
 - GraphQL rate limit recovered and live artifact mutations were completed.
