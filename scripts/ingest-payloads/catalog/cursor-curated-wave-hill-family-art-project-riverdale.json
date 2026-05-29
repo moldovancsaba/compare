@@ -1,0 +1,76 @@
+{
+  "sourceUrls": [
+    "https://www.wavehill.org/education/children-and-families/the-family-art-project",
+    "https://www.wavehill.org/calendar/family-art-project-portraits-of-home",
+    "https://www.wavehill.org/visit/getting-here",
+    "https://www.wavehill.org/visit?gad_source=1",
+    "https://www.wavehill.org/uploads/pages/_1200x630_crop_center-center_none/education-fap_Joshua-Bright_18.jpg"
+  ],
+  "notes": "Official Wave Hill Family Art Project, calendar, getting-here, and visit pages reviewed May 19, 2026. Original official image source URL: https://www.wavehill.org/uploads/pages/_1200x630_crop_center-center_none/education-fap_Joshua-Bright_18.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Wave Hill says Family Art Project is best suited for children and their families and says the affiliated storytime appeals to children of all ages, but it does not publish exact ClassScout age brackets; stored ageRanges reflect broad child coverage rather than a source-published age table.",
+    "pricePerClass uses the published child 6+ grounds-admission price ($4) because Family Art Project itself is free with admission; the reviewed pages did not publish a separate under-6 ticket line on the same page.",
+    "rating and reviewCount are 0; not published on the official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-wave-hill-family-art-project-riverdale",
+        "name": "Wave Hill — Family Art Project",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "address": "4900 Independence Avenue, Bronx, NY 10471",
+        "activityTypes": ["Art", "Science"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 4,
+        "shortDescription": "Weekend drop-in family art at Wave Hill House in Riverdale, with most Saturdays and Sundays 10 a.m.–1 p.m. and first/third-Saturday storytime at 11:30 a.m.",
+        "longDescription": "Wave Hill's Family Art Project page says this inter-generational program invites families to make art inspired by nature, science, and culture on site at Wave Hill House. The official page lists the core schedule as Saturday and Sunday, 10AM-1PM, and says onsite drop-in programs run most Saturdays and Sundays with no preregistration required.\n\nThe same page says the program is free with admission and best suited for children and their families. It also lists an affiliated storytime at 11:30AM on the first and third Saturday of every month, described as a free drop-in session designed to appeal to children of all ages. A Wave Hill calendar entry for May 2-3, 2026 confirms the published 10:00AM-1:00PM weekend timing and notes that registration is not required.\n\nWave Hill's getting-here page places the venue in the Riverdale section of the Bronx at 4900 Independence Avenue. The visit page lists Tuesday-Sunday grounds hours, a published child admission price of $4 for ages 6+, and free admission on Thursdays; because Family Art Project itself is weekend-only, the stored day/time tags reflect the program schedule rather than general grounds hours.\n\nSources: https://www.wavehill.org/education/children-and-families/the-family-art-project https://www.wavehill.org/calendar/family-art-project-portraits-of-home https://www.wavehill.org/visit/getting-here https://www.wavehill.org/visit?gad_source=1",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/jZzQ7dwv/c2b56f367025.jpg",
+        "email": "education@wavehill.org",
+        "website": "https://www.wavehill.org/education/children-and-families/the-family-art-project",
+        "phone": "718-549-3200 x251",
+        "announcementTitle": "Weekend drop-in art",
+        "announcementDescription": "Most Saturdays and Sundays, 10AM-1PM at Wave Hill House; storytime runs at 11:30AM on first and third Saturdays.",
+        "announcementBadge": "Weekend AM",
+        "recurringPrograms": [
+          {
+            "id": "rp-wave-hill-family-art-project",
+            "title": "Family Art Project",
+            "cadence": "Weekends",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "10AM-1PM",
+            "locationNote": "Wave Hill House",
+            "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+            "activityTypes": ["Art", "Science"],
+            "summary": "Drop-in family artmaking inspired by nature, science, and culture.",
+            "priceText": "Free with admission",
+            "registrationUrl": "https://www.wavehill.org/education/children-and-families/the-family-art-project",
+            "isDropIn": true
+          },
+          {
+            "id": "rp-wave-hill-family-art-project-storytime",
+            "title": "Family Art Project Storytime",
+            "cadence": "Monthly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "11:30AM on the first and third Saturday of every month",
+            "locationNote": "Wave Hill House",
+            "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+            "activityTypes": ["Art"],
+            "summary": "Free drop-in storytime tied to the weekend art-project theme.",
+            "priceText": "Free with admission",
+            "registrationUrl": "https://www.wavehill.org/education/children-and-families/the-family-art-project",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

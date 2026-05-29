@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://www.corlearsschool.org/rentals"
+  ],
+  "notes": "Official Corlears School birthday-rentals page reviewed May 16, 2026. Original official image source URL: https://www.corlearsschool.org/hs-fs/hubfs/Web/Hero%20imagery/Birthday%20parties%20hero%20-%20desktop%20v2.webp?width=2000&name=Birthday%20parties%20hero%20-%20desktop%20v2.webp. The hero image was downloaded from the official Corlears page and re-uploaded through POST /api/ingest/upload for ImgBB compliance.",
+  "missingOrUncertain": [
+    "pricePerClass is 0 because the official page describes deposits, add-ons, and planning details but does not publish a base package price.",
+    "Age ranges are mapped to 3–5 and 6–8 based on the page’s repeated positioning for young children, the rule that children ages 4 and below must be accompanied by an adult, and official parent testimonials citing parties for 4-, 5-, and 7-year-olds.",
+    "Weekend and Weekday tags reflect the official FAQ stating rentals are mainly available on weekends, with select weekdays and times available case-by-case; the page does not publish fixed party time slots."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-corlears-birthday-parties",
+        "name": "Corlears School Birthday Party Rentals",
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "address": "324 W 15th St., New York, NY 10011",
+        "activityTypes": ["Birthday Entertainment", "Indoor Play"],
+        "ageRanges": ["3–5", "6–8"],
+        "dayTimeTags": ["Weekend", "Weekday"],
+        "pricePerClass": 0,
+        "shortDescription": "Chelsea birthday-party rentals at Corlears School with classroom base space, optional backyard or gym add-ons, and staff support for setup and cleanup.",
+        "longDescription": "Corlears School in Chelsea offers birthday party rentals in a safe, age-appropriate environment designed for young children. The official rentals page describes a bright classroom base package, with optional add-ons such as the natural backyard playground, multipurpose gym, additional classrooms, and rooftop terrace depending on the kind of celebration families want to build.\n\nThe same page says two Corlears staff members are on-site during parties to help with setup, transitions, cleanup, and mid-event needs. Families can keep the party simple or work with Corlears and partner vendors on themed entertainment, food, decorations, and other add-ons. The FAQ says the base package includes capacity for up to 14 children plus the birthday child and accompanying grown-ups, with additional headcount available on request.\n\nCorlears’ FAQ states that the base package includes a two-hour birthday party, that the hosting family may arrive up to one hour in advance of the scheduled start time, and that one hour is allotted for cleanup afterward. The same FAQ says rentals are mainly available on weekends, while select weekdays and times may be possible on a case-by-case basis.\n\nThe page also provides child-specific planning details that make the venue especially relevant for early-childhood families: children ages 4 and below must be accompanied by an adult caregiver, classrooms include age-appropriate materials and kid-sized furniture, and the playground and gym are described as spaces tailored to young children. Official family testimonials on the page cite successful parties for 4-, 5-, and 7-year-olds.\n\nCorlears does not publish a base package price on the page, but it does state that a non-refundable deposit of 50% of the final party cost is required to hold a party date and time. Contact on the same page: rentals@corlearsschool.org. Sources: https://www.corlearsschool.org/rentals",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/LXxk3SMk/73e161984b8a.jpg",
+        "email": "rentals@corlearsschool.org",
+        "website": "https://www.corlearsschool.org/rentals",
+        "phone": "212-741-2800",
+        "announcementTitle": "Weekend-first party availability",
+        "announcementDescription": "Corlears says rentals are mainly available on weekends, with select weekdays and times possible case-by-case through the rentals team.",
+        "announcementBadge": "Chelsea",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

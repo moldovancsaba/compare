@@ -1,0 +1,66 @@
+{
+  "sourceUrls": [
+    "https://www.worldice.com/skating-school/",
+    "https://www.worldice.com/contact/",
+    "https://www.worldice.com/wp-content/uploads/2025/03/24-25-LTS-Brochure-v23.pdf",
+    "https://www.worldice.com/wp-content/uploads/2023/01/World-Ice-Arena-1024x583.png"
+  ],
+  "notes": "Official World Ice Arena skating school and contact pages plus the current Learn to Skate brochure result were reviewed on May 26, 2026. The official World Ice Arena image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official source excerpt focused on class structure and contact details rather than a single clean per-class tuition value.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-world-ice-arena-flushing-learn-to-skate",
+        "name": "World Ice Arena Flushing Learn to Skate",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "address": "131-04 Meridian Rd, Flushing, NY 11368",
+        "activityTypes": ["Sports"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Learn to Skate classes in Flushing for ages 2 and up, with Thursday through Sunday sessions at World Ice Arena.",
+        "longDescription": "World Ice Arena's official skating school page describes a Learn to Skate program in Flushing Meadows Corona Park at 131-04 Meridian Road, Flushing, with phone 718-760-9001. The official page says the program follows the Learn to Skate USA curriculum and serves all ages and abilities, while the current brochure result includes Parent and Me for ages 2-3, Snowplow Sam classes for ages 4-6, Basic classes for ages 7-14, and adult tracks.\n\nThe published schedule includes Thursday afternoon sessions beginning at 3:45 PM, Friday evening sessions, Saturday morning and afternoon sessions, and Sunday morning sessions. That supports weekday, weekend, morning, afternoon, evening, and after-school tags without needing to infer beyond the published class table.\n\nSources: https://www.worldice.com/skating-school/ https://www.worldice.com/contact/ https://www.worldice.com/wp-content/uploads/2025/03/24-25-LTS-Brochure-v23.pdf https://www.worldice.com/wp-content/uploads/2023/01/World-Ice-Arena-1024x583.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/ZRBSdjHt/world-ice-arena.png",
+        "email": "skatingschool@worldice.com",
+        "website": "https://www.worldice.com/skating-school/",
+        "phone": "(718) 760-9001",
+        "recurringPrograms": [
+          {
+            "id": "rp-world-ice-weekday-skating",
+            "title": "Thursday and Friday Learn to Skate",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Thursday", "Friday"],
+            "timeText": "3:45 PM-7:00 PM",
+            "locationNote": "World Ice Arena",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Sports"],
+            "summary": "Weekday Learn to Skate classes for children and teens.",
+            "registrationUrl": "https://www.worldice.com/skating-school/"
+          },
+          {
+            "id": "rp-world-ice-weekend-skating",
+            "title": "Saturday and Sunday Learn to Skate",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "10:30 AM-1:30 PM",
+            "locationNote": "World Ice Arena",
+            "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Sports"],
+            "summary": "Weekend Learn to Skate classes including parent-and-me and youth levels.",
+            "registrationUrl": "https://www.worldice.com/skating-school/"
+          }
+        ]
+      }
+    }
+  ]
+}

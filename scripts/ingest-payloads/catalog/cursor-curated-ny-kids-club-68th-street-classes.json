@@ -1,0 +1,53 @@
+{
+  "sourceUrls": [
+    "https://nypreschoolandkidsclub.com/68th-street/",
+    "https://nypreschoolandkidsclub.com/wp-content/uploads/2026/01/68th-Street-%E2%80%93-Winter_Spring-Enrichment-2.pdf",
+    "https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg"
+  ],
+  "notes": "Official NY Preschool & Kids Club 68th Street location search result, official Winter/Spring 2026 schedule PDF, and official NY Kids Club logo image were reviewed on May 26, 2026. The provider image reuses the existing NY Kids Club ImgBB asset already used in production payloads.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official sources publish schedules and contact details but not a single fixed per-class tuition for this location.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ny-kids-club-68th-street-classes",
+        "name": "NY Kids Club 68th Street Classes",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "address": "168 Amsterdam Ave, New York, NY 10023",
+        "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Morning"],
+        "pricePerClass": 0,
+        "shortDescription": "Morning enrichment classes on the Upper West Side for babies and toddlers at NY Kids Club 68th Street.",
+        "longDescription": "NY Kids Club's official Winter/Spring 2026 68th Street schedule PDF lists enrichment classes at 168 Amsterdam Avenue on the Upper West Side with contact phone (917) 708-8440 and email nykidsclub68@nypreschoolandkidsclub.com. The official schedule excerpt lists Musical Tots, Gym Babies, Baby Art & STEM Explorers, and Gym Tots for children from 4 months through 36 months.\n\nThe current official snippet shows weekday classes in the morning, including 9:00 AM, 10:45 AM, and 11:00 AM sessions, so this listing uses weekday and morning tags only. This keeps the listing aligned to the schedule details surfaced in the official current PDF result.\n\nSources: https://nypreschoolandkidsclub.com/68th-street/ https://nypreschoolandkidsclub.com/wp-content/uploads/2026/01/68th-Street-%E2%80%93-Winter_Spring-Enrichment-2.pdf https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/HfNdy4t7/c716cbfab29b.jpg",
+        "email": "nykidsclub68@nypreschoolandkidsclub.com",
+        "website": "https://nypreschoolandkidsclub.com/68th-street/",
+        "phone": "(917) 708-8440",
+        "recurringPrograms": [
+          {
+            "id": "rp-nykc-68th-street-weekday-mornings",
+            "title": "68th Street Morning Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "9:00 AM-11:45 AM",
+            "locationNote": "NY Kids Club 68th Street",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+            "summary": "Weekday morning baby and toddler enrichment classes including music, gym, and STEM exploration.",
+            "registrationUrl": "https://nypreschoolandkidsclub.com/68th-street/"
+          }
+        ]
+      }
+    }
+  ]
+}

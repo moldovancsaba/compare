@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://www.uws.playstreetmuseum.com/",
+    "https://www.uws.playstreetmuseum.com/birthday-parties",
+    "https://book.playstreetmuseum.com/p/n/lTq7qmGJ/v5",
+    "https://images.squarespace-cdn.com/content/v1/645a6fee52e97d1057418d8e/1683648516941-F1VALGGUVWHJDSW8HNYR/Mermaid+Party+6.jpg"
+  ],
+  "notes": "Official Play Street Museum Upper West Side home, birthday-parties, and semi-private booking pages reviewed May 16, 2026. Address, party tiers, times, deposit policy, and email from those pages. Listing image is an official party photograph on uws.playstreetmuseum.com (Squarespace CDN), uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $600 from the published semi-private Do-It-Yourself package (8 children, 16 adults); private packages start at $1,250–$2,200 and higher tiers cost more per the birthday-parties page.",
+    "rating and reviewCount are 0; not published on the cited official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-play-street-museum-uws-birthday-parties",
+        "name": "Play Street Museum Upper West Side — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "address": "805 Columbus Avenue, New York, NY 10025",
+        "activityTypes": ["Indoor Play", "Birthday Entertainment"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening"],
+        "pricePerClass": 600,
+        "shortDescription": "Upper West Side interactive children's museum with private and semi-private birthday parties, themed packages, and 1.5-hour party slots seven days a week.",
+        "longDescription": "Play Street Museum Upper West Side is an interactive neighborhood children's museum at 805 Columbus Avenue for toddlers and children up to about age 8, with imaginative play exhibits and dedicated birthday party options.\n\nThe official birthday-parties page lists private and semi-private packages. Semi-private Do-It-Yourself parties start at $600 for up to 8 children and 16 adults with private use of the party room during a 90-minute play session; Sweet & Simple and Sit Back & Relax semi-private tiers are $1,000 and $1,500. Private party options start at $1,350 (Do-It-Yourself) with exclusive museum use, and weekday evening private parties start at $1,250 (Monday–Wednesday 7:00–8:30 p.m.). Parties are 1.5 hours with optional 30-minute setup; published party time slots run weekdays and weekends throughout the day, with a $500 non-refundable deposit to reserve.\n\nThe homepage lists phone (646) 825-2005; the booking page lists uwsinfo@playstreetmuseum.com for availability questions. Play Street is a nut-free, shoe-free facility (socks required).\n\nThis listing image is an official party photograph published on uws.playstreetmuseum.com, re-hosted on ImgBB for ClassScout storage policy compliance.\n\nSources: https://www.uws.playstreetmuseum.com/ https://www.uws.playstreetmuseum.com/birthday-parties https://book.playstreetmuseum.com/p/n/lTq7qmGJ/v5",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/gZ26TBWp/29b12be64336.webp",
+        "email": "uwsinfo@playstreetmuseum.com",
+        "website": "https://www.uws.playstreetmuseum.com/birthday-parties",
+        "phone": "(646) 825-2005",
+        "announcementTitle": "Semi-private parties from $600",
+        "announcementDescription": "Official page lists private and semi-private tiers with themed add-ons; $500 deposit required to book.",
+        "announcementBadge": "Book online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

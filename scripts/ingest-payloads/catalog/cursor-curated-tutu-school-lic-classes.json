@@ -1,0 +1,59 @@
+{
+  "sourceUrls": [
+    "https://tutuschool.com/lic/",
+    "https://tutuschool.com/lic/classes/",
+    "https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-classes-scaled.jpg"
+  ],
+  "notes": "Official Tutu School Long Island City home and classes pages fetched May 16 2026. Age bands, Long Island City address, class schedule, and tuition details come from those pages. Original official image source URL: https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-classes-scaled.jpg. ImgBB upload completed via POST /api/ingest/upload and stored in provider.image.",
+  "missingOrUncertain": [
+    "provider.pricePerClass uses $165 as the planning figure because the official classes page says class membership is charged in installment payments of $165 monthly; the same page says Baby Ballet tuition is $120 each month.",
+    "email: no plain-text public contact email was confirmed on the cited pages, so this field is empty.",
+    "rating and reviewCount are not published on the official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "tutu-school-long-island-city-classes",
+        "name": "Tutu School Long Island City",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "address": "43-44 12th Street, Long Island City, NY 11101",
+        "activityTypes": [
+          "Dance",
+          "Music"
+        ],
+        "ageRanges": [
+          "0–2",
+          "3–5",
+          "6–8"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Morning",
+          "Afternoon",
+          "Evening",
+          "After-school"
+        ],
+        "pricePerClass": 165,
+        "shortDescription": "Story-driven ballet classes in Long Island City for children ages 6 months to 8 years.",
+        "longDescription": "Tutu School Long Island City offers story-driven ballet classes for children ages 6 months to 8 years. The official home page lists four divisions: Baby Ballet for 6–18 months, Tutu Toddlers for 18 months to 3 years, Exploring Ballet for ages 3–5, and Primary Ballet Prep for ages 5–8.\n\nThe official classes page says registration is ongoing and that class membership is charged in installment payments of $165 on the 1st of each month, while Baby Ballet tuition is $120 each month. That same page shows classes scheduled across weekdays and weekends, with examples including weekday morning, afternoon, and after-school slots as well as Saturday and Sunday classes.\n\nThe official site lists the studio at 43-44 12th Street, Long Island City, NY 11101. This listing uses the general membership figure as a planning price and notes the Baby Ballet tuition difference as an official exception.\n\nSources: https://tutuschool.com/lic/ https://tutuschool.com/lic/classes/ https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-classes-scaled.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New"
+        ],
+        "image": "https://i.ibb.co/jZx081QZ/bc13c42d3cf7.jpg",
+        "email": "",
+        "website": "https://tutuschool.com/lic/classes/",
+        "phone": "(347) 617-1347",
+        "announcementTitle": "Class schedule posted across weekdays and weekends",
+        "announcementDescription": "Official schedule shows morning, afternoon, after-school, and weekend ballet classes.",
+        "announcementBadge": "Schedule"
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://astoriadancecenter.com/",
+    "https://astoriadancecenter.com/adc-class-descriptions",
+    "https://astoriadancecenter.com/about-us",
+    "https://astoriadancecenter.com/summer-afternoon-classes",
+    "https://img1.wsimg.com/isteam/ip/e5ed9ef3-bee7-46c5-8b11-3bfec22cbcd9/Serena%20ring%20jump.jpg"
+  ],
+  "notes": "Official Astoria Dance Center homepage, class descriptions, about page, and summer afternoon classes page were reviewed on May 26, 2026. The official Astoria Dance Center image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official sources publish program structure but not a single simple per-class public rate in the source excerpt used here.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-astoria-dance-center-classes",
+        "name": "Astoria Dance Center Classes",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "address": "42-16 28th Avenue, Queens, NY 11103",
+        "activityTypes": ["Dance", "Music", "Theater"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Long-running Astoria dance school with toddler, children’s, and teen classes plus summer afternoon dance programs.",
+        "longDescription": "Astoria Dance Center's official site says it has offered dance education since 1983 and currently serves children ages 2 through teens at 42-16 28th Avenue in Astoria. The official about and class descriptions pages list programs including Dance Together for 2's & 3's, Pre-Dance for ages 3-4.5, Pre-Ballet for ages 5-7, and older children's and teen classes in ballet, tap/jazz, hip-hop, Broadway Bound, performance team, modern, acting, music, and singing.\n\nThe official summer classes page specifically promotes summer afternoon dance classes, and the homepage notes the studio is open Mondays through Thursdays during summer hours. This supports weekday afternoon timing tags while avoiding unsupported weekend claims.\n\nSources: https://astoriadancecenter.com/ https://astoriadancecenter.com/adc-class-descriptions https://astoriadancecenter.com/about-us https://astoriadancecenter.com/summer-afternoon-classes https://img1.wsimg.com/isteam/ip/e5ed9ef3-bee7-46c5-8b11-3bfec22cbcd9/Serena%20ring%20jump.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/qKsMZwX/astoria-dance-center.jpg",
+        "email": "info@astoriadancecenter.com",
+        "website": "https://astoriadancecenter.com/",
+        "phone": "(718) 278-1567",
+        "recurringPrograms": []
+      }
+    }
+  ]
+}

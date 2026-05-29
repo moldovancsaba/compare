@@ -1,0 +1,169 @@
+{
+  "sourceUrls": [
+    "https://www.stgeorgecivic.org/",
+    "https://www.tottenvillehistory.com/index.php/about/programs-past-and-upcoming.html",
+    "https://www.ps20statenisland.org/pta",
+    "https://southbronxunited.org/clubhouse",
+    "https://www.skyvillagenyc.com/birthdays",
+    "https://www.skyvillagenyc.com/contact",
+    "https://oneyogahouse.com/kids-yoga-parties/",
+    "https://oneyogahouse.com/",
+    "https://oneyogahouse.com/wp-content/uploads/2022/09/ONEYOGAHOUSE-Brooklyn.jpg"
+  ],
+  "notes": "Curated on May 19, 2026 for the user's explicit scarcity targets. After the follow-up quality pass on May 20, 2026, this payload retains only the six rows that still meet the family-fit and current-source bar: three Staten Island meet-up groups plus three birthday-party providers in Concourse, Astoria, and DUMBO. Every image was downloaded from the official source site and re-hosted through POST /api/ingest/upload so all stored image URLs are ImgBB HTTPS links.",
+  "missingOrUncertain": [
+    "St. George Civic Association currently shows the next general meeting as TBD at 6:45 p.m.; cadence is therefore stored as Pop-up rather than Monthly.",
+    "Tottenville Historical Society's programs page describes recurring exhibitions, programs, tours, and informal discussion groups but does not publish one fixed repeating schedule; cadence is stored as Pop-up.",
+    "Several birthday providers market to children without publishing a narrow age band on the party page itself; ageRanges are set from the provider's child-facing positioning on the cited official pages and should be rechecked if the venue publishes tighter limits later.",
+    "ONEYOGAHOUSE publishes a standard kids' yoga party package and studio hours, but not separate weekday/weekend party slots; dayTimeTags therefore use the party page's published mid-afternoon language rather than a stronger weekend claim."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-st-george-civic-association",
+        "name": "St. George Civic Association",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Pop-up",
+        "instagram": "",
+        "website": "https://www.stgeorgecivic.org/",
+        "description": "The St. George Civic Association describes itself as a volunteer neighborhood group that gives residents a collective voice on issues affecting St. George, from pedestrian safety and ferry service to public spaces, recreation, culture, and retail amenities. The official site says the organization works with local officials and elected representatives to improve quality of life on Staten Island's North Shore.\n\nThe homepage currently lists upcoming general meetings with a 6:45 p.m. time and directs visitors to the SGCA calendar for future events and meeting dates, while noting that meeting details are still to be determined. The site also lists the association's nonprofit mailing address as P.O. Box 10490, Staten Island, NY 10301.\n\nSources: https://www.stgeorgecivic.org/",
+        "initials": "SGCA",
+        "icon": "skyline",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/KcycVfC9/69e67d3a71d8.png"
+      }
+    },
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-tottenville-historical-society",
+        "name": "Tottenville Historical Society Programs",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Pop-up",
+        "instagram": "",
+        "website": "https://www.tottenvillehistory.com/index.php/about/programs-past-and-upcoming.html",
+        "description": "The Tottenville Historical Society says it has spent more than a decade presenting public exhibitions, programs, walking tours, and informal discussion groups for the Tottenville community. Its official programs page publishes upcoming programming at the H. H. Biddle House in Conference House Park and frames the organization as a neighborhood hub for local-history events.\n\nThe cited page identifies the primary venue as 70 Satterlee Street in Staten Island, NY 10307 and lists phone (718) 887-9125. Because the page describes ongoing public programs without one single repeating weekly or monthly slot, this listing stores cadence as Pop-up.\n\nSources: https://www.tottenvillehistory.com/index.php/about/programs-past-and-upcoming.html",
+        "initials": "THS",
+        "icon": "skyline",
+        "palette": "beige",
+        "coverImageUrl": "https://i.ibb.co/S7tKn419/98c3d885824b.jpg"
+      }
+    },
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-ps20-port-richmond-pta",
+        "name": "P.S. 20 Port Richmond PTA",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "groupType": "Parent Meetup",
+        "ageRange": "All ages",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://www.ps20statenisland.org/pta",
+        "description": "P.S. 20 Port Richmond's official PTA page states the Parent Teacher Association's mission is to make every child's potential a reality by engaging and empowering families and communities to advocate for all children. The page says membership is open to anyone who believes in the mission and purposes of the PTA and presents it as a broad family-and-community voice for children.\n\nThe school's 2025-2026 PTA page also publishes a school-year meeting and event calendar that includes family workshops, holiday art night, PTA meetings, and the PTA election, with dates from September 30, 2025 through June 11, 2026. The school lists its address as 161 Park Avenue, Staten Island, NY 10302 and phone as (718) 442-4110.\n\nSources: https://www.ps20statenisland.org/pta",
+        "initials": "PS20",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/gZH42GPJ/8aa9cc4741f1.png"
+      }
+    },
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-south-bronx-united-clubhouse-birthday-parties",
+        "name": "South Bronx United Clubhouse — Kids Soccer Birthday Party",
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "address": "814 River Avenue, Suite 2-3, Bronx, NY 10451",
+        "activityTypes": ["Soccer", "Sports", "Birthday Entertainment"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Afternoon"],
+        "pricePerClass": 450,
+        "shortDescription": "Concourse soccer birthday parties at South Bronx United's Clubhouse with 90-minute coach-led packages and optional upgraded food-and-decor tier.",
+        "longDescription": "South Bronx United's official Clubhouse rental page says the SBU Clubhouse is available for children's birthday parties with soccer activities included. The page describes the 3,000-square-foot space as featuring a mini soccer pitch, classroom, retractable wall, sound system, built-in television, projector screens, and event seating.\n\nThe same page lists two Kids Soccer Birthday Party packages. The All-Star Package is a 90-minute party with a 60-minute soccer session led by a coach and 30 minutes for food and birthday activities, priced at $450 for up to 12 children with $25 per additional child. The MVP Package is also 90 minutes and includes pizza, drinks, party favors, cake, balloons, and decorations for $700, with $30 per additional child. The Clubhouse page also notes ongoing Clubhouse Classes for ages 2-15, reinforcing the youth sports focus of the space.\n\nContact on the official page: clubhouse@southbronxunited.org. The footer lists South Bronx United at 814 River Avenue, Suite 2-3, Bronx, NY 10451 and phone (718) 404-9281.\n\nSources: https://southbronxunited.org/clubhouse",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/YFm6zD5F/6ffd54b01a49.webp",
+        "email": "clubhouse@southbronxunited.org",
+        "website": "https://southbronxunited.org/clubhouse",
+        "phone": "(718) 404-9281",
+        "announcementTitle": "Soccer birthday package from $450",
+        "announcementDescription": "Official Clubhouse page lists 90-minute kids soccer parties with a coach, up to 12 children, and an upgraded MVP tier with pizza and cake.",
+        "announcementBadge": "Mini soccer pitch",
+        "bookingEnabled": true
+      }
+    },
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sky-village-astoria-birthday-parties",
+        "name": "Sky Village NYC — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "address": "23-05 29th Street, Astoria, NY 11105",
+        "activityTypes": ["Art", "Indoor Play", "Birthday Entertainment"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Morning", "Afternoon"],
+        "pricePerClass": 810,
+        "shortDescription": "Astoria private art-party packages at Sky Village NYC with AM or PM party slots, up to three hours of space, and themed creative add-ons.",
+        "longDescription": "Sky Village NYC's official birthday page says the venue offers full-service private party packages with creative art activities, setup, and cleanup. The page describes two Astoria locations and lists guest counts, pricing, and party timing details.\n\nFor the 29th Street Astoria location, the birthday page lists a base package of 8 children with $15 per additional child up to 13 children and a maximum total capacity of 30 people. It says every booking includes a full-service private party package and notes party time slots as AM parties before 12 p.m. and PM parties after 1 p.m. The page publishes package pricing including the Sky Village Arty Party at $810, Spin Art Party at $910, Canvas Paint Party at $965, and Deluxe Rainbow Cupcake Party at $1,060 for groups of 25 people or less, with a $250 non-refundable deposit required to reserve.\n\nThe contact page lists Sky Village NYC - 29th Street at 23-05 29th Street, Astoria, NY 11105, phone 917-608-1658, and email skyvillagenyc@gmail.com.\n\nSources: https://www.skyvillagenyc.com/birthdays https://www.skyvillagenyc.com/contact https://www.skyvillagenyc.com/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/bj6dGpcb/ba03cd45e8a3.jpg",
+        "email": "skyvillagenyc@gmail.com",
+        "website": "https://www.skyvillagenyc.com/birthdays",
+        "phone": "917-608-1658",
+        "announcementTitle": "AM and PM party slots",
+        "announcementDescription": "Official birthday page lists private art-party packages from $810, with AM parties before noon and PM parties after 1 p.m.",
+        "announcementBadge": "Private party",
+        "bookingEnabled": true
+      }
+    },
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-oneyogahouse-dumbo-kids-yoga-parties",
+        "name": "ONEYOGAHOUSE — Kids Yoga Parties",
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "address": "90 Furman Street, Brooklyn, NY 11201",
+        "activityTypes": ["Yoga", "Birthday Entertainment", "Music"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Afternoon"],
+        "pricePerClass": 850,
+        "shortDescription": "DUMBO kids' yoga birthday parties at ONEYOGAHOUSE with a 90-minute format, live music, storytelling, and mid-afternoon studio rental.",
+        "longDescription": "ONEYOGAHOUSE's official kids-yoga-parties page says the Dumbo studio hosts children's yoga birthday parties in its ground-floor Brooklyn Bridge Park space next to the 1Hotel. The page describes a 90-minute party format: 60 minutes of supervised activities led by musicians and instructors with sing-alongs, interactive games, storytelling, and kids' yoga, followed by a 30-minute reception with a custom birthday song, cake, and celebration.\n\nThe same page lists a Standard Party Package of $850 based on a minimum of 10 kids, with $30 additional per head, and says the studio can accommodate 12 kids including the birthday child for the same pricing. Included items listed on the official page include studio rental in mid-afternoon hours, a Paperless Post invitation, balloons, yoga-wheel adventure, live music and yoga-led entertainment, a special song for the birthday child, a curated playlist, and parachute-game finale. The party page lists phone (917) 970-0896. The homepage gives the studio address as 90 Furman Street, Brooklyn, NY 11201 and identifies the location as Dumbo.\n\nSources: https://oneyogahouse.com/kids-yoga-parties/ https://oneyogahouse.com/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/93YY0BJR/2f3bee656a10.jpg",
+        "email": "",
+        "website": "https://oneyogahouse.com/kids-yoga-parties/",
+        "phone": "(917) 970-0896",
+        "announcementTitle": "90-minute yoga parties from $850",
+        "announcementDescription": "Official Dumbo party page lists a 60-minute instructor-led kids' yoga experience plus a 30-minute reception in mid-afternoon studio hours.",
+        "announcementBadge": "Live music",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

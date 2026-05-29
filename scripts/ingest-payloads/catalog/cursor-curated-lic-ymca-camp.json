@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/long-island-city-ymca/programs-classes/camps",
+    "https://ymcanyc.org/locations/long-island-city-ymca"
+  ],
+  "notes": "Official YMCA of Greater New York Long Island City branch camp page and branch page reviewed May 16, 2026. Original official image source URL: https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm. The YMCA camp hero image was downloaded from the official page and re-uploaded through POST /api/ingest/upload for ImgBB compliance.",
+  "missingOrUncertain": [
+    "pricePerClass stores the published community rate for Traditional Summer Camp per two-week session, not a single-day rate.",
+    "rating and reviewCount are 0 because no official rating or review totals are published on the cited pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-lic-ymca-traditional-summer-camp-2026",
+        "name": "Long Island City YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "address": "32-23 Queens Blvd, LIC, NY 11101",
+        "activityTypes": ["Sports", "Swimming", "Art", "Science", "Outdoor Activities"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 942,
+        "shortDescription": "Queens YMCA day camp in LIC with 2026 two-week sessions, swim twice a week, arts, science, fitness, and team-building for ages 5–9.",
+        "longDescription": "The Long Island City YMCA publishes 2026 Summer Camp details for its Queens branch at 32-23 Queens Boulevard. The official camp page lists day camp hours of 9 a.m. to 5 p.m., with extended hours available from 8 a.m. to 9 a.m. and 5 p.m. to 6 p.m. Summer camp starts June 29, 2026 and runs in two-week sessions through August 21, 2026, with camp closed Friday, July 3 in observance of Independence Day.\n\nThis listing focuses on the official Traditional Summer Camp track for ages 5–9. The LIC YMCA describes it as a classic day-camp program where children rotate through physical fitness, arts and crafts, science activities, theme days, group play, and team building in a fun and inclusive environment. The page also says all campers have the opportunity to participate in instructional swim twice per week and that camp activities are organized around the YMCA’s core values of respect, caring, honesty, and responsibility.\n\nPublished Traditional Summer Camp pricing on the same page is $856 per two-week session for Y members and $942 per two-week session for community participants. Open house times listed there are April 18 at 10:00 a.m., May 16 at 10:00 a.m., and June 12 at 3:30 p.m. Camp leadership contact on the official page: Lillian Morales, licycamp@ymcanyc.org, 212-912-2568. The branch page lists the branch phone as 718-392-7932.\n\nThe same official camp page also advertises additional LIC camp tracks including Early Childhood Camp (ages 3–4), Spanish Language Immersion Camp (ages 4–5), Kinder Camp (ages 4–5), Art Camp (ages 5–8), Swim Camp (ages 5–14), and Seven Express Trip Camp (ages 10–14).\n\nSources: https://ymcanyc.org/locations/long-island-city-ymca/programs-classes/camps https://ymcanyc.org/locations/long-island-city-ymca",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/MxvbVL0j/3edd9e9081d6.webp",
+        "email": "licycamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/long-island-city-ymca/programs-classes/camps",
+        "phone": "212-912-2568",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Official LIC YMCA camp page lists June 29–August 21 sessions, open houses, and extended-hour options for summer 2026.",
+        "announcementBadge": "Summer ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

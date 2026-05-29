@@ -1,0 +1,99 @@
+{
+  "sourceUrls": [
+    "https://bronxhouse.org/tweens-teens/",
+    "https://bronxhouse.org/about/",
+    "https://bronxhouse.org/wp-content/uploads/2021/11/stony-brook-teens.jpg"
+  ],
+  "notes": "Official Bronx House Tweens & Teens and About pages reviewed May 21, 2026. Teen basketball days, times, age band, free-program note, and Bronx address come from those pages. The official teens image was downloaded from bronxhouse.org and uploaded via POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Morris Park because Bronx House lists 990 Pelham Parkway South, Bronx, NY 10461 and the official about page names the 5 train stop at Morris Park for access.",
+    "pricePerClass is stored as 0 because the official Tweens & Teens page says the listed programs are free and open to tweens and teens through June 2026.",
+    "rating and reviewCount are 0 because the official source does not publish rating or review totals."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-house-teen-basketball",
+        "name": "Bronx House Teen Basketball",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "address": "990 Pelham Parkway South, Bronx, NY 10461",
+        "activityTypes": [
+          "Basketball",
+          "Sports"
+        ],
+        "ageRanges": [
+          "Teens"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Afternoon",
+          "Evening"
+        ],
+        "pricePerClass": 0,
+        "shortDescription": "Bronx House runs free teen basketball sessions for ages 13-18 on weeknights and weekends at its Pelham Parkway campus in the Bronx.",
+        "longDescription": "Bronx House lists Teen Basketball inside its Tweens & Teens program lineup for ages 13-18. The official page says these tween and teen programs are free and open through June 2026 thanks to support from the New York City Department of Youth & Community Development and United Neighborhood Houses.\n\nThe same official page publishes Teen Basketball on Tuesdays and Thursdays from 6:30 p.m. to 8:30 p.m., plus Saturdays and Sundays from 2:30 p.m. to 4:30 p.m. Bronx House describes the broader Teen Program as a place for ages 13-18 to learn, engage, and achieve through activities and classes.\n\nBronx House's official contact details list the site at 990 Pelham Parkway South, Bronx, NY 10461, with main phone 718.792.1800. The official about page also names the 5 train stop at Morris Park for access, which supports the canonical Morris Park neighborhood mapping used for this listing.\n\nSources: https://bronxhouse.org/tweens-teens/ https://bronxhouse.org/about/ https://bronxhouse.org/wp-content/uploads/2021/11/stony-brook-teens.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Weekend Friendly"
+        ],
+        "image": "https://i.ibb.co/3mhyFHfz/76ace05cea30.jpg",
+        "email": "",
+        "website": "https://bronxhouse.org/tweens-teens/",
+        "phone": "718.792.1800",
+        "announcementTitle": "Free teen basketball through June 2026",
+        "announcementDescription": "The official Bronx House teen page lists Tuesday/Thursday evening sessions plus Saturday/Sunday afternoon sessions for ages 13-18.",
+        "announcementBadge": "Free teen class",
+        "recurringPrograms": [
+          {
+            "id": "rp-bronx-house-teen-basketball-weeknights",
+            "title": "Teen Basketball Weeknight Sessions",
+            "cadence": "Weekly",
+            "daysOfWeek": [
+              "Tuesday",
+              "Thursday"
+            ],
+            "timeText": "6:30 p.m.-8:30 p.m.",
+            "locationNote": "Bronx House Teen Program",
+            "ageRanges": [
+              "Teens"
+            ],
+            "activityTypes": [
+              "Basketball",
+              "Sports"
+            ],
+            "summary": "Free evening basketball sessions for teens ages 13-18.",
+            "isDropIn": false
+          },
+          {
+            "id": "rp-bronx-house-teen-basketball-weekends",
+            "title": "Teen Basketball Weekend Sessions",
+            "cadence": "Weekly",
+            "daysOfWeek": [
+              "Saturday",
+              "Sunday"
+            ],
+            "timeText": "2:30 p.m.-4:30 p.m.",
+            "locationNote": "Bronx House Teen Program",
+            "ageRanges": [
+              "Teens"
+            ],
+            "activityTypes": [
+              "Basketball",
+              "Sports"
+            ],
+            "summary": "Free weekend basketball sessions for teens ages 13-18.",
+            "isDropIn": false
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://www.dreamcityfohi.com/play",
+    "https://www.dreamcityfohi.com/openplayfaq",
+    "https://www.dreamcityfohi.com/",
+    "https://static.wixstatic.com/media/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg/v1/fill/w_2500,h_1391,al_c/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg"
+  ],
+  "notes": "Official Dream City play, FAQ, and home pages reviewed May 16, 2026. Original official image source URL: https://static.wixstatic.com/media/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg/v1/fill/w_2500,h_1391,al_c/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg. The official hero image was downloaded from Dream City's Wix-hosted media and uploaded through POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "Dream City says the facility is for children 6 months to 6 years old; the schema has no exact 6-only bucket, so the listing maps that upper edge into 6–8.",
+    "pricePerClass uses the published single-visit open-play admission of $35 for 1 child with 1 adult; sibling and extra-adult pricing are listed separately on the official play page.",
+    "rating / reviewCount are not published on the official site, so they are stored as 0 / 0.",
+    "Open-play schedules are marked 'subject to change' and may shift for private events or camp sessions."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-dream-city-forest-hills-open-play",
+        "name": "Dream City Open Play",
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "address": "108-48 Queens Blvd, Forest Hills, NY 11375",
+        "activityTypes": ["Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 35,
+        "shortDescription": "Reservation-based indoor open play in Forest Hills for children 6 months to 6 years old, with weekday and weekend two-hour sessions in a 6,200-square-foot play-and-learn center.",
+        "longDescription": "Dream City is a children's play and learn center in Forest Hills, Queens. The official site describes the 6,200-square-foot facility as designed for young children six years old and under, with open play, classes, special events, and parties in a play-based environment for families and caretakers.\n\nThe official open-play page lists two-hour reservation-based sessions. Current posted weekday sessions are Tuesday through Friday at 9:30 a.m.-11:30 a.m., 12:30 p.m.-2:30 p.m., and 3:00 p.m.-5:00 p.m. Weekend sessions are Saturday and Sunday at 9:00 a.m.-11:00 a.m., 12:00 p.m.-2:00 p.m., and 3:00 p.m.-5:00 p.m. The site notes schedules are subject to change, camp weeks can affect the afternoon slot, and private events can change availability.\n\nPublished admission is $35 for 1 child with 1 adult, $20 for each accompanied sibling, and $15 for each additional adult. The same page says online reservations are required, open-play passes expire two months after purchase, and no adult swapping is allowed during the session. The FAQ adds that the session can close if nobody signs up one hour before start time, cancellations are allowed up to one hour before open play, and each adult may supervise up to three children ages 6 and under.\n\nDream City lists its address as 108-48 Queens Blvd, Forest Hills, NY 11375, with phone (718) 880-2352 and email info@dreamcityfohi.com. ClassScout's image is a re-hosted copy of Dream City's official Wix-served hero photograph.\n\nSources: https://www.dreamcityfohi.com/play https://www.dreamcityfohi.com/openplayfaq https://www.dreamcityfohi.com/ https://static.wixstatic.com/media/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg/v1/fill/w_2500,h_1391,al_c/05dfa2_ef00f1f2766d411ba14a6588b85d7018~mv2.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "Weekend Friendly", "New"],
+        "image": "https://i.ibb.co/HfWHCwHD/d59bcfee8998.jpg",
+        "email": "info@dreamcityfohi.com",
+        "website": "https://www.dreamcityfohi.com/play",
+        "phone": "(718) 880-2352",
+        "announcementTitle": "Reservations required for open play",
+        "announcementDescription": "Dream City requires online reservations for open play and says sessions may close if nobody books one hour before start time.",
+        "announcementBadge": "Reserve online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

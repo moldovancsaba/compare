@@ -1,0 +1,45 @@
+{
+  "sourceUrls": [
+    "https://www.statenislandmuseum.org/visit/",
+    "https://www.statenislandmuseum.org/",
+    "https://www.statenislandmuseum.org/wp-content/uploads/2025/11/Visit-Mastodon-Staten-Island-Museum-scaled-1-1200x602.jpg"
+  ],
+  "notes": "Staten Island Museum official WordPress site (visit + home). Hero image is the museum’s own “Visit Mastodon” JPEG variant from wp-content/uploads/2025/11, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Admission is listed as suggested on the visit page; child rate cited is for ages 2–12 ($2). Policy for children under 2 is not spelled out in the excerpt used—confirm at the desk before visiting.",
+    "pricePerClass uses $2 as the published child (2–12) suggested general admission; adult and senior suggested amounts differ per the same page.",
+    "rating and reviewCount are 0; not published on the official visit page.",
+    "Special closure dates (e.g. May 6–8, 2026 on the fetched page) can change—check statenislandmuseum.org/visit before planning a trip."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-staten-island-museum",
+        "name": "Staten Island Museum",
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "address": "1000 Richmond Terrace, Building A, Staten Island, NY 10301",
+        "activityTypes": ["Museum", "Science", "Art", "History", "STEM"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 2,
+        "shortDescription": "Snug Harbor–based art, natural science, and history museum (Wed–Sun) with suggested admission and family-friendly exhibits including the mastodon experience highlighted on the visit page.",
+        "longDescription": "The Staten Island Museum is a Cultural Institutions Group museum on the Snug Harbor Cultural Center & Botanical Garden campus, housed in Building A at 1000 Richmond Terrace. Its visit page lists public hours as Wednesday through Sunday, 11 a.m. to 5 p.m., with last entry at 4:45 p.m., and notes annual closures on Thanksgiving, Christmas, New Year’s Day, Memorial Day, and Labor Day.\n\nSuggested general admission on the same page: adults $8, students and seniors $5, children ages 2 through 12 $2, and free admission for museum members. The page also notes free admission for a caregiver accompanying a visitor with a disability, and year-round free admission for active-duty and retired veterans with ID. Groups of ten or more are directed to contact Visitor Experience at the published phone.\n\nThe museum describes its mission as sparking curiosity through natural science, art, and history. The visit page promotes a digital guide via Bloomberg Connects and links a Snug Harbor Discovery Pass product for combined admission to multiple Snug Harbor venues (details on Snug Harbor’s site).\n\nVisitor phone listed on the visit page: 718-727-1135.\n\nSources: https://www.statenislandmuseum.org/visit/ https://www.statenislandmuseum.org/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick", "Weekend Friendly"],
+        "image": "https://i.ibb.co/3YjftCyZ/41ac2fd66cd3.jpg",
+        "email": "",
+        "website": "https://www.statenislandmuseum.org",
+        "phone": "718-727-1135",
+        "announcementTitle": "Snug Harbor Discovery Pass",
+        "announcementDescription": "Visit page links a $20 Discovery Pass covering multiple Snug Harbor venues—see Snug Harbor’s site for current pass details.",
+        "announcementBadge": "Discovery Pass",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

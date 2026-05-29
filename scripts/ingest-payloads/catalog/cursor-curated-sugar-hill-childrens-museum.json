@@ -1,0 +1,50 @@
+{
+  "sourceUrls": [
+    "https://www.sugarhillmuseum.org/hours-and-admission",
+    "https://www.sugarhillmuseum.org/",
+    "https://images.squarespace-cdn.com/content/v1/54413be4e4b0e6f12d4a82f4/17320a8f-2ac9-4450-b8b3-40522899e95c/RinggoldFaith_portfolio8_BHC.png"
+  ],
+  "notes": "Official Sugar Hill Children's Museum hours-and-admission and home pages reviewed May 16, 2026. Hero image is an official Squarespace-hosted artwork photograph credited to Michael Palma Mir on the museum site, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass set to 0 because children ages 0–8 are free on the official admission page; adults are $9 and other tiers differ.",
+    "The official hours page lists Friday 10 a.m.–5 p.m. and Saturday 10 a.m.–3 p.m. as temporarily closed to the public—confirm current open days before visiting.",
+    "Museum programming is designed for children ages 3–8 per the FAQ on the same page; ClassScout age bands include 0–2 for caregivers with infants.",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sugar-hill-childrens-museum-drop-in",
+        "name": "Sugar Hill Children's Museum of Art & Storytelling",
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "address": "898 St. Nicholas Avenue at 155th Street, New York, NY 10032",
+        "activityTypes": [
+          "Art museum",
+          "Storytelling",
+          "Workshops",
+          "Performances"
+        ],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Harlem children’s museum (ages 3–8 focus): free admission for children 0–8, art exhibitions, storytelling, and family workshops at 155th Street.",
+        "longDescription": "The Sugar Hill Children’s Museum of Art & Storytelling in Upper Manhattan offers year-round art exhibitions, storytelling series, workshops, and performances rooted in the cultural heritage of Sugar Hill and surrounding communities. The official hours-and-admission page lists the museum at 898 St. Nicholas Avenue at 155th Street, New York, NY 10032, phone 212-335-0004, and email info@sugarhillmuseum.org.\n\nAdmission on that page: children ages 0 to 8 free; members free; youth ages 9 to 17 $4; seniors (65+) and visitors with disabilities $4; students and teachers with ID $6; adults $9. Discount programs include $3 admission with EBT card and ID (Museums for All), Cool Culture card holders, and Culture Pass. Museum admission includes access to exhibits, programs, performances, and workshops unless a special ticketed event notes an additional charge.\n\nHours published on the same page list Friday 10 a.m. to 5 p.m. and Saturday 10 a.m. to 3 p.m. as temporarily closed to the public, with Sunday through Tuesday closed and Wednesday and Thursday reserved for group visits—families should confirm current public hours on sugarhillmuseum.org before visiting. Subway directions on the page include the C train to 155th Street directly across from the museum entrance.\n\nSources: https://www.sugarhillmuseum.org/hours-and-admission https://www.sugarhillmuseum.org/ https://images.squarespace-cdn.com/content/v1/54413be4e4b0e6f12d4a82f4/17320a8f-2ac9-4450-b8b3-40522899e95c/RinggoldFaith_portfolio8_BHC.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "New"],
+        "image": "https://i.ibb.co/Tx4bMWM8/661f33d09fac.webp",
+        "email": "info@sugarhillmuseum.org",
+        "website": "https://www.sugarhillmuseum.org",
+        "phone": "212-335-0004",
+        "announcementTitle": "Check public hours",
+        "announcementDescription": "Official page notes Fri/Sat temporarily closed to the public—confirm current open days on sugarhillmuseum.org before visiting.",
+        "announcementBadge": "Free ages 0–8",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

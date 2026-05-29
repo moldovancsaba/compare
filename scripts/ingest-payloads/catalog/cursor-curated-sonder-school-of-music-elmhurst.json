@@ -1,0 +1,65 @@
+{
+  "sourceUrls": [
+    "https://sonderous.com/",
+    "https://sonderous.com/programs/",
+    "https://sonderous.com/enroll/",
+    "https://sonderous.com/wp-content/uploads/2024/03/Lobby-3-1024x768.jpg"
+  ],
+  "notes": "Official Sonder School of Music home, programs, and enroll pages were reviewed on May 26, 2026. The official Sonder School of Music interior image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sonder-school-of-music-elmhurst",
+        "name": "Sonder School of Music Elmhurst",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "address": "83-07 Grand Ave, Elmhurst, NY 11373",
+        "activityTypes": ["Music", "Art"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening"],
+        "pricePerClass": 48,
+        "shortDescription": "Private lessons and group music classes in Elmhurst for ages 3 and up, with weekday and weekend availability.",
+        "longDescription": "Sonder School of Music's official site describes an Elmhurst music school at 83-07 Grand Avenue offering private lessons, group classes, and ensemble coaching for ages 3 and up. The official programs page lists instruction in piano, strings, guitar, flute, saxophone, clarinet, drums, voice, ukulele, theory, composition, general music appreciation, recording, and more, plus an art program for enrolled students.\n\nThe official enroll page publishes current lesson availability of 2-8 PM on weekdays and 9 AM-5 PM on weekends, which supports weekday, weekend, morning, afternoon, evening, and after-school tags. The same page also publishes one-on-one music lesson pricing starting at $48 for a 30-minute lesson, so this listing stores pricePerClass as 48.\n\nSources: https://sonderous.com/ https://sonderous.com/programs/ https://sonderous.com/enroll/ https://sonderous.com/wp-content/uploads/2024/03/Lobby-3-1024x768.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/5X4zv8SG/sonder-school-of-music.jpg",
+        "email": "music@sonderous.com",
+        "website": "https://sonderous.com/",
+        "phone": "(347) 527-9088",
+        "recurringPrograms": [
+          {
+            "id": "rp-sonder-weekday-lessons",
+            "title": "Weekday Music Lessons",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "2:00 PM-8:00 PM",
+            "locationNote": "Sonder School of Music",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Music", "Art"],
+            "summary": "Weekday afternoon and evening private lessons, group classes, and ensemble coaching for ages 3 and up.",
+            "registrationUrl": "https://sonderous.com/enroll/"
+          },
+          {
+            "id": "rp-sonder-weekend-lessons",
+            "title": "Weekend Music Lessons",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "9:00 AM-5:00 PM",
+            "locationNote": "Sonder School of Music",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Music", "Art"],
+            "summary": "Weekend music lessons and classes for ages 3 and up.",
+            "registrationUrl": "https://sonderous.com/enroll/"
+          }
+        ]
+      }
+    }
+  ]
+}

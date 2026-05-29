@@ -1,0 +1,49 @@
+{
+  "sourceUrls": [
+    "https://www.statenislandzoo.org/birthday-parties",
+    "https://www.statenislandzoo.org/contact",
+    "https://statenislandzoo.doubleknot.com/facilitysearch/3770"
+  ],
+  "notes": "Official Staten Island Zoo birthday-parties and contact pages reviewed May 16, 2026. Hero image is an official Wix-hosted birthday-party photograph from statenislandzoo.org, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $650, the published non-member package price; member price is $600 and discounts apply at checkout when logged into a member account.",
+    "Party capacity maximum is 40 people per the official birthday page; families must supply their own cake or cupcakes.",
+    "Education department phone extension (718-442-3100 ext. 33) is cited on the zoo’s registration system for party inquiries; general zoo phone not repeated on the contact page excerpt used.",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-staten-island-zoo-birthday-parties",
+        "name": "Staten Island Zoo Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "address": "614 Broadway, Staten Island, NY 10310",
+        "activityTypes": [
+          "Birthday Entertainment",
+          "Animals",
+          "Outdoor Activities"
+        ],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 650,
+        "shortDescription": "Weekend zoo birthday parties: animal encounter, craft, carousel ride, pizza, and juice in the Zoo Café—$650 non-member / $600 member for up to 40 guests.",
+        "longDescription": "The Staten Island Zoo advertises children’s birthday parties as a two-hour experience on Saturdays and Sundays at 10:30 a.m. or 1:30 p.m. in the Zoo Café, led by a zoo instructor. The official birthday-parties page describes meeting animals up close, a carousel ride, pizza and juice, an animal mask craft, animal-themed paper goods, and 32 invitations. Maximum party capacity is 40 people. Families must supply their own cake or cupcakes.\n\nPublished pricing on the same page: $600 for zoo members and $650 for non-members, with member discounts applied at checkout when logged into a member account on the zoo’s registration portal.\n\nLocation from the official contact page: 614 Broadway, Staten Island, NY 10310. Party registration and availability are handled through the zoo’s online system; education inquiries are commonly directed to 718-442-3100 ext. 33 per the zoo’s facility-registration pages.\n\nSources: https://www.statenislandzoo.org/birthday-parties https://www.statenislandzoo.org/contact https://statenislandzoo.doubleknot.com/facilitysearch/3770",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Staff Pick"],
+        "image": "https://i.ibb.co/gLhZC98g/9ff1422f835b.jpg",
+        "email": "",
+        "website": "https://www.statenislandzoo.org/birthday-parties",
+        "phone": "718-442-3100",
+        "announcementTitle": "Weekend party slots",
+        "announcementDescription": "Official page lists 10:30 a.m. and 1:30 p.m. Saturday and Sunday parties in the Zoo Café—register online for availability.",
+        "announcementBadge": "Animals + pizza",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://bronxzoo.com/learn/families/birthday-parties",
+    "https://bronxzoo.com/learn/families/birthday-parties/faq",
+    "https://bronxzoo.com/contact",
+    "https://bronxzoo.com/plan-your-visit/getting-here?buf=99999999",
+    "https://cdn.wcs.org/2022/07/25/5neygwcjm4_BZ_Birthday_Hero_072522_v3.jpg"
+  ],
+  "notes": "Official Bronx Zoo birthday party page, FAQ, contact page, and getting-here page fetched May 16, 2026. The official birthday-hero image from cdn.wcs.org was downloaded locally and uploaded via POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "pricePerClass uses $1560, the published regular price for the Birthday Expedition package for up to 25 guests; Zoofari pricing, member pricing, and larger-party add-ons differ on the official page.",
+    "Neighborhood is mapped to canonical Fordham because the official Bronx Zoo address is 2300 Southern Boulevard in Bronx 10460 and the zoo's official getting-here page references nearby Fordham University for parking guidance.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-zoo-birthday-parties-fordham",
+        "name": "Bronx Zoo Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "address": "2300 Southern Boulevard, Bronx, NY 10460",
+        "activityTypes": [
+          "Birthday Entertainment",
+          "Outdoor Activities"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8",
+          "9–12",
+          "Teens"
+        ],
+        "dayTimeTags": [
+          "Weekend",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 1560,
+        "shortDescription": "Weekend Bronx Zoo birthday packages with animal encounters, educator-led activities, and a morning expedition option that fills a scarce Bronx birthday-party slot.",
+        "longDescription": "The Bronx Zoo offers official children's birthday party packages with dedicated conservation educators, animal encounters, and full-day zoo admission for party guests. The birthday party page currently lists two weekend formats: the Birthday Expedition package, a 90-minute experience with an educator-led activity and animal guests, and the Zoofari Birthday Party package, which adds a private party space, scavenger hunt, activity stations, cupcakes, and optional catered food and drink.\n\nThe official page lists Birthday Expedition at $1,560 regular or $1,400 member for up to 25 guests, scheduled Saturdays or Sundays from 10:30 a.m. to 12:00 p.m. It lists Zoofari at $3,020 regular or $2,720 member for up to 35 guests, scheduled Saturdays or Sundays from 1:30 p.m. to 4:00 p.m. The FAQ says parties are generally offered Saturday and Sunday, encourages booking 3-4 months in advance, and notes that the Birthday Expedition is an outdoor experience while Zoofari includes a private party space.\n\nFor contact and planning, the official birthday page directs families to BZBirthdayParties@wcs.org or 718-741-7517 Tuesday through Friday from 9:00 a.m. to 4:00 p.m. The official contact and getting-here pages list Bronx Zoo at 2300 Southern Boulevard, Bronx, NY 10460.\n\nSources: https://bronxzoo.com/learn/families/birthday-parties https://bronxzoo.com/learn/families/birthday-parties/faq https://bronxzoo.com/contact https://bronxzoo.com/plan-your-visit/getting-here?buf=99999999 https://cdn.wcs.org/2022/07/25/5neygwcjm4_BZ_Birthday_Hero_072522_v3.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Weekend Friendly"
+        ],
+        "image": "https://i.ibb.co/hRzsdQv9/4f52103097bb.jpg",
+        "email": "BZBirthdayParties@wcs.org",
+        "website": "https://bronxzoo.com/learn/families/birthday-parties",
+        "phone": "718-741-7517",
+        "announcementTitle": "Morning Birthday Expedition",
+        "announcementDescription": "Official page lists a Saturday/Sunday Birthday Expedition package from 10:30 a.m. to 12:00 p.m. with animal encounters and full-day zoo admission.",
+        "announcementBadge": "Weekend AM",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

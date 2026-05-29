@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/dodge-ymca/programs-classes/kids-family/birthday-parties",
+    "https://ymcanyc.org/locations/dodge-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/prgf_gallery/public/2018-10/banner-dodge-facility-pool_1.jpg.webp?itok=hx_K9iqM"
+  ],
+  "notes": "YMCA of Greater New York Dodge branch birthday-party page and branch listing. Hero image is the official Dodge indoor pool banner on ymcanyc.org, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0 because the birthday page uses an inquiry form rather than a published per-party price table; request a quote via the Office form or dodgeparties@ymcanyc.org.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "Specific party package options (pool vs gym) and availability are confirmed only after the branch party team responds to an inquiry."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-dodge-ymca-birthday-parties",
+        "name": "Dodge YMCA — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "address": "225 Atlantic Avenue, Brooklyn, NY 11201",
+        "activityTypes": ["Swimming", "Birthday Entertainment", "Indoor Play"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekend", "Afternoon", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Downtown Brooklyn Y birthday rentals with pool and gym party options; families start via the branch inquiry form and dodgeparties@ymcanyc.org.",
+        "longDescription": "The Dodge YMCA of Greater New York at 225 Atlantic Avenue in Brooklyn advertises hassle-free children’s birthday parties with packages that can include pool parties, gym parties, and related youth-program spaces. The official birthday-party page directs families to complete an inquiry form so the party team can review the requested date and follow up, and lists dodgeparties@ymcanyc.org for questions.\n\nThe branch location page describes Dodge as serving the downtown Brooklyn area with pools, youth sports, dance, and other family programs. Party pricing is not listed as a fixed public rate on the birthday page used here; families should use the inquiry workflow for current package details and fees.\n\nBranch phone on the location listing: 212-912-2400.\n\nSources: https://ymcanyc.org/locations/dodge-ymca/programs-classes/kids-family/birthday-parties https://ymcanyc.org/locations/dodge-ymca",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Popular", "Weekend Friendly"],
+        "image": "https://i.ibb.co/JWJGWXLg/7254b4be62b4.webp",
+        "email": "dodgeparties@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/dodge-ymca",
+        "phone": "212-912-2400",
+        "announcementTitle": "Start with the party inquiry form",
+        "announcementDescription": "Dodge Y birthday bookings begin with the published Office inquiry form—email dodgeparties@ymcanyc.org for help.",
+        "announcementBadge": "Inquiry first",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

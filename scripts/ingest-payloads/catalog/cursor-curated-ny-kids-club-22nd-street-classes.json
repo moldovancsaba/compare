@@ -1,0 +1,65 @@
+{
+  "sourceUrls": [
+    "https://nypreschoolandkidsclub.com/22nd-street/",
+    "https://nypreschoolandkidsclub.com/wp-content/uploads/2026/03/22nd-Street-%E2%80%93-Winter_Spring-Enrichment-Table-Schedule-3.pdf",
+    "https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg"
+  ],
+  "notes": "Official NY Preschool & Kids Club 22nd Street location search result, official Winter/Spring 2026 schedule PDF, and official NY Kids Club logo image were reviewed on May 26, 2026. The provider image reuses the existing NY Kids Club ImgBB asset already used in production payloads.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official sources publish schedules and contact details but not a single fixed per-class tuition for this location.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ny-kids-club-22nd-street-classes",
+        "name": "NY Kids Club 22nd Street Classes",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "address": "38 E 22nd St, New York, NY 10010",
+        "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekday and weekend enrichment classes in Flatiron for babies, toddlers, and preschoolers.",
+        "longDescription": "NY Kids Club's official Winter/Spring 2026 22nd Street schedule PDF lists enrichment classes at 38 E 22nd Street in Flatiron with contact phone (917) 525-4559 and email nykidsclub22@nypreschoolandkidsclub.com. The published schedule includes baby and toddler programs such as Musical Tots, baby art and STEM, and toddler science.\n\nThe official schedule snippet shows weekday classes including toddler science at 4:15 PM and also shows weekend programming, supporting weekday, weekend, morning, afternoon, and after-school timing tags. This listing follows the same NY Kids Club enrichment convention already used elsewhere in the catalog for early childhood art, music, STEM, and gym-oriented classes.\n\nSources: https://nypreschoolandkidsclub.com/22nd-street/ https://nypreschoolandkidsclub.com/wp-content/uploads/2026/03/22nd-Street-%E2%80%93-Winter_Spring-Enrichment-Table-Schedule-3.pdf https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/HfNdy4t7/c716cbfab29b.jpg",
+        "email": "nykidsclub22@nypreschoolandkidsclub.com",
+        "website": "https://nypreschoolandkidsclub.com/22nd-street/",
+        "phone": "(917) 525-4559",
+        "recurringPrograms": [
+          {
+            "id": "rp-nykc-22nd-street-weekdays",
+            "title": "22nd Street Weekday Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "Morning through 4:15 PM",
+            "locationNote": "NY Kids Club 22nd Street",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+            "summary": "Weekday baby, toddler, and preschool enrichment classes including music, STEM, and toddler science.",
+            "registrationUrl": "https://nypreschoolandkidsclub.com/22nd-street/"
+          },
+          {
+            "id": "rp-nykc-22nd-street-weekend",
+            "title": "22nd Street Weekend Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "9:45 AM-11:00 AM",
+            "locationNote": "NY Kids Club 22nd Street",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+            "summary": "Weekend enrichment classes for babies and toddlers.",
+            "registrationUrl": "https://nypreschoolandkidsclub.com/22nd-street/"
+          }
+        ]
+      }
+    }
+  ]
+}

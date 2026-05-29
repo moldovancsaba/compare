@@ -1,0 +1,54 @@
+{
+  "sourceUrls": [
+    "https://tutuschool.com/parkslope/camp/",
+    "https://tutuschool.com/parkslope/",
+    "https://tutuschool.com/parkslope/wp-content/uploads/sites/86/2025/03/hero-camp-scaled-1.jpg"
+  ],
+  "notes": "Official Tutu School Park Slope camp page and main location page fetched May 16 2026. Address, phone, Park Slope neighborhood, camp ages, times, and prices come from those pages. Original official image source URL: https://tutuschool.com/parkslope/wp-content/uploads/sites/86/2025/03/hero-camp-scaled-1.jpg. ImgBB upload completed via POST /api/ingest/upload and stored in provider.image.",
+  "missingOrUncertain": [
+    "provider.pricePerClass uses $500 as the planning figure because the official page lists the 4-day full-time camp at $500; the same page also lists Petite Day Camps at $75 per day.",
+    "email: official pages invite families to email questions, but the raw HTML obfuscates the address; left empty rather than guessing.",
+    "rating and reviewCount are not published on the official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "tutu-camp-park-slope",
+        "name": "Tutu Camp",
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "address": "235 5th Ave, Park Slope, NY 11215",
+        "activityTypes": [
+          "Dance"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 500,
+        "shortDescription": "Storybook ballet camp in Park Slope with weekday sessions for ages 3–8.",
+        "longDescription": "Tutu Camp at Tutu School Park Slope is a summer ballet camp where kids spend their days dancing, crafting, and exploring ballet stories; the official camp page says no prior dance experience is needed and describes a 4-day full-time camp for ages 4–8 plus Petite Day Camps for ages 3–5.\n\nThe official 2026 camp page lists a 4-day full-time camp from Monday, June 29 through Thursday, July 2, running 9:00 a.m. to 2:00 p.m. for ages 4–8 at $500. The same page also lists multiple Petite Day Camps for ages 3–5 that run 9:00 a.m. to 12:00 p.m. at $75 per day, with multi-day and sibling discounts noted on the site.\n\nActivities described on the official page include ballet classes, playful games and activities, creative crafts, enchanting storytime, and themed sessions based on ballet stories such as Sleeping Beauty, Cinderella, and The Nutcracker. The school’s Park Slope location page lists the address as 235 5th Ave, Park Slope, NY 11215 and phone number as (917) 933-8007.\n\nSources: https://tutuschool.com/parkslope/camp/ https://tutuschool.com/parkslope/ https://tutuschool.com/parkslope/wp-content/uploads/sites/86/2025/03/hero-camp-scaled-1.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New"
+        ],
+        "image": "https://i.ibb.co/GQFnbH4Q/df2f88a5c661.jpg",
+        "email": "",
+        "website": "https://tutuschool.com/parkslope/camp/",
+        "phone": "(917) 933-8007",
+        "announcementTitle": "Summer 2026 ballet camp schedule posted",
+        "announcementDescription": "Official page lists weekday camps with 9 a.m. starts for ages 3–8.",
+        "announcementBadge": "Seasonal"
+      }
+    }
+  ]
+}

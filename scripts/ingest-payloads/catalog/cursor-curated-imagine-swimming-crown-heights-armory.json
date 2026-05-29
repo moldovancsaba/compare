@@ -1,0 +1,55 @@
+{
+  "sourceUrls": [
+    "https://www.imagineswimming.com/locations/crown-heights-armory",
+    "https://www.imagineswimming.com/our-offerings/weekly-lessons",
+    "https://www.imagineswimming.com/locations.html",
+    "https://static.wixstatic.com/media/3398a9_daf07cb1ca864e14952e3b831d25c278~mv2.png/v1/fill/w_192,h_192,lg_1,usm_0.66_1.00_0.01/3398a9_daf07cb1ca864e14952e3b831d25c278~mv2.png"
+  ],
+  "notes": "Official Imagine Swimming Crown Heights Armory location page, official weekly lessons page, legacy locations page, and official site image were reviewed on May 26, 2026. The official image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "provider.phone uses the general official Imagine Swimming contact number published on the official locations page rather than a separate location-specific front desk line.",
+    "pricePerClass is stored as 0 because the reviewed official sources publish program access details and some income-based discount examples, but not one single universal weekly-lesson price for this location.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-imagine-swimming-crown-heights-armory",
+        "name": "Imagine Swimming Crown Heights Armory",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "address": "1561 Bedford Ave, Brooklyn, NY 11225",
+        "activityTypes": ["Swimming", "Sports"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Evening", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Seven-day swim lessons at the Crown Heights Armory for babies, kids, and teens starting at 18 months.",
+        "longDescription": "Imagine Swimming's official Crown Heights Armory page says the Brooklyn pool serves families in Crown Heights and surrounding neighborhoods and offers swim lessons for babies, children, and adults. The official page states that this location is suited for ages 18 months and older.\n\nThe official Weekly Lessons page says lessons at the Crown Heights Armory are offered 7 days a week from 9:00 AM to 6:00 PM. The official Crown Heights Armory page lists the facility at 1561 Bedford Ave, Brooklyn, NY 11225 and describes the location as a Crown Heights site with a supportive, safety-first swim instruction model.\n\nImagine Swimming's official locations page publishes the general business contact details as phone 212-253-9650 and email info@imagineswimming.com.\n\nSources: https://www.imagineswimming.com/locations/crown-heights-armory https://www.imagineswimming.com/our-offerings/weekly-lessons https://www.imagineswimming.com/locations.html https://static.wixstatic.com/media/3398a9_daf07cb1ca864e14952e3b831d25c278~mv2.png/v1/fill/w_192,h_192,lg_1,usm_0.66_1.00_0.01/3398a9_daf07cb1ca864e14952e3b831d25c278~mv2.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/7dDd0Gbk/4477265cb17f.png",
+        "email": "info@imagineswimming.com",
+        "website": "https://www.imagineswimming.com/locations/crown-heights-armory",
+        "phone": "212-253-9650",
+        "recurringPrograms": [
+          {
+            "id": "rp-imagine-crown-heights-weekly-lessons",
+            "title": "Weekly Swim Lessons",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "timeText": "9:00 AM-6:00 PM",
+            "locationNote": "Crown Heights Armory pool",
+            "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Swimming", "Sports"],
+            "summary": "Seven-day swim lessons for babies, children, and teens at the Crown Heights Armory.",
+            "registrationUrl": "https://www.imagineswimming.com/locations/crown-heights-armory"
+          }
+        ]
+      }
+    }
+  ]
+}

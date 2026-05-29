@@ -1,0 +1,74 @@
+{
+  "sourceUrls": [
+    "https://www.unionsquareplay.com/upper-east-side",
+    "https://www.unionsquareplay.com/classes-programs",
+    "https://www.unionsquareplay.com/_files/ugd/134920_9559eb9a0b0c42bba061dba466c0576c.pdf",
+    "https://www.hisawyer.com/union-square-play-1/schedules?location_id%5B%5D=134001&schedule_id=drop-ins",
+    "https://static.wixstatic.com/media/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg"
+  ],
+  "notes": "Official Union Square Play Upper East Side page, classes page, Spring 2026 UES schedule PDF, and the official Sawyer drop-ins booking link reviewed May 26, 2026. The official Union Square Play image from unionsquareplay.com was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the cited official Union Square Play sources for the Upper East Side location do not publish a public open-play price.",
+    "rating and reviewCount are set to 0 because the official source pages do not publish them.",
+    "The official Upper East Side page publishes broader location hours, but this payload only stores the explicit Open Play recurrences visible on the official Spring 2026 schedule PDF."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-union-square-play-ues-open-play",
+        "name": "Union Square Play Open Play - Upper East Side",
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "address": "245 E 84th Street, New York, NY 10028",
+        "activityTypes": ["Indoor Play"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Union Square Play lists weekday open-play sessions for babies, toddlers, and preschool-age kids at its Upper East Side studio on East 84th Street.",
+        "longDescription": "Union Square Play's official Upper East Side page describes the E 84th Street location as a neighborhood hub for early childhood development and says the studio offers classes and open play. The location page lists Union Square Play at 245 E 84th Street, New York, NY 10028, with contact points info@unionsquareplay.com and (917) 397-2843.\n\nThe official classes page frames the studio's programming around early-childhood play and development. On the official Spring 2026 UES schedule PDF, Union Square Play publishes an Open Play session on Mondays at 2:00 PM for ages 0-5 years and another Open Play session on Fridays at 9:30 AM for ages 6 months-3 years. Those source-backed recurring slots support Weekday, Morning, and Afternoon tags for this listing.\n\nThe same official Upper East Side page also states Monday-Friday hours of 9:00am-5:00pm for classes and open play. Union Square Play's official site links out to a Sawyer booking page dedicated to this location's drop-ins.\n\nSources: https://www.unionsquareplay.com/upper-east-side https://www.unionsquareplay.com/classes-programs https://www.unionsquareplay.com/_files/ugd/134920_9559eb9a0b0c42bba061dba466c0576c.pdf https://www.hisawyer.com/union-square-play-1/schedules?location_id%5B%5D=134001&schedule_id=drop-ins https://static.wixstatic.com/media/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [],
+        "image": "https://i.ibb.co/mr8PFbKs/c6bbf42c0986.jpg",
+        "email": "info@unionsquareplay.com",
+        "website": "https://www.unionsquareplay.com/upper-east-side",
+        "phone": "(917) 397-2843",
+        "announcementTitle": "Spring 2026 drop-ins posted",
+        "announcementDescription": "The official UES schedule PDF includes recurring Open Play sessions and links to Sawyer drop-in booking.",
+        "announcementBadge": "Book now",
+        "recurringPrograms": [
+          {
+            "id": "rp-usp-ues-open-play-mon",
+            "title": "Open Play",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday"],
+            "timeText": "2:00 PM",
+            "locationNote": "UES - 245 E 84th St. NYC",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Indoor Play"],
+            "summary": "Published on the official Spring 2026 UES schedule as Open Play for ages 0-5 years.",
+            "registrationUrl": "https://www.hisawyer.com/union-square-play-1/schedules?location_id%5B%5D=134001&schedule_id=drop-ins",
+            "isDropIn": true
+          },
+          {
+            "id": "rp-usp-ues-open-play-fri",
+            "title": "Open Play",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Friday"],
+            "timeText": "9:30 AM",
+            "locationNote": "UES - 245 E 84th St. NYC",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Indoor Play"],
+            "summary": "Published on the official Spring 2026 UES schedule as Open Play for ages 6 months-3 years.",
+            "registrationUrl": "https://www.hisawyer.com/union-square-play-1/schedules?location_id%5B%5D=134001&schedule_id=drop-ins",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

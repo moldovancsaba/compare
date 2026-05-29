@@ -1,0 +1,57 @@
+{
+  "sourceUrls": [
+    "https://www.nypl.org/locations/grand-concourse",
+    "https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-4",
+    "https://drupal.nypl.org/sites-drupal/default/files/styles/max_width_960/public/2022-04/Steam_Discovery_Kits_identity%20%282%29.png?itok=AMgP9oi9"
+  ],
+  "notes": "Grand Concourse Library official location page and official NYPL After School event listing reviewed May 26, 2026. The image is an official NYPL STEAM Discovery Kits graphic from nypl.org, re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The Grand Concourse branch page confirms NYPL After School runs Monday-Thursday when school is in session, while the cited event listing provides a current 3:30-6:30 PM example and upcoming dates for the program."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-grand-concourse-library-after-school",
+        "name": "Grand Concourse Library NYPL After School",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "address": "155 East 173rd Street, Bronx, NY 10457",
+        "activityTypes": ["Tutoring", "STEM"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Free Concourse library drop-in for ages 6-12 with homework help, reading support, STEAM activities, and snacks after school.",
+        "longDescription": "The New York Public Library's Grand Concourse branch highlights NYPL After School as a free drop-in program for kids ages 6-12. The official branch page says the program takes place after regular school hours on Mondays through Thursdays when school is in session, with homework help from tutors or Teen Reading Ambassadors, reading recommendations, fun activities, and snacks.\n\nA current official NYPL After School event listing for Grand Concourse Library shows the program running from 3:30 PM to 6:30 PM and repeating across upcoming Monday-Thursday dates. Families can simply show up; no pre-registration is required.\n\nThe branch page lists Grand Concourse Library at 155 East 173rd Street, Bronx, NY 10457, with phone 718-583-6611 and email grandconcourse@nypl.org.\n\nSources: https://www.nypl.org/locations/grand-concourse https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-4",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/nqWfZXwM/84436bd23463.png",
+        "email": "grandconcourse@nypl.org",
+        "website": "https://www.nypl.org/locations/grand-concourse",
+        "phone": "718-583-6611",
+        "announcementTitle": "Free after-school drop-in",
+        "announcementDescription": "NYPL After School at Grand Concourse Library offers free homework help, enrichment, and snacks Monday-Thursday.",
+        "announcementBadge": "Free",
+        "recurringPrograms": [
+          {
+            "id": "rp-grand-concourse-library-nypl-after-school",
+            "title": "NYPL After School",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "timeText": "3:30 PM-6:30 PM",
+            "locationNote": "Grand Concourse Library, Children's Room",
+            "ageRanges": ["6–8", "9–12"],
+            "activityTypes": ["Tutoring", "STEM"],
+            "summary": "Free drop-in homework help, reading support, STEAM activities, and snacks for kids ages 6-12.",
+            "registrationUrl": "https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-4",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

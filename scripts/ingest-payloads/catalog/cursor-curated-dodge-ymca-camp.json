@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/dodge-ymca/programs-classes/camps",
+    "https://ymcanyc.org/locations/dodge-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc"
+  ],
+  "notes": "Official Dodge YMCA 2026 camp page and branch listing reviewed May 19, 2026. Original official image source URL: https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "225 Atlantic Avenue is mapped to the nearest supported canonical neighborhood, Brooklyn Heights, because the official YMCA page gives the street address but not a ClassScout-native neighborhood label.",
+    "pricePerClass uses $956, the published community rate for one two-week Traditional Summer Camp session; Kinder, Swim, and Big Messy Art Camp rates differ on the same official page.",
+    "rating and reviewCount are not published on the cited official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-dodge-ymca-summer-camp-2026",
+        "name": "Dodge YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "address": "225 Atlantic Avenue, Brooklyn, NY 11201",
+        "activityTypes": ["Swimming", "Sports", "STEM", "Art"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 956,
+        "shortDescription": "Dodge YMCA runs weekday summer camp in Downtown Brooklyn with traditional, kinder, swim, and Big Messy Art tracks for children ages 4 through 12.",
+        "longDescription": "The Dodge YMCA publishes 2026 summer camp at 225 Atlantic Avenue in Brooklyn, with two-week sessions running June 29 through August 21, 2026. The official page lists camp hours as 9 a.m. to 5 p.m. and extended hours from 8 a.m. to 9 a.m. and 5 p.m. to 6 p.m., which supports weekday morning, afternoon, and after-school tags.\n\nThe camp page lists Traditional Summer Camp for ages 5-10, Kinder Camp for ages 4-5, Swim Camp for ages 7-12, and Big Messy Art Camp for ages 6-8. Published descriptions highlight physical fitness, arts and crafts, science activities, group play, instructional swim, and a focused art camp with painting, clay sculpting, murals, and field trips.\n\nPublished community tuition for one two-week Traditional Summer Camp session is $956; Kinder Camp is listed at $1,043 community, Swim Camp at $1,073 community, and Big Messy Art Camp at $1,200 community. Camp leadership contact on the official page is Tsjaniqua Jeffrey at dodgeycamp@ymcanyc.org and 212-912-2414.\n\nSources: https://ymcanyc.org/locations/dodge-ymca/programs-classes/camps https://ymcanyc.org/locations/dodge-ymca https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/1G6C8Sks/dc128647b0c8.webp",
+        "email": "dodgeycamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/dodge-ymca/programs-classes/camps",
+        "phone": "212-912-2414",
+        "announcementTitle": "Big Messy Art Camp listed",
+        "announcementDescription": "Dodge's 2026 page includes a Big Messy Art Camp for ages 6-8 alongside traditional, kinder, and swim tracks.",
+        "announcementBadge": "Register",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

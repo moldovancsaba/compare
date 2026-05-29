@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://www.makeinspires.com/parties-ues",
+    "https://static.wixstatic.com/media/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg/v1/fit/w_2169,h_1392,q_90,enc_avif,quality_auto/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg"
+  ],
+  "notes": "Official MakeInspires Upper East Side birthday party page reviewed May 19, 2026. Original official image source URL: https://static.wixstatic.com/media/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg/v1/fit/w_2169,h_1392,q_90,enc_avif,quality_auto/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg. The official party photo was downloaded locally and uploaded through POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "pricePerClass uses the official starting price ($1,200 for 10 children) because the provider schema expects one numeric price while the source publishes party package pricing plus add-ons and per-child extras.",
+    "The official source says parties are perfect for ages 5-14; ageRanges are mapped to ClassScout's 3–5, 6–8, 9–12, and Teens bands.",
+    "rating and reviewCount are not published on the official source page, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-makeinspires-ues-steam-birthday-parties",
+        "name": "MakeInspires Upper East Side STEAM Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "address": "1642 York Ave, New York, NY 10028",
+        "activityTypes": [
+          "STEM",
+          "Art",
+          "Science",
+          "Birthday Entertainment"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8",
+          "9–12",
+          "Teens"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Morning",
+          "Afternoon",
+          "Evening"
+        ],
+        "pricePerClass": 1200,
+        "shortDescription": "Official MakeInspires Upper East Side STEAM birthday parties bring hands-on maker activities to ages 5-14 in a private York Avenue makerspace.",
+        "longDescription": "MakeInspires publishes dedicated STEAM birthday parties at its Upper East Side makerspace in Manhattan. The official party page says children and their guests can explore science, technology, engineering, art, and math through hands-on themes tailored to the birthday child's interests, with the venue offering exclusive use of a 3,000-square-foot makerspace.\n\nThe official page lists pricing starting at $1,200 for 10 children, plus $50 per additional child. Included food is two slices of pizza per child, spring water, paper goods, and utensils, while optional add-ons include balloon decor, a photo booth, a professional photographer, extra party time, a dance party extension, face painting, and custom goodie bags.\n\nPublished party availability is Fridays from 6:30 p.m. to 8:15 p.m., Saturdays at 1:30 p.m. and 4:15 p.m., and Sundays at 10:45 a.m., 1:30 p.m., and 4:15 p.m. The same source says these parties are best for ages 5-14 and are hosted at MakeInspires Upper East Side, 1642 York Ave, New York, NY 10028. Contact details listed on the page are nyc@makeinspires.com and 212-933-4392.\n\nSources: https://www.makeinspires.com/parties-ues https://static.wixstatic.com/media/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg/v1/fit/w_2169,h_1392,q_90,enc_avif,quality_auto/107b16_90e0c564101f42f7be19baedcd6e1b3d~mv2.jpeg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Weekend Friendly"
+        ],
+        "image": "https://i.ibb.co/XktxqHs1/210c3ca39f14.jpg",
+        "email": "nyc@makeinspires.com",
+        "website": "https://www.makeinspires.com/parties-ues",
+        "phone": "212-933-4392",
+        "announcementTitle": "Upper East Side STEAM parties",
+        "announcementDescription": "Official page lists Friday evening plus Saturday and Sunday party slots in MakeInspires' private York Avenue makerspace.",
+        "announcementBadge": "Weekend + Fri PM"
+      }
+    }
+  ]
+}

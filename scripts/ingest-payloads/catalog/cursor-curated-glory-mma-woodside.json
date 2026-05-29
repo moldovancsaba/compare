@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://www.glorymma.com/kidsmma",
+    "https://www.glorymma.com/schedule",
+    "https://images.squarespace-cdn.com/content/v1/5d9cc40eac7d08435cdef016/1678489050967-L4G3TJ7I51KPJWPJPYBB/20230310_171457.jpg"
+  ],
+  "notes": "Official Glory MMA kids program and schedule pages reviewed May 26, 2026. The official Glory MMA class image was downloaded from the provider's Squarespace CDN and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the public kids page advertises a free trial but does not publish tuition.",
+    "The public kids page clearly confirms ages 7-16, while the companion schedule page publishes overall class-schedule business hours for the Woodside gym rather than a kids-only timetable. Top-level tags are therefore limited to Weekday and Weekend.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-glory-mma-woodside-kids-martial-arts",
+        "name": "Glory MMA Kids Martial Arts",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "address": "45-35 47th Street, Woodside, NY 11377",
+        "activityTypes": ["Martial Arts", "Sports"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Woodside mixed martial arts program for ages 7-16 combining kickboxing, Muay Thai, and Brazilian jiu jitsu, with free trial sign-up.",
+        "longDescription": "Glory MMA's official kids page in Woodside describes a youth mixed martial arts program for children ages 7-16. The page says the gym combines kickboxing, Muay Thai, and Brazilian jiu jitsu in a system designed to be safe, fun, and easy to follow for young students.\n\nThe same page and footer identify the location as 45-35 47th Street, Woodside, NY 11377 with contact phone (718) 433-0544 and email info@glorymma.com. Glory's official schedule page publishes class-schedule business hours for the gym as Monday-Friday 11:00 AM-12:00 PM and 4:00 PM-9:30 PM, plus Saturday 10:00 AM-2:00 PM, which supports weekday and weekend availability for the studio's active programs.\n\nThe official kids page also promotes a free trial class for families who want to visit before committing. The listing image here is an ImgBB re-host of one of Glory MMA's own class photos from the kids program page.\n\nSources: https://www.glorymma.com/kidsmma https://www.glorymma.com/schedule https://images.squarespace-cdn.com/content/v1/5d9cc40eac7d08435cdef016/1678489050967-L4G3TJ7I51KPJWPJPYBB/20230310_171457.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/TBL9q35g/59c07a3b4109.webp",
+        "email": "info@glorymma.com",
+        "website": "https://www.glorymma.com/kidsmma",
+        "phone": "(718) 433-0544",
+        "announcementTitle": "Start a free trial",
+        "announcementDescription": "The official kids page invites families to sign up for a free trial class at Glory MMA.",
+        "announcementBadge": "Free trial",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

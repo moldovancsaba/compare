@@ -1,0 +1,51 @@
+{
+  "sourceUrls": [
+    "https://www.sichildrensmuseum.org/visit",
+    "https://sichildrensmuseum.org/directions/",
+    "https://sichildrensmuseum.org/wp-content/uploads/2021/02/SICM_0000_Visit.png"
+  ],
+  "notes": "Official Staten Island Children’s Museum visit + directions pages (May 2026 fetch). Admission, hours, address, and main phone from those pages; group-reservations email cited only in FAQ for groups of 10+ (not used as general email). Listing image is an official Staten Island Children's Museum visit-page image originally sourced from https://sichildrensmuseum.org/wp-content/uploads/2021/02/SICM_0000_Visit.png and uploaded through POST /api/ingest/upload for ImgBB-compliant storage.",
+  "missingOrUncertain": [
+    "rating / reviewCount: not on official pages; 0 / 0.",
+    "General public contact email for individual tickets not stated on visit/directions pages; left email empty (FAQ lists reservations@sichildrensmuseum.org for scheduled groups of 10+ only).",
+    "pricePerClass: $10 matches published adult and child general admission on visit page (same price tier); confirm current rates on sichildrensmuseum.org before visiting.",
+    "Visit page notes construction may intermittently close some interior roads on the Snug Harbor campus — check signage day-of."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-staten-island-childrens-museum",
+        "name": "Staten Island Children's Museum",
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "address": "1000 Richmond Terrace, Staten Island, NY 10301",
+        "activityTypes": [
+          "Museum",
+          "Hands-on exhibits",
+          "Art",
+          "Performances",
+          "Early learning"
+        ],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 10,
+        "shortDescription": "Hands-on children’s museum on the Snug Harbor campus (Wed–Sun) with exhibits, workshops, and family programs; advance tickets recommended.",
+        "longDescription": "Staten Island Children’s Museum invites families to explore interactive exhibits, create art in workshops, and catch performances; the official visit page highlights spaces such as Pets & People, Sea of Boats, House About It, Big Games, Great Explorations, and Portia’s Playhouse, and recommends buying tickets in advance and checking the calendar for workshops and events.\n\nDaily public hours on the visit page: Wednesday through Sunday 10:00 a.m. to 5:00 p.m. Members-only hour (photo ID required): Wednesday through Friday 9:00 a.m. to 10:00 a.m. The museum lists closures on New Year’s Day, Easter Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day, and Christmas Day.\n\nAdmission from the same page: adults $10; children $10; children under one year free; members free.\n\nLocation and phone from the directions page: 1000 Richmond Terrace, Staten Island, NY 10301, on the grounds of Snug Harbor Cultural Center & Botanical Garden; phone (718) 273-2060. Public transportation guidance on that page: Staten Island Ferry, then S40 bus from St. George Ferry Terminal to the Snug Harbor Road stop (about 5–10 minutes).\n\nSources: https://www.sichildrensmuseum.org/visit https://sichildrensmuseum.org/directions/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/JWYVQ5Xq/f0a435508b9a.png",
+        "email": "",
+        "website": "https://www.sichildrensmuseum.org",
+        "phone": "(718) 273-2060",
+        "announcementTitle": "Members-only mornings",
+        "announcementDescription": "Wednesday–Friday 9–10 a.m. members-only hour (photo ID required) per official visit page.",
+        "announcementBadge": "Members 9–10am",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

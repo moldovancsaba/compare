@@ -1,0 +1,88 @@
+{
+  "sourceUrls": [
+    "https://www.kidsatworknyc.com/playgroup-gentle-separation/",
+    "https://www.kidsatworknyc.com/rates/",
+    "https://www.kidsatworknyc.com/wp-content/uploads/2021/03/parents-kids-at-work.jpg"
+  ],
+  "notes": "Official Kids at Work Gentle Separation Preschool Prep page and tuition/rates page reviewed May 19, 2026. Original official image source URL: https://www.kidsatworknyc.com/wp-content/uploads/2021/03/parents-kids-at-work.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass uses the lowest published total program price ($3080 for the 11-week Summer 2026 semester) because the provider schema expects one numeric field rather than a semester-tuition structure; the same official page also lists a $1200 deposit, higher 12- and 13-week summer totals, semester-specific fall and winter-spring pricing, and full-year enrollment pricing.",
+    "ageRanges map the official 18 months-2.7 years span into ClassScout's supported bands 0–2 and 3–5.",
+    "rating and reviewCount are 0 because the cited official pages do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-kids-at-work-gentle-separation-chelsea",
+        "name": "Kids at Work — Gentle Separation Preschool Prep",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "address": "147 W. 24th St. Second Floor, New York, NY 10011",
+        "activityTypes": ["Art", "Music", "Indoor Play"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Morning"],
+        "pricePerClass": 3080,
+        "shortDescription": "Chelsea preschool-prep class for toddlers and twos, with weekday morning Gentle Separation groups that gradually build independence in a small classroom setting.",
+        "longDescription": "Kids at Work's Gentle Separation Preschool Prep program is an independence-building class for young children and their adults in Chelsea. The official program page says the class is designed for children ages 18 months to 2.7 years and uses a gradual separation process in a nurturing classroom with messy art, sensory play, meeting time, music, cooperative play, cooking, and snack.\n\nThe same page says each child and adult spend two days per week for two hours together in the classroom before adults gradually move to a separate waiting area, while remaining on site for the duration of class. Published schedule options at the West 24th location in Chelsea are Monday/Wednesday 9:15am-11:15am and Tuesday/Thursday 9:15am-11:15am, with an additional four-day Monday-Thursday enrollment option. Kids at Work describes the program as running throughout the year with Fall, Winter-Spring, Full Academic Year, and Summer semester options.\n\nThe official pricing section says each session requires a $1200 deposit to hold a child's spot. It also publishes Summer 2026 tuition of $3080 for 11 weeks, $3240 for 12 weeks, and $3380 for 13 weeks; 2026-2027 full-year tuition of $8860 for either the Monday/Wednesday or Tuesday/Thursday group and $16,720 for the four-day option; Fall 2026 semester pricing of $3770 for Monday/Wednesday, $3640 for Tuesday/Thursday, and $7010 for four-day enrollment; and Winter-Spring 2027 semester pricing of $5590 for Monday/Wednesday, $5720 for Tuesday/Thursday, and $10,910 for four-day enrollment. Contact details published on the page footer list 147 W. 24th St. Second floor in Manhattan, phone 212-488-8800, and email Info@kidsatworknyc.com.\n\nSources: https://www.kidsatworknyc.com/playgroup-gentle-separation/ https://www.kidsatworknyc.com/rates/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers"],
+        "image": "https://i.ibb.co/1fnQnJ1M/1aad24e4ecc6.jpg",
+        "email": "Info@kidsatworknyc.com",
+        "website": "https://www.kidsatworknyc.com/playgroup-gentle-separation/",
+        "phone": "212-488-8800",
+        "announcementTitle": "Weekday preschool prep enrollment",
+        "announcementDescription": "Current published options include Monday/Wednesday, Tuesday/Thursday, or four-day weekday morning enrollment, with intro calls and virtual open house registration available.",
+        "announcementBadge": "Weekday AM",
+        "recurringPrograms": [
+          {
+            "id": "rp-kids-at-work-gentle-separation-mw",
+            "title": "Gentle Separation — Monday/Wednesday",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Wednesday"],
+            "timeText": "9:15am-11:15am",
+            "locationNote": "West 24th location in Chelsea",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "Indoor Play"],
+            "summary": "Two-day preschool prep group with gradual separation for toddlers and twos.",
+            "priceText": "Fall 2026 semester: $3770; Winter-Spring 2027 semester: $5590; 2026-2027 full year: $8860",
+            "registrationUrl": "https://www.kidsatworknyc.com/playgroup-gentle-separation/",
+            "isDropIn": false
+          },
+          {
+            "id": "rp-kids-at-work-gentle-separation-tth",
+            "title": "Gentle Separation — Tuesday/Thursday",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Tuesday", "Thursday"],
+            "timeText": "9:15am-11:15am",
+            "locationNote": "West 24th location in Chelsea",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "Indoor Play"],
+            "summary": "Two-day preschool prep group with gradual separation for toddlers and twos.",
+            "priceText": "Fall 2026 semester: $3640; Winter-Spring 2027 semester: $5720; 2026-2027 full year: $8860",
+            "registrationUrl": "https://www.kidsatworknyc.com/playgroup-gentle-separation/",
+            "isDropIn": false
+          },
+          {
+            "id": "rp-kids-at-work-gentle-separation-4day",
+            "title": "Gentle Separation — Four-Day Enrollment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "timeText": "9:15am-11:15am",
+            "locationNote": "West 24th location in Chelsea",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Art", "Music", "Indoor Play"],
+            "summary": "Four-day weekday morning preschool prep enrollment built from the published Monday-Thursday schedule.",
+            "priceText": "Fall 2026 semester: $7010; Winter-Spring 2027 semester: $10,910; 2026-2027 full year: $16,720",
+            "registrationUrl": "https://www.kidsatworknyc.com/playgroup-gentle-separation/",
+            "isDropIn": false
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

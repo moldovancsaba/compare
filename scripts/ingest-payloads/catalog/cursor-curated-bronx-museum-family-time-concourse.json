@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://bronxmuseum.org/learn/family-programs/",
+    "https://bronxmuseum.org/event/family-time-june26/",
+    "https://bronxmuseum.org/",
+    "https://bronxmuseum.org/wp-content/uploads/2025/04/Family-Art-Activity-scaled.jpg"
+  ],
+  "notes": "Official Bronx Museum family-program and June 2026 Family Time event pages reviewed May 21, 2026. The hero image is the museum's own Family Art Activity image from bronxmuseum.org and was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Concourse from the official 1040 Grand Concourse address; the museum pages list the street address but do not publish a ClassScout neighborhood field.",
+    "The official pages say Family Time is for all ages and skill levels and accessible to young children and caregivers; the stored ageRanges map that broad language into ClassScout's fixed age buckets.",
+    "rating and reviewCount are set to 0 because the official source pages do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-museum-family-time-concourse",
+        "name": "The Bronx Museum — Family Time",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "address": "1040 Grand Concourse, Bronx, NY 10456",
+        "activityTypes": ["Art", "Museum Programs"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekend", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Free monthly Saturday family art-making at The Bronx Museum on Grand Concourse, with drop-ins welcome and activities designed for all ages.",
+        "longDescription": "The Bronx Museum's Family Programs page describes free art-making activities inspired by exhibitions on view in the galleries, designed and facilitated by Bronx Museum educators. The museum says these activities are fun for all ages, accessible to families with young children, and open to drop-ins.\n\nThe museum's current Family Time event page lists the next session as Saturday, June 13, 2026 from 1:00-3:00 PM at 1040 Grand Concourse in the Bronx. The same page says Family Time is free, for all ages and skill levels, and drop-in only with no RSVP needed. It also states that one Saturday afternoon per month the museum offers free art-making for all ages as part of its Family Programs.\n\nThe museum's main site lists the venue as 1040 Grand Concourse, Bronx, NY 10456 with phone 718-681-6000. Questions for the Family Time program are directed to education@bronxmuseum.org, and the homepage notes that admission is always free for everyone.\n\nSources: https://bronxmuseum.org/learn/family-programs/ https://bronxmuseum.org/event/family-time-june26/ https://bronxmuseum.org/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Great for Toddlers"],
+        "image": "https://i.ibb.co/cXQ7VQhv/de068fe4c508.jpg",
+        "email": "education@bronxmuseum.org",
+        "website": "https://bronxmuseum.org/learn/family-programs/",
+        "phone": "718-681-6000",
+        "announcementTitle": "Family Time: June 13, 2026",
+        "announcementDescription": "Free drop-in art-making for all ages on Saturday, June 13, 2026 from 1:00-3:00 PM.",
+        "announcementBadge": "Free",
+        "recurringPrograms": [
+          {
+            "id": "rp-bronx-museum-family-time",
+            "title": "Family Time",
+            "cadence": "Monthly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "Saturday afternoons; June 13, 2026 session runs 1:00-3:00 PM",
+            "locationNote": "The Bronx Museum galleries",
+            "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Art", "Museum Programs"],
+            "summary": "Free drop-in family art-making inspired by the museum's current exhibitions.",
+            "priceText": "Free",
+            "registrationUrl": "https://bronxmuseum.org/event/family-time-june26/",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

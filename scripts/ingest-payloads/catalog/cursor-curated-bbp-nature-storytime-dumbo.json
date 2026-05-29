@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://brooklynbridgepark.org/series/nature-storytime/",
+    "https://brooklynbridgepark.org/education/early-childhood/",
+    "https://brooklynbridgepark.org/places-to-see/environmental-education-center/",
+    "https://brooklynbridgepark.org/about/brooklyn-bridge-park-corporation/",
+    "https://brooklynbridgepark.org/wp-content/uploads/2020/10/Early-Nature-Experiences-in-Brooklyn-Bridge-Park-SarahRyanHudson-scaled-1.jpg"
+  ],
+  "notes": "Brooklyn Bridge Park Conservancy official Nature Storytime series page, early-childhood education overview, and Environmental Education Center location page (99 Plymouth Street, DUMBO). Hero image is the park’s own early-childhood program photograph from brooklynbridgepark.org wp-content, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0 because Nature Storytime and Environmental Education Center Open Hours are described as free; the separate Early Nature Experiences semester program (ages 2–4) is on hold for 2026 with tuition not published on the fetched pages.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "Event dates follow the third Thursday of each month at 3:00 p.m. and may change for weather—check brooklynbridgepark.org or the Park Alerts page before visiting."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-brooklyn-bridge-park-nature-storytime-dumbo",
+        "name": "Brooklyn Bridge Park — Nature Storytime",
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "address": "99 Plymouth Street, Brooklyn, NY 11201 (Environmental Education Center)",
+        "activityTypes": ["Storytime", "Nature", "Outdoor Activities", "STEM"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Free monthly nature-themed storytime with Brooklyn Public Library librarians at the park’s DUMBO Environmental Education Center (third Thursdays, 3 p.m.).",
+        "longDescription": "Brooklyn Bridge Park hosts Nature Storytime at the Environmental Education Center, 99 Plymouth Street in DUMBO. The official series page describes sessions at 3:00 p.m. on the third Thursday of every month during the center’s Open Hours. Brooklyn Public Library librarians from the Adams Street branch lead stories, songs, and rhymes paired with the Education Center’s monthly nature theme; storytime runs about 30 minutes and families can stay to explore live animal displays and activities afterward.\n\nThe Environmental Education Center’s location page lists free public Open Hours on Thursdays and Fridays 3–5 p.m. and Saturdays and Sundays 1–5 p.m., with self-guided exploration and educator support. The park’s early-childhood overview also notes monthly Nature Storytime and that park entry is free.\n\nQuestions and program updates: info@bbp.nyc (listed on the Nature Storytime event page). Brooklyn Bridge Park Corporation lists general inquiries at 718-222-9939 (Monday–Friday, 9 a.m.–5 p.m.). Nearby transit includes the F train at York Street and NYC Ferry to DUMBO/Fulton Ferry.\n\nSources: https://brooklynbridgepark.org/series/nature-storytime/ https://brooklynbridgepark.org/education/early-childhood/ https://brooklynbridgepark.org/places-to-see/environmental-education-center/ https://brooklynbridgepark.org/about/brooklyn-bridge-park-corporation/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers"],
+        "image": "https://i.ibb.co/Fbzrgkmf/040ebe87c050.jpg",
+        "email": "info@bbp.nyc",
+        "website": "https://brooklynbridgepark.org/series/nature-storytime/",
+        "phone": "718-222-9939",
+        "announcementTitle": "Third Thursdays at 3 p.m.",
+        "announcementDescription": "Free Nature Storytime during Environmental Education Center Open Hours—confirm dates on the park events calendar.",
+        "announcementBadge": "Free",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

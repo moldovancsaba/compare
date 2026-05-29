@@ -1,0 +1,37 @@
+{
+  "sourceUrls": [
+    "https://bronxhype.org/",
+    "https://bronxhype.org/about/",
+    "https://bronxhype.org/event/family-game-nights/2026-04-03/",
+    "https://www.nyc.gov/site/acs/about/fec.page",
+    "https://bronxhype.org/wp-content/uploads/2024/11/IMG_3681-1-scaled.webp"
+  ],
+  "notes": "Official Bronx H.Y.P.E home, about, and Family Friday pages plus the NYC ACS Family Enrichment Centers page reviewed May 19, 2026. Original official image source URL: https://bronxhype.org/wp-content/uploads/2024/11/IMG_3681-1-scaled.webp. The official Bronx H.Y.P.E image was downloaded locally and re-hosted through POST /api/ingest/upload so coverImageUrl complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "Neighborhood is stored as Mott Haven because Bronx H.Y.P.E describes itself as a Mott Haven space and the ACS Family Enrichment Centers directory lists its service area as Mott Haven/Melrose; ClassScout's canonical neighborhood list supports Mott Haven but not Melrose.",
+    "Age range is stored as All ages because the official Bronx H.Y.P.E site says the center is open to children, youth, and adults of all ages rather than a narrower child age band.",
+    "The Family Fridays listing is sourced from a recurring event page tied to a dated occurrence; families should confirm the current week's session on bronxhype.org/events before attending."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-bronx-hype-family-fridays",
+        "name": "Bronx H.Y.P.E — Family Fridays",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Weekly",
+        "instagram": "https://instagram.com/bronxhype.fec",
+        "website": "https://bronxhype.org/event/family-game-nights/2026-04-03/",
+        "description": "Bronx H.Y.P.E (Helping Y(our) People Evolve) is a Family Enrichment Center at 109 Bruckner Boulevard in the Bronx that describes itself as a family-centered, community-driven, homelike space in Mott Haven. The official site says the center is open to children, youth, and adults of all ages and holds multiple offerings throughout the year to help neighbors get involved, have fun, and support the community.\n\nIts official Family Friday page describes a recurring Friday meetup from 4:00 p.m. to 6:30 p.m. at 111 Bruckner Blvd, Suite 203, where families can enjoy games and arts and crafts together. The page says children are welcome with adult supervision, and lists community liaison Julian at Julian@theremcenter.org / 646-801-0191 for questions.\n\nSources: https://bronxhype.org/ https://bronxhype.org/about/ https://bronxhype.org/event/family-game-nights/2026-04-03/ https://www.nyc.gov/site/acs/about/fec.page",
+        "initials": "BH",
+        "icon": "community",
+        "palette": "orange",
+        "coverImageUrl": "https://i.ibb.co/N2Vd8K8r/ef379dd8faa2.webp"
+      }
+    }
+  ]
+}

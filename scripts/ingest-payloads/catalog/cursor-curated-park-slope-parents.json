@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://www.parkslopeparents.com/Membership/want-to-join-park-slope-parents-heres-info-on-how.html",
+    "https://www.parkslopeparents.com/Get-Connected/findgroups.html",
+    "https://www.parkslopeparents.com/images/PSPServingAll.jpg"
+  ],
+  "notes": "Official Park Slope Parents public membership and groups pages fetched May 16 2026. Description, Brooklyn geography, age scope, and meetup/community framing come from those pages. Original official image source URL: https://www.parkslopeparents.com/images/PSPServingAll.jpg. ImgBB upload completed via POST /api/ingest/upload and stored as coverImageUrl.",
+  "missingOrUncertain": [
+    "instagram: no official Instagram URL was confirmed on the cited public pages, so this field is empty.",
+    "cadence: official pages describe over 500 events each year plus expectant/new parent meetups and neighborhood-organized meet-ups, but not one fixed recurring schedule on the cited pages; stored as Pop-up.",
+    "neighborhood mapping: Park Slope Parents serves families across Brooklyn and notes that only about half of members live in Park Slope; mapped to canonical neighborhood Park Slope because that is the organization’s public-facing identity."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "park-slope-parents",
+        "name": "Park Slope Parents",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Pop-up",
+        "instagram": "",
+        "website": "https://www.parkslopeparents.com/Get-Connected/findgroups.html",
+        "description": "Park Slope Parents is a Brooklyn parent community with larger advice, classifieds, and career groups plus smaller groups to chat and meet up in person or via Zoom. Its public pages say membership is open to expectant parents and parents with children under 18 in Brooklyn, and that members can join neighborhood groups to discuss local resources and organize meet-ups.",
+        "initials": "PSP",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/jPNk5hkS/98bfb63f0efc.jpg"
+      }
+    }
+  ]
+}

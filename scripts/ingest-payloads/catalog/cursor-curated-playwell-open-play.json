@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://www.playwellbrooklyn.com",
+    "https://cdn.prod.website-files.com/6372ee5f7746cc66b5b44e4e/648744a86d24696a06e0e497_IMG_9996%201.webp"
+  ],
+  "notes": "Official PlayWell Brooklyn homepage reviewed May 19, 2026. Original official image source URL: https://cdn.prod.website-files.com/6372ee5f7746cc66b5b44e4e/648744a86d24696a06e0e497_IMG_9996%201.webp. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the homepage reviewed promotes open-play booking and memberships but does not publish a single public drop-in admission price on-page.",
+    "The official source describes PlayWell as serving kids of all abilities and ages, so ClassScout maps that broad wording across all supported age ranges.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-playwell-park-slope-open-play",
+        "name": "PlayWell Brooklyn Open-Play",
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "address": "94 9th St #218, Brooklyn, NY 11215",
+        "activityTypes": ["Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "PlayWell Brooklyn offers inclusive drop-in open-play in Park Slope, with weekday and weekend sessions in a modular indoor playspace designed for kids of all abilities and ages.",
+        "longDescription": "PlayWell Brooklyn's official homepage describes the venue as an inclusive indoor playspace for kids of all abilities and ages, offering drop-in open-play, classes, and parties. The site says the space is thoughtfully designed with all kids in mind and describes PlayWell as a place where neurodivergent and neurotypical children and their families can play, build social skills, and work on fitness.\n\nOn the membership notes published on the homepage, PlayWell says unlimited open-play is offered Monday through Friday from 9 a.m. to 4 p.m. and on weekends from 9 a.m. to 12 p.m. The same note adds that during after-school hours, Monday through Friday from 4 p.m. to 6 p.m., members receive a discounted open-play rate using the code PlayMore. Those published hours support weekday, weekend, morning, afternoon, and after-school availability tags for the open-play listing.\n\nThe site's footer lists PlayWell Brooklyn at 94 9th St #218, Brooklyn, NY 11215, with email hello@playwellbrooklyn.com and phone (718) 750-8478. The homepage reviewed did not publish a single standalone drop-in admission price, so ClassScout stores pricing as unknown.\n\nSources: https://www.playwellbrooklyn.com https://cdn.prod.website-files.com/6372ee5f7746cc66b5b44e4e/648744a86d24696a06e0e497_IMG_9996%201.webp",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Great for Toddlers"],
+        "image": "https://i.ibb.co/TQcJHrD/ee22a63bbb6c.webp",
+        "email": "hello@playwellbrooklyn.com",
+        "website": "https://www.playwellbrooklyn.com",
+        "phone": "(718) 750-8478",
+        "announcementTitle": "Open-play runs every week",
+        "announcementDescription": "The homepage lists weekday 9 a.m.-4 p.m., weekend 9 a.m.-12 p.m., and weekday after-school 4 p.m.-6 p.m. open-play availability.",
+        "announcementBadge": "Book now"
+      }
+    }
+  ]
+}

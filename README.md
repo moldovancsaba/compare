@@ -1,137 +1,66 @@
-# {compare}
+# RangeScout EU
 
-{compare} is a Next.js web app for high-trust comparison intelligence across supported decision domains. Release `v0.2.1` ships a domain-adapter platform with mechanical watches and business services live, plus collector intelligence for watch profiles.
+RangeScout EU is a Next.js app for discovering sport shooting training, ranges, competitions, hunting grounds, and clubs across Europe.
 
-## Version
-- Project version: `0.2.1`
-- Current release label: `v0.2.1`
+## Product shape
 
-## What It Does
-- Lets users choose a supported comparison domain.
-- Accepts supported names, aliases, references, or source URLs where the adapter supports them.
-- Rejects weak, unsupported, duplicate, or ambiguous inputs instead of guessing.
-- Leads with an instant verdict, stronger choice, exception case, recommendation signals, and confidence rationale.
-- Shows evidence and limitations so users can separate catalog facts, deterministic rules, editorial inference, and missing data.
-- Lets watch users simulate alternate buying priorities without replacing the baseline verdict.
-- Supports optional local watch decision-intent profiles for personalized recommendation emphasis.
-- Shows transparent watch value scoring with explicit weighting for comfort, capability, versatility, ownership, and price discipline.
-- Shows curated secondary-market ownership context for supported watches without live scraping or investment framing.
-- Recommends smart discovery alternatives with explicit reason codes for better-value plays, role contrast, hidden-gem fit, manageable exit risk, and decision-intent fit.
-- Supports accountless watch collection profiles stored in the browser.
-- Supports local recent-comparison history and local saved-intent monitoring for curated watch price/spec deltas.
-- Adds collection-aware watch guidance: gap/overlap insights, upgrade-path verdicts, balance scoring, single-watch should-I-buy reports, five-year ownership simulation, market positioning, and marketing-reality checks.
-- Supports saved comparison pages with route-specific metadata when MongoDB is configured.
+- Public directory for EU shooting and hunting operators
+- Country and region browsing instead of NYC neighborhood browsing
+- Venue, club, and planner flows adapted for shooting activity discovery
+- MongoDB-backed catalog with admin and ingest APIs
 
-## Live Domains
-- Mechanical watches: curated watch catalog with resolver disambiguation, consequence rules, ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, smart discovery alternatives, collection profiles, and collector guidance.
-- Business services: curated service archetypes with switching-cost, contract-risk, implementation-friction, and governance reasoning.
+## Core categories
 
-## Product Shape
-- Single-screen comparison experience with an adapter-aware domain selector.
-- Generic comparison API at `/api/compare`.
-- Optional Brain enrichment through a MongoDB-backed local worker handoff.
-- Optional feedback, telemetry, and saved-comparison persistence when MongoDB is configured.
-- Tokenized visual system in `src/app/globals.css`.
+- `Training`
+- `Ranges`
+- `Competitions`
+- `Hunting Grounds`
+- `Clubs`
 
 ## Stack
-- Next.js 16 App Router
-- React 19
-- TypeScript 5.9 in strict mode
-- Tailwind CSS 4
-- Zod 4 for input validation
-- Mongoose for optional MongoDB Atlas persistence
-- Vitest for unit and conformance tests
 
-## Local Setup
-1. Install dependencies with `npm install`.
-2. Start the app with `npm run dev`.
-3. Open `http://localhost:3000`.
+- Next.js App Router
+- MongoDB
+- Mantine
+- React Query
 
-Optional environment variables:
+## Local setup
+
+1. Install dependencies:
 
 ```bash
-MONGODB_URI=
-MONGODB_DB_NAME=compare
-COMPARE_BRAIN_PROVIDER=
-NEXT_PUBLIC_APP_ORIGIN=http://localhost:3000
+npm install
 ```
 
-Use `.env.example` as the template and copy values into `.env.local` for local development. Keep `.env.example` free of real credentials.
-Set `NEXT_PUBLIC_APP_ORIGIN` to the canonical public origin so saved comparison pages emit correct canonical, Open Graph, and Twitter metadata.
+2. Configure env values in `.env.local`:
 
-The app does not require MongoDB to run. Without MongoDB, `/api/compare` still returns deterministic comparison results. With MongoDB, submitted comparisons can be saved to `saved_comparisons`, feedback can be recorded, telemetry can be written, and Brain jobs can be queued.
+- `MONGODB_URI`
+- `MONGODB_DB` optional, defaults to `rangescout`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
+- `INGEST_API_KEY`
+- `IMGBB_API_KEY` if you use hosted media upload
 
-Set `COMPARE_BRAIN_PROVIDER=trinity_worker` only when MongoDB Atlas is configured and a local `{trinity}` worker is available. In that mode `/api/compare` returns the deterministic comparison immediately and queues optional enrichment.
-
-Run the local Brain worker with:
+3. Seed defaults:
 
 ```bash
-npm run brain:worker
+npm run db:seed
 ```
 
-For one queued job only:
+4. Start the app:
 
 ```bash
-npm run brain:worker:once
+npm run dev
 ```
 
-## Quality Gates
-- `npm run lint`
-- `npm run typecheck`
-- `npm run test`
-- `npm run build`
-- `npm audit --omit=dev`
+## Verification
 
-Current status for `v0.2.1`:
-- lint: pass
-- typecheck: pass
-- test: pass
-- build: pass
-- audit: pass
+```bash
+npm run build
+```
 
-Verification note:
-- Quality-gate commands require installed dependencies in `node_modules`.
+## Notes
 
-GitHub Actions runs install, lint, test, typecheck, build, and production dependency audit gates on pushes to `main` and on pull requests.
-
-## Documentation Map
-- User manual: `docs/user-manual.md`
-- API documentation: `docs/api.md`
-- Architecture: `docs/architecture.md`
-- Watch catalog: `docs/watch-catalog.md`
-- Domain adapter SDK: `docs/domain-adapters.md`
-- Data governance: `docs/data-governance.md`
-- Watch collection profiles: `docs/watch-collection-profiles.md`
-- Watch consequence rules: `docs/watch-consequence-rules.md`
-- Trinity Brain integration: `docs/trinity-brain-integration.md`
-- Release history: `10_Release_Notes.md`
-- Product strategy: `11_Product_Strategy.md`
-- Design primitives: `design-tokens.md`
-
-## Testing Coverage
-Vitest coverage includes resolver matching, typo tolerance, ambiguity rejection, domain adapter conformance, generic comparison output shape, evidence/confidence metadata, recommendation signals, watch ownership metadata, ownership simulation, market positioning, marketing-reality analysis, tradeoff simulation, transparent value scoring, smart discovery alternatives, watch consequence rules, collection profiles, gap/overlap analysis, upgrade-path intelligence, balance scoring, services comparisons, validation, shared and fallback rate limiting, feedback, Brain status, telemetry sanitization, saved comparison slugs, and client error handling.
-
-## Catalog Maintenance
-The watch adapter source of truth is the versioned JSON document at `src/lib/data/watch-catalog.v1.json`.
-
-- Validate the current catalog with `npm run catalog:validate`.
-- Generate a normalized draft row from curated source URLs with `npm run catalog:ingest -- --manifest ./watch-draft.json --output ./tmp/watch-entry.json`.
-- Maintainer workflow and schema details live in `docs/watch-catalog.md`.
-
-## Compare Flow Notes
-- Compare API and tradeoff telemetry rate limiting now prefer MongoDB-backed shared buckets when MongoDB is configured and fall back to in-memory buckets otherwise.
-- Unsupported watch source URLs fail closed with explicit source guidance instead of being treated as generic unresolved inputs.
-- The no-account feedback panel doubles as the lightweight community correction path for wrong specs or misleading recommendation reports.
-- Watch comparison rule groups are now split into focused evidence, ownership, and scoring modules under `src/lib/domains/watch-comparison-rules`.
-
-## Operations
-Structured logging lives in `src/lib/observability/logger.ts`. API and Brain queue events emit JSON with stable event names, redacted raw inputs/URLs/notes/credentials, and hashed client identifiers.
-
-Durable submitted-comparison persistence lives in `src/lib/services/saved-comparisons.ts`. Writes are best-effort and nonblocking so the main comparison path remains available offline.
-
-Durable telemetry lives in `src/lib/observability/telemetry.ts` and writes allowlisted event metadata to `analytics_events` only when MongoDB is configured.
-
-## Codex Automation
-{compare} uses Codex heartbeats as the autonomous maintenance loop. The configs live in `.codex/heartbeats`, agent briefs live in `.codex/agents`, and shared state lives in `.codex/memory`.
-
-GitHub Project 16 is the single source of truth for roadmap and task state. By current product-owner instruction, autonomous agents may commit and push verified changes directly to `origin/main`; force pushes remain disallowed.
+- The old `compare` watch project has been replaced.
+- Useful structural patterns were copied from `classscout`, but the active product is now `RangeScout EU`.
+- Some legacy curator and content-intelligence code paths are still present in the repo, but the public-facing app and seeded content are now aligned to the new shooting/hunting domain.

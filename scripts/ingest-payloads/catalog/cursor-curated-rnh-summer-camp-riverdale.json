@@ -1,0 +1,60 @@
+{
+  "sourceUrls": [
+    "https://www.riverdaleonline.org/camp/",
+    "https://images.squarespace-cdn.com/content/v1/613d0200842c1c12ca06e171/38ec46ac-7800-4101-8796-1da176473586/PSwim8725-149.jpg?format=1500w"
+  ],
+  "notes": "Official Riverdale Neighborhood House Summer Camp page reviewed May 20, 2026. Original official image source URL: https://images.squarespace-cdn.com/content/v1/613d0200842c1c12ca06e171/38ec46ac-7800-4101-8796-1da176473586/PSwim8725-149.jpg?format=1500w. The official camp image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official source publishes week-based camp packages and add-on fees rather than a single per-class or per-day list price.",
+    "rating and reviewCount are 0 because the official source does not publish rating or review totals."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-riverdale-neighborhood-house-summer-camp-2026",
+        "name": "Riverdale Neighborhood House — Summer Camp 2026",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "address": "5521 Mosholu Avenue, Bronx, NY 10471",
+        "activityTypes": ["Swimming", "Sports", "STEM", "Arts and crafts", "Outdoor Activities"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Riverdale Neighborhood House runs a weekday Bronx summer camp for ages 4-11 with daily swim lessons, sports, crafts, STEM activities, and optional extended day.",
+        "longDescription": "Riverdale Neighborhood House publishes a Summer Camp program at 5521 Mosholu Avenue in the Riverdale section of the Bronx. The official page says the camp is open to children entering Pre-K through 5th grade, listed as ages 4-11, and describes an action-packed program with swimming, sports, performing arts, chess, crafts, outdoor adventures, themed days, and more.\n\nThe same official page lists regular camp hours of 9am-3pm and says early morning drop-off and extended day are available from 8am-5pm for an additional fee. Camp runs Monday, June 22, 2026 through Friday, August 21, 2026, and families can sign up for a minimum of two weeks or the whole summer. The camp experience section specifically highlights daily swim lessons with certified instructors plus sports, crafts, STEM, arts, and daily snacks, with lunch available for an additional fee.\n\nPublished pricing on the page is week-based rather than per class: 2 weeks cost $700 with the early-bird discount or $750 after April 1, and 8-9 weeks cost $600 early bird or $665 after April 1. The same page lists lunch at $40/week, early drop-off at $10/day, late pickup at $20/day, limited financial aid availability, and contact details of rnhsummercamp@riverdaleonline.org and (718) 549-8100 ext.116.\n\nSources: https://www.riverdaleonline.org/camp/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/4z4LdDm/1328ab35c3ac.webp",
+        "email": "rnhsummercamp@riverdaleonline.org",
+        "website": "https://www.riverdaleonline.org/camp/",
+        "phone": "718-549-8100 ext. 116",
+        "announcementTitle": "Summer 2026 registration open",
+        "announcementDescription": "The official camp page lists a June 22-August 21, 2026 weekday season, with 9am-3pm camp hours and optional 8am-5pm extended coverage.",
+        "announcementBadge": "Summer '26",
+        "recurringPrograms": [
+          {
+            "id": "rp-rnh-summer-camp-2026",
+            "title": "Summer Camp 2026",
+            "cadence": "Seasonal",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "9am-3pm",
+            "locationNote": "Riverdale Neighborhood House",
+            "ageRanges": ["3–5", "6–8", "9–12"],
+            "activityTypes": ["Swimming", "Sports", "STEM", "Arts and crafts", "Outdoor Activities"],
+            "summary": "Weekday day camp with daily swim lessons, sports, crafts, STEM activities, arts, themed programming, and optional paid extended coverage.",
+            "priceText": "2-week minimum. 2 weeks: $700 early bird / $750 after April 1; 8-9 weeks: $600 early bird / $665 after April 1; lunch $40/week; early drop-off $10/day; late pickup $20/day.",
+            "registrationUrl": "https://schools.mybrightwheel.com/sign-in?redirect_path=/admissions/packet/08e81cba-ef4b-4f0b-9a63-8860ed3961de/fill?school_id=b6e43a7f-415c-49bd-a641-198cff9a6f36",
+            "startDate": "2026-06-22",
+            "endDate": "2026-08-21",
+            "isDropIn": false
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

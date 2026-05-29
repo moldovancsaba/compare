@@ -1,0 +1,37 @@
+{
+  "sourceUrls": [
+    "https://www.harlemfamilyservices.org/",
+    "https://www.harlemfamilyservices.org/service/parent-groups",
+    "https://www.harlemfamilyservices.org/contact-us",
+    "https://sa1s3optim.patientpop.com/sc-assets/prd/practices/3fa664aa-6611-407c-b141-4940b50e2e12/hero01.jpg"
+  ],
+  "notes": "Official Harlem Family Services nonprofit site (home, parent groups service page, contact) reviewed May 16, 2026. Clinically led parent groups, East Harlem location, hours, and phone from those pages. Cover image is the official hero photograph on harlemfamilyservices.org (PatientPop/Tebra practice assets), uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "cadence: the official parent-groups page describes clinician-led group sessions and in-person or virtual options but does not publish a fixed weekly or monthly schedule; stored as Pop-up.",
+    "ageRange: the page welcomes parents of toddlers through teenagers and children with special needs; stored as All ages rather than a narrower band.",
+    "instagram: no official Instagram URL was found on the cited pages.",
+    "Clinic hours on the contact page are listed for the overall practice; specific parent-group session times require contacting the office or booking online."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-harlem-family-services-parent-groups",
+        "name": "Harlem Family Services — Parent Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "groupType": "Parent Meetup",
+        "ageRange": "All ages",
+        "cadence": "Pop-up",
+        "instagram": "",
+        "website": "https://www.harlemfamilyservices.org/service/parent-groups",
+        "description": "Harlem Family Services is a nonprofit community mental health clinic in East Harlem at The Margaret Morgan Lawrence Center for Family and Child Development (20 East 110th Street, Suite 201). Its official parent-groups page describes clinician-led gatherings for parents, guardians, and caregivers focused on child development, communication, discipline, emotional health, and building strong family relationships.\n\nThe page states that groups offer a safe space to share experiences, learn practical tools, and reduce isolation, and that both in-person and virtual options are available. Families are directed to call (212) 470-3162 or complete the online booking form on the official site to learn more or schedule a consultation. Published clinic hours on the contact page are Monday–Thursday 9:00 a.m.–8:00 p.m., Friday 8:00 a.m.–8:00 p.m., and Saturday 9:00 a.m.–5:00 p.m. (closed Sunday).\n\nSources: https://www.harlemfamilyservices.org/service/parent-groups https://www.harlemfamilyservices.org/ https://www.harlemfamilyservices.org/contact-us",
+        "initials": "HFS",
+        "icon": "community",
+        "palette": "orange",
+        "coverImageUrl": "https://i.ibb.co/KzfcNKvZ/e7d7e274b6b7.jpg"
+      }
+    }
+  ]
+}

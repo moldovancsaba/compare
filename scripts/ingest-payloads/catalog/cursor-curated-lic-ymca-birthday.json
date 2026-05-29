@@ -1,0 +1,45 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/long-island-city-ymca/long-island-city-birthday-parties",
+    "https://ymcanyc.org/locations/long-island-city-ymca",
+    "https://ymcanyc.org/locations",
+    "https://ymcanyc.org/sites/default/files/2018-10/banner-lic-camp-pool.jpg"
+  ],
+  "notes": "YMCA of Greater New York Long Island City branch birthday-party page and branch listing. Hero image is the official YMCA-hosted pool banner JPEG referenced from the birthday page markup, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $500, the published non-member rate for the 60-minute pool package without a swim instructor on the LIC birthday page; member pricing and longer or instructor-led packages differ per the same table.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "General branch phone is used for the listing phone field; pool-party-specific questions are directed on the page to the Aquatics Director email."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-lic-ymca-birthday-parties",
+        "name": "Long Island City YMCA — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "address": "32-23 Queens Boulevard, Long Island City, NY 11101",
+        "activityTypes": ["Swimming", "Birthday Entertainment", "Indoor Play"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekend", "Afternoon", "Evening"],
+        "pricePerClass": 500,
+        "shortDescription": "YMCA pool and party-room birthday packages in LIC: published pool times, capacity limits, and optional multipurpose room add-ons with member and non-member pricing.",
+        "longDescription": "The Long Island City YMCA of Greater New York advertises child birthday party packages that include pool parties with a certified lifeguard and optional use of a multipurpose party room. The official birthday-party page states that pool parties include exclusive pool use for the booked duration, with noodles, bubbles/backpacks, and toys available, and a published capacity of up to 25 swimmers including adults supervising in the water, with a note to confirm required adult-to-child ratios with the branch.\n\nScheduling details on the same page: pool parties are offered on Saturdays at 4:30 p.m., with optional room rental afterward until 8 p.m.; party room rentals alone are described as Sundays between 10 a.m. and 4:30 p.m. The Y does not provide decorations, supplies, or food for the party room; families may bring their own. Swim caps are sold at the front desk ($12–$16 each per the page), and guests are reminded to bring flip-flops, appropriate swim attire (no cotton), and towels/locks.\n\nPublished package pricing (member / non-member) on that page includes, for example, 60-minute pool without swim instructor at $450 / $500, 90-minute pool without instructor at $500 / $575, and higher tiers with swim instructors or longer room blocks as listed in the table. Additional surcharges apply for groups beyond 25 or 50 swimmers, and parking add-ons for up to 20 cars are listed separately.\n\nFor more information the page directs families to contact William Tsuda, Aquatics Director, at wtsuda@ymcanyc.org. The branch location listing confirms the street address and lists branch phone 718-392-7932.\n\nSources: https://ymcanyc.org/locations/long-island-city-ymca/long-island-city-birthday-parties https://ymcanyc.org/locations/long-island-city-ymca https://ymcanyc.org/locations",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Popular", "New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/vCkzg34z/ceea1d8f9486.jpg",
+        "email": "wtsuda@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/long-island-city-ymca",
+        "phone": "718-392-7932",
+        "announcementTitle": "Saturday pool parties",
+        "announcementDescription": "Official page lists pool parties on Saturdays at 4:30 p.m., with optional room rental after—confirm current availability when booking.",
+        "announcementBadge": "Pool + room",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

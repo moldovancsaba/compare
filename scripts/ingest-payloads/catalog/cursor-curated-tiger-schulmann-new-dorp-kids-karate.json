@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://tsk.com/kids/karate/staten-island-new-dorp/",
+    "https://tsk.com/locations/ny/staten-island-new-dorp/",
+    "https://tsk.com/kids/karate/",
+    "https://cdn.prod.website-files.com/681b74041b3ab04738836a94/681cfa2a31adefd02d1793a0_0039-tsk.JPG"
+  ],
+  "notes": "Official Tiger Schulmann's New Dorp kids karate and location pages reviewed May 26, 2026 through current indexed public results, plus the Tiger-branded MyStudio media asset used for the listing image. The official Tiger class photo was downloaded and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official New Dorp pages promote a free beginner session but do not publish tuition.",
+    "The official kids page confirms children of all ages, a preschool Cubs track beginning at age 3, and a published location-hours block on the same page. It does not expose a day-by-day kids-only timetable in the HTML available here, so recurring schedule detail is kept at the top-level tags only.",
+    "The listing image is a Tiger-branded class photo from the organization's MyStudio build rather than a directly fetchable tsk.com asset, because the main tsk.com pages were Cloudflare-blocked for direct shell fetch while still readable in indexed official snippets.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-tiger-schulmann-new-dorp-kids-karate",
+        "name": "Tiger Schulmann's New Dorp Kids Karate",
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "address": "363 New Dorp Lane, Staten Island, NY 10306",
+        "activityTypes": ["Martial Arts", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Curriculum-based kids karate in New Dorp with preschool Cubs starting at age 3, plus broader youth martial arts and a free beginner session.",
+        "longDescription": "Tiger Schulmann's official New Dorp kids karate page says the Staten Island school helps children of all ages build fitness, confidence, and lasting discipline through martial arts. The same official kids overview says the Cubs preschool program begins at age 3, while the New Dorp school page describes curriculum-based karate classes that help children grow through structured achievements and coaching under Shihan John Delaney.\n\nThe official New Dorp pages list the school at 363 New Dorp Lane, Staten Island, NY 10306 with contact phone 718-635-1416 and email statenisland@tsk.com. The indexed official kids and location pages also publish a location-hours block of Monday-Friday 10:00 AM-9:30 PM, Saturday 10:00 AM-2:00 PM, and Sunday closed, which supports weekday, weekend, morning, afternoon, and evening availability for the school.\n\nTiger's official kids page promotes a free beginner class described as a 1-hour private beginner session for new families. The listing image is an ImgBB re-host of a Tiger-branded youth martial arts class photo used in the organization's current web build.\n\nSources: https://tsk.com/kids/karate/staten-island-new-dorp/ https://tsk.com/locations/ny/staten-island-new-dorp/ https://tsk.com/kids/karate/ https://cdn.prod.website-files.com/681b74041b3ab04738836a94/681cfa2a31adefd02d1793a0_0039-tsk.JPG",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/zVKcprkJ/6e0a8feab869.jpg",
+        "email": "statenisland@tsk.com",
+        "website": "https://tsk.com/kids/karate/staten-island-new-dorp/",
+        "phone": "718-635-1416",
+        "announcementTitle": "Free beginner session",
+        "announcementDescription": "The official New Dorp kids page offers a free 1-hour private beginner session for new students.",
+        "announcementBadge": "Free beginner class",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

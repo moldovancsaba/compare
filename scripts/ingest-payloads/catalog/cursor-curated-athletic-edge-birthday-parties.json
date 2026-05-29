@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://www.athleticedgeny.com/birthdayparties",
+    "https://www.athleticedgeny.com/",
+    "https://www.athleticedgeny.com/contact",
+    "https://images.squarespace-cdn.com/content/v1/5e436ac224001a4298f7fafa/37af94d6-7b07-4567-86f2-cb6d8b6ca8a4/AESC+Birthday+Flyer_Insta.png"
+  ],
+  "notes": "Official Athletic Edge Sports Center birthday parties page, homepage, and contact page reviewed May 16, 2026. The official AESC Birthday Flyer_Insta image was downloaded from the provider's Squarespace CDN and uploaded through POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "pricePerClass is set to 0 because the official birthday party page does not publish party pricing.",
+    "ageRanges are approximate: the official source states a minimum participant age of 3, but does not publish an upper age limit, so the listing maps to ClassScout bands 3–5, 6–8, and 9–12.",
+    "dayTimeTags use Weekend only because the official homepage says Saturday and Sunday times are available, but it does not publish specific party time slots.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-athletic-edge-birthday-parties",
+        "name": "Athletic Edge Sports Center Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "address": "10 Nassau Place, Staten Island, NY 10307",
+        "activityTypes": ["Gymnastics", "Birthday Entertainment"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Gymnastics birthday parties in Tottenville with one hour of floor activities, 30 minutes for refreshments, and Saturday-Sunday availability.",
+        "longDescription": "Athletic Edge Sports Center offers gymnastics birthday parties at its Tottenville location at 10 Nassau Place on Staten Island. The official party page says each party is 1.5 hours long, with one hour of gymnastics activities followed by 30 minutes for refreshments and snack.\n\nPublished activities include the four Olympic events, trampoline, obstacle courses, races, prizes, and a winner medal for each participant. The page says the package includes the facility, instructors, setup and cleanup, plates, cups, forks, tablecloth, pizza, chips, and drinks, with additional catering available upon request. Packages start at 16 children.\n\nThe official party page states the minimum participant age is 3 and notes that if children in that age group attend, one adult per child must be present to assist if necessary. Athletic Edge's homepage also says Saturday and Sunday times are available for birthday parties. Contact details for the Tottenville location on the official site list (718) 608-0100 and info@athleticedgeny.com.\n\nThis listing uses an ImgBB copy of Athletic Edge's official AESC Birthday Flyer_Insta image from the provider's own site.\n\nSources: https://www.athleticedgeny.com/birthdayparties https://www.athleticedgeny.com/ https://www.athleticedgeny.com/contact",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/5h8YCHcJ/727655c94dd5.webp",
+        "email": "info@athleticedgeny.com",
+        "website": "https://www.athleticedgeny.com/",
+        "phone": "718-608-0100",
+        "announcementTitle": "Saturday & Sunday parties",
+        "announcementDescription": "Athletic Edge's official homepage says birthday-party times are available on Saturdays and Sundays.",
+        "announcementBadge": "Weekends",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

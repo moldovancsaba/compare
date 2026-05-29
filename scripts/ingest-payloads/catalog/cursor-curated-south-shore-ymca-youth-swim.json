@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/south-shore-ymca/programs-classes/swimming",
+    "https://ymcanyc.org/locations/south-shore-ymca/programs-and-classes",
+    "https://ymcanyc.org/locations/south-shore-ymca/programs-classes/camps",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc"
+  ],
+  "notes": "Official YMCA of Greater New York South Shore branch swimming and programs pages reviewed May 26, 2026. This payload reuses the same official South Shore YMCA branch hero image already uploaded to ImgBB for the South Shore camp listing, so the provider image remains an official branch photo while satisfying ClassScout's ImgBB-only storage rule.",
+  "missingOrUncertain": [
+    "Neighborhood set to Great Kills as the closest South Shore match in ClassScout's Staten Island list for 3939 Richmond Avenue; confirm the branch's preferred local label if finer-grained naming matters.",
+    "pricePerClass set to 0 because the public South Shore swim pages describe lesson stages and registration but do not publish a single current per-class price for group youth lessons.",
+    "The current branch swimming page confirms weekday, evening, and weekend swim classes all year long, but it does not publish one fixed recurring weekly timetable in the page HTML used here.",
+    "rating / reviewCount: not published on the official YMCA pages; stored as 0 / 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-south-shore-ymca-youth-swim",
+        "name": "South Shore YMCA — Youth Swim Lessons",
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "address": "3939 Richmond Avenue, Staten Island, NY 10312",
+        "activityTypes": ["Swimming", "Sports"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "South Shore YMCA swim lessons for Staten Island kids, from parent-and-child water discovery through teen stages, with weekday, evening, and weekend availability.",
+        "longDescription": "The YMCA of Greater New York's South Shore branch publishes youth swim lessons at 3939 Richmond Avenue on Staten Island. Its current swimming page says the branch offers swim classes for infants, kids, teenagers, and adults, with weekday, evening, and weekend classes all year long.\n\nThe branch's current Programs and Classes page breaks those offerings into YMCA swim stages, including Parent and Child lessons for ages 6-36 months, Preschool lessons for ages 3-5, School Age Child lessons, and Teen lessons for ages 12-17. The page describes the parent-and-child pathway as adult-accompanied water readiness classes and explains that older children progress through safety, comfort, and stroke-development stages.\n\nSouth Shore's branch pages describe the facility as a family-focused Staten Island YMCA with a pool and youth programming. The public camp page and branch listings provide the branch contact line 718-227-3200 and address 3939 Richmond Avenue, Staten Island, NY 10312, while the About page lists Aquatics Director Matthew Greenfield at mgreenfield@ymcanyc.org.\n\nClassScout's listing image reuses an official South Shore YMCA branch hero already uploaded to ImgBB from YMCA-hosted media.\n\nSources: https://ymcanyc.org/locations/south-shore-ymca/programs-classes/swimming https://ymcanyc.org/locations/south-shore-ymca/programs-and-classes https://ymcanyc.org/locations/south-shore-ymca/programs-classes/camps https://ymcanyc.org/locations/south-shore-ymca/about",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/WWj0CVhy/5540edffe933.webp",
+        "email": "mgreenfield@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/south-shore-ymca/programs-classes/swimming",
+        "phone": "718-227-3200",
+        "announcementTitle": "Year-round swim registration",
+        "announcementDescription": "Official South Shore YMCA pages direct families to current online registration for infant, child, and teen swim stages.",
+        "announcementBadge": "Register online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

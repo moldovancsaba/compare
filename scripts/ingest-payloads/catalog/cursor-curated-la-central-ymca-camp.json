@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/la-central-ymca/summer-camps",
+    "https://ymcanyc.org/locations/la-central-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_music2.jpg.webp?itok=c0GXd3Xk"
+  ],
+  "notes": "Official La Central YMCA 2026 camp page and branch listing reviewed May 19, 2026. Original official image source URL: https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_music2.jpg.webp?itok=c0GXd3Xk. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "pricePerClass uses $714, the published community rate for one two-week Traditional Summer Camp session; Kinder, Swim, and Zookeepers Camp rates differ on the same official page.",
+    "rating and reviewCount are not published on the cited official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-la-central-ymca-summer-camp-2026",
+        "name": "La Central YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "address": "434 Westchester Avenue, Bronx, NY 10455",
+        "activityTypes": ["Swimming", "Sports", "STEM", "Art"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 714,
+        "shortDescription": "La Central YMCA runs weekday summer camp in Mott Haven with traditional, kinder, swim, and Zookeepers tracks for children ages 4 through 12.",
+        "longDescription": "The La Central YMCA publishes 2026 summer camp at 434 Westchester Avenue in Mott Haven, with two-week sessions from June 29 through August 21, 2026. The official page lists camp hours as 9 a.m. to 5 p.m. and extended hours from 8 a.m. to 9 a.m. and 5 p.m. to 6 p.m., which supports weekday morning, afternoon, and after-school tags.\n\nThe camp page lists Traditional Summer Camp for ages 6-12, Kinder Camp for ages 4-5, Swim Camp for ages 8-12, and Zookeepers Camp for ages 5-7. Published descriptions highlight physical fitness, arts and crafts, science activities, group play, and specialized animal-focused programming with zoo visits and swim lessons.\n\nPublished community tuition for one two-week Traditional Summer Camp session is $714; Kinder Camp is listed at $799 community, Swim Camp at $828 community, and Zookeepers Camp at $1,200 community. Camp leadership contact on the official page is Tasia Brown at lacentral@ymcanyc.org and (718) 530-5403.\n\nSources: https://ymcanyc.org/locations/la-central-ymca/summer-camps https://ymcanyc.org/locations/la-central-ymca https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_music2.jpg.webp?itok=c0GXd3Xk",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/Ng22r2CN/f8be55de4518.webp",
+        "email": "lacentral@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/la-central-ymca/summer-camps",
+        "phone": "(718) 530-5403",
+        "announcementTitle": "Zookeepers Camp added for 2026",
+        "announcementDescription": "La Central's 2026 camp page includes a Zookeepers Camp for ages 5-7 in Session 3 alongside traditional, kinder, and swim tracks.",
+        "announcementBadge": "Register",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

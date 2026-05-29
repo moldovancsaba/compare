@@ -1,0 +1,41 @@
+{
+  "sourceUrls": [
+    "https://www.qtc-itf.com/class-schedule",
+    "https://www.qtc-itf.com/our-history",
+    "https://www.qtc-itf.com/copy-of-our-rules",
+    "https://static.wixstatic.com/media/85abaa_feb571b00e3148969e240c6034c96951~mv2.jpg/v1/crop/x_0,y_103,w_2480,h_3296/fill/w_643,h_855,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/QTC_2026_POSTER%20(1).jpg"
+  ],
+  "notes": "Official QTC class schedule, history, and do-jang pages were reviewed on May 26, 2026. The official QTC poster image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "The reviewed official search results confirm that QTC runs four children’s classes Monday to Friday plus a weekend group, but the extracted text available here did not surface a clean typed timetable for every youth slot, so this listing uses only Weekday and Weekend timing tags.",
+    "pricePerClass is stored as 0 because the reviewed official sources do not publish a fixed public per-class price.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-qtc-jackson-heights-taekwondo",
+        "name": "Queens Taekwon-Do Center Jackson Heights",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "address": "89-18 Roosevelt Avenue, Jackson Heights, NY 11372",
+        "activityTypes": ["Martial Arts"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Jackson Heights taekwondo program with weekday children’s classes and a weekend youth group.",
+        "longDescription": "Queens Taekwon-Do Center's official history and class schedule pages place the school at 89-18 Roosevelt Avenue in Jackson Heights with phone 718-639-6998 and email mastersuarez@qtc-itf.com. The official site describes a long-running program focused on junior students and says the school currently offers flexible hours for both adults and children.\n\nThe reviewed official search results also state that QTC teaches four children's classes from Monday to Friday and runs an additional weekend group for students who can only attend on weekends. That is enough to support weekday and weekend availability without inventing more specific time-of-day tags.\n\nSources: https://www.qtc-itf.com/class-schedule https://www.qtc-itf.com/our-history https://www.qtc-itf.com/copy-of-our-rules https://static.wixstatic.com/media/85abaa_feb571b00e3148969e240c6034c96951~mv2.jpg/v1/crop/x_0,y_103,w_2480,h_3296/fill/w_643,h_855,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/QTC_2026_POSTER%20(1).jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/QF85ZqzJ/qtc-itf.jpg",
+        "email": "mastersuarez@qtc-itf.com",
+        "website": "https://www.qtc-itf.com/class-schedule",
+        "phone": "(718) 639-6998"
+      }
+    }
+  ]
+}

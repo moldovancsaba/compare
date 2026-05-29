@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://affcny.org/nyc-caregiver/",
+    "https://affcny.org/events/nyc-caregiver-connection-live-manhattan/2026-03-14/",
+    "https://affcny.org/wp-content/uploads/NYC-Manhattan-CC-plus-Youth-Hangouts.jpg"
+  ],
+  "notes": "Official AFFCNY NYC Caregiver Connection Manhattan pages reviewed May 19, 2026. Schedule, Manhattan location, and audience details come from the event pages. Original official image source URL: https://affcny.org/wp-content/uploads/NYC-Manhattan-CC-plus-Youth-Hangouts.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so meetupGroup.coverImageUrl uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official page describes a parent support group that runs alongside youth hangouts rather than a child-age-limited meetup, so ageRange is stored as All ages.",
+    "The event is generally the second Saturday of each month, but the official 2026 page notes February 7, 2026 as a first-Saturday exception with a 3:00-4:30 p.m. time window.",
+    "No official Instagram URL was confirmed on the cited pages, so instagram is left empty."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-affcny-caregiver-connection-manhattan",
+        "name": "AFFCNY — NYC Caregiver Connection LIVE! Manhattan",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "groupType": "Parent Meetup",
+        "ageRange": "All ages",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://affcny.org/nyc-caregiver/",
+        "description": "AFFCNY publishes NYC Caregiver Connection LIVE! Manhattan as a free, in-person parent support group for adoptive, foster, or kinship families in New York City. The official event page says the group is generally scheduled for the second Saturday of each month from 1:00 p.m. to 2:30 p.m. at St John the Baptist, 213 W. 30th Street in Manhattan, and that youth hangouts run simultaneously so parents and kids can both get support. The page describes monthly discussions on children's behaviors, parental resilience, school challenges, social and emotional hurdles, and therapeutic versus traditional parenting approaches. Sources: https://affcny.org/nyc-caregiver/ https://affcny.org/events/nyc-caregiver-connection-live-manhattan/2026-03-14/",
+        "initials": "AF",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/dJzHx58D/60605d11b63b.jpg"
+      }
+    }
+  ]
+}

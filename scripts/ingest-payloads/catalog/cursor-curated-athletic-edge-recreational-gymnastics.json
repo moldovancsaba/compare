@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://www.athleticedgeny.com/recreationalgymnastics",
+    "https://www.athleticedgeny.com/contact",
+    "https://www.athleticedgeny.com/faqs",
+    "https://images.squarespace-cdn.com/content/v1/5e436ac224001a4298f7fafa/1594240588194-GGOOM5A6C5WLTWXER8ZT/IMG_7199.jpg"
+  ],
+  "notes": "Official Athletic Edge Sports Center recreational gymnastics, contact, and FAQ pages reviewed May 16, 2026. The official gymnastics image IMG_7199.jpg was downloaded from the Athletic Edge site and uploaded through POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "pricePerClass is set to 0 because the official recreational gymnastics page does not publish class tuition.",
+    "dayTimeTags include Weekday and Weekend only because the official page says classes run Monday-Sunday but does not publish a complete kid schedule with times of day.",
+    "ageRanges map the official 18 months-15 years span into ClassScout's supported bands 0–2, 3–5, 6–8, 9–12, and Teens.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-athletic-edge-recreational-gymnastics",
+        "name": "Athletic Edge Sports Center Recreational Gymnastics",
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "address": "10 Nassau Place, Staten Island, NY 10307",
+        "activityTypes": ["Gymnastics"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Recreational gymnastics classes at Athletic Edge's Tottenville location, with Monday-Sunday availability and programs starting as young as 18 months.",
+        "longDescription": "Athletic Edge Sports Center's recreational gymnastics program is offered at its Tottenville location at 10 Nassau Place on Staten Island. The official recreational gymnastics page says classes are offered Monday-Sunday and describes the program as open to children from 18 months through 15 years old, including tumbling classes and private group options through the parent portal.\n\nThe official FAQ says students can start as young as 18 months old and notes that classes for children under 3 years old are considered parent + tot. The same FAQ confirms one free trial per student. Contact details published on the official site list the Tottenville location phone as (718) 608-0100 and email as info@athleticedgeny.com.\n\nThis listing uses an ImgBB copy of the official Athletic Edge gymnastics image IMG_7199.jpg downloaded from the provider's own Squarespace CDN asset.\n\nSources: https://www.athleticedgeny.com/recreationalgymnastics https://www.athleticedgeny.com/contact https://www.athleticedgeny.com/faqs",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Great for Toddlers"],
+        "image": "https://i.ibb.co/Djh33r5/8d04367fbb14.webp",
+        "email": "info@athleticedgeny.com",
+        "website": "https://www.athleticedgeny.com/",
+        "phone": "718-608-0100",
+        "announcementTitle": "One free trial per student",
+        "announcementDescription": "Athletic Edge's official FAQ says the Tottenville gymnastics program offers one free trial per student.",
+        "announcementBadge": "Free trial",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

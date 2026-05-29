@@ -1,0 +1,81 @@
+{
+  "sourceUrls": [
+    "https://warriorssportsclub.com/taekwondo",
+    "https://warriorssportsclub.com/lib/vmw3lb/5-lxg4ksig.png"
+  ],
+  "notes": "Official Warriors Sports Club Taekwondo page reviewed May 26, 2026. The official Warriors image was downloaded from the organization's own site and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Kingsbridge from the official 260 W 231st Street Bronx address and the page's repeated Kingsbridge branding.",
+    "pricePerClass is stored as 0 because the public Taekwondo page publishes schedules and contact details but not a single fixed per-class tuition for the year-round youth program.",
+    "rating and reviewCount are set to 0 because the official page does not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-warriors-sports-club-taekwondo",
+        "name": "Warriors Sports Club Taekwondo",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "address": "260 W 231st Street, Bronx, NY 10463",
+        "activityTypes": ["Martial Arts", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Warriors Sports Club runs weekday and Saturday Taekwondo classes in Kingsbridge for ages 4-17, with after-school youth slots and older teen/adult evening training.",
+        "longDescription": "Warriors Sports Club's official Taekwondo page describes a Kingsbridge Bronx program focused on discipline, confidence, respect, focus, and fitness. The page publishes a class schedule with weekday youth sessions for ages 4-6 from 4:00 PM to 5:00 PM Monday through Friday, ages 7-10 from 5:00 PM to 6:00 PM Mondays through Fridays, and ages 10-17 from 6:00 PM to 7:00 PM Monday through Friday.\n\nThe same official schedule adds Saturday youth classes from 12:00 PM to 1:00 PM for ages 4-9 and 1:00 PM to 2:00 PM for ages 10-17, while adult classes run Tuesdays and Thursdays from 7:00 PM to 8:30 PM. The page lists Warriors Sports Club at 260 W 231st Street, Bronx, NY 10463 with phone 718-812-7087 and email info@warriorssportsclub.com.\n\nSources: https://warriorssportsclub.com/taekwondo https://warriorssportsclub.com/lib/vmw3lb/5-lxg4ksig.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/gZdF5xGH/3acc66d2d6a5.png",
+        "email": "info@warriorssportsclub.com",
+        "website": "https://warriorssportsclub.com/taekwondo",
+        "phone": "718-812-7087",
+        "announcementTitle": "Weekday and Saturday Taekwondo",
+        "announcementDescription": "Official schedule lists daily after-school youth classes plus Saturday noon and 1 PM youth sessions in Kingsbridge.",
+        "announcementBadge": "Free trial",
+        "recurringPrograms": [
+          {
+            "id": "rp-warriors-taekwondo-weekdays-younger",
+            "title": "Ages 4-10 Weekday Taekwondo",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "4:00 PM-6:00 PM",
+            "locationNote": "Warriors Sports Club indoor facility",
+            "ageRanges": ["3–5", "6–8"],
+            "activityTypes": ["Martial Arts", "Sports"],
+            "summary": "After-school weekday Taekwondo classes for ages 4-6 and 7-10.",
+            "registrationUrl": "https://warriorssportsclub.com/taekwondo"
+          },
+          {
+            "id": "rp-warriors-taekwondo-weekdays-older",
+            "title": "Ages 10-17 Weekday Taekwondo",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "6:00 PM-7:00 PM",
+            "locationNote": "Warriors Sports Club indoor facility",
+            "ageRanges": ["9–12", "Teens"],
+            "activityTypes": ["Martial Arts", "Sports"],
+            "summary": "Weekday evening Taekwondo training for ages 10-17.",
+            "registrationUrl": "https://warriorssportsclub.com/taekwondo"
+          },
+          {
+            "id": "rp-warriors-taekwondo-saturday",
+            "title": "Saturday Youth Taekwondo",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "12:00 PM-2:00 PM",
+            "locationNote": "Warriors Sports Club indoor facility",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Martial Arts", "Sports"],
+            "summary": "Saturday youth Taekwondo classes for ages 4-9 and ages 10-17.",
+            "registrationUrl": "https://warriorssportsclub.com/taekwondo"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

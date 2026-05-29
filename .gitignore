@@ -1,10 +1,32 @@
-.next
-node_modules
-.env
-.env.local
-coverage
+# Logs
+logs
+*.log
 npm-debug.log*
-*.tsbuildinfo
-vercel-env-*
-.DS_Store
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+.next
 .vercel
+*.local
+*.tsbuildinfo
+
+# Env (keep example tracked)
+.env
+.env.*.local
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

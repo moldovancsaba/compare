@@ -1,0 +1,49 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/kids-family/birthday-parties",
+    "https://ymcanyc.org/locations/ridgewood-ymca"
+  ],
+  "notes": "Official Ridgewood YMCA birthday-parties page reviewed May 16, 2026. Hero image is the official YMCA of Greater New York 2026 camp parachute banner from ymcanyc.org, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "The official page states that as of 12.1.21 party packages are not yet available online—families should contact Member Services or Alexandra Reyes for current themes, pricing, and room availability.",
+    "pricePerClass set to 0 because specific package dollar amounts are not published on the public birthday page (only that member and non-member pricing varies by party type).",
+    "Party times are listed as varying Monday–Sunday; confirm schedule when booking.",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ridgewood-ymca-birthday-parties",
+        "name": "Ridgewood YMCA — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "address": "69-02 64th Street, Ridgewood, NY 11385",
+        "activityTypes": [
+          "Birthday Entertainment",
+          "Sports",
+          "Dance",
+          "Arts and crafts"
+        ],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Queens YMCA birthday parties in Ridgewood: sports, dance, arts, and toddler themes in gym, studio, and classrooms—contact the branch for current packages.",
+        "longDescription": "The YMCA of Greater New York’s Ridgewood branch advertises hassle-free children’s birthday parties with themed options including sports, dance, arts and crafts, toddlers, and more. The official birthday-parties page notes that tables and chairs are provided and staff can help host events in the gymnasium, studio, and classrooms.\n\nThe same page states that party packages were not yet available online as of December 1, 2021, and directs families to stop by Member Services or contact Alexandra Reyes at areyes@ymcanyc.org or 212-912-2185 for more information. Published scheduling notes list parties Monday through Sunday with varying times and member versus non-member pricing depending on the party chosen.\n\nBranch address from YMCA listings: 69-02 64th Street, Ridgewood, NY 11385.\n\nSources: https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/kids-family/birthday-parties https://ymcanyc.org/locations/ridgewood-ymca",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/QvCJJKpL/959f5fa7c18b.webp",
+        "email": "areyes@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/kids-family/birthday-parties",
+        "phone": "212-912-2185",
+        "announcementTitle": "Contact for packages",
+        "announcementDescription": "Official page notes online party packages were not yet listed—email areyes@ymcanyc.org or call 212-912-2185 for current Ridgewood Y themes and pricing.",
+        "announcementBadge": "Call to book",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

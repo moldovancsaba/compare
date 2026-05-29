@@ -1,0 +1,53 @@
+{
+  "sourceUrls": [
+    "https://www.92ny.org/children-family/camps/about",
+    "https://www.92ny.org/children-family/camps/yomi",
+    "https://find.acacamps.org/program_profile.php?program_id=2014"
+  ],
+  "notes": "Official 92NY camps about and Yomi pages plus ACA Find-a-Camp program summary reviewed May 16, 2026. Hero image is an official 92NY kids-and-families photograph served from ny92-stage.imgix.net (same CDN family referenced on 92ny.org), downloaded and uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass set to 0: 2026 session tuition is published on 92NY’s Dates & Rates page, which was not fully retrieved in this pass—confirm current tuition and discounts on 92ny.org before registering.",
+    "Camp programming takes place at the Rockland County campground (Orangeburg, NY); Manhattan families typically use published bus pickups—the winter registration office is 1395 Lexington Avenue, New York, NY 10128.",
+    "Published 2026 session calendar dates (June 29–August 14) should be confirmed on the official Dates & Rates page when booking.",
+    "ACA listing describes Camp Yomi for children entering kindergarten through 4th grade; other 92NY camps serve different age bands.",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-92ny-camp-yomi-2026",
+        "name": "92NY Camp Yomi (2026)",
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "address": "1395 Lexington Avenue, New York, NY 10128",
+        "activityTypes": [
+          "Swimming",
+          "Sports",
+          "Arts and crafts",
+          "Outdoor adventure",
+          "STEM",
+          "Performing arts"
+        ],
+        "ageRanges": ["3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Classic 92NY day camp at Rockland County grounds with bus service from NYC: two swims daily, sports, arts, adventure, and a Lexington Ave camp office for Manhattan families.",
+        "longDescription": "92NY (formerly 92nd Street Y) has run summer camps for more than 60 years. Its official camps about page describes a 50-acre Rockland County campground about 20 minutes outside New York City with swim, sports, creative arts, adventure courses, and air-conditioned coach buses with onboard bathrooms. Camp Yomi is the traditional day-camp track linked from the official Yomi page and summarized on ACA’s Find-a-Camp listing as serving children entering kindergarten through fourth grade at the Rockland campground with transportation from Manhattan.\n\nThe same about page highlights two swims per day (instructional and free swim), sports including gymnastics and baseball, ceramics and jewelry-making, low staff-to-camper ratios, and values-based programming. Winter camp registration contact on that page: 1395 Lexington Avenue, New York, NY 10128; 212.415.5573; email link provided on 92ny.org.\n\nRockland camp address listed on the official page: Orangeburg, NY 10962. Families should use 92NY’s bus map and Dates & Rates (tuition) pages on 92ny.org for current 2026 sessions, pickup locations, and pricing.\n\nSources: https://www.92ny.org/children-family/camps/about https://www.92ny.org/children-family/camps/yomi https://find.acacamps.org/program_profile.php?program_id=2014",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/kVzSBxKH/88542f6493db.jpg",
+        "email": "",
+        "website": "https://www.92ny.org/children-family/camps/yomi",
+        "phone": "212-415-5573",
+        "announcementTitle": "Bus from Manhattan",
+        "announcementDescription": "Official camp pages describe coach-bus pickups in Manhattan for the Rockland campground—see 92NY’s bus map and registration portal for 2026 details.",
+        "announcementBadge": "Day camp",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

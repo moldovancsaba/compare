@@ -1,0 +1,58 @@
+{
+  "sourceUrls": [
+    "https://rockingtheboat.org/public-programs/camp",
+    "https://live.staticflickr.com/65535/53155310413_a9646537b4_h.jpg"
+  ],
+  "notes": "Rocking the Boat official summer camp page reviewed May 26, 2026. The official camp photo was downloaded from the organization's live Flickr-hosted media and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because Rocking the Boat publishes weekly camp pricing and mini-camp day pricing rather than a per-class price."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-rocking-the-boat-hunts-point-summer-camp-2026",
+        "name": "Rocking the Boat Summer Camp",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "address": "812 Edgewater Road, Bronx, NY 10474",
+        "activityTypes": ["Outdoor Activities", "Science", "STEM", "Sports"],
+        "ageRanges": ["9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Weeklong Hunts Point summer camp on the Bronx River for rising 4th-9th graders, with woodworking, river ecology, rowing, and mini-camps.",
+        "longDescription": "Rocking the Boat's official summer camp page invites rising 4th through 9th graders to spend the summer in Hunts Point exploring the Bronx River through woodworking, rowing, and river ecology. The page says camp runs June 22 through September 9, 2026, with elementary and middle school weeklong sessions plus holiday-week mini-camps.\n\nThe published schedule is Monday-Friday from 9:00 AM to 3:00 PM. Rocking the Boat lists pricing at $450 per camper per week, with mini-camps at $90 per day, and notes that no previous experience is necessary. The site says all swim abilities are welcome and that children wear US Coast Guard approved life jackets while on or near the water.\n\nThe organization lists its Hunts Point address as 812 Edgewater Road, Bronx, NY 10474, with contact email publicprograms@rockingtheboat.org for camp questions and main phone 718-466-5799.\n\nSources: https://rockingtheboat.org/public-programs/camp https://live.staticflickr.com/65535/53155310413_a9646537b4_h.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/23m8Y1zs/b238c5ec3f9d.jpg",
+        "email": "publicprograms@rockingtheboat.org",
+        "website": "https://rockingtheboat.org/public-programs/camp",
+        "phone": "718-466-5799",
+        "announcementTitle": "Summer 2026 registration live",
+        "announcementDescription": "Rocking the Boat's official camp page lists June 22-September 9, 2026 sessions for rising 4th-9th graders.",
+        "announcementBadge": "Apply online",
+        "recurringPrograms": [
+          {
+            "id": "rp-rocking-the-boat-summer-camp-2026",
+            "title": "Summer Camp 2026",
+            "cadence": "Seasonal",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "Monday-Friday, 9:00 AM-3:00 PM",
+            "locationNote": "Bronx River campus in Hunts Point",
+            "ageRanges": ["9–12", "Teens"],
+            "activityTypes": ["Outdoor Activities", "Science", "STEM", "Sports"],
+            "summary": "Weeklong woodworking and river ecology camp sessions for rising 4th-9th graders, plus mini-camps.",
+            "priceText": "$450 per camper per week; mini-camps $90 per day",
+            "registrationUrl": "https://rockingtheboat.org/public-programs/camp",
+            "startDate": "2026-06-22",
+            "endDate": "2026-09-09"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://riverdaley.org/performing-arts/dance/jazz/",
+    "https://riverdaley.org/performing-arts/dance/"
+  ],
+  "notes": "Official Riverdale Y jazz class page and Riverdale Y Dance overview page reviewed May 16, 2026. Original official image source URL: https://riverdaley.org/wp-content/uploads/2025/07/riverdale-y-dance.png. The Riverdale Y dance hero image was downloaded from the official site and re-uploaded through POST /api/ingest/upload for ImgBB compliance.",
+  "missingOrUncertain": [
+    "pricePerClass is 0 because the cited official pages publish schedule details and a $25 trial-class offer, but do not publish Broadway Jazz C semester tuition on the public page.",
+    "Neighborhood is mapped to canonical Riverdale from the organization name Riverdale Y and its Riverdale-branded Bronx location; the cited pages list the street address but do not label a separate neighborhood field.",
+    "rating and reviewCount are 0 because no official rating or review totals are published on the cited pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-riverdale-y-broadway-jazz-c",
+        "name": "Riverdale Y Dance — Broadway Jazz C",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "address": "5625 Arlington Avenue, Bronx, NY 10471",
+        "activityTypes": ["Dance"],
+        "ageRanges": ["9–12"],
+        "dayTimeTags": ["Weekday", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekly Riverdale Y jazz class for ages 9–11 focused on Broadway-inspired movement and musical-theater style, scheduled on Tuesdays after school.",
+        "longDescription": "Broadway Jazz C at Riverdale Y Dance is a youth class for ages 9–11. The official class page describes it as a popular option for young musical-theater fans, exploring music and moves from favorite Broadway musicals as either a standalone class or a complement to musical-theater training.\n\nThe official Spring Semester schedule on the class page lists Broadway Jazz C on Tuesdays from 5:00 p.m. to 5:45 p.m., with a start date of February 3 and an end date of June 14. The same page lists days off on February 17 and April 7.\n\nThe Riverdale Y Dance overview page says dance classes meet weekly during two semesters and culminate with a recital on the organization’s in-house stage in June; it lists the fall semester as September through January and the spring semester as February through June. That overview page also says families can try a class during the first two weeks of the semester by registering for a trial at the front desk, with a published $25 trial fee that can be applied toward registration using code TRIAL25.\n\nContact details shown on the cited pages: Riverdale Y, 5625 Arlington Avenue, Bronx, NY 10471; general phone 718-548-8200; dance program email dance@riverdaley.org. The public pages reviewed do not publish Broadway Jazz C tuition, so this listing keeps the planning price at 0 until Riverdale Y publishes or confirms the program fee.\n\nSources: https://riverdaley.org/performing-arts/dance/jazz/ https://riverdaley.org/performing-arts/dance/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/1YDwB1DW/246531fdb311.png",
+        "email": "dance@riverdaley.org",
+        "website": "https://riverdaley.org/performing-arts/dance/jazz/",
+        "phone": "718-548-8200",
+        "announcementTitle": "Spring semester Tuesdays",
+        "announcementDescription": "Official page lists Broadway Jazz C on Tuesdays from 5:00 to 5:45 p.m. through June 14, with select days off noted on-page.",
+        "announcementBadge": "After-school",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

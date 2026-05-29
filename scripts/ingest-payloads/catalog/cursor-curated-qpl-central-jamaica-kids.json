@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://www.queenslibrary.org/about-us/locations/Central-Library",
+    "https://www.queenslibrary.org/calendar",
+    "https://www.queenslibrary.org/sites/default/files/2026-04/for%20the%20website%203.png"
+  ],
+  "notes": "Queens Public Library Central Library (Jamaica) official web presence. Hero image is the library's own 2026 site graphic from queenslibrary.org wp-content, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0; most children's programs are free with a library card but some events may require registration.",
+    "Specific storytime titles and times rotate; use queenslibrary.org/calendar filtered to Central Library rather than a single fixed program name.",
+    "Central Library serves Jamaica at 89-11 Merrick Boulevard; neighborhood chip Jamaica reflects the branch's published Queens location."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-qpl-central-library-jamaica-kids",
+        "name": "Queens Public Library — Central Library Children's Programs",
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "address": "89-11 Merrick Boulevard, Jamaica, NY 11432",
+        "activityTypes": ["Storytime", "STEM", "Art", "Music"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "QPL's flagship Jamaica campus hosts rotating free children's programs—storytimes, early learning, and family events (see queenslibrary.org/calendar).",
+        "longDescription": "Queens Public Library's Central Library at 89-11 Merrick Boulevard in Jamaica is the system hub for borough-wide children's programming. The official site publishes a full events calendar with storytimes, early-learning activities, cultural programs, and family events at Central Library and across Queens. Branch contact phone listed on Queens Library materials: 718-990-0700.\n\nProgram names, ages, and times change seasonally; filter the calendar by Central Library on queenslibrary.org/calendar before visiting. Many programs are free with a Queens Public Library card.\n\nSources: https://www.queenslibrary.org/about-us/locations/Central-Library https://www.queenslibrary.org/calendar",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Featured", "New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/xqmLhbbw/a8d7eabba1da.png",
+        "email": "",
+        "website": "https://www.queenslibrary.org/about-us/locations/Central-Library",
+        "phone": "718-990-0700",
+        "announcementTitle": "Check the events calendar",
+        "announcementDescription": "Filter queenslibrary.org/calendar by Central Library for current children's programs.",
+        "announcementBadge": "Free",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

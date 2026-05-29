@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/harlem-ymca/programs-classes/camps",
+    "https://ymcanyc.org/locations/harlem-ymca",
+    "https://ymcanyc.org/locations",
+    "https://ymcanyc.org/programs/camp",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc"
+  ],
+  "notes": "Harlem YMCA 2026 summer day camp pages (branch camps + org locations + general camp program). Hero image is the official YMCA of Greater New York 2026 camp STEM banner asset from the same Drupal path, downloaded and re-hosted via POST /api/ingest/upload for ImgBB compliance.",
+  "missingOrUncertain": [
+    "pricePerClass uses $771, the published community (non-member) rate for one two-week Traditional Summer Camp session (ages 6–14) on the Harlem Y camp page; Kinder and Swim camp tiers differ—see branch page for member pricing and other tracks.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "Extended care (8–9 a.m. and 5–6 p.m.) is mentioned on the camp page; add-on fees for extended hours are not spelled out on the excerpted page—confirm with the branch or registration desk."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-harlem-ymca-camp-2026",
+        "name": "Harlem YMCA — Summer Day Camp",
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "address": "180 West 135th Street, New York, NY 10030",
+        "activityTypes": ["Swimming", "STEM", "Art", "Sports", "Outdoor Activities"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 771,
+        "shortDescription": "Licensed YMCA day camp in Harlem (2026): Traditional, Swim, and Kinder tracks; two-week sessions, optional extended hours, and instructional swim for eligible programs.",
+        "longDescription": "The Harlem YMCA of Greater New York runs 2026 Summer Day Camp at 180 West 135th Street with branch hours listed on the location page and detailed camp offerings on the branch camps page. Published camp day hours are 9 a.m.–5 p.m., with optional extended hours 8–9 a.m. and 5–6 p.m. Summer camp is scheduled to start June 29, 2026, and run in two-week sessions through August 21, 2026, with closure Friday, July 3, for the Independence Day holiday, matching the session table on the Harlem camp page.\n\nProgram tracks described there include Traditional Summer Camp (ages 6–14), Swim Camp (ages 7–12), and Kinder Camp for children entering kindergarten in September 2026 (ages 4–5). The Traditional camp description highlights sports, arts and crafts, science activities, theme days, group play, team building, and instructional swim. Swim Camp adds structured aquatics with certified instructors when campers are not in the pool. Kinder Camp emphasizes kindergarten readiness, classroom routines, literacy, science, and theme-based arts and crafts, with weekly instructional swim.\n\nPublished per-session tuition on the same page: Traditional Summer Camp—Y member $685, community $771; Swim Camp—member $799, community $885; Kinder Camp—member $771, community $856 (each per two-week session). Open house dates including April 18, May 16, and June 6 are listed for tours and registration support. Camp leadership contact on the page: Jessica Carter, harlemycamp@ymcanyc.org, 212-912-2100. Online registration is linked via the Y’s summer camp registration portal for this branch.\n\nSources: https://ymcanyc.org/locations/harlem-ymca/programs-classes/camps https://ymcanyc.org/locations/harlem-ymca https://ymcanyc.org/locations https://ymcanyc.org/programs/camp",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/DFKHyXD/33bd31f411c2.webp",
+        "email": "harlemycamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/harlem-ymca",
+        "phone": "212-912-2100",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Harlem Y lists 10% early-bird savings when the full balance is paid by April 18, 2026, plus sibling discounts—see branch camp page for details.",
+        "announcementBadge": "Early bird",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

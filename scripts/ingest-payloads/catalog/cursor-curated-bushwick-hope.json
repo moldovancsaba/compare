@@ -1,0 +1,37 @@
+{
+  "sourceUrls": [
+    "https://www.bushwickhope.org/",
+    "https://www.bushwickhope.org/about-us",
+    "https://www.bushwickhope.org/offerings",
+    "https://www.bushwickhope.org/gallery",
+    "https://images.squarespace-cdn.com/content/v1/67e2fca4ddf64b7227e7c285/fe568730-ba72-4252-919b-9f6b4a603a9c/940A7139+%281%29.jpg"
+  ],
+  "notes": "Official Bushwick H.O.P.E site pages and official gallery image reviewed May 19, 2026. Original official image source URL: https://images.squarespace-cdn.com/content/v1/67e2fca4ddf64b7227e7c285/fe568730-ba72-4252-919b-9f6b4a603a9c/940A7139+%281%29.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so coverImageUrl complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "cadence is stored as Pop-up because the official pages describe co-designed offerings, events, workshops, and gatherings but do not publish one fixed weekly or monthly meetup schedule on the cited pages.",
+    "ageRange is stored as All ages because Bushwick H.O.P.E describes a walk-in family-centered space open to all rather than a single child age band.",
+    "The official site does not publish one canonical contact phone number on the cited pages; families should use the official site or Instagram for current event details and contact."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-bushwick-hope-fec",
+        "name": "Bushwick H.O.P.E — Family Enrichment Center",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Pop-up",
+        "instagram": "https://www.instagram.com/fec_bushwick/",
+        "website": "https://www.bushwickhope.org/about-us",
+        "description": "Bushwick H.O.P.E. (Honoring Our People Equally) is a Bushwick Family Enrichment Center at 959 Madison Street in Brooklyn. Its official site describes a welcoming, community-based space designed to support and strengthen families through resources, offerings, and activities, with a mission to create a safe, inclusive place where families build connections and thrive together.\n\nThe official About Us and Offerings pages say Family Enrichment Centers are walk-in family-centered spaces where activities are co-designed with community members, and that Bushwick H.O.P.E offerings include gatherings, activities, events, workshops, self-help groups, and fun community events for children, youth, and families. The center also highlights chances for neighbors to connect over snacks or coffee and seek support and resources.\n\nSources: https://www.bushwickhope.org/ https://www.bushwickhope.org/about-us https://www.bushwickhope.org/offerings https://www.bushwickhope.org/gallery",
+        "initials": "BHO",
+        "icon": "community",
+        "palette": "charcoal",
+        "coverImageUrl": "https://i.ibb.co/hxB6qswQ/1d6310133d76.jpg"
+      }
+    }
+  ]
+}

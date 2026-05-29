@@ -1,0 +1,65 @@
+{
+  "sourceUrls": [
+    "https://nybbc.org/location-corona/",
+    "https://nybbc.org/wp-content/uploads/2019/09/NYBBC_Corona_class_Schedule.pdf",
+    "https://nybbc.org/wp-content/uploads/2019/08/nybbc_location_corona__0000_corona-517.jpg"
+  ],
+  "notes": "Official New York Black Belt Center Corona location page and official Corona schedule were reviewed on May 26, 2026. The official Corona location image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official sources publish the class schedule and location details but not a fixed public per-class price.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-nybbc-corona-taekwondo",
+        "name": "New York Black Belt Center Corona Taekwondo",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "address": "104-05 Northern Blvd, Corona, NY 11368",
+        "activityTypes": ["Martial Arts"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekday and Saturday taekwondo classes in Corona for ages 3-14 at New York Black Belt Center.",
+        "longDescription": "New York Black Belt Center's official Corona page publishes a detailed class schedule for its location at 104-05 Northern Boulevard in Corona with phone (347) 639-1201. The current schedule shows weekday classes for 3-5 year olds at 3:30-4:00 PM, 6-9 year olds at 4:15-5:00 PM, and 9-12 or 9-14 year olds at 5:00-7:00 PM across Monday through Friday, plus Saturday classes starting at 10:15 AM and 11:00 AM.\n\nBecause the same official schedule spans weekday after-school and evening sessions plus weekend morning and afternoon sessions, this listing carries the full set of supported timing tags. The provider page also describes NYBBC Corona as a family taekwondo program with classes for kids, families, and everyone.\n\nSources: https://nybbc.org/location-corona/ https://nybbc.org/wp-content/uploads/2019/09/NYBBC_Corona_class_Schedule.pdf https://nybbc.org/wp-content/uploads/2019/08/nybbc_location_corona__0000_corona-517.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/fYxfLvxJ/nybbc-corona.jpg",
+        "email": "",
+        "website": "https://nybbc.org/location-corona/",
+        "phone": "(347) 639-1201",
+        "recurringPrograms": [
+          {
+            "id": "rp-nybbc-corona-weekday-kids",
+            "title": "Weekday Kids Taekwondo",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "3:30 PM-7:00 PM",
+            "locationNote": "NYBBC Corona",
+            "ageRanges": ["3–5", "6–8", "9–12"],
+            "activityTypes": ["Martial Arts"],
+            "summary": "Weekday kids taekwondo classes for ages 3-14 across early childhood, children, and junior groups.",
+            "registrationUrl": "https://nybbc.org/location-corona/"
+          },
+          {
+            "id": "rp-nybbc-corona-saturday",
+            "title": "Saturday Kids Taekwondo",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "10:15 AM-12:00 PM",
+            "locationNote": "NYBBC Corona",
+            "ageRanges": ["3–5", "6–8", "9–12"],
+            "activityTypes": ["Martial Arts"],
+            "summary": "Saturday taekwondo classes for ages 3-5 and children.",
+            "registrationUrl": "https://nybbc.org/location-corona/"
+          }
+        ]
+      }
+    }
+  ]
+}

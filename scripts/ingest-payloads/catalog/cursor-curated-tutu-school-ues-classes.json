@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://tutuschool.com/ues/",
+    "https://tutuschool.com/ues/classes/",
+    "https://tutuschool.com/ues/wp-content/uploads/sites/114/2025/03/hero-classes-scaled.jpg"
+  ],
+  "notes": "Official Tutu School Upper East Side home and classes pages reviewed May 19, 2026. Original official image source URL: https://tutuschool.com/ues/wp-content/uploads/sites/114/2025/03/hero-classes-scaled.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "provider.pricePerClass uses $180 as the planning figure because the official classes page says class membership is charged in installment payments of $180.00 monthly; the cited page does not publish one uniform per-visit price.",
+    "No plain-text public contact email was confirmed on the cited official pages, so email is stored as an empty string.",
+    "rating and reviewCount are not published on the cited official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-tutu-school-upper-east-side-classes",
+        "name": "Tutu School Upper East Side",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "address": "1195 Lexington Avenue, Upper East Side, NY 10028",
+        "activityTypes": ["Dance", "Music"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"],
+        "pricePerClass": 180,
+        "shortDescription": "Story-driven ballet classes on the Upper East Side for children ages 6 months to 8 years, with a published schedule across weekdays and weekends.",
+        "longDescription": "Tutu School Upper East Side offers story-driven ballet classes for children ages 6 months to 8 years. The official home and classes pages list Baby Ballet for 6-18 months, Tutu Toddlers for 18 months to 3 years, Exploring Ballet for ages 3-5, and Primary Ballet Prep for ages 5-8.\n\nThe official classes page says registration is ongoing and that class membership is charged in installment payments of $180.00 on the 1st of each month. The same page publishes classes Monday through Sunday, with examples including Monday morning classes from 9:30 a.m. to 12:15 p.m., weekday after-school and afternoon-evening slots from 3:00 p.m. to 5:45 p.m., and weekend classes on both Saturday and Sunday.\n\nThe official site lists the studio at 1195 Lexington Avenue on the Upper East Side, and the public contact number on the page is 917-794-4975. This listing uses the monthly membership figure as a planning price because the official page does not publish one standardized per-class rate.\n\nSources: https://tutuschool.com/ues/ https://tutuschool.com/ues/classes/ https://tutuschool.com/ues/wp-content/uploads/sites/114/2025/03/hero-classes-scaled.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/PGqYpJdV/5ded4a880c64.jpg",
+        "email": "",
+        "website": "https://tutuschool.com/ues/classes/",
+        "phone": "(917) 794-4975",
+        "announcementTitle": "Weekday and weekend ballet schedule",
+        "announcementDescription": "The official class page shows morning, afternoon, after-school, and evening ballet classes across Monday through Sunday.",
+        "announcementBadge": "Schedule"
+      }
+    }
+  ]
+}

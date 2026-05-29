@@ -1,0 +1,64 @@
+{
+  "sourceUrls": [
+    "https://www.bafausa.org/class-schedules",
+    "https://images.squarespace-cdn.com/content/v1/61eb966cc6417f1e8dd30e30/1642830400111-JC2YHQ3PUTNM75QG836U/A43348E1-2404-4277-80B4-D9C526D0086D_1_105_c.jpeg"
+  ],
+  "notes": "Official BAFA class schedules page was reviewed on May 26, 2026. The official BAFA image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official schedule page publishes class times and contact details but not public tuition.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bafa-jamaica-singing-classes",
+        "name": "BAFA Jamaica Singing Classes",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "address": "86-44 Edgerton Blvd, Jamaica, NY 11432",
+        "activityTypes": ["Music"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Friday singing classes in Jamaica at BAFA’s Queens location, with after-school and evening sessions.",
+        "longDescription": "The official BAFA class schedules page lists its Queens location in Jamaica at 86-44 Edgerton Boulevard with booking email bafa.inc.usa@gmail.com and phone (347) 387-7897. The current Queens Friday schedule includes two singing classes, from 5:00 PM to 6:30 PM and from 6:30 PM to 7:30 PM.\n\nBecause the published listing is clearly tied to Friday afternoon and evening singing instruction at the Jamaica location, this entry uses weekday, afternoon, after-school, and evening tags. BAFA describes its mission as building a diverse cultural community through performing arts training and education.\n\nSources: https://www.bafausa.org/class-schedules https://images.squarespace-cdn.com/content/v1/61eb966cc6417f1e8dd30e30/1642830400111-JC2YHQ3PUTNM75QG836U/A43348E1-2404-4277-80B4-D9C526D0086D_1_105_c.jpeg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/xtRnpXKy/bafa-jamaica.webp",
+        "email": "bafa.inc.usa@gmail.com",
+        "website": "https://www.bafausa.org/class-schedules",
+        "phone": "(347) 387-7897",
+        "recurringPrograms": [
+          {
+            "id": "rp-bafa-jamaica-friday-singing-1",
+            "title": "Friday Singing Class 1",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Friday"],
+            "timeText": "5:00 PM-6:30 PM",
+            "locationNote": "BAFA Queens (Jamaica) Location",
+            "ageRanges": ["6–8", "9–12", "Teens"],
+            "activityTypes": ["Music"],
+            "summary": "Friday singing instruction at BAFA Jamaica.",
+            "registrationUrl": "https://www.bafausa.org/class-schedules"
+          },
+          {
+            "id": "rp-bafa-jamaica-friday-singing-2",
+            "title": "Friday Singing Class 2",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Friday"],
+            "timeText": "6:30 PM-7:30 PM",
+            "locationNote": "BAFA Queens (Jamaica) Location",
+            "ageRanges": ["9–12", "Teens"],
+            "activityTypes": ["Music"],
+            "summary": "Friday evening singing instruction at BAFA Jamaica.",
+            "registrationUrl": "https://www.bafausa.org/class-schedules"
+          }
+        ]
+      }
+    }
+  ]
+}

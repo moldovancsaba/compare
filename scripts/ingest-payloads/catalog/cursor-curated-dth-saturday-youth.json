@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://dancetheatreofharlem.org/saturdayyouthdanceprogram/",
+    "https://dancetheatreofharlem.org/who-we-are/",
+    "https://www.dancetheatreofharlem.org/wp-content/uploads/2023/06/DTH-SCHOOL-1440x1047.jpeg",
+    "https://app.gostudiopro.com/online/index.php?account_id=31053"
+  ],
+  "notes": "Official Dance Theatre of Harlem Saturday Youth Drop-In and Who We Are pages (2026). Hero image is the DTH School JPEG used on the Saturday program page (WordPress media), downloaded and uploaded via POST /api/ingest/upload. Registration link taken from the Saturday program page HTML.",
+  "missingOrUncertain": [
+    "ClassScout age bands are approximate: the program invites ages 8–17 overall; ballet sections are split 8–11 and 12–17 on the official page, while Afro Pop and Hip-Hop are listed as 12+.",
+    "The Afro Pop class description on the official page includes wording about “adults of all levels” in the same paragraph as the youth schedule context — treat audience as the published youth drop-in series and confirm with DTH before assuming age policy for that section.",
+    "Season dates Oct 4, 2025–May 9, 2026 appear on the Saturday page; future seasons may shift — confirm on dancetheatreofharlem.org before planning.",
+    "rating / reviewCount: not on official pages; 0 / 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-dth-saturday-youth-drop-in",
+        "name": "Dance Theatre of Harlem School — Saturday Youth Drop-In Classes",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "address": "466 West 152nd Street, New York, NY 10031-1814",
+        "activityTypes": ["Dance", "Ballet", "Music", "Theater"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 10,
+        "shortDescription": "Saturday drop-in youth dance at the Everett Center: beginner ballet (ages 8–11 and 12–17 tracks), Afro Pop 12+, and Hip-Hop 12+; $10 per class with online registration.",
+        "longDescription": "Dance Theatre of Harlem’s Saturday Youth Drop-In Classes run Saturdays from October 4, 2025 through May 9, 2026, and are open to youth ages 8–17 for the overall series, with no full-year school enrollment required to participate in these drop-ins per the official program page.\n\nPublished class blocks: Ballet (ages 8–11) 12:30–1:30 p.m. with Rachel Afi Sekyi; Ballet (ages 12–17) 12:30–1:30 p.m. with Erika Mosley; Afro Pop (12 years old+) 11:30 a.m.–12:30 p.m. with Negesti McIntosh; Hip-Hop (12 years old+) 1:30–2:30 p.m. with Aicha Konate. The page lists pricing as $10 for a single class and links to online registration via GoStudio Pro (account_id=31053 on the official “Register Here” link).\n\nVenue and organization contact from the Who We Are page: Dance Theatre of Harlem at the Everett Center for the Performing Arts, 466 West 152nd Street, New York, NY 10031-1814; Tel 212.690.2800. School questions are directed to school-info@dancetheatreofharlem.org on the same site; general inquiries reference info@dancetheatreofharlem.org.\n\nThe listing image reproduces the official DTH School photograph used on the Saturday program page, re-hosted on ImgBB to meet ClassScout image policy.\n\nSources: https://dancetheatreofharlem.org/saturdayyouthdanceprogram/ https://dancetheatreofharlem.org/who-we-are/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Weekend Friendly", "New"],
+        "image": "https://i.ibb.co/Ps1mhhkn/51b9a3927a78.jpg",
+        "email": "school-info@dancetheatreofharlem.org",
+        "website": "https://dancetheatreofharlem.org/",
+        "phone": "212-690-2800",
+        "announcementTitle": "$10 Saturday drop-ins",
+        "announcementDescription": "Official Saturday Youth page lists $10 per single class and online registration via the linked GoStudio Pro portal.",
+        "announcementBadge": "$10 / class",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://www.brooklearnbrooklyn.com/parties",
+    "https://www.brooklearnbrooklyn.com/about",
+    "https://images.squarespace-cdn.com/content/v1/66987fb06f38b937b095f565/6d4a61a9-bd2f-47a3-a917-8d8bca9e7d19/IMG_7907.jpeg?format=1500w"
+  ],
+  "notes": "Official Brooklearn parties and about pages reviewed May 19, 2026. Original official image source URL: https://images.squarespace-cdn.com/content/v1/66987fb06f38b937b095f565/6d4a61a9-bd2f-47a3-a917-8d8bca9e7d19/IMG_7907.jpeg?format=1500w. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because Brooklearn says it offers three distinct party packages, but the public page reviewed does not publish package pricing.",
+    "age ranges are based on Brooklearn's official description of its playspace serving children 6 months to 6 years old; the birthday page does not publish a separate birthday-specific age cap.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-brooklearn-carroll-gardens-birthday",
+        "name": "Brooklearn Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "address": "380 Court Street, Brooklyn, NY 11231",
+        "activityTypes": ["Indoor Play", "Birthday Entertainment"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Brooklearn in Carroll Gardens offers all-inclusive birthday party packages in its neighborhood playspace, with weekend birthday availability and a family-focused indoor setting for young children.",
+        "longDescription": "Brooklearn's official parties page says the playspace offers all-inclusive birthday party packages and invites families to choose from three distinct party packages. The page says the team will work with families to make the day extra special and recommends booking two to three months in advance to secure a preferred date and time.\n\nBrooklearn lists its address as 380 Court Street, Brooklyn, NY 11231, with phone (929) 256-2377 and emails info@brooklearnbrooklyn.com and Jenna@brooklearnbrooklyn.com. The official about page describes Brooklearn as a neighborhood playroom created for children and families, and says its playspace is excellent for children 6 months to 6 years of age.\n\nThe official site also says Saturday and Sunday are closed for birthday parties on the playspace-hours block, which indicates weekend party scheduling rather than regular public playspace hours. The public parties page reviewed did not publish package prices, so ClassScout stores pricing as unknown.\n\nSources: https://www.brooklearnbrooklyn.com/parties https://www.brooklearnbrooklyn.com/about https://images.squarespace-cdn.com/content/v1/66987fb06f38b937b095f565/6d4a61a9-bd2f-47a3-a917-8d8bca9e7d19/IMG_7907.jpeg?format=1500w",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Great for Toddlers"],
+        "image": "https://i.ibb.co/wZk34fJK/5d45f4d00efe.webp",
+        "email": "info@brooklearnbrooklyn.com",
+        "website": "https://www.brooklearnbrooklyn.com/parties",
+        "phone": "(929) 256-2377",
+        "announcementTitle": "Book early for party dates",
+        "announcementDescription": "Brooklearn recommends booking birthday parties two to three months in advance.",
+        "announcementBadge": "Reserve early"
+      }
+    }
+  ]
+}

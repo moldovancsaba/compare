@@ -1,0 +1,67 @@
+{
+  "sourceUrls": [
+    "https://www.sunsetdaycarenyc.com/sunset-park-daycare",
+    "https://www.sunsetdaycarenyc.com/program",
+    "https://www.sunsetdaycarenyc.com/",
+    "https://static1.squarespace.com/static/6669b11a09444264f72833ee/t/66c4f9b1fc68982276d11df3/1724185009111/Sunsetdaycare_social+share.png?format=1500w"
+  ],
+  "notes": "Official Sunset Daycare Sunset Park location page, program page, homepage, and official social-share image were reviewed on May 26, 2026. The official image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "This listing is framed around the official daily enrichment classes and after-school tutoring published by the Sunset Park location, rather than the broader full-day childcare offering alone.",
+    "pricePerClass is stored as 0 because the official reviewed pages publish hours, enrichment offerings, and contact details but not one single fixed per-class tuition figure.",
+    "rating and reviewCount are set to 0 because the official source does not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sunset-daycare-sunset-park-enrichment",
+        "name": "Sunset Daycare Sunset Park Enrichment",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "address": "338 42th St, Floors 1 & 2, Brooklyn, NY 11232",
+        "activityTypes": ["Language", "Science", "Music", "Art", "Yoga", "Tutoring"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Daily enrichment classes and after-school tutoring in Sunset Park for children ages 6 weeks to 5 years.",
+        "longDescription": "Sunset Daycare's official Sunset Park pages describe two facilities across two floors at 338 42th Street in Brooklyn and say the location serves children from 6 weeks to 5 years old. The official program page says the site provides after-school tutoring and runs daily enrichment classes including Spanish, Literature, Science, Music, Art, and Yoga.\n\nThe same official Sunset Park location materials publish contact details of phone (929) 899-5284 and email sunsetdaycarenyc@gmail.com. Official hours for the Sunset Park location are 6 AM to 7 PM Monday to Friday and 8 AM to 5 PM on Saturday, which supports weekday, weekend, morning, after-school, and evening coverage for the published enrichment program.\n\nSources: https://www.sunsetdaycarenyc.com/sunset-park-daycare https://www.sunsetdaycarenyc.com/program https://www.sunsetdaycarenyc.com/ https://static1.squarespace.com/static/6669b11a09444264f72833ee/t/66c4f9b1fc68982276d11df3/1724185009111/Sunsetdaycare_social+share.png?format=1500w",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/ccqJHfZR/e9a96e859bed.png",
+        "email": "sunsetdaycarenyc@gmail.com",
+        "website": "https://www.sunsetdaycarenyc.com/sunset-park-daycare",
+        "phone": "(929) 899-5284",
+        "recurringPrograms": [
+          {
+            "id": "rp-sunset-daycare-sunset-park-weekdays",
+            "title": "Weekday Enrichment Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "6:00 AM-3:00 PM and 3:00 PM-7:00 PM",
+            "locationNote": "Sunset Daycare Sunset Park",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Language", "Science", "Music", "Art", "Yoga", "Tutoring"],
+            "summary": "Weekday enrichment classes plus after-school tutoring at the Sunset Park location.",
+            "registrationUrl": "https://www.sunsetdaycarenyc.com/program"
+          },
+          {
+            "id": "rp-sunset-daycare-sunset-park-saturday",
+            "title": "Saturday Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "8:00 AM-5:00 PM",
+            "locationNote": "Sunset Daycare Sunset Park",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Language", "Science", "Music", "Art", "Yoga"],
+            "summary": "Saturday enrichment coverage at the Sunset Park location.",
+            "registrationUrl": "https://www.sunsetdaycarenyc.com/sunset-park-daycare"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://www.commonpoint.org/program/dance-school",
+    "https://www.commonpoint.org/wp-content/uploads/2023/10/youthfamilyoverview_dance.jpg"
+  ],
+  "notes": "Official Commonpoint dance program page reviewed May 19, 2026. Original official image source URL: https://www.commonpoint.org/wp-content/uploads/2023/10/youthfamilyoverview_dance.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official page publishes different member and non-member prices by class length and class selection rather than one single Forest Hills program price.",
+    "Commonpoint's dance page covers both Forest Hills and Little Neck offerings; this listing is limited to the Forest Hills address and weekday Forest Hills youth classes.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-commonpoint-forest-hills-dance",
+        "name": "Commonpoint Forest Hills Youth Dance Classes",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "address": "67-09 108th Street, Forest Hills, NY 11375",
+        "activityTypes": ["Dance"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Commonpoint runs Forest Hills youth dance classes at its Central Queens facility, with weekday after-school ballet, jazz, tap, and related dance offerings for children ages 4 through 12.",
+        "longDescription": "Commonpoint's official dance page says its youth dance classes for Winter and Spring 2026 run through June 20, 2026 and are taught by dynamic instructors using age-appropriate curriculum. At the Central Queens facility in Forest Hills, the page lists weekday youth dance classes including ballet, jazz, tap, and Zumba Kids for children starting at age 4 and continuing through age 12.\n\nThe Forest Hills listing gives the Central Queens address as 67-09 108th Street, Forest Hills, NY 11375. The published class tables show weekday afternoon and after-school time slots such as Tuesday, Wednesday, and Thursday sessions between roughly 3:00 p.m. and 5:45 p.m. The page also notes that classes are drop-off only, held indoors, and that dance families will receive dress requirements before the semester begins.\n\nCommonpoint publishes multiple pricing tiers by class length and membership status rather than one single price for the Forest Hills youth program. The current page shows 18-week, 19-week, and 20-week pricing tables, plus per-class prices for specific age bands. For direct registration questions, the page lists hfdesk@commonpoint.org and 718-268-5011 ext. 500.\n\nSources: https://www.commonpoint.org/program/dance-school https://www.commonpoint.org/wp-content/uploads/2023/10/youthfamilyoverview_dance.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/zhWywzdW/88ceb1ee6de1.jpg",
+        "email": "hfdesk@commonpoint.org",
+        "website": "https://www.commonpoint.org/program/dance-school",
+        "phone": "718-268-5011 ext. 500",
+        "announcementTitle": "Weekday Forest Hills dance schedule",
+        "announcementDescription": "The official page shows weekday after-school youth dance classes at Commonpoint's Forest Hills address.",
+        "announcementBadge": "Register"
+      }
+    }
+  ]
+}

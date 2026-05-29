@@ -1,0 +1,55 @@
+{
+  "sourceUrls": [
+    "https://nypreschoolandkidsclub.com/location/cobble-hill/",
+    "https://nypreschoolandkidsclub.com/wp-content/uploads/2025/06/Cobble-Hill-Summer-2025-Class-Schedule.pdf",
+    "https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg"
+  ],
+  "notes": "Official NY Preschool & Kids Club Cobble Hill location page search result, official Summer 2025 Cobble Hill class schedule PDF, and official NY Kids Club logo image were reviewed on May 26, 2026. The official logo image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The public Cobble Hill webpage was Cloudflare-blocked in this shell, so location details were verified from the official location search snippet and official schedule PDF.",
+    "provider.phone uses the current official Cobble Hill location page contact number 917-935-4850 surfaced in the official search snippet; the Summer 2025 PDF footer surfaced a different number.",
+    "pricePerClass is stored as 0 because the official sources reviewed here publish schedule and enrollment policies but not one single fixed per-class tuition figure.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ny-kids-club-cobble-hill-classes",
+        "name": "NY Kids Club Cobble Hill Classes",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "address": "299 Court St, Brooklyn, NY 11231",
+        "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekday enrichment classes in Cobble Hill for babies, toddlers, and young kids with music, art, STEM, and movement.",
+        "longDescription": "NY Kids Club Cobble Hill publishes an official Summer 2025 enrichment schedule for children from infancy through early elementary ages. The official materials describe classes for babies, toddlers, and older young children, with activity areas spanning music, art, science, movement, and school-readiness style enrichment.\n\nThe public Cobble Hill schedule and location materials show weekday programming with classes beginning in the morning and continuing through afternoon and after-school windows at the Cobble Hill center on Court Street. The current official location page search result lists the address as 299 Court St, Brooklyn, NY 11231 with phone 917-935-4850 and email cobblehill@nypreschoolandkidsclub.com.\n\nSources: https://nypreschoolandkidsclub.com/location/cobble-hill/ https://nypreschoolandkidsclub.com/wp-content/uploads/2025/06/Cobble-Hill-Summer-2025-Class-Schedule.pdf https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/HfNdy4t7/c716cbfab29b.jpg",
+        "email": "cobblehill@nypreschoolandkidsclub.com",
+        "website": "https://nypreschoolandkidsclub.com/location/cobble-hill/",
+        "phone": "917-935-4850",
+        "recurringPrograms": [
+          {
+            "id": "rp-nykc-cobble-hill-weekdays",
+            "title": "Cobble Hill Weekday Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "8:45 AM-4:00 PM",
+            "locationNote": "NY Kids Club Cobble Hill",
+            "ageRanges": ["0–2", "3–5", "6–8"],
+            "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+            "summary": "Weekday enrichment classes for babies, toddlers, and young children at the Cobble Hill location.",
+            "registrationUrl": "https://nypreschoolandkidsclub.com/location/cobble-hill/"
+          }
+        ]
+      }
+    }
+  ]
+}

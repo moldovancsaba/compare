@@ -1,0 +1,1219 @@
+{
+  "generatedAt": "2026-05-26T10:13:12.464Z",
+  "providers": 71,
+  "meetups": 18,
+  "total": 172,
+  "summary": {
+    "Classes": 34,
+    "Camps": 34,
+    "Birthday Parties": 33,
+    "Drop-In Activities": 37,
+    "Meet-Up Groups": 34
+  },
+  "rows": [
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Highbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Highbridge"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Hunts%20Point"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Kingsbridge"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Morris Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Morris%20Park"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Pelham Bay",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Pelham%20Bay"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Throgs Neck",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Bronx&neighborhood=Throgs%20Neck"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Bay Ridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Bay%20Ridge"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Bedford-Stuyvesant",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Bedford-Stuyvesant"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Bushwick",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Bushwick"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Cobble Hill",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Cobble%20Hill"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Crown Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Crown%20Heights"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Fort Greene",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Fort%20Greene"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Greenpoint",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Greenpoint"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Park Slope",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Park%20Slope"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Prospect Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Prospect%20Heights"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Brooklyn",
+      "neighborhood": "Sunset Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Brooklyn&neighborhood=Sunset%20Park"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Manhattan",
+      "neighborhood": "Flatiron",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Manhattan&neighborhood=Flatiron"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Manhattan",
+      "neighborhood": "Harlem",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Manhattan&neighborhood=Harlem"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Manhattan",
+      "neighborhood": "SoHo",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Manhattan&neighborhood=SoHo"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Manhattan",
+      "neighborhood": "Tribeca",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Manhattan&neighborhood=Tribeca"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Bayside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Bayside"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Corona",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Corona"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Elmhurst",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Elmhurst"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Forest Hills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Forest%20Hills"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Jackson Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Jackson%20Heights"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Jamaica",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Jamaica"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Sunnyside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Sunnyside"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Queens",
+      "neighborhood": "Woodside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Queens&neighborhood=Woodside"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Staten Island",
+      "neighborhood": "Annadale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Staten%20Island&neighborhood=Annadale"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Staten Island",
+      "neighborhood": "Great Kills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Staten%20Island&neighborhood=Great%20Kills"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Staten Island",
+      "neighborhood": "Port Richmond",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Staten%20Island&neighborhood=Port%20Richmond"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Staten Island",
+      "neighborhood": "Stapleton",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Staten%20Island&neighborhood=Stapleton"
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Staten Island",
+      "neighborhood": "Westerleigh",
+      "count": 0,
+      "href": "https://classscout.vercel.app/birthday-parties?borough=Staten%20Island&neighborhood=Westerleigh"
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Concourse",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Bronx&neighborhood=Concourse"
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Bronx&neighborhood=Hunts%20Point"
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Bronx&neighborhood=Kingsbridge"
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Pelham Bay",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Bronx&neighborhood=Pelham%20Bay"
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Throgs Neck",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Bronx&neighborhood=Throgs%20Neck"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Bay Ridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Bay%20Ridge"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Bedford-Stuyvesant",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Bedford-Stuyvesant"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Bushwick",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Bushwick"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Carroll Gardens",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Carroll%20Gardens"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Cobble Hill",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Cobble%20Hill"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Crown Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Crown%20Heights"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "DUMBO",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=DUMBO"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Fort Greene",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Fort%20Greene"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Prospect Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Prospect%20Heights"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Sunset Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Sunset%20Park"
+    },
+    {
+      "category": "Camps",
+      "borough": "Brooklyn",
+      "neighborhood": "Williamsburg",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Brooklyn&neighborhood=Williamsburg"
+    },
+    {
+      "category": "Camps",
+      "borough": "Manhattan",
+      "neighborhood": "Chelsea",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Manhattan&neighborhood=Chelsea"
+    },
+    {
+      "category": "Camps",
+      "borough": "Manhattan",
+      "neighborhood": "Flatiron",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Manhattan&neighborhood=Flatiron"
+    },
+    {
+      "category": "Camps",
+      "borough": "Manhattan",
+      "neighborhood": "SoHo",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Manhattan&neighborhood=SoHo"
+    },
+    {
+      "category": "Camps",
+      "borough": "Manhattan",
+      "neighborhood": "Tribeca",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Manhattan&neighborhood=Tribeca"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Astoria",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Astoria"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Bayside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Bayside"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Corona",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Corona"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Elmhurst",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Elmhurst"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Forest Hills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Forest%20Hills"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Jackson Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Jackson%20Heights"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Jamaica",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Jamaica"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Sunnyside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Sunnyside"
+    },
+    {
+      "category": "Camps",
+      "borough": "Queens",
+      "neighborhood": "Woodside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Queens&neighborhood=Woodside"
+    },
+    {
+      "category": "Camps",
+      "borough": "Staten Island",
+      "neighborhood": "Annadale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Staten%20Island&neighborhood=Annadale"
+    },
+    {
+      "category": "Camps",
+      "borough": "Staten Island",
+      "neighborhood": "New Dorp",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Staten%20Island&neighborhood=New%20Dorp"
+    },
+    {
+      "category": "Camps",
+      "borough": "Staten Island",
+      "neighborhood": "Port Richmond",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Staten%20Island&neighborhood=Port%20Richmond"
+    },
+    {
+      "category": "Camps",
+      "borough": "Staten Island",
+      "neighborhood": "Tottenville",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Staten%20Island&neighborhood=Tottenville"
+    },
+    {
+      "category": "Camps",
+      "borough": "Staten Island",
+      "neighborhood": "Westerleigh",
+      "count": 0,
+      "href": "https://classscout.vercel.app/camps?borough=Staten%20Island&neighborhood=Westerleigh"
+    },
+    {
+      "category": "Classes",
+      "borough": "Bronx",
+      "neighborhood": "Concourse",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Bronx&neighborhood=Concourse"
+    },
+    {
+      "category": "Classes",
+      "borough": "Bronx",
+      "neighborhood": "Fordham",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Bronx&neighborhood=Fordham"
+    },
+    {
+      "category": "Classes",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Bronx&neighborhood=Kingsbridge"
+    },
+    {
+      "category": "Classes",
+      "borough": "Bronx",
+      "neighborhood": "Mott Haven",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Bronx&neighborhood=Mott%20Haven"
+    },
+    {
+      "category": "Classes",
+      "borough": "Bronx",
+      "neighborhood": "Throgs Neck",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Bronx&neighborhood=Throgs%20Neck"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Brooklyn Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Brooklyn%20Heights"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Bushwick",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Bushwick"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Carroll Gardens",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Carroll%20Gardens"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Cobble Hill",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Cobble%20Hill"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Crown Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Crown%20Heights"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "DUMBO",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=DUMBO"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Fort Greene",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Fort%20Greene"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Greenpoint",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Greenpoint"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Prospect Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Prospect%20Heights"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Sunset Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Sunset%20Park"
+    },
+    {
+      "category": "Classes",
+      "borough": "Brooklyn",
+      "neighborhood": "Williamsburg",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Brooklyn&neighborhood=Williamsburg"
+    },
+    {
+      "category": "Classes",
+      "borough": "Manhattan",
+      "neighborhood": "Flatiron",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Manhattan&neighborhood=Flatiron"
+    },
+    {
+      "category": "Classes",
+      "borough": "Manhattan",
+      "neighborhood": "SoHo",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Manhattan&neighborhood=SoHo"
+    },
+    {
+      "category": "Classes",
+      "borough": "Manhattan",
+      "neighborhood": "Upper West Side",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Manhattan&neighborhood=Upper%20West%20Side"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Astoria",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Astoria"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Corona",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Corona"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Elmhurst",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Elmhurst"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Flushing",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Flushing"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Jackson Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Jackson%20Heights"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Jamaica",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Jamaica"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Ridgewood",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Ridgewood"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Sunnyside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Sunnyside"
+    },
+    {
+      "category": "Classes",
+      "borough": "Queens",
+      "neighborhood": "Woodside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Queens&neighborhood=Woodside"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "Annadale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=Annadale"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "Great Kills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=Great%20Kills"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "New Dorp",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=New%20Dorp"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "Port Richmond",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=Port%20Richmond"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "Stapleton",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=Stapleton"
+    },
+    {
+      "category": "Classes",
+      "borough": "Staten Island",
+      "neighborhood": "Westerleigh",
+      "count": 0,
+      "href": "https://classscout.vercel.app/classes?borough=Staten%20Island&neighborhood=Westerleigh"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Highbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Highbridge"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Hunts%20Point"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Kingsbridge"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Morris Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Morris%20Park"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Pelham Bay",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Pelham%20Bay"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Bronx",
+      "neighborhood": "Throgs Neck",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Bronx&neighborhood=Throgs%20Neck"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Bay Ridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Bay%20Ridge"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Bedford-Stuyvesant",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Bedford-Stuyvesant"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Brooklyn Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Brooklyn%20Heights"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Bushwick",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Bushwick"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Carroll Gardens",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Carroll%20Gardens"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Cobble Hill",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Cobble%20Hill"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Fort Greene",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Fort%20Greene"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Greenpoint",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Greenpoint"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Prospect Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Prospect%20Heights"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Sunset Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Sunset%20Park"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Brooklyn",
+      "neighborhood": "Williamsburg",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Brooklyn&neighborhood=Williamsburg"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Manhattan",
+      "neighborhood": "Chelsea",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Manhattan&neighborhood=Chelsea"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Manhattan",
+      "neighborhood": "Flatiron",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Manhattan&neighborhood=Flatiron"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Manhattan",
+      "neighborhood": "SoHo",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Manhattan&neighborhood=SoHo"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Manhattan",
+      "neighborhood": "Tribeca",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Manhattan&neighborhood=Tribeca"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Manhattan",
+      "neighborhood": "Upper East Side",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Manhattan&neighborhood=Upper%20East%20Side"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Astoria",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Astoria"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Bayside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Bayside"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Elmhurst",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Elmhurst"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Flushing",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Flushing"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Jackson Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Jackson%20Heights"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Long Island City",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Long%20Island%20City"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Ridgewood",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Ridgewood"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Sunnyside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Sunnyside"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Queens",
+      "neighborhood": "Woodside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Queens&neighborhood=Woodside"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "Annadale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=Annadale"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "Great Kills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=Great%20Kills"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "New Dorp",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=New%20Dorp"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "Port Richmond",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=Port%20Richmond"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "Stapleton",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=Stapleton"
+    },
+    {
+      "category": "Drop-In Activities",
+      "borough": "Staten Island",
+      "neighborhood": "Westerleigh",
+      "count": 0,
+      "href": "https://classscout.vercel.app/drop-in-activities?borough=Staten%20Island&neighborhood=Westerleigh"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Fordham",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Fordham"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Hunts%20Point"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Kingsbridge"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Morris Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Morris%20Park"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Pelham Bay",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Pelham%20Bay"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Riverdale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Riverdale"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Bronx",
+      "neighborhood": "Throgs Neck",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Bronx&neighborhood=Throgs%20Neck"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Bay Ridge",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Bay%20Ridge"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Brooklyn Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Brooklyn%20Heights"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Carroll Gardens",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Carroll%20Gardens"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Cobble Hill",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Cobble%20Hill"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Crown Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Crown%20Heights"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "DUMBO",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=DUMBO"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Fort Greene",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Fort%20Greene"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Greenpoint",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Greenpoint"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Prospect Heights",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Prospect%20Heights"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Sunset Park",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Sunset%20Park"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Brooklyn",
+      "neighborhood": "Williamsburg",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Brooklyn&neighborhood=Williamsburg"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Manhattan",
+      "neighborhood": "Flatiron",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Manhattan&neighborhood=Flatiron"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Manhattan",
+      "neighborhood": "SoHo",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Manhattan&neighborhood=SoHo"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Manhattan",
+      "neighborhood": "Tribeca",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Manhattan&neighborhood=Tribeca"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Manhattan",
+      "neighborhood": "Upper West Side",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Manhattan&neighborhood=Upper%20West%20Side"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Bayside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Bayside"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Corona",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Corona"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Elmhurst",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Elmhurst"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Flushing",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Flushing"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Forest Hills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Forest%20Hills"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Long Island City",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Long%20Island%20City"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Ridgewood",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Ridgewood"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Sunnyside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Sunnyside"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Queens",
+      "neighborhood": "Woodside",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Queens&neighborhood=Woodside"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Staten Island",
+      "neighborhood": "Annadale",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Staten%20Island&neighborhood=Annadale"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Staten Island",
+      "neighborhood": "Great Kills",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Staten%20Island&neighborhood=Great%20Kills"
+    },
+    {
+      "category": "Meet-Up Groups",
+      "borough": "Staten Island",
+      "neighborhood": "New Dorp",
+      "count": 0,
+      "href": "https://classscout.vercel.app/meet-up-groups?borough=Staten%20Island&neighborhood=New%20Dorp"
+    }
+  ]
+}

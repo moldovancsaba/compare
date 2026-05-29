@@ -1,0 +1,71 @@
+{
+  "sourceUrls": [
+    "https://performersedgedanceacademy.com/class-schedule/",
+    "https://performersedgedanceacademy.com/",
+    "https://performersedgedanceacademy.com/wp-content/uploads/2025/11/bronx-fall-2025-scaled.jpg"
+  ],
+  "notes": "Official Performer's Edge Dance Academy homepage and Bronx schedule page reviewed May 26, 2026. The official Bronx schedule image was downloaded from the studio's WordPress uploads and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Throgs Neck from the official 4037 E. Tremont Bronx address and the studio's own Throgs Neck community language.",
+    "pricePerClass is stored as 0 because the published Bronx tuition table lists monthly class packages rather than a true single-visit per-class price.",
+    "The official contact block on the schedule page shows email Pedaoffice03@gmail.com, while the homepage contact area also uses info@performersedgedanceacademy.com elsewhere; this listing stores the schedule-page address because it is printed directly on the same published Bronx schedule asset.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-performers-edge-dance-academy-bronx",
+        "name": "Performer's Edge Dance Academy - Bronx",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "address": "4037 E. Tremont, Bronx, NY 10465",
+        "activityTypes": ["Dance"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Performer's Edge Dance Academy publishes a full Bronx youth dance schedule in Throgs Neck, with ballet, tap, hip hop, tumbling, jazz, salsa, and contemporary classes from weekdays through Saturdays.",
+        "longDescription": "Performer's Edge Dance Academy's official Bronx schedule page publishes a 2025-2026 Bronx location schedule for 4037 East Tremont, Bronx, NY 10465. The schedule includes weekday after-school classes such as Monday Jazz/Tap for ages 5-7 from 3:30 PM to 4:30 PM, Tuesday Ballet/Jazz for ages 8-10 from 4:00 PM to 5:00 PM, Friday Hip Hop for ages 6-8 from 4:30 PM to 5:30 PM, and evening teen/preteen classes that run as late as 8:30 PM to 9:30 PM.\n\nThe same official Bronx schedule also supports weekend availability, with Saturday morning and afternoon classes including 10:00 AM-11:00 AM Ballet/Tap for ages 3-5, 11:00 AM-12:00 PM TumbleBugs for ages 3-5, 12:00 PM-1:00 PM Hippty Hop for ages 4-6, 1:00 PM-2:00 PM Hip Hop for ages 7-10, and 2:00 PM-3:00 PM Contemporary for ages 7-10. The published tuition chart lists $90 monthly for one class and scaled monthly tuition for more classes.\n\nThe studio's site lists Bronx phone (718) 882-2025, Bronx address 4037 E. Tremont Bronx, NY 10465, and the schedule asset itself prints email Pedaoffice03@gmail.com along with the website URL.\n\nSources: https://performersedgedanceacademy.com/class-schedule/ https://performersedgedanceacademy.com/ https://performersedgedanceacademy.com/wp-content/uploads/2025/11/bronx-fall-2025-scaled.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/4nnQRc71/200b60833d82.jpg",
+        "email": "Pedaoffice03@gmail.com",
+        "website": "https://performersedgedanceacademy.com/class-schedule/",
+        "phone": "(718) 882-2025",
+        "announcementTitle": "Bronx 2025-2026 schedule posted",
+        "announcementDescription": "The official Bronx schedule shows weekday after-school dance classes plus Saturday morning and afternoon youth options.",
+        "announcementBadge": "Dance schedule",
+        "recurringPrograms": [
+          {
+            "id": "rp-performers-edge-bronx-weekdays",
+            "title": "Weekday Youth Dance Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "3:00 PM-9:30 PM",
+            "locationNote": "Bronx location schedule",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Dance"],
+            "summary": "Weekday ballet, tap, jazz, hip hop, tumbling, salsa, and team technique classes from after-school through evening.",
+            "registrationUrl": "https://app.thestudiodirector.com/performersedgedanceaca/portal.sd?page=Login"
+          },
+          {
+            "id": "rp-performers-edge-bronx-saturday",
+            "title": "Saturday Youth Dance Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "10:00 AM-3:00 PM",
+            "locationNote": "Bronx location schedule",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Dance"],
+            "summary": "Saturday ballet/tap, tumbling, hip hop, and contemporary classes for multiple youth age groups.",
+            "registrationUrl": "https://app.thestudiodirector.com/performersedgedanceaca/portal.sd?page=Login"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

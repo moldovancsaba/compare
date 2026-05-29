@@ -1,0 +1,52 @@
+{
+  "sourceUrls": [
+    "https://spaceclub.com/pages/classes",
+    "https://cdn.shopify.com/s/files/1/0767/3505/4146/files/SpaceWebsiteClassTiles-02_fb3a5dcc-545a-4d09-8f08-3e9effd7086e.jpg?v=1712857726"
+  ],
+  "notes": "Official Space Club classes page reviewed on May 26, 2026. The official Space Club image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official classes page lists recurring weekday class times and the Greenpoint location block but does not publish a single fixed per-class tuition on the page reviewed here.",
+    "rating and reviewCount are set to 0 because the official source does not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-space-club-greenpoint-classes",
+        "name": "Space Club Greenpoint Classes",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "address": "220 Newel St, Brooklyn, NY 11222",
+        "activityTypes": ["Music", "Art", "Dance", "Indoor Play"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Morning"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekday morning classes in Greenpoint for ages 1-5 with music, art, movement, and sensory play.",
+        "longDescription": "Space Club's official classes page says its classes are built for children ages 1 to 5 and include music, art, dance and movement, playdoh, and sensory play. The public page shows weekday class times at 10 AM and 11 AM Monday through Friday.\n\nThe same official page includes a Greenpoint location block with 220 Newel St, Brooklyn, email greenpoint@spaceclub.com, and phone +1 (212) 812-2996. The published schedule supports a straightforward weekday morning class listing for the Greenpoint neighborhood.\n\nSources: https://spaceclub.com/pages/classes https://cdn.shopify.com/s/files/1/0767/3505/4146/files/SpaceWebsiteClassTiles-02_fb3a5dcc-545a-4d09-8f08-3e9effd7086e.jpg?v=1712857726",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/CKHN1yzC/989c02e7e558.jpg",
+        "email": "greenpoint@spaceclub.com",
+        "website": "https://spaceclub.com/pages/classes",
+        "phone": "+1 (212) 812-2996",
+        "recurringPrograms": [
+          {
+            "id": "rp-space-club-greenpoint-weekdays",
+            "title": "Weekday Morning Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "10:00 AM-11:45 AM",
+            "locationNote": "Space Club Greenpoint",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Music", "Art", "Dance", "Indoor Play"],
+            "summary": "Weekday morning classes for ages 1-5 with music, art, dance and movement, and sensory play.",
+            "registrationUrl": "https://spaceclub.com/pages/classes"
+          }
+        ]
+      }
+    }
+  ]
+}

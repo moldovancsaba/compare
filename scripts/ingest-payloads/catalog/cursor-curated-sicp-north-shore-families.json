@@ -1,0 +1,37 @@
+{
+  "sourceUrls": [
+    "https://sicommunitypartnership.org/",
+    "https://sicommunitypartnership.org/about-us/",
+    "https://sicommunitypartnership.org/programs-and-services/",
+    "https://sicommunitypartnership.org/contact-us/",
+    "https://sicommunitypartnership.org/wp-content/uploads/2024/06/0002_sicp-team-outdoor.jpg"
+  ],
+  "notes": "Official Staten Island Community Partnership site (home, about, programs, contact) reviewed May 16, 2026. ACS-funded community partnership backed by The New York Foundling; North Shore family programs, monthly meetings, and contact details from those pages. Cover image is an official team photograph on sicommunitypartnership.org, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "instagram: no official Instagram URL was confirmed on the cited pages.",
+    "ageRange: the partnership serves children and multi-generational families across the North Shore; stored as All ages.",
+    "Specific dates for PB&J and other pop-up family events vary by year on the events calendar; cadence Monthly reflects the published SICP Monthly Meeting Virtual series."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-sicp-north-shore-families",
+        "name": "Staten Island Community Partnership — North Shore Families",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://sicommunitypartnership.org/",
+        "description": "The Staten Island Community Partnership (SICP) is a family-centered community program supported by The New York Foundling and funded by the NYC Administration for Children’s Services. Its official site describes impactful, educational, and skills-building encounters that enrich the lives of children and families on Staten Island’s North Shore, working with residents and local partners to build a safety net of support.\n\nPrograms and services pages note weekly SICP Free Market pantry shopping for North Shore families, monthly membership meetings (including virtual SICP Monthly Meetings listed on the events calendar), community ambassador outreach, and family events such as PB&J (Pajamas, Books, and Joining Families Together). The partnership connects residents to healthcare, mental health, counseling, and other resources through its network.\n\nPublished contact: 1 Edgewater Street, Suite 350, Staten Island, NY 10305; phone (917) 485-7608.\n\nSources: https://sicommunitypartnership.org/ https://sicommunitypartnership.org/about-us/ https://sicommunitypartnership.org/programs-and-services/ https://sicommunitypartnership.org/contact-us/",
+        "initials": "SICP",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/RTZVQ9Xz/180f764cda51.jpg"
+      }
+    }
+  ]
+}

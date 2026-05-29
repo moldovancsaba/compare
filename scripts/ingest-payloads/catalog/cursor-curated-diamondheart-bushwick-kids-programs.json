@@ -1,0 +1,39 @@
+{
+  "sourceUrls": [
+    "https://teamdiamondheart.com/programs",
+    "https://teamdiamondheart.com/images/og/og-default.jpg"
+  ],
+  "notes": "Official Diamondheart Brooklyn programs page reviewed on May 26, 2026. The official Diamondheart OG image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official programs page clearly labels the kids offering as Ages 4-12 and After-School Classes, but it does not publish exact weekly class times on the public page.",
+    "pricePerClass is stored as 0 because the official public programs page does not publish a fixed tuition figure for the kids program.",
+    "rating and reviewCount are set to 0 because the listing does not use third-party review metrics from the official source."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-diamondheart-bushwick-kids-programs",
+        "name": "Diamondheart Bushwick Kids Programs",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "address": "67 Ingraham St, Brooklyn, NY 11237",
+        "activityTypes": ["Martial Arts", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Bushwick martial arts after-school classes for ages 4-12 with youth Brazilian jiu-jitsu and Muay Thai training.",
+        "longDescription": "Diamondheart Brooklyn's official programs page includes a dedicated kids offering labeled Kids Programs for ages 4 to 12. The page describes a safe, structured environment where children build confidence, discipline, coordination, and self-defense skills through age-appropriate Brazilian jiu-jitsu and Muay Thai training.\n\nThe same official page tags the youth program as After-School Classes and identifies the business as Diamondheart Striking & Grappling at 67 Ingraham Street in Bushwick, Brooklyn, with phone +1-718-662-6108 and email Physicalculturecollective@gmail.com. The public page does not publish exact session times, so this listing keeps the schedule language conservative and uses only the source-backed weekday after-school framing.\n\nSources: https://teamdiamondheart.com/programs https://teamdiamondheart.com/images/og/og-default.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/jZzRcvSP/544c55821b0e.jpg",
+        "email": "Physicalculturecollective@gmail.com",
+        "website": "https://teamdiamondheart.com/programs",
+        "phone": "+1-718-662-6108"
+      }
+    }
+  ]
+}

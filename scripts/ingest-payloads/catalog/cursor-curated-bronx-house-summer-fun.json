@@ -1,0 +1,60 @@
+{
+  "sourceUrls": [
+    "https://bronxhouse.org/early-childhood/",
+    "https://bronxhouse.org/about/",
+    "https://bronxhouse.org/",
+    "https://bronxhouse.org/wp-content/uploads/2021/10/summerfun.jpg"
+  ],
+  "notes": "Official Bronx House Early Childhood, About, and home pages fetched May 16, 2026. Summer Fun dates, themes, time-slot pricing, contact details, and Bronx address come from those pages. The official Summer Fun image was downloaded from bronxhouse.org and uploaded via POST /api/ingest/upload for ImgBB-compliant storage.",
+  "missingOrUncertain": [
+    "pricePerClass uses $1500 as the published Community rate for the 9 a.m.–12 p.m. Summer Fun time slot; the same official page also lists longer Community options at $3150 (8 a.m.–3 p.m.) and $3475 (8 a.m.–6 p.m.).",
+    "Neighborhood is mapped to canonical Morris Park because Bronx House lists 990 Pelham Parkway South, Bronx, NY 10461 and the official about page names the 5 train stop at Morris Park for access.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-house-summer-fun-2026",
+        "name": "Bronx House — Summer Fun 2026",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "address": "990 Pelham Parkway South, Bronx, NY 10461",
+        "activityTypes": [
+          "Outdoor Activities",
+          "Early learning",
+          "Water play",
+          "Neighborhood trips"
+        ],
+        "ageRanges": [
+          "3–5"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Morning",
+          "Afternoon",
+          "After-school"
+        ],
+        "pricePerClass": 1500,
+        "shortDescription": "Bronx preschool summer camp for children entering Pre-K and Kindergarten, with weekly themes, sprinklers, neighborhood trips, and flexible weekday time slots.",
+        "longDescription": "Bronx House publishes Summer Fun 2026 as a 7.5-week early-childhood summer program for children ages 3.5 to 5 entering Pre-K and Kindergarten. The official page says the program is led by Bronx House Early Childhood staff and is designed as an introduction to the summer camp experience with weekly summertime-inspired themes such as Water Exploration and Gardening.\n\nThe official Summer Fun section lists dates of Monday, June 29 through Wednesday, August 19, 2026. It says children enjoy neighborhood trips, fun in the sprinklers, and picnics on the parkway. Families can register for three weekday time slots: 9 a.m.–12 p.m., 8 a.m.–3 p.m., and 8 a.m.–6 p.m.\n\nPublished Summer Fun 2026 Community pricing on the same page is $1500 for 9 a.m.–12 p.m., $3150 for 8 a.m.–3 p.m., and $3475 for 8 a.m.–6 p.m. Member pricing is listed separately. Bronx House contact pages list the site at 990 Pelham Parkway South, Bronx, NY 10461, with main phone 718.792.1800; the Early Childhood page identifies Daikys Tineo, Administrative Assistant, for Summer Fun registration support.\n\nSources: https://bronxhouse.org/early-childhood/ https://bronxhouse.org/about/ https://bronxhouse.org/ https://bronxhouse.org/wp-content/uploads/2021/10/summerfun.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Staff Pick"
+        ],
+        "image": "https://i.ibb.co/8nnnSbGV/52335f84f060.jpg",
+        "email": "daikys@bronxhouse.org",
+        "website": "https://bronxhouse.org/early-childhood/",
+        "phone": "718.792.1800 ext. 264",
+        "announcementTitle": "Summer Fun registration open",
+        "announcementDescription": "Official page lists Summer Fun 2026 for ages 3.5–5 with weekday time-slot options from June 29 to August 19.",
+        "announcementBadge": "Summer ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

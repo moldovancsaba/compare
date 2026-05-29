@@ -1,0 +1,47 @@
+{
+  "sourceUrls": [
+    "https://www.sidanceandartscenter.com/",
+    "https://www.sidanceandartscenter.com/about.html",
+    "https://www.sidanceandartscenter.com/fashion-design-and-sewing.html",
+    "https://www.sidanceandartscenter.com/contact-us.html",
+    "https://www.sidanceandartscenter.com/uploads/2/5/5/7/25572831/art-cook-sew-2025-2026-schedule-1-5-26-screenshot_orig.png"
+  ],
+  "notes": "Official Staten Island Dance and Arts Center home, about, fashion-design-and-sewing, and contact pages reviewed May 26, 2026. The official 2025-2026 art/cook/sew schedule graphic was downloaded from the provider's site and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official About page says the studio was established in the town of Annadale, while the current address is 26 Richmond Valley Road near the Richmond Valley station. This listing maps the studio to Annadale as the nearest supported canonical South Shore neighborhood and should be spot-checked if you want stricter neighborhood labeling.",
+    "pricePerClass is stored as 0 because the public fashion page describes the classes and ages but does not publish tuition.",
+    "The provider's public pages show active 2025-2026 schedule graphics and published weekday/Saturday office hours, but they do not expose machine-readable class-by-class time slots for the fashion track in the HTML captured here.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sidac-annadale-fashion-sewing",
+        "name": "SI Dance and Arts Center Fashion Design & Sewing",
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "address": "26 Richmond Valley Rd, Staten Island, NY 10309",
+        "activityTypes": ["Art"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "South Shore Staten Island studio classes where kids learn sewing, fashion illustration, draping, and accessories design from age 6 up.",
+        "longDescription": "Staten Island Dance and Arts Center publishes a Fashion Design & Sewing program for children and teens at 26 Richmond Valley Road. The official fashion page lists Mini Fashion Design & Sewing for ages 6-8, a broader Fashion Design & Sewing class for ages 9+, and a Fashion Accessory Design track for ages 9+, each centered on sewing-machine skills, sketching, construction, and runway-show projects.\n\nSIDAC's home page describes the studio as a community arts space offering classes across dance, art, musical theatre, cooking, and fashion, while the About page says the school was established in the town of Annadale. The public home and contact pages list the current studio phone 718-356-3760 and email ilovesidac@gmail.com. The home page also publishes office hours of Monday-Friday 4-7 PM and Saturday 10 AM-1 PM and points families to active 2025-2026 schedule graphics for current programming.\n\nBecause the public fashion page does not expose tuition or machine-readable class-time rows in the HTML captured here, this listing keeps pricing at 0 and limits schedule tags to source-backed weekday and weekend availability only. The listing image is an ImgBB re-host of SIDAC's own 2025-2026 schedule graphic.\n\nSources: https://www.sidanceandartscenter.com/ https://www.sidanceandartscenter.com/about.html https://www.sidanceandartscenter.com/fashion-design-and-sewing.html https://www.sidanceandartscenter.com/contact-us.html https://www.sidanceandartscenter.com/uploads/2/5/5/7/25572831/art-cook-sew-2025-2026-schedule-1-5-26-screenshot_orig.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/1VN78cJ/e66a6901d473.png",
+        "email": "ilovesidac@gmail.com",
+        "website": "https://www.sidanceandartscenter.com/fashion-design-and-sewing.html",
+        "phone": "718-356-3760",
+        "announcementTitle": "2025-2026 fashion track active",
+        "announcementDescription": "SIDAC's official fashion page and current schedule graphics show active sewing and fashion-design classes for ages 6 and up.",
+        "announcementBadge": "Schedule online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

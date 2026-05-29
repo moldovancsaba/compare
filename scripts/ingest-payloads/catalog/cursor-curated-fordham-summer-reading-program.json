@@ -1,0 +1,73 @@
+{
+  "sourceUrls": [
+    "https://www.fordham.edu/school-of-professional-and-continuing-studies/academics/continuing-education/summer-reading-program/",
+    "https://readingprograms.org/fordham",
+    "https://www.fordham.edu/about/maps-and-directions/directions-to-rose-hill/",
+    "https://www.fordham.edu/about/campuses/rose-hill-campus/",
+    "https://www.fordham.edu/media/home/commonly-used-images/campus-beauty/Argenis-Apolinario-Rose-Hill-Students-Photoshoot-2-1.jpg"
+  ],
+  "notes": "Official Fordham Summer Reading Program page, Fordham Rose Hill campus pages, and the linked Institute of Reading Development partner page reviewed May 26, 2026. The Rose Hill campus image was downloaded from fordham.edu and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Fordham from Fordham University's official Rose Hill campus address at 441 East Fordham Road / 2691 Southern Boulevard, Bronx, NY 10458.",
+    "The public Fordham page says a variety of weekday and weekend options are available, but it does not publish one fixed Bronx-only recurring timetable on-page; recurringPrograms therefore summarize the published weekly weekday/weekend availability conservatively.",
+    "pricePerClass is stored as 0 because Fordham's own page does not publish a single Bronx campus tuition figure on-page, even though the linked partner enrollment page contains program pricing that can vary by format and season.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-fordham-summer-reading-program",
+        "name": "Fordham Summer Reading Program",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "address": "441 East Fordham Road, Bronx, NY 10458",
+        "activityTypes": ["Tutoring"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Fordham's Summer Reading Program offers weekly reading-skills classes for children and teens, with Bronx Rose Hill campus availability and both weekday and weekend options.",
+        "longDescription": "Fordham University's School of Professional and Continuing Studies promotes Summer Reading Programs for Children offered on campus in the Bronx, Manhattan, and West Harrison. The official Fordham page says these programs are taught by instructors from the Institute of Reading Development, that children attend weekly classes focused on reading-skills development, and that a variety of weekday and weekend options are available.\n\nThe linked Fordham partner page on readingprograms.org describes the program structure in more detail, including grade-banded reading instruction and recurring live weekly classes with between-class practice. Together, the official Fordham page and its linked enrollment partner page support a recurring weekly summer reading format for children from early readers through teens.\n\nFordham's official Rose Hill directions page identifies the Bronx campus at 441 East Fordham Road, Bronx, NY 10458, with main entrance navigation at 2691 Southern Boulevard. The Summer Reading page lists 1-800-964-8888 for speaking with a reading program advisor and links families to the Fordham-branded program page for schedules.\n\nSources: https://www.fordham.edu/school-of-professional-and-continuing-studies/academics/continuing-education/summer-reading-program/ https://readingprograms.org/fordham https://www.fordham.edu/about/maps-and-directions/directions-to-rose-hill/ https://www.fordham.edu/about/campuses/rose-hill-campus/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/xS1PXLN0/495dbd86576e.jpg",
+        "email": "contact@readingprograms.org",
+        "website": "https://www.fordham.edu/school-of-professional-and-continuing-studies/academics/continuing-education/summer-reading-program/",
+        "phone": "1-800-964-8888",
+        "announcementTitle": "Bronx summer reading registration",
+        "announcementDescription": "Fordham's page links Bronx summer reading schedules and says weekday and weekend options are available.",
+        "announcementBadge": "Summer class",
+        "recurringPrograms": [
+          {
+            "id": "rp-fordham-summer-reading-weekdays",
+            "title": "Summer Reading Weekly Classes - Weekday Options",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "Weekly summer classes; exact times vary by grade and session",
+            "locationNote": "Fordham Rose Hill campus / Fordham-linked program schedule",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Tutoring"],
+            "summary": "Weekly reading-skills classes for children and teens with weekday schedule choices.",
+            "registrationUrl": "https://readingprograms.org/fordham"
+          },
+          {
+            "id": "rp-fordham-summer-reading-weekends",
+            "title": "Summer Reading Weekly Classes - Weekend Options",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "Weekly summer classes; exact times vary by grade and session",
+            "locationNote": "Fordham Rose Hill campus / Fordham-linked program schedule",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Tutoring"],
+            "summary": "Weekly reading-skills classes for children and teens with weekend schedule choices.",
+            "registrationUrl": "https://readingprograms.org/fordham"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

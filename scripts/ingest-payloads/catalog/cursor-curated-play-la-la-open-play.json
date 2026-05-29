@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://playlalasi.com/",
+    "https://playlalasi.com/classes/",
+    "https://playlalasi.com/wp-content/uploads/2024/09/IMG_7849-1.jpeg"
+  ],
+  "notes": "Official Play La La homepage and classes page reviewed May 19, 2026. Original official image source URL: https://playlalasi.com/wp-content/uploads/2024/09/IMG_7849-1.jpeg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the cited official pages publish open-play age range and weekday hours but do not show a public drop-in admission price.",
+    "The official source gives a Staten Island address at 4220 Arthur Kill Rd, NY 10309 without a canonical ClassScout neighborhood name; this listing maps it to the nearest supported neighborhood, Tottenville.",
+    "No public email address was confirmed on the cited official pages, so email is left empty.",
+    "rating and reviewCount are not published on the cited official pages, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-play-la-la-tottenville-open-play",
+        "name": "Play La La Open Play",
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "address": "4220 Arthur Kill Rd, Staten Island, NY 10309",
+        "activityTypes": ["Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon"],
+        "pricePerClass": 0,
+        "shortDescription": "Play La La publishes weekday open play on Staten Island for ages 4 months to 8 years, with Monday-Friday hours on its official site.",
+        "longDescription": "Play La La's official classes page includes an Open Play section for ages 4 months to 8 years and invites families to join during the venue's open-play hours for full access to the space. The official homepage and classes page both show the Staten Island address and venue hours.\n\nThe cited official pages publish venue hours as Monday-Friday from 10 a.m. to 4 p.m. and Saturday-Sunday as private parties. Because this listing is specifically for open play, only the weekday open-play hours are used for tags here; the weekend private-party hours are not treated as weekend open-play availability.\n\nThe official site lists Play La La at 4220 Arthur Kill Rd, Staten Island, NY 10309. The reviewed pages did not publish a public drop-in admission price, so pricing is stored as unknown.\n\nSources: https://playlalasi.com/ https://playlalasi.com/classes/ https://playlalasi.com/wp-content/uploads/2024/09/IMG_7849-1.jpeg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers"],
+        "image": "https://i.ibb.co/7xYKM1sf/f081848f442c.jpg",
+        "email": "",
+        "website": "https://playlalasi.com/classes/",
+        "phone": "(718) 554-4211",
+        "announcementTitle": "Weekday open play published",
+        "announcementDescription": "The official site lists open play for ages 4 months to 8 years and venue hours Monday-Friday from 10 a.m. to 4 p.m.",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

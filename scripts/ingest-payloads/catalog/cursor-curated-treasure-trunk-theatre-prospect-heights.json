@@ -1,0 +1,54 @@
+{
+  "sourceUrls": [
+    "https://www.treasuretrunktheatre.com/prospect_heights/",
+    "https://www.treasuretrunktheatre.com/classes-at-tt-prospect-heights/",
+    "https://www.treasuretrunktheatre.com/contact/",
+    "https://www.treasuretrunktheatre.com/wp-content/uploads/2016/02/267954_530012183688060_1916429731_n.jpg"
+  ],
+  "notes": "Official Treasure Trunk Theatre Prospect Heights and contact pages reviewed on May 26, 2026. The official Treasure Trunk image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official Prospect Heights class pages do not publish one fixed per-class tuition figure on the public page excerpt used here.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-treasure-trunk-theatre-prospect-heights",
+        "name": "Treasure Trunk Theatre Prospect Heights",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "address": "Brooklyn Brainery, 190 Underhill Ave, Brooklyn, NY 11238",
+        "activityTypes": ["Theater"],
+        "ageRanges": ["3–5"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Monday after-school theater classes in Prospect Heights for ages 3-6 at Brooklyn Brainery.",
+        "longDescription": "Treasure Trunk Theatre's official Prospect Heights pages describe a theater class for children ages 3 to 6 at Brooklyn Brainery in Prospect Heights. The official public class page lists the address as 190 Underhill Avenue, Brooklyn, NY 11238.\n\nThe same official class page publishes a recurring Monday class from 3:30 PM to 4:15 PM and notes an optional PS9 after-school pickup for enrolled students. Treasure Trunk Theatre's official contact page lists phone (347) 762-9475.\n\nSources: https://www.treasuretrunktheatre.com/prospect_heights/ https://www.treasuretrunktheatre.com/classes-at-tt-prospect-heights/ https://www.treasuretrunktheatre.com/contact/ https://www.treasuretrunktheatre.com/wp-content/uploads/2016/02/267954_530012183688060_1916429731_n.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/GvcBC5wj/6ed18540d91b.jpg",
+        "email": "",
+        "website": "https://www.treasuretrunktheatre.com/classes-at-tt-prospect-heights/",
+        "phone": "(347) 762-9475",
+        "recurringPrograms": [
+          {
+            "id": "rp-treasure-trunk-prospect-heights-monday",
+            "title": "Monday Theater Class",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday"],
+            "timeText": "3:30 PM-4:15 PM",
+            "locationNote": "Brooklyn Brainery",
+            "ageRanges": ["3–5"],
+            "activityTypes": ["Theater"],
+            "summary": "Weekly Monday storytelling and theater class for ages 3-6 in Prospect Heights.",
+            "registrationUrl": "https://www.treasuretrunktheatre.com/classes-at-tt-prospect-heights/"
+          }
+        ]
+      }
+    }
+  ]
+}

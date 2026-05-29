@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/south-shore-ymca/programs-classes/camps",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc"
+  ],
+  "notes": "Official YMCA of Greater New York South Shore branch 2026 camp page (2026). Hero WebP is the YMCA-published 2026 camp STEM carousel image from that page (alt: three kids doing science projects), downloaded and uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Neighborhood set to Great Kills as the closest South Shore match in ClassScout’s Staten Island list for 3939 Richmond Avenue; confirm local naming with the Y if you need a finer-grained label.",
+    "pricePerClass is 942 as the published Community rate for Traditional Summer Camp (ages 6–12) per two-week session; Y Member rate $856 is on the same page — confirm tier and session on register.ymcanyc.org before enrolling.",
+    "Camp weekday schedule with optional early drop-off; weekend pickup is not described as core camp programming on this page.",
+    "rating / reviewCount: not on official camp page; 0 / 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-south-shore-ymca-traditional-camp-2026",
+        "name": "South Shore YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "address": "3939 Richmond Avenue, Staten Island, NY 10312",
+        "activityTypes": ["Sports", "Swimming", "Art", "Science", "Outdoor Activities"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 942,
+        "shortDescription": "YMCA licensed day camp on Staten Island’s South Shore: 2026 Traditional Summer Camp (ages 6–12) with swim, arts, science, sports, and themed activities in two-week sessions June 29–August 21.",
+        "longDescription": "The YMCA of Greater New York’s South Shore branch publishes 2026 Summer Day Camp registration for programs running June 29 through August 21 in two-week sessions, with camp noted as closed Friday, July 3 in observance of the Independence Day holiday. Published camp hours are 9 a.m.–5 p.m. with extended hours listed as 7:30–9 a.m.\n\nTraditional Summer Camp (ages 6–12) is described as including physical fitness, arts and crafts, science activities, theme days, group play, team building, and instructional swim, framed around YMCA core values (respect, caring, honesty, responsibility). Published pricing lists $856 per two-week session for Y Members and $942 per two-week session for Community participants.\n\nThe branch “Find us” line on the camp page lists 3939 Richmond Avenue, Staten Island, NY 10312. Camp leadership contact on the same page: southshoreycamp@ymcanyc.org and 718-227-3200.\n\nThe listing image is the official YMCA 2026 camp carousel photograph used on this camp page (STEM-themed hero), downloaded from YMCA-hosted media and re-uploaded to ImgBB for ClassScout storage policy compliance.\n\nSources: https://ymcanyc.org/locations/south-shore-ymca/programs-classes/camps https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/WWj0CVhy/5540edffe933.webp",
+        "email": "southshoreycamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/south-shore-ymca/programs-classes/camps",
+        "phone": "718-227-3200",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Official page links to register.ymcanyc.org summer-camp/13 and lists early-bird and sibling discount rules.",
+        "announcementBadge": "Summer ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

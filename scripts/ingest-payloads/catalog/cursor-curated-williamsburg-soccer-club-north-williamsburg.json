@@ -1,0 +1,65 @@
+{
+  "sourceUrls": [
+    "https://www.jcc-brooklyn.org/north-williamsburg/programs/0-5/williamsburg-soccer-club/",
+    "https://www.williamsburgsoccerclub.com/",
+    "https://static.wixstatic.com/media/6b81be_c3d3378043ae4e20a9bb3b615b18baef%7Emv2.png/v1/fit/w_2500,h_1330,al_c/6b81be_c3d3378043ae4e20a9bb3b615b18baef%7Emv2.png"
+  ],
+  "notes": "Official JCC Brooklyn North Williamsburg program page and official Williamsburg Soccer Club site were reviewed on May 26, 2026. The official Williamsburg Soccer Club hero image was re-hosted to ImgBB for the provider image.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official sources publish the spring session structure but not a simple standalone per-class price in the source excerpt used here.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-williamsburg-soccer-club-north-williamsburg",
+        "name": "Williamsburg Soccer Club North Williamsburg",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "address": "14 Hope Street, Brooklyn, NY 11211",
+        "activityTypes": ["Sports", "Soccer"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekly spring soccer classes in North Williamsburg for ages 2-5 at JCC Brooklyn.",
+        "longDescription": "JCC Brooklyn's official North Williamsburg page lists Williamsburg Soccer Club classes for young children at 14 Hope Street in Williamsburg. The official program page describes a weekly kids soccer class for boys and girls, with a Spring Session of nine classes on April 15, 22, 29, May 6, 13, 20, 27, and June 3 and 10.\n\nThe same official page lists a 3:00 PM class for ages 2-3 and a 3:45 PM class for ages 4-5, which supports weekday afternoon and after-school timing tags. Williamsburg Soccer Club's official site describes the program as kids soccer classes in Williamsburg for players ages 2-8, but this listing stays aligned to the North Williamsburg class block published on the JCC page.\n\nSources: https://www.jcc-brooklyn.org/north-williamsburg/programs/0-5/williamsburg-soccer-club/ https://www.williamsburgsoccerclub.com/ https://static.wixstatic.com/media/6b81be_c3d3378043ae4e20a9bb3b615b18baef%7Emv2.png/v1/fit/w_2500,h_1330,al_c/6b81be_c3d3378043ae4e20a9bb3b615b18baef%7Emv2.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/C5NrCpNV/williamsburg-soccer-club.png",
+        "email": "williamsburg@jcc-brooklyn.org",
+        "website": "https://www.jcc-brooklyn.org/north-williamsburg/programs/0-5/williamsburg-soccer-club/",
+        "phone": "(718) 407-6388",
+        "recurringPrograms": [
+          {
+            "id": "rp-williamsburg-soccer-club-spring-ages-2-3",
+            "title": "Ages 2-3 Soccer Class",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Wednesday"],
+            "timeText": "3:00 PM",
+            "locationNote": "JCC Brooklyn North Williamsburg",
+            "ageRanges": ["0–2", "3–5"],
+            "activityTypes": ["Sports", "Soccer"],
+            "summary": "Spring session soccer class for ages 2-3.",
+            "registrationUrl": "https://www.jcc-brooklyn.org/north-williamsburg/programs/0-5/williamsburg-soccer-club/"
+          },
+          {
+            "id": "rp-williamsburg-soccer-club-spring-ages-4-5",
+            "title": "Ages 4-5 Soccer Class",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Wednesday"],
+            "timeText": "3:45 PM",
+            "locationNote": "JCC Brooklyn North Williamsburg",
+            "ageRanges": ["3–5"],
+            "activityTypes": ["Sports", "Soccer"],
+            "summary": "Spring session soccer class for ages 4-5.",
+            "registrationUrl": "https://www.jcc-brooklyn.org/north-williamsburg/programs/0-5/williamsburg-soccer-club/"
+          }
+        ]
+      }
+    }
+  ]
+}

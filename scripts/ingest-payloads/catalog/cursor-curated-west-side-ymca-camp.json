@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/west-side-ymca/programs-and-classes/camps",
+    "https://ymcanyc.org/locations/west-side-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm"
+  ],
+  "notes": "Official West Side YMCA 2026 camp page and branch listing reviewed May 19, 2026. Original official image source URL: https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "pricePerClass uses $1,135, the published community rate for one two-week Traditional Summer Camp session; Early Childhood, Kinder, and Swim Camp rates differ on the same official page.",
+    "The camp page also shows a separate community extended-hours figure of $263 and a Y-member figure of $178, but it does not clearly label those as standalone aftercare tuition versus supplemental fees.",
+    "rating and reviewCount are not published on the cited official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-west-side-ymca-summer-camp-2026",
+        "name": "West Side YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "address": "5 West 63rd Street, New York, NY 10023",
+        "activityTypes": ["Swimming", "Sports", "STEM", "Art"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 1135,
+        "shortDescription": "West Side YMCA runs weekday two-week summer camp sessions near Columbus Circle with traditional, early-childhood, kinder, and swim tracks for children ages 3 through 12.",
+        "longDescription": "The West Side YMCA publishes 2026 summer camp at 5 West 63rd Street on the Upper West Side, with camp dates from June 29 through August 21, 2026 in two-week sessions. The official page lists camp hours as 9 a.m. to 5 p.m. and an extended day option from 5 p.m. to 6 p.m., which supports weekday morning, afternoon, and after-school tags.\n\nThe same page lists Traditional Summer Camp for ages 6-12, Early Childhood Camp for ages 3-4, Kinder Camp for ages 4-5, and Swim Camp for ages 7-12. Published descriptions highlight physical fitness, arts and crafts, science activities, group play, and instructional swim.\n\nPublished community tuition for one two-week Traditional Summer Camp session is $1,135; Early Childhood and Kinder Camp are listed at $1,405 community, and Swim Camp at $1,500 community. Camp leadership contact on the official page is Donesha Bowden at wsycamp@ymcanyc.org and 212-912-2640.\n\nSources: https://ymcanyc.org/locations/west-side-ymca/programs-and-classes/camps https://ymcanyc.org/locations/west-side-ymca https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/Lhts5Fw7/ade19a1ea7e7.webp",
+        "email": "wsycamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/west-side-ymca/programs-and-classes/camps",
+        "phone": "212-912-2640",
+        "announcementTitle": "2026 camp sessions posted",
+        "announcementDescription": "The official page lists four two-week sessions from June 29 through August 21, 2026, with open house dates in April, May, and June.",
+        "announcementBadge": "Register",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

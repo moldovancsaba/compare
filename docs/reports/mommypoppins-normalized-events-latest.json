@@ -1,0 +1,1734 @@
+[
+  {
+    "externalEventId": "evt-event-2025-dumbo-drop-on-washington-street-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "2025 Dumbo Drop On Washington Street",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/2025-dumbo-drop-on-washington-street"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-29",
+    "startTime": "5:00 pm",
+    "endTime": "9:00 pm",
+    "locationHint": "Brooklyn, DUMBO",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "DUMBO",
+    "ageHints": [],
+    "activityHints": [
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/2025-dumbo-drop-on-washington-street",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "One of Brooklyn’s most iconic experiences, the annual Dumbo Drop—a flying elephant fundraising spectacle—sends thousands of parachuting toy elephants from the rooftops surrounding Washington Street. Tickets begin at $15, and include a souvenir toy elephant, a guaranteed spot to view the Drop on t",
+      "Dumbo Drop on Washington Street | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Dumbo Drop on Washington Street Dumbo Drop event 05/29/2026 2026-05-29 5:00 pm - 9:00 pm ET Age: All Ages $18.75 and up Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/29/2026 Google Yahoo iCal One of Brooklyn’s most iconic experiences, the annual Dumbo Drop —a flying elephant fundraising spectacle—sends thousands of parachuting toy elephants from the rooftops surrounding Washington Street .&nbsp;&nbsp; Tickets include a souvenir toy elephant, a guaranteed spot to view the Drop on the block of Washington Street between Front Street and Water Street, and an entry into that Drop’s prize sweepstakes.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-05-29"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-7th-annual-public-school-film-festival-in-0-brookly",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars 7th Annual Public School Film Festival In 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-7th-annual-public-school-film-festival-in-0"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-13",
+    "startTime": "8:30 pm",
+    "endTime": "10:00 pm",
+    "locationHint": "Brooklyn, Sunset Park",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "Sunset Park",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-7th-annual-public-school-film-festival-in-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Celebrate some of the best of NYC students’ works with friends and family! Bring blankets and chairs, find a great spot, and enjoy the show.",
+      "Celebrate some of the best of NYC students’ works with friends and family!",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: 8th Annual Public School Film Festival in Sunset Park event 06/13/2026 2026-06-13 8:30 pm - 10:00 pm ET Age: 8 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/13/2026 Google Yahoo iCal Celebrate some of the best of NYC students’ works with friends and family!",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-13"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-freakier-friday-pg-in-allerton-playground-0-queens",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Freakier Friday Pg In Allerton Playground 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-freakier-friday-pg-in-allerton-playground-0"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-29",
+    "startTime": "8:30 pm",
+    "endTime": "10:30 pm",
+    "recurrenceDays": [
+      "Friday"
+    ],
+    "locationHint": "Queens, Flushing",
+    "boroughHint": "Queens",
+    "neighborhoodHint": "Flushing",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-freakier-friday-pg-in-allerton-playground-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "The Freaky Friday sequel plays on a big outdoor screen.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under The Stars: Freakier Friday (PG) in Frank D O&#039;Connor Playground event 05/29/2026 2026-05-29 8:30 pm - 10:30 pm ET Age: 8 and up FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/29/2026 Google Yahoo iCal The Freaky Friday sequel plays on a big outdoor screen.&nbsp; Bring a blanket and a picnic.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids.",
+      "QUICK LINKS Activities Providers Family Travel CONTACT Newsletter Subscribe Contact About SITEMAP Submit an Activity List Your Business Advertise with Us &copy; MommyPoppins."
+    ],
+    "expiresAt": "2026-05-29"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-manhattan-0-manhattan",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Manhattan 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-manhattan-0"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-04",
+    "locationHint": "Manhattan, Harlem",
+    "boroughHint": "Manhattan",
+    "neighborhoodHint": "Harlem",
+    "ageHints": [],
+    "activityHints": [
+      "Art",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-manhattan-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Stars onscreen and in the sky! Cuddle up on a blanket with a pizza or picnic and catch a free kid-friendly flick. NYC Parks&#039; Movies under the Stars brings classic and animated kid-friendly films to Manhattan parks all summer long.",
+      "Movies under the Stars: Manhattan | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: Manhattan event 06/04/2026 - 07/11/2026 (click for all dates) 2026-06-04 2026-06-06 2026-06-11 2026-06-13 2026-06-18 2026-06-20 2026-06-24 2026-06-25 2026-06-26 2026-07-02 2026-07-10 2026-07-11 Various times Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/4/2026 6/6/2026 6/11/2026 6/13/2026 6/18/2026 6/20/2026 6/24/2026 6/25/2026 6/26/2026 7/2/2026 7/10/2026 7/11/2026 Google Yahoo iCal Stars onscreen and in the sky!",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-04"
+  },
+  {
+    "externalEventId": "evt-event-movies-with-a-view-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Movies With A View",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/free/movies-with-a-view"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-02",
+    "startTime": "6:00 pm",
+    "endTime": "6:00 pm",
+    "locationHint": "Brooklyn, DUMBO",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "DUMBO",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Music",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/free/movies-with-a-view",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Brooklyn Bridge Park brings back Movies with a View for its 21st season (having missed last summer), with \\\"Grit\\\" as the theme, celebrating uplifting underdog stories.",
+      "Movies with a View | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies With a View in Brooklyn Bridge Park Brooklyn Bridge Park event 07/02/2026 - 08/27/2026 (click for all dates) 2026-07-02 2026-07-09 2026-07-16 2026-07-23 2026-07-30 2026-08-06 2026-08-13 2026-08-20 2026-08-27 6:00 pm - 6:00 pm ET Age: Varies with film Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 7/2/2026 7/9/2026 7/16/2026 7/23/2026 7/30/2026 8/6/2026 8/13/2026 8/20/2026 8/27/2026 Google Yahoo iCal Brooklyn Bridge Park brings back Movies with a View for its 25th season.",
+      "&nbsp; &nbsp; (718) 222-9939 Website Brooklyn Bridge Park Harbor View Lawn of Pier 1 Brooklyn , NY United States See on map Films & Photography Free Kids Tweens & teens Grown-ups Events New York City Brooklyn DUMBO Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-07-02"
+  },
+  {
+    "externalEventId": "evt-event-right-of-spring-at-the-old-stone-house-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Right Of Spring At The Old Stone House",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/right-of-spring-at-the-old-stone-house"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-31",
+    "startTime": "4:00 pm",
+    "endTime": "5:00 pm",
+    "locationHint": "Brooklyn, Park Slope",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "Park Slope",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/right-of-spring-at-the-old-stone-house",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Join The Puppeteers Cooperative to celebrate its annual Right of Spring Puppet Pageant. Witness a costumed performance with handmade masks, larger-than-life puppets, live music, and a parade of fantastical beings flitting through Washington Park. This year&#039;s theme is dirt.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Right of Spring at the Old Stone House event 05/31/2026 2026-05-31 4:00 pm - 5:00 pm ET Age: All Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/31/2026 Google Yahoo iCal Join The Puppeteers Cooperative to celebrate its annual Right of Spring Puppet Pageant.",
+      "&nbsp; Website Old Stone House Fifth Avenue and 4th Street Brooklyn , NY 11215 United States See on map Arts Free Outdoor & Nature Preschoolers Kids Tweens & teens Grown-ups Events New York City Brooklyn Park Slope Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-05-31"
+  },
+  {
+    "externalEventId": "evt-event-sing-for-hope-free-mini-piano-lessons-with-bkcm-faculty-at-the-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Sing For Hope Free Mini Piano Lessons With Bkcm Faculty At The",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/sing-for-hope-free-mini-piano-lessons-with-bkcm-faculty-at-the"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-30",
+    "locationHint": "Brooklyn, Prospect Heights",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "Prospect Heights",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/sing-for-hope-free-mini-piano-lessons-with-bkcm-faculty-at-the",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Sing for Hope is placing colorful outdoor pianos painted by local artists in public plazas across New York City, and on May 30, from 10-11am and 1-2pm, BKCM piano faculty Eliot Krimsky & Adriana Svitak are giving free mini piano lessons under the Grand Army Plaza arch to anyone who stops by!",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Sing for Hope: Free Mini Piano Lessons with BKCM Faculty at the Grand Army Plaza Arch event 05/30/2026 2026-05-30 Various times Age: 6 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/30/2026 Google Yahoo iCal Sing for Hope is placing colorful outdoor pianos painted by local artists in public plazas across New York City, and on May 30, from 10-11am and 1-2pm, BKCM piano faculty Eliot Krimsky & Adriana Svitak are giving free mini piano lessons under the Grand Army Plaza arch to anyone who stops by!&nbsp; First-come, first-served!",
+      "Website Grand Army Plaza Arch Grand Army Plaza Brooklyn , NY United States See on map Free Music Preschoolers Kids Tweens & teens Grown-ups Events New York City Brooklyn Prospect Heights Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-05-30"
+  },
+  {
+    "externalEventId": "evt-event-youth-pride-fest-in-industry-city-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Youth Pride Fest In Industry City",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/youth-pride-fest-in-industry-city"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-20",
+    "startTime": "12:00 pm",
+    "endTime": "5:00 pm",
+    "locationHint": "Brooklyn, Sunset Park",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": "Sunset Park",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/youth-pride-fest-in-industry-city",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "Youth Pride shines bright in Industry City, with surprise guest DJs, food stations, carnival games, a photo booth, and more.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Youth Pride Fest in Industry City event 06/20/2026 2026-06-20 12:00 pm - 5:00 pm ET Age: 11-18 Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/20/2026 Google Yahoo iCal Youth Pride shines bright in Industry City, with surprise guest DJs, food stations, carnival games, a photo booth, and more.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids.",
+      "QUICK LINKS Activities Providers Family Travel CONTACT Newsletter Subscribe Contact About SITEMAP Submit an Activity List Your Business Advertise with Us &copy; MommyPoppins."
+    ],
+    "expiresAt": "2026-06-20"
+  },
+  {
+    "externalEventId": "evt-event-fifa-world-cup-fan-fest-queens-queens",
+    "eventType": "event_instance",
+    "titleHint": "Fifa World Cup Fan Fest Queens",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/fifa-world-cup-fan-fest-queens"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-11",
+    "locationHint": "Queens, Corona",
+    "boroughHint": "Queens",
+    "neighborhoodHint": "Corona",
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Sports",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/fifa-world-cup-fan-fest-queens",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [],
+    "evidenceSnippets": [
+      "The NYNJ World Cup 26 Fan Zone Queens features live match broadcasts, family-friendly entertainment and interactive games, cultural showcases, including local food vendors, official merchandise, and VIP hospitality experiences.",
+      "The NYNJ World Cup 26 Fan Zone Queens features live match broadcasts, family-friendly entertainment and interactive games, cultural showcases, including local food vendors, official merchandise, and VIP hospitality experiences..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home FIFA World Cup Fan Zone in Flushing FIFA Queens event 06/11/2026 - 06/27/2026 (click for all dates) 2026-06-11 2026-06-12 2026-06-13 2026-06-14 2026-06-15 2026-06-16 2026-06-17 2026-06-18 2026-06-19 2026-06-20 2026-06-21 2026-06-22 2026-06-23 2026-06-24 2026-06-25 2026-06-26 2026-06-27 Various times Age: All FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/11/2026 6/12/2026 6/13/2026 6/14/2026 6/15/2026 6/16/2026 6/17/2026 6/18/2026 6/19/2026 6/20/2026 6/21/2026 6/22/2026 6/23/2026 6/24/2026 6/25/2026 6/26/2026 6/27/2026 Google Yahoo iCal The NYNJ World Cup 26 Fan Zone Queens features live match broadcasts, family-friendly entertainment and interactive games, cultural showcases, including local food vendors, official merchandise, and VIP hospitality experiences.&nbsp; The event is FREE but you must pre-register for tickets.",
+      "Website USTA Billie Jean King National Tennis Center Flushing Meadows Corona Park Queens , NY United States See on map Free Outdoor & Nature Sports Kids Tweens & teens Grown-ups Events New York City Queens Flushing Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-06-11"
+  },
+  {
+    "externalEventId": "evt-event-bats-and-echolocation-in-marine-park-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Bats And Echolocation In Marine Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/bats-and-echolocation-in-marine-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-08-27",
+    "startTime": "7:00 pm",
+    "endTime": "8:30 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/bats-and-echolocation-in-marine-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Gotham Bat Conservancy shows how bats use radar to find food.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Bats: Night Walk in Marine Park event 08/27/2026 2026-08-27 7:00 pm - 8:30 pm ET Age: All Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 8/27/2026 Google Yahoo iCal Gotham Bat Conservancy shows how bats use radar to find food.",
+      "Email Website Seba Playground Gerritsen Avenue and Seba Avenue Marine Park New York , NY 11234 United States See on map Free Outdoor & Nature Kids Tweens & teens Events New York City Brooklyn Sheepshead Bay Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-08-27"
+  },
+  {
+    "externalEventId": "evt-event-daniel-tigers-neighborhood-opening-weekend-at-the-bronx-zoo-bronx",
+    "eventType": "venue_program",
+    "titleHint": "Daniel Tigers Neighborhood Opening Weekend At The Bronx Zoo",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/daniel-tigers-neighborhood-opening-weekend-at-the-bronx-zoo"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "10:00 am",
+    "endTime": "11:00 am",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/daniel-tigers-neighborhood-opening-weekend-at-the-bronx-zoo",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Daniel Tiger’s Neighborhood, the beloved PBS KIDS series from Fred Rogers Productions, comes to the Bronx Zoo with live performances, a Daniel Tiger character meet-and-greet, and an interactive exhibit at the Giraffe Corner.",
+      "Daniel Tiger’s Neighborhood, the beloved PBS KIDS series from Fred Rogers Productions, comes to the Bronx Zoo with live performances, a Daniel Tiger character meet-and-greet, and an interactive exhibit at the Giraffe Corner..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Daniel Tiger&#039;s Neighborhood Opening Weekend at the Bronx Zoo Daniel Tiger event This event is past 10:00 am - 11:00 am ET Age: 3-10 Included in Zoo Admission Invite a friend Daniel Tiger’s Neighborhood , the beloved PBS KIDS series from Fred Rogers Productions, comes to the Bronx Zoo with live performances, a Daniel Tiger character meet-and-greet, and an interactive exhibit at the Giraffe Corner.&nbsp; Website The Bronx Zoo 2300 Southern Boulevard Bronx , NY 10460 United States See on map Exhibitions Baby Preschoolers Kids Events New York City Bronx Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-drums-along-the-hudson-a-native-american-festival-in-inwood-hill-manhattan",
+    "eventType": "event_instance",
+    "titleHint": "Drums Along The Hudson A Native American Festival In Inwood Hill",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/drums-along-the-hudson-a-native-american-festival-in-inwood-hill"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-07",
+    "startTime": "11:00 am",
+    "endTime": "6:00 pm",
+    "locationHint": "Manhattan",
+    "boroughHint": "Manhattan",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2",
+      "Teens"
+    ],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/drums-along-the-hudson-a-native-american-festival-in-inwood-hill",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The Annual Drums Along the Hudson: A Native American Festival and Multicultural Celebration features Manhattan’s only open air pow wow, a celebratory gathering of Native American people.",
+      "Drums Along the Hudson: a Native American Festival and Multicultural Celebration | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Drums Along the Hudson: A Native American Festival in Inwood Hill Park event 06/07/2026 2026-06-07 11:00 am - 6:00 pm ET Age: All Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/7/2026 Google Yahoo iCal Drums Along the Hudson marks its 24th anniversary as Manhattan’s only open-air pow wow.",
+      "The all-day event features Native American crafts, storytelling, and traditional food and dance."
+    ],
+    "expiresAt": "2026-06-07"
+  },
+  {
+    "externalEventId": "evt-event-flower-power-opening-weekend-at-the-new-york-botanical-garden-bronx",
+    "eventType": "venue_program",
+    "titleHint": "Flower Power Opening Weekend At The New York Botanical Garden",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/flower-power-opening-weekend-at-the-new-york-botanical-garden"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "10:00 am",
+    "endTime": "10:00 am",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Art",
+      "Music",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/flower-power-opening-weekend-at-the-new-york-botanical-garden",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Step back into the 1960s with this summertime floral takeover of the New York Botanical Garden.",
+      "Flower Power at the New York Botanical Garden | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Flower Power Opening Weekend at the New York Botanical Garden event This event is past 10:00 am - 10:00 am ET Age: All ages Adults $39+; Children (2-12) $17+ Invite a friend Channel the spirit of the ’60s at Flower Power , a joyous celebration of the enduring symbolism of flowers as icons of peace and love.",
+      "While you're there, be sure to check out the Summer of Moomin installation in the Everett Children's Adventure Garden."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-inside-an-ambulance-in-marine-park-0-brooklyn",
+    "eventType": "event_series",
+    "titleHint": "Inside An Ambulance In Marine Park 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/inside-an-ambulance-in-marine-park-0"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "11:00 am",
+    "endTime": "12:00 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/inside-an-ambulance-in-marine-park-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Kids are invited to tour the interior of an ambulance with the Gerritsen Beach Volunteer Fire Dept.",
+      "Kids are invited to tour the interior of an ambulance with the Gerritsen Beach Volunteer Fire Dept..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Inside an Ambulance in Marine Park event 06/21/2026 2026-06-21 11:00 am - 12:00 pm ET Age: 2-10 FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/21/2026 Google Yahoo iCal Kids are invited to tour the interior of an ambulance with the Gerritsen Beach Volunteer Fire Dept.&nbsp; Website Dr.",
+      "John&#039;s Playground in Marine Park Avenue X and Gerritsen Ave Brooklyn , NY United States See on map Boats, Buses & Trains Free Baby Preschoolers Kids Events New York City Brooklyn Off ** Activity dates/times are subject to change."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-juneteenth-book-event-in-marine-park-brooklyn",
+    "eventType": "event_series",
+    "titleHint": "Juneteenth Book Event In Marine Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/juneteenth-book-event-in-marine-park"
+    ],
+    "timezone": "America/New_York",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/juneteenth-book-event-in-marine-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Learn all about the celebration of Juneteenth and the importance of commemorating this milestone with Gerritsen Beach Public Library, and kids can pick up summer reading supplies & free books courtesy of the BPL summer reading program.",
+      "Juneteenth Book Event In Marine Park.",
+      "Learn all about the celebration of Juneteenth and the importance of commemorating this milestone with Gerritsen Beach Public Library, and kids can pick up summer reading supplies & free books courtesy of the BPL summer reading program..",
+      "Juneteenth Book Event in Marine Park | Mommy Poppins Sorry, you need to enable JavaScript to visit this website."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-kids-soccer-village-and-watch-party-in-brooklyn-commons-park-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Kids Soccer Village And Watch Party In Brooklyn Commons Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/kids-soccer-village-and-watch-party-in-brooklyn-commons-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-17",
+    "startTime": "3:30 pm",
+    "endTime": "6:00 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Sports",
+      "Art",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/kids-soccer-village-and-watch-party-in-brooklyn-commons-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Head to Brooklyn Commons Park for an afternoon of soccer-themed crafts, goal-shooting activities, Duplo Lego play, foosball tables, live screen printing, and more—and catch the England vs. Croatia match.",
+      "Kids Soccer Village And Watch Party In Brooklyn Commons Park.",
+      "Kid’s Soccer Village and Watch Party in Brooklyn Commons Park | Mommy Poppins Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Kid’s Soccer Village and Watch Party in Brooklyn Commons Park Soccer Drill event 06/17/2026 2026-06-17 3:30 pm - 6:00 pm ET Age: All FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/17/2026 Google Yahoo iCal Head to Brooklyn Commons Park for an afternoon of soccer-themed crafts, goal-shooting activities, Duplo Lego play, foosball tables, live screen printing, and more—and catch the England vs."
+    ],
+    "expiresAt": "2026-06-17"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-brooklyn-manhattan",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Brooklyn",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-brooklyn"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-03",
+    "locationHint": "Manhattan",
+    "boroughHint": "Manhattan",
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Sports",
+      "Art",
+      "Martial Arts",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-brooklyn",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Nothing says summer in NYC quite like watching a movie outdoors just after sunset. NYC Parks&#039; Movies under the Stars brings classic and animated kid-friendly films to Brooklyn parks all summer long.",
+      "Movies under the Stars: Brooklyn | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: Brooklyn event 06/03/2026 - 06/28/2026 (click for all dates) 2026-06-03 2026-06-04 2026-06-06 2026-06-10 2026-06-11 2026-06-12 2026-06-18 2026-06-24 2026-06-25 2026-06-26 2026-06-27 2026-06-28 Various times Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/3/2026 6/4/2026 6/6/2026 6/10/2026 6/11/2026 6/12/2026 6/18/2026 6/24/2026 6/25/2026 6/26/2026 6/27/2026 6/28/2026 Google Yahoo iCal Nothing says summer in NYC quite like watching a movie outdoors just after sunset.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-03"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-elio-in-david-marcus-playground-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Elio In David Marcus Playground",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-elio-in-david-marcus-playground"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-31",
+    "startTime": "8:30 pm",
+    "endTime": "10:30 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-elio-in-david-marcus-playground",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Elio, an underdog with an active imagination, finds himself inadvertently beamed up to the Communiverse, an interplanetary organization with representatives from galaxies far and wide.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: Elio in David Marcus Playground event 05/31/2026 2026-05-31 8:30 pm - 10:30 pm ET Age: 6 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/31/2026 Google Yahoo iCal Elio, an underdog with an active imagination, finds himself inadvertently beamed up to the Communiverse, an interplanetary organization with representatives from galaxies far and wide.&nbsp; Mistakenly identified as Earth's ambassador to the rest of the universe, he starts to form new bonds with eccentric aliens while discovering who he's truly meant to be.",
+      "5th Street and Avenue P Brooklyn , NY United States See on map Films & Photography Free Kids Events New York City Brooklyn Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-05-31"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-puss-in-boots-the-last-wish-at-muliner-bronx",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Puss In Boots The Last Wish At Muliner",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-puss-in-boots-the-last-wish-at-muliner"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-30",
+    "startTime": "8:30 pm",
+    "endTime": "10:30 pm",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-puss-in-boots-the-last-wish-at-muliner",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Bring a picnic blanket and some snacks to the Matthews Muliner Playground and enjoy a free screening of Puss in Boots: The Last Wish (PG).",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies under the Stars: Puss in Boots: The Last Wish at Muliner Playground event 05/30/2026 2026-05-30 8:30 pm - 10:30 pm ET Age: 4 and up FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/30/2026 Google Yahoo iCal Bring a picnic blanket and some snacks to the Matthews Muliner Playground and enjoy a free screening of Puss in Boots: The Last Wish (PG).&nbsp;&nbsp; Website Matthews Muliner Playground 1815 Muliner Ave Bronx , NY 10462 United States See on map Films & Photography Free Kids Tweens & teens Events New York City Bronx Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids.",
+      "QUICK LINKS Activities Providers Family Travel CONTACT Newsletter Subscribe Contact About SITEMAP Submit an Activity List Your Business Advertise with Us &copy; MommyPoppins."
+    ],
+    "expiresAt": "2026-05-30"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-queens-0-queens",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Queens 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-queens-0"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-03",
+    "locationHint": "Queens",
+    "boroughHint": "Queens",
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-queens-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "NYC Parks&#039; Movies under the Stars brings classic and animated kid-friendly films to Queens parks all summer long. Bring a blanket and a picnic",
+      "Movies under the Stars: Queens | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: Queens event 06/03/2026 - 06/13/2026 (click for all dates) 2026-06-03 2026-06-04 2026-06-05 2026-06-06 2026-06-12 2026-06-13 Various times Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/3/2026 6/4/2026 6/5/2026 6/6/2026 6/12/2026 6/13/2026 Google Yahoo iCal NYC Parks' Movies Under the Stars brings classic and animated kid-friendly films to Queens parks all summer long.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-03"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-the-bronx-bronx",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars The Bronx",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-the-bronx"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-04",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-the-bronx",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Pack a picnic and head to a local park to watch a favorite kid-friendly flick as the sun goes down. NYC Parks&#039; Movies under the Stars brings classic and animated kid-friendly films to Bronx parks all summer long.",
+      "Movies under the Stars: Bronx | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: The Bronx event 06/04/2026 - 07/11/2026 (click for all dates) 2026-06-04 2026-06-06 2026-06-11 2026-06-12 2026-06-18 2026-06-19 2026-06-20 2026-06-25 2026-06-26 2026-07-02 2026-07-03 2026-07-04 2026-07-08 2026-07-09 2026-07-10 2026-07-11 Various times Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/4/2026 6/6/2026 6/11/2026 6/12/2026 6/18/2026 6/19/2026 6/20/2026 6/25/2026 6/26/2026 7/2/2026 7/3/2026 7/4/2026 7/8/2026 7/9/2026 7/10/2026 7/11/2026 Google Yahoo iCal Pack a picnic and head to a local park to watch a favorite kid-friendly flick as the sun goes down.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-04"
+  },
+  {
+    "externalEventId": "evt-event-spring-fever-festival-in-st-marys-park-bronx",
+    "eventType": "event_instance",
+    "titleHint": "Spring Fever Festival In St Marys Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/spring-fever-festival-in-st-marys-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-13",
+    "startTime": "12:00 pm",
+    "endTime": "4:00 pm",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Sports",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/spring-fever-festival-in-st-marys-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Get up close and personal with NYC’s wild residents. Learn about squirrels, turtles, raccoons, opossum, and coyotes , and discover the best places in New York City and New York State to watch wildlife.",
+      "Urban Wildlife Festival | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Spring Fever Festival in St.",
+      "Mary&#039;s Park event 06/13/2026 2026-06-13 12:00 pm - 4:00 pm ET Age: All ages FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/13/2026 Google Yahoo iCal Enjoy this family-friendly celebration at St."
+    ],
+    "expiresAt": "2026-06-13"
+  },
+  {
+    "externalEventId": "evt-event-summer-concert-series-in-marine-park-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Summer Concert Series In Marine Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/summer-concert-series-in-marine-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-17",
+    "startTime": "7:00 pm",
+    "endTime": "7:00 pm",
+    "recurrenceDays": [
+      "Wednesday"
+    ],
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/summer-concert-series-in-marine-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Bring a blanket and a picnic to an evening concert on the lawn near the Bocce Court.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Summer Concert Series in Marine Park event 06/17/2026 - 08/26/2026 (click for all dates) 2026-06-17 2026-06-24 2026-07-01 2026-07-08 2026-07-15 2026-07-22 2026-07-29 2026-08-05 2026-08-12 2026-08-19 2026-08-26 7:00 pm - 7:00 pm ET Age: All Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/17/2026 6/24/2026 7/1/2026 7/8/2026 7/15/2026 7/22/2026 7/29/2026 8/5/2026 8/12/2026 8/19/2026 8/26/2026 Google Yahoo iCal Bring a blanket and a picnic to an evening concert on the lawn near the Bocce Court.",
+      "2026 schedule: Wednesday, June 17 Caribbean Night&nbsp; Wednesday, June 24 Cantor vocalist Shea Rubenstein Wednesday, July 1 Class Rock with Scott Yahney and Friends Wednesday, July 8 Salsa Night Wednesday, July 15 Children's Concert (Christmas in July) Wednesday, July 22 Regina Opera (Opera and Broadway Tunes) Wednesday, July 29 Sound Affair Wednesday, August 5 Plastic Soul (60s and 70s) Wednesday, August 12 Country Western Wednesday, August 19 Decades (Rock 'n' Roll) Wednesday, August 26 Disco Night with Scott Yahney Email Website Marine Park 3302 Ave U Meet south of the Bocce Courts Brooklyn , NY United States See on map Free Outdoor & Nature Shows & Concerts Kids Tweens & teens Grown-ups Events Shows & Exhibitions New York City Brooklyn Sheepshead Bay Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-17"
+  },
+  {
+    "externalEventId": "evt-event-summer-of-moomin-opening-weekend-at-the-new-york-botanical-garden-bronx",
+    "eventType": "venue_program",
+    "titleHint": "Summer Of Moomin Opening Weekend At The New York Botanical Garden",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/summer-of-moomin-opening-weekend-at-the-new-york-botanical-garden"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "10:00 am",
+    "endTime": "10:00 am",
+    "locationHint": "Bronx",
+    "boroughHint": "Bronx",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2",
+      "Teens"
+    ],
+    "activityHints": [
+      "Art",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/summer-of-moomin-opening-weekend-at-the-new-york-botanical-garden",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The Moomin takeover of the New York Botanical Garden features a clue-based quest, nature crafts, and large-scale character moments.",
+      "Summer of Moomin at the New York Botanical Garden | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Summer of Moomin Opening Weekend at the New York Botanical Garden event This event is past 10:00 am - 10:00 am ET Age: All ages Adults $39+; Children (2-12) $17+ Invite a friend Step into the imaginative universe of the Moomins through immersive installations, outdoor adventures, and family programming.",
+      "The Moomin takeover features a clue-based quest, nature crafts, and large-scale character moments in the Everett Children's Adventure Garden."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-uncle-tonys-reptile-show-in-marine-park-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "Uncle Tonys Reptile Show In Marine Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/uncle-tonys-reptile-show-in-marine-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-18",
+    "startTime": "11:00 am",
+    "endTime": "12:00 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/uncle-tonys-reptile-show-in-marine-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Meet snakes and other reptiles up close and personal with Uncle Tony.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Uncle Tony&#039;s Reptile Show in Marine Park event 07/18/2026 2026-07-18 11:00 am - 12:00 pm ET Age: 2-10 FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 7/18/2026 Google Yahoo iCal Meet snakes and other reptiles up close and personal with Uncle Tony.&nbsp; Website Playground 278 in Marine Park Fillmore Ave and Madison Place Brooklyn , NY United States See on map Boats, Buses & Trains Free Baby Preschoolers Kids Events New York City Brooklyn Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids.",
+      "QUICK LINKS Activities Providers Family Travel CONTACT Newsletter Subscribe Contact About SITEMAP Submit an Activity List Your Business Advertise with Us &copy; MommyPoppins."
+    ],
+    "expiresAt": "2026-07-18"
+  },
+  {
+    "externalEventId": "evt-event-world-cup-under-the-stars-in-marine-park-brooklyn",
+    "eventType": "event_instance",
+    "titleHint": "World Cup Under The Stars In Marine Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/world-cup-under-the-stars-in-marine-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-12",
+    "startTime": "8:30 pm",
+    "endTime": "11:00 pm",
+    "locationHint": "Brooklyn",
+    "boroughHint": "Brooklyn",
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Sports",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/world-cup-under-the-stars-in-marine-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Watch Team USA square off against Paraguay on the big outdoor screen. Bring a blanket or chair!",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home World Cup under the Stars in Marine Park event 06/12/2026 2026-06-12 8:30 pm - 11:00 pm ET Age: 8 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/12/2026 Google Yahoo iCal Watch Team USA square off against Paraguay on the big outdoor screen.",
+      "Website Marine Park (Lenape Park) Flatbush, Gerritsen and Fillmore Avenues Brooklyn , NY United States See on map Films & Photography Free Outdoor & Nature Sports Kids Tweens & teens Grown-ups Events New York City Brooklyn Sheepshead Bay Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-12"
+  },
+  {
+    "externalEventId": "evt-event-big-kick-at-asphalt-green-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Big Kick At Asphalt Green",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/big-kick-at-asphalt-green"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-18",
+    "startTime": "3:30 pm",
+    "endTime": "6:30 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Sports",
+      "Swimming",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/big-kick-at-asphalt-green",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Mommy Poppins",
+      "Big Kick and Big Swim | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Big Kick at Asphalt Green event 07/18/2026 2026-07-18 3:30 pm - 6:30 pm ET Age: 3 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 7/18/2026 Google Yahoo iCal Head to Litwin Field for fun soccer-themed activities, entertainment, and giveaways.",
+      "Website Asphalt Green Litwin Field 555 E 90th Street New York , NY 10128 United States See on map Fairs & Festivals Free Sports Kids Tweens & teens Events New York City Uptown Upper East Side Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-07-18"
+  },
+  {
+    "externalEventId": "evt-event-big-umbrella-day-at-lincoln-center-0-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Big Umbrella Day At Lincoln Center 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/big-umbrella-day-at-lincoln-center-0"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-13",
+    "startTime": "11:00 am",
+    "endTime": "8:30 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2",
+      "Teens"
+    ],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/big-umbrella-day-at-lincoln-center-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Award-winning singer-songwriter Suzi Shelton and accomplished musician Christopher Johnson perform songs from Shelton’s beloved Cinnamon Bear coloring book.",
+      "Music Storytime with Christopher Johnson and Suzi Shelton at Lincoln Center | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Big Umbrella Day at Lincoln Center event 06/13/2026 2026-06-13 11:00 am - 8:30 pm ET Age: All FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/13/2026 Google Yahoo iCal This free, day-long campus takeover welcomes neurodivergent audiences and their families for multidisciplinary programming, with an emphasis on dance and movement.&nbsp; This summer’s offerings include: an immersive performance of Steve Reich’s The Four Sections by Paraorchestra The Naughty Penguin , an interactive puppet performance created by Spellbound Theatre salsa dancing for Deaf or Hard of Hearing led by Silent Rhythms accessible dance experiences for all ages performances by Thingumajig Theatre’s roaming puppet duo The Flying Dodos visual arts stations numerous relaxed spaces and more multi-sensory activities, performances, installations, and workshops.",
+      "Website The Dance Floor at Josie Robertson Plaza 10 Lincoln Center Plaza New York , NY 10023 United States See on map Arts Fairs & Festivals Free Baby Preschoolers Kids Tweens & teens Grown-ups Events Shows & Exhibitions New York City Uptown Midtown West Upper West Side Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-06-13"
+  },
+  {
+    "externalEventId": "evt-event-community-field-day-in-rockefeller-park-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Community Field Day In Rockefeller Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/community-field-day-in-rockefeller-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-26",
+    "startTime": "1:00 pm",
+    "endTime": "3:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Art",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/community-field-day-in-rockefeller-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "BPCA FIELD DAY & World Wide Playdate School’s out for the Summer! Families are invited to join us for a World Wide Playdate with Divinity Roxx and Friends. Take part in field games, activities with local organizations, and our annual tug-of-war. Plus face-painting, water play, and so much more! D",
+      "BPCA Field Day and World Wide Playdate in Rockefeller Park | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Community Field Day in Rockefeller Park event 06/26/2026 2026-06-26 1:00 pm - 3:00 pm ET Age: All Ages FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/26/2026 Google Yahoo iCal School’s out for the summer!",
+      "New York , NY 10280 United States See on map Fairs & Festivals Free Outdoor & Nature Preschoolers Kids Events New York City Downtown Battery Park City Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-06-26"
+  },
+  {
+    "externalEventId": "evt-event-family-fridays-loops-links-and-illusions-at-momath-unknown",
+    "eventType": "venue_program",
+    "titleHint": "Family Fridays Loops Links And Illusions At Momath",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/family-fridays-loops-links-and-illusions-at-momath"
+    ],
+    "timezone": "America/New_York",
+    "recurrenceDays": [
+      "Friday"
+    ],
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/family-fridays-loops-links-and-illusions-at-momath",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Family Fridays at MoMath bring family members of all ages together to enjoy a diverse array of engaging mathematical activities, promoting interest and enthusiasm among kids and adults alike. This month, Dr. Tiago Hirth explores classic stage illusions through the lens of topology, the mathematics of shape, and connection.",
+      "Family Fridays Loops Links And Illusions At Momath.",
+      "Family Fridays at MoMath bring family members of all ages together to enjoy a diverse array of engaging mathematical activities, promoting interest and enthusiasm among kids and adults alike.",
+      "Family Fridays: Loops, Links and Illusions at MoMath | Mommy Poppins Sorry, you need to enable JavaScript to visit this website."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-free-movie-night-on-the-intrepid-top-gun-unknown",
+    "eventType": "venue_program",
+    "titleHint": "Free Movie Night On The Intrepid Top Gun",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/free-movie-night-on-the-intrepid-top-gun"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "7:30 pm",
+    "endTime": "10:30 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/free-movie-night-on-the-intrepid-top-gun",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Bring a blanket, deck chairs, and a picnic and watch a movie on the ship’s flight deck, under the stars! Enjoy views of the Hudson River and city skyline while you watch Top Gun - Maverick on the big screen.",
+      "Free Movie Night on the Intrepid: Top Gun - Maverick (PG-13) | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movie Night on the Intrepid: Top Gun event This event is past 7:30 pm - 10:30 pm ET Age: 6 and up FREE Invite a friend Bring a blanket, deck chairs, and a picnic and watch a movie on the flight deck of the Intrepid, under the stars!",
+      "New York , NY 10036 United States See on map Films & Photography Free Kids Tweens & teens Grown-ups Events New York City Uptown Midtown West Off ** Activity dates/times are subject to change."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-how-to-train-your-dragon-in-columbus-park-unknown",
+    "eventType": "venue_program",
+    "titleHint": "How To Train Your Dragon In Columbus Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/how-to-train-your-dragon-in-columbus-park"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "8:15 pm",
+    "endTime": "10:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/how-to-train-your-dragon-in-columbus-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "On the rugged isle of Berk, where Vikings and dragons have been bitter enemies for generations, Hiccup stands apart. The inventive yet overlooked son of Chief Stoick the Vast Hiccup defies centuries of tradition when he befriends Toothless, a feared Night Fury dragon.",
+      "How to Train Your Dragon (PG) in Sol Lain Playground | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: How to Train Your Dragon in Columbus Park event This event is past 8:15 pm - 10:00 pm ET Age: 5 and up FREE Invite a friend On the rugged isle of Berk, where Vikings and dragons have been bitter enemies for generations, Hiccup stands apart.",
+      "Website ColumbusPark Worth Street and Hogan Place New York , NY United States See on map Films & Photography Free Preschoolers Kids Tweens & teens Events New York City Downtown Financial District Lower East Side Off ** Activity dates/times are subject to change."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-intrepid-summer-movie-series-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Intrepid Summer Movie Series",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/free/intrepid-summer-movie-series"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-26",
+    "startTime": "7:00 pm",
+    "endTime": "9:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/free/intrepid-summer-movie-series",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Watch a movie on the ship’s flight deck, under the stars! Enjoy views of the Hudson River and city skyline while you watch some old and new favorites on the big screen.",
+      "Intrepid Summer Movie Series | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Intrepid Summer Movie Series event 06/26/2026 - 08/28/2026 (click for all dates) 2026-06-26 2026-07-31 2026-08-28 7:00 pm - 9:00 pm ET Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/26/2026 7/31/2026 8/28/2026 Google Yahoo iCal Watch a movie on the ship’s flight deck&nbsp;under the stars!",
+      "New York , NY 10036 United States See on map Films & Photography Free Kids Tweens & teens Events New York City Uptown Midtown West Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-06-26"
+  },
+  {
+    "externalEventId": "evt-event-juneteenth-celebration-in-rockefeller-park-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Juneteenth Celebration In Rockefeller Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/juneteenth-celebration-in-rockefeller-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-19",
+    "startTime": "11:30 am",
+    "endTime": "2:30 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2",
+      "Teens"
+    ],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/juneteenth-celebration-in-rockefeller-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Battery Park City’s 8th annual Emancipation Day celebration offers fun, history, art and a performance by Juneteenth LP, whose mission is to share music of the African Diaspora through the lens of Black classically trained musicians. The Federation of Black Cowboys share history and horseback rides",
+      "Juneteenth Celebration in Rockefeller Park | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Juneteenth Celebration in Rockefeller Park Ride a pony on Juneteenth event 06/19/2026 2026-06-19 11:30 am - 2:30 pm ET Age: All ages Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/19/2026 Google Yahoo iCal Battery Park City Authority's annual Juneteenth Celebration features a jam-packed lineup of free activities, including storytelling, pony rides, music, arts and crafts, and more for the whole family to enjoy.",
+      "The Federation of Black Cowboys shares the history of Juneteenth, and kids ages 3 and up can take a pony ride."
+    ],
+    "expiresAt": "2026-06-19"
+  },
+  {
+    "externalEventId": "evt-event-legor-batmantm-legacy-of-the-dark-knight-launch-day-at-the-paley-unknown",
+    "eventType": "venue_program",
+    "titleHint": "Legor Batmantm Legacy Of The Dark Knight Launch Day At The Paley",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/legor-batmantm-legacy-of-the-dark-knight-launch-day-at-the-paley"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "3:00 pm",
+    "endTime": "7:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/legor-batmantm-legacy-of-the-dark-knight-launch-day-at-the-paley",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The Paley Museum celebrates the launch of Lego Batman: Legacy of the Dark Knight with an action-packed event. Players of all ages can get hands‑on with the game, including gameplay showcased on two massive screens. Plus, the chance to win exciting prizes in an exclusive raffle.",
+      "The Paley Museum celebrates the launch of Lego Batman: Legacy of the Dark Knight with an action-packed event.",
+      "Lego Batman: Legacy of the Dark Knight Launch Party at the Paley Museum | Mommy Poppins Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Lego Batman: Legacy of the Dark Knight Launch Party at the Paley Museum LEGO Batman event This event is past 3:00 pm - 7:00 pm ET Age: 6 and up Free with Museum admission Invite a friend The Paley Museum celebrates the launch of Lego Batman: Legacy of the Dark Knight with an action-packed event."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-live-concerts-at-the-wells-fargo-stage-hudson-yards-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Live Concerts At The Wells Fargo Stage Hudson Yards",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/live-concerts-at-the-wells-fargo-stage-hudson-yards"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-03",
+    "startTime": "6:00 pm",
+    "endTime": "7:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/live-concerts-at-the-wells-fargo-stage-hudson-yards",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Experience the energy of live music in the Public Square and Gardens with a free concert series featuring chart-topping talent.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Live Concerts at Hudson Yards event 06/03/2026 2026-06-03 6:00 pm - 7:00 pm ET Age: All Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/3/2026 Google Yahoo iCal Experience the energy of live music in the Public Square and Gardens with a free concert series featuring chart-topping talent.",
+      "Website Hudson Yards Public Square and Gardens 30 Hudson Yards NYC , NY 10001 United States See on map Free Music Shows & Concerts Preschoolers Kids Tweens & teens Grown-ups Events New York City Uptown Midtown West Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-06-03"
+  },
+  {
+    "externalEventId": "evt-event-making-moves-community-art-party-on-the-high-line-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Making Moves Community Art Party On The High Line",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/making-moves-community-art-party-on-the-high-line"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-07",
+    "startTime": "1:00 pm",
+    "endTime": "4:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/making-moves-community-art-party-on-the-high-line",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Kick off autumn with a creative energy boost: Dance on the High Line to a live DJ set by Saint James Joy, groove alongside collaborative art activities led by High Line Teaching Artists, get expansive by joining a movement workshop led by New Victory Theater, check out hands-on activities with comm",
+      "Making Moves Community Art Party On The High Line.",
+      "Making Moves: Community Art Party on the High Line | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Making Moves: Community Art Party on the High Line Making Moves on the High Line event 06/07/2026 - 08/29/2026 (click for all dates) 2026-06-07 2026-07-12 2026-08-29 1:00 pm - 4:00 pm ET Age: 5-10 FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/7/2026 7/12/2026 8/29/2026 Google Yahoo iCal Dance on The High Line to a live DJ set by&nbsp;Saint James Joy, groove alongside collaborative art activities led by&nbsp;High Line teaching artists, get expansive by joining a movement workshop led by&nbsp;New Victory Theater, check out hands-on activities with community partner&nbsp;Infirnity, or simply vibe to the music and experience the changing seasons on The High Line."
+    ],
+    "expiresAt": "2026-06-07"
+  },
+  {
+    "externalEventId": "evt-event-movies-in-the-square-at-union-square-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Movies In The Square At Union Square",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-in-the-square-at-union-square"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-09",
+    "startTime": "8:00 pm",
+    "endTime": "10:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-in-the-square-at-union-square",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Featuring beloved cinematic selections, these free-to-attend outdoor screenings fill up fast, so arrive early and bring your own blankets and snacks.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies in the Square at Union Square event 07/09/2026 - 07/23/2026 (click for all dates) 2026-07-09 2026-07-16 2026-07-23 8:00 pm - 10:00 pm ET Age: Varies with film FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 7/9/2026 7/16/2026 7/23/2026 Google Yahoo iCal Featuring beloved cinematic selections, these free-to-attend outdoor screenings fill up fast, so arrive early and bring your own blankets and snacks.&nbsp; 2026 Schedule: July 9: Black Panther (rated PG-13) July 16: Shrek (rated PG)&nbsp; July 23: Addams Family Values (rated PG-13) Website Union Square Park North Plaza Broadway & E.",
+      "17th Street New York , NY 10003 United States See on map Films & Photography Free Kids Tweens & teens Grown-ups Events New York City Downtown Union Square Off ** Activity dates/times are subject to change.",
+      "Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey New York City Orlando Philadelphia San Francisco Bay Area Washington DC Westchester Mommy Poppins is a family activity website that helps people find things to do with kids."
+    ],
+    "expiresAt": "2026-07-09"
+  },
+  {
+    "externalEventId": "evt-event-movies-on-the-waterfront-in-riverside-park-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Movies On The Waterfront In Riverside Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-on-the-waterfront-in-riverside-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-08-06",
+    "startTime": "8:00 pm",
+    "endTime": "8:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "STEM",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-on-the-waterfront-in-riverside-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Catch a family-friendly outdoor screening, with a cool breeze off the river.",
+      "Catch a family-friendly outdoor screening, with a cool breeze off the river..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies on the Waterfront in Riverside Park event 08/06/2026 - 08/27/2026 (click for all dates) 2026-08-06 2026-08-13 2026-08-20 2026-08-27 8:00 pm - 8:00 pm ET Age: Varies with film Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 8/6/2026 8/13/2026 8/20/2026 8/27/2026 Google Yahoo iCal Catch a family-friendly outdoor screening, with a cool breeze off the river.",
+      "2026 Schedule: August 6 | Strange World | PG August 13 | Vivo | PG August 20 | The Wild Robot | PG August 27 | Audience Choice (Vote on August 9) Website Riverside Park 145th and the Hudson River New York , NY United States See on map Films & Photography Free Kids Tweens & teens Grown-ups Events New York City Uptown Upper West Side Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-08-06"
+  },
+  {
+    "externalEventId": "evt-event-movies-under-the-stars-public-school-film-festival-in-washington-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Movies Under The Stars Public School Film Festival In Washington",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-public-school-film-festival-in-washington"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-12",
+    "startTime": "8:30 pm",
+    "endTime": "10:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/movies-under-the-stars-public-school-film-festival-in-washington",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Celebrate some of the best of NYC students’ works with friends and family! Bring blankets and chairs, find a great spot, and enjoy the show.",
+      "Celebrate some of the best of NYC students’ works with friends and family!",
+      "Movies Under the Stars: 7th Annual Public School Film Festival in Washington Square Park | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Movies Under the Stars: Public School Film Festival in Washington Square Park event 06/12/2026 2026-06-12 8:30 pm - 10:00 pm ET Age: 8 and up Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/12/2026 Google Yahoo iCal Celebrate the best work from NYC students with friends and family!"
+    ],
+    "expiresAt": "2026-06-12"
+  },
+  {
+    "externalEventId": "evt-event-neighborhood-cookout-and-bad-bunny-flash-dash-at-st-marks-church-in-unknow",
+    "eventType": "venue_program",
+    "titleHint": "Neighborhood Cookout And Bad Bunny Flash Dash At St Marks Church In",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/neighborhood-cookout-and-bad-bunny-flash-dash-at-st-marks-church-in"
+    ],
+    "timezone": "America/New_York",
+    "startTime": "1:00 pm",
+    "endTime": "3:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "0–2",
+      "Teens"
+    ],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/neighborhood-cookout-and-bad-bunny-flash-dash-at-st-marks-church-in",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Stop by 10th Street in front of St. Mark&#039;s Church at 1:30pm for a brief dance lesson, followed by a flash dance to Bad Banny&#039;s DtMF. Third Street Music School provides the instructor and choreography. All are welcome—plus: There&#039;s a cookout, games, and crafts for kids in the church yard from 1-3pm.",
+      "All are welcome—plus: There&#039;s a cookout, games, and crafts for kids in the church yard from 1-3pm..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Neighborhood Cookout and Flash Dance at St.",
+      "event This event is past 1:00 pm - 3:00 pm ET Age: All ages Free Invite a friend Stop by 10th Street in front of St."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-new-york-city-poetry-festival-on-governors-island-unknown",
+    "eventType": "event_instance",
+    "titleHint": "New York City Poetry Festival On Governors Island",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/new-york-city-poetry-festival-on-governors-island"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-18",
+    "startTime": "11:00 am",
+    "endTime": "6:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/new-york-city-poetry-festival-on-governors-island",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The New York City Poetry Festival unites the vast and diverse New York City poetry community on Governors Island.",
+      "New York City Poetry Festival | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home New York City Poetry Festival on Governors Island Poetry Fest on Governors Island event 07/18/2026 - 07/19/2026 (click for all dates) 2026-07-18 2026-07-19 11:00 am - 6:00 pm ET Age: 6 and up FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 7/18/2026 7/19/2026 Google Yahoo iCal The New York City Poetry Festival unites the vast and diverse New York City poetry community on Governors Island.",
+      "646-241-2670 Website Governors Island Nolan Park New York , NY 10004 United States See on map Books & Stories Fairs & Festivals Free Kids Tweens & teens Grown-ups Events New York City Downtown Governors Island Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-07-18"
+  },
+  {
+    "externalEventId": "evt-event-philharmonic-families-strings-at-merkin-hall-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Philharmonic Families Strings At Merkin Hall",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/philharmonic-families-strings-at-merkin-hall"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-30",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [],
+    "activityHints": [
+      "Art",
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/philharmonic-families-strings-at-merkin-hall",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Explore the sound world of the string family: violin, viola, cello and bass!",
+      "Explore the sound world of the string family: violin, viola, cello and bass!.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home SOLD OUT.",
+      "Philharmonic Families: Strings at Merkin Hall event 05/30/2026 2026-05-30 Various times Age: 4-10 $33 and up Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/30/2026 Google Yahoo iCal Explore the sound world of the string family: violin, viola, cello and bass!"
+    ],
+    "expiresAt": "2026-05-30"
+  },
+  {
+    "externalEventId": "evt-event-piano-mondays-on-the-highline-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Piano Mondays On The Highline",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/piano-mondays-on-the-highline"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-06-01",
+    "startTime": "6:00 pm",
+    "endTime": "8:30 pm",
+    "recurrenceDays": [
+      "Monday"
+    ],
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Music",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/piano-mondays-on-the-highline",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The Highline recreates a classic NYC piano bar experience and brings it to a beautiful, open-air setting on the park. Love to sing? The spotlight is yours! Members of the public are invited to step up to the mic and perform—no tips required. Celebrate Pride month, sing your heart out, and make Mondays your new favorite night out.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Piano Mondays on the Highline event 06/01/2026 - 06/22/2026 (click for all dates) 2026-06-01 2026-06-08 2026-06-15 2026-06-22 6:00 pm - 8:30 pm ET Age: 5-12, all ages Free Invite a friend Add to calendar Choose a date and calendar type to add this activity: 6/1/2026 6/8/2026 6/15/2026 6/22/2026 Google Yahoo iCal The Highline recreates a classic NYC piano bar experience and brings it to a beautiful, open-air setting on the park.",
+      "June 1 Old Broadway x New Broadway June 8 Family Night, featuring hits from Annie , Frozen , and more.",
+      "A Pride Celebration Website The High Line W 30th Street and 10th Avenue New York , NY 10011 United States See on map Free Music Outdoor & Nature Shows & Concerts Kids Tweens & teens Grown-ups Events New York City Downtown Chelsea Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-06-01"
+  },
+  {
+    "externalEventId": "evt-event-sprinkler-day-at-asphalt-green-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Sprinkler Day At Asphalt Green",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/sprinkler-day-at-asphalt-green"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-08-08",
+    "startTime": "12:00 pm",
+    "endTime": "3:00 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Sports",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/sprinkler-day-at-asphalt-green",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "It’s hot, hot, hot! Don’t let the soaring summer temperatures discourage you from enjoying the outdoors. Cool off by splashing around in Asphalt Green’s sprinklers.",
+      "Sprinkler Day | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Sprinkler Day at Asphalt Green Sprinkler Day at Asphalt Green event 08/08/2026 2026-08-08 12:00 pm - 3:00 pm ET Age: 3 and up FREE Invite a friend Add to calendar Choose a date and calendar type to add this activity: 8/8/2026 Google Yahoo iCal Don’t let the soaring summer temperatures discourage you from enjoying the outdoors.",
+      "&nbsp; Website Asphalt Green 555 East 90th Street Asphalt Green Upper East Side Field New York , NY United States See on map Fairs & Festivals Free Preschoolers Kids Tweens & teens Events New York City Uptown Upper East Side Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-08-08"
+  },
+  {
+    "externalEventId": "evt-event-tada-musical-theater-summer-camp-open-house-0-unknown",
+    "eventType": "venue_program",
+    "titleHint": "Tada Musical Theater Summer Camp Open House 0",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/tada-musical-theater-summer-camp-open-house-0"
+    ],
+    "timezone": "America/New_York",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Dance",
+      "Art",
+      "Music",
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/tada-musical-theater-summer-camp-open-house-0",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "recurringPrograms"
+    },
+    "uncertainty": [
+      "No explicit one-off date or recurring schedule was extracted.",
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Catch a sneak peek of the fun in store at Tada&#039;s week-long summer camps. Kids can sing and dance with talented teaching artists, while parents join a Q&A with Tada&#039;s Director of Education. Attendees also get access to some of the biggest summer discounts.",
+      "Tada Musical Theater Summer Camp Open House 0.",
+      "Kids can sing and dance with talented teaching artists, while parents join a Q&A with Tada&#039;s Director of Education.",
+      "Musical Theater Summer Camp Open House | Mommy Poppins Sorry, you need to enable JavaScript to visit this website."
+    ]
+  },
+  {
+    "externalEventId": "evt-event-uncle-vanya-in-riverside-park-unknown",
+    "eventType": "event_instance",
+    "titleHint": "Uncle Vanya In Riverside Park",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/uncle-vanya-in-riverside-park"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-05-28",
+    "startTime": "6:30 pm",
+    "endTime": "6:30 pm",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Theater",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/uncle-vanya-in-riverside-park",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "The Hudson Classical Theater Company presents The Lady from the Sea, adapted from a play by Henrik Ibsen.",
+      "The Lady from the Sea in Riverside Park | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home Uncle Vanya in Riverside Park event 05/28/2026 - 06/21/2026 (click for all dates) 2026-05-28 2026-05-29 2026-05-30 2026-05-31 2026-06-04 2026-06-05 2026-06-06 2026-06-07 2026-06-11 2026-06-12 2026-06-13 2026-06-14 2026-06-18 2026-06-19 2026-06-20 2026-06-21 6:30 pm - 6:30 pm ET Age: 12 and up FREE (donations appreciated) Invite a friend Add to calendar Choose a date and calendar type to add this activity: 5/28/2026 5/29/2026 5/30/2026 5/31/2026 6/4/2026 6/5/2026 6/6/2026 6/7/2026 6/11/2026 6/12/2026 6/13/2026 6/14/2026 6/18/2026 6/19/2026 6/20/2026 6/21/2026 Google Yahoo iCal The Hudson Classical Theater Company presents Uncle Vanya , Anton Chekhov's classic about disillusionment, unrequired love, and wasted potential.",
+      "89th St and Riverside Dr New York , NY United States See on map Free Shows & Concerts Kids Tweens & teens Grown-ups Events Shows & Exhibitions New York City Uptown Upper West Side Off ** Activity dates/times are subject to change."
+    ],
+    "expiresAt": "2026-05-28"
+  },
+  {
+    "externalEventId": "evt-event-city-of-water-day-1-unknown",
+    "eventType": "event_instance",
+    "titleHint": "City Of Water Day 1",
+    "sourceUrls": [
+      "https://mommypoppins.com/new-york-city-kids/event/events/city-of-water-day-1"
+    ],
+    "timezone": "America/New_York",
+    "startDate": "2026-07-25",
+    "boroughHint": null,
+    "neighborhoodHint": null,
+    "ageHints": [
+      "Teens"
+    ],
+    "activityHints": [
+      "Art",
+      "STEM",
+      "Outdoor Activities"
+    ],
+    "registrationUrl": "https://mommypoppins.com/new-york-city-kids/event/events/city-of-water-day-1",
+    "listingMapping": {
+      "targetEntity": "provider",
+      "targetScheduleField": "scheduledInstances"
+    },
+    "uncertainty": [
+      "Borough could not be confidently inferred.",
+      "Neighborhood could not be confidently inferred."
+    ],
+    "evidenceSnippets": [
+      "Celebrate City of Water Day 2026! Join thousands of people across the region for a day of free, family-friendly events that bring you closer to the water—from kayaking and boat tours to waterfront walks, performances, and hands-on activities for all ages.",
+      "Join thousands of people across the region for a day of free, family-friendly events that bring you closer to the water—from kayaking and boat tours to waterfront walks, performances, and hands-on activities for all ages..",
+      "Skip to main content MAKE YOUR DAY Login Get Listed My Profile My Cart Sign out My Profile Sign out Login Get Listed Close Menu Calendar Events Deals This Week&#039;s Picks Submit an Activity Directory Camps Directory Classes Directory Parties Directory See All NYC Listings Things To Do Now NYC by Age NYC by Neighborhood NYC by Season Holidays Birthday Parties Restaurants Visitors&#039; Guide to NYC Free Free Events Free Fun in NYC More Freebies Camp Guide Day Camps Overnight Camps Camp Directory Classes Classes Guide Classes Directory Preschools & Schools Guide Getaways Day Trips Family Vacations Theme & Water Parks Resorts & Hotels Adirondacks Hamptons & North Fork Poconos Guide Jersey Shore Guide Menu Find fun in Close Menu New York City Anywhere Atlanta Boston Chicago Connecticut Dallas Fort Worth Houston Long Island Los Angeles Miami South Florida New Jersey Orlando Philadelphia San Francisco Bay Area Washington DC Westchester My Profile Sign out Login Get Listed Close Menu Calendar Directory Things To Do Now Free Camp Guide Classes Getaways Search Breadcrumb Home City of Water Day Seining at City of Water Day 2025 event 07/25/2026 2026-07-25 Various times Age: All Ages Free!",
+      "Join thousands of people across the region for a day of free, family-friendly events that bring you closer to the water—from kayaking and boat tours to waterfront walks, performances, and hands-on activities for all ages.&nbsp; Whether you’re exploring your local shoreline for the first time or returning to a favorite spot, there’s something happening near you."
+    ],
+    "expiresAt": "2026-07-25"
+  }
+]

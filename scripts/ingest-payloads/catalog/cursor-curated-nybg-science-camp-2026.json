@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://www.nybg.org/education/childrens-education/kids-teens/camps/",
+    "https://www.nybg.org/education/childrens-education/kids-teens/camps/camps-faq/",
+    "https://www.nybg.org/content/uploads/2025/10/MCO-DSC03497-1.1.jpg"
+  ],
+  "notes": "Official NYBG camps page and camps FAQ reviewed May 17, 2026. Listing uses an official NYBG Science Camp image originally sourced from https://www.nybg.org/content/uploads/2025/10/MCO-DSC03497-1.1.jpg and uploaded through POST /api/ingest/upload for ImgBB-compliant storage.",
+  "missingOrUncertain": [
+    "pricePerClass uses the published Science Camp non-member tuition of $1650; the same official page also lists a member rate of $1485.",
+    "The official source describes eligibility by school grade rather than age; ageRanges map students entering grades 1 through 6 in Fall 2026 to ClassScout's 6–8 and 9–12 bands.",
+    "Neighborhood is mapped to canonical Fordham from the published 2900 Southern Boulevard Bronx address used for camp check-in at the NYBG Main Entrance.",
+    "Early drop-off, late pickup, and extended pickup are optional add-ons with separate weekly fees on the official page and are not included in pricePerClass.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-nybg-science-camp-2026",
+        "name": "New York Botanical Garden Science Camp (2026)",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "address": "2900 Southern Boulevard, Bronx, NY 10458",
+        "activityTypes": [
+          "Science",
+          "STEM",
+          "Outdoor Activities",
+          "Art"
+        ],
+        "ageRanges": [
+          "6–8",
+          "9–12"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 1650,
+        "shortDescription": "Bronx day camp at NYBG for children entering grades 1-6, with hiking, experiments, art, and outdoor science exploration on the Garden's 250-acre campus.",
+        "longDescription": "New York Botanical Garden publishes Science Camp as a summer day camp for students entering grades 1 through 6 in Fall 2026. The official camps page lists two sessions: July 6-24, 2026 and August 3-21, 2026, both running from 9 a.m. to 3 p.m.\n\nThe official description says campers spend the day outdoors on NYBG's 250-acre campus hiking, experimenting, creating art, and playing with fellow campers and staff. Weekly themes on the same page include junior botanists, woodland adventures, and wild wetlands.\n\nPublished tuition for Science Camp is $1485 for members and $1650 for non-members. The official page also lists optional extra care on a weekly basis: early drop-off at 8 a.m., late pickup at 5 p.m., and extended pickup until 6 p.m., with separate fees and pre-registration required. The camps FAQ says all camp programs check in and out at the NYBG Main Entrance (Visitor Center) at 2900 Southern Boulevard, Bronx, NY 10458. Registration support listed on the official pages: childed@nybg.org and 718.817.8181.\n\nSources: https://www.nybg.org/education/childrens-education/kids-teens/camps/ https://www.nybg.org/education/childrens-education/kids-teens/camps/camps-faq/ https://www.nybg.org/content/uploads/2025/10/MCO-DSC03497-1.1.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Staff Pick"
+        ],
+        "image": "https://i.ibb.co/qY2Wxsgg/2cd587e55b70.jpg",
+        "email": "childed@nybg.org",
+        "website": "https://www.nybg.org/education/childrens-education/kids-teens/camps/",
+        "phone": "718-817-8181",
+        "announcementTitle": "Two 2026 science sessions",
+        "announcementDescription": "Official page lists July 6-24 and August 3-21 weekday sessions from 9 a.m. to 3 p.m., with optional extra care.",
+        "announcementBadge": "Summer '26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

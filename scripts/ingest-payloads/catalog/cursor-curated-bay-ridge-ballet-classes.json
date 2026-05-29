@@ -1,0 +1,67 @@
+{
+  "sourceUrls": [
+    "https://www.bayridgeballet.com/about",
+    "https://www.bayridgeballet.com/baby-toddler-classes",
+    "https://www.bayridgeballet.com/location",
+    "https://www.bayridgeballet.com/rates-fees",
+    "https://www.bayridgeballet.com/_files/ugd/d05c79_cc7edda1a1c946aa9798c0efb3f8d966.pdf",
+    "https://www.bayridgeballet.com/_files/ugd/d05c79_1066010deedb4beaa4931af9394fb6cd.pdf",
+    "https://static.wixstatic.com/media/d05c79_c7528e21b69540999d79a2b2ac3610a0~mv2.jpeg/v1/fill/w_1020,h_1020,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_3549.jpeg"
+  ],
+  "notes": "Official Bay Ridge Ballet about, class descriptions, baby/toddler, location, rates, current schedule PDF, and classes-by-age PDF reviewed May 20, 2026. Original official image source URL: https://static.wixstatic.com/media/d05c79_c7528e21b69540999d79a2b2ac3610a0~mv2.jpeg/v1/fill/w_1020,h_1020,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_3549.jpeg. The official image was downloaded locally and uploaded through POST /api/ingest/upload so provider.image is stored on ImgBB.",
+  "missingOrUncertain": [
+    "pricePerClass uses the published $395 tuition per semester (16 classes), not a published single-class drop-in rate.",
+    "The baby/toddler page confirms the 0–2 program but does not publish its own timetable on-page; dayTimeTags reflect Bay Ridge Ballet's overall current school-year schedule rather than a separate baby/toddler schedule.",
+    "rating and reviewCount are not published on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bay-ridge-ballet-classes",
+        "name": "Bay Ridge Ballet — Children's Dance Classes",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "address": "110 Bay Ridge Avenue, Brooklyn, NY 11220",
+        "activityTypes": [
+          "Dance"
+        ],
+        "ageRanges": [
+          "0–2",
+          "3–5",
+          "6–8",
+          "9–12",
+          "Teens"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Morning",
+          "Afternoon",
+          "Evening",
+          "After-school"
+        ],
+        "pricePerClass": 395,
+        "shortDescription": "Bay Ridge Ballet offers children's dance classes in Bay Ridge from baby-and-caregiver sessions through teen levels, with weekday, after-school, evening, and weekend options.",
+        "longDescription": "Bay Ridge Ballet is a Bay Ridge dance school that says it has served the Brooklyn community since 2016 and offers year-round instruction in ballet plus other dance forms including tap, jazz, hip-hop, tumbling, and musical theater. The official baby-and-toddler page describes Move with Me as a 45-minute caregiver class for babies and toddlers using singing, musical instruments, and interactive games to build movement skills and confidence.\n\nThe official class descriptions and current schedule materials show offerings from baby-and-caregiver sessions through teen levels, with classes across weekdays and weekends that cover morning, afternoon, after-school, and evening time slots. Bay Ridge Ballet's current rates page lists a $20 registration fee per family and $395 tuition per semester for 16 classes, with multiple-class discounts and payment plans available for families registering for more than one class per semester.\n\nThe official location page lists Bay Ridge Ballet at 110 Bay Ridge Avenue, Brooklyn, NY 11220, with contact email info@bayridgeballet.com and phone 347-968-6905. ClassScout stores an ImgBB-hosted copy of the official Bay Ridge Ballet child-focused image from the provider's Wix media library for image-policy compliance.\n\nSources: https://www.bayridgeballet.com/about https://www.bayridgeballet.com/class-descriptions https://www.bayridgeballet.com/baby-toddler-classes https://www.bayridgeballet.com/location https://www.bayridgeballet.com/rates-fees https://www.bayridgeballet.com/_files/ugd/d05c79_cc7edda1a1c946aa9798c0efb3f8d966.pdf https://www.bayridgeballet.com/_files/ugd/d05c79_1066010deedb4beaa4931af9394fb6cd.pdf",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Weekend Friendly",
+          "Great for Toddlers"
+        ],
+        "image": "https://i.ibb.co/x8gVNwsC/58847787d54e.jpg",
+        "email": "info@bayridgeballet.com",
+        "website": "https://www.bayridgeballet.com/",
+        "phone": "347-968-6905",
+        "announcementTitle": "Current tuition from $395 per semester",
+        "announcementDescription": "Bay Ridge Ballet's current rates page lists $395 tuition per 16-class semester.",
+        "announcementBadge": "16-class semester",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

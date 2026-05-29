@@ -1,0 +1,65 @@
+{
+  "sourceUrls": [
+    "https://tutuschool.com/dumbo/",
+    "https://tutuschool.com/dumbo/classes/",
+    "https://tutuschool.com/dumbo/wp-content/uploads/sites/43/2025/04/TutuSchool-HomeHero-14.jpg"
+  ],
+  "notes": "Official Tutu School DUMBO home and classes pages reviewed on May 26, 2026. The official Tutu School image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed DUMBO public pages used here were relied on primarily for schedule, age, and contact data rather than a single published tuition figure.",
+    "rating and reviewCount are set to 0 because the official pages do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-tutu-school-dumbo-classes",
+        "name": "Tutu School DUMBO",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "address": "100 Jay Street, Brooklyn, NY 11201",
+        "activityTypes": ["Dance", "Music"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Story-driven ballet classes in DUMBO for children ages 6 months to 8 years, with weekday and weekend options.",
+        "longDescription": "Tutu School DUMBO offers storybook-inspired ballet classes for children from infancy through age 8 at 100 Jay Street in Brooklyn. The official site lists Baby Ballet for ages 6 to 18 months, Tutu Toddlers for 18 months to 3 years, Exploring Ballet for ages 3 to 5, and Primary Ballet Prep for ages 5 to 8.\n\nThe official classes page publishes recurring examples that span weekday and weekend programming, including Monday morning, afternoon, after-school, and evening classes plus Saturday and Sunday classes. Examples on the official schedule include Monday 9:30 AM Tutu Toddlers, Monday 3:30 PM Exploring Ballet, Monday 5:30 PM Exploring Ballet, Saturday 8:30 AM Tutu Toddlers, Saturday 12:30 PM Primary Ballet Prep, and Sunday 10:30 AM Tutu Toddlers.\n\nThe official site lists phone 718.709.0408 for the DUMBO studio.\n\nSources: https://tutuschool.com/dumbo/ https://tutuschool.com/dumbo/classes/ https://tutuschool.com/dumbo/wp-content/uploads/sites/43/2025/04/TutuSchool-HomeHero-14.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/przrVmv0/1f94ec3a1214.jpg",
+        "email": "",
+        "website": "https://tutuschool.com/dumbo/classes/",
+        "phone": "718.709.0408",
+        "recurringPrograms": [
+          {
+            "id": "rp-tutu-dumbo-monday-classes",
+            "title": "Monday Ballet Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday"],
+            "timeText": "9:30 AM-6:15 PM",
+            "locationNote": "Tutu School DUMBO",
+            "ageRanges": ["0–2", "3–5", "6–8"],
+            "activityTypes": ["Dance", "Music"],
+            "summary": "Official Monday schedule examples span toddler, preschool, and early elementary ballet classes from morning through evening.",
+            "registrationUrl": "https://tutuschool.com/dumbo/classes/"
+          },
+          {
+            "id": "rp-tutu-dumbo-weekend-classes",
+            "title": "Weekend Ballet Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "8:30 AM-1:15 PM",
+            "locationNote": "Tutu School DUMBO",
+            "ageRanges": ["0–2", "3–5", "6–8"],
+            "activityTypes": ["Dance", "Music"],
+            "summary": "Official weekend schedule examples include Saturday morning and midday classes plus Sunday morning classes.",
+            "registrationUrl": "https://tutuschool.com/dumbo/classes/"
+          }
+        ]
+      }
+    }
+  ]
+}

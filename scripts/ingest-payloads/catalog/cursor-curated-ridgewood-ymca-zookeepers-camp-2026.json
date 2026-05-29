@@ -1,0 +1,57 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/camps",
+    "https://register.ymcanyc.org/summer-camp/48"
+  ],
+  "notes": "Official Ridgewood YMCA summer camp page and current YMCA registration page reviewed May 16, 2026. Listing uses an ImgBB copy of an official YMCA camp image originally sourced from https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_stem.jpg.webp?itok=rXALosoc and uploaded through /api/ingest/upload for storage compatibility.",
+  "missingOrUncertain": [
+    "pricePerClass uses the official community rate for Zookeepers Camp ($1,200 per two-week session) as a planning figure because the provider schema expects one numeric price field rather than a session-based pricing structure.",
+    "The official camp page lists Zookeepers Camp for ages 5-7, so ClassScout age bands are mapped to 3–5 and 6–8 to cover that span.",
+    "The official page describes trips to NYC zoos and animal-focused activities but does not publish a detailed day-by-day schedule, so dayTimeTags use the posted weekday camp hours rather than a more specific cadence.",
+    "rating and reviewCount are not stated on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ridgewood-ymca-zookeepers-camp-2026",
+        "name": "Ridgewood YMCA — Zookeepers Camp (2026)",
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "address": "69-02 64th Street, Ridgewood, NY 11385",
+        "activityTypes": [
+          "Science",
+          "Art",
+          "Outdoor Activities"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 1200,
+        "shortDescription": "Queens YMCA specialty camp where kids ages 5-7 explore zoos, animal science, and hands-on art projects during a two-week summer session in Ridgewood.",
+        "longDescription": "Ridgewood YMCA's 2026 summer camp page lists Zookeepers Camp as a specialty camp for ages 5-7 in Queens. The official description says campers dive into wildlife, learn facts about favorite animals, explore the zoos of NYC, and take part in art projects, games, and activities focused on reptiles and other animals.\n\nThe official camp page lists Zookeepers Camp at the Ridgewood YMCA for Session 4 only, running August 10 through August 21, 2026. Posted camp hours for the branch's 2026 summer camp are 8:00 a.m. to 4:00 p.m., with extended hours from 4:00 p.m. to 6:00 p.m. The same page lists the community price for Zookeepers Camp at $1,200 per two-week session and the member price at $1,085.\n\nThe YMCA states that its adventure and specialty camps are designed to let kids fully dive into favorite activities and interests with focused instruction and peers who share those interests. For this camp, the official source specifically highlights wildlife learning, zoo exploration, and animal-themed hands-on activities. Because the source gives the camp for ages 5-7, this listing maps that span to ClassScout's 3–5 and 6–8 age bands.\n\nContact details listed on the official Ridgewood YMCA camp page: 69-02 64th Street, Ridgewood, NY 11385; phone 718-789-1497; camp contact RidgewoodYCamp@ymcanyc.org.\n\nSources: https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/camps https://register.ymcanyc.org/summer-camp/48",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New"
+        ],
+        "image": "https://i.ibb.co/WWj0CVhy/5540edffe933.webp",
+        "email": "RidgewoodYCamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/ridgewood-ymca/programs-classes/camps",
+        "phone": "718-789-1497",
+        "announcementTitle": "New for Summer 2026",
+        "announcementDescription": "The official Ridgewood YMCA camp page highlights Zookeepers Camp as a new Summer 2026 specialty camp running August 10 to August 21.",
+        "announcementBadge": "Specialty Camp",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

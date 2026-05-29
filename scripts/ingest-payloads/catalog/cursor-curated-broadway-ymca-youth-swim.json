@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/broadway-ymca/programs-classes/",
+    "https://ymcanyc.org/locations/broadway-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/gallery_cta_2x/public/2025-12/2026_camp_swim_0.jpg.webp"
+  ],
+  "notes": "Official YMCA of Greater New York Broadway (Staten Island) branch programs page and branch landing page. Image is YMCA-hosted 2026 swim gallery asset shown on the Broadway Y branch page carousel, downloaded and uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass set to 0: the public programs page lists swim stages and sports clinics but does not publish a single per-class dollar price online; fees depend on membership/session and registration portal — confirm at the branch or on active registration listings.",
+    "General branch email not extracted from the fetched HTML; phone 718-981-4933 is from structured data on the branch page.",
+    "Neighborhood mapped to St. George for catalog filters (651 Broadway, Staten Island); local micro-neighborhood names may differ.",
+    "rating / reviewCount: not on official program pages; 0 / 0.",
+    "Specific swim lesson meeting times vary by session; the page publishes seasonal registration windows (e.g., Spring II starting April 27) rather than a fixed weekly timetable in the HTML we used."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-broadway-ymca-staten-island-youth-swim",
+        "name": "Broadway YMCA — Youth Swim Lessons (Staten Island)",
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "address": "651 Broadway, Staten Island, NY 10310",
+        "activityTypes": ["Swimming", "Sports", "Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Staten Island North Shore Y: YMCA swim lesson pathway from parent-and-child water discovery through teen stages, plus instructional sports and early-child programs at the Broadway branch.",
+        "longDescription": "The YMCA of Greater New York’s Broadway branch on Staten Island publishes youth aquatics and instructional programming on its Programs & Classes page, including swim lessons for parent-and-child (Water Discovery ages 6–36 months with required adult in-water participation; Water Exploration ages 18–36 months), preschool stages 1–4 (ages 3–5), school-age stages 1–6 (ages 5–12), and teen stages 1–2 and 3–4 (ages 12–17) with detailed skill progressions listed for each stage.\n\nThe same page also highlights instructional sports such as Basketball Clinic and Quickstart Tennis (ages 5–12) and an early-childhood “Let’s Get Ready for 3K” series for two- and three-year-olds. Seasonal registration windows are published in a session table (for example Spring II programming starting April 27 with member and community registration dates).\n\nBranch address and main telephone appear in structured data on the branch landing page: 651 Broadway, Staten Island, NY 10310; 718-981-4933. Public branch hours on that page: Monday–Friday 6:00 a.m.–8:30 p.m.; Saturday–Sunday 8:00 a.m.–5:00 p.m.\n\nThe listing image is an official YMCA swim-program photograph from YMCA-hosted media used in the Broadway branch gallery, re-uploaded to ImgBB for ClassScout storage policy compliance.\n\nSources: https://ymcanyc.org/locations/broadway-ymca/programs-classes/ https://ymcanyc.org/locations/broadway-ymca",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/yms4x0vh/41228a4a2541.webp",
+        "email": "",
+        "website": "https://ymcanyc.org/locations/broadway-ymca/programs-classes/",
+        "phone": "718-981-4933",
+        "announcementTitle": "Session-based registration",
+        "announcementDescription": "Official page lists Winter/Spring/Summer/Fall windows and member vs community registration dates — check ymcanyc.org for the current session.",
+        "announcementBadge": "Register online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

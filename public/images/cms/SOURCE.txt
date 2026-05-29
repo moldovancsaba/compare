@@ -1,0 +1,6 @@
+Raster marketing/fallback images are stored on **ImgBB only** (https://i.ibb.co/...).
+Source JPEGs live in `scripts/imgbb-asset-sources/`. Run:
+
+  npm run imgbb:upload-assets
+
+Then paste the printed `NEXT_PUBLIC_IMG_BB_*` lines into `.env.local` and redeploy.

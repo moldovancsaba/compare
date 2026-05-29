@@ -1,0 +1,47 @@
+{
+  "sourceUrls": [
+    "https://www.churchstreetschool.org/",
+    "https://www.churchstreetschool.org/programs",
+    "https://www.churchstreetschool.org/earlychildhood",
+    "https://www.churchstreetschool.org/afterschool",
+    "https://static.wixstatic.com/media/de47a3_4a5d5acdbafc4aef8f0b1f7e07a0bb07~mv2.jpg"
+  ],
+  "notes": "Official Church Street School for Music & Art (CSSMA) homepage JSON-LD, programs hub, early childhood, and after-school pages reviewed May 2026. Address and phone from schema.org LocalBusiness on the homepage; program ages and descriptions from earlychildhood and afterschool pages. Listing image is an official Wix-hosted JPEG from the early childhood section on churchstreetschool.org, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0: the official programs page states prices are prorated by semester and session count rather than publishing a single drop-in class rate online.",
+    "rating and reviewCount are not published on the cited official pages; both set to 0.",
+    "dayTimeTags emphasize weekday afternoons based on after-school and Creative Arts Club scheduling; private lesson times vary.",
+    "School pickup add-on fee ($360 per 18-week semester on the after-school page) is not folded into pricePerClass."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-church-street-school-kids-classes",
+        "name": "Church Street School for Music & Art — Kids Classes",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "address": "41 White Street, New York, NY 10013",
+        "activityTypes": ["Music", "Art", "Early childhood", "After-school enrichment"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Downtown Tribeca community arts school with progressive Explore! music and art for toddlers through preschool, after-school studio art and Creative Arts Club, instrumental lessons, and teen portfolio programs.",
+        "longDescription": "Church Street School for Music & Art (CSSMA) is a downtown Manhattan community arts school at 41 White Street in Tribeca. Its official programs hub lists open registration for Spring, Summer, and Fall 2026 semesters across private and group instrumental lessons, early childhood classes, after-school studio art, teen programs, vacation programs, and summer intensives.\n\nThe early childhood page describes the Explore! series for ages 16 months through 5 years, including caregiver-and-me Explore! Music I and Art I for toddlers, Explore! Music II and Art II for ages 3–5, and Explore! Piano for ages 4–5, emphasizing hands-on music and art experiences.\n\nThe after-school page lists weekday afternoon options for ages 5–12, including 60-minute studio art and improv classes and the three-hour Creative Arts Club (3:00–6:00 p.m.), plus portfolio development for ages 12–18 and private art lessons from age 5. The programs page notes prorated semester pricing and registration by phone 212.571.7290 or email info@churchstreetschool.org.\n\nThis listing image is an official school photograph from CSSMA’s Wix-hosted early childhood media, re-uploaded to ImgBB for ClassScout storage policy compliance.\n\nSources: https://www.churchstreetschool.org/ https://www.churchstreetschool.org/programs https://www.churchstreetschool.org/earlychildhood https://www.churchstreetschool.org/afterschool",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick", "Great for Toddlers"],
+        "image": "https://i.ibb.co/Q3rc3CcF/0f78407d4f2d.jpg",
+        "email": "info@churchstreetschool.org",
+        "website": "https://www.churchstreetschool.org/programs",
+        "phone": "212-571-7290",
+        "announcementTitle": "Spring, Summer & Fall 2026 open",
+        "announcementDescription": "CSSMA’s programs page lists ongoing registration for 2026 semesters — call or email to enroll.",
+        "announcementBadge": "Register now",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

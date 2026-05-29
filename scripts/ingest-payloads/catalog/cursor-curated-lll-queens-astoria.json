@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://lllofqueens.weebly.com/meetings.html",
+    "https://lllofqueens.weebly.com/",
+    "https://lllofqueens.weebly.com/uploads/4/6/6/6/46661755/background-images/751157792.jpg"
+  ],
+  "notes": "La Leche League of Queens chapter Weebly site (volunteer LLL USA–affiliated local group). Cover image is the chapter’s own Weebly header JPEG path, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Exact leader email addresses appear Cloudflare-obfuscated on Weebly; use published phone/text for Dawn on the meetings page or the chapter Facebook page for schedule updates.",
+    "Some dated library meeting bullets remain on the page; Astoria/LIC Sacred Space series (2nd Wednesday 10:30 a.m.) is the primary recurring in-person anchor described there.",
+    "Forest Hills and other Queens meeting series on the same page serve different neighborhoods; this listing documents only the Astoria / LIC infant series at Sacred Space Astoria."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-lll-astoria-lic-infant",
+        "name": "La Leche League of Queens — Astoria / LIC Infant Meeting",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "groupType": "Mom Group",
+        "ageRange": "0–2",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://lllofqueens.weebly.com/meetings.html",
+        "description": "Volunteer-led La Leche League of Queens parent-to-parent meetings for breastfeeding, chest-feeding, and mixed feeding. The chapter’s meetings page lists an Astoria / Long Island City infant series that meets in person at Sacred Space Astoria (29-05 21st Avenue) on the second Wednesday of each month at 10:30 a.m., with a reminder to check with Dawn for schedule updates before attending. Expectant parents and support people are welcome; the page notes Zoom groups were on hold and one-on-one helping calls may be available.\n\nPrimary leader contact published there: Dawn (she/her), phone 410-991-5673 (text preferred). A Facebook page for the Astoria/LIC circle is linked from the same page for reminders and updates.\n\nSources: https://lllofqueens.weebly.com/meetings.html https://lllofqueens.weebly.com/",
+        "initials": "LLL",
+        "icon": "heart",
+        "palette": "beige",
+        "coverImageUrl": "https://i.ibb.co/JWrpCy3P/3ebe07fde9d4.jpg"
+      }
+    }
+  ]
+}

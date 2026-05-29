@@ -1,0 +1,51 @@
+{
+  "sourceUrls": [
+    "https://www.nybg.org/visit/admission/",
+    "https://www.nybg.org/visit/getting-here/",
+    "https://www.nybg.org/content/uploads/2019/08/Ben_Hider_BH_06016_3.1.jpg"
+  ],
+  "notes": "Official NYBG admission and getting-here pages reviewed May 16, 2026. Hero image is an official NYBG photograph from nybg.org content uploads (Ben Hider / Everett Children’s Adventure Garden context), downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $4, the published NYC Resident Grounds Access Pass child rate (ages 2–12); adult and senior NYC resident grounds rates differ on the same page.",
+    "NYC Resident Grounds Access requires proof of residency and is sold onsite (Tue and Thu–Sun per the admission page); Wednesday NYC resident grounds admission is free all day with the same residency rules.",
+    "Grounds Access does not include the Haupt Conservatory, special exhibitions, or tram; families wanting indoor conservatory access should compare All-Garden Pass pricing on the official page.",
+    "Neighborhood mapped to Fordham from the published 2900 Southern Boulevard Bronx address used across NYBG visit pages.",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-nybg-nyc-resident-grounds-access",
+        "name": "New York Botanical Garden — NYC Resident Grounds Access",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "address": "2900 Southern Boulevard, Bronx, NY 10458",
+        "activityTypes": [
+          "Botanical garden",
+          "Outdoor exploration",
+          "Nature",
+          "Children's garden"
+        ],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 4,
+        "shortDescription": "Bronx NYBG grounds visit for NYC families: resident Grounds Access includes the Everett Children’s Adventure Garden; published child rate $4 with free under-2.",
+        "longDescription": "The New York Botanical Garden in the Bronx publishes separate ticket products on its admission page. For NYC residents, the Grounds Access Pass includes outdoor gardens and collections, including the Everett Children’s Adventure Garden, and is available for purchase onsite with proof of residency on Tuesday and Thursday through Sunday (pricing and residency rules are listed on the official admission page). On Wednesdays, the same page notes free grounds admission for NYC residents all day, with a one-hour free grounds window for non-residents from 10–11 a.m.\n\nPublished NYC Resident Grounds Access pricing on that page: adults $15, students/seniors $7, children ages 2–12 $4, children under 2 free, members free. This listing uses the child grounds rate as the planning figure for families with young children.\n\nGeneral Garden hours on the admission page: open 10 a.m. to 6 p.m., Tuesday through Sunday, and select Monday holidays. The getting-here page lists the main visitor address at 2900 Southern Boulevard, Bronx, NY 10458, and general ticketing support at 718.817.8716 or ticketingsupport@nybg.org.\n\nSources: https://www.nybg.org/visit/admission/ https://www.nybg.org/visit/getting-here/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/27Qw0brr/0778bf930264.jpg",
+        "email": "ticketingsupport@nybg.org",
+        "website": "https://www.nybg.org/visit/admission/",
+        "phone": "718-817-8716",
+        "announcementTitle": "Children’s Adventure Garden",
+        "announcementDescription": "NYC Resident Grounds Access includes outdoor collections and the Everett Children’s Adventure Garden—confirm current hours before visiting.",
+        "announcementBadge": "Grounds pass",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

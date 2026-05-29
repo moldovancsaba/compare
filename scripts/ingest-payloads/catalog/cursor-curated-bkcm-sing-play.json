@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://bkcm.org/class-ensemble/sing-and-play/",
+    "https://bkcm.org/music-classes/early-childhood/",
+    "https://bkcm.org/contact/"
+  ],
+  "notes": "Official BKCM class, program overview, and contact pages (2026). Hero image downloaded from https://bkcm.org/wp-content/uploads/2023/08/Sing-and-Play.jpg (Sing & Play class page) and uploaded via POST /api/ingest/upload; ImgBB URL stored in document.image.",
+  "missingOrUncertain": [
+    "pricePerClass is set to 688 because the official Sing & Play page lists Price: $688 for the 16-week term — this is term tuition, not a published single-session drop-in rate.",
+    "Spring 2026 section availability and registration windows change; early-childhood overview noted “Limited Spots Available for Spring 2026” — confirm current term on bkcm.org before enrolling.",
+    "rating / reviewCount: not on official class page; 0 / 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bkcm-sing-play",
+        "name": "Brooklyn Conservatory of Music — Sing & Play",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "address": "58 Seventh Avenue, Brooklyn, NY 11217",
+        "activityTypes": ["Music", "Early childhood", "Group class", "Caregiver-and-me", "Rhythm and movement"],
+        "ageRanges": ["0–2"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning"],
+        "pricePerClass": 688,
+        "shortDescription": "Caregiver-and-me early childhood music at BKCM (6 months–2 years): singing, listening, and small percussion in a 16-week group class with weekday and Saturday sections.",
+        "longDescription": "Sing & Play at the Brooklyn Conservatory of Music (BKCM) is an early childhood group class for children about six months to two years old with a caregiver. The official class page describes singing, listening, and playing small percussion while building motor skills, with a 16-week term structure and online registration through BKCM’s registration systems.\n\nPublished sections on the Sing & Play page: Saturdays 10:30–11:15 a.m.; Wednesdays 9:30–10:15 a.m. and 10:30–11:15 a.m. The page lists Price: $688 for the term (see missingOrUncertain — this is term tuition, not a per-visit drop-in price). Class size is listed as 8; instructor listed as Laura Angyal. The early-childhood overview page links here and notes limited Spring 2026 availability for Sing & Play.\n\nBKCM’s contact page lists the building at 58 Seventh Avenue, Brooklyn, NY 11217; phone 718-622-3300; email info@bkcm.org. Transit notes on the contact page include B/Q to Seventh Avenue or 2/3 to Grand Army Plaza with walking directions to Seventh Avenue and Lincoln Place.\n\nHero image in ClassScout is a copy of the official Sing & Play promotional JPEG from BKCM’s WordPress media (same artwork shown on the class page), re-hosted via ClassScout ingest upload to ImgBB for policy compliance.\n\nSources: https://bkcm.org/class-ensemble/sing-and-play/ https://bkcm.org/music-classes/early-childhood/ https://bkcm.org/contact/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "New"],
+        "image": "https://i.ibb.co/mr1dzhLb/74e00ed8ab61.jpg",
+        "email": "info@bkcm.org",
+        "website": "https://bkcm.org",
+        "phone": "718-622-3300",
+        "announcementTitle": "Spring 2026 Sing & Play",
+        "announcementDescription": "Official early-childhood page highlights limited Spring 2026 spots for Sing & Play; confirm schedules and registration on bkcm.org.",
+        "announcementBadge": "Spring ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

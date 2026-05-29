@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://www.littlesharksplayground.com",
+    "https://static.wixstatic.com/media/c30376_46590d34d32b4b858bb236593df085fe~mv2.jpg/v1/fill/w_1346,h_578,al_c,q_85,enc_avif,quality_auto/P11_edited.jpg"
+  ],
+  "notes": "Official Little Sharks Playground homepage reviewed May 19, 2026. Original official image source URL: https://static.wixstatic.com/media/c30376_46590d34d32b4b858bb236593df085fe~mv2.jpg/v1/fill/w_1346,h_578,al_c,q_85,enc_avif,quality_auto/P11_edited.jpg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official homepage reviewed describes open-play availability but does not publish a public drop-in admission price.",
+    "The official source gives a Staten Island address at 27 Brienna Ct, NY 10309 without a canonical ClassScout neighborhood name; this listing maps it to the nearest supported neighborhood, Tottenville.",
+    "No public email address was confirmed on the cited official page, so email is left empty.",
+    "rating and reviewCount are not published on the cited official page, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-little-sharks-tottenville-open-play",
+        "name": "Little Sharks Playground Open Play",
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "address": "27 Brienna Ct, Staten Island, NY 10309",
+        "activityTypes": ["Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Little Sharks Playground publishes Wednesday-Sunday open play in Staten Island for children ages 1-11, with a 10 a.m.-6 p.m. schedule on its official site.",
+        "longDescription": "Little Sharks Playground describes itself as a Staten Island indoor playground for kids and families, with slides, ball pits, tunnels, and other active-play features. The official homepage states that the space is for children 1-11 years old.\n\nThe same page publishes open-play availability Wednesday through Sunday from 10 a.m. to 6 p.m. Those posted hours support weekday, weekend, morning, afternoon, and after-school tags for this listing.\n\nOfficial contact information shown on the homepage includes 27 Brienna Ct, Staten Island, NY 10309 and phone (718) 612-5867. The homepage reviewed did not publish a public drop-in admission price, so pricing is stored as unknown.\n\nSources: https://www.littlesharksplayground.com https://static.wixstatic.com/media/c30376_46590d34d32b4b858bb236593df085fe~mv2.jpg/v1/fill/w_1346,h_578,al_c,q_85,enc_avif,quality_auto/P11_edited.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Weekend Friendly", "Great for Toddlers"],
+        "image": "https://i.ibb.co/Wvp9YP1c/e1086eeb4cb6.jpg",
+        "email": "",
+        "website": "https://www.littlesharksplayground.com",
+        "phone": "(718) 612-5867",
+        "announcementTitle": "Open play runs Wednesday-Sunday",
+        "announcementDescription": "The official homepage lists open play Wednesday-Sunday from 10 a.m. to 6 p.m. for children ages 1-11.",
+        "announcementBadge": "Weekend Friendly",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "sourceUrls": [
+    "https://www.treasuretrunktheatre.com/soho2/",
+    "https://www.treasuretrunktheatre.com/contact/",
+    "https://www.treasuretrunktheatre.com/wp-content/uploads/2016/04/Screen-Shot-2016-04-28-at-4.40.36-PM.png"
+  ],
+  "notes": "Official Treasure Trunk Theatre SoHo and contact pages were reviewed on May 26, 2026. The provider image reuses the existing Treasure Trunk Theatre ImgBB asset already used in production payloads.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the reviewed official SoHo page publishes the session schedule and registration link but not a simple per-class public tuition figure in the source excerpt used here.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-treasure-trunk-theatre-soho",
+        "name": "Treasure Trunk Theatre SoHo",
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "address": "Freshmade NYC, 636 Broadway Suite 516, New York, NY 10012",
+        "activityTypes": ["Theater"],
+        "ageRanges": ["3–5"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Wednesday after-school theater classes in SoHo for ages 3-6 at Freshmade NYC.",
+        "longDescription": "Treasure Trunk Theatre's official SoHo page lists its Imagination Adventure class at Freshmade NYC, 636 Broadway Suite 516 in SoHo. The official page publishes a Spring Session for ages 3-6 on Wednesdays from 3:30 PM to 4:15 PM, with registration handled through Sawyer.\n\nThe class description emphasizes acting, movement, storytelling, props, costumes, and improvisation, making this a strong theater listing for preschool-age children. Treasure Trunk Theatre's official contact page lists phone (347) 762-9475.\n\nSources: https://www.treasuretrunktheatre.com/soho2/ https://www.treasuretrunktheatre.com/contact/ https://www.treasuretrunktheatre.com/wp-content/uploads/2016/04/Screen-Shot-2016-04-28-at-4.40.36-PM.png",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/GvcBC5wj/6ed18540d91b.jpg",
+        "email": "",
+        "website": "https://www.treasuretrunktheatre.com/soho2/",
+        "phone": "(347) 762-9475",
+        "recurringPrograms": [
+          {
+            "id": "rp-treasure-trunk-soho-wednesday",
+            "title": "Wednesday Imagination Adventure",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Wednesday"],
+            "timeText": "3:30 PM-4:15 PM",
+            "locationNote": "Freshmade NYC",
+            "ageRanges": ["3–5"],
+            "activityTypes": ["Theater"],
+            "summary": "Weekly Wednesday theater class for ages 3-6 in SoHo.",
+            "registrationUrl": "https://www.treasuretrunktheatre.com/soho2/"
+          }
+        ]
+      }
+    }
+  ]
+}

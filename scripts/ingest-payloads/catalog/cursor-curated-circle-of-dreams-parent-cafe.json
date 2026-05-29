@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://circleofdreamsfec.org/en/",
+    "https://circleofdreamsfec.org/en/offerings/",
+    "https://circleofdreamsfec.org/wp-content/uploads/2023/11/codpeople.png"
+  ],
+  "notes": "Official Circle of Dreams Family Enrichment Center pages fetched May 16 2026. Highbridge location, community framing, weekly offerings, Parent Cafe description, and official Instagram link come from the official site. Original official image source URL: https://circleofdreamsfec.org/wp-content/uploads/2023/11/codpeople.png. ImgBB upload completed via POST /api/ingest/upload and stored as coverImageUrl.",
+  "missingOrUncertain": [
+    "The site describes Parent Cafe plus weekly offerings and parent support groups, but it does not publish one fixed recurring Parent Cafe schedule on the cited pages; cadence is stored as Weekly based on the official weekly-offerings language.",
+    "Age range is stored as All ages because the official pages describe a parent and caregiver community space rather than a child-age-limited playgroup.",
+    "No single event-registration page with dated upcoming sessions was cited; users should check the official site or contact Circle of Dreams for the latest meeting dates."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-circle-of-dreams-parent-cafe",
+        "name": "Circle of Dreams — Parent Cafe",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "groupType": "Parent Meetup",
+        "ageRange": "All ages",
+        "cadence": "Weekly",
+        "instagram": "https://www.instagram.com/codfec/",
+        "website": "https://circleofdreamsfec.org/en/offerings/#parent-cafe",
+        "description": "Circle of Dreams Family Enrichment Center is a Highbridge community space where parents, caregivers, youth, and neighbors come together to connect, learn, and support one another. Its official offerings page describes Parent Cafe as a safe, peer-learning space for conversations about raising a family, well-being, and community support, and also says the center hosts free weekly offerings that include parent support groups and other family-focused activities.\n\nSources: https://circleofdreamsfec.org/en/ https://circleofdreamsfec.org/en/offerings/",
+        "initials": "CD",
+        "icon": "coffee",
+        "palette": "orange",
+        "coverImageUrl": "https://i.ibb.co/v4qQL0yB/b6930dc40e6b.png"
+      }
+    }
+  ]
+}

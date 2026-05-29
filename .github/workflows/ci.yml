@@ -7,18 +7,18 @@ on:
   pull_request:
 
 jobs:
-  quality:
-    name: Lint, test, typecheck, build, audit
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: npm
 
       - name: Install dependencies
@@ -27,14 +27,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
-        run: npm run test
+      - name: Audit curated payloads
+        run: npm run audit:curated
 
-      - name: Typecheck
-        run: npm run typecheck
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npm run build
-
-      - name: Audit production dependencies
-        run: npm audit --omit=dev

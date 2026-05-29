@@ -1,0 +1,74 @@
+{
+  "sourceUrls": [
+    "https://splashfit.org/mh/",
+    "https://splashfit.org/programs/",
+    "https://splashfit.org/contact/",
+    "https://splashfit.org/wp-content/uploads/2026/04/mott-haven.jpg"
+  ],
+  "notes": "Official Splash Fit Mott Haven location page and broader programs page reviewed May 26, 2026. The official Mott Haven photo was downloaded from splashfit.org and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The public Mott Haven page publishes recurring same-day weekly enrollment examples and says classes begin on the hour and half hour, but it does not publish one fixed Monday/Wednesday/Saturday time grid on-page.",
+    "Age ranges are mapped conservatively from Splash Fit's public program marketing and its Mott Haven location page rather than a single location-specific age ladder on the cited page.",
+    "The contact phone and email are taken from Splash Fit's official site-wide contact page rather than the Mott Haven location page itself.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-splashfit-mott-haven-swimming-lessons",
+        "name": "Splash Fit Mott Haven Swimming Lessons",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "address": "The Crescendo, 25 Bruckner Blvd., Bronx, NY 10454",
+        "activityTypes": ["Swimming", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 55,
+        "shortDescription": "Splash Fit offers recurring Mott Haven swim lessons at The Crescendo, with same-day weekly enrollment, monthly tuition, and weekday plus Saturday availability.",
+        "longDescription": "Splash Fit's official Mott Haven location page lists swim lessons at The Crescendo, 25 Bruckner Blvd., Bronx, NY 10454. The page publishes monthly lesson pricing of $55 per 30-minute class and says 60-minute classes are available for intermediate, advanced, and adult levels at $74 per lesson, while private 30-minute classes are $165.\n\nThe same page explains that students enrolled in the program attend the same class and day every week and gives recurring tuition examples for Monday classes, Wednesday classes, and Saturday classes. It also says each class or practice begins on the hour and half hour. Those official examples support real recurring weekday and weekend swim instruction at the Mott Haven site.\n\nSplash Fit's broader programs marketing says there is something for every age and ability at the organization, while the Mott Haven page itself is clearly marketed as a youth-and-family swim instruction location with ongoing enrollment and location-specific facility rules. Splash Fit's official contact page lists phone (917) 951-7057 and email info@splashfit.org. Because the cited location page does not publish one complete public timetable by level, recurringPrograms summarize the published weekday and Saturday structure conservatively.\n\nSources: https://splashfit.org/mh/ https://splashfit.org/programs/ https://splashfit.org/contact/ https://splashfit.org/wp-content/uploads/2026/04/mott-haven.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/9m3pkmFw/75650bc923d4.jpg",
+        "email": "info@splashfit.org",
+        "website": "https://splashfit.org/mh/",
+        "phone": "(917) 951-7057",
+        "announcementTitle": "Recurring same-day weekly enrollment",
+        "announcementDescription": "Official Mott Haven page gives Monday, Wednesday, and Saturday weekly enrollment examples plus monthly lesson pricing.",
+        "announcementBadge": "Swim lessons",
+        "recurringPrograms": [
+          {
+            "id": "rp-splashfit-mott-haven-weekdays",
+            "title": "Mott Haven Weekday Swim Lessons",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Wednesday"],
+            "timeText": "Classes begin on the hour and half hour; exact weekly class time varies by level",
+            "locationNote": "The Crescendo pool",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Swimming", "Sports"],
+            "summary": "Recurring weekday swim instruction with same-day weekly enrollment.",
+            "priceText": "$55 per 30-minute lesson; $74 per 60-minute lesson for select levels",
+            "registrationUrl": "https://portal.iclasspro.com/splashfitswimming/leads"
+          },
+          {
+            "id": "rp-splashfit-mott-haven-saturday",
+            "title": "Mott Haven Saturday Swim Lessons",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday"],
+            "timeText": "Classes begin on the hour and half hour; exact weekly class time varies by level",
+            "locationNote": "The Crescendo pool",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Swimming", "Sports"],
+            "summary": "Recurring Saturday swim instruction with same-day weekly enrollment.",
+            "priceText": "$55 per 30-minute lesson; $74 per 60-minute lesson for select levels",
+            "registrationUrl": "https://portal.iclasspro.com/splashfitswimming/leads"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

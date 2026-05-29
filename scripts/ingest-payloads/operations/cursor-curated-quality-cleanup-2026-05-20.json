@@ -1,0 +1,50 @@
+{
+  "sourceUrls": [
+    "https://www.bayridgeballet.com/about",
+    "https://www.bayridgeballet.com/class-descriptions",
+    "https://www.bayridgeballet.com/baby-toddler-classes",
+    "https://www.bayridgeballet.com/location",
+    "https://www.bayridgeballet.com/rates-fees",
+    "https://www.bayridgeballet.com/_files/ugd/d05c79_cc7edda1a1c946aa9798c0efb3f8d966.pdf",
+    "https://www.bayridgeballet.com/_files/ugd/d05c79_1066010deedb4beaa4931af9394fb6cd.pdf",
+    "https://ymcanyc.org/programs/kids-family/birthday-parties",
+    "https://ymcanyc.org/locations/harlem-ymca/programs-classes/kids-family",
+    "https://www.greatkillsswimclub.com/2026",
+    "https://www.greatkillsswimclub.com/join-our-club",
+    "https://www.newdorpmoravian.org/ministries/community-groups/"
+  ],
+  "notes": "Quality cleanup on May 20, 2026. Bay Ridge Ballet remains current and is refreshed with non-stale wording backed by the current official pages. Harlem YMCA birthday parties, Great Kills Swim Club Families, and New Dorp Moravian Community Groups are removed because the surviving official evidence is either too stale for the specific structured claims we stored or not a strong enough ClassScout family/meetup fit.",
+  "missingOrUncertain": [
+    "Harlem YMCA still advertises birthday parties on its current kids-and-family page, but the structured local schedule, pricing, and contact details previously stored came from an older 2020 PDF and are no longer strong enough to keep live without fresher branch-specific evidence.",
+    "Great Kills Swim Club is a family membership club with events, not a clearly recurring family meetup group in the ClassScout sense.",
+    "New Dorp Moravian's cited community-groups page centers adult support and community groups rather than a clearly family/kids meetup."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "patch",
+      "id": "prov-bay-ridge-ballet-classes",
+      "patch": {
+        "longDescription": "Bay Ridge Ballet is a Bay Ridge dance school that says it has served the Brooklyn community since 2016 and offers year-round instruction in ballet plus other dance forms including tap, jazz, hip-hop, tumbling, and musical theater. The official baby-and-toddler page describes Move with Me as a 45-minute caregiver class for babies and toddlers using singing, musical instruments, and interactive games to build movement skills and confidence.\n\nThe official class descriptions and current schedule materials show offerings from baby-and-caregiver sessions through teen levels, with classes across weekdays and weekends that cover morning, afternoon, after-school, and evening time slots. Bay Ridge Ballet's current rates page lists a $20 registration fee per family and $395 tuition per semester for 16 classes, with multiple-class discounts and payment plans available for families registering for more than one class per semester.\n\nThe official location page lists Bay Ridge Ballet at 110 Bay Ridge Avenue, Brooklyn, NY 11220, with contact email info@bayridgeballet.com and phone 347-968-6905. ClassScout stores an ImgBB-hosted copy of the official Bay Ridge Ballet child-focused image from the provider's Wix media library for image-policy compliance.\n\nSources: https://www.bayridgeballet.com/about https://www.bayridgeballet.com/class-descriptions https://www.bayridgeballet.com/baby-toddler-classes https://www.bayridgeballet.com/location https://www.bayridgeballet.com/rates-fees https://www.bayridgeballet.com/_files/ugd/d05c79_cc7edda1a1c946aa9798c0efb3f8d966.pdf https://www.bayridgeballet.com/_files/ugd/d05c79_1066010deedb4beaa4931af9394fb6cd.pdf",
+        "announcementTitle": "Current tuition from $395 per semester",
+        "announcementDescription": "Bay Ridge Ballet's current rates page lists $395 tuition per 16-class semester.",
+        "announcementBadge": "16-class semester"
+      }
+    },
+    {
+      "resource": "provider",
+      "action": "delete",
+      "id": "prov-harlem-ymca-birthday-parties"
+    },
+    {
+      "resource": "meetupGroup",
+      "action": "delete",
+      "id": "meetup-great-kills-swim-club-families"
+    },
+    {
+      "resource": "meetupGroup",
+      "action": "delete",
+      "id": "meetup-new-dorp-moravian-community-groups"
+    }
+  ]
+}

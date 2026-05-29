@@ -1,0 +1,45 @@
+{
+  "sourceUrls": [
+    "https://www.statenislandmuseum.org/education/camps/",
+    "https://www.statenislandmuseum.org/education/earth-camp/",
+    "https://snug-harbor.org/things-to-do/family-programs/",
+    "https://www.statenislandmuseum.org/wp-content/uploads/2025/10/Siobhan-McBride-Canopy-1200x881.jpg"
+  ],
+  "notes": "Staten Island Museum official Earth Camp 2026 pages (camp held at Snug Harbor). Hero image is the museum's own wp-content photograph, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Neighborhood mapped to Stapleton because the camp meets at Snug Harbor (1000 Richmond Terrace), which serves the North Shore / Stapleton area; the museum's primary listing is St. George.",
+    "pricePerClass uses $400, the published tuition for a one-week session (July 6–10 or July 13–17); Session 1 (June 29–July 2) is $320 on the same page.",
+    "rating and reviewCount are 0; not published on the camp page."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-si-museum-earth-camp-2026-stapleton",
+        "name": "Staten Island Museum — Earth Camp 2026",
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "address": "1000 Richmond Terrace, Building A, Staten Island, NY 10301 (Snug Harbor campus)",
+        "activityTypes": ["STEM", "Outdoor Activities", "Science", "Art"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon"],
+        "pricePerClass": 400,
+        "shortDescription": "SI Museum's 2026 Earth Camp at Snug Harbor for ages 8–13: pond life, wetlands walks, STEAM gallery activities, and a personal field discovery kit.",
+        "longDescription": "Staten Island Museum's Earth Camp returns in 2026 for curious kids ages 8–13 who love science. The official camps page states sessions take place at the museum on the grounds of Snug Harbor Cultural Center & Botanical Garden. Campers study pond life, animal tracks, plants and insects, and more, with walking trips to nearby green spaces plus hands-on STEAM activities in the galleries. Each camper receives a personal field discovery kit with a scientific journal.\n\nPublished 2026 tuition on the same page: Session 1 (June 29–July 2) $320; Session 2 (July 6–10) $400; Session 3 (July 13–17) $400; all three weeks $1,050. Member discounts are noted. Registration is via the museum's Wufoo application linked from statenislandmuseum.org/education/camps/.\n\nSnug Harbor's family programs page also lists Earth Camp among school-break offerings for ages 8–13.\n\nSources: https://www.statenislandmuseum.org/education/camps/ https://www.statenislandmuseum.org/education/earth-camp/ https://snug-harbor.org/things-to-do/family-programs/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/Tx0H6Rh5/637f90cbbf05.jpg",
+        "email": "",
+        "website": "https://www.statenislandmuseum.org/education/camps/",
+        "phone": "718-727-1135",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Earth Camp registration is listed as available on the museum camps page—apply via the official Wufoo link.",
+        "announcementBadge": "Summer '26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

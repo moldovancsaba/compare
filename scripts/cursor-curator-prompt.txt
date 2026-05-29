@@ -1,0 +1,209 @@
+# ClassScout — Cursor curator (copy everything below the line into a new chat)
+# ---------------------------------------------------------------------------
+
+You are my ClassScout curator agent. Do ALL of the following in this order. Use tools yourself (web search, fetch, terminal). Do not only tell me what to run.
+
+## Goal
+Find exactly one new NYC family/kids listing that fits ClassScout and successfully ingest it into production.
+
+Valid listing types:
+- Classes
+- Camps
+- Birthday Parties
+- Drop-In Activities
+- Meet-Up Groups
+
+Prefer official sources (organization site, `.org`, `.gov`, `.nyc`, or the venue/program’s own site). It must be clearly relevant to NYC, with borough + neighborhood when possible.
+
+## Hard requirements
+1. You must finish with a successful production ingest.
+2. You must include a non-empty image URL in the final payload.
+3. Every non-empty image URL in the payload must be an `https` ImgBB URL (`https://i.ibb.co/...` or another ImgBB host accepted by the repo).
+4. Do not complete the task with `image: ""` or `coverImageUrl: ""`. If no usable official image exists, find a different listing instead.
+5. Do not invent prices, hours, addresses, phone numbers, emails, image URLs, unsupported tags, or unsupported badges.
+6. You must use only canonical repo-supported enums and location values.
+7. You must keep schedule-derived tags and badges internally consistent:
+   - If the listing has any source-backed Monday-Friday slot, include `Weekday`.
+   - If the listing has any source-backed Saturday/Sunday slot, include `Weekend`.
+   - Only add `Morning`, `Afternoon`, `Evening`, or `After-school` when the listing’s own published times support them.
+   - Only use `Weekend Friendly` when the listing itself has real source-backed weekend availability. Do not infer it from venue hours, adjacent open hours, related programs, or contact hours.
+8. If the provider has a clearly recurring source-backed schedule, use the provider `recurringPrograms` field instead of burying all repeating schedule detail in prose alone.
+
+## First: inspect the live catalog and compute scarcity
+Before choosing a candidate:
+- fetch `GET https://classscout.vercel.app/api/public/providers`
+- fetch `GET https://classscout.vercel.app/api/public/meetup-groups`
+- inspect the repo’s canonical enums and location lists so you only use supported values
+- if the repo is available locally, prefer running `npm run scarcity:report` and use `docs/reports/scarcity-report-latest.md` as the saved artifact for your scarcity reasoning
+
+Use the live public data, not memory, to estimate which parts of the catalog are most underrepresented.
+
+## Scarcity dimensions
+Measure coverage across these dimensions using the live catalog:
+
+### Categories
+- Classes
+- Camps
+- Birthday Parties
+- Drop-In Activities
+- Meet-Up Groups
+
+### Boroughs
+- Manhattan
+- Brooklyn
+- Queens
+- Bronx
+- Staten Island
+
+### Neighborhoods
+Use the app’s canonical neighborhood list from the repo, not a hand-written subset. Only use neighborhoods that already exist in the app’s supported location data.
+
+### Ages
+- 0–2
+- 3–5
+- 6–8
+- 9–12
+- Teens
+
+### Day/time tags
+- Weekday
+- Weekend
+- Morning
+- Afternoon
+- Evening
+- After-school
+
+### Activity types
+Use these when applicable and only if they are supported by the source and make sense for the listing:
+- Sports
+- Dance
+- Gymnastics
+- Art
+- Music
+- STEM
+- Martial Arts
+- Swimming
+- Theater
+- Language
+- Tutoring
+- Indoor Play
+- Outdoor Activities
+- Yoga
+- Soccer
+- Basketball
+- Science
+- Birthday Entertainment
+
+If the repo or current schema already uses additional or different activity types, prefer the repo’s existing conventions over this list.
+
+## Scarcity-driven selection rule
+Choose the next listing from the least-populated area of the catalog, using this ranking process:
+
+1. Rank categories from fewest existing rows to most existing rows.
+2. Within the scarcest category, rank boroughs from fewest rows to most rows.
+3. Within that category + borough, rank neighborhoods from fewest rows to most rows.
+4. Within that slice, rank age ranges from fewest rows to most rows.
+5. Within that slice, rank day/time tags from fewest rows to most rows.
+6. Within that slice, rank activity types from fewest rows to most rows.
+7. Find a real official listing that improves the scarcest combination you can reasonably satisfy.
+
+Important:
+- Do not get stuck trying to satisfy a perfectly empty combination if no credible official listing exists.
+- Use pragmatic fallback: if the exact scarcest combination is not realistically sourceable, move to the next scarcest nearby combination.
+- Prefer real catalog coverage improvement over theoretical perfection.
+- Avoid always picking famous large institutions if a smaller valid official listing better fills a scarcer part of the catalog.
+
+## Candidate selection rules
+1. Verify the source looks current and official.
+2. Dedupe against the live public APIs by normalized name and proposed `id`.
+3. If the listing already exists, find a different one.
+4. Prefer listings that improve catalog coverage in the scarcest category / borough / neighborhood / age / day-time / activity-type combination.
+5. If two candidates are similarly scarce, prefer:
+   - more official source
+   - clearer borough/neighborhood fit
+   - stronger age fit
+   - better image availability for ImgBB upload
+   - more specific and useful activity typing
+
+## Data quality rules
+1. Use only facts supported by the official source.
+2. If something is unknown, leave it empty or `0` and list it under `missingOrUncertain`.
+3. If pricing is unclear but the source gives a range or admission table, you may use a planning figure only if you explicitly note the uncertainty in both `missingOrUncertain` and `longDescription`.
+4. Do not guess neighborhood names; map them to the closest canonical neighborhood only when the source supports that mapping.
+5. Do not let listing-specific schedule tags be influenced by broader venue hours, contact hours, or separate programs at the same organization.
+6. If you use `recurringPrograms`, every populated field inside it must be source-backed. Do not infer days, cadence, date range, price text, or drop-in status.
+
+## Image requirement (blocking)
+1. You must source an official image from the official site or official organization-controlled asset URL.
+2. Download that image locally.
+3. Upload it through one of the supported repo flows:
+   - POST `/api/ingest/upload` with multipart field `file`, or
+   - POST `/api/admin/upload` if admin session is available
+4. Use the returned ImgBB `url` in the payload.
+5. Record the original official image source URL in `sourceUrls` or `notes`.
+6. If the upload fails, retry or choose another official image.
+7. If you cannot produce a valid ImgBB image URL for that listing, do not ingest it; choose another listing.
+8. If you are auditing or refreshing an existing curated row and still cannot produce a valid official ImgBB image URL through the supported automated flow, delete that row instead of leaving it live with an empty image.
+
+## Output shape
+If it is a business / venue / program, produce a JSON body matching `npm run ingest:listing`:
+- top level:
+  - `sourceUrls`: string[]
+  - `notes`: string
+  - `missingOrUncertain`: string[]
+  - `operations`: [{ "resource": "provider", "action": "upsert", "document": { ... } }]
+- the `document` must match the repo’s provider schema and enums exactly
+- use canonical borough / neighborhood values from the app
+- include `announcementTitle`, `announcementDescription`, and `announcementBadge` when useful
+- append audit URLs to the end of `longDescription` as:
+  `Sources: <url1> <url2> ...`
+- if the provider has a clearly recurring schedule, populate `recurringPrograms` when source-backed. The supported per-program shape is:
+  - `id`: short slug-like id, unique within the provider
+  - `title`: string
+  - `cadence`: one of `Daily`, `Weekdays`, `Weekends`, `Weekly`, `Biweekly`, `Monthly`, `Seasonal`, `Custom`
+  - `daysOfWeek`: any of `Monday` through `Sunday`
+  - `timeText`: string
+  - optional `locationNote`, `ageRanges`, `activityTypes`, `summary`, `priceText`, `registrationUrl`, `startDate`, `endDate`, `isDropIn`
+- use `recurringPrograms` when the official source has repeating schedule detail that would otherwise be lost; still keep top-level `dayTimeTags` and `badges` consistent with the same source-backed schedule.
+
+If it is a parent/community group, use:
+- `resource: "meetupGroup"`
+- the repo’s meetupGroup document shape
+- a non-empty ImgBB `coverImageUrl`
+
+## Consistency check before ingest
+After saving or editing the payload, if you changed schedule-related tags, badges, recurring programs, or refreshed multiple curated payloads, run:
+- `npm run audit:curated`
+
+If the audit flags your payload, fix it before ingesting.
+
+After a successful production ingest or cleanup, prefer also running:
+- `npm run catalog:audit`
+- `npm run scarcity:report`
+
+This keeps the live reviewer artifact and scarcity artifact current.
+
+## Write and ingest
+1. Save the JSON under:
+   `scripts/ingest-payloads/catalog/cursor-curated-<short-slug>.json`
+2. Run:
+   `npm run ingest:listing -- scripts/ingest-payloads/catalog/cursor-curated-<short-slug>.json`
+3. If this is a refresh of an existing id and dedupe blocks the run, re-run with:
+   `npm run ingest:listing -- --force scripts/ingest-payloads/catalog/cursor-curated-<short-slug>.json`
+4. If ingest fails, fix the payload and retry until you get HTTP 200 and `ok: true`.
+
+## Final reply
+After successful ingest, reply with:
+- what was added or updated: name, id, category, borough/neighborhood
+- why this was chosen as the scarcest coverage opportunity
+- a short scarcity summary:
+  - category counts
+  - chosen borough count within that category
+  - chosen neighborhood count within that category + borough
+  - chosen age/day-time/activity-type rationale
+- whether `recurringPrograms` was used and, if so, which recurring schedule fields were stored
+- source URLs used
+- original official image source URL
+- final ImgBB image URL stored in the payload
+- what was missing or uncertain
+- confirmation that the public API now shows the row and includes the image URL

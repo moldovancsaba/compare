@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://www.rainbowcastleplayground.com/",
+    "https://www.rainbowcastleplayground.com/index.php/Home/Index/cms/mid/19",
+    "https://www.rainbowcastleplayground.com/index.php/Home/Index/cms/mid/18",
+    "https://www.rainbowcastleplayground.com/Uploads/Content/2020-03-12/58453a502ac77d8997654fa70e29335a.jpg"
+  ],
+  "notes": "Official Rainbow Castle Indoor Playground home, OUR PARTIES, and PRICES pages reviewed May 16, 2026. Address, hours, party tiers, admission age band, and phone from those pages. Listing image is an official playground photo from the venue gallery on rainbowcastleplayground.com, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $598 from the published Gold Party Package starting rate (10–15 kids + 20 adults, before tax); Platinum and Diamond tiers are higher and tax, tips, and a $200 deposit are additional per the parties page.",
+    "No public email is listed on the cited official pages; contact is by phone.",
+    "Party scheduling days and specific start times are not published on the parties page; dayTimeTags reflect published venue hours (10:00 a.m.–7:00/8:00 p.m., open all week).",
+    "rating and reviewCount are 0; not published on the cited official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-rainbow-castle-flushing-birthday-parties",
+        "name": "Rainbow Castle Indoor Playground — Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "address": "131-48 Avery Avenue, Flushing, NY 11355",
+        "activityTypes": ["Indoor Play", "Birthday Entertainment"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 598,
+        "shortDescription": "Flushing indoor playground birthday packages with private party rooms, open play access, obstacle courses, slides, and tiered Gold/Platinum/Diamond packages.",
+        "longDescription": "Rainbow Castle Indoor Playground is an indoor family play venue in Flushing, Queens, at 131-48 Avery Avenue. The official site describes birthday parties with wall-to-wall jumps, slides, obstacle courses, and arcade games, plus free setup and cleanup and a private party room.\n\nThe official OUR PARTIES page lists three tiers. Gold packages start at $598 plus tax for 10–15 kids and 20 adults (or $698 plus tax for 15–20 kids and 25 adults) and include a private room with open playground access, a birthday banner, music, and cleaning service; families may arrive 30 minutes early with their own decorations and tableware. Platinum and Diamond packages add themed décor, balloons, juice, pinata, pizza, and other items at higher published rates ($758–$1,188 plus tax depending on tier and headcount). Parties are two hours; the page notes a $200 non-refundable deposit to reserve, socks required for all guests, and additional per-child and per-adult fees beyond package limits.\n\nGeneral admission pricing on the PRICES page lists ages 10 months–15 years. Published hours on the site are Monday–Thursday 10:00 a.m.–7:00 p.m., Friday–Saturday 10:00 a.m.–8:00 p.m., and Sunday 10:00 a.m.–8:00 p.m. Phone listed on the site: 347-506-9900.\n\nThis listing image is an official photograph published on rainbowcastleplayground.com (venue gallery), re-hosted on ImgBB for ClassScout storage policy compliance.\n\nSources: https://www.rainbowcastleplayground.com/ https://www.rainbowcastleplayground.com/index.php/Home/Index/cms/mid/19 https://www.rainbowcastleplayground.com/index.php/Home/Index/cms/mid/18",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/VYHCmGPf/555fd19a237b.jpg",
+        "email": "",
+        "website": "https://www.rainbowcastleplayground.com/index.php/Home/Index/cms/mid/19",
+        "phone": "347-506-9900",
+        "announcementTitle": "Gold party packages from $598",
+        "announcementDescription": "Official parties page lists Gold, Platinum, and Diamond tiers with two-hour parties and a $200 deposit to reserve—confirm current pricing and availability by phone.",
+        "announcementBadge": "Private party room",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://www.thepoint.org/",
+    "https://images.squarespace-cdn.com/content/v1/620c3a96c5bdbb49ee49e4b7/95fdd107-a273-4feb-88b1-dcce45d08a16/Winter2026-Top-Banner-Website-2-4.jpg"
+  ],
+  "notes": "THE POINT Community Development Corporation official Squarespace site (Hunts Point). Hero image is the organization's own Winter 2026 site banner from images.squarespace-cdn.com, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0; youth program fees are not published on the homepage excerpt used—contact the Point for enrollment costs.",
+    "Specific class schedules for each youth track are not listed on the homepage; confirm current semesters with info@thepoint.org.",
+    "Spring break closure April 1–12, 2026 was announced on the site at ingest time."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-the-point-cdc-youth-programs",
+        "name": "THE POINT CDC — Youth Development Programs",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "address": "940 Garrison Avenue, Bronx, NY 10474",
+        "activityTypes": ["Art", "Theater", "Dance", "Outdoor Activities", "STEM"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Hunts Point community development center with youth development, arts, and leadership programming for neighborhood kids and teens.",
+        "longDescription": "THE POINT Community Development Corporation has served Hunts Point since 1994 with youth development, arts and culture, and community development. The organization's official site describes youth programming curated for different age groups, aiming to cultivate leadership and creative expression in the South Bronx.\n\nThe campus is at 940 Garrison Avenue, Bronx, NY 10474. Published hours: Monday–Friday 10:00 a.m.–6:00 p.m. (closed weekends on the site contact card). Phone (718) 542-4139; email info@thepoint.org. The site also promotes community events such as the Hunts Point Fish Parade & Arts Festival.\n\nSources: https://www.thepoint.org/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/20p32Q7x/bdeb58abbea6.webp",
+        "email": "info@thepoint.org",
+        "website": "https://www.thepoint.org/",
+        "phone": "718-542-4139",
+        "announcementTitle": "Spring break closure",
+        "announcementDescription": "Site announced no programs April 1–12, 2026; reopening April 13—verify before visiting.",
+        "announcementBadge": "Community",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

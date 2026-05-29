@@ -1,0 +1,57 @@
+{
+  "sourceUrls": [
+    "https://www.nypl.org/locations/high-bridge",
+    "https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-3",
+    "https://drupal.nypl.org/sites-drupal/default/files/styles/max_width_960/public/2022-04/Steam_Discovery_Kits_identity%20%282%29.png?itok=AMgP9oi9"
+  ],
+  "notes": "High Bridge Library official location page and official NYPL After School event listing reviewed May 26, 2026. The image is an official NYPL STEAM Discovery Kits graphic from nypl.org, re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The High Bridge branch page confirms NYPL After School runs Monday-Thursday when school is in session, while the cited event listing provides a current 3:30-6:30 PM example and upcoming dates for the program."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-high-bridge-library-after-school",
+        "name": "High Bridge Library NYPL After School",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "address": "78 West 168th Street, Bronx, NY 10452",
+        "activityTypes": ["Tutoring", "STEM"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Free Highbridge library drop-in for ages 6-12 with homework help, reading support, STEAM activities, and snacks after school.",
+        "longDescription": "The New York Public Library's High Bridge branch lists NYPL After School as a free drop-in program for kids ages 6-12. The official branch page says the program takes place after regular school hours on Mondays through Thursdays when school is in session, with homework help from tutors or Teen Reading Ambassadors, reading recommendations, fun activities, and snacks.\n\nA current official NYPL After School event listing for High Bridge Library shows the program running from 3:30 PM to 6:30 PM and repeating across upcoming Monday-Thursday dates. Families do not need to register in advance.\n\nThe branch page lists High Bridge Library at 78 West 168th Street, Bronx, NY 10452, with phone 718-293-7800 and email highbridge@nypl.org.\n\nSources: https://www.nypl.org/locations/high-bridge https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-3",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/nqWfZXwM/84436bd23463.png",
+        "email": "highbridge@nypl.org",
+        "website": "https://www.nypl.org/locations/high-bridge",
+        "phone": "718-293-7800",
+        "announcementTitle": "Free after-school drop-in",
+        "announcementDescription": "NYPL After School at High Bridge Library offers free homework help, enrichment, and snacks Monday-Thursday.",
+        "announcementBadge": "Free",
+        "recurringPrograms": [
+          {
+            "id": "rp-high-bridge-library-nypl-after-school",
+            "title": "NYPL After School",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "timeText": "3:30 PM-6:30 PM",
+            "locationNote": "High Bridge Library",
+            "ageRanges": ["6–8", "9–12"],
+            "activityTypes": ["Tutoring", "STEM"],
+            "summary": "Free drop-in homework help, reading support, STEAM activities, and snacks for kids ages 6-12.",
+            "registrationUrl": "https://www.nypl.org/events/programs/2026/03/02/nypl-after-school-3",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

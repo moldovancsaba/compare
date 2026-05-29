@@ -1,0 +1,57 @@
+{
+  "sourceUrls": [
+    "https://www.nypl.org/locations/bronx-library-center/blcchildren",
+    "https://www.nypl.org/events/programs/2026/02/02/nypl-after-school-45",
+    "https://drupal.nypl.org/sites-drupal/default/files/styles/max_width_960/public/2022-04/Steam_Discovery_Kits_identity%20%282%29.png?itok=AMgP9oi9"
+  ],
+  "notes": "Bronx Library Center Children's Center official page and official NYPL After School event listing reviewed May 26, 2026. The image is an official NYPL STEAM Discovery Kits graphic from nypl.org, re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The Children's Center page and event listing are specific to the Bronx Library Center children's floor; the canonical neighborhood is mapped to Fordham from the branch's Kingsbridge Road address."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-library-center-after-school",
+        "name": "Bronx Library Center NYPL After School",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "address": "310 East Kingsbridge Road, Second Floor, Bronx, NY 10458",
+        "activityTypes": ["Tutoring", "STEM"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Free Fordham library drop-in for ages 6-12 with homework help, reading support, STEAM activities, and snacks after school.",
+        "longDescription": "The Children's Center at the Bronx Library Center lists NYPL After School among its free school-age services. The official event page says NYPL After School is a free drop-in program for kids ages 6-12 that runs after regular school hours on Mondays through Thursdays, with homework help from tutors or Teen Reading Ambassadors, reading recommendations, fun writing, STEAM activities, enrichment, and snacks.\n\nThe official Bronx Library Center event listing shows the program running from 3:30 PM to 6:30 PM across upcoming Monday-Thursday dates. No registration is required.\n\nThe branch lists the Children's Center on the second floor at 310 East Kingsbridge Road, Bronx, NY 10458, with phone 718-572-4220 and email blcchildren@nypl.org.\n\nSources: https://www.nypl.org/locations/bronx-library-center/blcchildren https://www.nypl.org/events/programs/2026/02/02/nypl-after-school-45",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/nqWfZXwM/84436bd23463.png",
+        "email": "blcchildren@nypl.org",
+        "website": "https://www.nypl.org/locations/bronx-library-center/blcchildren",
+        "phone": "718-572-4220",
+        "announcementTitle": "Free after-school drop-in",
+        "announcementDescription": "NYPL After School at the Bronx Library Center offers free homework help, enrichment, and snacks Monday-Thursday.",
+        "announcementBadge": "Free",
+        "recurringPrograms": [
+          {
+            "id": "rp-bronx-library-center-nypl-after-school",
+            "title": "NYPL After School",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "timeText": "3:30 PM-6:30 PM",
+            "locationNote": "Bronx Library Center, Children's Room",
+            "ageRanges": ["6–8", "9–12"],
+            "activityTypes": ["Tutoring", "STEM"],
+            "summary": "Free drop-in homework help, reading support, STEAM activities, and snacks for kids ages 6-12.",
+            "registrationUrl": "https://www.nypl.org/events/programs/2026/02/02/nypl-after-school-45",
+            "isDropIn": true
+          }
+        ],
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

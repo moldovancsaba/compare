@@ -1,0 +1,38 @@
+{
+  "sourceUrls": [
+    "https://www.sweattoddlersoccer.com/carroll-gardens-toddlers"
+  ],
+  "notes": "Official Sweat Toddler's Soccer Carroll Gardens page reviewed on May 26, 2026. The public page title and meta description confirm the Carroll Park location, Sunday schedule, and ages 2-5. The official site image was previously re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official Carroll Gardens page confirms Sunday classes for ages 2-5 at Carroll Park but does not publish a clearly readable exact start time on the public page excerpt reviewed here.",
+    "pricePerClass is stored as 0 because the official public location page reviewed here does not publish a standalone per-class price.",
+    "rating and reviewCount are set to 0 because the official source does not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sweat-carroll-gardens-toddler-soccer",
+        "name": "Sweat Toddler Soccer Carroll Gardens",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "address": "Carroll Park asphalt field, Brooklyn, NY 11231",
+        "activityTypes": ["Soccer", "Sports", "Outdoor Activities"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "Sunday soccer classes at Carroll Park in Carroll Gardens for toddlers and preschoolers ages 2-5.",
+        "longDescription": "Sweat Toddler's Soccer publishes a dedicated Carroll Gardens page for its Carroll Park program. The official page title and description say the classes are held at Carroll Park in Brooklyn on Sundays and are designed for children ages 2 to 5 years old.\n\nThe same official site presents the program as a neighborhood soccer class where children learn soccer basics, stay active, and make new friends. Public site contact details include Registration@Sweattoddlersoccer.com and phone 347-330-3122.\n\nBecause the official public page excerpt reviewed here clearly supports the Sunday schedule but not a precise class time, this listing uses a conservative weekend tag set only.\n\nSources: https://www.sweattoddlersoccer.com/carroll-gardens-toddlers",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/DgwnrKfY/17b0f5d019c3.webp",
+        "email": "Registration@Sweattoddlersoccer.com",
+        "website": "https://www.sweattoddlersoccer.com/carroll-gardens-toddlers",
+        "phone": "347-330-3122"
+      }
+    }
+  ]
+}

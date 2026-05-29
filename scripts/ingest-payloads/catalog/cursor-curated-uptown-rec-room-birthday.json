@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://uptownrecroom.com/",
+    "https://uptownrecroom.com/wp-content/uploads/2021/07/8f231e0a-2980-4760-a3ff-9af90913fa79.jpeg"
+  ],
+  "notes": "Official Uptown Rec Room homepage reviewed May 19, 2026. Original official image source URL: https://uptownrecroom.com/wp-content/uploads/2021/07/8f231e0a-2980-4760-a3ff-9af90913fa79.jpeg. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official page describes the venue as being for children of all ages rather than narrower age brackets, so ClassScout maps that broad wording across all supported age ranges.",
+    "The public page lists party times from 12 p.m. to 6 p.m. but does not separately identify weekday versus weekend availability, so only Afternoon is tagged.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-uptown-rec-room-mott-haven-birthday",
+        "name": "Uptown Rec Room Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "address": "229 Bruckner Blvd, Bronx, NY 10454",
+        "activityTypes": ["Indoor Play", "Birthday Entertainment"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Afternoon"],
+        "pricePerClass": 1600,
+        "shortDescription": "Uptown Rec Room in Mott Haven offers large-format children's birthday party rentals with multiple party rooms, arcade-style play features, and published afternoon party packages in the Bruckner Boulevard space.",
+        "longDescription": "Uptown Rec Room's official homepage describes the venue as a party center designed for children of all ages, with three rooms including two 5,000-square-foot funhouse areas and one 3,000-square-foot party room. The site says the facility can accommodate parties and playdates of different sizes and invites families to contact the venue for custom requests or a tour.\n\nThe public page publishes two preset packages: a Funhouse Party priced at $1,800 and a Party Room package priced at $1,600. Both published packages list party time as 12 p.m. to 6 p.m. and include features such as a bouncy house, video game systems, basketball hoop, corn hole, pizza party, and oversized game stations.\n\nUptown Rec Room lists its address as 229 Bruckner Blvd, Bronx, NY 10454, with phone 212-920-9160 and email uptownrecroom@gmail.com. Because the public page publishes the 12 p.m. to 6 p.m. party window but does not separately identify weekday versus weekend availability, ClassScout stores only the time-of-day tag supported by the source.\n\nSources: https://uptownrecroom.com/ https://uptownrecroom.com/wp-content/uploads/2021/07/8f231e0a-2980-4760-a3ff-9af90913fa79.jpeg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/wrRnLWRj/b70043a6a90d.jpg",
+        "email": "uptownrecroom@gmail.com",
+        "website": "https://uptownrecroom.com/",
+        "phone": "212-920-9160",
+        "announcementTitle": "Published party packages",
+        "announcementDescription": "The official page lists $1,600 Party Room and $1,800 Funhouse afternoon party packages.",
+        "announcementBadge": "Party packages"
+      }
+    }
+  ]
+}

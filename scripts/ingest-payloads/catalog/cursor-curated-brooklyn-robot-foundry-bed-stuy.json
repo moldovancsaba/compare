@@ -1,0 +1,47 @@
+{
+  "sourceUrls": [
+    "https://brooklynrobotfoundry.com/bed-stuy/welcome/",
+    "https://brooklynrobotfoundry.com/programs/?location=15",
+    "https://brooklynrobotfoundry.com/locations/",
+    "https://brooklynrobotfoundry.com/contact/",
+    "https://brooklynrobotfoundry.com/bed-stuy/wp-content/uploads/sites/15/2024/05/2-older-kids-working-on-coding-robot-scaled.jpg"
+  ],
+  "notes": "Official Brooklyn Robot Foundry North Brooklyn / Southern Queens franchise (Bed-Stuy hub). Program ages, offerings, service area, and local contact email come from the Bed-Stuy welcome and programs pages; national phone and contact email from the main contact page. Hero image is the franchise welcome page primaryImageOfPage JPEG on brooklynrobotfoundry.com, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 0: after-school and in-school enrichment are semester or school-contract programs without a published per-class rate on the cited pages; Foundry Fundays full-day registration on the shop lists session prices (e.g. $75–$190) that vary by date and location.",
+    "No single public storefront street address is published for this franchise; programs run at schools, partner sites, and customer-supplied party venues across the listed service area. Address field uses the Bed-Stuy hub ZIP (11206) called out on registration flows plus the official service-area label.",
+    "rating and reviewCount are not published on the official program pages; both set to 0.",
+    "dayTimeTags are inferred from after-school, school-holiday Fundays, and weekend party offerings; exact weekly times depend on each school or registered session."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-brooklyn-robot-foundry-bed-stuy-steam",
+        "name": "Brooklyn Robot Foundry — North Brooklyn STEAM Classes",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "address": "North Brooklyn & Southern Queens service area, Bedford-Stuyvesant, Brooklyn, NY 11206",
+        "activityTypes": ["STEM", "Robotics", "Arts & Crafts", "After-school enrichment"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Hands-on, screen-free robot-building STEAM classes for pre-K through 8th grade across North Brooklyn and southern Queens — after-school residencies, school-holiday Fundays, parties, and family workshops.",
+        "longDescription": "Brooklyn Robot Foundry’s North Brooklyn / Southern Queens franchise (Bed-Stuy hub) brings screen-free, hands-on robot-building programs to families across Greenpoint, Williamsburg, Bushwick, Bedford-Stuyvesant, Ridgewood, and nearby Queens neighborhoods. The official Bed-Stuy welcome page describes age-appropriate classes from pre-K through 8th grade, plus family and adult events, delivered through after-school residencies, in-school enrichment, school-holiday Foundry Fundays, Summer Circuits camps, birthday parties, and scout or youth-group workshops.\n\nThe franchise programs page for this location lists semester-style After-School Classes and In-School Enrichment for children roughly ages 2–14, single-day Foundry Fundays for grades K–5 when school is closed, full-week Summer Circuits, Family Fun sessions for ages 2–12 with a grown-up, and mobile parties where families supply the venue. The locations directory titles this territory “North Brooklyn & Southern Queens (Bed-Stuy Area).” Local inquiries are directed to caroline@brooklynrobotfoundry.com on the welcome page; the national contact page lists phone (347) 762-6840 and contact@brooklynrobotfoundry.com.\n\nNeed-based scholarships for select programs are linked from the Bed-Stuy site. This listing image is the official welcome-page photograph of children working on a robot project, re-hosted on ImgBB for ClassScout storage policy compliance.\n\nSources: https://brooklynrobotfoundry.com/bed-stuy/welcome/ https://brooklynrobotfoundry.com/programs/?location=15 https://brooklynrobotfoundry.com/locations/ https://brooklynrobotfoundry.com/contact/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick", "Weekend Friendly"],
+        "image": "https://i.ibb.co/PzvZDsPp/6878d9ebb53e.jpg",
+        "email": "caroline@brooklynrobotfoundry.com",
+        "website": "https://brooklynrobotfoundry.com/bed-stuy/welcome/",
+        "phone": "347-762-6840",
+        "announcementTitle": "2026 Summer Circuits open",
+        "announcementDescription": "Bed-Stuy franchise page lists registration open for 2026 Summer Circuits and school-holiday Foundry Fundays — see brooklynrobotfoundry.com for dates.",
+        "announcementBadge": "Register online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

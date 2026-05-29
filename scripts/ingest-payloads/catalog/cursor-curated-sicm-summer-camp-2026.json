@@ -1,0 +1,51 @@
+{
+  "sourceUrls": [
+    "https://sichildrensmuseum.org/summer-camps/",
+    "https://sichildrensmuseum.org/2026-summer-mini-camps/",
+    "https://commons.wikimedia.org/wiki/File:Staten_Island_Children%27s_Museum.jpg"
+  ],
+  "notes": "Official SICM summer-camps announcement and 2026 registration page reviewed May 16, 2026. Building photo is the museum’s staff-uploaded Wikimedia Commons image (CC BY-SA 4.0), downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $100, the published full-day community rate per day for ages 5–8; member rate is $80/day and half-day kindergarten option pricing differs on the official page.",
+    "Weekly themed camps run June 29–September 4, 2026 per the official summer-camps post; individual theme weeks and availability are listed on the registration portal.",
+    "Listing is distinct from the museum’s general drop-in admission listing (prov-staten-island-childrens-museum).",
+    "rating and reviewCount are 0; not published on these official pages."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-sicm-summer-camp-2026",
+        "name": "Staten Island Children's Museum — Summer Camp 2026",
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "address": "1000 Richmond Terrace, Staten Island, NY 10301",
+        "activityTypes": [
+          "STEAM",
+          "Art",
+          "Cooking",
+          "Outdoor play",
+          "Museum exhibits"
+        ],
+        "ageRanges": ["3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon"],
+        "pricePerClass": 100,
+        "shortDescription": "Snug Harbor day camp with themed weeks (STEAM, cooking, superheroes): full day 9 a.m.–4 p.m., half-day option ages 4–5, and exhibit access while closed to the public.",
+        "longDescription": "The Staten Island Children’s Museum announced its Summer 2026 camp schedule on its official summer-camps page, with registration linked at sichildrensmuseum.org/2026-summer-mini-camps/. Camps run June 29 through September 4 with ten themed weekly options for ages 4–8 in a hands-on environment on the Snug Harbor campus.\n\nPublished rates on that page: Full Day Camp (ages 5–8), 9:00 a.m. to 4:00 p.m., $100 per day ($80 for members) or $450 per five-day week ($360 for members). Half Day Kindergarten Option (ages 4–5), 9:00 a.m. to 12:00 p.m., $55 per day ($44 for members) or $247.50 per five-day week ($198 for members). Extended care is available 8:00–9:00 a.m. and 4:00–5:30 p.m. for $15 per session per camper.\n\nThe announcement highlights STEAM, cooking, and superhero themes; visual and performance arts; exclusive daily exhibit access while the museum is closed to the public; outdoor play on Snug Harbor grounds; and weekly live performances. Museum contact on the same page: 718-273-2060, info@sichildrensmuseum.org, 1000 Richmond Terrace, Staten Island, NY 10301.\n\nSources: https://sichildrensmuseum.org/summer-camps/ https://sichildrensmuseum.org/2026-summer-mini-camps/ https://commons.wikimedia.org/wiki/File:Staten_Island_Children%27s_Museum.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/7dtHwz3G/255cf7f2a25f.jpg",
+        "email": "info@sichildrensmuseum.org",
+        "website": "https://sichildrensmuseum.org/summer-camps/",
+        "phone": "718-273-2060",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Official page lists themed weeks June 29–Sept 4 with full-day, half-day, and extended-care options—register at sichildrensmuseum.org.",
+        "announcementBadge": "Summer ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

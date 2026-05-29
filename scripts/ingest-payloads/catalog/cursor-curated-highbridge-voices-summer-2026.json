@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://www.highbridgevoices.org/summer2026/",
+    "https://docs.google.com/forms/d/e/1FAIpQLSeHloTPoMJ4UXeJ1kEzoQUX7sMYu3p2oFkXTQ9rgY9EzajGoQ/viewform?usp=publish-editor",
+    "https://www.highbridgevoices.org/merriam/",
+    "https://www.highbridgevoices.org/wp-content/uploads/2024/07/061924_518-scaled.jpg"
+  ],
+  "notes": "Official Highbridge Voices Summer Voices 2026 page, embedded public Google Form, and Merriam campus page reviewed May 21, 2026. The official hero image from highbridgevoices.org was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Highbridge from the published 1360 Merriam Ave address; the official site does not publish a ClassScout neighborhood field.",
+    "pricePerClass is stored as 0 because the public Summer Voices 2026 pages do not publish tuition or camp fees.",
+    "rating and reviewCount are set to 0 because the official source pages do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-highbridge-voices-summer-2026",
+        "name": "Highbridge Voices — Summer Voices 2026",
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "address": "1360 Merriam Ave., Bronx, NY 10452",
+        "activityTypes": ["Music", "Art", "Outdoor Activities"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Two-week weekday summer music and arts camp in Highbridge with daily outside activities for students entering grades 3-12.",
+        "longDescription": "Highbridge Voices publishes a 2026 Summer Voices application for a two-week summer program running July 6 through July 17, 2026. The public form invites families to join for a fun and engaging program full of music, art, academics, and recreation, and lists offerings including strings, group piano, xylophone, recorder, Art Club, daily outside activities, and a field trip.\n\nThe same official application states the program runs Monday through Friday from 10:00 AM to 3:00 PM and is open to students in grades 3 through 12. Highbridge Voices' Merriam campus page says the main campus is located in the heart of the Highbridge community and serves as the home base for its music and academic enrichment programs.\n\nPublished contact details on the official site list Highbridge Voices at 1360 Merriam Ave., Bronx, NY 10452, with phone (718) 293-8759 and email info@highbridgevoices.org. The public Summer Voices materials reviewed did not publish tuition, so ClassScout stores pricing as unknown.\n\nSources: https://www.highbridgevoices.org/summer2026/ https://docs.google.com/forms/d/e/1FAIpQLSeHloTPoMJ4UXeJ1kEzoQUX7sMYu3p2oFkXTQ9rgY9EzajGoQ/viewform?usp=publish-editor https://www.highbridgevoices.org/merriam/ https://www.highbridgevoices.org/wp-content/uploads/2024/07/061924_518-scaled.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/ynsS2XYg/7c9eb73113f4.jpg",
+        "email": "info@highbridgevoices.org",
+        "website": "https://www.highbridgevoices.org/summer2026/",
+        "phone": "(718) 293-8759",
+        "announcementTitle": "Summer Voices 2026 applications open",
+        "announcementDescription": "Weekday camp runs July 6-17, 2026 for students entering grades 3-12.",
+        "announcementBadge": "Apply now",
+        "recurringPrograms": [
+          {
+            "id": "rp-highbridge-voices-summer-2026",
+            "title": "Summer Voices 2026",
+            "cadence": "Weekdays",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "10:00 AM-3:00 PM",
+            "locationNote": "Highbridge Voices Merriam campus",
+            "ageRanges": ["6–8", "9–12", "Teens"],
+            "activityTypes": ["Music", "Art", "Outdoor Activities"],
+            "summary": "Two-week summer program with music, art, academics, recreation, and a field trip.",
+            "registrationUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeHloTPoMJ4UXeJ1kEzoQUX7sMYu3p2oFkXTQ9rgY9EzajGoQ/viewform?usp=publish-editor",
+            "startDate": "2026-07-06",
+            "endDate": "2026-07-17"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

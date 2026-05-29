@@ -1,0 +1,36 @@
+{
+  "sourceUrls": [
+    "https://www.paanyc.org/",
+    "https://www.paanyc.org/play-areas/",
+    "https://www.paanyc.org/contact-us/",
+    "https://www.paanyc.org/wp/wp-content/uploads/elementor/thumbs/IMG_3848-scaled-psw1k52qleyoszmy11x3yub1qnnf6hoew3jzyrekqw.jpg"
+  ],
+  "notes": "Official Play Area Association pages fetched May 16 2026. Community description, family count, weekly toddler playgroups, and Play-and-Learn co-op age information come from the home page; Upper East Side location support comes from the play-areas page (Payson House, 435 East 70th Street) and contact page mailing ZIP 10021. Original official image source URL: https://www.paanyc.org/wp/wp-content/uploads/elementor/thumbs/IMG_3848-scaled-psw1k52qleyoszmy11x3yub1qnnf6hoew3jzyrekqw.jpg. ImgBB upload completed via POST /api/ingest/upload and stored as coverImageUrl.",
+  "missingOrUncertain": [
+    "instagram: no official Instagram URL was confirmed on the cited pages, so this field is empty.",
+    "ageRange: stored as 2–5 because the official site describes weekly toddler playgroups and a Play-and-Learn co-op for children 18 months through 4 years; this is the closest supported meetup age enum.",
+    "neighborhood mapping: the official site gives Payson House at 435 East 70th Street and mailing ZIP 10021; mapped to canonical Upper East Side."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "play-area-association",
+        "name": "Play Area Association",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "groupType": "Neighborhood Families",
+        "ageRange": "2–5",
+        "cadence": "Weekly",
+        "instagram": "",
+        "website": "https://www.paanyc.org/",
+        "description": "The Play Area Association is a volunteer social organization for more than 250 member families in Manhattan’s East 70s area. Its official site says the group provides weekly playgroups for toddlers, year-round Play-and-Learn co-op classes for children 18 months through 4 years, field trips, parties, and shared indoor and outdoor play spaces at Payson House.",
+        "initials": "PAA",
+        "icon": "playground",
+        "palette": "beige",
+        "coverImageUrl": "https://i.ibb.co/PZ40g9MD/032ad5f157e7.jpg"
+      }
+    }
+  ]
+}

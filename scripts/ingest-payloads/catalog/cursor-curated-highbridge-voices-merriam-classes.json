@@ -1,0 +1,61 @@
+{
+  "sourceUrls": [
+    "https://www.highbridgevoices.org/merriam/",
+    "https://www.highbridgevoices.org/music-program/",
+    "https://www.highbridgevoices.org/program/",
+    "https://www.highbridgevoices.org/2025-2026-application/",
+    "https://www.highbridgevoices.org/",
+    "https://www.highbridgevoices.org/wp-content/uploads/2024/07/061924_518-scaled.jpg"
+  ],
+  "notes": "Official Highbridge Voices Merriam campus, music program, broader program hub, 2025-2026 application page, and homepage reviewed May 23, 2026. The official Highbridge Voices photo from highbridgevoices.org was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Highbridge from the published 1360 Merriam Ave address; the official site does not publish a ClassScout neighborhood field.",
+    "pricePerClass is stored as 0 because the homepage states all students participate on a 100% scholarship rather than publishing a per-class tuition amount.",
+    "rating and reviewCount are set to 0 because the official source pages do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-highbridge-voices-merriam-classes",
+        "name": "Highbridge Voices at Merriam Ave",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "address": "1360 Merriam Ave., Bronx, NY 10452",
+        "activityTypes": ["Music", "STEM", "Art"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Highbridge afterschool music and enrichment program for grades 3-12 with weekday choir, music theory, STEM, art, and homework help at the Merriam campus.",
+        "longDescription": "Highbridge Voices at Merriam Ave is the organization's main Highbridge campus at 1360 Merriam Avenue in the Bronx. The official Merriam page says the campus is open Monday through Thursday from 2:00 PM to 6:00 PM for students in grades 3-12, and describes a well-rounded afterschool experience with homework help, STEM, art, music theory, choral training, and instrumental and musicianship classes.\n\nThe official Music Program page describes Highbridge Voices as a transformative afterschool initiative for students in grades 3-12 and says rehearsals are held Monday through Thursday from 4:00 PM to 6:00 PM at the main campus. The broader program page also describes Highbridge Voices as a music and academic program dedicated to children and notes the Merriam Ave afterschool music program as an active application path for the 2025-2026 school year.\n\nThe official homepage says all Highbridge Voices students participate on a 100% scholarship. Published contact details across the official site list Highbridge Voices at 1360 Merriam Ave., Bronx, NY 10452, phone (718) 293-8759, and email info@highbridgevoices.org.\n\nSources: https://www.highbridgevoices.org/merriam/ https://www.highbridgevoices.org/music-program/ https://www.highbridgevoices.org/program/ https://www.highbridgevoices.org/2025-2026-application/ https://www.highbridgevoices.org/ https://www.highbridgevoices.org/wp-content/uploads/2024/07/061924_518-scaled.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/gLjbVyw1/e0fb71612e24.jpg",
+        "email": "info@highbridgevoices.org",
+        "website": "https://www.highbridgevoices.org/merriam/",
+        "phone": "(718) 293-8759",
+        "announcementTitle": "2025-2026 afterschool applications open",
+        "announcementDescription": "The official site links a Merriam Ave afterschool program application for the 2025-2026 school year.",
+        "announcementBadge": "Apply now",
+        "recurringPrograms": [
+          {
+            "id": "rp-highbridge-voices-merriam-afterschool",
+            "title": "Merriam Ave Afterschool Program",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "timeText": "2:00 PM-6:00 PM (music rehearsals 4:00 PM-6:00 PM)",
+            "locationNote": "Highbridge Voices main campus",
+            "ageRanges": ["6–8", "9–12", "Teens"],
+            "activityTypes": ["Music", "STEM", "Art"],
+            "summary": "Afterschool music and academic enrichment with homework help, STEM, art, choral training, music theory, and instrumental classes.",
+            "registrationUrl": "https://www.highbridgevoices.org/2025-2026-application/"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sourceUrls": [
+    "https://www.bklynlibrary.org/locations/bay-ridge",
+    "https://www.bklynlibrary.org/locations/walt-whitman"
+  ],
+  "notes": "Removing two BPL curated rows that cannot currently satisfy the official-image plus ImgBB requirement. Official branch pages remain behind Cloudflare challenge responses for automated fetches, so no stable official image asset URL could be extracted safely.",
+  "missingOrUncertain": [
+    "Rows are being dropped rather than retained with empty images because the curator workflow requires a source-backed official image uploaded to ImgBB.",
+    "If browser-assisted extraction or a separately supplied official BPL image URL becomes available later, these listings can be re-curated and re-ingested."
+  ],
+  "operations": [
+    {
+      "resource": "providers",
+      "action": "deleteMany",
+      "ids": [
+        "prov-bpl-bay-ridge-storytime-playtime",
+        "prov-bpl-storytime-fort-greene-park"
+      ]
+    }
+  ]
+}

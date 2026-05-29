@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://www.cutestcookies.com/pages/parties",
+    "https://cdn.shopify.com/s/files/1/0992/3726/files/FullSizeRender_medium.jpg?v=1498070436"
+  ],
+  "notes": "Official Cutest Cookies birthday parties page reviewed May 19, 2026. Original official image source URL: https://cdn.shopify.com/s/files/1/0992/3726/files/FullSizeRender_medium.jpg?v=1498070436. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image complies with ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "The official page identifies the bakery as being in Old Town; this listing maps it to the nearest supported canonical neighborhood, New Dorp.",
+    "ageRanges are approximate because the official page recommends a minimum age of 5 for cookie decorating parties and ages 8+ for hands-on baking parties, while ClassScout uses broader supported age bands.",
+    "pricePerClass uses $400, the published Monday-Thursday base rate for the two-hour cookie decorating party; Friday-Sunday pricing is higher and baking parties use a separate $75 per-person structure.",
+    "rating and reviewCount are not published on the cited official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-cutest-cookies-new-dorp-birthday",
+        "name": "Cutest Cookies Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "address": "1300 Hylan Blvd, Staten Island, NY 10305",
+        "activityTypes": ["Art", "Cooking", "Birthday Entertainment"],
+        "ageRanges": ["3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend"],
+        "pricePerClass": 400,
+        "shortDescription": "Cutest Cookies in Staten Island hosts cookie-decorating and hands-on baking birthday parties with explicit weekday and weekend pricing on its official page.",
+        "longDescription": "Cutest Cookies publishes birthday party packages at 1300 Hylan Blvd in Staten Island. The official page says all parties include invitations, make-your-own pizza, birthday cake, popcorn and drinks, party supplies, aprons, and take-home cookie boxes.\n\nThe official page lists a two-hour Cookie Decorating Party priced at $400 for up to 12 children Monday through Thursday, $500 for up to 12 children Friday through Sunday, and $450 on school holidays, with additional per-child fees above the base package. It also lists a Kid's Hands On Baking Party for ages 8 and up at $75 per person, lasting three hours, with a minimum of 6 guests and maximum of 8 guests.\n\nCutest Cookies states a recommended minimum age of 5 years old and lists contact information as (718) 966-2883 and info@cutestcookies.com. Because the official pricing explicitly separates Monday-Thursday from Friday, Saturday, and Sunday, this listing uses weekday and weekend tags only and does not infer time-of-day availability.\n\nSources: https://www.cutestcookies.com/pages/parties https://cdn.shopify.com/s/files/1/0992/3726/files/FullSizeRender_medium.jpg?v=1498070436",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly"],
+        "image": "https://i.ibb.co/LzBGbcgV/0d11c3c67e83.jpg",
+        "email": "info@cutestcookies.com",
+        "website": "https://www.cutestcookies.com/pages/parties",
+        "phone": "(718) 966-2883",
+        "announcementTitle": "Weekday and weekend rates posted",
+        "announcementDescription": "The official page lists Monday-Thursday cookie parties from $400 and Friday-Sunday cookie parties from $500 for up to 12 children.",
+        "announcementBadge": "Weekend Friendly",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

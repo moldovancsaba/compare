@@ -1,0 +1,43 @@
+{
+  "sourceUrls": [
+    "https://www.brooklynkids.org/visit/",
+    "https://www.brooklynkids.org/wp-content/uploads/2023/10/Animal-Encounters-2023-web-res-photo-credit-Winston-Williams-Brooklyn-Childrens-Museum-010-1400x934.jpg"
+  ],
+  "notes": "Official Brooklyn Children’s Museum visit page plus BCM-hosted program photo used on brooklynkids.org (Animal Encounters image credit Winston Williams / Brooklyn Children’s Museum). Image downloaded and uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass is 15 as general per-person museum admission on the visit page (not a separate timed-ticket SKU); confirm on brooklynkids.org/tickets before visiting.",
+    "rating / reviewCount: not on official visit page; 0 / 0.",
+    "Specific exhibit photos rotate on the public homepage; listing image is one official BCM-published JPEG from site media, not necessarily the visit page hero."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-brooklyn-childrens-museum",
+        "name": "Brooklyn Children's Museum",
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "address": "145 Brooklyn Avenue, Brooklyn, NY 11213",
+        "activityTypes": ["Museum", "Science", "Hands-on exhibits", "Early learning", "Indoor Play"],
+        "ageRanges": ["0–2", "3–5", "6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 15,
+        "shortDescription": "Crown Heights children’s museum (Wed–Sun) with three floors of interactive exhibits and hands-on cultural and science programs for ages about 6 months through 10 years.",
+        "longDescription": "Brooklyn Children’s Museum describes itself as the world’s first children’s museum and offers three floors of interactive exhibits plus hands-on cultural and science programs for ages about six months through ten years, per the official visit page.\n\nPublic hours on the same page: Wednesday–Sunday 10:00 a.m.–5:00 p.m.; last entry 4:50 p.m.; closed Monday–Tuesday.\n\nGeneral admission is $15 per person per the visit page. Members receive free admission and guest discounts as described there. Community Access Thursdays: admission is free every Thursday 2:00–5:00 p.m. (courtesy of Amazon); tickets may be reserved online or at BCM on the day-of; group visits are restricted during that window per the same page. Additional discounted categories are linked from the visit page under tickets/discounts.\n\nLocation: 145 Brooklyn Avenue, Brooklyn, NY 11213. Visitor telephone on the visit page: (718) 735-4400 x 151. Visit-related email hello@brooklynkids.org (allow up to 48 hours for a response per the page).\n\nThe listing image is an official Brooklyn Children’s Museum program photograph published in BCM WordPress media (Animal Encounters series, photographer credit Winston Williams as shown in the asset filename), re-hosted on ImgBB for ClassScout storage policy compliance.\n\nSources: https://www.brooklynkids.org/visit/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/vv4Psw9Y/61a5f038fb03.jpg",
+        "email": "hello@brooklynkids.org",
+        "website": "https://www.brooklynkids.org",
+        "phone": "(718) 735-4400 x 151",
+        "announcementTitle": "Community Access Thursdays",
+        "announcementDescription": "Free museum admission Thursdays 2–5 p.m.; reserve online or at BCM — see brooklynkids.org/visit.",
+        "announcementBadge": "Free Thu 2–5pm",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

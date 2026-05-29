@@ -1,0 +1,36 @@
+{
+  "sourceUrls": [
+    "https://www.communityconnectionfec.org/",
+    "https://www.nyc.gov/site/acs/about/fec.page",
+    "https://www.forestdaleinc.org/community-connection-fec",
+    "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2147696053/images/b7c75f4-ebf0-011f-ac5-b77d7aca54cf_CC_FEC.png"
+  ],
+  "notes": "Community Connection official site, NYC ACS Family Enrichment Centers directory, and Forestdale parent-organization page reviewed May 17, 2026. Cover image is the official Community Connection Kajabi-hosted PNG from the organization's site, downloaded locally and re-hosted through POST /api/ingest/upload for ClassScout's ImgBB-only storage policy.",
+  "missingOrUncertain": [
+    "Neighborhood stored as Jamaica because the ACS directory describes the service area as Jamaica/Hollis/Queens Village and the canonical ClassScout neighborhood list does not include Hollis, Queens Village, or St. Albans as separate supported values.",
+    "ageRange is set to All ages because the official sources describe family-wide and neighborhood-wide programming rather than a single child age band.",
+    "cadence is set to Weekly because Forestdale says events happen every week and the official site points families to an event calendar; individual offering dates and formats vary."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-community-connection-jamaica-fec",
+        "name": "Community Connection — Family Enrichment Center",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Weekly",
+        "instagram": "https://www.instagram.com/communityconnection.fec/",
+        "website": "https://www.communityconnectionfec.org/",
+        "description": "Community Connection is a Family Enrichment Center serving Southeast Queens families. The official site describes it as a safe space for community, connection, creativity, culture, and empowerment, and says families can use the center for free events for the entire family, resources, and community-led support. Forestdale's program page says the center was co-created with neighbors and that weekly events and offerings are shaped with the community.\n\nOfficial contact details published by the organization and ACS include 203-12 Linden Boulevard, Jamaica, NY 11412, phone 347-308-7762, and Instagram @communityconnection.fec.\n\nSources: https://www.communityconnectionfec.org/ https://www.nyc.gov/site/acs/about/fec.page https://www.forestdaleinc.org/community-connection-fec",
+        "initials": "CC",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/v6sRqg8y/b1a30f4df4c9.jpg"
+      }
+    }
+  ]
+}

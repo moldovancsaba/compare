@@ -1,0 +1,66 @@
+{
+  "sourceUrls": [
+    "https://www.bxcm.org/",
+    "https://www.bxcm.org/admission",
+    "https://www.bxcm.org/exhibits1",
+    "https://www.bxcm.org/visitus"
+  ],
+  "notes": "Official Bronx Children's Museum pages reviewed May 16, 2026. Listing uses an ImgBB copy of an official Bronx Children's Museum image originally sourced from https://static.wixstatic.com/media/95fc43_b4707eb706ac49cb82f2f7327b70abf6~mv2.jpg/v1/fit/w_1920,h_1080,q_90,enc_avif,quality_auto/95fc43_b4707eb706ac49cb82f2f7327b70abf6~mv2.jpg and uploaded through /api/ingest/upload for storage compatibility.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to Mott Haven from the official 725 Exterior Street address so the record fits ClassScout's canonical neighborhood taxonomy; the official pages do not explicitly name the neighborhood.",
+    "pricePerClass uses the official child general-admission ticket price ($8) as a planning figure for this drop-in museum visit rather than a literal per-class SKU.",
+    "Age ranges are mapped conservatively from the official exhibits language, including a designated birth-to-3 play space and broader family exhibit descriptions; the official site does not publish ClassScout-style age bands.",
+    "rating and reviewCount are not stated on the official source pages, so both are set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-bronx-childrens-museum-mott-haven",
+        "name": "Bronx Children's Museum",
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "address": "725 Exterior Street, 2nd Floor, Bronx, NY 10451",
+        "activityTypes": [
+          "Interactive exhibits",
+          "STEAM-based art",
+          "Dramatic role-play",
+          "Scientific exploration",
+          "Water play"
+        ],
+        "ageRanges": [
+          "0–2",
+          "3–5",
+          "6–8",
+          "9–12"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 8,
+        "shortDescription": "Bronx children's museum with active exhibits, water play, STEAM art, and a dedicated infant-and-toddler play space near Mill Pond Park.",
+        "longDescription": "Bronx Children's Museum offers more than 10,000 square feet of active exhibit space where families can play, learn, and connect with the Bronx through STEAM-based art, dramatic role-play, and scientific exploration. The official exhibits page highlights a 35-foot water table based on Bronx waterways, a multimedia exhibit space, a calm caregiver room, nature-themed play areas, a miniature neighborhood block, a bookstore, and The Nest, a designated play space for children from birth to age 3 and their caregivers.\n\nThe museum's official admission page lists child tickets at $8, adult tickets at $14, senior tickets at $10, and free admission for children under 1. Reservations are recommended, especially for Saturdays, but are not required. The same page notes an adult-to-child ratio of at least 1 adult per 3 children and says organized groups larger than 6 need a reservation.\n\nThe official visitor page describes Bronx Children's Museum as being on the second floor of NYC Parks' Powerhouse Building at the north end of Mill Pond Park, across from Bronx Terminal Market. The official visit information currently lists hours as Tuesday through Friday from 10 a.m. to 1 p.m. and Saturdays from 10 a.m. to 1 p.m. and 2 p.m. to 5 p.m.\n\nContact details listed on the official site: 725 Exterior Street, 2nd Floor, Bronx, NY 10451; phone 718-775-3450; email info@bxcm.org.\n\nSources: https://www.bxcm.org/ https://www.bxcm.org/admission https://www.bxcm.org/exhibits1 https://www.bxcm.org/visitus",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Weekend Friendly",
+          "Great for Toddlers"
+        ],
+        "image": "https://i.ibb.co/N6Ytrfty/d54c2c0a8c46.jpg",
+        "email": "info@bxcm.org",
+        "website": "https://www.bxcm.org/",
+        "phone": "718-775-3450",
+        "announcementTitle": "Tuesday-Saturday admission hours",
+        "announcementDescription": "Official visit page lists Tuesday-Friday 10 a.m.-1 p.m. plus Saturday sessions from 10 a.m.-1 p.m. and 2 p.m.-5 p.m.; reservations recommended, especially for Saturdays.",
+        "announcementBadge": "Plan ahead",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/castle-hill-ymca",
+    "https://ymcanyc.org/locations/castle-hill-ymca/programs-classes",
+    "https://ymcanyc.org/sites/default/files/styles/gallery_cta_2x/public/2025-12/2026_camp_stem2.jpg.webp?itok=yQSRuSKc"
+  ],
+  "notes": "YMCA of Greater New York Castle Hill branch landing and programs hub. Hero image is the branch gallery STEM/youth program web asset served from the same Drupal host, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Neighborhood is set to Pelham Bay (supported app chip) while the branch address is in the Castle Hill section of the Bronx (10473); discover filters are approximate until Castle Hill is added as its own neighborhood.",
+    "pricePerClass is 0 because the branch programs landing page does not list a single fixed child swim-lesson price; confirm current lesson fees and session dates via register.ymcanyc.org or by calling the branch.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "Spring II session marketing dates (e.g. April 27 start, registration windows) appear on the programs page and can change—verify on ymcanyc.org before registering."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-castle-hill-ymca-youth-swim",
+        "name": "Castle Hill YMCA — Youth swim programs",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "address": "2 Castle Hill Avenue, Bronx, NY 10473",
+        "activityTypes": ["Swimming", "Sports", "STEM"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Castle Hill Y (outdoor + indoor pools) runs youth aquatics and broader kids/teen classes; branch hub links swim lessons with seasonal registration windows.",
+        "longDescription": "The YMCA of Greater New York’s Castle Hill branch at 2 Castle Hill Avenue in the Castle Hill neighborhood of the Bronx promotes programs and classes for children, teens, and adults on its programs landing page, explicitly inviting families to sign up for swim lessons alongside other youth offerings. The branch page highlights both an outdoor pool and an indoor pool, family swim, lap swim, and other fitness amenities, and lists branch phone contact for questions.\n\nPublished branch hours on the location page include Monday–Friday 5:30 a.m.–10:00 p.m. and weekend hours in a similar range (see branch page for exact Saturday/Sunday times). The programs hub also advertises upcoming seasonal session windows (for example, Spring II programming with member and community registration dates) that rotate throughout the year.\n\nBecause lesson pricing is session- and level-specific and not summarized as a single child rate on the pages used here, families should confirm current swim-lesson fees and availability through the Y’s online registration system or by calling the branch.\n\nSources: https://ymcanyc.org/locations/castle-hill-ymca https://ymcanyc.org/locations/castle-hill-ymca/programs-classes",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Weekend Friendly", "Popular"],
+        "image": "https://i.ibb.co/Zz2vTX5v/f037326b4dd8.webp",
+        "email": "",
+        "website": "https://ymcanyc.org/locations/castle-hill-ymca",
+        "phone": "212-912-2490",
+        "announcementTitle": "Spring II registration windows",
+        "announcementDescription": "Programs page promotes Spring II with separate member vs community registration Saturdays—confirm current season on the branch hub.",
+        "announcementBadge": "Seasonal signup",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

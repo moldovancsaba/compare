@@ -1,0 +1,58 @@
+{
+  "sourceUrls": [
+    "https://southbronxunited.org/register",
+    "https://images.squarespace-cdn.com/content/v1/601ad865cf01393aa95bf49b/1614564904592-5FB307KUJFMEWQ66XSRW/03212019-0738.jpg?format=1500w"
+  ],
+  "notes": "Official South Bronx United registration page reviewed May 26, 2026. The official South Bronx United photo was downloaded from the organization's Squarespace CDN and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "Neighborhood is mapped to canonical Concourse from the official 814 River Avenue address near Yankee Stadium; the source does not publish a ClassScout neighborhood field.",
+    "The official page describes individual weekend skill-building classes and says each class lasts one hour, but it does not publish a fixed recurring Saturday/Sunday timetable.",
+    "pricePerClass is stored as 0 because the public registration page reviewed here does not publish a single fixed per-class price.",
+    "rating and reviewCount are set to 0 because the official source does not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-south-bronx-united-clubhouse-soccer",
+        "name": "South Bronx United Clubhouse Soccer Classes",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "address": "814 River Avenue, Suite 2-3, Bronx, NY 10451",
+        "activityTypes": ["Soccer", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekend"],
+        "pricePerClass": 0,
+        "shortDescription": "South Bronx United offers one-hour weekend indoor soccer skill-building classes for Bronx kids and teens ages 5-15 at its River Avenue clubhouse.",
+        "longDescription": "South Bronx United's official registration page lists Clubhouse Soccer Classes and 3v3 League - Indoor for ages 5-15. The page says families can sign up children born in 2009-2021 (U6-U15) for as many individual weekend skill-building classes as they want, and states that each class lasts one hour.\n\nThe same official site publishes South Bronx United at 814 River Avenue in the Bronx with contact email info@southbronxunited.org and phone (718) 404-9281. Because the registration page does not publish a single fixed per-class price or a detailed repeating weekend timetable on the public-facing page reviewed here, this listing keeps pricePerClass at 0 and stores the recurring weekend structure conservatively.\n\nSources: https://southbronxunited.org/register https://images.squarespace-cdn.com/content/v1/601ad865cf01393aa95bf49b/1614564904592-5FB307KUJFMEWQ66XSRW/03212019-0738.jpg?format=1500w",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/x8P9y96J/24bfa16a92e3.webp",
+        "email": "info@southbronxunited.org",
+        "website": "https://southbronxunited.org/register",
+        "phone": "(718) 404-9281",
+        "announcementTitle": "Weekend indoor soccer registration",
+        "announcementDescription": "The official registration page promotes one-hour weekend clubhouse soccer classes for ages 5-15.",
+        "announcementBadge": "Weekend class",
+        "recurringPrograms": [
+          {
+            "id": "rp-south-bronx-united-clubhouse-soccer-weekend",
+            "title": "Clubhouse Soccer Weekend Classes",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Saturday", "Sunday"],
+            "timeText": "One-hour weekend skill-building classes; exact public schedule varies by registration",
+            "locationNote": "South Bronx United clubhouse",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Soccer", "Sports"],
+            "summary": "Indoor skill-building soccer classes for ages 5-15 with individual weekend registration options.",
+            "registrationUrl": "https://southbronxunited.org/register/"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

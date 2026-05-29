@@ -1,0 +1,174 @@
+import { ACTIVITY_TYPES, AGE_RANGES, DAY_TIME_TAGS } from "@/data/providers";
+import { BOROUGHS } from "@/data/locations";
+import type { Borough, BoroughChoice, Category } from "@/types/provider";
+import type { FilterState } from "@/components/scout/Filters";
+import type { DiscoverDateMode, DiscoverSort } from "@/lib/providerQuery";
+
+export type ScoutPageKey =
+  | Category
+  | "This Week"
+  | "Saved"
+  | "Calculator"
+  | "Meet-Up Groups"
+  | "Home"
+  | "My Account"
+  | "Neighborhood Guide";
+
+const CATEGORY_TO_SLUG: Record<Category, string> = {
+  Classes: "training",
+  Camps: "ranges",
+  "Birthday Parties": "competitions",
+  "Drop-In Activities": "hunting-grounds",
+};
+
+const SLUG_TO_CATEGORY: Record<string, Category> = Object.fromEntries(
+  Object.entries(CATEGORY_TO_SLUG).map(([category, slug]) => [slug, category as Category]),
+) as Record<string, Category>;
+
+const VIEW_HREFS: Record<ScoutPageKey, string> = {
+  Home: "/",
+  Classes: "/training",
+  Camps: "/ranges",
+  "Birthday Parties": "/competitions",
+  "Drop-In Activities": "/hunting-grounds",
+  "This Week": "/this-week",
+  "Meet-Up Groups": "/clubs",
+  Saved: "/saved",
+  Calculator: "/calculator",
+  "My Account": "/my-account",
+  "Neighborhood Guide": "/neighborhood-guides",
+};
+
+export function getHrefForView(view: ScoutPageKey): string {
+  return VIEW_HREFS[view];
+}
+
+export function getViewFromPathname(pathname: string): ScoutPageKey {
+  const normalized = pathname.replace(/\/+$/, "") || "/";
+  if (normalized === "/") return "Home";
+  const slug = normalized.slice(1);
+  if (slug in SLUG_TO_CATEGORY) return SLUG_TO_CATEGORY[slug];
+  if (slug === "classes") return "Classes";
+  if (slug === "camps") return "Camps";
+  if (slug === "birthday-parties") return "Birthday Parties";
+  if (slug === "drop-in-activities") return "Drop-In Activities";
+  if (slug === "this-week") return "This Week";
+  if (slug === "clubs" || slug === "meet-up-groups") return "Meet-Up Groups";
+  if (slug === "saved") return "Saved";
+  if (slug === "calculator") return "Calculator";
+  if (slug === "my-account") return "My Account";
+  if (slug === "neighborhood-guides") return "Neighborhood Guide";
+  return "Home";
+}
+
+export function isDiscoverCategory(view: ScoutPageKey): view is Category {
+  return view in CATEGORY_TO_SLUG;
+}
+
+function sanitizeSort(value: string | null): DiscoverSort | null {
+  if (!value) return null;
+  return ["newest", "oldest", "relevance", "upcoming"].includes(value) ? (value as DiscoverSort) : null;
+}
+
+function sanitizeDateMode(value: string | null): DiscoverDateMode {
+  return value === "this-week" ? "this-week" : "all";
+}
+
+function sanitizeBorough(value: string | null): BoroughChoice | null {
+  if (!value) return null;
+  if (value === "All") return "All";
+  return BOROUGHS.includes(value as Borough) ? (value as Borough) : null;
+}
+
+function sanitizeList<T extends string>(value: string | null, allowed: readonly T[]): T[] {
+  if (!value) return [];
+  const parts = value
+    .split(",")
+    .map((item) => decodeURIComponent(item.trim()))
+    .filter(Boolean);
+  return parts.filter((item): item is T => allowed.includes(item as T));
+}
+
+function setListParam(params: URLSearchParams, key: string, values: string[]) {
+  if (values.length === 0) {
+    params.delete(key);
+    return;
+  }
+  params.set(key, values.join(","));
+}
+
+function withSearch(baseHref: string, params: URLSearchParams) {
+  const query = params.toString();
+  return query ? `${baseHref}?${query}` : baseHref;
+}
+
+export function getDiscoverHref(
+  category: Category | "This Week",
+  state?: {
+    borough?: BoroughChoice | null;
+    neighborhood?: string | null;
+    filters?: FilterState;
+    q?: string | null;
+    sort?: DiscoverSort | null;
+    dateMode?: DiscoverDateMode;
+  },
+) {
+  const params = new URLSearchParams();
+  if (state?.borough && state.borough !== "All") params.set("borough", state.borough);
+  if (state?.borough === "All") params.delete("borough");
+  if (state?.borough && state.borough !== "All" && state.neighborhood?.trim()) {
+    params.set("neighborhood", state.neighborhood.trim());
+  }
+  if (state?.filters) {
+    setListParam(params, "ages", state.filters.ages);
+    setListParam(params, "times", state.filters.times);
+    if (state.filters.activity?.trim()) params.set("activity", state.filters.activity.trim());
+  }
+  if (state?.q?.trim()) params.set("q", state.q.trim());
+  if (state?.sort) params.set("sort", state.sort);
+  if (state?.dateMode === "this-week") params.set("dateMode", "this-week");
+  return withSearch(getHrefForView(category), params);
+}
+
+export function getMeetupGroupsHref(state?: { borough?: BoroughChoice | null; neighborhood?: string | null }) {
+  const params = new URLSearchParams();
+  if (state?.borough && state.borough !== "All") params.set("borough", state.borough);
+  if (state?.borough && state.borough !== "All" && state.neighborhood?.trim()) {
+    params.set("neighborhood", state.neighborhood.trim());
+  }
+  return withSearch(getHrefForView("Meet-Up Groups"), params);
+}
+
+export function getNeighborhoodGuideHref(state: { borough: BoroughChoice; neighborhood: string }) {
+  const params = new URLSearchParams();
+  if (state.borough !== "All") params.set("borough", state.borough);
+  if (state.neighborhood.trim()) params.set("neighborhood", state.neighborhood.trim());
+  return withSearch(getHrefForView("Neighborhood Guide"), params);
+}
+
+export function parseDiscoverState(searchParams: URLSearchParams) {
+  const borough = sanitizeBorough(searchParams.get("borough")) ?? "All";
+  const neighborhood = borough === "All" ? null : searchParams.get("neighborhood")?.trim() || null;
+  const q = searchParams.get("q")?.trim() ?? "";
+  const dateMode = sanitizeDateMode(searchParams.get("dateMode"));
+  const requestedSort = sanitizeSort(searchParams.get("sort"));
+  const filters: FilterState = {
+    ages: sanitizeList(searchParams.get("ages"), AGE_RANGES),
+    times: sanitizeList(searchParams.get("times"), DAY_TIME_TAGS),
+    activity: sanitizeList(searchParams.get("activity"), ACTIVITY_TYPES)[0] ?? null,
+  };
+  const sort = requestedSort ?? (dateMode === "this-week" ? "upcoming" : q ? "relevance" : "newest");
+  return { borough, neighborhood, filters, q, sort, dateMode };
+}
+
+export function parseMeetupState(searchParams: URLSearchParams) {
+  const borough = sanitizeBorough(searchParams.get("borough")) ?? "All";
+  const neighborhood = borough === "All" ? null : searchParams.get("neighborhood")?.trim() || null;
+  return { borough, neighborhood };
+}
+
+export function parseNeighborhoodGuideState(searchParams: URLSearchParams) {
+  const borough = sanitizeBorough(searchParams.get("borough")) ?? "All";
+  const neighborhood = searchParams.get("neighborhood")?.trim() || null;
+  return { borough, neighborhood };
+}

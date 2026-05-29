@@ -1,0 +1,44 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/flushing-ymca/programs-classes/camps",
+    "https://ymcanyc.org/locations/flushing-ymca",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm"
+  ],
+  "notes": "YMCA of Greater New York Flushing branch 2026 summer camp page and branch listing. Hero image is the official 2026 camp parachute banner on ymcanyc.org, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $771, the published community (non-member) rate for one two-week Traditional Summer Camp session (ages 6–11); Kinder, Swim, and Teen camp tiers differ on the same page.",
+    "rating and reviewCount are 0; not published on these official pages.",
+    "Extended-care fees for 8–9 a.m. and 5–6 p.m. are mentioned but not itemized on the excerpted camp page."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-flushing-ymca-summer-camp-2026",
+        "name": "Flushing YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "address": "138-46 Northern Boulevard, Flushing, NY 11354",
+        "activityTypes": ["Swimming", "Sports", "STEM", "Art", "Outdoor Activities"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 771,
+        "shortDescription": "Flushing Y day camp (2026): Traditional, Kinder, Swim, and Teen tracks in two-week sessions with instructional swim and published member/community rates.",
+        "longDescription": "The Flushing YMCA of Greater New York runs 2026 Summer Day Camp at 138-46 Northern Boulevard. Published camp hours are 9 a.m.–5 p.m. with optional extended hours 8–9 a.m. and 5–6 p.m. Summer camp is scheduled to start June 29, 2026, and run in two-week sessions through August 21, 2026, with closure Friday, July 3, for the Independence Day holiday.\n\nProgram tracks on the official camp page include Traditional Summer Camp (ages 6–11), Kinder Camp for children entering kindergarten in September 2026 (ages 4–5), Swim Camp (ages 7–11), and Teen Camp (ages 12–15). The Traditional camp description highlights sports, arts and crafts, science, theme days, group play, team building, and instructional swim.\n\nPublished per-session tuition on the same page: Traditional Summer Camp—Y member $685, community $771; Kinder Camp—member $771, community $856; Swim Camp—member $799, community $885; Teen Camp—member $685, community $771 (each per two-week session). Open house dates including April 4, April 18, and April 24 are listed. Camp leadership contact: Amanda Algu, FlDayCamp@ymcanyc.org, 718-551-9375. Branch phone: 718-551-9350.\n\nSources: https://ymcanyc.org/locations/flushing-ymca/programs-classes/camps https://ymcanyc.org/locations/flushing-ymca",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/y3n7BQs/0603ab22fa5f.webp",
+        "email": "FlDayCamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/flushing-ymca",
+        "phone": "718-551-9375",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Flushing Y lists 10% early-bird savings when the full balance is paid by April 18, 2026, plus sibling discounts—see branch camp page.",
+        "announcementBadge": "Early bird",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

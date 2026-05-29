@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-05-28T15:12:35.044Z",
+  "findings": [
+    {
+      "sourceUrl": "https://mommypoppins.com/events/1670/anywhere/all/tag/all/age/all/all/all/type/0/deals/0/near/all",
+      "sourceSurface": "events",
+      "capabilityName": "Date-first event browsing",
+      "observedBehavior": "Mommy Poppins exposes an event date bar with forward date browsing and calendar pickers for event discovery.",
+      "classScoutEquivalent": "ClassScout has `This Week` and upcoming rendering but not a first-class date-bar event browser.",
+      "gapStatus": "missing",
+      "recommendationReason": "High family-discovery value with bounded implementation scope if built as a GDS-compliant public browse extension.",
+      "implementationScope": "medium",
+      "gdsImpact": "new_public_surface",
+      "accessibilityRisk": "medium",
+      "sourceEvidence": [
+        "datebar",
+        "calendar modal",
+        "date-button"
+      ],
+      "scores": {
+        "userValue": 0.9,
+        "deliveryFit": 0.7,
+        "operationalSafety": 0.8,
+        "classScoutGap": 1,
+        "total": 0.87
+      },
+      "capabilityId": "date-first-event-browsing",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "adopt"
+    },
+    {
+      "sourceUrl": "https://mommypoppins.com/events/1670/anywhere/all/tag/all/age/all/all/all/type/0/deals/0/near/all",
+      "sourceSurface": "events",
+      "capabilityName": "Event deals and free filters",
+      "observedBehavior": "Mommy Poppins exposes explicit route-level filters for free events and deals inside the calendar surface.",
+      "classScoutEquivalent": "ClassScout does not expose price-sensitive event filters as a first-class discovery control.",
+      "gapStatus": "missing",
+      "recommendationReason": "Useful for parent planning, but should only land after a real event surface exists.",
+      "implementationScope": "medium",
+      "gdsImpact": "surface_extension",
+      "accessibilityRisk": "low",
+      "sourceEvidence": [
+        "/type/1/",
+        "/free/0/"
+      ],
+      "scores": {
+        "userValue": 0.8,
+        "deliveryFit": 0.55,
+        "operationalSafety": 0.75,
+        "classScoutGap": 1,
+        "total": 0.7925
+      },
+      "capabilityId": "event-deals-and-free-filters",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "adopt"
+    },
+    {
+      "sourceUrl": "https://mommypoppins.com/",
+      "sourceSurface": "navigation",
+      "capabilityName": "Structured route taxonomy for search surfaces",
+      "observedBehavior": "Mommy Poppins publishes explicit route-level search targets and region maps in client-side settings.",
+      "classScoutEquivalent": "ClassScout has discovery feature flags and scarcity targets but not a documented route-taxonomy contract for external source capture.",
+      "gapStatus": "missing",
+      "recommendationReason": "Useful mainly as an internal data/operations idea, not a direct end-user feature.",
+      "implementationScope": "small",
+      "gdsImpact": "none",
+      "accessibilityRisk": "low",
+      "sourceEvidence": [
+        "searchurls",
+        "regionMap"
+      ],
+      "scores": {
+        "userValue": 0.35,
+        "deliveryFit": 0.9,
+        "operationalSafety": 0.95,
+        "classScoutGap": 1,
+        "total": 0.7125
+      },
+      "capabilityId": "structured-route-taxonomy-for-search-surfaces",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "maybe"
+    },
+    {
+      "sourceUrl": "https://mommypoppins.com/mommy-poppins-business-listings",
+      "sourceSurface": "submission",
+      "capabilityName": "Structured provider self-submission funnel",
+      "observedBehavior": "Mommy Poppins Business Listings | Mommy Poppins - Things to Do with Kids Sorry, you need to enable JavaScript to visit this website.",
+      "classScoutEquivalent": "ClassScout has ingest/admin tooling but no public provider self-submission funnel.",
+      "gapStatus": "missing",
+      "recommendationReason": "Operationally valuable for future supply growth, but only after moderation and quality gates are explicit.",
+      "implementationScope": "large",
+      "gdsImpact": "new_public_surface",
+      "accessibilityRisk": "medium",
+      "sourceEvidence": [
+        "Get Listed",
+        "business listings"
+      ],
+      "scores": {
+        "userValue": 0.7,
+        "deliveryFit": 0.45,
+        "operationalSafety": 0.6,
+        "classScoutGap": 1,
+        "total": 0.71
+      },
+      "capabilityId": "structured-provider-self-submission-funnel",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "maybe"
+    },
+    {
+      "sourceUrl": "https://mommypoppins.com/directory/1670/anywhere/all/type/all/age/0/deals/all",
+      "sourceSurface": "directory",
+      "capabilityName": "Map-backed directory discovery",
+      "observedBehavior": "Mommy Poppins directory pages ship map-marker payloads for browseable business discovery.",
+      "classScoutEquivalent": "ClassScout has provider map support inside profiles, but not map-first directory discovery.",
+      "gapStatus": "partial",
+      "recommendationReason": "Potentially useful, but lower priority than event/date browsing because ClassScout already has limited map support.",
+      "implementationScope": "large",
+      "gdsImpact": "new_public_surface",
+      "accessibilityRisk": "high",
+      "sourceEvidence": [
+        "map_markers",
+        "parachute_location.png"
+      ],
+      "scores": {
+        "userValue": 0.65,
+        "deliveryFit": 0.35,
+        "operationalSafety": 0.55,
+        "classScoutGap": 0.65,
+        "total": 0.575
+      },
+      "capabilityId": "map-backed-directory-discovery",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "maybe"
+    },
+    {
+      "sourceUrl": "https://mommypoppins.com/find/1670/anywhere/all/cat/all/age/all",
+      "sourceSurface": "find",
+      "capabilityName": "Editorial-to-discovery article search",
+      "observedBehavior": "Mommy Poppins provides a dedicated article/search surface with paged discovery and filtered guides.",
+      "classScoutEquivalent": "ClassScout has neighborhood-guide pages but not a dedicated editorial search surface.",
+      "gapStatus": "partial",
+      "recommendationReason": "Useful once ClassScout accumulates enough editorial volume; not a near-term priority over catalog operations.",
+      "implementationScope": "large",
+      "gdsImpact": "new_public_surface",
+      "accessibilityRisk": "medium",
+      "sourceEvidence": [
+        "filtersforsearchingarticles",
+        "pager__item"
+      ],
+      "scores": {
+        "userValue": 0.45,
+        "deliveryFit": 0.3,
+        "operationalSafety": 0.7,
+        "classScoutGap": 0.65,
+        "total": 0.5075
+      },
+      "capabilityId": "editorial-to-discovery-article-search",
+      "recordedAt": "2026-05-28T15:12:35.045Z",
+      "recommendation": "maybe"
+    }
+  ]
+}

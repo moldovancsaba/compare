@@ -1,0 +1,42 @@
+{
+  "sourceUrls": [
+    "https://www.huntspoint.org/balletinthebronx",
+    "https://images.squarespace-cdn.com/content/v1/5d4488914df5da0001ddaa0e/f5a2e62e-c807-4826-be67-cbf6c530aeae/BalletinTheBronx.jpg?format=1500w"
+  ],
+  "notes": "Official Hunts Point Alliance for Children Ballet in the Bronx page reviewed May 19, 2026. Original official image source URL: https://images.squarespace-cdn.com/content/v1/5d4488914df5da0001ddaa0e/f5a2e62e-c807-4826-be67-cbf6c530aeae/BalletinTheBronx.jpg?format=1500w. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the official program page does not publish tuition or fee information.",
+    "The page describes the program by school grades rather than exact ages; ClassScout maps 2nd through 6th grade into the supported 6–8 and 9–12 age bands.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ballet-in-the-bronx-hunts-point",
+        "name": "Ballet in the Bronx",
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "address": "1231 Lafayette Avenue, The Bronx, NY 10474",
+        "activityTypes": ["Dance"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Hunts Point Alliance for Children offers Ballet in the Bronx, an after-school dance program in Hunts Point for 2nd through 6th grade scholars with ballet, modern dance, and anatomy instruction.",
+        "longDescription": "Hunts Point Alliance for Children's official Ballet in the Bronx page says the program provides a holistic, rigorous, and culturally relevant dance experience for children in Hunts Point. The page says 2nd through 6th grade scholars learn the fundamentals of ballet, modern dance, and human anatomy to build an understanding of form, function, and movement.\n\nThe official page says scholars are taught by professional instructors from Dance Theatre of Harlem and that classes occur three days a week from 2:30 p.m. to 5:30 p.m. during the school year. The program includes two community showcase performances each year, one in December and one in June.\n\nThe organization's footer lists 1231 Lafayette Avenue, The Bronx, NY 10474, with phone (718) 620-2824 and email info@hpac10474.org. The public page reviewed does not publish tuition information.\n\nSources: https://www.huntspoint.org/balletinthebronx https://images.squarespace-cdn.com/content/v1/5d4488914df5da0001ddaa0e/f5a2e62e-c807-4826-be67-cbf6c530aeae/BalletinTheBronx.jpg?format=1500w",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/cm4pM0d/5b09ee7f0be5.webp",
+        "email": "info@hpac10474.org",
+        "website": "https://www.huntspoint.org/balletinthebronx",
+        "phone": "(718) 620-2824",
+        "announcementTitle": "After-school dance program",
+        "announcementDescription": "Ballet in the Bronx runs three afternoons a week during the school year with December and June showcases.",
+        "announcementBadge": "School year"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "sourceUrls": [
+    "https://www.qbksports.com/youth-beach-volleyball-classes",
+    "https://static.wixstatic.com/media/541d0d_3e7129e89b484d34a689f79dbc4bc742~mv2.jpg/v1/fill/w_2500,h_1662,al_c/541d0d_3e7129e89b484d34a689f79dbc4bc742~mv2.jpg"
+  ],
+  "notes": "Official QBK Sports youth beach volleyball classes page reviewed May 26, 2026. The official QBK youth volleyball hero image was downloaded from the provider's Wix-hosted media and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the public page publishes membership-style pricing and trial information rather than one universal per-class rate.",
+    "The page explicitly names detailed Cubs and Seals recurring times, but some Seals slots vary by age subset and Saturday session choice, so recurringPrograms summarize those published schedules in one field each.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-qbk-sunnyside-youth-beach-volleyball",
+        "name": "QBK Sports Youth Beach Volleyball",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "address": "41-20 39th St, Sunnyside, NY 11104",
+        "activityTypes": ["Sports"],
+        "ageRanges": ["6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Indoor beach volleyball classes in Sunnyside for kids ages 6+ with weekday after-school sessions plus Saturday and Sunday training.",
+        "longDescription": "QBK Sports publishes youth beach volleyball classes at its Sunnyside facility for children in grades 4 and up. The official page breaks the program into Cubs Club for ages 6-9 and Seals classes for ages 10-12 and 13+, describing the program as an all-abilities pathway into beach volleyball skills, teamwork, and sportsmanship.\n\nThe same page gives a detailed recurring schedule. Cubs are listed on Tuesdays 5:00-6:00 PM, Thursdays 3:30-4:30 PM, and Saturdays 9:00-10:00 AM. Seals ages 10-12 are listed on Mondays or Thursdays 4:30-6:00 PM, Tuesdays 3:30-5:00 PM, Saturdays 9:00-10:30 AM and 10:30 AM-12:00 PM, and Sundays 11:00 AM-12:30 PM. Seals ages 13+ are listed on Mondays or Wednesdays 4:30-6:00 PM and Saturdays 9:00-10:30 AM and 10:30 AM-12:00 PM.\n\nQBK's official page says the facility is located at 41-20 39th St in Sunnyside, Queens and directs families to register for a free trial by emailing youth@qbksports.com. The provider image here is an ImgBB re-host of QBK's official youth volleyball hero image from the same page.\n\nSources: https://www.qbksports.com/youth-beach-volleyball-classes https://static.wixstatic.com/media/541d0d_3e7129e89b484d34a689f79dbc4bc742~mv2.jpg/v1/fill/w_2500,h_1662,al_c/541d0d_3e7129e89b484d34a689f79dbc4bc742~mv2.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/tTynQjsY/4ff86e259256.jpg",
+        "email": "youth@qbksports.com",
+        "website": "https://www.qbksports.com/youth-beach-volleyball-classes",
+        "phone": "(718) 475-9694",
+        "announcementTitle": "Free trial available",
+        "announcementDescription": "The official QBK youth volleyball page invites families to register for a free trial class by email.",
+        "announcementBadge": "Free trial",
+        "recurringPrograms": [
+          {
+            "id": "rp-qbk-cubs-club",
+            "title": "Cubs Club (Ages 6-9)",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Tuesday", "Thursday", "Saturday"],
+            "timeText": "Tue 5:00-6:00 PM; Thu 3:30-4:30 PM; Sat 9:00-10:00 AM",
+            "locationNote": "QBK Sports indoor beach courts",
+            "ageRanges": ["6–8", "9–12"],
+            "activityTypes": ["Sports"],
+            "summary": "Beginner-friendly youth volleyball development for ages 6-9.",
+            "registrationUrl": "https://www.qbksports.com/youth-beach-volleyball-classes"
+          },
+          {
+            "id": "rp-qbk-seals-10-12",
+            "title": "Seals (Ages 10-12)",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Thursday", "Saturday", "Sunday"],
+            "timeText": "Mon/Thu 4:30-6:00 PM; Tue 3:30-5:00 PM; Sat 9:00-10:30 AM or 10:30 AM-12:00 PM; Sun 11:00 AM-12:30 PM",
+            "locationNote": "QBK Sports indoor beach courts",
+            "ageRanges": ["9–12"],
+            "activityTypes": ["Sports"],
+            "summary": "Youth volleyball skill-building for preteens ages 10-12.",
+            "registrationUrl": "https://www.qbksports.com/youth-beach-volleyball-classes"
+          },
+          {
+            "id": "rp-qbk-seals-13-plus",
+            "title": "Seals (Ages 13+)",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Wednesday", "Saturday"],
+            "timeText": "Mon/Wed 4:30-6:00 PM; Sat 9:00-10:30 AM or 10:30 AM-12:00 PM",
+            "locationNote": "QBK Sports indoor beach courts",
+            "ageRanges": ["Teens"],
+            "activityTypes": ["Sports"],
+            "summary": "Teen volleyball classes for ages 13 and up.",
+            "registrationUrl": "https://www.qbksports.com/youth-beach-volleyball-classes"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-05-27T06:58:30.368Z",
+  "counts": {
+    "providers": 108,
+    "meetups": 18,
+    "fingerprints": 126,
+    "exactDuplicateGroups": 0,
+    "nearDuplicatePairs": 1
+  },
+  "exactGroups": [],
+  "nearGroups": [
+    {
+      "entityA": "provider:tutu-camp-long-island-city",
+      "entityB": "provider:tutu-camp-park-slope",
+      "uploadedUrlA": "https://i.ibb.co/j90zMkL3/736f32bcdf91.jpg",
+      "uploadedUrlB": "https://i.ibb.co/GQFnbH4Q/df2f88a5c661.jpg",
+      "distance": 1
+    }
+  ]
+}

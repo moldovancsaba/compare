@@ -1,0 +1,62 @@
+2026-05-21T19:13:31Z
+
+- Reviewed live catalogs and reran scarcity report: providers=69 and meetups=18 before ingest; sparsest top slice was Bronx camps, including Highbridge at 0.
+- Curated `Highbridge Voices — Summer Voices 2026` from official Highbridge Voices pages plus the embedded public Google Form.
+- Uploaded the official Highbridge Voices hero image to production ingest upload and stored ImgBB URL `https://i.ibb.co/ynsS2XYg/7c9eb73113f4.jpg`.
+- Added payload file `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-highbridge-voices-summer-2026.json`.
+- Dry-run validation passed after aligning top-level `After-school` with the repo's recurring-program tag derivation for `10:00 AM-3:00 PM`.
+- Production ingest succeeded via `npm run ingest:listing -- scripts/ingest-payloads/catalog/cursor-curated-highbridge-voices-summer-2026.json` with HTTP 200.
+- Live verification after ingest: providers=70 and `prov-highbridge-voices-summer-2026` is present in production.
+
+2026-05-23T07:06:24Z
+
+- Reviewed live production catalogs first: providers=70 and meetupGroups=18 before this run.
+- Recomputed scarcity from the live APIs and confirmed the strict top gap had moved to `Classes`, with Bronx `Concourse`, `Fordham`, and `Highbridge` at 0; selected `Highbridge` because Highbridge Voices had the strongest official source + image path.
+- Curated `Highbridge Voices at Merriam Ave` as a new `Classes` provider in canonical `Bronx / Highbridge`, using official Merriam, Music Program, Program, application, and homepage sources.
+- Uploaded the official Highbridge Voices image through production ingest upload and stored ImgBB URL `https://i.ibb.co/gLjbVyw1/e0fb71612e24.jpg`.
+- Added payload file `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-highbridge-voices-merriam-classes.json`.
+- Fixed one validator issue by adding top-level `Evening`, because the repo derives it from the recurring program time ending at `6:00 PM`.
+- Curated payload audit passed, production ingest succeeded with HTTP 200, and live verification showed providers=71 with `prov-highbridge-voices-merriam-classes` present.
+- Run time: about 267 seconds.
+
+2026-05-26T10:23:24Z
+
+- Reviewed live production catalogs first: providers=71 and meetupGroups=18 before this run; zero-result report still showed `Drop-In Activities` as the scarcest category at 17 rows.
+- Recomputed scarcity from live data: within `Drop-In Activities`, Manhattan was tied for the fewest rows (3), and `Upper East Side` remained a zero-result neighborhood in that slice.
+- Selected `Union Square Play Open Play - Upper East Side` as a pragmatic scarcity fit because the official UES page plus Spring 2026 schedule PDF publish exact open-play slots, canonical UES address/contact info, and an accessible official image.
+- Uploaded the official Union Square Play image from `https://static.wixstatic.com/media/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/134920_2c4e000746d84e049fb5377ab6412457%7Emv2.jpg` and stored ImgBB URL `https://i.ibb.co/mr8PFbKs/c6bbf42c0986.jpg`.
+- Added payload file `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-union-square-play-ues-open-play.json`.
+- `npm` scripts were blocked because `node` was missing from PATH, so audit and ingest were run successfully with `bun` against the same repo scripts.
+- Curated payload audit passed, production ingest succeeded with HTTP 200, and live verification showed providers=72 with `prov-union-square-play-ues-open-play` present in production.
+- Run time: about 10 minutes.
+
+2026-05-26T10:37:49Z
+
+- Started from `/Users/Shared/Projects/classscout/docs/reports/zero-result-filters-latest.md` and took the next five zero-result `Classes / Bronx` neighborhoods in order: `Concourse`, `Fordham`, `Kingsbridge`, `Mott Haven`, and `Throgs Neck`.
+- Curated and ingested five new Bronx class providers from official sources: `South Bronx United Clubhouse Soccer Classes`, `Fordham Summer Reading Program`, `Warriors Sports Club Taekwondo`, `Splash Fit Mott Haven Swimming Lessons`, and `Performer's Edge Dance Academy - Bronx`.
+- Uploaded five official source images through production ingest upload and stored these ImgBB URLs: `https://i.ibb.co/x8P9y96J/24bfa16a92e3.webp`, `https://i.ibb.co/xS1PXLN0/495dbd86576e.jpg`, `https://i.ibb.co/gZdF5xGH/3acc66d2d6a5.png`, `https://i.ibb.co/9m3pkmFw/75650bc923d4.jpg`, and `https://i.ibb.co/4nnQRc71/200b60833d82.jpg`.
+- Added payload files `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-south-bronx-united-clubhouse-soccer.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-fordham-summer-reading-program.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-warriors-sports-club-taekwondo.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-splashfit-mott-haven-swimming-lessons.json`, and `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-performers-edge-dance-academy-bronx.json`.
+- `bun scripts/audit-curated-payloads.cjs` passed before ingest; `node` was still unavailable on PATH, so all production ingest calls used `bun -r ./scripts/load-env.cjs scripts/ingest-listing-automation.cjs ...`.
+- Production ingest succeeded for all five with HTTP 200, and live verification after the batch showed providers=77 with all five IDs present: `prov-south-bronx-united-clubhouse-soccer`, `prov-fordham-summer-reading-program`, `prov-warriors-sports-club-taekwondo`, `prov-splashfit-mott-haven-swimming-lessons`, and `prov-performers-edge-dance-academy-bronx`.
+- Run time: about 14 minutes.
+
+2026-05-26T11:16:11Z
+
+- Continued from the next ten zero-result `Classes / Brooklyn` neighborhoods in order: `Brooklyn Heights`, `Bushwick`, `Carroll Gardens`, `Cobble Hill`, `Crown Heights`, `DUMBO`, `Fort Greene`, `Greenpoint`, `Prospect Heights`, and `Sunset Park`.
+- Curated and ingested ten new Brooklyn class providers from official sources: `NY Kids Club Brooklyn Heights Classes`, `Diamondheart Bushwick Kids Programs`, `Sweat Toddler Soccer Carroll Gardens`, `NY Kids Club Cobble Hill Classes`, `Imagine Swimming Crown Heights Armory`, `Tutu School DUMBO`, `Space Club Fort Greene Classes`, `Space Club Greenpoint Classes`, `Treasure Trunk Theatre Prospect Heights`, and `Sunset Daycare Sunset Park Enrichment`.
+- Uploaded two new official source images through production ingest upload during this run and stored ImgBB URLs `https://i.ibb.co/7dDd0Gbk/4477265cb17f.png` for Imagine Swimming and `https://i.ibb.co/ccqJHfZR/e9a96e859bed.png` for Sunset Daycare; the other eight listings reused official-source uploads already prepared in this workspace.
+- Added payload files `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-ny-kids-club-brooklyn-heights-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-diamondheart-bushwick-kids-programs.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-sweat-carroll-gardens-toddler-soccer.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-ny-kids-club-cobble-hill-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-imagine-swimming-crown-heights-armory.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-tutu-school-dumbo-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-space-club-fort-greene-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-space-club-greenpoint-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-treasure-trunk-theatre-prospect-heights.json`, and `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-sunset-daycare-sunset-park-enrichment.json`.
+- `bun scripts/audit-curated-payloads.cjs` passed for 99 payloads before ingest; all ten production ingest calls succeeded with HTTP 200 via `bun -r ./scripts/load-env.cjs scripts/ingest-listing-automation.cjs ...`.
+- Live verification after the batch showed providers=87, and all ten new IDs were present in production with ImgBB images: `prov-ny-kids-club-brooklyn-heights-classes`, `prov-diamondheart-bushwick-kids-programs`, `prov-sweat-carroll-gardens-toddler-soccer`, `prov-ny-kids-club-cobble-hill-classes`, `prov-imagine-swimming-crown-heights-armory`, `prov-tutu-school-dumbo-classes`, `prov-space-club-fort-greene-classes`, `prov-space-club-greenpoint-classes`, `prov-treasure-trunk-theatre-prospect-heights`, and `prov-sunset-daycare-sunset-park-enrichment`.
+- Run time: about 39 minutes.
+
+2026-05-26T11:46:08Z
+
+- Continued in strict zero-result order with the next ten `Classes` neighborhoods: `Williamsburg`, `Flatiron`, `SoHo`, `Upper West Side`, `Astoria`, `Corona`, `Elmhurst`, `Flushing`, `Jackson Heights`, and `Jamaica`.
+- Curated and ingested ten new class providers from official sources: `Williamsburg Soccer Club North Williamsburg`, `NY Kids Club 22nd Street Classes`, `Treasure Trunk Theatre SoHo`, `NY Kids Club 68th Street Classes`, `Astoria Dance Center Classes`, `Sonder School of Music Elmhurst`, `New York Black Belt Center Corona Taekwondo`, `World Ice Arena Flushing Learn to Skate`, `Queens Taekwon-Do Center Jackson Heights`, and `BAFA Jamaica Singing Classes`.
+- Uploaded eight official source images to ImgBB during this run and stored these URLs: `https://i.ibb.co/C5NrCpNV/williamsburg-soccer-club.png`, `https://i.ibb.co/qKsMZwX/astoria-dance-center.jpg`, `https://i.ibb.co/fYxfLvxJ/nybbc-corona.jpg`, `https://i.ibb.co/ZRBSdjHt/world-ice-arena.png`, `https://i.ibb.co/QF85ZqzJ/qtc-itf.jpg`, `https://i.ibb.co/xtRnpXKy/bafa-jamaica.webp`, `https://i.ibb.co/5X4zv8SG/sonder-school-of-music.jpg`, and `https://i.ibb.co/N6y1Rs1T/studio-x-wrestling.jpg`; the NY Kids Club and Treasure Trunk Theatre listings reused existing official-source ImgBB assets already in the repo.
+- Added payload files `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-williamsburg-soccer-club-north-williamsburg.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-ny-kids-club-22nd-street-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-treasure-trunk-theatre-soho.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-ny-kids-club-68th-street-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-astoria-dance-center-classes.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-sonder-school-of-music-elmhurst.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-nybbc-corona-taekwondo.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-world-ice-arena-flushing-learn-to-skate.json`, `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-qtc-jackson-heights-taekwondo.json`, and `/Users/Shared/Projects/classscout/scripts/ingest-payloads/catalog/cursor-curated-bafa-jamaica-singing-classes.json`.
+- `bun scripts/audit-curated-payloads.cjs` passed for 109 payloads before ingest; all ten production ingest calls succeeded with HTTP 200 via `bun -r ./scripts/load-env.cjs scripts/ingest-listing-automation.cjs ...`.
+- Live verification after the batch showed providers=97, and all ten new IDs were present in production with ImgBB images: `prov-williamsburg-soccer-club-north-williamsburg`, `prov-ny-kids-club-22nd-street-classes`, `prov-treasure-trunk-theatre-soho`, `prov-ny-kids-club-68th-street-classes`, `prov-astoria-dance-center-classes`, `prov-sonder-school-of-music-elmhurst`, `prov-nybbc-corona-taekwondo`, `prov-world-ice-arena-flushing-learn-to-skate`, `prov-qtc-jackson-heights-taekwondo`, and `prov-bafa-jamaica-singing-classes`.
+- The next strict zero-result `Classes` queue starts with `Queens / Ridgewood`, `Queens / Sunnyside`, `Queens / Woodside`, then moves to `Staten Island / Annadale`, `Great Kills`, `New Dorp`, `Port Richmond`, `Stapleton`, and `Westerleigh`.
+- Run time: about 30 minutes.

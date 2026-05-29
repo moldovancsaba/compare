@@ -1,0 +1,45 @@
+{
+  "sourceUrls": [
+    "https://ymcanyc.org/locations/greenpoint-ymca/programs-classes/camps",
+    "https://ymcanyc.org/locations/greenpoint-ymca/",
+    "https://ymcanyc.org/sites/default/files/styles/hero_banner_desktop/public/2025-12/2026_camp_parachute.jpg.webp?itok=bMj91pWm"
+  ],
+  "notes": "Official YMCA of Greater New York Greenpoint branch camp and location pages (2026). Hero image downloaded from YMCA-hosted WebP (2026_camp_parachute hero banner on the camp page) and uploaded via POST /api/ingest/upload; ImgBB URL stored in document.image.",
+  "missingOrUncertain": [
+    "pricePerClass is set to 942 as the published Community rate for Traditional Summer Camp (ages 6–11) per two-week session; Y Member rate is listed separately as $856 on the same page — confirm current tiered pricing and session choice on register.ymcanyc.org before enrolling.",
+    "Camp runs on weekday schedules; published camp day hours are 9 a.m.–5 p.m. with optional extended hours 8–9 a.m. and 5–6 p.m. — weekend pickup is not described as camp programming.",
+    "rating / reviewCount: not on official camp page; 0 / 0.",
+    "Specific weekly activity calendars are described as distributed per session rather than published as fixed public timetables on this page."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-greenpoint-ymca-summer-camp",
+        "name": "Greenpoint YMCA — Traditional Summer Camp (2026)",
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "address": "99 Meserole Avenue, Brooklyn, NY 11222",
+        "activityTypes": ["Sports", "Swimming", "Art", "Science", "Outdoor Activities"],
+        "ageRanges": ["6–8", "9–12"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 942,
+        "shortDescription": "YMCA licensed day camp at the Greenpoint Y: 2026 Traditional Summer Camp (ages 6–11) with swim, arts, science, sports, and themed activities in two-week sessions June 29–August 21.",
+        "longDescription": "The YMCA of Greater New York’s Greenpoint branch publishes 2026 Summer Day Camp registration for programs running June 29 through August 21 in two-week sessions, with camp noted as closed Friday, July 3 in observance of Independence Day. Published camp hours are 9 a.m.–5 p.m. with extended hours available 8–9 a.m. and 5–6 p.m.\n\nTraditional Summer Camp (ages 6–11) is described as including physical fitness, arts and crafts, science activities, theme days, group play, team building, and instructional swim, framed around YMCA core values (respect, caring, honesty, responsibility). Published pricing for Traditional Summer Camp lists $856 per two-week session for Y Members and $942 per two-week session for Community participants.\n\nThe branch location page lists the address as 99 Meserole Avenue, Brooklyn, NY 11222. Camp leadership contact on the camp page lists greenpointcamp@ymcanyc.org and 212-912-2260 (Camp Director). Open house dates and registration steps—including links to the camp registration portal, camper information form, and medical form—are detailed on the same camp page.\n\nThe listing image is derived from the YMCA’s official 2026 camp hero photography (parachute activity image) shown on the Greenpoint YMCA camp page, downloaded from YMCA-hosted media and re-uploaded to ImgBB for ClassScout storage policy compliance.\n\nSources: https://ymcanyc.org/locations/greenpoint-ymca/programs-classes/camps https://ymcanyc.org/locations/greenpoint-ymca/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Staff Pick"],
+        "image": "https://i.ibb.co/jvt5vzhG/3221f6976d5b.webp",
+        "email": "greenpointcamp@ymcanyc.org",
+        "website": "https://ymcanyc.org/locations/greenpoint-ymca/programs-classes/camps",
+        "phone": "212-912-2260",
+        "announcementTitle": "2026 registration open",
+        "announcementDescription": "Official camp page lists 2026 sessions, fees, forms, and register.ymcanyc.org summer-camp link for Greenpoint Y (node-linked registration). Early-bird discount rules are described on-page.",
+        "announcementBadge": "Summer ’26",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

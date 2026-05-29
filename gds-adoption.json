@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "gdsVersion": "2.6.4",
+  "productArchetype": "hybrid",
+  "supportedEntryPoints": [
+    "@doneisbetter/gds-theme/client",
+    "@doneisbetter/gds-theme/server",
+    "@doneisbetter/gds-core/client",
+    "@doneisbetter/gds-core/server",
+    "@doneisbetter/gds-admin/client"
+  ],
+  "requiredContracts": [
+    "GdsProvider",
+    "DocsPageShell",
+    "StateBlock",
+    "PublicProductCard",
+    "FeatureBand",
+    "PublicSiteFooter",
+    "EditorialHero",
+    "PublicBrandFooter",
+    "AccentPanel",
+    "MetricCard",
+    "ProgressCard",
+    "StatsSection",
+    "PageHeader",
+    "ResponsiveDataView",
+    "FormField"
+  ],
+  "localAdapters": [],
+  "approvedExceptions": [
+    {
+      "surface": "Temporary GitHub release asset package source",
+      "category": "runtime-constraint",
+      "scope": [
+        "package.json",
+        "package-lock.json",
+        "gds-adoption.json",
+        "README.md",
+        "docs/design-system-adapter.md",
+        "docs/architecture.md",
+        "docs/HANDOVER.md"
+      ],
+      "allowedImplementation": "Install the official @doneisbetter/* tarballs directly from the tagged GitHub release assets for the pinned GDS release.",
+      "mustStillUse": [
+        "Only use official release assets published under the sovereignsquad/general-design-system release.",
+        "Keep the pinned GDS version synchronized across package.json, package-lock.json, and the adoption manifest.",
+        "Document the temporary release-asset source anywhere user-facing install or architecture docs mention the package line."
+      ],
+      "mustNotDo": [
+        "Do not switch to unofficial tarballs or local forks.",
+        "Do not mix release-asset versions across GDS packages.",
+        "Do not imply that npm publication is already the canonical install path."
+      ],
+      "exitCondition": "Replace the release-asset URLs with the canonical published npm package coordinates once the @doneisbetter/* package line is officially available for all delivery environments.",
+      "status": "temporary",
+      "reason": "The canonical npm package line is not published yet. Until npm is live, ClassScout installs the official 2.6.4 tarballs from the public GitHub release assets defined by the GDS release contract.",
+      "owner": "classscout-ui",
+      "reviewDate": "2026-05-28"
+    },
+    {
+      "surface": "Embedded maps iframe",
+      "category": "package-coverage-gap",
+      "scope": [
+        "src/components/scout/panels/ProviderMap.tsx",
+        "src/components/scout/panels/ProviderProfile.tsx"
+      ],
+      "allowedImplementation": "Use the third-party provider map iframe only where listing location context requires it and no canonical GDS map surface exists yet.",
+      "mustStillUse": [
+        "Keep the iframe contained inside governed GDS page layouts and shells.",
+        "Preserve accessible titles and non-map fallback location text.",
+        "Treat the embed as a product-specific integration, not as a new UI foundation."
+      ],
+      "mustNotDo": [
+        "Do not create a parallel local design-system authority around the map embed.",
+        "Do not expand the iframe use into unrelated public or admin surfaces without a source-backed product need.",
+        "Do not remove adjacent textual address/location content in favor of map-only presentation."
+      ],
+      "exitCondition": "Replace the iframe integration when the canonical GDS package line ships an approved map or location-surface contract that satisfies the listing use case.",
+      "status": "approved",
+      "reason": "Provider location maps remain a third-party embed surface outside the current GDS package scope.",
+      "owner": "classscout-ui",
+      "reviewDate": "2026-05-28"
+    }
+  ],
+  "compliance": {
+    "documentationPaths": [
+      "README.md",
+      "docs/design-system-adapter.md",
+      "docs/architecture.md",
+      "docs/operations.md",
+      "docs/next-phase-roadmap.md"
+    ],
+    "staleDocumentationReferences": [
+      "@gds/",
+      "MANTINE_RUNTIME.md",
+      "COMPONENT_CONTRACTS.md",
+      "MANTINE_PLATFORM.md"
+    ],
+    "protectedSurfacePaths": [],
+    "bannedImports": [
+      "@gds/"
+    ]
+  },
+  "migrationStatus": "governed",
+  "owner": "classscout-ui",
+  "lastReviewedAt": "2026-05-28"
+}

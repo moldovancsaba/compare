@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://www.bronxhealthlink.org/parenting-support-group",
+    "https://www.bronxhealthlink.org",
+    "https://images.squarespace-cdn.com/content/v1/606b27e9923d14748eb780fc/96416d65-3dc7-4961-87c2-bede06a274de/parent-support-group.jpg"
+  ],
+  "notes": "Official The Bronx Health Link parenting support group page fetched May 16, 2026. Audience, purpose, support topics, Bronx address, email, and phone come from that page and the site metadata. The official parenting-support-group image was downloaded from Squarespace CDN and uploaded via POST /api/ingest/upload for ImgBB-compliant storage.",
+  "missingOrUncertain": [
+    "Cadence is stored as Pop-up because the official page describes dedicated group sessions but does not publish a fixed recurring schedule on the cited page.",
+    "Neighborhood is mapped to canonical Concourse because The Bronx Health Link lists 851 Grand Concourse / Room 914 on the parenting support page.",
+    "Age range is stored as 0–2 because the group is designed for expecting mothers and covers newborn care, but the page does not define a tighter post-birth participant window."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-bronx-health-link-parenting-support",
+        "name": "The Bronx Health Link — Parenting Support Group",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "groupType": "New Parents",
+        "ageRange": "0–2",
+        "cadence": "Pop-up",
+        "instagram": "https://www.instagram.com/thebronxhealthlink",
+        "website": "https://www.bronxhealthlink.org/parenting-support-group",
+        "description": "The Bronx Health Link runs an inclusive parenting support group in the Bronx for black and brown expecting mothers. Its official page says the group offers a safe and supportive space to connect, learn, and grow together, with sessions covering prenatal care, childbirth preparation, newborn care, self-care, and related resources. The organization lists its Bronx office at 851 Grand Concourse, Room 914, with contact email info@bronxhealthlink.org and phone (718) 590-2648. Sources: https://www.bronxhealthlink.org/parenting-support-group https://www.bronxhealthlink.org",
+        "initials": "TBHL",
+        "icon": "heart",
+        "palette": "orange",
+        "coverImageUrl": "https://i.ibb.co/ymXXYkLw/c40dd61c4849.webp"
+      }
+    }
+  ]
+}

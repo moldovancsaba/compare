@@ -1,0 +1,63 @@
+{
+  "sourceUrls": [
+    "https://nysci.org/",
+    "https://tickets.nysci.org/Info.aspx?EventID=3",
+    "https://tickets.nysci.org/Info.aspx?EventID=19"
+  ],
+  "notes": "Official NYSCI website and ticketing pages fetched May 16, 2026. Address, phone, email, general admission pricing, listed museum hours, Friday Community Hours, and the Little Makers note were taken from official NYSCI pages.",
+  "missingOrUncertain": [
+    "pricePerClass uses the listed child general-admission rate ($19), which is a planning figure for a drop-in museum visit rather than a literal class SKU.",
+    "Age ranges are inferred conservatively from the family museum / maker-workshop context on NYSCI's official pages; the cited pages do not publish a strict age-band taxonomy for general admission.",
+    "rating and reviewCount are not stated on the official source pages, so both are set to 0.",
+    "provider.image uses an ImgBB copy of an official NYSCI image downloaded from https://nysci.org/media/Community-Celebration-2026_01.jpg and uploaded via /api/ingest/upload for storage compatibility."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-nysci-corona",
+        "name": "New York Hall of Science",
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "address": "47-01 111th St., Corona, NY, 11368",
+        "activityTypes": [
+          "Science museum",
+          "Hands-on STEM exhibits",
+          "Maker workshops",
+          "Family programs",
+          "Community hours"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8",
+          "9–12"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 19,
+        "shortDescription": "Corona science museum with 450 hands-on exhibits, family maker activities, and free Friday afternoon Community Hours.",
+        "longDescription": "New York Hall of Science (NYSCI) in Corona, Queens lists general admission for a hands-on science museum visit with 450 exhibits, demonstrations, workshops, and participatory activities focused on science, technology, engineering, and math. The official ticket page describes the visit as a hands-on, energetic educational experience, and NYSCI also lists Little Makers & Maker Space workshops that require general admission.\n\nThe current official general-admission page lists museum hours as closed Monday and Tuesday; open Wednesday and Thursday from 10 a.m. to 5 p.m.; Friday from 10 a.m. to 5 p.m. with Community Hours from 2 p.m. to 5 p.m.; and Saturday and Sunday from 10 a.m. to 5 p.m. The same page says Community Hours are free on Fridays from 2 p.m. to 5 p.m. with same-day reservations through the website.\n\nFor planning, general admission is currently listed at $22 for adults and $19 for children, students, and seniors. Children under 18 must be accompanied by an adult per the official ticket page. NYSCI's Little Makers page notes that general admission is required for anyone attending those workshops.\n\nContact details listed on the official NYSCI ticket pages: 47-01 111th St., Corona, NY, 11368; phone 718-699-0005; email info@nysci.org.\n\nSources: https://nysci.org/ https://tickets.nysci.org/Info.aspx?EventID=3 https://tickets.nysci.org/Info.aspx?EventID=19",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "Weekend Friendly",
+          "New"
+        ],
+        "image": "https://i.ibb.co/zW9CnT52/7db125f6dccf.jpg",
+        "email": "info@nysci.org",
+        "website": "https://nysci.org",
+        "phone": "718-699-0005",
+        "announcementTitle": "Free Friday Community Hours",
+        "announcementDescription": "NYSCI lists free Community Hours on Fridays from 2 p.m. to 5 p.m. with same-day reservations through its website.",
+        "announcementBadge": "Free Fridays",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

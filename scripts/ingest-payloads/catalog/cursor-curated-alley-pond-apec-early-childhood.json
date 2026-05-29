@@ -1,0 +1,46 @@
+{
+  "sourceUrls": [
+    "https://www.alleypond.org/",
+    "https://www.alleypond.org/early-childhood-programs.html",
+    "https://www.alleypond.org/contact.html",
+    "https://www.alleypond.org/uploads/1/2/8/3/128396335/published/dsc-0156.jpg"
+  ],
+  "notes": "Official Alley Pond Environmental Center (APEC) homepage, early childhood programs hub, and contact page reviewed May 2026. Address, hours, suggested donation, program ages, session pricing examples, and registration policies from those pages. Listing image is an official JPEG published on alleypond.org, uploaded via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "pricePerClass uses $22 per session derived from Toddler Time Saturday pricing ($88 for four child/adult sessions on the early childhood page); Sunny Bunnies drop-off semesters, Wee Sprouts, and Lil' Hoppers use different session bundles and totals.",
+    "Public contact email is Cloudflare-obfuscated on the official site; use the contact form or phone rather than a guessed address.",
+    "Neighborhood mapped to Bayside for ClassScout filters; APEC lists Douglaston, NY 11362 on its contact page.",
+    "rating and reviewCount are not published on the cited official pages; both set to 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-alley-pond-apec-early-childhood",
+        "name": "Alley Pond Environmental Center — Early Childhood Nature Classes",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "address": "229-10 Northern Boulevard, Douglaston, NY 11362",
+        "activityTypes": ["Nature", "Science", "Early childhood", "Outdoor Activities"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning"],
+        "pricePerClass": 22,
+        "shortDescription": "Queens nature center in Alley Pond Park: caregiver-and-me and drop-off early childhood classes with live animals, nature walks, stories, and science-themed pre-K readiness.",
+        "longDescription": "Alley Pond Environmental Center (APEC) is a nature education center in Alley Pond Park at 229-10 Northern Boulevard in Douglaston, Queens. Its official early childhood programs page lists ongoing classes for ages 18 months through 4 years, including Wee Sprouts (18–23 months with one adult), Toddler Time (ages 2–3 with one adult), Lil' Hoppers (ages 3–4 with one adult), and Sunny Bunnies (ages 3–4 drop-off pre-K readiness with live animals, nature walks, and school-readiness skills).\n\nThe homepage notes the building and animal room are open most weekdays 9:00 a.m.–4:30 p.m. and most weekends 9:00 a.m.–1:00 p.m. (call ahead on weekends and holidays), with free parking and a suggested $5 per person donation at the front desk. Example session pricing on the early childhood page includes Toddler Time blocks such as four Saturday sessions for $88 per child/adult pair and Sunny Bunnies spring semesters listed at $990 for 30 classes; pre-registration is required via APEC's online registration system.\n\nMain telephone published on the site: (718) 229-4000. APEC directs questions through its official contact form and notes it is not a licensed wildlife rehabilitator.\n\nThis listing image is an official photograph published on alleypond.org, re-hosted on ImgBB for ClassScout storage policy compliance.\n\nSources: https://www.alleypond.org/ https://www.alleypond.org/early-childhood-programs.html https://www.alleypond.org/contact.html",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New", "Great for Toddlers", "Weekend Friendly"],
+        "image": "https://i.ibb.co/tTzTxZ4T/5fb39f73ba55.jpg",
+        "email": "",
+        "website": "https://www.alleypond.org/early-childhood-programs.html",
+        "phone": "718-229-4000",
+        "announcementTitle": "Spring & summer 2026 registration",
+        "announcementDescription": "Official early childhood page lists 2026 Sunny Bunnies, Toddler Time, Wee Sprouts, and Lil' Hoppers sessions with links to alleypond.doubleknot.com registration.",
+        "announcementBadge": "Register online",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

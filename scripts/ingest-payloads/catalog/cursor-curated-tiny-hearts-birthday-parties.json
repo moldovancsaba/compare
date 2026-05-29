@@ -1,0 +1,56 @@
+{
+  "sourceUrls": [
+    "https://www.tinyheartsplaycafe.com/",
+    "https://www.tinyheartsplaycafe.com/about",
+    "https://images.squarespace-cdn.com/content/v1/68a91a3faabcc92f0f352a75/775e6425-8aba-48dd-a747-3668bf21bab0/DSC02542.jpeg"
+  ],
+  "notes": "Official Tiny Hearts Play Cafe home and about pages fetched May 16 2026. Party description and Friday-Sunday birthday availability come from the home/about page copy; ages, address, phone, and email come from the about page. Original official image source URL: https://images.squarespace-cdn.com/content/v1/68a91a3faabcc92f0f352a75/775e6425-8aba-48dd-a747-3668bf21bab0/DSC02542.jpeg. ImgBB upload completed via POST /api/ingest/upload and stored in provider.image.",
+  "missingOrUncertain": [
+    "pricePerClass: the official pages confirm birthday party availability but do not publish package pricing, so this field is 0.",
+    "neighborhood mapping: the official site gives 123 Hope St, Brooklyn, NY 11211; mapped to canonical Williamsburg.",
+    "dayTimeTags: parties are stated as available on Fridays, Saturdays, and Sundays, so only Weekday and Weekend are asserted; no specific time-of-day windows are published."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "tiny-hearts-play-cafe-birthday-parties",
+        "name": "Tiny Hearts Play Cafe Birthday Parties",
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "address": "123 Hope St, Brooklyn, NY 11211",
+        "activityTypes": [
+          "Indoor Play",
+          "Birthday Entertainment"
+        ],
+        "ageRanges": [
+          "0–2",
+          "3–5",
+          "6–8"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Weekend"
+        ],
+        "pricePerClass": 0,
+        "shortDescription": "Private birthday parties for little ones at a Williamsburg indoor play cafe.",
+        "longDescription": "Tiny Hearts Play Cafe offers birthday parties for young children in its Williamsburg play space. The official site describes the parties as a fun, stress-free celebration designed for little ones and notes that birthday party packages are available on Fridays, Saturdays, and Sundays.\n\nThe official about page describes Tiny Hearts as a welcoming indoor play space created especially for children ages 0–6, rooted in connection and intentional play. Contact details on that page list the venue at 123 Hope St, Brooklyn, NY 11211 with phone number (347) 422-0665 and email tinyheartsnyc25@gmail.com.\n\nThe official site does not publish package pricing on the cited pages, so this listing leaves the planning price at 0 until Tiny Hearts publishes or confirms party rates.\n\nSources: https://www.tinyheartsplaycafe.com/ https://www.tinyheartsplaycafe.com/about https://images.squarespace-cdn.com/content/v1/68a91a3faabcc92f0f352a75/775e6425-8aba-48dd-a747-3668bf21bab0/DSC02542.jpeg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New",
+          "Great for Toddlers"
+        ],
+        "image": "https://i.ibb.co/kgGtszK1/7c9d91d98426.webp",
+        "email": "tinyheartsnyc25@gmail.com",
+        "website": "https://www.tinyheartsplaycafe.com/",
+        "phone": "(347) 422-0665",
+        "announcementTitle": "Birthday party packages available Friday through Sunday",
+        "announcementDescription": "Official site notes private party availability on Fridays, Saturdays, and Sundays.",
+        "announcementBadge": "Parties"
+      }
+    }
+  ]
+}

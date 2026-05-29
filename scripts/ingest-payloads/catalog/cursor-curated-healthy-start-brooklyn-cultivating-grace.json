@@ -1,0 +1,36 @@
+{
+  "sourceUrls": [
+    "https://www.nyc.gov/site/doh/health/neighborhood-health/healthy-start-brooklyn.page",
+    "https://www.nyc.gov/site/doh/health/neighborhood-health/family-wellness-suites.page",
+    "https://www.eventbrite.com/e/cultivating-grace-support-group-healthy-start-brooklyn-tickets-580545797107",
+    "https://cdn.evbuc.com/images/465892579/217511971804/1/original.20230310-152139"
+  ],
+  "notes": "NYC Department of Health Healthy Start Brooklyn program page (official .gov) plus the linked Eventbrite registration listing for Cultivating Grace at the Brownsville Family Wellness Suite. Cover image is the Eventbrite event graphic for this DOH-hosted series, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Neighborhood mapped to Bedford-Stuyvesant because the program serves central and eastern Brooklyn broadly; in-person Cultivating Grace cycles meet at the Brownsville Neighborhood Health Action Center (259 Bristol Street), which is not a canonical ClassScout chip.",
+    "Cadence stored as Monthly because the NYC.gov calendar lists Cultivating Grace on Fridays 1–2 p.m. while the program page describes a biweekly support group run in 8-session cycles—confirm the current cycle on Eventbrite before attending.",
+    "instagram left empty; registration and updates are via Eventbrite and HealthyStartBrooklyn@health.nyc.gov."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-healthy-start-brooklyn-cultivating-grace",
+        "name": "Healthy Start Brooklyn — Cultivating Grace Support Group",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "groupType": "New Parents",
+        "ageRange": "0–2",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://www.nyc.gov/site/doh/health/neighborhood-health/healthy-start-brooklyn.page",
+        "description": "Healthy Start Brooklyn, a NYC Department of Health program for expectant and new parents who live in Brooklyn, runs Cultivating Grace—a free mental health support group for birthing people from pregnancy through postpartum. The official program page describes peer support on staying mentally healthy, wellness techniques, and topics such as baby blues, self-advocacy, support systems, holistic wellness, boundaries, and self-care. Registration is through the linked Eventbrite listing; the Family Wellness Suite host site notes the space is child-friendly and that interpretation can be requested at least 72 hours ahead (sbrazley@health.nyc.gov, 917-846-9054). General program enrollment: HealthyStartBrooklyn@health.nyc.gov or 844-919-1123.\n\nIn-person sessions for this series are hosted at the Brownsville Neighborhood Health Action Center Family Wellness Suite, 259 Bristol Street, Brooklyn, NY 11212. Cultivating Grace runs in multi-session cycles (listed as eight sessions per cycle on Eventbrite).\n\nSources: https://www.nyc.gov/site/doh/health/neighborhood-health/healthy-start-brooklyn.page https://www.nyc.gov/site/doh/health/neighborhood-health/family-wellness-suites.page https://www.eventbrite.com/e/cultivating-grace-support-group-healthy-start-brooklyn-tickets-580545797107",
+        "initials": "HSB",
+        "icon": "heart",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/Ww33sky/ab4a6a54ef72.jpg"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "sourceUrls": [
+    "https://www.crossbar.nyc/openplay",
+    "https://images.squarespace-cdn.com/content/v1/64f797c7f5352b7acb2f2243/1693947855213-0YYEY2SFM8PLSPTD9ZN3/Open%2BPlay.JPG"
+  ],
+  "notes": "Official Crossbar toddler open-play page reviewed May 19, 2026. Original official image source URL: https://images.squarespace-cdn.com/content/v1/64f797c7f5352b7acb2f2243/1693947855213-0YYEY2SFM8PLSPTD9ZN3/Open%2BPlay.JPG. The official image was downloaded locally and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The official page says toddler open-play sessions without a precise numerical age band; ClassScout maps that wording to 0–2 and 3–5.",
+    "pricePerClass is stored as 10 because the official page publishes $10 per kid admission, while also offering free entry with a separate $20 cafe purchase.",
+    "rating and reviewCount are not published on the cited official page, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-crossbar-ues-toddler-open-play",
+        "name": "Crossbar Toddler Open Play",
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "address": "250 West 86th Street, New York, NY 10024",
+        "activityTypes": ["Soccer", "Sports", "Indoor Play"],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Morning"],
+        "pricePerClass": 10,
+        "shortDescription": "Crossbar publishes weekday toddler open-play soccer sessions on the Upper West Side from 9:00 a.m. to 12:00 p.m. at $10 per child.",
+        "longDescription": "Crossbar's official toddler open-play page describes a weekday drop-in soccer play session for little ones on the Upper West Side. The page says children play in a safe, climate-controlled environment with soccer balls and other toys.\n\nThe official schedule on the page says toddler open-play soccer sessions run every week day from 9:00 AM to 12:00 PM. Those published hours support weekday and morning tags for this listing.\n\nCrossbar lists admission at $10 per kid, with a separate offer for free entry when a family makes a $20 food-and-beverage purchase in the cafe. The official page also lists Crossbar at 250 West 86th Street, New York, NY 10024, with hello@crossbar.nyc, events@crossbar.nyc, and (212) 652-2238.\n\nSources: https://www.crossbar.nyc/openplay https://images.squarespace-cdn.com/content/v1/64f797c7f5352b7acb2f2243/1693947855213-0YYEY2SFM8PLSPTD9ZN3/Open%2BPlay.JPG",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [],
+        "image": "https://i.ibb.co/8gq2C5cN/b79b92e770e8.webp",
+        "email": "events@crossbar.nyc",
+        "website": "https://www.crossbar.nyc/openplay",
+        "phone": "(212) 652-2238",
+        "bookingEnabled": false
+      }
+    }
+  ]
+}

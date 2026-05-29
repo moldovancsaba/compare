@@ -1,0 +1,55 @@
+{
+  "sourceUrls": [
+    "https://nypreschoolandkidsclub.com/brooklyn-heights/",
+    "https://nypreschoolandkidsclub.com/wp-content/uploads/2025/06/Brooklyn-Heights-Summer-2025-Class-Schedule.pdf",
+    "https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg"
+  ],
+  "notes": "Official NY Preschool & Kids Club Brooklyn Heights location page search result, official Summer 2025 Brooklyn Heights class schedule PDF, and official NY Kids Club logo image were reviewed on May 26, 2026. The official logo image was re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "The public Brooklyn Heights webpage was Cloudflare-blocked in this shell, so address and current page-level contact details come from the official location search snippet and the official schedule PDF.",
+    "provider.phone uses the official Summer 2025 PDF contact number 718.228.0800; a newer search snippet for the location page surfaced a different Brooklyn Heights phone number.",
+    "pricePerClass is stored as 0 because the official sources reviewed here publish schedules and policies but not one single fixed per-class tuition figure.",
+    "rating and reviewCount are set to 0 because the official sources do not publish them."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-ny-kids-club-brooklyn-heights-classes",
+        "name": "NY Kids Club Brooklyn Heights Classes",
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "address": "182 Henry St, Brooklyn, NY 11201",
+        "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+        "ageRanges": ["0–2", "3–5", "6–8"],
+        "dayTimeTags": ["Weekday", "Morning", "Afternoon", "After-school"],
+        "pricePerClass": 0,
+        "shortDescription": "Weekday enrichment classes in Brooklyn Heights for babies, toddlers, and young kids, including music, art, science, math, and gym.",
+        "longDescription": "NY Kids Club Brooklyn Heights publishes a Summer 2025 enrichment schedule for babies, toddlers, and young children at its Brooklyn Heights location. The official PDF lists baby classes for ages 6 to 18 months, toddler classes for ages 18 to 36 months, and older child classes including art, music, science, math, gym, and school-prep style offerings for children up to age 8.\n\nThe official schedule shows weekday classes starting with morning baby and toddler sessions at 8:45 AM and continuing through afternoon and after-school options, including Toddler Gym Ninjas at 4:00 PM. The same official PDF footer lists the Brooklyn Heights location at 182 Henry St with phone 718.228.0800 and email bheights@nykidsclub.com.\n\nThis listing maps the program to the canonical Brooklyn Heights neighborhood and uses the official NY Kids Club schedule as the source of truth for ages and weekday timing coverage.\n\nSources: https://nypreschoolandkidsclub.com/brooklyn-heights/ https://nypreschoolandkidsclub.com/wp-content/uploads/2025/06/Brooklyn-Heights-Summer-2025-Class-Schedule.pdf https://dev.nykidsclub.com/wp-content/themes/nykids/images/nykidsclub_logo.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/HfNdy4t7/c716cbfab29b.jpg",
+        "email": "bheights@nykidsclub.com",
+        "website": "https://nypreschoolandkidsclub.com/brooklyn-heights/",
+        "phone": "718.228.0800",
+        "recurringPrograms": [
+          {
+            "id": "rp-nykc-brooklyn-heights-weekdays",
+            "title": "Brooklyn Heights Weekday Enrichment",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "timeText": "8:45 AM-4:45 PM",
+            "locationNote": "NY Kids Club Brooklyn Heights",
+            "ageRanges": ["0–2", "3–5", "6–8"],
+            "activityTypes": ["Art", "Music", "STEM", "Gymnastics"],
+            "summary": "Weekday baby, toddler, and young child enrichment classes spanning morning, midday, and after-school sessions.",
+            "registrationUrl": "https://nypreschoolandkidsclub.com/brooklyn-heights/"
+          }
+        ]
+      }
+    }
+  ]
+}

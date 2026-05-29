@@ -1,0 +1,55 @@
+{
+  "sourceUrls": [
+    "https://tutuschool.com/lic/camp/",
+    "https://tutuschool.com/lic/",
+    "https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-camp-scaled-1.jpg"
+  ],
+  "notes": "Official Tutu School Long Island City camp page and home page fetched May 16 2026. Camp prices, times, ages, Long Island City address, and phone come from those pages. Original official image source URL: https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-camp-scaled-1.jpg. ImgBB upload completed via POST /api/ingest/upload and stored in provider.image.",
+  "missingOrUncertain": [
+    "ageRanges: official camp page states ages 3–8; mapped to supported ranges 3–5 and 6–8.",
+    "email: no plain-text public email was confirmed in the fetched HTML, so this field is empty.",
+    "rating and reviewCount are not published on the official pages; stored as 0 and 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "tutu-camp-long-island-city",
+        "name": "Tutu Camp LIC",
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "address": "43-44 12th Street, Long Island City, NY 11101",
+        "activityTypes": [
+          "Dance",
+          "Art"
+        ],
+        "ageRanges": [
+          "3–5",
+          "6–8"
+        ],
+        "dayTimeTags": [
+          "Weekday",
+          "Morning",
+          "Afternoon"
+        ],
+        "pricePerClass": 625,
+        "shortDescription": "Weekday summer ballet camp in Long Island City for children ages 3–8.",
+        "longDescription": "Tutu Camp LIC is Tutu School Long Island City’s summer ballet camp for children ages 3–8. The official camp page says campers spend their days dancing, crafting, and exploring enchanting ballet stories, and that no prior dance experience is needed.\n\nThe current official schedule lists Coppelia Camp (June 29–July 3), Swan Lake Camp (August 24–28), and Cinderella Camp (August 31–September 4). Each session is listed at $625 and runs from 9:00 a.m. to 2:00 p.m. The official page also notes that campers must be potty trained.\n\nThe official site lists the location as 43-44 12th Street, Long Island City, NY 11101, with phone number 347.617.1347.\n\nSources: https://tutuschool.com/lic/camp/ https://tutuschool.com/lic/ https://tutuschool.com/lic/wp-content/uploads/sites/27/2025/03/hero-camp-scaled-1.jpg",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": [
+          "New"
+        ],
+        "image": "https://i.ibb.co/j90zMkL3/736f32bcdf91.jpg",
+        "email": "",
+        "website": "https://tutuschool.com/lic/camp/",
+        "phone": "(347) 617-1347",
+        "announcementTitle": "Summer 2026 camp sessions posted",
+        "announcementDescription": "Official page lists weekday 9 a.m. to 2 p.m. ballet camp sessions in LIC.",
+        "announcementBadge": "Seasonal"
+      }
+    }
+  ]
+}

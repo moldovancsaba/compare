@@ -1,0 +1,57 @@
+{
+  "sourceUrls": [
+    "https://www.grapplehousenyc.com/",
+    "https://images.squarespace-cdn.com/content/v1/6941fad654f2dd175ed0fbf9/20546ef8-6657-4480-aaa8-3db4ade393af/GH+Logo+2027+v2.png?format=1500w"
+  ],
+  "notes": "Official Grapple House homepage reviewed May 26, 2026. The official Grapple House logo image was downloaded from the provider's Squarespace CDN and re-hosted through POST /api/ingest/upload so provider.image uses an ImgBB URL.",
+  "missingOrUncertain": [
+    "pricePerClass is stored as 0 because the public homepage advertises a free first class but does not publish ongoing tuition.",
+    "The homepage clearly says classes run every Monday for ages 4-15; the 4:00 PM-8:00 PM window comes from the site's published structured business-hours data rather than a more detailed timetable.",
+    "rating and reviewCount are not published on the official source, so both are stored as 0."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-grapple-house-ridgewood-kids-bjj",
+        "name": "Grapple House Kids Jiu Jitsu",
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "address": "62-19 Myrtle Ave, Ridgewood, NY 11385",
+        "activityTypes": ["Martial Arts", "Sports"],
+        "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+        "dayTimeTags": ["Weekday", "Afternoon", "After-school", "Evening"],
+        "pricePerClass": 0,
+        "shortDescription": "Play-based no-gi jiu jitsu for Queens kids ages 4-15, held every Monday inside Artists in Motion in Ridgewood.",
+        "longDescription": "Grapple House describes itself as a kids-first BJJ school in Ridgewood, Queens with play-based no-gi classes for ages 4-15. The official homepage says classes run every Monday at Artists in Motion, invites families to schedule a trial, and notes that no uniform is needed for a first visit.\n\nThe same official page lists the location inside Artists in Motion at 62-19 Myrtle Ave, Ridgewood, NY 11385, with contact phone (917) 586-9950 and email grapplehousenyc@gmail.com. Published site metadata and structured business-hours data support a Monday after-school and evening window for the program.\n\nThe ClassScout listing image is an ImgBB re-host of Grapple House's official Squarespace logo art.\n\nSources: https://www.grapplehousenyc.com/ https://images.squarespace-cdn.com/content/v1/6941fad654f2dd175ed0fbf9/20546ef8-6657-4480-aaa8-3db4ade393af/GH+Logo+2027+v2.png?format=1500w",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["New"],
+        "image": "https://i.ibb.co/DHLSh2tW/232ced5f3419.webp",
+        "email": "grapplehousenyc@gmail.com",
+        "website": "https://www.grapplehousenyc.com/",
+        "phone": "(917) 586-9950",
+        "announcementTitle": "Monday trial classes",
+        "announcementDescription": "The official homepage says Grapple House runs kids classes every Monday and offers a first class trial.",
+        "announcementBadge": "Schedule a trial",
+        "recurringPrograms": [
+          {
+            "id": "rp-grapple-house-monday-kids-bjj",
+            "title": "Monday Kids No-Gi Jiu Jitsu",
+            "cadence": "Weekly",
+            "daysOfWeek": ["Monday"],
+            "timeText": "4:00 PM-8:00 PM",
+            "locationNote": "Inside Artists in Motion",
+            "ageRanges": ["3–5", "6–8", "9–12", "Teens"],
+            "activityTypes": ["Martial Arts", "Sports"],
+            "summary": "Play-based kids jiu jitsu for ages 4-15 every Monday in Ridgewood.",
+            "registrationUrl": "https://www.grapplehousenyc.com/trial"
+          }
+        ],
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

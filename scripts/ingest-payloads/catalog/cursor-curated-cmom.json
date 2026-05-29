@@ -1,0 +1,46 @@
+{
+  "sourceUrls": ["https://cmom.org/", "https://cmom.org/visit/", "https://cmom.org/wp-content/uploads/2025/04/Website-Header-Banner_Narrow_12-Images37-e1748895171351.jpg"],
+  "notes": "Official CMOM home and visit pages fetched May 2026. Hours, address, age focus (0–6), and ticket table ($17 online / $18 walk-up for adult and child; infants under 1 free) taken from cmom.org/visit/. Phone from same page. Listing image is an official CMOM visit-page hero banner originally sourced from https://cmom.org/wp-content/uploads/2025/04/Website-Header-Banner_Narrow_12-Images37-e1748895171351.jpg and uploaded through POST /api/ingest/upload for ImgBB-compliant storage.",
+  "missingOrUncertain": [
+    "email omitted: visit page points to FAQ and uses obfuscated mailto; use phone or site contact rather than guessing an address.",
+    "rating / reviewCount set to 0: not stated on official visit page.",
+    "pricePerClass uses $17 to match online general adult/child ticket column on visit page (per person, not a class SKU); confirm current rates before visiting."
+  ],
+  "operations": [
+    {
+      "resource": "provider",
+      "action": "upsert",
+      "document": {
+        "id": "prov-cmom-manhattan",
+        "name": "Children's Museum of Manhattan (CMOM)",
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "address": "The Tisch Building, 212 West 83rd Street, New York, NY 10024",
+        "activityTypes": [
+          "Museum",
+          "Hands-on exhibits",
+          "Early childhood",
+          "Daily programs",
+          "Arts and science play"
+        ],
+        "ageRanges": ["0–2", "3–5"],
+        "dayTimeTags": ["Weekday", "Weekend", "Morning", "Afternoon"],
+        "pricePerClass": 17,
+        "shortDescription": "Upper West Side children’s museum (Tue–Sun, holiday Mondays) with interactive exhibits and daily programs designed especially for ages 0–6.",
+        "longDescription": "Children’s Museum of Manhattan (CMOM) is an Upper West Side museum in The Tisch Building at 212 West 83rd Street (between Broadway and Amsterdam). The museum states it is designed especially for children ages 0–6, with interactive exhibits and daily public programs included with admission.\n\nPublic hours from the official visit page: 10 a.m.–5 p.m. Tuesday–Sunday and on holiday Mondays.\n\nAdmission (visit page pricing table): online purchase $17 adult, $17 child, free for infants under 1; walk-up $18 adult, $18 child; discounted senior and accessibility rates listed on the same page. Online purchase saves $1 vs at-door pricing per the visit page.\n\nTransit notes from CMOM: nearest subways include the 1 to 79th/86th and B/C to 81st/86th; several crosstown and avenue buses are listed on the visit page.\n\nVisitor phone on visit page: 212-721-1223. Food is not allowed inside; stroller check is available and strollers are not permitted in exhibit areas per the visit page.\n\nSources: https://cmom.org/ https://cmom.org/visit/",
+        "rating": 0,
+        "reviewCount": 0,
+        "badges": ["Great for Toddlers", "Weekend Friendly", "New"],
+        "image": "https://i.ibb.co/1fYgT097/cd7991f57667.jpg",
+        "email": "",
+        "website": "https://cmom.org",
+        "phone": "212-721-1223",
+        "announcementTitle": "Save $1 when you buy tickets online",
+        "announcementDescription": "CMOM lists lower online ticket prices than walk-up on its visit page — book before you go.",
+        "announcementBadge": "Online tickets",
+        "bookingEnabled": true
+      }
+    }
+  ]
+}

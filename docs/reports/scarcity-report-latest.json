@@ -1,0 +1,1973 @@
+{
+  "generatedAt": "2026-05-26T17:15:08.527Z",
+  "providersCount": 103,
+  "meetupCount": 18,
+  "categories": [
+    {
+      "category": "Birthday Parties",
+      "count": 18
+    },
+    {
+      "category": "Camps",
+      "count": 18
+    },
+    {
+      "category": "Drop-In Activities",
+      "count": 18
+    },
+    {
+      "category": "Meet-Up Groups",
+      "count": 18
+    },
+    {
+      "category": "Classes",
+      "count": 49
+    }
+  ],
+  "boroughRankings": {
+    "Birthday Parties": [
+      {
+        "name": "Manhattan",
+        "count": 3
+      },
+      {
+        "name": "Staten Island",
+        "count": 3
+      },
+      {
+        "name": "Bronx",
+        "count": 4
+      },
+      {
+        "name": "Brooklyn",
+        "count": 4
+      },
+      {
+        "name": "Queens",
+        "count": 4
+      }
+    ],
+    "Camps": [
+      {
+        "name": "Brooklyn",
+        "count": 3
+      },
+      {
+        "name": "Manhattan",
+        "count": 3
+      },
+      {
+        "name": "Staten Island",
+        "count": 3
+      },
+      {
+        "name": "Queens",
+        "count": 4
+      },
+      {
+        "name": "Bronx",
+        "count": 5
+      }
+    ],
+    "Drop-In Activities": [
+      {
+        "name": "Brooklyn",
+        "count": 3
+      },
+      {
+        "name": "Queens",
+        "count": 3
+      },
+      {
+        "name": "Bronx",
+        "count": 4
+      },
+      {
+        "name": "Manhattan",
+        "count": 4
+      },
+      {
+        "name": "Staten Island",
+        "count": 4
+      }
+    ],
+    "Meet-Up Groups": [
+      {
+        "name": "Bronx",
+        "count": 3
+      },
+      {
+        "name": "Manhattan",
+        "count": 3
+      },
+      {
+        "name": "Queens",
+        "count": 3
+      },
+      {
+        "name": "Brooklyn",
+        "count": 4
+      },
+      {
+        "name": "Staten Island",
+        "count": 5
+      }
+    ],
+    "Classes": [
+      {
+        "name": "Staten Island",
+        "count": 5
+      },
+      {
+        "name": "Manhattan",
+        "count": 7
+      },
+      {
+        "name": "Bronx",
+        "count": 11
+      },
+      {
+        "name": "Queens",
+        "count": 12
+      },
+      {
+        "name": "Brooklyn",
+        "count": 14
+      }
+    ]
+  },
+  "neighborhoodRankings": {
+    "Birthday Parties": [
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Fort Greene",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "count": 0
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "count": 1
+      },
+      {
+        "category": "Birthday Parties",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "count": 1
+      }
+    ],
+    "Camps": [
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Fort Greene",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "count": 0
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "count": 1
+      },
+      {
+        "category": "Camps",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "count": 2
+      }
+    ],
+    "Drop-In Activities": [
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Fort Greene",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "count": 0
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "count": 1
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "count": 2
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "count": 2
+      },
+      {
+        "category": "Drop-In Activities",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "count": 2
+      }
+    ],
+    "Meet-Up Groups": [
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Fort Greene",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "count": 0
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "count": 1
+      },
+      {
+        "category": "Meet-Up Groups",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "count": 2
+      }
+    ],
+    "Classes": [
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Port Richmond",
+        "count": 0
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Stapleton",
+        "count": 0
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "count": 0
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Concourse",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Fordham",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Highbridge",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Kingsbridge",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Morris Park",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Mott Haven",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Pelham Bay",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Riverdale",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Throgs Neck",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bay Ridge",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bedford-Stuyvesant",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Brooklyn Heights",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Bushwick",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Carroll Gardens",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Cobble Hill",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Crown Heights",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "DUMBO",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Fort Greene",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Greenpoint",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Park Slope",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Prospect Heights",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Sunset Park",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Brooklyn",
+        "neighborhood": "Williamsburg",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Chelsea",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Flatiron",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Harlem",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "SoHo",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Tribeca",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Upper East Side",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Manhattan",
+        "neighborhood": "Upper West Side",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Astoria",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Bayside",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Corona",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Elmhurst",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Flushing",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Forest Hills",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Jamaica",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Long Island City",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Ridgewood",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Sunnyside",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Queens",
+        "neighborhood": "Woodside",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Annadale",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Great Kills",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "New Dorp",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "St. George",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Staten Island",
+        "neighborhood": "Tottenville",
+        "count": 1
+      },
+      {
+        "category": "Classes",
+        "borough": "Bronx",
+        "neighborhood": "Hunts Point",
+        "count": 2
+      }
+    ]
+  },
+  "recommendedFocus": [
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Highbridge",
+      "count": 0,
+      "rationale": "This slice is underrepresented at category, borough, and neighborhood level, with additional gaps in age/day-time/activity coverage.",
+      "details": {
+        "age": [
+          {
+            "name": "0–2",
+            "count": 0
+          },
+          {
+            "name": "3–5",
+            "count": 0
+          },
+          {
+            "name": "6–8",
+            "count": 0
+          },
+          {
+            "name": "9–12",
+            "count": 0
+          },
+          {
+            "name": "Teens",
+            "count": 0
+          }
+        ],
+        "dayTime": [
+          {
+            "name": "After-school",
+            "count": 0
+          },
+          {
+            "name": "Afternoon",
+            "count": 0
+          },
+          {
+            "name": "Evening",
+            "count": 0
+          },
+          {
+            "name": "Morning",
+            "count": 0
+          },
+          {
+            "name": "Weekday",
+            "count": 0
+          },
+          {
+            "name": "Weekend",
+            "count": 0
+          }
+        ],
+        "activity": []
+      }
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "rationale": "This slice is underrepresented at category, borough, and neighborhood level, with additional gaps in age/day-time/activity coverage.",
+      "details": {
+        "age": [
+          {
+            "name": "0–2",
+            "count": 0
+          },
+          {
+            "name": "3–5",
+            "count": 0
+          },
+          {
+            "name": "6–8",
+            "count": 0
+          },
+          {
+            "name": "9–12",
+            "count": 0
+          },
+          {
+            "name": "Teens",
+            "count": 0
+          }
+        ],
+        "dayTime": [
+          {
+            "name": "After-school",
+            "count": 0
+          },
+          {
+            "name": "Afternoon",
+            "count": 0
+          },
+          {
+            "name": "Evening",
+            "count": 0
+          },
+          {
+            "name": "Morning",
+            "count": 0
+          },
+          {
+            "name": "Weekday",
+            "count": 0
+          },
+          {
+            "name": "Weekend",
+            "count": 0
+          }
+        ],
+        "activity": []
+      }
+    },
+    {
+      "category": "Birthday Parties",
+      "borough": "Bronx",
+      "neighborhood": "Kingsbridge",
+      "count": 0,
+      "rationale": "This slice is underrepresented at category, borough, and neighborhood level, with additional gaps in age/day-time/activity coverage.",
+      "details": {
+        "age": [
+          {
+            "name": "0–2",
+            "count": 0
+          },
+          {
+            "name": "3–5",
+            "count": 0
+          },
+          {
+            "name": "6–8",
+            "count": 0
+          },
+          {
+            "name": "9–12",
+            "count": 0
+          },
+          {
+            "name": "Teens",
+            "count": 0
+          }
+        ],
+        "dayTime": [
+          {
+            "name": "After-school",
+            "count": 0
+          },
+          {
+            "name": "Afternoon",
+            "count": 0
+          },
+          {
+            "name": "Evening",
+            "count": 0
+          },
+          {
+            "name": "Morning",
+            "count": 0
+          },
+          {
+            "name": "Weekday",
+            "count": 0
+          },
+          {
+            "name": "Weekend",
+            "count": 0
+          }
+        ],
+        "activity": []
+      }
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Concourse",
+      "count": 0,
+      "rationale": "This slice is underrepresented at category, borough, and neighborhood level, with additional gaps in age/day-time/activity coverage.",
+      "details": {
+        "age": [
+          {
+            "name": "0–2",
+            "count": 0
+          },
+          {
+            "name": "3–5",
+            "count": 0
+          },
+          {
+            "name": "6–8",
+            "count": 0
+          },
+          {
+            "name": "9–12",
+            "count": 0
+          },
+          {
+            "name": "Teens",
+            "count": 0
+          }
+        ],
+        "dayTime": [
+          {
+            "name": "After-school",
+            "count": 0
+          },
+          {
+            "name": "Afternoon",
+            "count": 0
+          },
+          {
+            "name": "Evening",
+            "count": 0
+          },
+          {
+            "name": "Morning",
+            "count": 0
+          },
+          {
+            "name": "Weekday",
+            "count": 0
+          },
+          {
+            "name": "Weekend",
+            "count": 0
+          }
+        ],
+        "activity": []
+      }
+    },
+    {
+      "category": "Camps",
+      "borough": "Bronx",
+      "neighborhood": "Hunts Point",
+      "count": 0,
+      "rationale": "This slice is underrepresented at category, borough, and neighborhood level, with additional gaps in age/day-time/activity coverage.",
+      "details": {
+        "age": [
+          {
+            "name": "0–2",
+            "count": 0
+          },
+          {
+            "name": "3–5",
+            "count": 0
+          },
+          {
+            "name": "6–8",
+            "count": 0
+          },
+          {
+            "name": "9–12",
+            "count": 0
+          },
+          {
+            "name": "Teens",
+            "count": 0
+          }
+        ],
+        "dayTime": [
+          {
+            "name": "After-school",
+            "count": 0
+          },
+          {
+            "name": "Afternoon",
+            "count": 0
+          },
+          {
+            "name": "Evening",
+            "count": 0
+          },
+          {
+            "name": "Morning",
+            "count": 0
+          },
+          {
+            "name": "Weekday",
+            "count": 0
+          },
+          {
+            "name": "Weekend",
+            "count": 0
+          }
+        ],
+        "activity": []
+      }
+    }
+  ]
+}

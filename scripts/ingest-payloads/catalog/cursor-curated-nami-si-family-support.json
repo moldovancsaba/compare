@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://namistatenisland.org/support-and-education/support-groups/nami-family-support-group/",
+    "https://namistatenisland.org/",
+    "https://www.sijcc.org/uploads/1/2/2/7/122792762/bulletin-web_orig.png"
+  ],
+  "notes": "NAMI NYC Staten Island affiliate program page for Family Support Group schedules. Cover image is an official asset from the Joan & Alan Bernikow JCC of Staten Island website (same host venue as the Wednesday meetings at 1466 Victory Blvd), downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Two recurring in-person locations are published (Holy Rosary Parish Center, 85 Jerome Avenue, and JCC, 1466 Victory Boulevard); confirm room numbers and holiday cancellations on namistatenisland.org/calendar before attending.",
+    "ClassScout neighborhood is set to Westerleigh to match the 10314 ZIP commonly associated with the JCC Victory Boulevard address; the Tuesday Jerome Avenue site is in a different north-shore area—use NAMI’s calendar for the session you plan to join.",
+    "Meetings are for adult family members and loved ones per NAMI’s model; not a drop-in playgroup for young children."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-nami-staten-island-family-support",
+        "name": "NAMI NYC Staten Island — Family Support Group",
+        "borough": "Staten Island",
+        "neighborhood": "Westerleigh",
+        "groupType": "Parent Meetup",
+        "ageRange": "All ages",
+        "cadence": "Weekly",
+        "instagram": "",
+        "website": "https://namistatenisland.org/support-and-education/support-groups/nami-family-support-group/",
+        "description": "Free, confidential NAMI Family Support Group meetings on Staten Island for adults who care about someone who has experienced symptoms of a mental health condition. The NAMI NYC Staten Island page describes a structured, peer-led model (typically 60–90 minutes) led by trained family members, with no endorsement of specific medical therapies.\n\nPublished recurring in-person options on the same page include: Tuesdays 6:30–9:00 p.m. at Holy Rosary Parish Center, 85 Jerome Avenue, Staten Island, NY; Wednesdays 11:00 a.m. at the JCC of Staten Island, 1466 Victory Boulevard, Staten Island, NY (noted as currently running); and Wednesdays 6:30–9:00 p.m. at the same JCC address. The page directs visitors to the affiliate calendar and program interest form for the latest schedule.\n\nSources: https://namistatenisland.org/support-and-education/support-groups/nami-family-support-group/ https://namistatenisland.org/",
+        "initials": "NM",
+        "icon": "community",
+        "palette": "charcoal",
+        "coverImageUrl": "https://i.ibb.co/219zNMXG/e97171085c4c.png"
+      }
+    }
+  ]
+}

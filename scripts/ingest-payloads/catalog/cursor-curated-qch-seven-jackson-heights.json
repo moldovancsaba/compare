@@ -1,0 +1,35 @@
+{
+  "sourceUrls": [
+    "https://qchnyc.org/programs/adult-and-family-services/family-enrichment-center",
+    "https://qchnyc.org/programs/adult-and-family-services/",
+    "https://qchnyc.org/sites/default/files/styles/carousel/public/img_2268_0.jpg?itok=e4MpwmQk"
+  ],
+  "notes": "Queens Community House official program page for the S.E.V.E.N Family Enrichment Center in Jackson Heights. Cover image is the program carousel JPEG on qchnyc.org, downloaded and re-hosted via POST /api/ingest/upload.",
+  "missingOrUncertain": [
+    "Specific workshop dates and drop-in hours are not listed on the program landing page; contact the center to confirm current family activities and enrollment.",
+    "ageRange set to All ages because the FEC describes family-wide support rather than a single child age band on the cited page.",
+    "cadence set to Monthly as a planning label for recurring workshops and family activities; actual schedule varies by program."
+  ],
+  "operations": [
+    {
+      "resource": "meetupGroup",
+      "action": "upsert",
+      "document": {
+        "id": "meetup-qch-seven-jackson-heights-fec",
+        "name": "Queens Community House — S.E.V.E.N Family Enrichment Center",
+        "borough": "Queens",
+        "neighborhood": "Jackson Heights",
+        "groupType": "Neighborhood Families",
+        "ageRange": "All ages",
+        "cadence": "Monthly",
+        "instagram": "",
+        "website": "https://qchnyc.org/programs/adult-and-family-services/family-enrichment-center",
+        "description": "The S.E.V.E.N Family Enrichment Center (FEC) is a Queens Community House program in Jackson Heights offering a welcoming space for neighborhood families. The official program page describes parenting resources, educational workshops, family activities, and personalized assistance aimed at connection, empowerment, and stability, with services co-designed with participating families.\n\nPublished contact details: 87-10 Northern Boulevard, Suite 202, Jackson Heights, NY 11372; main line 917-858-2180; Director Tiffany Nunez at 917-724-9279, tnunez@qchnyc.org.\n\nSources: https://qchnyc.org/programs/adult-and-family-services/family-enrichment-center https://qchnyc.org/programs/adult-and-family-services/",
+        "initials": "QCH",
+        "icon": "community",
+        "palette": "teal",
+        "coverImageUrl": "https://i.ibb.co/G3Hftrdy/42b0dc3c1157.jpg"
+      }
+    }
+  ]
+}
