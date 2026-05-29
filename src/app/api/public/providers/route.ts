@@ -3,6 +3,7 @@ import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { Provider } from "@/types/provider";
 import { normalizeProviderFreshness } from "@/lib/providerFreshness";
 import { deriveNextOccurrence } from "@/lib/providerSchedule";
+import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
 
 function stripId<T extends object>(doc: T): T {
   const o = { ...doc } as Record<string, unknown>;
@@ -18,14 +19,15 @@ export async function GET() {
   const rows = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as (Provider & {
     _id?: unknown;
   })[];
-  const providers = rows
+  const providers = filterObsoleteContent(
+    rows
     .map((row) => {
       const normalized = normalizeProviderFreshness(row);
       return stripId({
         ...normalized,
         nextOccurrence: deriveNextOccurrence(normalized),
       });
-    })
-    .sort((left, right) => (right.publishedAt ?? "").localeCompare(left.publishedAt ?? ""));
+    }),
+  ).sort((left, right) => (right.publishedAt ?? "").localeCompare(left.publishedAt ?? ""));
   return NextResponse.json(providers);
 }

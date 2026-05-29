@@ -15,6 +15,7 @@ import {
   removeCatalogMediaFingerprintsForEntity,
   syncCatalogImageFingerprintForEntity,
 } from "@/lib/contentIntelligence/catalogImageUniqueness";
+import { isObsoleteFamilyMeetup, isObsoleteFamilyProvider } from "@/lib/catalogContentPolicy";
 
 export type IngestOpResult =
   | { ok: true; data?: unknown }
@@ -163,6 +164,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       const { _id, ...rest } = raw as unknown as Provider & { _id?: unknown };
       return withCatalogProject(withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso));
     });
+    if (preparedProviders.some(isObsoleteFamilyProvider)) {
+      return { ok: false, error: "providers.replaceAll rejected: content policy blocks legacy family/kid listings" };
+    }
     for (const provider of preparedProviders) {
       const duplicateError = await validateCatalogImageUniqueness(db, {
         entityKind: "provider",
@@ -204,6 +208,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       const { _id, ...rest } = raw as unknown as MeetupGroup & { _id?: unknown };
       return withCatalogProject(rest) as MeetupGroup;
     });
+    if (normalizedMeetups.some(isObsoleteFamilyMeetup)) {
+      return { ok: false, error: "meetupGroups.replaceAll rejected: content policy blocks legacy family/kid groups" };
+    }
     for (const meetup of normalizedMeetups) {
       const duplicateError = await validateCatalogImageUniqueness(db, {
         entityKind: "meetupGroup",
@@ -269,6 +276,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     if (providerErr) return { ok: false, error: providerErr };
     const existing = (await db.collection(COL.providers).findOne(scopedIdFilter(rest.id))) as unknown as (Provider & { _id?: unknown }) | null;
     const prepared = withProviderFreshness(withCatalogProject(rest as Provider), existing, new Date().toISOString());
+    if (isObsoleteFamilyProvider(prepared)) {
+      return { ok: false, error: "provider.upsert rejected: content policy blocks legacy family/kid listing" };
+    }
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "provider", document: prepared });
     if (duplicateError) return { ok: false, error: duplicateError };
     await db.collection(COL.providers).replaceOne(
@@ -295,6 +305,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     const providerErr = validateProviderDocument(merged);
     if (providerErr) return { ok: false, error: providerErr };
     const prepared = withCatalogProject(withProviderFreshness(merged as Provider, cur, new Date().toISOString()));
+    if (isObsoleteFamilyProvider(prepared)) {
+      return { ok: false, error: "provider.patch rejected: content policy blocks legacy family/kid listing" };
+    }
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "provider", document: prepared });
     if (duplicateError) return { ok: false, error: duplicateError };
     await db
@@ -341,6 +354,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       const providerErr = validateProviderDocument(rest);
       if (providerErr) return { ok: false, error: providerErr };
       const prepared = withCatalogProject(withProviderFreshness(rest as Provider, existingById.get(rest.id) ?? null, nowIso));
+      if (isObsoleteFamilyProvider(prepared)) {
+        return { ok: false, error: "providers.upsertMany rejected: content policy blocks legacy family/kid listing" };
+      }
       nextProvidersById.set(rest.id, prepared);
       preparedProviders.push(prepared);
       writes.push({
@@ -378,6 +394,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     const meetupErr = validateMeetupDocument(rest);
     if (meetupErr) return { ok: false, error: meetupErr };
     const scopedRest = withCatalogProject(rest);
+    if (isObsoleteFamilyMeetup(scopedRest)) {
+      return { ok: false, error: "meetupGroup.upsert rejected: content policy blocks legacy family/kid group" };
+    }
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: scopedRest as MeetupGroup });
     if (duplicateError) return { ok: false, error: duplicateError };
     await db.collection(COL.meetupGroups).replaceOne(scopedIdFilter(rest.id), scopedRest as MeetupGroup, {
@@ -401,6 +420,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
     const meetupErr = validateMeetupDocument(merged);
     if (meetupErr) return { ok: false, error: meetupErr };
     const scopedMerged = withCatalogProject(merged as MeetupGroup);
+    if (isObsoleteFamilyMeetup(scopedMerged)) {
+      return { ok: false, error: "meetupGroup.patch rejected: content policy blocks legacy family/kid listing" };
+    }
     const duplicateError = await validateCatalogImageUniqueness(db, { entityKind: "meetupGroup", document: scopedMerged as MeetupGroup });
     if (duplicateError) return { ok: false, error: duplicateError };
     await db.collection(COL.meetupGroups).updateOne(scopedIdFilter(id), { $set: { ...patch, catalogProject: scopedMerged.catalogProject } });
@@ -435,6 +457,9 @@ export async function applyIngestOperation(db: Db, op: unknown): Promise<IngestO
       const meetupErr = validateMeetupDocument(rest);
       if (meetupErr) return { ok: false, error: meetupErr };
       const prepared = withCatalogProject(rest) as MeetupGroup;
+      if (isObsoleteFamilyMeetup(prepared)) {
+        return { ok: false, error: "meetupGroups.upsertMany rejected: content policy blocks legacy family/kid group" };
+      }
       nextMeetupsById.set(rest.id, prepared);
       normalizedMeetups.push(prepared);
       writes.push({

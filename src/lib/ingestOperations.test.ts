@@ -83,12 +83,12 @@ describe("applyIngestOperation", () => {
       document: {
         id: "prov-time-test",
         name: "Time Test",
-        category: "Classes",
+        category: "Camps",
         borough: "Brooklyn",
         neighborhood: "Park Slope",
         address: "1 Example St",
-        activityTypes: ["Art"],
-        ageRanges: ["3–5"],
+        activityTypes: ["Rifle"],
+        ageRanges: ["Licensed Adult"],
         dayTimeTags: ["Weekday"],
         pricePerClass: 20,
         shortDescription: "A provider used for timestamp testing.",
@@ -126,21 +126,21 @@ describe("applyIngestOperation", () => {
     const db = new FakeDb() as never;
 
     const upsert = await applyIngestOperation(db, {
-      resource: "meetupGroup",
+        resource: "meetupGroup",
       action: "upsert",
       document: {
         id: "meetup-riverdale-families",
-        name: "Riverdale Families",
+        name: "Shooting Club",
         borough: "Bronx",
         neighborhood: "Riverdale",
-        groupType: "Neighborhood Families",
+        groupType: "Sport Shooting Club",
         ageRange: "All ages",
         cadence: "Monthly",
         instagram: "",
         website: "https://example.org/families",
-        description: "A neighborhood families meetup for parents and children with monthly community gatherings.",
+        description: "A neighborhood groups meetup for active shooters.",
         initials: "RF",
-        icon: "community",
+        icon: "target",
         palette: "teal",
         coverImageUrl: "https://i.ibb.co/example/photo.jpg",
       },
@@ -163,14 +163,14 @@ describe("applyIngestOperation", () => {
         name: "Riverdale Families",
         borough: "Bronx",
         neighborhood: "Riverdale",
-        groupType: "Neighborhood Families",
+        groupType: "Sport Shooting Club",
         ageRange: "All ages",
         cadence: "Monthly",
         instagram: "",
         website: "https://example.org/families",
-        description: "A neighborhood families meetup for parents and children with monthly community gatherings.",
+        description: "Monthly shooter-focused meetup. ",
         initials: "RF",
-        icon: "community",
+        icon: "target",
         palette: "teal",
       },
     });
@@ -184,5 +184,40 @@ describe("applyIngestOperation", () => {
 
     expect(patched.ok).toBe(false);
     expect((patched as { error: string }).error).toMatch(/Invalid enum value/);
+  });
+
+  it("blocks provider upserts that match legacy kid criteria", async () => {
+    const db = new FakeDb() as never;
+
+    const result = await applyIngestOperation(db, {
+      resource: "provider",
+      action: "upsert",
+      document: {
+        id: "prov-kid-scratch",
+        name: "Little Hands Club",
+        category: "Classes",
+        borough: "Brooklyn",
+        neighborhood: "Park Slope",
+        address: "1 Scratch Ave",
+        activityTypes: ["Art"],
+        ageRanges: ["3–5"],
+        dayTimeTags: ["Weekday"],
+        pricePerClass: 12,
+        shortDescription: "Hands-on classes for children.",
+        longDescription: "Fun children-led classes designed for little hands and curious minds.",
+        rating: 4,
+        reviewCount: 7,
+        badges: [],
+        image: "https://i.ibb.co/example/kids.jpg",
+        email: "",
+        website: "https://example.org",
+        phone: "",
+      },
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      error: "provider.upsert rejected: content policy blocks legacy family/kid listing",
+    });
   });
 });

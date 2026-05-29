@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { MeetupGroup } from "@/types/meetup";
+import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
 
 function stripId<T extends object>(doc: T): T {
   const o = { ...doc } as Record<string, unknown>;
@@ -16,5 +17,5 @@ export async function GET() {
   const rows = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as (MeetupGroup & {
     _id?: unknown;
   })[];
-  return NextResponse.json(rows.map(stripId));
+  return NextResponse.json(filterObsoleteContent(rows.map(stripId)));
 }
