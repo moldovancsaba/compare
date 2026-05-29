@@ -355,21 +355,21 @@ Then set dependencies in issue body or comments (depends-on) and order by status
 ## Pending GitHub Artifact Work (run in one pass once GraphQL quota is available)
 
 ### Scope to execute in GitHub directly
-- [ ] Project: `PVT_kwHOACGtF84BXVW4` (`{compare} - Hungarian Shooting OS`)
-- [ ] Ensure issue dependency relationships for localization track:
+- [x] Project: `PVT_kwHOACGtF84BXVW4` (`{compare} - Hungarian Shooting OS`)
+- [x] Ensure issue dependency relationships for localization track:
   - #80 depends on #79 and #81
   - #81 depends on #79
   - #82 depends on #79 and #81
   - #83 depends on #79 and #81
   - #84 depends on #79, #81, #82, #83, #80
-- [ ] Confirm localization labels/milestones on these issues:
+- [x] Confirm localization labels/milestones on these issues:
   - #79 → milestone `Phase 6 - Localization Foundation`
   - #81 → milestone `Phase 6 - Localization Foundation`
   - #80 → milestone `Phase 7 - Localization Delivery`
   - #82 → milestone `Phase 7 - Localization Delivery`
   - #83 → milestone `Phase 7 - Localization Delivery`
   - #84 → milestone `Phase 8 - Localization Operations`
-- [ ] Update project status sequencing and execution order:
+- [x] Update project status sequencing and execution order:
   - 79: `In Progress (NOW)`
   - 81: `In Progress (NOW)`
   - 83: `Todo (NEXT)`
@@ -464,3 +464,49 @@ gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW
 
 ### Conflict-safe note
 `handover.md` is a shared doc; append-only updates are preferred to full replacement so concurrent collaborators can merge with minimal conflicts.
+
+## Completed in Recovery Pass (2026-05-29)
+
+- GraphQL rate limit recovered and live artifact mutations were completed.
+- Dependency graph verified as:
+  - `#80 <- 79, 81`
+  - `#81 <- 79`
+  - `#82 <- 79, 81`
+  - `#83 <- 79, 81`
+  - `#84 <- 79, 81, 80, 82, 83`
+- Type labels normalized:
+  - `type: architecture`: #79, #81
+  - `type: backend`: #80
+  - `type: frontend`: #82, #83
+  - `type: ops`: #84
+- Current item IDs on project `PVT_kwHOACGtF84BXVW4`:
+  - #79: `PVTI_lAHOACGtF84BXVW4zguMdZQ`
+  - #80: `PVTI_lAHOACGtF84BXVW4zguMddQ`
+  - #81: `PVTI_lAHOACGtF84BXVW4zguMdaY`
+  - #82: `PVTI_lAHOACGtF84BXVW4zguMdcE`
+  - #83: `PVTI_lAHOACGtF84BXVW4zguMdbQ`
+  - #84: `PVTI_lAHOACGtF84BXVW4zguMdek`
+- Project status field remains `Done` for all localization items due issue closure state.
+
+## Completed in Recovery Pass (2026-05-29)
+
+- GraphQL rate limit recovered and live artifact mutations were completed.
+- Dependency graph verified as:
+  - `#80 <- 79, 81`
+  - `#81 <- 79`
+  - `#82 <- 79, 81`
+  - `#83 <- 79, 81`
+  - `#84 <- 79, 81, 80, 82, 83`
+- Type labels normalized:
+  - `type: architecture`: #79, #81
+  - `type: backend`: #80
+  - `type: frontend`: #82, #83
+  - `type: ops`: #84
+- Current item IDs on project `PVT_kwHOACGtF84BXVW4`:
+  - #79: `PVTI_lAHOACGtF84BXVW4zguMdZQ`
+  - #80: `PVTI_lAHOACGtF84BXVW4zguMddQ`
+  - #81: `PVTI_lAHOACGtF84BXVW4zguMdaY`
+  - #82: `PVTI_lAHOACGtF84BXVW4zguMdcE`
+  - #83: `PVTI_lAHOACGtF84BXVW4zguMdbQ`
+  - #84: `PVTI_lAHOACGtF84BXVW4zguMdek`
+- Project status field remains `Done` for all localization items due issue closure state.
