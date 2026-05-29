@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { ColorSchemeScript } from "@mantine/core";
+import { cookies } from "next/headers";
 import { Providers } from "./providers";
+import { localeCookieName, normalizeLocale } from "@/lib/i18n/config";
+import { getMetadata } from "@/lib/i18n/messages";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "./globals.css";
@@ -19,30 +22,34 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "RangeScout EU — Discover Sport Shooting Venues Across Europe",
-  description:
-    "Curated EU sport shooting training, ranges, competitions, hunting grounds, and clubs by country and region. Save favorites and estimate costs.",
-  authors: [{ name: "RangeScout EU" }],
-  icons: {
-    icon: "/images/class_scout_logo_favicon.png",
-    shortcut: "/images/class_scout_logo_favicon.png",
-    apple: "/images/class_scout_logo_favicon.png",
-  },
-  openGraph: {
-    title: "RangeScout EU — Sport Shooting Directory",
-    description:
-      "Curated EU sport shooting training, ranges, competitions, hunting grounds, and clubs by country and region.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const locale = normalizeLocale(cookieStore.get(localeCookieName)?.value);
+  const dynamicMetadata = getMetadata(locale);
+  return {
+    ...dynamicMetadata,
+    authors: [{ name: "RangeScout EU" }],
+    icons: {
+      icon: "/images/class_scout_logo_favicon.png",
+      shortcut: "/images/class_scout_logo_favicon.png",
+      apple: "/images/class_scout_logo_favicon.png",
+    },
+    openGraph: {
+      ...dynamicMetadata.openGraph,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const locale = normalizeLocale(cookieStore.get(localeCookieName)?.value);
+  const dir = "ltr";
   return (
-    <html lang="en" dir="ltr" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${poppins.variable}`}>
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>

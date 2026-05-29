@@ -16,6 +16,7 @@ import { discoveryFeatureFlags } from "@/lib/discoveryConfig";
 import { emitDiscoveryTelemetry } from "@/lib/discoveryTelemetry";
 import { type DiscoverDateMode, type DiscoverSort, queryProviders } from "@/lib/providerQuery";
 import { formatUpcomingOccurrenceLabel } from "@/lib/providerSchedule";
+import type { AppLocale } from "@/lib/i18n/config";
 
 interface Props {
   category: Category | null;
@@ -33,6 +34,7 @@ interface Props {
   onFiltersChange: (filters: FilterState) => void;
   onQueryChange: (query: string) => void;
   onSortChange: (sort: DiscoverSort) => void;
+  locale?: AppLocale;
 }
 
 const DISPLAY_LABELS: Record<Category, string> = {
@@ -58,10 +60,11 @@ export function DiscoverView({
   onFiltersChange,
   onQueryChange,
   onSortChange,
+  locale = "en",
 }: Props) {
   const { data: providers = [], isLoading: loadP, isError: errP } = useProvidersCatalog();
   const { data: neighborhoodsMap } = useNeighborhoodsCatalog();
-  const { data: site } = useSiteCatalog();
+  const { data: site } = useSiteCatalog(locale);
 
   const hoodOptions = useMemo(() => {
     if (borough === "All") return [];

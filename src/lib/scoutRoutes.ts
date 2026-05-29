@@ -1,5 +1,7 @@
 import { ACTIVITY_TYPES, AGE_RANGES, DAY_TIME_TAGS } from "@/data/providers";
 import { BOROUGHS } from "@/data/locations";
+import { DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n/config";
+import { localizePath, stripLocaleFromPathname } from "@/lib/i18n/paths";
 import type { Borough, BoroughChoice, Category } from "@/types/provider";
 import type { FilterState } from "@/components/scout/Filters";
 import type { DiscoverDateMode, DiscoverSort } from "@/lib/providerQuery";
@@ -39,12 +41,20 @@ const VIEW_HREFS: Record<ScoutPageKey, string> = {
   "Neighborhood Guide": "/neighborhood-guides",
 };
 
-export function getHrefForView(view: ScoutPageKey): string {
-  return VIEW_HREFS[view];
+export function getHrefForView(view: ScoutPageKey, locale: AppLocale = DEFAULT_LOCALE): string {
+  return getLocalizedHrefForView(view, locale);
+}
+
+export function getLocalizedHrefForView(
+  view: ScoutPageKey,
+  locale: AppLocale = DEFAULT_LOCALE,
+  params?: URLSearchParams,
+) {
+  return localizePath(withSearch(VIEW_HREFS[view], params ?? new URLSearchParams()), locale);
 }
 
 export function getViewFromPathname(pathname: string): ScoutPageKey {
-  const normalized = pathname.replace(/\/+$/, "") || "/";
+  const normalized = stripLocaleFromPathname(pathname).replace(/\/+$/, "") || "/";
   if (normalized === "/") return "Home";
   const slug = normalized.slice(1);
   if (slug in SLUG_TO_CATEGORY) return SLUG_TO_CATEGORY[slug];
@@ -112,6 +122,7 @@ export function getDiscoverHref(
     sort?: DiscoverSort | null;
     dateMode?: DiscoverDateMode;
   },
+  locale: AppLocale = DEFAULT_LOCALE,
 ) {
   const params = new URLSearchParams();
   if (state?.borough && state.borough !== "All") params.set("borough", state.borough);
@@ -127,23 +138,29 @@ export function getDiscoverHref(
   if (state?.q?.trim()) params.set("q", state.q.trim());
   if (state?.sort) params.set("sort", state.sort);
   if (state?.dateMode === "this-week") params.set("dateMode", "this-week");
-  return withSearch(getHrefForView(category), params);
+  return withSearch(getHrefForView(category, locale), params);
 }
 
-export function getMeetupGroupsHref(state?: { borough?: BoroughChoice | null; neighborhood?: string | null }) {
+export function getMeetupGroupsHref(
+  state?: { borough?: BoroughChoice | null; neighborhood?: string | null },
+  locale: AppLocale = DEFAULT_LOCALE,
+) {
   const params = new URLSearchParams();
   if (state?.borough && state.borough !== "All") params.set("borough", state.borough);
   if (state?.borough && state.borough !== "All" && state.neighborhood?.trim()) {
     params.set("neighborhood", state.neighborhood.trim());
   }
-  return withSearch(getHrefForView("Meet-Up Groups"), params);
+  return withSearch(getHrefForView("Meet-Up Groups", locale), params);
 }
 
-export function getNeighborhoodGuideHref(state: { borough: BoroughChoice; neighborhood: string }) {
+export function getNeighborhoodGuideHref(
+  state: { borough: BoroughChoice; neighborhood: string },
+  locale: AppLocale = DEFAULT_LOCALE,
+) {
   const params = new URLSearchParams();
   if (state.borough !== "All") params.set("borough", state.borough);
   if (state.neighborhood.trim()) params.set("neighborhood", state.neighborhood.trim());
-  return withSearch(getHrefForView("Neighborhood Guide"), params);
+  return withSearch(getHrefForView("Neighborhood Guide", locale), params);
 }
 
 export function parseDiscoverState(searchParams: URLSearchParams) {

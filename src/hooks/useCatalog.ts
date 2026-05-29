@@ -5,6 +5,15 @@ import type { Provider } from "@/types/provider";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Borough } from "@/types/provider";
 import type { SiteDoc } from "@/types/site";
+import type { AppLocale } from "@/lib/i18n/config";
+
+function buildLocaleQuery(locale?: AppLocale) {
+  if (!locale) return "";
+  const params = new URLSearchParams();
+  params.set("locale", locale);
+  const query = params.toString();
+  return query ? `?${query}` : "";
+}
 
 export function useProvidersCatalog() {
   return useQuery({
@@ -48,11 +57,12 @@ export function useNeighborhoodsCatalog() {
   });
 }
 
-export function useSiteCatalog() {
+export function useSiteCatalog(locale?: AppLocale) {
   return useQuery({
-    queryKey: ["catalog", "site"],
+    queryKey: ["catalog", "site", locale ?? "en"],
     queryFn: async () => {
-      const r = await fetch("/api/public/site");
+      const localeQuery = buildLocaleQuery(locale);
+      const r = await fetch(`/api/public/site${localeQuery}`);
       if (r.status === 404) return null;
       if (!r.ok) throw new Error("Failed to load site");
       return (await r.json()) as SiteDoc | null;

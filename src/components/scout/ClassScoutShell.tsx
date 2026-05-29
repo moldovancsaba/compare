@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DiscoveryShell, PublicSiteFooter } from "@doneisbetter/gds-core/client";
 import { ActionIcon, Badge, Box, Button, Group, Indicator, Stack, Text } from "@mantine/core";
 import { Sidebar, type ViewKey } from "@/components/scout/Sidebar";
@@ -37,11 +37,16 @@ import {
 import type { FilterState } from "@/components/scout/Filters";
 import type { DiscoverDateMode, DiscoverSort } from "@/lib/providerQuery";
 import { Plus } from "@/lib/appIcons";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { getText, siteCopy } from "@/lib/i18n/messages";
+import { normalizeLocale } from "@/lib/i18n/config";
 
 export default function ClassScoutShell() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const params = useParams<{ locale?: string }>();
+  const locale = normalizeLocale(params.locale ?? parseLocaleFromPathname(pathname));
   const view = getViewFromPathname(pathname) as ViewKey;
   const [openProvider, setOpenProvider] = useState<Provider | null>(null);
   const [shareProvider, setShareProvider] = useState<Provider | null>(null);
@@ -49,7 +54,7 @@ export default function ClassScoutShell() {
   const [shareGroup, setShareGroup] = useState<MeetupGroup | null>(null);
   const { saved } = useSaved();
   const { items } = useCalculator();
-  const { data: site } = useSiteCatalog();
+  const { data: site } = useSiteCatalog(locale);
   const { data: providers = [] } = useProvidersCatalog();
   const { data: meetupGroups = [] } = useMeetupGroupsCatalog();
 
@@ -82,23 +87,30 @@ export default function ClassScoutShell() {
   ) => {
     if (next === "Meet-Up Groups") {
       navigate(
-        getMeetupGroupsHref({
-          borough: location?.borough ?? null,
-          neighborhood: location?.borough === "All" ? null : location?.neighborhood ?? null,
-        }),
+        getMeetupGroupsHref(
+          {
+            borough: location?.borough ?? null,
+            neighborhood: location?.borough === "All" ? null : location?.neighborhood ?? null,
+          },
+          locale,
+        ),
       );
       return;
     }
     if (next === "Saved" || next === "Calculator" || next === "My Account") {
-      navigate(getHrefForView(next));
+      navigate(getHrefForView(next, locale));
       return;
     }
     navigate(
-      getDiscoverHref(next, {
-        borough: location?.borough ?? null,
-        neighborhood: location?.borough === "All" ? null : location?.neighborhood ?? null,
-        dateMode: next === "This Week" ? "this-week" : "all",
-      }),
+      getDiscoverHref(
+        next,
+        {
+          borough: location?.borough ?? null,
+          neighborhood: location?.borough === "All" ? null : location?.neighborhood ?? null,
+          dateMode: next === "This Week" ? "this-week" : "all",
+        },
+        locale,
+      ),
     );
   };
 
@@ -112,27 +124,35 @@ export default function ClassScoutShell() {
   }) => {
     if (!isDiscoverCategory(view)) return;
     navigate(
-      getDiscoverHref(view, {
-        borough: patch.borough ?? discoverState.borough,
-        neighborhood: patch.neighborhood !== undefined ? patch.neighborhood : discoverState.neighborhood,
-        filters: patch.filters ?? discoverState.filters,
-        q: patch.q ?? discoverState.q,
-        sort: patch.sort ?? discoverState.sort,
-        dateMode: patch.dateMode ?? "all",
-      }),
+      getDiscoverHref(
+        view,
+        {
+          borough: patch.borough ?? discoverState.borough,
+          neighborhood: patch.neighborhood !== undefined ? patch.neighborhood : discoverState.neighborhood,
+          filters: patch.filters ?? discoverState.filters,
+          q: patch.q ?? discoverState.q,
+          sort: patch.sort ?? discoverState.sort,
+          dateMode: patch.dateMode ?? "all",
+        },
+        locale,
+      ),
     );
   };
 
   const updateMeetupState = (patch: { borough?: BoroughChoice; neighborhood?: string | null }) => {
     navigate(
-      getMeetupGroupsHref({
-        borough: patch.borough ?? meetupState.borough,
-        neighborhood: patch.neighborhood !== undefined ? patch.neighborhood : meetupState.neighborhood,
-      }),
+      getMeetupGroupsHref(
+        {
+          borough: patch.borough ?? meetupState.borough,
+          neighborhood: patch.neighborhood !== undefined ? patch.neighborhood : meetupState.neighborhood,
+        },
+        locale,
+      ),
     );
   };
 
-  const homeHref = currentQuery.toString() ? `/?${currentQuery.toString()}` : "/";
+  const homeHrefBase = getHrefForView("Home", locale);
+  const homeHref = currentQuery.toString() ? `${homeHrefBase}?${currentQuery.toString()}` : homeHrefBase;
   const shellActions = (
     <Group gap="xs" wrap="nowrap">
       <Indicator
@@ -146,7 +166,7 @@ export default function ClassScoutShell() {
       >
         <ActionIcon
           component={Link}
-          href={getHrefForView("Saved")}
+            href={getHrefForView("Saved", locale)}
           variant={view === "Saved" ? "filled" : "light"}
           color="teal"
           radius="xl"
@@ -158,7 +178,7 @@ export default function ClassScoutShell() {
       </Indicator>
       <Button
         component={Link}
-        href={getHrefForView("Calculator")}
+        href={getHrefForView("Calculator", locale)}
         variant={view === "Calculator" ? "filled" : "light"}
         color={view === "Calculator" ? "teal" : "dark"}
         radius="xl"
@@ -170,7 +190,7 @@ export default function ClassScoutShell() {
       </Button>
       <ActionIcon
         component={Link}
-        href={getHrefForView("My Account")}
+        href={getHrefForView("My Account", locale)}
         variant={view === "My Account" ? "filled" : "light"}
         color="teal"
         radius="xl"
@@ -201,13 +221,13 @@ export default function ClassScoutShell() {
         </Box>
         <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
           <Text size="xs" tt="uppercase" fw={700} c="teal.7" style={{ letterSpacing: "0.14em" }}>
-            RangeScout EU
+            {getText(siteCopy.shell.brandName, locale)}
           </Text>
           <Text size="lg" fw={700} lh={1.2} truncate>
-            Curated shooting venues and clubs
+            {getText(siteCopy.shell.brandTagline, locale)}
           </Text>
           <Text size="sm" c="dimmed" visibleFrom="md" truncate>
-            Fast country-first browsing for training, ranges, competitions, hunting grounds, and clubs.
+            {getText(siteCopy.shell.brandSubtitle, locale)}
           </Text>
         </Stack>
       </Group>
@@ -221,6 +241,7 @@ export default function ClassScoutShell() {
       sidebar={
         <Sidebar
           active={view}
+          locale={locale}
           sidebarPromo={
             site
               ? {
@@ -241,7 +262,12 @@ export default function ClassScoutShell() {
       <Box maw={1400} mx="auto" w="100%">
         <Stack gap="lg" pb="xl">
             {view === "Home" && (
-              <HomeView onNavigate={handleNavigate} onOpenProvider={setOpenProvider} onOpenGroup={setOpenGroup} />
+              <HomeView
+                onNavigate={handleNavigate}
+                onOpenProvider={setOpenProvider}
+                onOpenGroup={setOpenGroup}
+                locale={locale}
+              />
             )}
             {view === "Neighborhood Guide" && (
               <NeighborhoodGuideView
@@ -261,6 +287,7 @@ export default function ClassScoutShell() {
               <DiscoverView
                 category={view}
                 mode="category"
+                locale={locale}
                 onOpen={setOpenProvider}
                 onShare={setShareProvider}
                 borough={discoverState.borough}
@@ -274,14 +301,15 @@ export default function ClassScoutShell() {
                 }
                 onNeighborhoodChange={(neighborhood) => updateDiscoverState({ neighborhood })}
                 onFiltersChange={(filters) => updateDiscoverState({ filters })}
-                onQueryChange={(q) => navigate(getDiscoverHref(view, { ...discoverState, q, dateMode: "all" }))}
-                onSortChange={(sort) => navigate(getDiscoverHref(view, { ...discoverState, sort, dateMode: "all" }))}
+                onQueryChange={(q) => navigate(getDiscoverHref(view, { ...discoverState, q, dateMode: "all" }, locale))}
+                onSortChange={(sort) => navigate(getDiscoverHref(view, { ...discoverState, sort, dateMode: "all" }, locale))}
               />
             )}
             {view === "This Week" && (
               <DiscoverView
                 category={null}
                 mode="this-week"
+                locale={locale}
                 onOpen={setOpenProvider}
                 onShare={setShareProvider}
                 borough={discoverState.borough}
@@ -296,12 +324,20 @@ export default function ClassScoutShell() {
                     borough,
                     neighborhood: borough === "All" ? null : null,
                     dateMode: "this-week",
-                  }))
+                  }, locale))
                 }
-                onNeighborhoodChange={(neighborhood) => navigate(getDiscoverHref("This Week", { ...discoverState, neighborhood, dateMode: "this-week" }))}
-                onFiltersChange={(filters) => navigate(getDiscoverHref("This Week", { ...discoverState, filters, dateMode: "this-week" }))}
-                onQueryChange={(q) => navigate(getDiscoverHref("This Week", { ...discoverState, q, dateMode: "this-week" }))}
-                onSortChange={(sort) => navigate(getDiscoverHref("This Week", { ...discoverState, sort, dateMode: "this-week" }))}
+                onNeighborhoodChange={(neighborhood) =>
+                  navigate(getDiscoverHref("This Week", { ...discoverState, neighborhood, dateMode: "this-week" }, locale))
+                }
+                onFiltersChange={(filters) =>
+                  navigate(getDiscoverHref("This Week", { ...discoverState, filters, dateMode: "this-week" }, locale))
+                }
+                onQueryChange={(q) =>
+                  navigate(getDiscoverHref("This Week", { ...discoverState, q, dateMode: "this-week" }, locale))
+                }
+                onSortChange={(sort) =>
+                  navigate(getDiscoverHref("This Week", { ...discoverState, sort, dateMode: "this-week" }, locale))
+                }
               />
             )}
             {view === "Saved" && (
@@ -336,7 +372,7 @@ export default function ClassScoutShell() {
               meta="RangeScout EU · Trusted. Regional. Built for sport shooting and hunting operators. · Demo prices for planning purposes only."
             >
               <Group gap="xs">
-                <Text component={Link} href="/admin" c="dimmed" size="xs">
+                <Text component={Link} href={getHrefForView("Home", locale).replace(/\/$/, "") + "/admin"} c="dimmed" size="xs">
                   Staff admin
                 </Text>
               </Group>

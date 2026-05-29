@@ -20,6 +20,7 @@ import { AccentPanel, EditorialCard, EditorialHero, FeatureBand, PublicBrandFoot
 import { ProviderCard } from "@/components/scout/ProviderCard";
 import { MeetupGroupCard } from "@/components/scout/MeetupGroupCard";
 import { getNeighborhoodGuideHref } from "@/lib/scoutRoutes";
+import { type AppLocale } from "@/lib/i18n/config";
 
 const HOME_BOROUGH_CHOICES: BoroughChoice[] = ["All", ...BOROUGHS];
 
@@ -81,14 +82,15 @@ interface Props {
   onNavigate: (view: Category | "Saved" | "Calculator" | "Meet-Up Groups", location?: { borough?: BoroughChoice; neighborhood?: string }) => void;
   onOpenProvider: (p: Provider) => void;
   onOpenGroup: (g: MeetupGroup) => void;
+  locale: AppLocale;
 }
 
-export function HomeView({ onNavigate, onOpenProvider, onOpenGroup }: Props) {
+export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Props) {
   const [borough, setBorough] = useState<BoroughChoice>("All");
   const [email, setEmail] = useState("");
   const { data: providers = [] } = useProvidersCatalog();
   const { data: meetups = [] } = useMeetupGroupsCatalog();
-  const { data: siteData, isLoading: siteLoading, isError: siteError } = useSiteCatalog();
+  const { data: siteData, isLoading: siteLoading, isError: siteError } = useSiteCatalog(locale);
   const { data: locationsByBorough } = useNeighborhoodsCatalog();
   const hoodList =
     borough === "All" ? [] : (locationsByBorough?.[borough] ?? NEIGHBORHOODS[borough]);
@@ -270,7 +272,9 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup }: Props) {
                 ctaLabel={g.ctaLabel?.trim() || "Explore guide"}
                 onClick={() =>
                   openMarketingLink(g.ctaHref, () => {
-                    window.location.assign(getNeighborhoodGuideHref({ borough: g.borough, neighborhood: g.neighborhood }));
+                    window.location.assign(
+                      getNeighborhoodGuideHref({ borough: g.borough, neighborhood: g.neighborhood }, locale),
+                    );
                   })
                 }
               />

@@ -1,10 +1,5 @@
-import { Suspense } from "react";
-import ClassScoutShell from "@/components/scout/ClassScoutShell";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <Suspense fallback={null}>
-      <ClassScoutShell />
-    </Suspense>
-  );
+  redirect("/en");
 }
