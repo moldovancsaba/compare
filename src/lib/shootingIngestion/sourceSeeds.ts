@@ -84,7 +84,19 @@ function getExternalSourceSeeds() {
 
 export function getShootingSourceSeeds(): ShootingSourceSeedRow[] {
   const external = getExternalSourceSeeds();
-  return sourceSeedDefaults.map((seed) => ({
-    ...seed,
-  })).concat(external);
+  const merged = new Map<string, ShootingSourceSeedRow>();
+
+  for (const seed of sourceSeedDefaults) {
+    merged.set(seed.sourceId, { ...seed });
+  }
+
+  for (const externalSeed of external) {
+    const existing = merged.get(externalSeed.sourceId);
+    merged.set(
+      externalSeed.sourceId,
+      existing ? ({ ...existing, ...externalSeed, sourceId: externalSeed.sourceId, discoveryUrls: externalSeed.discoveryUrls }) : externalSeed,
+    );
+  }
+
+  return Array.from(merged.values());
 }

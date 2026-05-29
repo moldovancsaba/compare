@@ -129,6 +129,56 @@ export interface ShootingCompetitionReport {
   rows: ShootingCompetitionSourceRecord[];
 }
 
+export type ShootingLeadType =
+  | "competition"
+  | "cup"
+  | "class"
+  | "group"
+  | "event_series"
+  | "event_instance"
+  | "range"
+  | "club";
+
+export interface ShootingEntityLeadRecord {
+  sourceId: string;
+  sourceUrl: string;
+  leadType: ShootingLeadType;
+  title: string;
+  description: string;
+  sourceDiscipline: string;
+  timezone: "Europe/Budapest";
+  locationHint?: string;
+  locationFallbackCity?: string;
+  ageBand?: string;
+  registrationUrl?: string;
+  registrationMethod: "practiscore" | "email" | "form" | "phone" | "club_portal" | "unknown";
+  membershipRequirement: "required" | "optional" | "unknown";
+  paymentRequired?: boolean;
+  sourceStatus: "active" | "inactive" | "blocked" | "timeout" | "failed";
+  confidence: "high" | "medium" | "low";
+  confidenceScore: number;
+  evidenceUrl: string[];
+  rationale: string;
+  canonicalRule: string;
+  startDate?: string;
+  startTime?: string;
+  recurrenceRuleText?: string;
+  recurrenceDays?: string[];
+  scrapedAt: string;
+}
+
+export interface ShootingLeadReport {
+  generatedAt: string;
+  sourceInventoryFile?: string;
+  totalCandidates: number;
+  byType: Record<ShootingLeadType, number>;
+  highConfidenceCount: number;
+  mediumConfidenceCount: number;
+  lowConfidenceCount: number;
+  blockedOrSkippedCount: number;
+  rows: ShootingEntityLeadRecord[];
+}
+
 export interface ShootingEventRecord {
   sourceId: string;
   sourceUrl: string;

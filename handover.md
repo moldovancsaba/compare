@@ -40,6 +40,21 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
   - `npm test`
   - script smoke run: `npm run shooting:sources:inventory`, `npm run shooting:sources:classify`, `npm run shooting:collect:leads`
 
+### Additional implementation completed in this continuation
+
+- Rulebook-first lead collection completed for shooting ingestion:
+  - Added `src/lib/shootingIngestion/collectionRulebook.ts` with scored rule matches, precedence, lead-type deduping, and deterministic match ordering.
+  - Updated `src/lib/shootingIngestion/sourceCollector.ts` to emit rule-derived `ShootingEntityLeadRecord`s with per-type and per-source caps, richer competition/event mapping, and unified entity lead export support.
+  - Extended `src/lib/shootingIngestion/types.ts` with explicit entity contracts for `ShootingLeadType`, `ShootingEntityLeadRecord`, and `ShootingLeadReport`.
+  - Added `src/lib/shootingIngestion/sourceCollector.test.ts` coverage for rule ordering, fallback behavior, and candidate semantics.
+  - Updated `scripts/collect-shooting-leads.ts` to emit `shooting-lead-pipeline-latest.json` and entity lead reports for downstream workflows.
+  - Updated `src/lib/shootingIngestion/sourceSeeds.ts` to merge external hot-loaded seed entries by `sourceId`.
+- Current verification result:
+  - `npm run build`
+  - `npm test --silent`
+  - `npm run lint --silent`
+- Board synchronization remains deferred (`skip board management`), so no further GitHub project mutations were performed in this pass.
+
 ## Execution-ready follow-up (implementation-focused)
 
 - Immediate backlog still needed before product release:
