@@ -7,12 +7,12 @@ Intelligence unit: compare-range-intelligence
 Checklist company: efce8e3d-c834-4bd1-8521-ce1e97b29f7c
 Destination key: compare
 
-Generated: 2026-05-29T18:08:20.216Z
+Generated: 2026-05-29T18:44:34.044Z
 Canonical standard: https://github.com/sovereignsquad/general-design-system/issues/81
 
 ## Runtime flow
-- Refresh EU shooting and hunting source inventories on schedule and when freshness incidents open.
-- Generate normalized venue, club, competition, and hunting-ground leads for the compare-owned intelligence unit.
+- Refresh the Hungary-first shooting source inventory on schedule and when freshness incidents open.
+- Generate normalized competition, event, course, club, and range leads for the compare-owned intelligence unit.
 - Build RangeScout-standard drafts from official sources and route them into Checklist review packets.
 - Publish approved drafts and verify both private and public visibility.
 - Continuously audit freshness, compliance, taxonomy drift, accessibility regressions, and pipeline silence.
@@ -32,12 +32,12 @@ Canonical standard: https://github.com/sovereignsquad/general-design-system/issu
   - Pipeline bootstrap or reconciliation should read from this artifact.
 
 ## Tasks
-### eu_source_inventory_refresh
+### hungary_source_inventory_refresh
 - cadence: daily
 - timeoutSeconds: 900
 - maxAttempts: 3
 - dependencies: (none)
-- success: Inventory artifact written successfully. | Eligible operator and venue source counts are non-zero.
+- success: Inventory artifact written successfully. | Eligible operator and entity source counts are non-zero.
 - failure: All source fetches fail. | Inventory artifact missing or malformed. | Eligible source count drops abruptly without upstream explanation.
 - rollback: Retain the last good artifact and open a freshness incident instead of publishing an empty inventory.
 - observability: Run duration | Discovered URL count | Eligible source count | Failed fetch count
@@ -50,34 +50,34 @@ Canonical standard: https://github.com/sovereignsquad/general-design-system/issu
 - failure: Target surfaces unreachable. | Audit emits no findings.
 - rollback: Keep the last successful audit and mark the current run degraded.
 - observability: Capability count | Adopt recommendation count | Fetch failures
-### shooting_lead_export_generation
+### shooting_entity_lead_export_generation
 - cadence: daily
 - timeoutSeconds: 1200
 - maxAttempts: 3
-- dependencies: eu_source_inventory_refresh
-- success: Lead export contains at least one medium-or-higher-confidence lead. | Normalized events map to explicit target schedule fields.
+- dependencies: hungary_source_inventory_refresh
+- success: Lead export contains at least one medium-or-higher-confidence lead. | Normalized competition and event records map to explicit target fields.
 - failure: Export returns zero leads. | Every record is discarded due to low confidence. | Normalized event mapping becomes ambiguous at scale.
 - rollback: Do not overwrite the last good export with an empty batch; open a source-harvest incident.
 - observability: Lead count | Lead type distribution | Confidence distribution | Per-record fetch failures
-### range_intelligence_draft_build
+### hungary_entity_draft_build
 - cadence: continuous
 - timeoutSeconds: 1800
 - maxAttempts: 5
-- dependencies: shooting_lead_export_generation
+- dependencies: shooting_entity_lead_export_generation
 - success: Draft payload validates against the target RangeScout schema. | Evidence points to official source material rather than third-party copy.
-- failure: Schema validation rejection. | Source page no longer accessible. | Generated draft lacks required venue, club, or compliance evidence.
+- failure: Schema validation rejection. | Source page no longer accessible. | Generated draft lacks required competition, club, range, course, or compliance evidence.
 - rollback: Mark the lead rejected and preserve diagnostics; do not enqueue malformed drafts for publish.
 - observability: Draft success rate | Validation failure rate | Rejected lead reasons
 ### review_packet_submission
 - cadence: continuous
 - timeoutSeconds: 300
 - maxAttempts: 3
-- dependencies: range_intelligence_draft_build
+- dependencies: hungary_entity_draft_build
 - success: Checklist packet accepted. | Callback recorded after publish completion.
 - failure: Checklist bridge missing. | Packet rejected. | Callback never received.
 - rollback: Leave the draft in review-ready state and retry packet submission with the same idempotency identifiers.
 - observability: Packet submission latency | Bridge skip count | Callback success rate
-### eu_publish_freshness_watchdog
+### hungary_publish_freshness_watchdog
 - cadence: hourly
 - timeoutSeconds: 120
 - maxAttempts: 2
@@ -113,12 +113,12 @@ Canonical standard: https://github.com/sovereignsquad/general-design-system/issu
 - failure: Compliance artifact not written. | Lead capture surface unreachable.
 - rollback: Retain the last good compliance audit and flag degraded coverage.
 - observability: Compliance issue count | Disclosure drift count | Form reachability failures
-### club_and_hunting_taxonomy_reconciliation
+### operator_taxonomy_reconciliation
 - cadence: daily
 - timeoutSeconds: 900
 - maxAttempts: 2
-- dependencies: range_intelligence_draft_build
-- success: Listings that drift between club, range, competition, and hunting categories are surfaced.
+- dependencies: hungary_entity_draft_build
+- success: Listings that drift between competition, event, course, club, and range categories are surfaced.
 - failure: No taxonomy artifact written. | Drift detector returns empty while live catalog changes.
 - rollback: Keep drift findings read-only until manual review confirms remapping rules.
 - observability: Taxonomy drift count | Auto-remap suggestion count

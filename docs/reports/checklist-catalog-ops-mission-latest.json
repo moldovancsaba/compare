@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T18:08:20.216Z",
+  "generatedAt": "2026-05-29T18:44:34.044Z",
   "missionKey": "compare-eu-shooting-ops",
   "projectKey": "compare",
   "productName": "RangeScout EU",
@@ -8,8 +8,8 @@
   "destinationKey": "compare",
   "canonicalStandard": "https://github.com/sovereignsquad/general-design-system/issues/81",
   "runtimeFlow": [
-    "Refresh EU shooting and hunting source inventories on schedule and when freshness incidents open.",
-    "Generate normalized venue, club, competition, and hunting-ground leads for the compare-owned intelligence unit.",
+    "Refresh the Hungary-first shooting source inventory on schedule and when freshness incidents open.",
+    "Generate normalized competition, event, course, club, and range leads for the compare-owned intelligence unit.",
     "Build RangeScout-standard drafts from official sources and route them into Checklist review packets.",
     "Publish approved drafts and verify both private and public visibility.",
     "Continuously audit freshness, compliance, taxonomy drift, accessibility regressions, and pipeline silence."
@@ -54,7 +54,7 @@
   ],
   "tasks": [
     {
-      "taskKey": "eu_source_inventory_refresh",
+      "taskKey": "hungary_source_inventory_refresh",
       "ownerSystem": "checklist-local-ai",
       "cadence": "daily",
       "timeoutSeconds": 900,
@@ -65,18 +65,19 @@
         900
       ],
       "inputs": [
-        "EU federation sites",
+        "Hungarian federation sites",
         "club directories",
         "range sites",
-        "hunting operators",
+        "course/training surfaces",
+        "PractiScore match surfaces",
         "robots.txt constraints"
       ],
       "outputs": [
-        "EU source inventory JSON/MD snapshots"
+        "Hungary source inventory JSON/MD snapshots"
       ],
       "successCriteria": [
         "Inventory artifact written successfully.",
-        "Eligible operator and venue source counts are non-zero."
+        "Eligible operator and entity source counts are non-zero."
       ],
       "failureSignals": [
         "All source fetches fail.",
@@ -128,7 +129,7 @@
       "dependencies": []
     },
     {
-      "taskKey": "shooting_lead_export_generation",
+      "taskKey": "shooting_entity_lead_export_generation",
       "ownerSystem": "checklist-local-ai",
       "cadence": "daily",
       "timeoutSeconds": 1200,
@@ -139,16 +140,16 @@
         900
       ],
       "inputs": [
-        "EU source inventory artifact",
+        "Hungary source inventory artifact",
         "Source detail pages"
       ],
       "outputs": [
         "Lead NDJSON/JSON/MD snapshots",
-        "Normalized event JSON/MD snapshots"
+        "Normalized competition/event JSON/MD snapshots"
       ],
       "successCriteria": [
         "Lead export contains at least one medium-or-higher-confidence lead.",
-        "Normalized events map to explicit target schedule fields."
+        "Normalized competition and event records map to explicit target fields."
       ],
       "failureSignals": [
         "Export returns zero leads.",
@@ -163,11 +164,11 @@
         "Per-record fetch failures"
       ],
       "dependencies": [
-        "eu_source_inventory_refresh"
+        "hungary_source_inventory_refresh"
       ]
     },
     {
-      "taskKey": "range_intelligence_draft_build",
+      "taskKey": "hungary_entity_draft_build",
       "ownerSystem": "checklist-local-ai",
       "cadence": "continuous",
       "timeoutSeconds": 1800,
@@ -196,7 +197,7 @@
       "failureSignals": [
         "Schema validation rejection.",
         "Source page no longer accessible.",
-        "Generated draft lacks required venue, club, or compliance evidence."
+        "Generated draft lacks required competition, club, range, course, or compliance evidence."
       ],
       "rollbackBehavior": "Mark the lead rejected and preserve diagnostics; do not enqueue malformed drafts for publish.",
       "observability": [
@@ -205,7 +206,7 @@
         "Rejected lead reasons"
       ],
       "dependencies": [
-        "shooting_lead_export_generation"
+        "shooting_entity_lead_export_generation"
       ]
     },
     {
@@ -245,11 +246,11 @@
         "Callback success rate"
       ],
       "dependencies": [
-        "range_intelligence_draft_build"
+        "hungary_entity_draft_build"
       ]
     },
     {
-      "taskKey": "eu_publish_freshness_watchdog",
+      "taskKey": "hungary_publish_freshness_watchdog",
       "ownerSystem": "checklist-local-ai",
       "cadence": "hourly",
       "timeoutSeconds": 120,
@@ -396,7 +397,7 @@
       ]
     },
     {
-      "taskKey": "club_and_hunting_taxonomy_reconciliation",
+      "taskKey": "operator_taxonomy_reconciliation",
       "ownerSystem": "checklist-local-ai",
       "cadence": "daily",
       "timeoutSeconds": 900,
@@ -408,14 +409,14 @@
       "inputs": [
         "Live catalog",
         "Draft catalog",
-        "Training/range/competition/hunting taxonomy rules"
+        "Competition/course/range/club/event taxonomy rules"
       ],
       "outputs": [
         "Taxonomy drift report",
         "Corrective review tasks"
       ],
       "successCriteria": [
-        "Listings that drift between club, range, competition, and hunting categories are surfaced."
+        "Listings that drift between competition, event, course, club, and range categories are surfaced."
       ],
       "failureSignals": [
         "No taxonomy artifact written.",
@@ -427,7 +428,7 @@
         "Auto-remap suggestion count"
       ],
       "dependencies": [
-        "range_intelligence_draft_build"
+        "hungary_entity_draft_build"
       ]
     }
   ]

@@ -1,8 +1,13 @@
 # Operations
 
-This document describes the supported local and production-facing workflows for operating and maintaining ClassScout.
+This document describes the supported local and production-facing workflows for operating and maintaining RangeScout.
 
-Design/UI/UX policy is not defined here. The SSOT is the [General Design System repository](https://github.com/sovereignsquad/general-design-system), and [`docs/design-system-adapter.md`](/Users/Shared/Projects/classscout/docs/design-system-adapter.md) records the local implementation contract.
+Design/UI/UX policy is not defined here. The SSOT is the [General Design System repository](https://github.com/sovereignsquad/general-design-system).
+
+For ingestion and planning direction, treat these as the current source of truth:
+
+- [Hungarian Shooting Rulebook](/Users/Shared/Projects/compare/docs/hungarian-shooting-rulebook.md)
+- [Hungarian Shooting Implementation Plan](/Users/Shared/Projects/compare/docs/hungarian-shooting-implementation-plan.md)
 
 ## Environment setup
 

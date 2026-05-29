@@ -1,8 +1,21 @@
-# ClassScout Roadmap
+# RangeScout Roadmap
 
-This roadmap reflects the current state of the repo after the validation, reporting, reviewer-audit, and curator release-check foundation has already been delivered.
+This roadmap reflects the post-pivot direction of the repo.
 
-Design/UI/UX standards are governed by the [General Design System repository](https://github.com/sovereignsquad/general-design-system). This roadmap may describe ClassScout sequencing, but it is not the authority for component behavior or UI rules.
+RangeScout is no longer planned as a generic EU directory fed by inherited ClassScout curation habits. The active roadmap is now:
+
+- Hungary-first source inventory
+- normalized competition intelligence
+- range and club infrastructure
+- Checklist-owned operational workflows
+- GDS-only accessible public UI
+
+Design/UI/UX standards are governed by the [General Design System repository](https://github.com/sovereignsquad/general-design-system). This roadmap does not override that source of truth.
+
+## Canonical planning documents
+
+- [Hungarian Shooting Rulebook](/Users/Shared/Projects/compare/docs/hungarian-shooting-rulebook.md)
+- [Hungarian Shooting Implementation Plan](/Users/Shared/Projects/compare/docs/hungarian-shooting-implementation-plan.md)
 
 ## Foundation already in place
 
@@ -19,9 +32,14 @@ Those capabilities now exist in code and should be treated as operating infrastr
 
 ## Current active phase
 
-The current phase is controlled catalog expansion with documentation and review discipline kept in sync.
+The active phase is architecture correction and source-governed ingestion redesign.
 
-In parallel, the UI platform now has a strict architectural direction: Mantine-only under the current GDS package/runtime contract.
+That means:
+
+- stop expanding from inherited scarcity heuristics alone
+- define a durable Hungarian source inventory
+- normalize competitions, ranges, clubs, courses, and events into first-class contracts
+- keep the public UI narrow while the backend contracts widen
 
 ## Tracks
 

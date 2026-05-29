@@ -8,16 +8,16 @@ import {
 } from "@/lib/workflow/projectConfig";
 
 export type CatalogOpsTaskKey =
-  | "eu_source_inventory_refresh"
+  | "hungary_source_inventory_refresh"
   | "operator_capability_audit_refresh"
-  | "shooting_lead_export_generation"
-  | "range_intelligence_draft_build"
+  | "shooting_entity_lead_export_generation"
+  | "hungary_entity_draft_build"
   | "review_packet_submission"
-  | "eu_publish_freshness_watchdog"
+  | "hungary_publish_freshness_watchdog"
   | "stale_listing_recheck"
   | "webapp_quality_audit"
   | "compliance_signal_audit"
-  | "club_and_hunting_taxonomy_reconciliation";
+  | "operator_taxonomy_reconciliation";
 
 export interface CatalogOpsTaskSpec {
   taskKey: CatalogOpsTaskKey;
@@ -65,8 +65,8 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
     destinationKey: CHECKLIST_DESTINATION_KEY,
     canonicalStandard: "https://github.com/sovereignsquad/general-design-system/issues/81",
     runtimeFlow: [
-      "Refresh EU shooting and hunting source inventories on schedule and when freshness incidents open.",
-      "Generate normalized venue, club, competition, and hunting-ground leads for the compare-owned intelligence unit.",
+      "Refresh the Hungary-first shooting source inventory on schedule and when freshness incidents open.",
+      "Generate normalized competition, event, course, club, and range leads for the compare-owned intelligence unit.",
       "Build RangeScout-standard drafts from official sources and route them into Checklist review packets.",
       "Publish approved drafts and verify both private and public visibility.",
       "Continuously audit freshness, compliance, taxonomy drift, accessibility regressions, and pipeline silence.",
@@ -111,15 +111,22 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
     ],
     tasks: [
       {
-        taskKey: "eu_source_inventory_refresh",
+        taskKey: "hungary_source_inventory_refresh",
         ownerSystem: "checklist-local-ai",
         cadence: "daily",
         timeoutSeconds: 900,
         maxAttempts: 3,
         retryBackoffSeconds: [60, 300, 900],
-        inputs: ["EU federation sites", "club directories", "range sites", "hunting operators", "robots.txt constraints"],
-        outputs: ["EU source inventory JSON/MD snapshots"],
-        successCriteria: ["Inventory artifact written successfully.", "Eligible operator and venue source counts are non-zero."],
+        inputs: [
+          "Hungarian federation sites",
+          "club directories",
+          "range sites",
+          "course/training surfaces",
+          "PractiScore match surfaces",
+          "robots.txt constraints",
+        ],
+        outputs: ["Hungary source inventory JSON/MD snapshots"],
+        successCriteria: ["Inventory artifact written successfully.", "Eligible operator and entity source counts are non-zero."],
         failureSignals: ["All source fetches fail.", "Inventory artifact missing or malformed.", "Eligible source count drops abruptly without upstream explanation."],
         rollbackBehavior: "Retain the last good artifact and open a freshness incident instead of publishing an empty inventory.",
         observability: ["Run duration", "Discovered URL count", "Eligible source count", "Failed fetch count"],
@@ -141,22 +148,25 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
         dependencies: [],
       },
       {
-        taskKey: "shooting_lead_export_generation",
+        taskKey: "shooting_entity_lead_export_generation",
         ownerSystem: "checklist-local-ai",
         cadence: "daily",
         timeoutSeconds: 1200,
         maxAttempts: 3,
         retryBackoffSeconds: [60, 300, 900],
-        inputs: ["EU source inventory artifact", "Source detail pages"],
-        outputs: ["Lead NDJSON/JSON/MD snapshots", "Normalized event JSON/MD snapshots"],
-        successCriteria: ["Lead export contains at least one medium-or-higher-confidence lead.", "Normalized events map to explicit target schedule fields."],
+        inputs: ["Hungary source inventory artifact", "Source detail pages"],
+        outputs: ["Lead NDJSON/JSON/MD snapshots", "Normalized competition/event JSON/MD snapshots"],
+        successCriteria: [
+          "Lead export contains at least one medium-or-higher-confidence lead.",
+          "Normalized competition and event records map to explicit target fields.",
+        ],
         failureSignals: ["Export returns zero leads.", "Every record is discarded due to low confidence.", "Normalized event mapping becomes ambiguous at scale."],
         rollbackBehavior: "Do not overwrite the last good export with an empty batch; open a source-harvest incident.",
         observability: ["Lead count", "Lead type distribution", "Confidence distribution", "Per-record fetch failures"],
-        dependencies: ["eu_source_inventory_refresh"],
+        dependencies: ["hungary_source_inventory_refresh"],
       },
       {
-        taskKey: "range_intelligence_draft_build",
+        taskKey: "hungary_entity_draft_build",
         ownerSystem: "checklist-local-ai",
         cadence: "continuous",
         timeoutSeconds: 1800,
@@ -165,10 +175,14 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
         inputs: ["Lead artifact", "Official source pages", "RangeScout schema constraints"],
         outputs: ["Draft payloads", "Evidence summaries", "Diagnostics"],
         successCriteria: ["Draft payload validates against the target RangeScout schema.", "Evidence points to official source material rather than third-party copy."],
-        failureSignals: ["Schema validation rejection.", "Source page no longer accessible.", "Generated draft lacks required venue, club, or compliance evidence."],
+        failureSignals: [
+          "Schema validation rejection.",
+          "Source page no longer accessible.",
+          "Generated draft lacks required competition, club, range, course, or compliance evidence.",
+        ],
         rollbackBehavior: "Mark the lead rejected and preserve diagnostics; do not enqueue malformed drafts for publish.",
         observability: ["Draft success rate", "Validation failure rate", "Rejected lead reasons"],
-        dependencies: ["shooting_lead_export_generation"],
+        dependencies: ["shooting_entity_lead_export_generation"],
       },
       {
         taskKey: "review_packet_submission",
@@ -183,10 +197,10 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
         failureSignals: ["Checklist bridge missing.", "Packet rejected.", "Callback never received."],
         rollbackBehavior: "Leave the draft in review-ready state and retry packet submission with the same idempotency identifiers.",
         observability: ["Packet submission latency", "Bridge skip count", "Callback success rate"],
-        dependencies: ["range_intelligence_draft_build"],
+        dependencies: ["hungary_entity_draft_build"],
       },
       {
-        taskKey: "eu_publish_freshness_watchdog",
+        taskKey: "hungary_publish_freshness_watchdog",
         ownerSystem: "checklist-local-ai",
         cadence: "hourly",
         timeoutSeconds: 120,
@@ -246,19 +260,19 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
         dependencies: ["review_packet_submission"],
       },
       {
-        taskKey: "club_and_hunting_taxonomy_reconciliation",
+        taskKey: "operator_taxonomy_reconciliation",
         ownerSystem: "checklist-local-ai",
         cadence: "daily",
         timeoutSeconds: 900,
         maxAttempts: 2,
         retryBackoffSeconds: [120, 600],
-        inputs: ["Live catalog", "Draft catalog", "Training/range/competition/hunting taxonomy rules"],
+        inputs: ["Live catalog", "Draft catalog", "Competition/course/range/club/event taxonomy rules"],
         outputs: ["Taxonomy drift report", "Corrective review tasks"],
-        successCriteria: ["Listings that drift between club, range, competition, and hunting categories are surfaced."],
+        successCriteria: ["Listings that drift between competition, event, course, club, and range categories are surfaced."],
         failureSignals: ["No taxonomy artifact written.", "Drift detector returns empty while live catalog changes."],
         rollbackBehavior: "Keep drift findings read-only until manual review confirms remapping rules.",
         observability: ["Taxonomy drift count", "Auto-remap suggestion count"],
-        dependencies: ["range_intelligence_draft_build"],
+        dependencies: ["hungary_entity_draft_build"],
       },
     ],
   };

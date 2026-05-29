@@ -61,6 +61,5 @@ npm run build
 
 ## Notes
 
-- The old `compare` watch project has been replaced.
 - Useful structural patterns were copied from `classscout`, but the active product is now `RangeScout EU`.
 - Some legacy curator and content-intelligence code paths are still present in the repo, but the public-facing app and seeded content are now aligned to the new shooting/hunting domain.
