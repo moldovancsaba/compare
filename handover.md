@@ -430,14 +430,14 @@ gh issue edit 84 --repo moldovancsaba/compare --milestone "Phase 8 - Localizatio
 
 # 5) Project board execution sequencing and status values (requires item IDs)
 # Project item IDs in this run:
-# 79 -> PVTI_lAHOACGtF84BXVW4zguMZc8
+# 79 -> PVTI_lAHOACGtF84BXVW4zguMdZQ
 # 80 -> PVTI_lAHOACGtF84BXVW4zguMddQ
 # 81 -> PVTI_lAHOACGtF84BXVW4zguMdaY
 # 82 -> PVTI_lAHOACGtF84BXVW4zguMdcE
 # 83 -> PVTI_lAHOACGtF84BXVW4zguMdbQ
 # 84 -> PVTI_lAHOACGtF84BXVW4zguMdek
 
-# status field id = PVTF_lAHOACGtF84BXVW4zhSi3y4
+# status field id = PVTSSF_lAHOACGtF84BXVW4zhSi3y0
 # execution order field id (after creation): from gh project field-list output (Number field)
 # options: f75ad846 Todo, 532b72d5 Backlog, 392fb27d Roadmap, 47fc9ee4 In Progress
 # sequence field (if added): create via gh project field-create then set with --number
