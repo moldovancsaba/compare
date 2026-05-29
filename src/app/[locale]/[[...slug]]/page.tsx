@@ -6,6 +6,7 @@ const PUBLIC_ROUTES = new Set([
   "",
   "classes",
   "class",
+  "training",
   "ranges",
   "range",
   "competitions",
