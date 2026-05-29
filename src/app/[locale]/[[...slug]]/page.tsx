@@ -1,24 +1,8 @@
 import { notFound } from "next/navigation";
 import ClassScoutShell from "@/components/scout/ClassScoutShell";
+import { PUBLIC_SLUG_ROUTES } from "@/lib/scoutRoutes";
 
-const PUBLIC_ROUTES = new Set([
-  undefined,
-  "",
-  "classes",
-  "class",
-  "training",
-  "ranges",
-  "range",
-  "competitions",
-  "hunting-grounds",
-  "this-week",
-  "clubs",
-  "meet-up-groups",
-  "saved",
-  "calculator",
-  "neighborhood-guides",
-  "my-account",
-]);
+const PUBLIC_ROUTES = new Set([undefined, "", ...PUBLIC_SLUG_ROUTES]);
 
 export default async function LocalizedHome({
   params,

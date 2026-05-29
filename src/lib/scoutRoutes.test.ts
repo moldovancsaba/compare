@@ -29,7 +29,9 @@ describe("scoutRoutes", () => {
   });
 
   it("maps legacy and mixed-case route slugs to stable views", () => {
+    expect(getViewFromPathname("/en/class")).toBe("Classes");
     expect(getViewFromPathname("/competitions")).toBe("Birthday Parties");
+    expect(getViewFromPathname("/en/range")).toBe("Camps");
     expect(getViewFromPathname("/MEET-UP-GROUPS")).toBe("Meet-Up Groups");
     expect(getViewFromPathname("/en/this-week")).toBe("This Week");
     expect(getViewFromPathname("/en/range-scout")).toBe("Camps");

@@ -23,12 +23,14 @@ const CATEGORY_TO_SLUG: Record<Category, string> = {
   "Drop-In Activities": "hunting-grounds",
 };
 
-const ROUTE_ALIASES: Record<string, Category | ScoutPageKey> = {
+export const ROUTE_ALIASES: Record<string, Category | ScoutPageKey> = {
   ...Object.fromEntries(Object.entries(CATEGORY_TO_SLUG).map(([category, slug]) => [slug, category as Category])),
   // legacy / compatibility slugs
   classes: "Classes",
+  class: "Classes",
   "kids-classes": "Classes",
   camps: "Camps",
+  range: "Camps",
   "birthday-parties": "Birthday Parties",
   competitions: "Birthday Parties",
   "drop-in-activities": "Drop-In Activities",
@@ -47,6 +49,8 @@ const ROUTE_ALIASES: Record<string, Category | ScoutPageKey> = {
 };
 
 const SLUG_TO_CATEGORY = ROUTE_ALIASES as Record<string, Category | ScoutPageKey>;
+
+export const PUBLIC_SLUG_ROUTES = Object.keys(SLUG_TO_CATEGORY);
 
 const VIEW_HREFS: Record<ScoutPageKey, string> = {
   Home: "/",
