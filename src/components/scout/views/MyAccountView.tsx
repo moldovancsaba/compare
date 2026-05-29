@@ -26,6 +26,7 @@ import type { Provider, BoroughChoice, Category } from "@/types/provider";
 import type { AccountSavedCategoryFilter, SiteAccountSettings } from "@/types/site";
 import { CMS_MEDIA } from "@/config/defaultMedia";
 import { CdnImage } from "@/components/media/CdnImage";
+import { formatBoroughLabel } from "@/data/locations";
 
 interface Props {
   onNavigate: (
@@ -566,7 +567,9 @@ function NeighborhoodCard({
               {n.addressLine2}
             </Text>
             <Text size="xs" c="dimmed">
-              {n.detectedLabelPrefix} <Text span fw={600} c="dark.7">{n.detectedNeighborhood}</Text> · {n.detectedBorough}
+              {n.detectedLabelPrefix} <Text span fw={600} c="dark.7">{n.detectedNeighborhood}</Text> · {formatBoroughLabel(
+                n.detectedBorough,
+              )}
             </Text>
           </Stack>
           <Button size="xs" variant="light" color="dark" radius="xl" onClick={() => toast(n.updateAddressToast)}>

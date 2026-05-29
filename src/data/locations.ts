@@ -1,33 +1,47 @@
 import type { Borough } from "@/types/provider";
 
-/** Operating regions for compare (legacy + EU rollout); retained as curated runtime choices. */
+/** Active operating regions for compare (EU rollout). */
 export const BOROUGHS: Borough[] = [
-  "Manhattan",
-  "Brooklyn",
-  "Queens",
-  "Bronx",
-  "Staten Island",
+  "Hungary",
   "Germany",
   "France",
   "Spain",
   "Italy",
   "Poland",
-  "HU",
 ];
 
-/**
- * Recognized regions per country (Discover / Clubs chips, admin locations, seed).
- */
-export const NEIGHBORHOODS: Record<Borough, string[]> = {
-  Manhattan: ["Upper West Side", "Upper East Side", "Chelsea", "Harlem", "SoHo", "Tribeca", "Flatiron"],
-  Brooklyn: ["Brooklyn Heights", "DUMBO", "Williamsburg", "Park Slope", "Sunset Park"],
-  Queens: ["Astoria", "Long Island City", "Jackson Heights", "Flushing", "Forest Hills"],
-  Bronx: ["Mott Haven", "Fordham", "Kingsbridge", "Riverdale", "Pelham Bay"],
-  "Staten Island": ["St. George", "Stapleton", "New Dorp", "Great Kills", "Tottenville"],
+export const LEGACY_HIGHLIGHT_BOROUGHS = [
+  "Manhattan",
+  "Brooklyn",
+  "Queens",
+  "Bronx",
+  "Staten Island",
+] as const;
+
+export const COUNTRY_LABELS: Record<string, string> = {
+  Hungary: "Hungary",
+  Germany: "Germany",
+  France: "France",
+  Spain: "Spain",
+  Italy: "Italy",
+  Poland: "Poland",
+};
+
+export function formatBoroughLabel(borough: string) {
+  return COUNTRY_LABELS[borough] ?? borough;
+}
+
+export function formatGeoRow(borough: string, neighborhood: string) {
+  const prettyBorough = formatBoroughLabel(borough);
+  return `${neighborhood}, ${prettyBorough}`;
+}
+
+/** Recognized regions per country (Discover / Clubs chips, admin locations, seed). */
+export const NEIGHBORHOODS: Record<string, string[]> = {
+  Hungary: ["Budapest", "Pest", "Bács-Kiskun", "Heves", "Borsod-Abaúj-Zemplén", "Zala"],
   Germany: ["Bavaria", "North Rhine-Westphalia", "Saxony", "Brandenburg", "Lower Saxony"],
   France: ["Nouvelle-Aquitaine", "Occitanie", "Grand Est", "Normandy", "Brittany"],
   Spain: ["Andalusia", "Catalonia", "Castile and Leon", "Valencian Community", "Aragon"],
   Italy: ["Lombardy", "Tuscany", "Veneto", "Piedmont", "Emilia-Romagna"],
   Poland: ["Masovian", "Lesser Poland", "Silesian", "Pomeranian", "Lower Silesian"],
-  HU: ["Budapest", "Pest", "Bács-Kiskun", "Heves", "Borsod-Abaúj-Zemplén", "Zala"],
 };

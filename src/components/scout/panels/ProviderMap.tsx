@@ -3,17 +3,12 @@ import { useEffect, useState } from "react";
 import { Navigation } from "@/lib/appIcons";
 
 const BOROUGH_CENTERS: Record<string, [number, number]> = {
+  Hungary: [47.1625, 19.5033],
   Germany: [51.1657, 10.4515],
   France: [46.2276, 2.2137],
   Spain: [40.4637, -3.7492],
   Italy: [41.8719, 12.5674],
   Poland: [51.9194, 19.1451],
-  HU: [47.1625, 19.5033],
-  Manhattan: [40.7831, -73.9712],
-  Brooklyn: [40.6782, -73.9442],
-  Queens: [40.7282, -73.7949],
-  Bronx: [40.8448, -73.8648],
-  "Staten Island": [40.5795, -74.1502],
 };
 
 export function ProviderMap({ address, borough }: { address: string; borough: string }) {
@@ -30,11 +25,11 @@ export function ProviderMap({ address, borough }: { address: string; borough: st
         if (Array.isArray(data) && data[0]) {
           setCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
         } else {
-          setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Manhattan);
+          setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Germany);
         }
       })
       .catch(() => {
-        if (!cancelled) setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Manhattan);
+        if (!cancelled) setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Germany);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);

@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/scout/EmptyState";
 import { CdnImage } from "@/components/media/CdnImage";
 import { ProviderCard } from "@/components/scout/ProviderCard";
 import { MeetupGroupCard } from "@/components/scout/MeetupGroupCard";
+import { formatBoroughLabel } from "@/data/locations";
 import type { MeetupGroup } from "@/types/meetup";
 import type { BoroughChoice, Category, Provider } from "@/types/provider";
 import type { SiteGuide } from "@/types/site";
@@ -80,8 +81,8 @@ export function NeighborhoodGuideView({
       <Paper withBorder radius="xl" p={{ base: "lg", md: "xl" }}>
         <SimpleGrid cols={{ base: 1, lg: guide?.imageUrl?.trim() ? 2 : 1 }} spacing="xl" verticalSpacing="xl">
           <Stack gap="md" justify="center">
-            <Text size="xs" fw={700} tt="uppercase" c="teal.6" style={{ letterSpacing: "0.2em" }}>
-              {neighborhood} • {borough}
+              <Text size="xs" fw={700} tt="uppercase" c="teal.6" style={{ letterSpacing: "0.2em" }}>
+              {neighborhood} • {formatBoroughLabel(borough)}
             </Text>
             <Title order={1}>{guide?.title ?? `${neighborhood} sport shooting guide`}</Title>
             <Text size="md" c="dimmed" maw={760}>

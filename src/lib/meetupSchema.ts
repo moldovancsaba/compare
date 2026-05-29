@@ -2,17 +2,12 @@ import { z } from "zod";
 import { isImgBbHttpsImageUrl } from "@/lib/imgbbUrl";
 
 const borough = z.enum([
-  "Manhattan",
-  "Brooklyn",
-  "Queens",
-  "Bronx",
-  "Staten Island",
+  "Hungary",
   "Germany",
   "France",
   "Spain",
   "Italy",
   "Poland",
-  "HU",
 ]);
 const groupType = z.enum([
   "Parent Meetup",

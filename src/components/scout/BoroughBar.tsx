@@ -1,5 +1,5 @@
 import { Chip, Group, Stack, Text } from "@mantine/core";
-import { BOROUGHS } from "@/data/locations";
+import { BOROUGHS, formatBoroughLabel } from "@/data/locations";
 import type { BoroughChoice } from "@/types/provider";
 
 export function BoroughBar({ value, onChange }: { value: BoroughChoice; onChange: (b: BoroughChoice) => void }) {
@@ -11,7 +11,7 @@ export function BoroughBar({ value, onChange }: { value: BoroughChoice; onChange
       </Text>
       <Group gap="xs">
         {choices.map((b) => {
-          const label = b === "All" ? "All" : b;
+          const label = b === "All" ? "All" : formatBoroughLabel(b);
           return (
             <Chip
               key={b}

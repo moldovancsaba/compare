@@ -6,6 +6,7 @@ import { toast } from "@/lib/notify";
 import type { MeetupGroup } from "@/types/meetup";
 import { CdnImage } from "@/components/media/CdnImage";
 import { CMS_MEDIA } from "@/config/defaultMedia";
+import { formatBoroughLabel } from "@/data/locations";
 
 interface Props {
   group: MeetupGroup;
@@ -32,7 +33,7 @@ export function MeetupGroupCard({ group, onOpen, onShare }: Props) {
       }
       title={group.name}
       description={group.description}
-      helperText={`${group.neighborhood}, ${group.borough}`}
+      helperText={`${group.neighborhood}, ${formatBoroughLabel(group.borough)}`}
       helperKind="supporting"
       metadata={[
         { label: "Type", value: group.groupType },

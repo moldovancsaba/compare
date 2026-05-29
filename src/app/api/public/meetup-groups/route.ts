@@ -2,11 +2,26 @@ import { NextResponse } from "next/server";
 import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { MeetupGroup } from "@/types/meetup";
 import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
+import { BOROUGHS } from "@/data/locations";
+
+function normalizeBorough(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const cleaned = raw.trim();
+  if (!cleaned) return null;
+  if (cleaned === "HU") return "Hungary";
+  return BOROUGHS.includes(cleaned as never) ? cleaned : null;
+}
 
 function stripId<T extends object>(doc: T): T {
   const o = { ...doc } as Record<string, unknown>;
   delete o._id;
   return o as T;
+}
+
+function normalizeMeetup(row: MeetupGroup): MeetupGroup {
+  const normalizedBorough = normalizeBorough((row as { borough?: unknown }).borough);
+  if (!normalizedBorough || normalizedBorough === row.borough) return row;
+  return { ...row, borough: normalizedBorough } as MeetupGroup;
 }
 
 export async function GET() {
@@ -17,5 +32,8 @@ export async function GET() {
   const rows = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as (MeetupGroup & {
     _id?: unknown;
   })[];
-  return NextResponse.json(filterObsoleteContent(rows.map(stripId)));
+  const scoped = rows
+    .map(normalizeMeetup)
+    .filter((row) => Boolean(normalizeBorough((row as { borough?: unknown }).borough)));
+  return NextResponse.json(filterObsoleteContent(scoped.map(stripId)));
 }

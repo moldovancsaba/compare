@@ -4,6 +4,21 @@ import type { Provider } from "@/types/provider";
 import { normalizeProviderFreshness } from "@/lib/providerFreshness";
 import { deriveNextOccurrence } from "@/lib/providerSchedule";
 import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
+import { BOROUGHS } from "@/data/locations";
+
+function normalizeBorough(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const cleaned = raw.trim();
+  if (!cleaned) return null;
+  if (cleaned === "HU") return "Hungary";
+  return BOROUGHS.includes(cleaned as never) ? cleaned : null;
+}
+
+function normalizeProvider(row: Provider): Provider {
+  const normalizedBorough = normalizeBorough((row as { borough?: unknown }).borough);
+  if (!normalizedBorough || normalizedBorough === row.borough) return row;
+  return { ...row, borough: normalizedBorough } as Provider;
+}
 
 function stripId<T extends object>(doc: T): T {
   const o = { ...doc } as Record<string, unknown>;
@@ -19,8 +34,11 @@ export async function GET() {
   const rows = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as (Provider & {
     _id?: unknown;
   })[];
+  const scoped = rows
+    .map(normalizeProvider)
+    .filter((row) => Boolean(normalizeBorough((row as { borough?: unknown }).borough)));
   const providers = filterObsoleteContent(
-    rows
+    scoped
     .map((row) => {
       const normalized = normalizeProviderFreshness(row);
       return stripId({

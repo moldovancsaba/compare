@@ -6,6 +6,7 @@ import { CdnImage } from "@/components/media/CdnImage";
 import { useSaved, useCalculator } from "@/store/useScout";
 import { toast } from "@/lib/notify";
 import { CMS_MEDIA } from "@/config/defaultMedia";
+import { formatBoroughLabel } from "@/data/locations";
 
 interface Props {
   provider: Provider;
@@ -34,7 +35,9 @@ export function ProviderCard({ provider, onOpen, onShare, highlightUpcoming = fa
       title={provider.name}
       description={provider.shortDescription}
       price={`EUR ${provider.pricePerClass}/session`}
-      helperText={highlightUpcoming && upcomingLabel ? `Next: ${upcomingLabel}` : `${provider.neighborhood}, ${provider.borough}`}
+      helperText={
+        highlightUpcoming && upcomingLabel ? `Next: ${upcomingLabel}` : `${provider.neighborhood}, ${formatBoroughLabel(provider.borough)}`
+      }
       helperKind="supporting"
       inventoryNote={provider.announcementBadge ?? undefined}
       metadata={[

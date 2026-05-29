@@ -12,7 +12,7 @@
           "id": "prov-hu-riflesafe-academy",
           "name": "Riflesafe Academy",
           "category": "Classes",
-          "borough": "HU",
+          "borough": "Hungary",
           "neighborhood": "Budapest",
           "address": "1117 Budapest, Bajcsy-Zsilinszky út 23, Hungary",
           "activityTypes": ["Rifle", "Pistol", "Competition", "Licence Preparation"],
@@ -146,7 +146,7 @@
         {
           "id": "meetup-hu-budapest-idsc",
           "name": "Budapest IDSC Squad",
-          "borough": "HU",
+          "borough": "Hungary",
           "neighborhood": "Budapest",
           "groupType": "Sport Shooting Club",
           "ageRange": "Competition",

@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { getDb, COL } from "@/lib/mongodb";
 import type { Borough } from "@/types/provider";
-import { NEIGHBORHOODS as FALLBACK } from "@/data/locations";
+import { BOROUGHS, NEIGHBORHOODS as FALLBACK } from "@/data/locations";
+
+function canonicalBorough(raw: unknown): Borough | null {
+  if (typeof raw !== "string") return null;
+  const cleaned = raw.trim();
+  if (!cleaned) return null;
+  const normalized = cleaned === "HU" ? "Hungary" : cleaned;
+  return BOROUGHS.includes(normalized as never) ? (normalized as Borough) : null;
+}
 
 export async function GET() {
   const db = await getDb();
@@ -15,9 +23,13 @@ export async function GET() {
   const map: Record<string, string[]> = {};
   for (const r of rows) {
     const row = r as unknown as { borough?: Borough; neighborhoods?: string[] };
-    const b = row.borough;
+    const rawBorough = row.borough;
+    const b = canonicalBorough(rawBorough);
     const n = row.neighborhoods;
     if (b && Array.isArray(n)) map[b] = n;
   }
+  BOROUGHS.forEach((borough) => {
+    if (!map[borough]) map[borough] = FALLBACK[borough] ?? [];
+  });
   return NextResponse.json(map as Record<Borough, string[]>);
 }

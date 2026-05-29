@@ -15,7 +15,7 @@ import { toast } from "@/lib/notify";
 import { CdnImage } from "@/components/media/CdnImage";
 import { SiteLucideIcon } from "@/lib/siteLucideIcon";
 import { useProvidersCatalog, useMeetupGroupsCatalog, useSiteCatalog, useNeighborhoodsCatalog } from "@/hooks/useCatalog";
-import { BOROUGHS, NEIGHBORHOODS } from "@/data/locations";
+import { BOROUGHS, NEIGHBORHOODS, formatBoroughLabel } from "@/data/locations";
 import { AccentPanel, EditorialCard, EditorialHero, FeatureBand, PublicBrandFooter } from "@doneisbetter/gds-core/client";
 import { ProviderCard } from "@/components/scout/ProviderCard";
 import { MeetupGroupCard } from "@/components/scout/MeetupGroupCard";
@@ -181,7 +181,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <AccentPanel
           tone="amber"
           title={s.neighborhoodSectionTitle}
-          badge={borough === "All" ? "All countries" : borough}
+          badge={borough === "All" ? "All countries" : formatBoroughLabel(borough)}
         >
           <Stack gap="lg">
             <Group gap="xs" wrap="wrap">
@@ -194,14 +194,14 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
                   variant={choice === borough ? "filled" : "outline"}
                   color={choice === borough ? "dark" : "gray"}
                 >
-                  {choice === "All" ? "All" : choice}
+                  {choice === "All" ? "All" : formatBoroughLabel(choice)}
                 </Chip>
               ))}
             </Group>
             <Text size="sm" c="dimmed">
               {borough === "All"
                 ? "Browse every EU region, or pick a country above to narrow down operators and clubs."
-                : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, borough)}
+                : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, formatBoroughLabel(borough))}
             </Text>
             <Group gap="xs" wrap="wrap">
               {borough === "All" ? (
@@ -236,7 +236,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <section>
           <Group mb="lg" justify="space-between" align="flex-end">
             <Stack gap={4}>
-            <Title order={2}>{s.guidesSectionTitle}</Title>
+              <Title order={2}>{s.guidesSectionTitle}</Title>
             <Text size="sm" c="dimmed">
                 Region-guided recommendations for operators, hunters, and sport shooters.
             </Text>
@@ -265,7 +265,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
                     style={{ display: "block", width: "100%", height: 180, objectFit: "cover" }}
                   />
                 }
-                eyebrow={g.borough}
+                eyebrow={formatBoroughLabel(g.borough)}
                 title={g.title}
                 description={g.desc}
                 tone={g.tone === "amber" ? "warm" : g.tone === "blue" ? "cool" : "default"}

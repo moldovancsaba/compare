@@ -4,6 +4,35 @@ Date: 2026-05-29
 Owner: compare repository (moldovancsaba/compare)  
 Status: code changes applied locally; GitHub GraphQL actions blocked by rate limit at API node level.
 
+## Immediate Implementation Additions (to continue now)
+
+- Public catalog APIs now harden response geography:
+  - `src/app/api/public/providers/route.ts` and `src/app/api/public/meetup-groups/route.ts` normalize legacy `borough` values (including `HU`) to `Hungary`, and filter out unsupported legacy regions at read time.
+  - `src/app/api/public/locations/route.ts` now normalizes legacy `borough` aliases and only returns EU whitelist regions with safe fallbacks.
+- EU launch payload was normalized to canonical country labels:
+  - `scripts/ingest-payloads/operations/rangescout-eu-launch-content.json` (`HU` entries changed to `Hungary` for providers and meetups).
+- Regression tests were aligned to EU geographies and updated/validated:
+  - `src/lib/meetupValidation.test.ts`
+  - `src/lib/ingestOperations.test.ts`
+  - `src/lib/contentIntelligence/classscoutAdapter.test.ts`
+- Verification run set:
+  - `npm run build` passes.
+  - `npm test` passes.
+
+### Vercel env/sync checklist (required before main push)
+
+- Confirm live environment has at least:
+  - `MONGODB_URI`
+  - `MONGODB_DB` (or `MONGODB_DB_NAME`)
+  - `ADMIN_PASSWORD`
+  - `ADMIN_SESSION_SECRET`
+  - `INGEST_API_KEY`
+  - `CATALOG_SCOPE` (set explicitly to `compare` for this product, avoid cross-app scope bleed)
+- Run one-time catalog seed for visible content after deployment:
+  - `npm run db:seed:eu-launch` (or use `scripts/seed-rangescout-eu.ts` manually against the deployed DB once env is present).
+- If new env changes are made locally and intended for Vercel, refresh deployment vars via:
+  - `npm run vercel:env:push`.
+
 ## Completed locally in this run
 
 - Added/extended shooting source ingestion and collection module set:

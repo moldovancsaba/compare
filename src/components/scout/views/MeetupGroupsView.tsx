@@ -6,6 +6,7 @@ import { NeighborhoodChips } from "../NeighborhoodChips";
 import { MeetupGroupCard } from "../MeetupGroupCard";
 import { EmptyState } from "../EmptyState";
 import { NEIGHBORHOODS as FALLBACK_HOODS } from "@/data/locations";
+import { formatBoroughLabel } from "@/data/locations";
 import type { BoroughChoice } from "@/types/provider";
 import type { MeetupGroup } from "@/types/meetup";
 import { MapPin, Users } from "@/lib/appIcons";
@@ -124,7 +125,7 @@ export function MeetupGroupsView({
                 ? `Clubs in ${neighborhood}`
                 : borough === "All"
                   ? "Clubs across the EU"
-                  : `Clubs in ${borough}`}
+                  : `Clubs in ${formatBoroughLabel(borough)}`}
             </Text>
           </Stack>
           <Text c="dimmed" size="sm">

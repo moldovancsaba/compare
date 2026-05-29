@@ -2,12 +2,13 @@ import { Button, Modal, Stack, Text, Title } from "@mantine/core";
 import { Mail, MessageCircle, Link2 } from "@/lib/appIcons";
 import type { Provider } from "@/types/provider";
 import { toast } from "@/lib/notify";
+import { formatBoroughLabel } from "@/data/locations";
 
 export function ShareDialog({ provider, onClose }: { provider: Provider | null; onClose: () => void }) {
   if (!provider) return null;
   const origin = typeof window !== "undefined" ? window.location.origin : "https://rangescout.vercel.app";
   const url = `${origin}/p/${provider.id}`;
-  const summary = `${provider.name} — ${provider.category} in ${provider.neighborhood}, ${provider.borough}. EUR ${provider.pricePerClass}/session. ${provider.shortDescription}`;
+  const summary = `${provider.name} — ${provider.category} in ${provider.neighborhood}, ${formatBoroughLabel(provider.borough)}. EUR ${provider.pricePerClass}/session. ${provider.shortDescription}`;
 
   return (
     <Modal opened={!!provider} onClose={onClose} title={<Title order={3}>Share {provider.name}</Title>} size="md">

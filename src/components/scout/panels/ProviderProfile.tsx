@@ -43,6 +43,7 @@ import { ProviderCard } from "../ProviderCard";
 import { ProviderMap } from "./ProviderMap";
 import { resolveImageUrl } from "@/lib/resolveImageUrl";
 import { CMS_MEDIA } from "@/config/defaultMedia";
+import { formatBoroughLabel } from "@/data/locations";
 import type { Provider } from "@/types/provider";
 import { discoveryFeatureFlags } from "@/lib/discoveryConfig";
 import { deriveUpcomingOccurrences, formatUpcomingOccurrenceLabel } from "@/lib/providerSchedule";
@@ -139,14 +140,18 @@ export function ProviderProfile({
   const nextOccurrenceLabel = formatUpcomingOccurrenceLabel(provider.nextOccurrence);
 
   const shareEmail = () => {
-    const body = `Check out ${provider.name} — ${provider.category} in ${provider.neighborhood}, ${provider.borough}.\n\n${provider.shortDescription}\nFrom EUR ${provider.pricePerClass}/session.\n\n${providerUrl}`;
+    const body = `Check out ${provider.name} — ${provider.category} in ${provider.neighborhood}, ${formatBoroughLabel(
+      provider.borough,
+    )}.\n\n${provider.shortDescription}\nFrom EUR ${provider.pricePerClass}/session.\n\n${providerUrl}`;
     window.open(
       `mailto:?subject=${encodeURIComponent(`${provider.name} on RangeScout EU`)}&body=${encodeURIComponent(body)}`,
     );
   };
 
   const shareWhatsapp = () => {
-    const text = `${provider.name} (${provider.category}) in ${provider.neighborhood}, ${provider.borough} — EUR ${provider.pricePerClass}/session. ${provider.shortDescription} ${providerUrl}`;
+    const text = `${provider.name} (${provider.category}) in ${provider.neighborhood}, ${formatBoroughLabel(
+      provider.borough,
+    )} — EUR ${provider.pricePerClass}/session. ${provider.shortDescription} ${providerUrl}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 

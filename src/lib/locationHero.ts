@@ -1,4 +1,5 @@
 import type { Borough, BoroughChoice, Category } from "@/types/provider";
+import { formatBoroughLabel } from "@/data/locations";
 import type { SiteDoc, SiteLocationHeroImage, SiteLocationImageView } from "@/types/site";
 
 type HeroKind = Category | "Meet-Up Groups";
@@ -23,25 +24,9 @@ type BoroughTheme = {
 };
 
 const BOROUGH_THEMES: Record<Borough, BoroughTheme> = {
-  Manhattan: {
-    landmark: "Legacy city catalog",
-    boroughLine: "Legacy catalog geography retained only for compatibility with older curation helpers.",
-  },
-  Brooklyn: {
-    landmark: "Legacy city catalog",
-    boroughLine: "Legacy catalog geography retained only for compatibility with older curation helpers.",
-  },
-  Queens: {
-    landmark: "Legacy city catalog",
-    boroughLine: "Legacy catalog geography retained only for compatibility with older curation helpers.",
-  },
-  Bronx: {
-    landmark: "Legacy city catalog",
-    boroughLine: "Legacy catalog geography retained only for compatibility with older curation helpers.",
-  },
-  "Staten Island": {
-    landmark: "Legacy city catalog",
-    boroughLine: "Legacy catalog geography retained only for compatibility with older curation helpers.",
+  Hungary: {
+    landmark: "Budapest and Hungarian regions",
+    boroughLine: "PractiScore-ready competition and training coverage with practical operator support and membership pathways.",
   },
   Germany: {
     landmark: "Forest ranges + clubhouses",
@@ -62,10 +47,6 @@ const BOROUGH_THEMES: Record<Borough, BoroughTheme> = {
   Poland: {
     landmark: "Training grounds + membership clubs",
     boroughLine: "Fast-growing sport shooting infrastructure with accessible training and practical licensing lanes.",
-  },
-  HU: {
-    landmark: "Budapest clubs + county circuits",
-    boroughLine: "PractiScore-ready competition and training surface with cross-discipline operator mix and practical membership pathways.",
   },
 };
 
@@ -122,7 +103,7 @@ function locationLine(borough: Borough, neighborhood: string | null): string {
 function headline(kind: HeroKind, borough: BoroughChoice, neighborhood: string | null): string {
   if (borough === "All") return CATEGORY_LINES[kind].cityTitle;
   if (neighborhood) return `${DISPLAY_LABELS[kind]} in ${neighborhood}`;
-  return `${DISPLAY_LABELS[kind]} in ${borough}`;
+  return `${DISPLAY_LABELS[kind]} in ${formatBoroughLabel(borough)}`;
 }
 
 function description(kind: HeroKind, borough: BoroughChoice, neighborhood: string | null): string {
@@ -132,16 +113,16 @@ function description(kind: HeroKind, borough: BoroughChoice, neighborhood: strin
   if (kind === "Meet-Up Groups") {
     return neighborhood
       ? `${locLine} Browse nearby clubs and associations without leaving the regional context behind.`
-      : `${boroughTheme.boroughLine} Compare member communities across nearby regions inside ${borough}.`;
+      : `${boroughTheme.boroughLine} Compare member communities across nearby regions inside ${formatBoroughLabel(borough)}.`;
   }
   return neighborhood
     ? `${locLine} Compare audience fit, schedules, and discipline mix without losing the local context.`
-    : `${boroughTheme.boroughLine} Start with ${borough}, then narrow to the region that matches your routine.`;
+    : `${boroughTheme.boroughLine} Start with ${formatBoroughLabel(borough)}, then narrow to the region that matches your routine.`;
 }
 
 function eyebrow(kind: HeroKind, borough: BoroughChoice, neighborhood: string | null): string {
-  if (neighborhood) return `${neighborhood} • ${borough}`;
-  if (borough !== "All") return `${borough} • ${CATEGORY_LINES[kind].eyebrow}`;
+  if (neighborhood) return `${neighborhood} • ${formatBoroughLabel(borough)}`;
+  if (borough !== "All") return `${formatBoroughLabel(borough)} • ${CATEGORY_LINES[kind].eyebrow}`;
   return CATEGORY_LINES[kind].eyebrow;
 }
 

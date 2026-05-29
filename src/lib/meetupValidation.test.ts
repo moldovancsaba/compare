@@ -7,8 +7,8 @@ describe("validateMeetupDocument", () => {
       validateMeetupDocument({
         id: "meetup-riverdale-families",
         name: "Riverdale Families",
-        borough: "Bronx",
-        neighborhood: "Riverdale",
+        borough: "Hungary",
+        neighborhood: "Bács-Kiskun",
         groupType: "Neighborhood Families",
         ageRange: "All ages",
         cadence: "Monthly",
@@ -28,8 +28,8 @@ describe("validateMeetupDocument", () => {
       validateMeetupDocument({
         id: "meetup-riverdale-families",
         name: "Riverdale Families",
-        borough: "Bronx",
-        neighborhood: "Riverdale",
+        borough: "Hungary",
+        neighborhood: "Bács-Kiskun",
         groupType: "Family Club" as never,
         ageRange: "All ages",
         cadence: "Monthly",
@@ -48,8 +48,8 @@ describe("validateMeetupDocument", () => {
       validateMeetupDocument({
         id: "meetup-riverdale-families",
         name: "Riverdale Families",
-        borough: "Bronx",
-        neighborhood: "Riverdale",
+        borough: "Hungary",
+        neighborhood: "Bács-Kiskun",
         groupType: "Neighborhood Families",
         ageRange: "All ages",
         cadence: "Monthly",

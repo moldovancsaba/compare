@@ -1,17 +1,12 @@
 export type Category = "Classes" | "Camps" | "Birthday Parties" | "Drop-In Activities";
 
 export type Borough =
-  | "Manhattan"
-  | "Brooklyn"
-  | "Queens"
-  | "Bronx"
-  | "Staten Island"
+  | "Hungary"
   | "Germany"
   | "France"
   | "Spain"
   | "Italy"
-  | "Poland"
-  | "HU";
+  | "Poland";
 
 /** Discover / Meetups borough filter: one borough or every borough. */
 export type BoroughChoice = Borough | "All";

@@ -6,6 +6,7 @@ import { CdnImage } from "@/components/media/CdnImage";
 import { useProvidersCatalog, useSiteCatalog } from "@/hooks/useCatalog";
 import { CMS_MEDIA } from "@/config/defaultMedia";
 import type { Category } from "@/types/provider";
+import { formatBoroughLabel } from "@/data/locations";
 
 export function CalculatorView({
   onNavigate,
@@ -81,7 +82,7 @@ export function CalculatorView({
                     {r.provider.name}
                   </Text>
                   <Text size="xs" c="dimmed">
-                    {r.provider.neighborhood}, {r.provider.borough} · EUR {r.provider.pricePerClass}
+                    {r.provider.neighborhood}, {formatBoroughLabel(r.provider.borough)} · EUR {r.provider.pricePerClass}
                     {c.providerLinePriceSuffix}
                   </Text>
                 </Stack>

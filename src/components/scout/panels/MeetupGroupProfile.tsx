@@ -25,6 +25,7 @@ import { MeetupGroupCard } from "../MeetupGroupCard";
 import type { MeetupGroup } from "@/types/meetup";
 import { CdnImage } from "@/components/media/CdnImage";
 import { CMS_MEDIA } from "@/config/defaultMedia";
+import { formatBoroughLabel } from "@/data/locations";
 
 function ContactLinkItem({
   icon,
@@ -102,14 +103,16 @@ export function MeetupGroupProfile({
   const similar = allGroups.filter((item) => item.id !== group.id && item.borough === group.borough).slice(0, 3);
 
   const shareEmail = () => {
-    const body = `Check out ${group.name} — a ${group.groupType.toLowerCase()} in ${group.neighborhood}, ${group.borough}.\n\n${group.description}\n\nInstagram: ${group.instagram}\nWebsite: ${group.website}`;
+    const body = `Check out ${group.name} — a ${group.groupType.toLowerCase()} in ${group.neighborhood}, ${formatBoroughLabel(
+      group.borough,
+    )}.\n\n${group.description}\n\nInstagram: ${group.instagram}\nWebsite: ${group.website}`;
     window.open(
       `mailto:?subject=${encodeURIComponent(`${group.name} on RangeScout EU`)}&body=${encodeURIComponent(body)}`,
     );
   };
 
   const shareWhatsapp = () => {
-    const text = `${group.name} — ${group.neighborhood}, ${group.borough}. ${group.description} Instagram: ${group.instagram} • ${group.website}`;
+    const text = `${group.name} — ${group.neighborhood}, ${formatBoroughLabel(group.borough)}. ${group.description} Instagram: ${group.instagram} • ${group.website}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -161,7 +164,7 @@ export function MeetupGroupProfile({
               <Group gap="xs" c="dimmed">
                 <MapPin size={16} />
                 <Text size="sm">
-                  {group.neighborhood}, {group.borough}
+                  {group.neighborhood}, {formatBoroughLabel(group.borough)}
                 </Text>
               </Group>
               <Group gap="xs">

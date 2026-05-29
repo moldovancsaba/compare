@@ -16,6 +16,7 @@ import { discoveryFeatureFlags } from "@/lib/discoveryConfig";
 import { emitDiscoveryTelemetry } from "@/lib/discoveryTelemetry";
 import { type DiscoverDateMode, type DiscoverSort, queryProviders } from "@/lib/providerQuery";
 import { formatUpcomingOccurrenceLabel } from "@/lib/providerSchedule";
+import { formatBoroughLabel } from "@/data/locations";
 import type { AppLocale } from "@/lib/i18n/config";
 
 interface Props {
@@ -90,27 +91,27 @@ export function DiscoverView({
           ? `Sessions coming up in ${neighborhood}`
           : borough === "All"
             ? "Sessions in the next 7 days across the EU catalog"
-            : `Sessions in the next 7 days in ${borough}`,
+            : `Sessions in the next 7 days in ${formatBoroughLabel(borough)}`,
         description: "Browse source-backed upcoming training sessions, range events, competitions, and hunting access windows happening within the next seven days.",
       }
     : getLocationHero(category ?? "Classes", borough, neighborhood);
   const heroImage = mode === "this-week" ? null : getLocationHeroImage(site, category ?? "Classes", borough, neighborhood);
   const currentSort = queryResult.diagnostics.sort;
   const resultHeading = mode === "this-week"
-    ? neighborhood
-      ? `This week in ${neighborhood}`
-      : borough === "All"
-        ? "This week across Europe"
-        : `This week in ${borough}`
+        ? neighborhood
+          ? `This week in ${neighborhood}`
+          : borough === "All"
+            ? "This week across Europe"
+            : `This week in ${formatBoroughLabel(borough)}`
     : neighborhood
       ? `${category ? DISPLAY_LABELS[category] : "Listings"} in ${neighborhood}`
       : borough === "All"
         ? `${category ? DISPLAY_LABELS[category] : "Listings"} across Europe`
-        : `${category ? DISPLAY_LABELS[category] : "Listings"} in ${borough}`;
+        : `${category ? DISPLAY_LABELS[category] : "Listings"} in ${formatBoroughLabel(borough)}`;
   const hasActiveStructuredFilters = filters.ages.length > 0 || filters.times.length > 0 || Boolean(filters.activity);
   const hasActiveFilters = hasActiveStructuredFilters || Boolean(neighborhood) || Boolean(q.trim()) || borough !== "All";
   const activeFilterBadges = [
-    ...(borough !== "All" ? [borough] : []),
+    ...(borough !== "All" ? [formatBoroughLabel(borough)] : []),
     ...(neighborhood ? [neighborhood] : []),
     ...(q.trim() ? [`Search: ${q.trim()}`] : []),
     ...filters.ages,
