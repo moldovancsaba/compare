@@ -6,7 +6,7 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
 
 ## Completed locally in this run
 
-- Added shooting source ingestion and collection module set:
+- Added/extended shooting source ingestion and collection module set:
   - `src/lib/shootingIngestion/sourceSeedDefaults.ts`
   - `src/lib/shootingIngestion/sourceSeeds.ts`
   - `src/lib/shootingIngestion/sourceClassifier.ts`
@@ -31,13 +31,86 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
   - `npm test`
   - script smoke run: `npm run shooting:sources:inventory`, `npm run shooting:sources:classify`, `npm run shooting:collect:leads`
 
-## What remains blocked by GitHub GraphQL quota
+## Current GitHub mutation state (2026-05-29)
 
-The following operations are pending until GraphQL quota resets:
-- Project board item cleanup and re-population on `PVT_kwHOACGtF84BXVW4`.
-- Deleting/rebuilding existing board items using GH CLI `project` subcommands.
-- Issue-level dependency links via board/metadata flows if this repo setup requires GraphQL.
+Repository issues/milestones/labels are now in the requested shape, and project-board mutations remain blocked by GraphQL quota for the current token.
 
+- 12 active issues created for the ShootingOS implementation plan.
+  - `#86` Rulebook-backed source policy and contract baseline
+  - `#87` Source seed registry for Hungarian operators
+  - `#88` Source classifier + extractor routing intelligence
+  - `#89` Shooting source inventory and inventory artifacts
+  - `#90` Competition normalization engine (MVP)
+  - `#91` Competition collector and lead export pipeline
+  - `#92` PractiScore readiness abstraction layer
+  - `#93` Range and club operator intelligence
+  - `#94` Beginner journey onboarding + discover surfaces (EU)
+  - `#95` Workflow bridge from checklist mission + stale recovery
+  - `#96` Observability and rollout safety
+  - `#97` i18n and UX policy for EU multilingual operations
+- Old duplicate/open shooting backlog issue `#85` was closed.
+- Labels verified: `type`, `track`, `initiative`, `priority`, `scope` labels are present and attached per issue.
+- Milestones verified and aligned:
+  - 1: Source Foundation
+  - 2: Competition Intelligence
+  - 3: Operator Intelligence
+  - 4: Workflow and Operations
+  - 5: Public MVP
+  - 6: Localization Foundation
+
+Blocked now (token-level):
+- Adding issues/labels/milestones and issue-level dependencies requires only REST and is now complete.
+- Project board item add/remove/edit and dependency metadata operations still require GraphQL.
+
+## GraphQL recovery and project board continuation plan
+
+When GraphQL is available again, run the following exact sequence:
+
+```bash
+# 1) Confirm GraphQL quota has budget
+gh api rate_limit --cache 0s
+
+# 2) Verify board exists and list field IDs (status, execution order, dependencies if present)
+gh project view PVT_kwHOACGtF84BXVW4 --owner moldovancsaba
+gh project field-list PVT_kwHOACGtF84BXVW4 --owner moldovancsaba
+
+# 3) Optional cleanup: remove stale items first (if old items are visible)
+gh project item-list PVT_kwHOACGtF84BXVW4 --owner moldovancsaba --format json \
+  | jq -r '.[] | .id' \
+  | xargs -n1 -I{} gh project item-delete {} --owner moldovancsaba
+
+# 4) Add issue cards in sequence order:
+# 86,87,88,89,90,91,92,93,94,95,96,97
+for n in 86 87 88 89 90 91 92 93 94 95 96 97; do
+  url=\"https://github.com/moldovancsaba/compare/issues/$n\"
+  gh project item-add PVT_kwHOACGtF84BXVW4 --owner moldovancsaba --url \"$url\"
+done
+
+# 5) Set sequencing/status fields to match plan
+```
+
+Execution ordering for sequencing:
+1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12
+matching issues `#86` through `#97`.
+
+Dependency order by issue title (for references in each body and to map as project blockers):
+- `#86` has no dependency
+- `#87`, `#88` depend on `#86`
+- `#89` depends on `#87` and `#88`
+- `#90` depends on `#86`, `#87`, `#88`, `#89`
+- `#91` depends on `#88`, `#89`, `#90`
+- `#92` depends on `#91`
+- `#93` depends on `#91`
+- `#94` depends on `#91` and `#93`
+- `#95` depends on `#89`, `#91`, `#93`
+- `#96` depends on `#89`, `#91`, `#95`
+- `#97` depends on `#94`
+
+## Remaining blocked item
+
+The following operations are pending until GraphQL recovers:
+- Project board item-level sequencing/status/dependency metadata updates.
+- Any dependency linking via GraphQL fields, if this board requires native dependency metadata.
 `gh api rate_limit` can show reset time.
 
 ## GitHub mutation playbook
