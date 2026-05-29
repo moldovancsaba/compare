@@ -6,11 +6,12 @@ import { localizePath } from "@/lib/i18n/paths";
 import { normalizeLocale } from "@/lib/i18n/config";
 
 interface NotFoundProps {
-  params: { locale: string };
+  params?: { locale?: string } | Promise<{ locale?: string }>;
 }
 
-export default function NotFound({ params }: NotFoundProps) {
-  const locale = normalizeLocale(params.locale);
+export default async function NotFound({ params }: NotFoundProps) {
+  const resolvedParams = params ? await params : undefined;
+  const locale = normalizeLocale(resolvedParams?.locale ?? "en");
 
   return (
     <Center mih="100vh" bg="beige.0" px="md">
