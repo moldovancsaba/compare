@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DiscoveryShell, PublicSiteFooter } from "@doneisbetter/gds-core/client";
-import { ActionIcon, Badge, Box, Button, Group, Indicator, Stack, Text } from "@mantine/core";
+import { ActionIcon, Badge, Box, Button, Group, Indicator, Select, Stack, Text } from "@mantine/core";
 import { Sidebar, type ViewKey } from "@/components/scout/Sidebar";
 import { DiscoverView } from "@/components/scout/views/DiscoverView";
 import { SavedView } from "@/components/scout/views/SavedView";
@@ -37,9 +37,9 @@ import {
 import type { FilterState } from "@/components/scout/Filters";
 import type { DiscoverDateMode, DiscoverSort } from "@/lib/providerQuery";
 import { Plus } from "@/lib/appIcons";
-import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { parseLocaleFromPathname, stripLocaleFromPathname, withLocaleSearch } from "@/lib/i18n/paths";
 import { getText, siteCopy } from "@/lib/i18n/messages";
-import { normalizeLocale } from "@/lib/i18n/config";
+import { isSupportedLocale, localeLabels, locales, normalizeLocale } from "@/lib/i18n/config";
 
 export default function ClassScoutShell() {
   const router = useRouter();
@@ -139,6 +139,16 @@ export default function ClassScoutShell() {
     );
   };
 
+  const handleLocaleSwitch = (nextLocale: string | null) => {
+    if (!nextLocale) return;
+    if (!isSupportedLocale(nextLocale)) return;
+    const localeTarget = nextLocale;
+    if (localeTarget === locale) return;
+    const targetPath = stripLocaleFromPathname(pathname);
+    const targetHref = withLocaleSearch(targetPath, localeTarget, new URLSearchParams(searchParams.toString()));
+    navigate(targetHref);
+  };
+
   const updateMeetupState = (patch: { borough?: BoroughChoice; neighborhood?: string | null }) => {
     navigate(
       getMeetupGroupsHref(
@@ -155,6 +165,14 @@ export default function ClassScoutShell() {
   const homeHref = currentQuery.toString() ? `${homeHrefBase}?${currentQuery.toString()}` : homeHrefBase;
   const shellActions = (
     <Group gap="xs" wrap="nowrap">
+      <Select
+        value={locale}
+        onChange={handleLocaleSwitch}
+        data={locales.map((language) => ({ value: language, label: localeLabels[language] }))}
+        aria-label={getText(siteCopy.common.language, locale)}
+        placeholder={getText(siteCopy.common.language, locale)}
+        styles={{ root: { minWidth: 140 } }}
+      />
       <Indicator
         inline
         disabled={savedCount === 0}
@@ -166,7 +184,7 @@ export default function ClassScoutShell() {
       >
         <ActionIcon
           component={Link}
-            href={getHrefForView("Saved", locale)}
+          href={getHrefForView("Saved", locale)}
           variant={view === "Saved" ? "filled" : "light"}
           color="teal"
           radius="xl"

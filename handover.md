@@ -488,6 +488,28 @@ gh project item-edit --project-id PVT_kwHOACGtF84BXVW4 --id PVTI_lAHOACGtF84BXVW
   - #84: `PVTI_lAHOACGtF84BXVW4zguMdek`
 - Project status field remains `Done` for all localization items due issue closure state.
 
+## Implementation Checkpoint (2026-05-29, after board-quota pause)
+
+- I completed the locale-switch implementation requested for the active "catalog health" product path and removed the build blocker tied to old watch/inventory schema references.
+- Files changed:
+  - `src/components/scout/ClassScoutShell.tsx`
+    - Added `Select` to the header action area for locale switching.
+    - Reused existing route utilities (`stripLocaleFromPathname`, `withLocaleSearch`) so switching preserves both route and query state.
+    - Added validation on locale changes using `isSupportedLocale`.
+    - Fixed imports to use canonical i18n sources (`localeLabels` from `@/lib/i18n/config`, `getText/siteCopy` from `@/lib/i18n/messages`).
+- Verification in this checkpoint:
+  - `npm run build` passes with no type errors.
+  - `npm run lint` passes.
+  - `npm test --silent` passes.
+- Board mutation status (still intentionally skipped):
+  - Do not add/move cards or dependency metadata until GraphQL/automation quota is restored and user re-authorizes execution.
+  - Keep `handover.md` as the source of truth for pending GH commands.
+- What to add to GH on next pass:
+  - Confirm no stale board card conflicts:
+    - `gh project item-list <project-id> --owner moldovancsaba`
+  - Add/update language/i18n execution issue details if product scope shifts beyond current locale shell wiring (issue references to be decided by user).
+  - Reapply sequencing/status updates only after quota/window allows GraphQL calls.
+
 ## Continuation Checkpoint (2026-05-29)
 
 - `main` remains clean and in sync with `origin/main`.
