@@ -7,7 +7,7 @@ Intelligence unit: compare-range-intelligence
 Checklist company: efce8e3d-c834-4bd1-8521-ce1e97b29f7c
 Destination key: compare
 
-Generated: 2026-05-29T18:44:34.044Z
+Generated: 2026-05-29T19:07:27.676Z
 Canonical standard: https://github.com/sovereignsquad/general-design-system/issues/81
 
 ## Runtime flow
