@@ -5,6 +5,7 @@ import { normalizeProviderFreshness } from "@/lib/providerFreshness";
 import { deriveNextOccurrence } from "@/lib/providerSchedule";
 import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
 import { BOROUGHS } from "@/data/locations";
+import { ensureLaunchCatalogSeeded } from "@/lib/catalogBootstrap";
 
 function normalizeBorough(raw: unknown): string | null {
   if (typeof raw !== "string") return null;
@@ -31,6 +32,7 @@ export async function GET() {
   if (!db) {
     return NextResponse.json({ error: "Database not configured (MONGODB_URI)" }, { status: 503 });
   }
+  await ensureLaunchCatalogSeeded(db);
   const rows = (await db.collection(COL.providers).find(buildCatalogScopeFilter({})).toArray()) as unknown as (Provider & {
     _id?: unknown;
   })[];

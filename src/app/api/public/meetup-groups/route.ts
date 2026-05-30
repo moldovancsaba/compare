@@ -3,6 +3,7 @@ import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { MeetupGroup } from "@/types/meetup";
 import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
 import { BOROUGHS } from "@/data/locations";
+import { ensureLaunchCatalogSeeded } from "@/lib/catalogBootstrap";
 
 function normalizeBorough(raw: unknown): string | null {
   if (typeof raw !== "string") return null;
@@ -29,6 +30,7 @@ export async function GET() {
   if (!db) {
     return NextResponse.json({ error: "Database not configured (MONGODB_URI)" }, { status: 503 });
   }
+  await ensureLaunchCatalogSeeded(db);
   const rows = (await db.collection(COL.meetupGroups).find(buildCatalogScopeFilter({})).toArray()) as unknown as (MeetupGroup & {
     _id?: unknown;
   })[];

@@ -11,6 +11,12 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
   - `src/app/api/public/locations/route.ts` now normalizes legacy `borough` aliases and only returns EU whitelist regions with safe fallbacks.
 - EU launch payload was normalized to canonical country labels:
   - `scripts/ingest-payloads/operations/rangescout-eu-launch-content.json` (`HU` entries changed to `Hungary` for providers and meetups).
+- Added protected startup bootstrap for public catalog endpoints:
+  - New helper `src/lib/catalogBootstrap.ts` seeds `providers` and `meetupGroups` from `rangescout-eu-launch-content.json` when the scoped catalog is empty.
+  - `providers` and `meetup-groups` public APIs now call the bootstrap before querying, so first render in clean environments loads seeded launch content.
+- Added environment controls in `.env.example`:
+  - `CATALOG_BOOTSTRAP_ON_EMPTY`
+  - `CATALOG_LAUNCH_PAYLOAD_PATH`
 - Regression tests were aligned to EU geographies and updated/validated:
   - `src/lib/meetupValidation.test.ts`
   - `src/lib/ingestOperations.test.ts`
@@ -28,6 +34,9 @@ Status: code changes applied locally; GitHub GraphQL actions blocked by rate lim
   - `ADMIN_SESSION_SECRET`
   - `INGEST_API_KEY`
   - `CATALOG_SCOPE` (set explicitly to `compare` for this product, avoid cross-app scope bleed)
+- Ensure runtime bootstrap can run in first-render empty DB:
+  - `CATALOG_BOOTSTRAP_ON_EMPTY` = `true`
+  - `CATALOG_LAUNCH_PAYLOAD_PATH` = `scripts/ingest-payloads/operations/rangescout-eu-launch-content.json` (or alternate path)
 - Run one-time catalog seed for visible content after deployment:
   - `npm run db:seed:eu-launch` (or use `scripts/seed-rangescout-eu.ts` manually against the deployed DB once env is present).
 - If new env changes are made locally and intended for Vercel, refresh deployment vars via:
