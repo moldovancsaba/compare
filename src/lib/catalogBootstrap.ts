@@ -30,7 +30,7 @@ function getBootstrapPayloadPath(): string {
 
 function getBootstrapEnabled(): boolean {
   const value = sanitize(process.env.CATALOG_BOOTSTRAP_ON_EMPTY);
-  if (!value) return true;
+  if (!value) return false;
   return value.toLowerCase() === "true" || value.toLowerCase() === "1";
 }
 

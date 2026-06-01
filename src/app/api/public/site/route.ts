@@ -4,6 +4,7 @@ import { mergeSiteDocument } from "@/lib/siteMerge";
 import type { SiteDoc } from "@/types/site";
 import { normalizeLocale, type AppLocale } from "@/lib/i18n/config";
 import { DEFAULT_LOCALE } from "@/lib/i18n/config";
+import { localizeSiteDocument } from "@/lib/i18n/messages";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -19,9 +20,5 @@ async function getSitePayload(locale: AppLocale = DEFAULT_LOCALE) {
   const doc = (await db.collection(COL.site).findOne({ _id: "main" } as never)) as unknown as Partial<SiteDoc> | null;
   const site = mergeSiteDocument(doc);
   if (!site) return NextResponse.json({ error: "Site document not found" }, { status: 404 });
-  if (locale !== DEFAULT_LOCALE) {
-    // Placeholder hook for locale-specific catalog variants.
-    // Current database schema stores a single canonical payload.
-  }
-  return NextResponse.json(site);
+  return NextResponse.json(localizeSiteDocument(site, locale));
 }

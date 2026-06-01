@@ -1,6 +1,6 @@
 /**
- * Seed only the curated EU launch payload used for webapp bring-up.
- * Uses operation semantics so we can fully replace providers/meetup groups.
+ * Apply an explicit, source-backed launch payload when one is supplied.
+ * The checked-in default payload is intentionally empty: Compare content must come from CHECK local intelligence, not invented starter rows.
  */
 import { config as loadEnv } from "dotenv";
 import path from "node:path";
@@ -41,6 +41,9 @@ async function main() {
 
   let ok = 0;
   console.log(`Applying launch payload with catalog scope: ${scope.join(", ")}`);
+  if (ops.length === 0) {
+    console.log("No launch operations found. This is expected for the checked-in default payload.");
+  }
 
   for (const op of ops) {
     const result = await applyIngestOperation(db, op);

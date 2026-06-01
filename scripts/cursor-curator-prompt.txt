@@ -9,7 +9,7 @@ Find exactly one new NYC family/kids listing that fits ClassScout and successful
 Valid listing types:
 - Classes
 - Camps
-- Birthday Parties
+- Competitions
 - Drop-In Activities
 - Meet-Up Groups
 
@@ -44,7 +44,7 @@ Measure coverage across these dimensions using the live catalog:
 ### Categories
 - Classes
 - Camps
-- Birthday Parties
+- Competitions
 - Drop-In Activities
 - Meet-Up Groups
 

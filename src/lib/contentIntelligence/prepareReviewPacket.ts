@@ -122,11 +122,35 @@ export async function prepareRangeScoutReviewPacket(
 ): Promise<PrepareReviewPacketResult> {
   let mediaResult: UploadedImageResult | null = null;
   if (!hasUploadedImage(input.normalizedListing) && input.mediaRequest) {
-    mediaResult = await processOfficialImage(input.mediaRequest, {
-      fetchImpl: deps.fetchImpl,
-      uploadImage: deps.uploadImage,
-      hashBuffer: deps.hashBuffer,
-    });
+    try {
+      mediaResult = await processOfficialImage(input.mediaRequest, {
+        fetchImpl: deps.fetchImpl,
+        uploadImage: deps.uploadImage,
+        hashBuffer: deps.hashBuffer,
+      });
+    } catch (error) {
+      mediaResult = {
+        candidateId: input.mediaRequest.candidateId,
+        originalUrl: input.mediaRequest.sourceImageUrl,
+        sourceDocumentUrl: input.mediaRequest.sourceDocumentUrl,
+        uploadedUrl: "",
+        uploadedAt: new Date().toISOString(),
+        mimeType: "",
+        contentHash: "",
+        perceptualHash: "",
+        uploadAttemptCount: 1,
+        status: "failed",
+        diagnostics: [
+          {
+            code: "image_upload_runtime_failed",
+            severity: "error",
+            message: error instanceof Error ? error.message : String(error),
+            retryable: true,
+            remediationHint: "Fix the media upload runtime configuration and retry the same candidate.",
+          },
+        ],
+      };
+    }
   }
 
   let listingWithMedia = appendUploadedImage(input.normalizedListing, mediaResult);

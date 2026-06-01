@@ -30,7 +30,7 @@ const { checkPayloadQuality } = require("./lib/curated-payload-quality.cjs");
 const BASE = (process.env.INGEST_BASE_URL || "https://classscout.vercel.app").replace(/\/$/, "");
 const KEY = (process.env.INGEST_API_KEY || "").trim();
 
-const CATEGORIES = ["Classes", "Camps", "Birthday Parties", "Drop-In Activities"];
+const CATEGORIES = ["Classes", "Camps", "Competitions", "Drop-In Activities"];
 const BOROUGHS = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"];
 const AGE_RANGES = ["0–2", "3–5", "6–8", "9–12", "Teens"];
 const DAY_TAGS = ["Weekday", "Weekend", "Morning", "Afternoon", "Evening", "After-school"];

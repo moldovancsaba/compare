@@ -3,6 +3,7 @@ import { buildCatalogScopeFilter, getDb, COL } from "@/lib/mongodb";
 import type { Provider } from "@/types/provider";
 import { normalizeProviderFreshness } from "@/lib/providerFreshness";
 import { deriveNextOccurrence } from "@/lib/providerSchedule";
+import { sanitizeProviderForPublic } from "@/lib/contentIntelligence/publicCopySanitizer";
 import { filterObsoleteContent } from "@/lib/catalogContentPolicy";
 import { BOROUGHS } from "@/data/locations";
 import { ensureLaunchCatalogSeeded } from "@/lib/catalogBootstrap";
@@ -43,9 +44,12 @@ export async function GET() {
     scoped
     .map((row) => {
       const normalized = normalizeProviderFreshness(row);
-      return stripId({
+      const sanitized = sanitizeProviderForPublic({
         ...normalized,
-        nextOccurrence: deriveNextOccurrence(normalized),
+      } as Provider).payload;
+      return stripId({
+        ...sanitized,
+        nextOccurrence: deriveNextOccurrence(sanitized),
       });
     }),
   ).sort((left, right) => (right.publishedAt ?? "").localeCompare(left.publishedAt ?? ""));

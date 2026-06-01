@@ -1,4 +1,5 @@
 import { ActionIcon, Button, Divider, Group, Paper, SimpleGrid, Stack, Text, Title } from "@mantine/core";
+import { usePathname } from "next/navigation";
 import { useCalculator } from "@/store/useScout";
 import { ArrowRight, Calculator, Minus, Plus, Trash2, X } from "@/lib/appIcons";
 import { EmptyState } from "../EmptyState";
@@ -7,19 +8,26 @@ import { useProvidersCatalog, useSiteCatalog } from "@/hooks/useCatalog";
 import { CMS_MEDIA } from "@/config/defaultMedia";
 import type { Category } from "@/types/provider";
 import { formatBoroughLabel } from "@/data/locations";
+import { normalizeLocale } from "@/lib/i18n/config";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { getLocalText } from "@/lib/i18n/messages";
 
 export function CalculatorView({
   onNavigate,
 }: {
   onNavigate: (view: Category | "Saved") => void;
 }) {
+  const pathname = usePathname();
+  const locale = normalizeLocale(parseLocaleFromPathname(pathname));
   const { items, setClasses, remove, clear } = useCalculator();
   const { data: providers = [], isLoading } = useProvidersCatalog();
-  const { data: siteData, isLoading: siteLoading, isError: siteError } = useSiteCatalog();
+  const { data: siteData, isLoading: siteLoading, isError: siteError } = useSiteCatalog(locale);
   if (siteLoading || siteError || !siteData) return null;
 
   const s = siteData;
   const c = s.calculator;
+  const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
+    getLocalText(s, locale, path, fallback);
 
   const rows = items
     .map((i) => {
@@ -57,10 +65,18 @@ export function CalculatorView({
           action={
             <Group gap="sm" justify="center">
               <Button variant="light" color="dark" onClick={() => onNavigate("Classes")}>
-                Browse training
+                {localText("calculator.browseTraining", {
+                  en: "Browse training",
+                  hu: "Képzések böngészése",
+                  it: "Sfoglia allenamenti",
+                })}
               </Button>
               <Button variant="subtle" color="gray" rightSection={<ArrowRight size={14} />} onClick={() => onNavigate("Saved")}>
-                Open saved items
+                {localText("calculator.openSaved", {
+                  en: "Open saved items",
+                  hu: "Mentettek megnyitása",
+                  it: "Apri salvati",
+                })}
               </Button>
             </Group>
           }
@@ -82,8 +98,13 @@ export function CalculatorView({
                     {r.provider.name}
                   </Text>
                   <Text size="xs" c="dimmed">
-                    {r.provider.neighborhood}, {formatBoroughLabel(r.provider.borough)} · EUR {r.provider.pricePerClass}
-                    {c.providerLinePriceSuffix}
+                    {r.provider.neighborhood}, {formatBoroughLabel(r.provider.borough, locale)} · {r.provider.pricePerClass > 0
+                      ? `EUR ${r.provider.pricePerClass}${c.providerLinePriceSuffix}`
+                      : localText("providerCard.priceOnRequest", {
+                          en: "Price on request",
+                          hu: "Ár egyeztetés alapján",
+                          it: "Prezzo su richiesta",
+                        })}
                   </Text>
                 </Stack>
                 <Group gap={4} wrap="nowrap">
@@ -92,7 +113,11 @@ export function CalculatorView({
                     color="gray"
                     radius="xl"
                     onClick={() => setClasses(r.providerId, r.classes - 1)}
-                    aria-label="Decrease classes"
+                    aria-label={localText("calculator.decrease", {
+                      en: "Decrease sessions",
+                      hu: "Alkalmak csökkentése",
+                      it: "Riduci sessioni",
+                    })}
                   >
                     <Minus size={14} />
                   </ActionIcon>
@@ -104,20 +129,32 @@ export function CalculatorView({
                     color="gray"
                     radius="xl"
                     onClick={() => setClasses(r.providerId, r.classes + 1)}
-                    aria-label="Increase classes"
+                    aria-label={localText("calculator.increase", {
+                      en: "Increase sessions",
+                      hu: "Alkalmak növelése",
+                      it: "Aumenta sessioni",
+                    })}
                   >
                     <Plus size={14} />
                   </ActionIcon>
                 </Group>
                 <Text ff="heading" fw={700} c="orange.5" w={80} ta="right">
-                  EUR {r.subtotal}
+                  {r.subtotal > 0 ? `EUR ${r.subtotal}` : localText("providerCard.priceOnRequest", {
+                    en: "Price on request",
+                    hu: "Ár egyeztetés alapján",
+                    it: "Prezzo su richiesta",
+                  })}
                 </Text>
                 <ActionIcon
                   variant="subtle"
                   color="gray"
                   radius="xl"
                   onClick={() => remove(r.providerId)}
-                  aria-label={`Remove ${r.provider.name}`}
+                  aria-label={`${localText("calculator.remove", {
+                    en: "Remove",
+                    hu: "Eltávolítás",
+                    it: "Rimuovi",
+                  })} ${r.provider.name}`}
                 >
                   <X size={16} />
                 </ActionIcon>
@@ -155,7 +192,11 @@ export function CalculatorView({
                 {c.estimatedTotalLabel}
               </Text>
               <Text ff="heading" fw={700} size="2rem" c="orange.5">
-                EUR {total}
+                {total > 0 ? `EUR ${total}` : localText("providerCard.priceOnRequest", {
+                  en: "Price on request",
+                  hu: "Ár egyeztetés alapján",
+                  it: "Prezzo su richiesta",
+                })}
               </Text>
             </Group>
             <Text size="xs" c="dimmed">

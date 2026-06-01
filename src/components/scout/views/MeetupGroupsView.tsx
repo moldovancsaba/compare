@@ -1,5 +1,6 @@
 import { PageHeader } from "@doneisbetter/gds-core/client";
 import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { Button, Card, Center, Group, Loader, Paper, SimpleGrid, Stack, Text, Title } from "@mantine/core";
 import { BoroughBar } from "../BoroughBar";
 import { NeighborhoodChips } from "../NeighborhoodChips";
@@ -13,6 +14,9 @@ import { MapPin, Users } from "@/lib/appIcons";
 import { useMeetupGroupsCatalog, useNeighborhoodsCatalog, useSiteCatalog } from "@/hooks/useCatalog";
 import { CdnImage } from "@/components/media/CdnImage";
 import { getLocationHero, getLocationHeroImage } from "@/lib/locationHero";
+import { normalizeLocale } from "@/lib/i18n/config";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { getLocalText, siteCopy } from "@/lib/i18n/messages";
 
 interface Props {
   onOpen: (g: MeetupGroup) => void;
@@ -31,9 +35,13 @@ export function MeetupGroupsView({
   onBoroughChange,
   onNeighborhoodChange,
 }: Props) {
+  const pathname = usePathname();
+  const locale = normalizeLocale(parseLocaleFromPathname(pathname));
   const { data: groups = [], isLoading, isError } = useMeetupGroupsCatalog();
   const { data: neighborhoodsMap } = useNeighborhoodsCatalog();
-  const { data: site } = useSiteCatalog();
+  const { data: site } = useSiteCatalog(locale);
+  const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
+    getLocalText(site, locale, path, fallback);
 
   const hoodOptions = useMemo(() => {
     if (borough === "All") return [];
@@ -48,7 +56,7 @@ export function MeetupGroupsView({
         .filter((g) => (neighborhood ? g.neighborhood === neighborhood : true)),
     [groups, borough, neighborhood],
   );
-  const pageCopy = getLocationHero("Meet-Up Groups", borough, neighborhood);
+  const pageCopy = getLocationHero("Meet-Up Groups", borough, neighborhood, locale);
   const heroImage = getLocationHeroImage(site, "Meet-Up Groups", borough, neighborhood);
 
   if (isLoading) {
@@ -57,7 +65,7 @@ export function MeetupGroupsView({
         <Stack align="center" gap="sm">
           <Loader color="teal" size="md" />
           <Text c="dimmed" size="sm">
-            Loading clubs...
+            {localText("meetups.loading", { en: "Loading clubs...", hu: "Klubok betöltése...", it: "Caricamento club..." })}
           </Text>
         </Stack>
       </Center>
@@ -68,11 +76,15 @@ export function MeetupGroupsView({
     return (
       <EmptyState
         icon={Users}
-        title="No clubs in the database"
-        message="Seed MongoDB (`npm run db:seed`) or add clubs in `/admin`."
+        title={localText("meetups.emptyDatabaseTitle", {
+          en: "No verified clubs are published yet",
+          hu: "Még nincs publikált, ellenőrzött klub",
+          it: "Non ci sono ancora club verificati pubblicati",
+        })}
+        message={localText("discover.emptyDatabaseMessage", siteCopy.discover.emptyDatabaseMessage)}
         action={
           <Button component="a" href="/secret-cms-to-edit" variant="light" color="dark">
-            Open admin
+            {localText("meetups.openAdmin", { en: "Open admin", hu: "Admin megnyitása", it: "Apri admin" })}
           </Button>
         }
       />
@@ -108,9 +120,9 @@ export function MeetupGroupsView({
       </Paper>
 
       <Stack gap="md">
-        <BoroughBar value={borough} onChange={onBoroughChange} />
+        <BoroughBar value={borough} onChange={onBoroughChange} locale={locale} copySource={site} />
         {borough !== "All" && (
-          <NeighborhoodChips options={hoodOptions} value={neighborhood} onChange={onNeighborhoodChange} />
+          <NeighborhoodChips options={hoodOptions} value={neighborhood} onChange={onNeighborhoodChange} locale={locale} copySource={site} />
         )}
       </Stack>
 
@@ -118,33 +130,43 @@ export function MeetupGroupsView({
         <Group justify="space-between" align="end" gap="sm">
           <Stack gap={2}>
             <Title order={2} size="h3">
-              {filtered.length === 1 ? "1 club" : `${filtered.length} clubs`}
+              {filtered.length === 1
+                ? localText("meetups.oneClub", { en: "1 club", hu: "1 klub", it: "1 club" })
+                : localText("meetups.clubCount", { en: "{count} clubs", hu: "{count} klub", it: "{count} club" }).replace("{count}", String(filtered.length))}
             </Title>
             <Text c="dimmed" size="sm">
               {neighborhood
-                ? `Clubs in ${neighborhood}`
+                ? `${localText("nav.clubs", siteCopy.nav.clubs)}: ${neighborhood}`
                 : borough === "All"
-                  ? "Clubs across the EU"
-                  : `Clubs in ${formatBoroughLabel(borough)}`}
+                  ? localText("meetups.clubsAcrossEu", { en: "Clubs across the EU", hu: "Klubok Európa-szerte", it: "Club in tutta l'UE" })
+                  : `${localText("nav.clubs", siteCopy.nav.clubs)}: ${formatBoroughLabel(borough, locale)}`}
             </Text>
           </Stack>
           <Text c="dimmed" size="sm">
-            Member clubs, associations, and regional communities
+            {localText("meetups.summary", {
+              en: "Member clubs, associations, and regional communities",
+              hu: "Tagsági klubok, egyesületek és regionális közösségek",
+              it: "Club associativi, associazioni e comunità regionali",
+            })}
           </Text>
         </Group>
 
         {filtered.length === 0 ? (
           <EmptyState
             icon={MapPin}
-            title="No clubs yet"
-            message="No clubs added here yet. Try another nearby region."
+            title={localText("meetups.emptyTitle", { en: "No clubs yet", hu: "Még nincs klub", it: "Nessun club" })}
+            message={localText("meetups.emptyMessage", {
+              en: "No verified clubs are showing for this region yet. Try another nearby region.",
+              hu: "Ehhez a régióhoz még nincs ellenőrzött klub. Próbálj másik közeli régiót.",
+              it: "Non ci sono ancora club verificati per questa regione. Prova un'altra area vicina.",
+            })}
             action={
               <Group gap="sm" justify="center">
                 <Button variant="light" color="dark" onClick={() => onNeighborhoodChange(null)}>
-                  Clear neighborhood
+                  {localText("meetups.clearRegion", { en: "Clear region", hu: "Régió törlése", it: "Cancella regione" })}
                 </Button>
                 <Button variant="subtle" color="gray" onClick={() => onBoroughChange("All")}>
-                  Browse all EU
+                  {localText("discover.browseAllEu", siteCopy.discover.browseAllEu)}
                 </Button>
               </Group>
             }
@@ -152,7 +174,7 @@ export function MeetupGroupsView({
         ) : (
           <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="lg" verticalSpacing="lg">
             {filtered.map((g) => (
-              <MeetupGroupCard key={g.id} group={g} onOpen={onOpen} onShare={onShare} />
+              <MeetupGroupCard key={g.id} group={g} onOpen={onOpen} onShare={onShare} locale={locale} copySource={site} />
             ))}
           </SimpleGrid>
         )}

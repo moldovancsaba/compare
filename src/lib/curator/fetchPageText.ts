@@ -40,11 +40,19 @@ export async function fetchPageText(url: string, allowedHost: string): Promise<{
   const og =
     raw.match(/property=["']og:image["']\s+content=["']([^"']+)["']/i)?.[1] ||
     raw.match(/content=["']([^"']+)["']\s+property=["']og:image["']/i)?.[1];
+  const firstImage = raw.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1];
+  const imageCandidate = og || firstImage;
+  const absoluteImageCandidate = imageCandidate
+    ? new URL(imageCandidate, url).toString()
+    : undefined;
   const stripped = raw
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return { text: stripped.slice(0, MAX_CHARS), ogImage: og?.startsWith("http") ? og : undefined };
+  return {
+    text: stripped.slice(0, MAX_CHARS),
+    ogImage: absoluteImageCandidate?.startsWith("https://") ? absoluteImageCandidate : undefined,
+  };
 }

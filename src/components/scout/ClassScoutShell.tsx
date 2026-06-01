@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DiscoveryShell, PublicSiteFooter } from "@doneisbetter/gds-core/client";
 import { ActionIcon, Badge, Box, Button, Group, Indicator, Select, Stack, Text } from "@mantine/core";
@@ -38,8 +38,8 @@ import type { FilterState } from "@/components/scout/Filters";
 import type { DiscoverDateMode, DiscoverSort } from "@/lib/providerQuery";
 import { Plus } from "@/lib/appIcons";
 import { parseLocaleFromPathname, stripLocaleFromPathname, withLocaleSearch } from "@/lib/i18n/paths";
-import { getText, siteCopy } from "@/lib/i18n/messages";
-import { isSupportedLocale, localeLabels, locales, normalizeLocale } from "@/lib/i18n/config";
+import { getLocalText, siteCopy } from "@/lib/i18n/messages";
+import { isSupportedLocale, localeLabels, locales, normalizeLocale, type AppLocale } from "@/lib/i18n/config";
 
 export default function ClassScoutShell() {
   const router = useRouter();
@@ -57,6 +57,20 @@ export default function ClassScoutShell() {
   const { data: site } = useSiteCatalog(locale);
   const { data: providers = [] } = useProvidersCatalog();
   const { data: meetupGroups = [] } = useMeetupGroupsCatalog();
+
+  useEffect(() => {
+    const providerId = searchParams.get("provider");
+    if (!providerId || openProvider?.id === providerId) return;
+    const provider = providers.find((item) => item.id === providerId);
+    if (provider) setOpenProvider(provider);
+  }, [openProvider?.id, providers, searchParams]);
+
+  useEffect(() => {
+    const meetupId = searchParams.get("meetup");
+    if (!meetupId || openGroup?.id === meetupId) return;
+    const group = meetupGroups.find((item) => item.id === meetupId);
+    if (group) setOpenGroup(group);
+  }, [meetupGroups, openGroup?.id, searchParams]);
 
   const savedCount = useMemo(() => {
     const providerIds = new Set(providers.map((p) => p.id));
@@ -76,6 +90,8 @@ export default function ClassScoutShell() {
     () => parseNeighborhoodGuideState(new URLSearchParams(searchParams.toString())),
     [searchParams],
   );
+  const localText = <T extends Record<AppLocale, string>>(path: string, fallback: T) =>
+    getLocalText(site, locale, path, fallback);
 
   const navigate = (href: string) => {
     router.push(href);
@@ -163,14 +179,21 @@ export default function ClassScoutShell() {
 
   const homeHrefBase = getHrefForView("Home", locale);
   const homeHref = currentQuery.toString() ? `${homeHrefBase}?${currentQuery.toString()}` : homeHrefBase;
+  const availableLocales = (() => {
+    const configured = Array.isArray(site?.publicLocales)
+      ? site.publicLocales.filter((value): value is AppLocale => isSupportedLocale(value))
+      : [];
+    const next = configured.length > 0 ? configured : [...locales];
+    return next.includes(locale) ? next : [locale, ...next];
+  })();
   const shellActions = (
     <Group gap="xs" wrap="nowrap">
       <Select
         value={locale}
         onChange={handleLocaleSwitch}
-        data={locales.map((language) => ({ value: language, label: localeLabels[language] }))}
-        aria-label={getText(siteCopy.common.language, locale)}
-        placeholder={getText(siteCopy.common.language, locale)}
+        data={availableLocales.map((language) => ({ value: language, label: localeLabels[language] }))}
+        aria-label={localText("common.language", siteCopy.common.language)}
+        placeholder={localText("common.language", siteCopy.common.language)}
         styles={{ root: { minWidth: 140 } }}
       />
       <Indicator
@@ -189,7 +212,7 @@ export default function ClassScoutShell() {
           color="teal"
           radius="xl"
           size="lg"
-          aria-label="Saved"
+          aria-label={localText("nav.saved", siteCopy.nav.saved)}
         >
           <Heart size={18} />
         </ActionIcon>
@@ -204,7 +227,7 @@ export default function ClassScoutShell() {
         leftSection={<Plus size={16} />}
         rightSection={calculatorCount > 0 ? <Badge color="orange">{calculatorCount}</Badge> : undefined}
       >
-        Calculator
+        {localText("nav.calculator", siteCopy.nav.calculator)}
       </Button>
       <ActionIcon
         component={Link}
@@ -213,7 +236,7 @@ export default function ClassScoutShell() {
         color="teal"
         radius="xl"
         size="lg"
-        aria-label="My account"
+        aria-label={localText("nav.account", siteCopy.nav.account)}
       >
         <UserCircle size={18} />
       </ActionIcon>
@@ -225,7 +248,7 @@ export default function ClassScoutShell() {
         <Box
           component={Link}
           href={homeHref}
-          aria-label="Go to home"
+          aria-label={localText("nav.home", siteCopy.nav.home)}
           style={{
             width: 44,
             height: 44,
@@ -239,13 +262,13 @@ export default function ClassScoutShell() {
         </Box>
         <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
           <Text size="xs" tt="uppercase" fw={700} c="teal.7" style={{ letterSpacing: "0.14em" }}>
-            {getText(siteCopy.shell.brandName, locale)}
+            {localText("shell.brandName", siteCopy.shell.brandName)}
           </Text>
           <Text size="lg" fw={700} lh={1.2} truncate>
-            {getText(siteCopy.shell.brandTagline, locale)}
+            {localText("shell.brandTagline", siteCopy.shell.brandTagline)}
           </Text>
           <Text size="sm" c="dimmed" visibleFrom="md" truncate>
-            {getText(siteCopy.shell.brandSubtitle, locale)}
+            {localText("shell.brandSubtitle", siteCopy.shell.brandSubtitle)}
           </Text>
         </Stack>
       </Group>
@@ -260,13 +283,14 @@ export default function ClassScoutShell() {
         <Sidebar
           active={view}
           locale={locale}
+          copySource={site}
           sidebarPromo={
             site
               ? {
                   title: site.sidebarTitle,
                   body: site.sidebarBody,
                   cta: site.sidebarCtaLabel,
-                  href: `mailto:${site.account.privacy.supportEmail}?subject=${encodeURIComponent("Request listing info")}`,
+                  href: `mailto:${site.account.privacy.supportEmail}?subject=${encodeURIComponent(localText("sidebar.promoCta", siteCopy.sidebar.promoCta))}`,
                 }
               : undefined
           }
@@ -387,11 +411,15 @@ export default function ClassScoutShell() {
             )}
             {view !== "Home" && <TrustStrip />}
             <PublicSiteFooter
-              meta="RangeScout EU · Trusted. Regional. Built for sport shooting and hunting operators. · Demo prices for planning purposes only."
+              meta={localText("footer.meta", {
+                en: "RangeScout EU · Trusted sport shooting and hunting catalog across Europe.",
+                hu: "RangeScout EU · Megbízható lősport- és vadászati katalógus Európában.",
+                it: "RangeScout EU · Catalogo europeo affidabile per tiro sportivo e caccia.",
+              })}
             >
               <Group gap="xs">
                 <Text component={Link} href={getHrefForView("Home", locale).replace(/\/$/, "") + "/admin"} c="dimmed" size="xs">
-                  Staff admin
+                  {localText("footer.staffAdmin", { en: "Staff admin", hu: "Admin", it: "Admin" })}
                 </Text>
               </Group>
             </PublicSiteFooter>

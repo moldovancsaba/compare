@@ -25,11 +25,11 @@ export function ProviderMap({ address, borough }: { address: string; borough: st
         if (Array.isArray(data) && data[0]) {
           setCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
         } else {
-          setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Germany);
+          setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Hungary);
         }
       })
       .catch(() => {
-        if (!cancelled) setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Germany);
+        if (!cancelled) setCoords(BOROUGH_CENTERS[borough] ?? BOROUGH_CENTERS.Hungary);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);

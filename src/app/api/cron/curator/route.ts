@@ -15,16 +15,16 @@ function authorize(req: Request): boolean {
 }
 
 /**
- * Scheduled curator: web search (Serper) → fetch official page → OpenAI JSON
+ * Scheduled curator: external search → fetch official page → deterministic local extraction
  * → validate → dedupe → Mongo upsert (same path as /api/ingest).
  *
  * Env:
  *   CRON_SECRET           — required for this route (Vercel injects on cron when set)
  *   CURATOR_ENABLED=true  — master switch
  *   SERPER_API_KEY        — serper.dev Google search
- *   CURATOR_OPENAI_API_KEY — OpenAI-compatible key (default base https://api.openai.com/v1)
- *   CURATOR_OPENAI_MODEL  — optional, default gpt-4o-mini
- *   CURATOR_OPENAI_BASE_URL — optional
+ *
+ * External LLM extraction is intentionally prohibited for Compare curator runs.
+ * Search/fetch may use external sources, but interpretation must remain local.
  */
 export async function GET(req: Request) {
   if (!authorize(req)) {

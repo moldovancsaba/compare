@@ -15,6 +15,18 @@ const dayTag = z.enum(CURATOR_DAY_TAGS);
 const badge = z.enum(CURATOR_BADGES);
 const recurringProgramCadence = z.enum(["Daily", "Weekdays", "Weekends", "Weekly", "Biweekly", "Monthly", "Seasonal", "Custom"]);
 const recurringProgramDay = z.enum(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]);
+const localizedProviderCopy = z
+  .record(
+    z.enum(["en", "hu", "it"]),
+    z
+      .object({
+        shortDescription: z.string().min(10).max(400).optional(),
+        longDescription: z.string().min(40).max(8000).optional(),
+        announcementBadge: z.string().min(2).max(80).optional(),
+      })
+      .strict(),
+  )
+  .optional();
 const scheduledInstance = z
   .object({
     id: z.string().min(2).max(80).regex(/^[a-z0-9-]+$/),
@@ -90,6 +102,7 @@ export const curatedProviderSchema = z
     announcementTitle: z.string().max(120).optional(),
     announcementDescription: z.string().max(500).optional(),
     announcementBadge: z.string().max(60).optional(),
+    localized: localizedProviderCopy,
     recurringPrograms: z.array(recurringProgram).max(24).optional(),
     scheduledInstances: z.array(scheduledInstance).max(64).optional(),
     publishedAt: z.string().datetime().optional(),

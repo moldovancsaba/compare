@@ -5,6 +5,7 @@ import type { UploadedImageResult } from "@/lib/contentIntelligence/mediaPipelin
 import type { PublishGateResult } from "@/lib/contentIntelligence/publishGate";
 import type { MeetupGroup } from "@/types/meetup";
 import type { Provider } from "@/types/provider";
+import { sanitizeMeetupForPublic, sanitizeProviderForPublic } from "@/lib/contentIntelligence/publicCopySanitizer";
 
 export interface PublishRequest {
   draftId: string;
@@ -28,7 +29,9 @@ export interface PublishResult {
     summary: string;
     attemptsUsed?: number;
     candidateDomain?: string | null;
+    publicUrl?: string | null;
   };
+  publicUrl?: string | null;
   auditRef: string;
   retryable: boolean;
   diagnostics: string[];
@@ -104,6 +107,9 @@ async function verifyPublicPublish(
   options: VerificationOptions = {},
 ) {
   const candidateDomain = inferCandidateDomainFromDraft(draftPayload);
+  const publicUrl = origin
+    ? `${origin}/?${entityKind === "provider" ? "provider" : "meetup"}=${encodeURIComponent(draftPayload.id)}`
+    : null;
   if (!origin) {
     return {
       verified: false,
@@ -112,6 +118,7 @@ async function verifyPublicPublish(
       summary: "Public verification skipped because no origin was provided.",
       attemptsUsed: 0,
       candidateDomain,
+      publicUrl,
     };
   }
   const endpoint = entityKind === "provider" ? "providers" : "meetup-groups";
@@ -139,6 +146,7 @@ async function verifyPublicPublish(
           summary: `Entity is visible in the public API and matches the published draft after ${attempt} attempt(s).`,
           attemptsUsed: attempt,
           candidateDomain,
+          publicUrl,
         };
       }
       lastFailureSummary = `Entity was not yet visible with matching public fields on attempt ${attempt}/${attempts}.`;
@@ -156,6 +164,7 @@ async function verifyPublicPublish(
     summary: lastFailureSummary,
     attemptsUsed: attempts,
     candidateDomain,
+    publicUrl,
   };
 }
 
@@ -180,7 +189,9 @@ export async function publishApprovedDraft(
         checkedAt: new Date().toISOString(),
         verificationSource: "publish-gate",
         summary: "The publish gate blocked this draft.",
+        publicUrl: null,
       },
+      publicUrl: null,
       auditRef: input.idempotencyKey,
       retryable: false,
       diagnostics: input.gateResult.errors.map((error) => error.message),
@@ -189,10 +200,18 @@ export async function publishApprovedDraft(
 
   const collection = input.entityKind === "provider" ? COL.providers : COL.meetupGroups;
   const id = input.draftPayload.id;
+  const sanitizedInput =
+    input.entityKind === "provider"
+      ? sanitizeProviderForPublic(input.draftPayload as Provider)
+      : sanitizeMeetupForPublic(input.draftPayload as MeetupGroup);
   const draftPayload = {
-    ...input.draftPayload,
+    ...sanitizedInput.payload,
     catalogProject: normalizeCatalogProject(input.draftPayload as { catalogProject?: string }),
-  };
+  } as Provider | MeetupGroup;
+  const combinedDiagnostics = [
+    ...input.gateResult.errors.map((error) => `error:${error.code}:${error.message}`),
+    ...sanitizedInput.removedTerms.map((term) => `sanitized:${term}`),
+  ];
   await db.collection(collection).replaceOne(buildCatalogScopeFilter({ id }), draftPayload as never, { upsert: true });
   if (input.entityKind === "provider") {
     await syncCatalogImageFingerprintForEntity(db, {
@@ -210,7 +229,7 @@ export async function publishApprovedDraft(
 
   const [privateVerification, publicVerification] = await Promise.all([
     verifyPrivatePublish(db, input.entityKind, id),
-    verifyPublicPublish(options.origin, input.entityKind, input.draftPayload, options),
+    verifyPublicPublish(options.origin, input.entityKind, draftPayload, options),
   ]);
 
   return {
@@ -219,8 +238,9 @@ export async function publishApprovedDraft(
     publishedEntityType: input.entityKind,
     privateVerification,
     publicVerification,
+    publicUrl: publicVerification.publicUrl,
     auditRef: input.idempotencyKey,
     retryable: !publicVerification.verified,
-    diagnostics: publicVerification.verified ? [] : [publicVerification.summary],
+    diagnostics: publicVerification.verified ? combinedDiagnostics : [...combinedDiagnostics, publicVerification.summary],
   };
 }
