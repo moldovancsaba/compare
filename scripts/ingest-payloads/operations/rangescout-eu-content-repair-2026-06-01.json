@@ -1,0 +1,277 @@
+{
+  "sourceUrls": [
+    "https://www.rangersport.hu/",
+    "https://www.gepardloter.com/en",
+    "https://www.celeritas.hu/",
+    "https://hungexpo.hu/en/events/fehova/"
+  ],
+  "notes": "Repairs the live Compare Visitor catalog by replacing duplicated placeholder-image rows with unique public records that have real descriptions and ImgBB-hosted images from official source pages. OMVK and B-Pro are intentionally excluded until Local can produce complete image-backed records.",
+  "operations": [
+    {
+      "resource": "providers",
+      "action": "replaceAll",
+      "documents": [
+        {
+          "catalogProject": "rangescout-eu",
+          "id": "prov-ranger-sport-budapest",
+          "name": "Ranger Sport Budapest",
+          "category": "Classes",
+          "borough": "Hungary",
+          "neighborhood": "Budapest",
+          "address": "Budapest, Deak Ferenc ter-M, 1052 Hungary",
+          "activityTypes": [
+            "Rifle",
+            "Pistol",
+            "Shotgun",
+            "Range Training"
+          ],
+          "ageRanges": [
+            "Beginner",
+            "Licensed Adult"
+          ],
+          "dayTimeTags": [
+            "Weekday",
+            "Weekend",
+            "Morning",
+            "Afternoon"
+          ],
+          "pricePerClass": 55,
+          "shortDescription": "Guided Budapest shooting sessions with rifle, pistol, and shotgun packages, instructor support, safety equipment, and indoor range access.",
+          "longDescription": "Ranger Sport Budapest offers supervised shooting experiences for adults and beginners, including guided firearm packages, instructor support, safety equipment, and 25-100 metre shooting distances. The range publishes daily opening hours and package pricing from EUR 55.",
+          "rating": 0,
+          "reviewCount": 0,
+          "badges": [
+            "Beginner Friendly",
+            "Weekend Friendly"
+          ],
+          "image": "https://i.ibb.co/MxfG886H/compare-ranger-1780320989000.jpg",
+          "galleryImages": [],
+          "email": "info@rangersport.hu",
+          "website": "https://www.rangersport.hu/",
+          "phone": "+36 1 808 8170",
+          "bookingEnabled": false,
+          "recurringPrograms": [
+            {
+              "id": "ranger-sport-budapest-daily-range-sessions",
+              "title": "Guided shooting packages",
+              "cadence": "Daily",
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "timeText": "10:00 AM - 8:00 PM",
+              "ageRanges": [
+                "Beginner",
+                "Licensed Adult"
+              ],
+              "activityTypes": [
+                "Rifle",
+                "Pistol",
+                "Shotgun",
+                "Range Training"
+              ],
+              "summary": "Supervised firearm packages with instructor support and safety equipment.",
+              "priceText": "From EUR 55",
+              "registrationUrl": "https://www.rangersport.hu/"
+            }
+          ]
+        },
+        {
+          "catalogProject": "rangescout-eu",
+          "id": "prov-gepard-shooting-range-budapest",
+          "name": "Gepard Shooting Range Budapest",
+          "category": "Drop-In Activities",
+          "borough": "Hungary",
+          "neighborhood": "Budapest",
+          "address": "1222 Budapest, Nagytetenyi ut 66, Hungary",
+          "activityTypes": [
+            "Pistol",
+            "Rifle",
+            "Range Training"
+          ],
+          "ageRanges": [
+            "Beginner",
+            "Licensed Adult"
+          ],
+          "dayTimeTags": [
+            "Weekday",
+            "Evening"
+          ],
+          "pricePerClass": 15,
+          "shortDescription": "Indoor Budapest range with supervised lane use, club guns, membership options, and published weekday evening access.",
+          "longDescription": "Gepard Shooting Range lists supervised range use in Budapest with club firearms available, annual club membership information, contact details, and weekday evening opening hours. The one-time range fee covers range use, supervision, and club guns, with ammunition handled separately.",
+          "rating": 0,
+          "reviewCount": 0,
+          "badges": [
+            "Beginner Friendly"
+          ],
+          "image": "https://i.ibb.co/gbFKTpyY/compare-gepard-1780320989333.jpg",
+          "galleryImages": [],
+          "email": "gmloterferenczgabor@gmail.com",
+          "website": "https://www.gepardloter.com/en",
+          "phone": "+36 70 247 6499",
+          "bookingEnabled": false,
+          "recurringPrograms": [
+            {
+              "id": "gepard-shooting-range-budapest-weekday-range-use",
+              "title": "Supervised range use",
+              "cadence": "Weekdays",
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "timeText": "4:00 PM - 8:00 PM",
+              "ageRanges": [
+                "Beginner",
+                "Licensed Adult"
+              ],
+              "activityTypes": [
+                "Pistol",
+                "Rifle",
+                "Range Training"
+              ],
+              "summary": "Weekday supervised indoor range access with club firearm options.",
+              "priceText": "From EUR 15 plus ammunition",
+              "registrationUrl": "https://www.gepardloter.com/en"
+            }
+          ]
+        },
+        {
+          "catalogProject": "rangescout-eu",
+          "id": "prov-celeritas-shooting-club-budapest",
+          "name": "Celeritas Shooting Club Budapest",
+          "category": "Classes",
+          "borough": "Hungary",
+          "neighborhood": "Budapest",
+          "address": "1239 Budapest, Grassalkovich ut 294, Hungary",
+          "activityTypes": [
+            "Pistol",
+            "Rifle",
+            "Range Training"
+          ],
+          "ageRanges": [
+            "Beginner",
+            "Licensed Adult"
+          ],
+          "dayTimeTags": [
+            "Weekday",
+            "Weekend",
+            "Seasonal"
+          ],
+          "pricePerClass": 0,
+          "shortDescription": "Budapest shooting club with a covered indoor range, online booking, instructor-led packages, and published safety rules.",
+          "longDescription": "Celeritas Shooting Club presents indoor shooting packages in Budapest with online booking, professional range officers, safety guidance, and participation conditions for visitors. Pricing is shown through package pages, so this card keeps the public price as request-based until Local extracts a stable package price.",
+          "rating": 0,
+          "reviewCount": 0,
+          "badges": [
+            "Beginner Friendly",
+            "Weekend Friendly"
+          ],
+          "image": "https://i.ibb.co/0RK45psC/compare-celeritas-1780320989967.jpg",
+          "galleryImages": [],
+          "email": "",
+          "website": "https://www.celeritas.hu/",
+          "phone": "",
+          "bookingEnabled": false,
+          "recurringPrograms": [
+            {
+              "id": "celeritas-shooting-club-budapest-booked-packages",
+              "title": "Booked shooting packages",
+              "cadence": "Custom",
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "timeText": "Book a package time online",
+              "ageRanges": [
+                "Beginner",
+                "Licensed Adult"
+              ],
+              "activityTypes": [
+                "Pistol",
+                "Rifle",
+                "Range Training"
+              ],
+              "summary": "Instructor-supported shooting packages with safety rules and online booking.",
+              "priceText": "Package price shown during booking",
+              "registrationUrl": "https://www.celeritas.hu/"
+            }
+          ]
+        },
+        {
+          "catalogProject": "rangescout-eu",
+          "id": "prov-fehova-budapest-hunting-exhibition",
+          "name": "FeHoVa Budapest hunting, fishing, and arms exhibition",
+          "category": "Drop-In Activities",
+          "borough": "Hungary",
+          "neighborhood": "Budapest",
+          "address": "1101 Budapest, Albertirsai ut 10, Hungary",
+          "activityTypes": [
+            "Hunt",
+            "Shotgun",
+            "Rifle"
+          ],
+          "ageRanges": [
+            "Hunter Prep",
+            "Licensed Adult"
+          ],
+          "dayTimeTags": [
+            "Seasonal",
+            "Weekend"
+          ],
+          "pricePerClass": 0,
+          "shortDescription": "Budapest exhibition for hunting, fishing, outdoor, and arms-sector visitors at HUNGEXPO.",
+          "longDescription": "FeHoVa is a Budapest exhibition for hunters, anglers, outdoor visitors, and arms-related exhibitors at the HUNGEXPO Budapest Congress and Exhibition Centre. It belongs in the discovery catalog as an event-style visitor item, with exact dates and ticket details refreshed from the event page.",
+          "rating": 0,
+          "reviewCount": 0,
+          "badges": [
+            "Weekend Friendly"
+          ],
+          "image": "https://i.ibb.co/bjDvTXh3/compare-fehova-1780320990335.jpg",
+          "galleryImages": [],
+          "email": "",
+          "website": "https://hungexpo.hu/en/events/fehova/",
+          "phone": "",
+          "bookingEnabled": false,
+          "recurringPrograms": [
+            {
+              "id": "fehova-budapest-hunting-exhibition-seasonal-event",
+              "title": "Seasonal exhibition visit",
+              "cadence": "Seasonal",
+              "daysOfWeek": [
+                "Saturday",
+                "Sunday"
+              ],
+              "timeText": "Seasonal event schedule",
+              "ageRanges": [
+                "Hunter Prep",
+                "Licensed Adult"
+              ],
+              "activityTypes": [
+                "Hunt",
+                "Shotgun",
+                "Rifle"
+              ],
+              "summary": "Hunting, fishing, outdoor, and arms-sector exhibition at HUNGEXPO.",
+              "priceText": "Ticket details on event page",
+              "registrationUrl": "https://hungexpo.hu/en/events/fehova/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
