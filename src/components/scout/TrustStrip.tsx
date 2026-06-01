@@ -17,20 +17,25 @@ export function TrustStrip() {
   const { data: site } = useSiteCatalog();
   if (!site) return null;
   const s = site;
+  const items = (s.trustPillars ?? [])
+    .map((pillar, index) => ({
+      id: `${pillar.title}-${index}`,
+      title: pillar.title.trim(),
+      description: pillar.desc.trim(),
+      icon: (
+        <ThemeIcon size={40} radius="xl" variant="light" color={(TONE_BG[pillar.tone] ?? TONE_BG.teal).color}>
+          <SiteLucideIcon name={pillar.icon} size={20} />
+        </ThemeIcon>
+      ),
+    }))
+    .filter((item) => item.title.length > 0 && item.description.length > 0);
+
+  if (items.length === 0) return null;
 
   return (
     <FeatureBand
       columns={3}
-      items={s.trustPillars.map((pillar, index) => ({
-        id: `${pillar.title}-${index}`,
-        title: pillar.title,
-        description: pillar.desc,
-        icon: (
-          <ThemeIcon size={40} radius="xl" variant="light" color={(TONE_BG[pillar.tone] ?? TONE_BG.teal).color}>
-            <SiteLucideIcon name={pillar.icon} size={20} />
-          </ThemeIcon>
-        ),
-      }))}
+      items={items}
     />
   );
 }
