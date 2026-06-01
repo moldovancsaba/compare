@@ -19,7 +19,7 @@ export type ScoutPageKey =
 const CATEGORY_TO_SLUG: Record<Category, string> = {
   Classes: "training",
   Camps: "ranges",
-  "Birthday Parties": "competitions",
+  "Competitions": "competitions",
   "Drop-In Activities": "hunting-grounds",
 };
 
@@ -31,8 +31,7 @@ export const ROUTE_ALIASES: Record<string, Category | ScoutPageKey> = {
   "kids-classes": "Classes",
   camps: "Camps",
   range: "Camps",
-  "birthday-parties": "Birthday Parties",
-  competitions: "Birthday Parties",
+  competitions: "Competitions",
   "drop-in-activities": "Drop-In Activities",
   "range-scout": "Camps",
   "hunting-grounds": "Drop-In Activities",
@@ -56,7 +55,7 @@ const VIEW_HREFS: Record<ScoutPageKey, string> = {
   Home: "/",
   Classes: "/training",
   Camps: "/ranges",
-  "Birthday Parties": "/competitions",
+  "Competitions": "/competitions",
   "Drop-In Activities": "/hunting-grounds",
   "This Week": "/this-week",
   "Meet-Up Groups": "/clubs",

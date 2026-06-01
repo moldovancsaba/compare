@@ -69,6 +69,6 @@ describe("curated payload quality", () => {
 
     expect(issues.some((issue) => issue.includes('missing top-level dayTimeTag "Afternoon"'))).toBe(true);
     expect(issues.some((issue) => issue.includes('missing top-level dayTimeTag "After-school"'))).toBe(true);
-    expect(issues.some((issue) => issue.includes("meetup description does not clearly support family / parent / child relevance"))).toBe(true);
+    expect(issues.some((issue) => issue.includes("meetup description does not clearly support sport shooting, hunting, club, or competition relevance"))).toBe(true);
   });
 });

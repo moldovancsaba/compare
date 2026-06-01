@@ -32,6 +32,16 @@ const SUSPICIOUS_PHRASE_PATTERNS = [
   /\bfor\s+source[-\s]?backed\b/i,
 ];
 
+const BLOCKED_PUBLIC_BADGE_PATTERNS = [
+  /\bbirthday\b/i,
+  /\bparty\b/i,
+  /\bkid(s)?\b/i,
+  /\bchild(ren)?\b/i,
+  /\bfamily\b/i,
+  /\bparent(s)?\b/i,
+  /\bplaydate\b/i,
+];
+
 interface PublicCopySanitizeResult {
   removedTerms: string[];
 }
@@ -92,6 +102,16 @@ function sanitizeCopyText(input: string, fallback: string, result: PublicCopySan
   return normalizeSpaces(fallback);
 }
 
+function sanitizePublicBadge(input: string | undefined, result: PublicCopySanitizeResult): string | undefined {
+  const badge = asString(input);
+  if (!badge) return undefined;
+  if (BLOCKED_PUBLIC_BADGE_PATTERNS.some((pattern) => pattern.test(badge))) {
+    result.removedTerms.push("blocked_public_badge");
+    return undefined;
+  }
+  return sanitizeCopyText(badge, "", result) || undefined;
+}
+
 function buildProviderFallback(provider: Provider): { short: string; long: string } {
   const title = asString(provider.name);
   const neighborhood = asString(provider.neighborhood);
@@ -132,7 +152,7 @@ function sanitizeLocaleCopy(
   }
 
   if ("announcementBadge" in copy) {
-    const announcementBadge = sanitizeCopyText(asString(copy.announcementBadge), "", result);
+    const announcementBadge = sanitizePublicBadge(asString(copy.announcementBadge), result);
     if (announcementBadge) next.announcementBadge = announcementBadge;
   }
 
@@ -161,6 +181,7 @@ export function sanitizeProviderForPublic(payload: Provider): PublicPayloadSanit
     next.announcementDescription =
       sanitizeCopyText(payload.announcementDescription, "", result) || asString(payload.announcementDescription);
   }
+  next.announcementBadge = sanitizePublicBadge(payload.announcementBadge, result);
 
   if (payload.localized) {
     const localized: ProviderLocalizedValue = asRecord(payload.localized) as ProviderLocalizedValue;
@@ -185,6 +206,7 @@ export function sanitizeProviderForPublic(payload: Provider): PublicPayloadSanit
       next.longDescription !== payload.longDescription ||
       next.announcementTitle !== payload.announcementTitle ||
       next.announcementDescription !== payload.announcementDescription ||
+      next.announcementBadge !== payload.announcementBadge ||
       JSON.stringify(next.localized) !== JSON.stringify(payload.localized),
     removedTerms: [...new Set(result.removedTerms)],
   };

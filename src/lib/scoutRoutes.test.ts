@@ -6,8 +6,8 @@ import { PUBLIC_SLUG_ROUTES } from "@/lib/scoutRoutes";
 describe("scoutRoutes", () => {
   it("serializes and parses discover state with query, sort, and date mode", () => {
     const href = getDiscoverHref("This Week", {
-      borough: "Germany",
-      neighborhood: "Bavaria",
+      borough: "Hungary",
+      neighborhood: "Budapest",
       filters: { ages: ["Beginner"], times: ["Weekend"], activity: "Rifle" },
       q: "robotics",
       sort: "upcoming",
@@ -17,8 +17,8 @@ describe("scoutRoutes", () => {
     const params = new URL(href, "https://rangescout.example.com").searchParams;
     const parsed = parseDiscoverState(params);
     expect(parsed).toMatchObject({
-      borough: "Germany",
-      neighborhood: "Bavaria",
+      borough: "Hungary",
+      neighborhood: "Budapest",
       q: "robotics",
       sort: "upcoming",
       dateMode: "this-week",
@@ -32,7 +32,7 @@ describe("scoutRoutes", () => {
 
   it("maps legacy and mixed-case route slugs to stable views", () => {
     expect(getViewFromPathname("/en/class")).toBe("Classes");
-    expect(getViewFromPathname("/competitions")).toBe("Birthday Parties");
+    expect(getViewFromPathname("/competitions")).toBe("Competitions");
     expect(getViewFromPathname("/en/range")).toBe("Camps");
     expect(getViewFromPathname("/MEET-UP-GROUPS")).toBe("Meet-Up Groups");
     expect(getViewFromPathname("/en/this-week")).toBe("This Week");
@@ -43,7 +43,7 @@ describe("scoutRoutes", () => {
     for (const locale of locales) {
       expect(getHrefForView("Classes", locale).startsWith(`/${locale}`)).toBe(true);
       expect(getHrefForView("Camps", locale).startsWith(`/${locale}`)).toBe(true);
-      expect(getHrefForView("Birthday Parties", locale).startsWith(`/${locale}`)).toBe(true);
+      expect(getHrefForView("Competitions", locale).startsWith(`/${locale}`)).toBe(true);
       expect(getHrefForView("Drop-In Activities", locale).startsWith(`/${locale}`)).toBe(true);
       expect(getHrefForView("This Week", locale).startsWith(`/${locale}`)).toBe(true);
       expect(getHrefForView("Saved", locale).startsWith(`/${locale}`)).toBe(true);

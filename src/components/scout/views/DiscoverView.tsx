@@ -1,4 +1,4 @@
-import { BrowseSurface, PageHeader } from "@doneisbetter/gds-core/client";
+import { PageHeader } from "@doneisbetter/gds-core/client";
 import { Badge, Box, Button, Group, Loader, Select, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
 import { useEffect, useMemo } from "react";
 import { BoroughBar } from "../BoroughBar";
@@ -18,6 +18,7 @@ import { type DiscoverDateMode, type DiscoverSort, queryProviders } from "@/lib/
 import { formatUpcomingOccurrenceLabel } from "@/lib/providerSchedule";
 import { formatBoroughLabel } from "@/data/locations";
 import type { AppLocale } from "@/lib/i18n/config";
+import { getLocalCategoryLabel, getLocalFilterValueLabel, getLocalText, interpolate, siteCopy } from "@/lib/i18n/messages";
 
 interface Props {
   category: Category | null;
@@ -37,13 +38,6 @@ interface Props {
   onSortChange: (sort: DiscoverSort) => void;
   locale?: AppLocale;
 }
-
-const DISPLAY_LABELS: Record<Category, string> = {
-  Classes: "Training",
-  Camps: "Ranges",
-  "Birthday Parties": "Competitions",
-  "Drop-In Activities": "Hunting Grounds",
-};
 
 export function DiscoverView({
   category,
@@ -84,46 +78,53 @@ export function DiscoverView({
 
   const filtered = queryResult.results;
   const featured = queryResult.featured;
+  const d = siteCopy.discover;
+  const localText = <T extends Record<AppLocale, string>>(path: string, fallback: T) => getLocalText(site, locale, path, fallback);
   const pageCopy = mode === "this-week"
     ? {
-        eyebrow: "This Week",
+        eyebrow: localText("discover.thisWeekEyebrow", d.thisWeekEyebrow),
         title: neighborhood
-          ? `Sessions coming up in ${neighborhood}`
+          ? interpolate(localText("discover.thisWeekRegionTitle", d.thisWeekRegionTitle), { region: neighborhood })
           : borough === "All"
-            ? "Sessions in the next 7 days across the EU catalog"
-            : `Sessions in the next 7 days in ${formatBoroughLabel(borough)}`,
-        description: "Browse source-backed upcoming training sessions, range events, competitions, and hunting access windows happening within the next seven days.",
+            ? localText("discover.thisWeekAllTitle", d.thisWeekAllTitle)
+            : interpolate(localText("discover.thisWeekCountryTitle", d.thisWeekCountryTitle), { country: formatBoroughLabel(borough, locale) }),
+        description: localText("discover.thisWeekDescription", d.thisWeekDescription),
       }
-    : getLocationHero(category ?? "Classes", borough, neighborhood);
+    : getLocationHero(category ?? "Classes", borough, neighborhood, locale);
   const heroImage = mode === "this-week" ? null : getLocationHeroImage(site, category ?? "Classes", borough, neighborhood);
   const currentSort = queryResult.diagnostics.sort;
+  const listingLabel = category ? getLocalCategoryLabel(site, category, locale) : locale === "hu" ? "Listák" : locale === "it" ? "Annunci" : "Listings";
   const resultHeading = mode === "this-week"
         ? neighborhood
-          ? `This week in ${neighborhood}`
+          ? locale === "hu" ? `Ezen a héten itt: ${neighborhood}` : locale === "it" ? `Questa settimana a ${neighborhood}` : `This week in ${neighborhood}`
           : borough === "All"
-            ? "This week across Europe"
-            : `This week in ${formatBoroughLabel(borough)}`
+            ? locale === "hu" ? "Ezen a héten Európában" : locale === "it" ? "Questa settimana in Europa" : "This week across Europe"
+            : locale === "hu" ? `Ezen a héten itt: ${formatBoroughLabel(borough, locale)}` : locale === "it" ? `Questa settimana in ${formatBoroughLabel(borough, locale)}` : `This week in ${formatBoroughLabel(borough, locale)}`
     : neighborhood
-      ? `${category ? DISPLAY_LABELS[category] : "Listings"} in ${neighborhood}`
+      ? locale === "hu" ? `${listingLabel} itt: ${neighborhood}` : locale === "it" ? `${listingLabel} a ${neighborhood}` : `${listingLabel} in ${neighborhood}`
       : borough === "All"
-        ? `${category ? DISPLAY_LABELS[category] : "Listings"} across Europe`
-        : `${category ? DISPLAY_LABELS[category] : "Listings"} in ${formatBoroughLabel(borough)}`;
+        ? locale === "hu" ? `${listingLabel} Európában` : locale === "it" ? `${listingLabel} in Europa` : `${listingLabel} across Europe`
+        : locale === "hu" ? `${listingLabel} itt: ${formatBoroughLabel(borough, locale)}` : locale === "it" ? `${listingLabel} in ${formatBoroughLabel(borough, locale)}` : `${listingLabel} in ${formatBoroughLabel(borough, locale)}`;
+  const hasDuplicateTopHeading = mode !== "this-week" && borough === "All" && !neighborhood && !q.trim() && !filters.activity && filters.ages.length === 0 && filters.times.length === 0;
+  const sectionTitle = hasDuplicateTopHeading
+    ? localText("discover.browseEyebrow", d.browseEyebrow)
+    : resultHeading;
   const hasActiveStructuredFilters = filters.ages.length > 0 || filters.times.length > 0 || Boolean(filters.activity);
   const hasActiveFilters = hasActiveStructuredFilters || Boolean(neighborhood) || Boolean(q.trim()) || borough !== "All";
   const activeFilterBadges = [
-    ...(borough !== "All" ? [formatBoroughLabel(borough)] : []),
+    ...(borough !== "All" ? [formatBoroughLabel(borough, locale)] : []),
     ...(neighborhood ? [neighborhood] : []),
-    ...(q.trim() ? [`Search: ${q.trim()}`] : []),
-    ...filters.ages,
-    ...filters.times,
-    ...(filters.activity ? [filters.activity] : []),
+    ...(q.trim() ? [`${localText("discover.searchBadgePrefix", d.searchBadgePrefix)}: ${q.trim()}`] : []),
+    ...filters.ages.map((value) => getLocalFilterValueLabel(site, value, locale)),
+    ...filters.times.map((value) => getLocalFilterValueLabel(site, value, locale)),
+    ...(filters.activity ? [getLocalFilterValueLabel(site, filters.activity, locale)] : []),
   ];
   const showFeatured = featured.length > 0 && mode !== "this-week" && !q.trim() && !hasActiveStructuredFilters;
   const sortOptions = [
-    ...((q.trim() || currentSort === "relevance") ? [{ value: "relevance", label: "Best match" }] : []),
-    { value: "newest", label: "Newest first" },
-    { value: "oldest", label: "Oldest first" },
-    ...((mode === "this-week" || currentSort === "upcoming") ? [{ value: "upcoming", label: "Soonest upcoming" }] : []),
+    ...((q.trim() || currentSort === "relevance") ? [{ value: "relevance", label: localText("discover.sortBestMatch", d.sortBestMatch) }] : []),
+    { value: "newest", label: localText("discover.sortNewest", d.sortNewest) },
+    { value: "oldest", label: localText("discover.sortOldest", d.sortOldest) },
+    ...((mode === "this-week" || currentSort === "upcoming") ? [{ value: "upcoming", label: localText("discover.sortSoonest", d.sortSoonest) }] : []),
   ];
 
   if (loadP) {
@@ -131,7 +132,7 @@ export function DiscoverView({
       <Stack align="center" gap="sm" py="xl">
         <Loader size="lg" />
         <Text size="sm" c="dimmed">
-          Loading listings…
+          {localText("discover.loadingListings", d.loadingListings)}
         </Text>
       </Stack>
     );
@@ -141,11 +142,11 @@ export function DiscoverView({
     return (
       <EmptyState
         icon={MapPin}
-        title="Can't load listings"
-        message="Listings did not load right now. Refresh the page or try again in a moment. If the problem keeps happening, the venue catalog connection needs attention."
+        title={localText("discover.loadErrorTitle", d.loadErrorTitle)}
+        message={localText("discover.loadErrorMessage", d.loadErrorMessage)}
         action={
           <Button variant="light" color="dark" onClick={() => window.location.reload()}>
-            Refresh page
+            {localText("discover.refreshPage", d.refreshPage)}
           </Button>
         }
       />
@@ -156,11 +157,11 @@ export function DiscoverView({
     return (
       <EmptyState
         icon={MapPin}
-        title="No listings in the database"
-        message="The catalog is still empty in this environment. Load venues from admin or ingest a curated payload before using the public browse experience."
+        title={localText("discover.emptyDatabaseTitle", d.emptyDatabaseTitle)}
+        message={localText("discover.emptyDatabaseMessage", d.emptyDatabaseMessage)}
         action={
-          <Button component="a" href="/secret-cms-to-edit" variant="light" color="dark">
-            Open admin
+          <Button component="a" href={`/${locale}`} variant="light" color="dark">
+            {localText("discover.browseAllEu", d.browseAllEu)}
           </Button>
         }
       />
@@ -189,56 +190,84 @@ export function DiscoverView({
         ) : null}
       </SimpleGrid>
 
-      <BrowseSurface
-        eyebrow="Browse listings"
-        title={resultHeading}
-        description={
-          mode === "this-week"
-            ? "Results only include providers with real upcoming dates in the next seven days. Every filter state is shareable by URL."
-            : "Refine by country, region, keyword, and activity filters. Every filter state is shareable by URL."
-        }
-        resultCount={filtered.length}
-        resultLabel="results"
-        locationControls={
-          <Stack gap="md">
-            <BoroughBar value={borough} onChange={onBoroughChange} />
-            {borough !== "All" && (
-              <NeighborhoodChips
-                options={hoodOptions}
-                value={neighborhood}
-                onChange={onNeighborhoodChange}
-              />
-            )}
+      <Box
+        component="section"
+        aria-labelledby="compare-discover-results-title"
+        style={{
+          border: "1px solid var(--mantine-color-gray-3)",
+          borderRadius: "var(--mantine-radius-xl)",
+          padding: "clamp(1.25rem, 3vw, 2rem)",
+          background: "var(--mantine-color-body)",
+        }}
+      >
+        <Stack gap="lg">
+          <Group justify="space-between" align="flex-start" gap="md">
+            <Box>
+              <Text size="xs" fw={700} c="dimmed" tt="uppercase" style={{ letterSpacing: "0.32em" }}>
+                {localText("discover.browseEyebrow", d.browseEyebrow)}
+              </Text>
+              <Title id="compare-discover-results-title" order={1} mt="xs">
+                {sectionTitle}
+              </Title>
+              <Text size="lg" c="dimmed" maw={760} mt="sm">
+                {mode === "this-week"
+                  ? localText("discover.thisWeekBrowseDescription", d.thisWeekBrowseDescription)
+                  : localText("discover.browseDescription", d.browseDescription)}
+              </Text>
+            </Box>
+            <Badge size="lg" radius="xl" variant="light" color="violet">
+              {filtered.length} {localText("discover.resultLabel", d.resultLabel)}
+            </Badge>
+          </Group>
+
+          <Stack gap="xs">
+            <Text size="sm" fw={600} c="dimmed">
+              {localText("discover.locationLabel", { en: "Location", hu: "Helyszín", it: "Località" })}
+            </Text>
+            <Stack gap="md">
+              <BoroughBar value={borough} onChange={onBoroughChange} locale={locale} copySource={site} />
+              {borough !== "All" && (
+                <NeighborhoodChips
+                  options={hoodOptions}
+                  value={neighborhood}
+                  onChange={onNeighborhoodChange}
+                  locale={locale}
+                  copySource={site}
+                />
+              )}
+            </Stack>
           </Stack>
-        }
-        toolbar={{
-          searchSlot: discoveryFeatureFlags.searchEnabled ? (
-            <TextInput
-              label="Search listings"
-              value={q}
-              placeholder={mode === "this-week" ? "Try IPSC, clay, hunter safety, Saturday..." : "Try rifle, clay, Bavaria, beginner..."}
-              onChange={(event) => onQueryChange(event.currentTarget.value)}
-            />
-          ) : null,
-          sortSlot: (
+
+          <SimpleGrid cols={{ base: 1, sm: discoveryFeatureFlags.searchEnabled ? 3 : 2 }} spacing="md">
+            {discoveryFeatureFlags.searchEnabled ? (
+              <TextInput
+                label={localText("discover.searchLabel", d.searchLabel)}
+                value={q}
+                placeholder={
+                  mode === "this-week"
+                    ? localText("discover.thisWeekSearchPlaceholder", d.thisWeekSearchPlaceholder)
+                    : localText("discover.searchPlaceholder", d.searchPlaceholder)
+                }
+                onChange={(event) => onQueryChange(event.currentTarget.value)}
+              />
+            ) : null}
+            <Filters value={filters} onChange={onFiltersChange} locale={locale} copySource={site} />
             <Select
-              label="Sort"
+              label={localText("discover.sortLabel", d.sortLabel)}
               value={currentSort}
               data={sortOptions}
               allowDeselect={false}
               onChange={(next) => next && onSortChange(next as DiscoverSort)}
             />
-          ),
-          filterSlot: <Filters value={filters} onChange={onFiltersChange} />,
-        }}
-        content={null}
-      />
+          </SimpleGrid>
+        </Stack>
+      </Box>
 
       {(hasActiveFilters || mode === "this-week") && (
         <Stack gap="xs">
           <Group justify="space-between" align="center" gap="sm">
             <Text size="sm" fw={600}>
-              {mode === "this-week" ? "Current browse scope" : "Active scope and filters"}
+              {mode === "this-week" ? localText("discover.currentScope", d.currentScope) : localText("discover.activeScope", d.activeScope)}
             </Text>
             {hasActiveFilters && (
               <Button
@@ -252,7 +281,7 @@ export function DiscoverView({
                   onFiltersChange(EMPTY_FILTERS);
                 }}
               >
-                Clear browse state
+                {localText("discover.clearBrowseState", d.clearBrowseState)}
               </Button>
             )}
           </Group>
@@ -265,12 +294,12 @@ export function DiscoverView({
               ))
             ) : (
               <Badge variant="light" color="gray" radius="xl">
-                All EU
+                {localText("discover.allEu", d.allEu)}
               </Badge>
             )}
             {mode === "this-week" && (
               <Badge variant="light" color="orange" radius="xl">
-                Next 7 days only
+                {localText("discover.nextSevenDays", d.nextSevenDays)}
               </Badge>
             )}
           </Group>
@@ -282,12 +311,12 @@ export function DiscoverView({
           <Group gap="xs">
             <Sparkles size={18} color="var(--mantine-color-orange-5)" />
             <Title order={2} size="h3">
-              Featured providers
+              {localText("discover.featuredProviders", d.featuredProviders)}
             </Title>
           </Group>
           <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="lg">
             {featured.map((p) => (
-              <ProviderCard key={p.id} provider={p} onOpen={onOpen} onShare={onShare} highlightUpcoming={false} />
+              <ProviderCard key={p.id} provider={p} onOpen={onOpen} onShare={onShare} highlightUpcoming={false} locale={locale} copySource={site} />
             ))}
           </SimpleGrid>
         </Stack>
@@ -297,7 +326,7 @@ export function DiscoverView({
         <Group justify="space-between" align="end" gap="sm">
           <Stack gap={2}>
             <Title order={2} size="h4">
-              {filtered.length === 1 ? "1 listing" : `${filtered.length} listings`}
+              {filtered.length === 1 ? localText("discover.oneListing", d.oneListing) : interpolate(localText("discover.listingCount", d.listingCount), { count: filtered.length })}
             </Title>
             <Text size="sm" c="dimmed">
               {resultHeading}
@@ -305,25 +334,25 @@ export function DiscoverView({
           </Stack>
           <Text size="sm" c="dimmed">
             {mode === "this-week"
-              ? "Real upcoming dates only"
+              ? localText("discover.sortedUpcoming", d.sortedUpcoming)
               : currentSort === "relevance"
-                ? "Sorted by best match"
+                ? localText("discover.sortedBestMatch", d.sortedBestMatch)
                 : currentSort === "oldest"
-                  ? "Sorted oldest to newest"
-                  : "Sorted newest to oldest"}
+                  ? localText("discover.sortedOldest", d.sortedOldest)
+                  : localText("discover.sortedNewest", d.sortedNewest)}
           </Text>
         </Group>
 
         {filtered.length === 0 ? (
           <EmptyState
             icon={MapPin}
-            title={mode === "this-week" ? "No upcoming sessions in this window" : "No venues match this search"}
+            title={mode === "this-week" ? localText("discover.noUpcomingTitle", d.noUpcomingTitle) : localText("discover.noMatchTitle", d.noMatchTitle)}
             message={
               mode === "this-week"
-                ? "Nothing source-backed is scheduled in the next seven days for this location and filter set. Try another country, loosen a filter, or switch back to all listings."
+                ? localText("discover.noUpcomingMessage", d.noUpcomingMessage)
                 : q.trim()
-                  ? `No venues matched “${q.trim()}”. Try a broader keyword, another region, or clear one of the active filters.`
-                  : "No venues are showing for this combination yet. Try another nearby region or broaden your filters."
+                  ? interpolate(localText("discover.noQueryMatchMessage", d.noQueryMatchMessage), { query: q.trim() })
+                  : localText("discover.noFilterMatchMessage", d.noFilterMatchMessage)
             }
             action={
               <Group gap="sm" justify="center">
@@ -336,14 +365,14 @@ export function DiscoverView({
                     onNeighborhoodChange(null);
                   }}
                 >
-                  Clear search and filters
+                  {localText("discover.clearSearchFilters", d.clearSearchFilters)}
                 </Button>
                 <Button
                   variant="subtle"
                   color="gray"
                   onClick={() => onBoroughChange("All")}
                 >
-                  Browse all EU
+                  {localText("discover.browseAllEu", d.browseAllEu)}
                 </Button>
               </Group>
             }
@@ -358,6 +387,8 @@ export function DiscoverView({
                 onShare={onShare}
                 highlightUpcoming={mode === "this-week"}
                 subtitle={mode === "this-week" ? formatUpcomingOccurrenceLabel(p.nextOccurrence) ?? undefined : undefined}
+                locale={locale}
+                copySource={site}
               />
             ))}
           </SimpleGrid>
