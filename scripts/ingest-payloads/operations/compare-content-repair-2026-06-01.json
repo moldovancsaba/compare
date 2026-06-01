@@ -12,7 +12,7 @@
       "action": "replaceAll",
       "documents": [
         {
-          "catalogProject": "rangescout-eu",
+          "catalogProject": "compare",
           "id": "prov-ranger-sport-budapest",
           "name": "Ranger Sport Budapest",
           "category": "Classes",
@@ -82,7 +82,7 @@
           ]
         },
         {
-          "catalogProject": "rangescout-eu",
+          "catalogProject": "compare",
           "id": "prov-gepard-shooting-range-budapest",
           "name": "Gepard Shooting Range Budapest",
           "category": "Drop-In Activities",
@@ -145,7 +145,7 @@
           ]
         },
         {
-          "catalogProject": "rangescout-eu",
+          "catalogProject": "compare",
           "id": "prov-celeritas-shooting-club-budapest",
           "name": "Celeritas Shooting Club Budapest",
           "category": "Classes",
@@ -212,7 +212,7 @@
           ]
         },
         {
-          "catalogProject": "rangescout-eu",
+          "catalogProject": "compare",
           "id": "prov-fehova-budapest-hunting-exhibition",
           "name": "FeHoVa Budapest hunting, fishing, and arms exhibition",
           "category": "Drop-In Activities",
