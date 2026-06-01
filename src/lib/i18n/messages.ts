@@ -212,9 +212,9 @@ export const siteCopy = {
       it: "Sfoglia allenamenti, eventi di poligono, gare e finestre di accesso venatorio supportati da fonti nei prossimi sette giorni.",
     },
     browseDescription: {
-      en: "Refine by country, region, keyword, and activity filters.",
-      hu: "Szűrj ország, régió, kulcsszó és tevékenység szerint.",
-      it: "Affina per paese, regione, parola chiave e attività.",
+      en: "",
+      hu: "",
+      it: "",
     },
     thisWeekBrowseDescription: {
       en: "Results only include providers with upcoming dates in the next seven days.",

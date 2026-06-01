@@ -109,6 +109,9 @@ export function DiscoverView({
   const sectionTitle = hasDuplicateTopHeading
     ? localText("discover.browseEyebrow", d.browseEyebrow)
     : resultHeading;
+  const browseSectionDescription = mode === "this-week"
+    ? localText("discover.thisWeekBrowseDescription", d.thisWeekBrowseDescription).trim()
+    : localText("discover.browseDescription", d.browseDescription).trim();
   const hasActiveStructuredFilters = filters.ages.length > 0 || filters.times.length > 0 || Boolean(filters.activity);
   const hasActiveFilters = hasActiveStructuredFilters || Boolean(neighborhood) || Boolean(q.trim()) || borough !== "All";
   const activeFilterBadges = [
@@ -209,11 +212,11 @@ export function DiscoverView({
               <Title id="compare-discover-results-title" order={1} mt="xs">
                 {sectionTitle}
               </Title>
-              <Text size="lg" c="dimmed" maw={760} mt="sm">
-                {mode === "this-week"
-                  ? localText("discover.thisWeekBrowseDescription", d.thisWeekBrowseDescription)
-                  : localText("discover.browseDescription", d.browseDescription)}
-              </Text>
+              {browseSectionDescription ? (
+                <Text size="lg" c="dimmed" maw={760} mt="sm">
+                  {browseSectionDescription}
+                </Text>
+              ) : null}
             </Box>
             <Badge size="lg" radius="xl" variant="light" color="violet">
               {filtered.length} {localText("discover.resultLabel", d.resultLabel)}
