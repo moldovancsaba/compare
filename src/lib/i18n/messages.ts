@@ -4,6 +4,12 @@ import type { Category } from "@/types/provider";
 import type { SiteDoc } from "@/types/site";
 
 type LocaleRecord = Record<AppLocale, string>;
+type PublicCopyDictionary = Partial<Record<AppLocale, Record<string, string>>>;
+type PublicCopyFields = {
+  publicCopy?: PublicCopyDictionary;
+  publicLocales?: AppLocale[];
+  publicDefaultLocale?: AppLocale;
+};
 
 const METADATA = {
   title: {
@@ -581,7 +587,7 @@ export function getText<T extends LocaleRecord>(value: T, locale: AppLocale): st
   return value[locale] ?? value[DEFAULT_LOCALE];
 }
 
-export type LocalCopySource = Pick<SiteDoc, "publicCopy"> | null | undefined;
+export type LocalCopySource = (object & { publicCopy?: PublicCopyDictionary }) | null | undefined;
 
 function getPublicCopyValue(source: LocalCopySource, locale: AppLocale, path: string): string | null {
   const localeCopy = source?.publicCopy?.[locale] ?? source?.publicCopy?.[DEFAULT_LOCALE];
@@ -657,7 +663,7 @@ export function getLocalFilterValueLabel(source: LocalCopySource, value: string,
   return getPublicCopyValue(source, locale, `filters.values.${value}`) ?? getFilterValueLabel(value, locale);
 }
 
-export function localizeSiteDocument(site: SiteDoc, locale: AppLocale): SiteDoc {
+export function localizeSiteDocument(site: SiteDoc & PublicCopyFields, locale: AppLocale): SiteDoc & PublicCopyFields {
   const guidesViewAllLabel = typeof site.guidesViewAllLabel === "string" ? site.guidesViewAllLabel : "";
   const publicLocales = Array.isArray(site.publicLocales)
     ? site.publicLocales.filter((value): value is AppLocale => (locales as readonly string[]).includes(value))

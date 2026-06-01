@@ -15,17 +15,20 @@ import {
   ThemeIcon,
   Title,
 } from "@mantine/core";
+import { usePathname } from "next/navigation";
 import { SectionPanel } from "@doneisbetter/gds-core/client";
 import { CalendarClock, Globe, Heart, Instagram, Mail, MapPin, MessageCircle, Share2, X } from "@/lib/appIcons";
 import { useSaved } from "@/store/useScout";
 import { toast } from "@/lib/notify";
-import { useMeetupGroupsCatalog } from "@/hooks/useCatalog";
+import { useMeetupGroupsCatalog, useSiteCatalog } from "@/hooks/useCatalog";
 import { MeetupLogo } from "../MeetupLogo";
 import { MeetupGroupCard } from "../MeetupGroupCard";
 import type { MeetupGroup } from "@/types/meetup";
 import { CdnImage } from "@/components/media/CdnImage";
-import { CMS_MEDIA } from "@/config/defaultMedia";
 import { formatBoroughLabel } from "@/data/locations";
+import { normalizeLocale } from "@/lib/i18n/config";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { getLocalText, siteCopy } from "@/lib/i18n/messages";
 
 function ContactLinkItem({
   icon,
@@ -89,10 +92,15 @@ export function MeetupGroupProfile({
   onShare: (g: MeetupGroup) => void;
   onOpenAnother: (g: MeetupGroup) => void;
 }) {
+  const pathname = usePathname();
+  const locale = normalizeLocale(parseLocaleFromPathname(pathname));
+  const { data: site } = useSiteCatalog(locale);
   const { isSaved, toggle } = useSaved();
   const { data: allGroups = [] } = useMeetupGroupsCatalog();
 
   if (!group) return null;
+  const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
+    getLocalText(site, locale, path, fallback);
 
   const saved = isSaved(group.id);
   const websiteUrl = normalizeExternalUrl(group.website);
@@ -103,16 +111,17 @@ export function MeetupGroupProfile({
   const similar = allGroups.filter((item) => item.id !== group.id && item.borough === group.borough).slice(0, 3);
 
   const shareEmail = () => {
-    const body = `Check out ${group.name} — a ${group.groupType.toLowerCase()} in ${group.neighborhood}, ${formatBoroughLabel(
+    const body = `${group.name} — ${group.groupType} / ${group.neighborhood}, ${formatBoroughLabel(
       group.borough,
-    )}.\n\n${group.description}\n\nInstagram: ${group.instagram}\nWebsite: ${group.website}`;
+      locale,
+    )}.\n\n${group.description}\n\n${group.website}`;
     window.open(
-      `mailto:?subject=${encodeURIComponent(`${group.name} on RangeScout EU`)}&body=${encodeURIComponent(body)}`,
+      `mailto:?subject=${encodeURIComponent(`${group.name} / RangeScout EU`)}&body=${encodeURIComponent(body)}`,
     );
   };
 
   const shareWhatsapp = () => {
-    const text = `${group.name} — ${group.neighborhood}, ${formatBoroughLabel(group.borough)}. ${group.description} Instagram: ${group.instagram} • ${group.website}`;
+    const text = `${group.name} — ${group.neighborhood}, ${formatBoroughLabel(group.borough, locale)}. ${group.description} ${group.website}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -128,12 +137,24 @@ export function MeetupGroupProfile({
     >
       <Stack gap={0}>
         <Box pos="relative" h={240}>
-          <CdnImage
-            resolveBase={group.coverImageUrl?.trim() ? group.website : undefined}
-            src={group.coverImageUrl?.trim() ? group.coverImageUrl : CMS_MEDIA.fallbackMeetup}
-            alt={group.name}
-            style={{ display: "block", height: "100%", width: "100%", objectFit: "cover" }}
-          />
+          {group.coverImageUrl?.trim() ? (
+            <CdnImage
+              resolveBase={group.website}
+              src={group.coverImageUrl}
+              alt={group.name}
+              style={{ display: "block", height: "100%", width: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <Box h="100%" bg="teal.0" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Text size="xs" fw={700} tt="uppercase" c="teal.8" style={{ letterSpacing: "0.14em" }}>
+                {localText("providerCard.imageUnavailable", {
+                  en: "Image not available",
+                  hu: "Kép nem elérhető",
+                  it: "Immagine non disponibile",
+                })}
+              </Text>
+            </Box>
+          )}
           <Group pos="absolute" top={16} left={16} gap="xs">
             <Badge radius="xl" color="teal" variant="filled">
               {group.groupType}
@@ -147,7 +168,11 @@ export function MeetupGroupProfile({
             radius="xl"
             size="lg"
             onClick={onClose}
-            aria-label="Close club details"
+            aria-label={localText("meetupProfile.close", {
+              en: "Close club details",
+              hu: "Klubrészletek bezárása",
+              it: "Chiudi dettagli club",
+            })}
           >
             <X size={16} />
           </ActionIcon>
@@ -158,18 +183,18 @@ export function MeetupGroupProfile({
             <MeetupLogo group={group} size="lg" />
             <Stack gap="xs" flex={1}>
               <Text size="xs" fw={700} tt="uppercase" c="teal.7">
-                Club
+                {localText("nav.clubs", siteCopy.nav.clubs)}
               </Text>
               <Title order={2}>{group.name}</Title>
               <Group gap="xs" c="dimmed">
                 <MapPin size={16} />
                 <Text size="sm">
-                  {group.neighborhood}, {formatBoroughLabel(group.borough)}
+                  {group.neighborhood}, {formatBoroughLabel(group.borough, locale)}
                 </Text>
               </Group>
               <Group gap="xs">
                 <Badge radius="xl" color="gray" variant="light">
-                  Audience {group.ageRange}
+                  {localText("providerCard.audience", siteCopy.providerCard.audience)} {group.ageRange}
                 </Badge>
                 <Badge radius="xl" color="gray" variant="outline" leftSection={<CalendarClock size={12} />}>
               {group.cadence}
@@ -187,16 +212,18 @@ export function MeetupGroupProfile({
               leftSection={<Heart size={16} fill={saved ? "currentColor" : "none"} />}
               onClick={() => {
                 toggle(group.id);
-                toast.success(saved ? "Removed from saved" : "Group saved");
+                toast.success(saved
+                  ? localText("providerCard.removedToast", siteCopy.providerCard.removedToast)
+                  : localText("meetupProfile.savedToast", { en: "Club saved", hu: "Klub mentve", it: "Club salvato" }));
               }}
             >
-              {saved ? "Saved" : "Save group"}
+              {saved ? localText("nav.saved", siteCopy.nav.saved) : localText("meetupCard.save", { en: "Save club", hu: "Klub mentése", it: "Salva club" })}
             </Button>
             <Button component="a" href={websiteUrl} target="_blank" rel="noreferrer" color="dark">
-              Visit website
+              {localText("profile.visitWebsite", { en: "Visit website", hu: "Weboldal megnyitása", it: "Visita il sito" })}
             </Button>
             <Button variant="default" leftSection={<Share2 size={16} />} onClick={() => onShare(group)}>
-              Share
+              {localText("profile.share", { en: "Share", hu: "Megosztás", it: "Condividi" })}
             </Button>
             <Button
               component="a"
@@ -206,7 +233,7 @@ export function MeetupGroupProfile({
               variant="default"
               leftSection={<Instagram size={16} />}
             >
-              Open Instagram
+              {localText("meetupProfile.openInstagram", { en: "Open Instagram", hu: "Instagram megnyitása", it: "Apri Instagram" })}
             </Button>
             <Button variant="default" leftSection={<Mail size={16} />} onClick={shareEmail}>
               Email
@@ -216,13 +243,17 @@ export function MeetupGroupProfile({
             </Button>
           </SimpleGrid>
 
-            <SectionPanel title="About this club">
+          <SectionPanel title={localText("meetupProfile.about", { en: "About this club", hu: "A klubról", it: "Informazioni sul club" })}>
             <Text size="sm" c="dimmed">
               {group.description}
             </Text>
           </SectionPanel>
 
-          <SectionPanel title="Connect with this club" description="Use the public channels they share for event details and membership updates.">
+          <SectionPanel title={localText("meetupProfile.connect", { en: "Connect with this club", hu: "Kapcsolat a klubbal", it: "Contatta questo club" })} description={localText("meetupProfile.connectDescription", {
+            en: "Use the public channels they share for event details and membership updates.",
+            hu: "Használd a megadott nyilvános csatornákat esemény- és tagsági információkhoz.",
+            it: "Usa i canali pubblici indicati per eventi e aggiornamenti.",
+          })}>
             <Stack gap="sm">
               <ContactLinkItem
                 icon={<Instagram size={14} />}
@@ -235,10 +266,14 @@ export function MeetupGroupProfile({
           </SectionPanel>
 
           {similar.length ? (
-            <SectionPanel title="Similar clubs nearby" description="Other clubs in the same country worth checking out.">
+            <SectionPanel title={localText("meetupProfile.similar", { en: "Similar clubs nearby", hu: "Hasonló klubok a közelben", it: "Club simili nelle vicinanze" })} description={localText("meetupProfile.similarDescription", {
+              en: "Other clubs in the same country worth checking out.",
+              hu: "További klubok ugyanabban az országban.",
+              it: "Altri club nello stesso paese da valutare.",
+            })}>
               <Stack gap="md">
                 {similar.map((item) => (
-                  <MeetupGroupCard key={item.id} group={item} onOpen={onOpenAnother} onShare={onShare} />
+                  <MeetupGroupCard key={item.id} group={item} onOpen={onOpenAnother} onShare={onShare} locale={locale} copySource={site} />
                 ))}
               </Stack>
             </SectionPanel>

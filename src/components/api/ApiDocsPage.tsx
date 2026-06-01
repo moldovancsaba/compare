@@ -133,7 +133,7 @@ function EndpointCard({
 const PROVIDER_FIELDS = `interface Provider {
   id: string;
   name: string;
-  category: "Classes" | "Camps" | "Birthday Parties" | "Drop-In Activities";
+  category: "Classes" | "Camps" | "Competitions" | "Drop-In Activities";
   borough: "Germany" | "France" | "Spain" | "Italy" | "Poland";
   neighborhood: string;
   address: string;

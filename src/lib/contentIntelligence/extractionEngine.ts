@@ -73,15 +73,22 @@ const ACTIVITY_KEYWORDS: Array<[string, RegExp]> = [
 
 function inferActivityTypes(text: string, fallback: string[]) {
   const activities = new Set(fallback);
+  const lower = text.toLowerCase();
   for (const [activity, pattern] of ACTIVITY_KEYWORDS) {
     if (pattern.test(text)) activities.add(activity);
+  }
+  if (lower.includes("mdlsz")) {
+    ["IPSC", "IDPA", "Pistol", "Rifle", "Shotgun", "Competitions"].forEach((activity) => activities.add(activity));
+  }
+  if (lower.includes("hunshooting")) {
+    ["Rifle", "Pistol", "Shotgun", "Competitions"].forEach((activity) => activities.add(activity));
   }
   return [...activities];
 }
 
 function inferCategory(text: string, fallback: string) {
   const lower = text.toLowerCase();
-  if (lower.includes("competition") || lower.includes("match") || lower.includes("cup")) return "Birthday Parties";
+  if (lower.includes("competition") || lower.includes("match") || lower.includes("cup")) return "Competitions";
   if (lower.includes("range") || lower.includes("facility") || lower.includes("facility")) return "Camps";
   if (lower.includes("club") || lower.includes("hunting") || lower.includes("membership")) return "Drop-In Activities";
   if (lower.includes("meetup") || lower.includes("association") || lower.includes("group")) return "Meet-Up Groups";
@@ -112,6 +119,19 @@ function extractScheduleBlocks(text: string): NormalizedScheduleBlock[] {
   if (/\bsaturday\b|\bsunday\b|\bweekend\b/i.test(lower)) {
     const weekendDays = ["Saturday", "Sunday"].filter((day) => lower.includes(day.toLowerCase())) as NormalizedScheduleBlock["daysOfWeek"];
     maybePush(weekendDays.length ? weekendDays : ["Saturday", "Sunday"], timeMatches[1]?.[0] ?? timeMatches[0]?.[0] ?? "Weekend schedule");
+  }
+
+  if (
+    blocks.length === 0 &&
+    /\b(calendar|competition|match|cup|championship|federation|registration|versenynaptár|verseny|bajnokság|szövetség|mdlsz|hunshooting)\b/i.test(lower)
+  ) {
+    blocks.push({
+      daysOfWeek: [],
+      timeText: "Seasonal schedule on official source",
+      title: "Official source schedule",
+      registrationUrl: undefined,
+      summary: "The source publishes federation, competition, registration, or calendar signals. Exact dates must be checked on the official source before booking claims.",
+    });
   }
 
   return blocks.slice(0, 4);

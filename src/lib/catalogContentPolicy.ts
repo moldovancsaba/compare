@@ -44,7 +44,7 @@ const SHOOTING_KEYWORDS = [
 ];
 
 const LEGACY_CHILD_CATEGORIES = new Set([
-  "Birthday Parties",
+  "Competitions",
   "Drop-In Activities",
 ]);
 

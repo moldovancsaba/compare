@@ -43,8 +43,8 @@ function badgeFor(cat: string) {
       return { label: "Training", filter: "Classes", color: "teal" };
     case "Camps":
       return { label: "Range", filter: "Camps", color: "green" };
-    case "Birthday Parties":
-      return { label: "Competition", filter: "Birthdays", color: "pink" };
+    case "Competitions":
+      return { label: "Competition", filter: "Competitions", color: "pink" };
     case "Drop-In Activities":
       return { label: "Hunting", filter: "Drop-Ins", color: "yellow" };
     case "Meet-Up Group":
@@ -56,7 +56,7 @@ function badgeFor(cat: string) {
 
 function priceUnitLabel(p: Provider, units: SiteAccountSettings["saved"]["priceUnits"]) {
   if (p.category === "Camps") return units.week;
-  if (p.category === "Birthday Parties") return units.party;
+  if (p.category === "Competitions") return units.party;
   if (p.category === "Drop-In Activities") return units.visit;
   return units.class;
 }

@@ -37,7 +37,7 @@ function directoryTaxonomyHint(url: string) {
   const path = new URL(url).pathname;
   if (path.includes("/directory/camps/")) return "Camps";
   if (path.includes("/directory/classes/")) return "Classes";
-  if (path.includes("/directory/party/")) return "Birthday Parties";
+  if (path.includes("/directory/party/")) return "Competitions";
   if (path.includes("/directory/family-fun/")) return "Drop-In Activities";
   return null;
 }
@@ -49,16 +49,16 @@ function inferCategory(record: MommyPoppinsSourceRecord, text: string): External
     if (taxonomyHint) return taxonomyHint;
     if (record.mommyPoppinsCategoryId === 644 || lower.includes("camp")) return "Camps";
     if (record.mommyPoppinsCategoryId === 645 || lower.includes("class")) return "Classes";
-    if (record.mommyPoppinsCategoryId === 648 || lower.includes("party")) return "Birthday Parties";
+    if (record.mommyPoppinsCategoryId === 648 || lower.includes("party")) return "Competitions";
     if (record.mommyPoppinsCategoryId === 1365 || lower.includes("open play") || lower.includes("drop in")) return "Drop-In Activities";
   }
   if (record.surfaceType === "event") {
-    if (lower.includes("birthday")) return "Birthday Parties";
+    if (lower.includes("birthday")) return "Competitions";
     if (lower.includes("open play") || lower.includes("drop-in") || lower.includes("drop in")) return "Drop-In Activities";
     return null;
   }
   if (lower.includes("camp")) return "Camps";
-  if (lower.includes("birthday")) return "Birthday Parties";
+  if (lower.includes("birthday")) return "Competitions";
   if (lower.includes("open play") || lower.includes("drop-in") || lower.includes("drop in")) return "Drop-In Activities";
   if (lower.includes("class") || lower.includes("lesson") || lower.includes("program")) return "Classes";
   return null;

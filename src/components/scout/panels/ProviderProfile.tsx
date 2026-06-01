@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   ActionIcon,
   Anchor,
@@ -37,16 +38,19 @@ import {
 } from "@/lib/appIcons";
 import { useSaved, useCalculator } from "@/store/useScout";
 import { toast } from "@/lib/notify";
-import { useProvidersCatalog } from "@/hooks/useCatalog";
+import { useProvidersCatalog, useSiteCatalog } from "@/hooks/useCatalog";
 import { CdnImage } from "@/components/media/CdnImage";
 import { ProviderCard } from "../ProviderCard";
 import { ProviderMap } from "./ProviderMap";
 import { resolveImageUrl } from "@/lib/resolveImageUrl";
-import { CMS_MEDIA } from "@/config/defaultMedia";
 import { formatBoroughLabel } from "@/data/locations";
 import type { Provider } from "@/types/provider";
 import { discoveryFeatureFlags } from "@/lib/discoveryConfig";
 import { deriveUpcomingOccurrences, formatUpcomingOccurrenceLabel } from "@/lib/providerSchedule";
+import { getLocalCategoryLabel, getLocalFilterValueLabel, getLocalText, interpolate, siteCopy } from "@/lib/i18n/messages";
+import { getLocalizedProviderCopy } from "@/lib/providerLocalization";
+import { normalizeLocale } from "@/lib/i18n/config";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
 
 function normalizeExternalUrl(value: string) {
   return /^https?:\/\//i.test(value) ? value : `https://${value}`;
@@ -96,6 +100,9 @@ export function ProviderProfile({
   onShare: (p: Provider) => void;
   onOpenAnother: (p: Provider) => void;
 }) {
+  const pathname = usePathname();
+  const locale = normalizeLocale(parseLocaleFromPathname(pathname));
+  const { data: site } = useSiteCatalog(locale);
   const { data: allProviders = [] } = useProvidersCatalog();
   const { isSaved, toggle } = useSaved();
   const { add } = useCalculator();
@@ -121,17 +128,28 @@ export function ProviderProfile({
 
     append(provider.image);
     for (const image of provider.galleryImages ?? []) append(image);
-    if (urls.length === 0) urls.push(CMS_MEDIA.fallbackListing);
     return urls;
   }, [provider]);
 
   if (!provider) return null;
 
   const saved = isSaved(provider.id);
-  const current = gallery[Math.min(photoIdx, Math.max(gallery.length - 1, 0))] ?? CMS_MEDIA.fallbackListing;
+  const current = gallery[Math.min(photoIdx, Math.max(gallery.length - 1, 0))] ?? null;
   const websiteUrl = normalizeExternalUrl(provider.website);
   const appOrigin = typeof window !== "undefined" ? window.location.origin : "https://rangescout.vercel.app";
   const providerUrl = `${appOrigin}/p/${provider.id}`;
+  const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
+    getLocalText(site, locale, path, fallback);
+  const providerCopy = getLocalizedProviderCopy(provider, locale);
+  const categoryLabel = getLocalCategoryLabel(site, provider.category, locale);
+  const priceLabel =
+    provider.pricePerClass > 0
+      ? `EUR ${provider.pricePerClass}/${localText("providerCard.priceUnitSession", siteCopy.providerCard.priceUnitSession)}`
+      : localText("providerCard.priceOnRequest", {
+          en: "Price on request",
+          hu: "Ár egyeztetés alapján",
+          it: "Prezzo su richiesta",
+        });
 
   const similar = allProviders
     .filter((item) => item.id !== provider.id && item.borough === provider.borough && item.category === provider.category)
@@ -140,18 +158,20 @@ export function ProviderProfile({
   const nextOccurrenceLabel = formatUpcomingOccurrenceLabel(provider.nextOccurrence);
 
   const shareEmail = () => {
-    const body = `Check out ${provider.name} — ${provider.category} in ${provider.neighborhood}, ${formatBoroughLabel(
+    const body = `${provider.name} — ${categoryLabel} / ${provider.neighborhood}, ${formatBoroughLabel(
       provider.borough,
-    )}.\n\n${provider.shortDescription}\nFrom EUR ${provider.pricePerClass}/session.\n\n${providerUrl}`;
+      locale,
+    )}.\n\n${providerCopy.shortDescription}\n${priceLabel}.\n\n${providerUrl}`;
     window.open(
-      `mailto:?subject=${encodeURIComponent(`${provider.name} on RangeScout EU`)}&body=${encodeURIComponent(body)}`,
+      `mailto:?subject=${encodeURIComponent(`${provider.name} / RangeScout EU`)}&body=${encodeURIComponent(body)}`,
     );
   };
 
   const shareWhatsapp = () => {
-    const text = `${provider.name} (${provider.category}) in ${provider.neighborhood}, ${formatBoroughLabel(
+    const text = `${provider.name} (${categoryLabel}) in ${provider.neighborhood}, ${formatBoroughLabel(
       provider.borough,
-    )} — EUR ${provider.pricePerClass}/session. ${provider.shortDescription} ${providerUrl}`;
+      locale,
+    )} — ${priceLabel}. ${providerCopy.shortDescription} ${providerUrl}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -167,16 +187,32 @@ export function ProviderProfile({
     >
       <Stack gap={0}>
         <Box pos="relative" h={320}>
-          <CdnImage
-            resolveBase={provider.website}
-            src={current}
-            alt={provider.name}
-            style={{ display: "block", height: "100%", width: "100%", objectFit: "cover" }}
-          />
+          {current ? (
+            <CdnImage
+              resolveBase={provider.website}
+              src={current}
+              alt={provider.name}
+              style={{ display: "block", height: "100%", width: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <Box
+              h="100%"
+              bg="teal.0"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+                <Text size="xs" fw={700} tt="uppercase" c="teal.8" style={{ letterSpacing: "0.14em" }}>
+                  {localText("providerCard.imageUnavailable", {
+                  en: "Image not available",
+                  hu: "Kép nem elérhető",
+                  it: "Immagine non disponibile",
+                })}
+              </Text>
+            </Box>
+          )}
 
           <Group pos="absolute" top={16} left={16} gap="xs">
             <Badge radius="xl" color="teal" variant="filled">
-              {provider.category}
+              {categoryLabel}
             </Badge>
             {provider.badges.slice(0, 2).map((badge) => (
               <Badge key={badge} radius="xl" color="dark" variant="filled">
@@ -189,7 +225,11 @@ export function ProviderProfile({
             <Badge radius="xl" color="dark" variant="filled">
               {photoIdx + 1} / {gallery.length}
             </Badge>
-            <ActionIcon variant="white" radius="xl" size="lg" onClick={onClose} aria-label="Close provider details">
+            <ActionIcon variant="white" radius="xl" size="lg" onClick={onClose} aria-label={localText("profile.closeProvider", {
+              en: "Close provider details",
+              hu: "Szolgáltató részleteinek bezárása",
+              it: "Chiudi dettagli operatore",
+            })}>
               <X size={16} />
             </ActionIcon>
           </Group>
@@ -205,7 +245,11 @@ export function ProviderProfile({
                 variant="white"
                 style={{ transform: "translateY(-50%)" }}
                 onClick={() => setPhotoIdx((index) => (index - 1 + gallery.length) % gallery.length)}
-                aria-label="Previous photo"
+                aria-label={localText("profile.previousPhoto", {
+                  en: "Previous photo",
+                  hu: "Előző kép",
+                  it: "Foto precedente",
+                })}
               >
                 <ChevronLeft size={18} />
               </ActionIcon>
@@ -218,7 +262,11 @@ export function ProviderProfile({
                 variant="white"
                 style={{ transform: "translateY(-50%)" }}
                 onClick={() => setPhotoIdx((index) => (index + 1) % gallery.length)}
-                aria-label="Next photo"
+                aria-label={localText("profile.nextPhoto", {
+                  en: "Next photo",
+                  hu: "Következő kép",
+                  it: "Foto successiva",
+                })}
               >
                 <ChevronRight size={18} />
               </ActionIcon>
@@ -227,7 +275,11 @@ export function ProviderProfile({
                   <UnstyledButton
                     key={`${provider.id}-gallery-${index}`}
                     onClick={() => setPhotoIdx(index)}
-                    aria-label={`Go to photo ${index + 1}`}
+                    aria-label={interpolate(localText("profile.goToPhoto", {
+                      en: "Go to photo {count}",
+                      hu: "Ugrás a(z) {count}. képre",
+                      it: "Vai alla foto {count}",
+                    }), { count: index + 1 })}
                   >
                     <Box
                       h={8}
@@ -266,7 +318,11 @@ export function ProviderProfile({
                   color="gray"
                   radius="xl"
                   onClick={() => setBannerOpen(false)}
-                  aria-label="Dismiss announcement"
+                  aria-label={localText("profile.dismissAnnouncement", {
+                    en: "Dismiss announcement",
+                    hu: "Közlemény elrejtése",
+                    it: "Nascondi avviso",
+                  })}
                 >
                   <X size={16} />
                 </ActionIcon>
@@ -281,7 +337,11 @@ export function ProviderProfile({
                   <UnstyledButton
                     key={`${provider.id}-thumb-${index}`}
                     onClick={() => setPhotoIdx(index)}
-                    aria-label={`View photo ${index + 1}`}
+                    aria-label={interpolate(localText("profile.viewPhoto", {
+                      en: "View photo {count}",
+                      hu: "{count}. kép megnyitása",
+                      it: "Vedi foto {count}",
+                    }), { count: index + 1 })}
                   >
                     <Paper
                       radius="lg"
@@ -308,7 +368,7 @@ export function ProviderProfile({
 
           <Stack gap="sm">
             <Text size="xs" fw={700} tt="uppercase" c="teal.7">
-              {provider.category}
+              {categoryLabel}
             </Text>
             <Title order={2}>{provider.name}</Title>
             <Group gap="xs" c="dimmed">
@@ -320,30 +380,37 @@ export function ProviderProfile({
                 <Star size={16} fill="var(--mantine-color-orange-5)" color="var(--mantine-color-orange-5)" />
                 <Text fw={600}>{provider.rating}</Text>
                 <Text c="dimmed" size="sm">
-                  ({provider.reviewCount} reviews)
+                  {provider.reviewCount > 0
+                    ? `(${interpolate(localText("profile.reviewCount", {
+                        en: "{count} reviews",
+                        hu: "{count} értékelés",
+                        it: "{count} recensioni",
+                      }), { count: provider.reviewCount })})`
+                    : localText("providerCard.noReviews", {
+                        en: "No public reviews yet",
+                        hu: "Még nincs nyilvános értékelés",
+                        it: "Nessuna recensione pubblica",
+                      })}
                 </Text>
               </Group>
               <Text ff="heading" fw={700} size="lg" c="orange.5">
-                EUR {provider.pricePerClass}
-                <Text span size="sm" fw={400} c="dimmed">
-                  /session
-                </Text>
+                {priceLabel}
               </Text>
             </Group>
             <Group gap="xs">
               {provider.activityTypes.map((item) => (
                 <Badge key={item} radius="xl" color="teal" variant="light">
-                  {item}
+                  {getLocalFilterValueLabel(site, item, locale)}
                 </Badge>
               ))}
               {provider.ageRanges.map((age) => (
                 <Badge key={age} radius="xl" color="gray" variant="light">
-                  Audience {age}
+                  {localText("providerCard.audience", siteCopy.providerCard.audience)} {getLocalFilterValueLabel(site, age, locale)}
                 </Badge>
               ))}
               {provider.dayTimeTags.map((tag) => (
                 <Badge key={tag} radius="xl" color="gray" variant="outline">
-                  {tag}
+                  {getLocalFilterValueLabel(site, tag, locale)}
                 </Badge>
               ))}
             </Group>
@@ -355,11 +422,15 @@ export function ProviderProfile({
                 leftSection={<Calendar size={16} />}
                 disabled
               >
-                Book now
+                {localText("providerCard.bookNow", siteCopy.providerCard.bookNow)}
               </Button>
             ) : (
               <Button color="dark" component="a" href={websiteUrl} target="_blank" rel="noreferrer">
-                Visit website
+                {localText("profile.visitWebsite", {
+                  en: "Visit website",
+                  hu: "Weboldal megnyitása",
+                  it: "Visita il sito",
+                })}
               </Button>
             )}
             <Button
@@ -368,14 +439,22 @@ export function ProviderProfile({
               leftSection={<Plus size={16} />}
               onClick={() => {
                 add(provider.id);
-                toast.success(`${provider.name} added to planner`);
+                toast.success(interpolate(localText("providerCard.addedToast", siteCopy.providerCard.addedToast), { name: provider.name }));
               }}
             >
-              Add to calculator
+              {localText("providerCard.addToPlanner", siteCopy.providerCard.addToPlanner)}
             </Button>
           </SimpleGrid>
 
-          <SectionPanel title="Contact this provider" description="Reach out directly for booking, questions, or schedule details.">
+          <SectionPanel title={localText("profile.contactProviderTitle", {
+            en: "Contact this provider",
+            hu: "Kapcsolat a szolgáltatóval",
+            it: "Contatta questo operatore",
+          })} description={localText("profile.contactProviderDescription", {
+            en: "Use the official channels shared by the provider for booking, questions, or schedule details.",
+            hu: "Foglaláshoz, kérdésekhez és időpontokhoz használd a szolgáltató hivatalos csatornáit.",
+            it: "Usa i canali ufficiali indicati dall'operatore per prenotazioni, domande o dettagli.",
+          })}>
             <Stack gap="sm">
               <ContactLinkItem icon={<Mail size={14} />} label={provider.email} href={`mailto:${provider.email}`} />
               <ContactLinkItem icon={<Phone size={14} />} label={provider.phone} href={`tel:${provider.phone}`} />
@@ -389,39 +468,51 @@ export function ProviderProfile({
               leftSection={<Heart size={16} fill={saved ? "currentColor" : "none"} />}
               onClick={() => {
                 toggle(provider.id);
-                toast.success(saved ? "Removed from saved" : "Saved");
+                toast.success(saved ? localText("providerCard.removedToast", siteCopy.providerCard.removedToast) : localText("providerCard.savedToast", siteCopy.providerCard.savedToast));
               }}
             >
-              {saved ? "Saved" : "Save provider"}
+              {saved ? localText("nav.saved", siteCopy.nav.saved) : localText("providerCard.saveProvider", siteCopy.providerCard.saveProvider)}
             </Button>
             <Button variant="default" leftSection={<Share2 size={16} />} onClick={() => onShare(provider)}>
-              Share
+              {localText("profile.share", { en: "Share", hu: "Megosztás", it: "Condividi" })}
             </Button>
             <Button variant="default" leftSection={<Mail size={16} />} onClick={shareEmail}>
-              Email
+              {localText("profile.email", { en: "Email", hu: "E-mail", it: "Email" })}
             </Button>
             <Button variant="default" leftSection={<MessageCircle size={16} />} onClick={shareWhatsapp}>
               WhatsApp
             </Button>
           </SimpleGrid>
 
-          <SectionPanel title="About this provider">
+          <SectionPanel title={localText("profile.aboutProvider", {
+            en: "About this provider",
+            hu: "A szolgáltatóról",
+            it: "Informazioni sull'operatore",
+          })}>
             <Text size="sm" c="dimmed" style={{ whiteSpace: "pre-line" }}>
-              {provider.longDescription}
+              {providerCopy.longDescription}
             </Text>
           </SectionPanel>
 
           {discoveryFeatureFlags.upcomingRenderingEnabled && (nextOccurrenceLabel || upcomingOccurrences.length > 0) ? (
             <SectionPanel
-              title="Upcoming schedule"
-              description="Source-backed upcoming availability within the next seven days when available."
+              title={localText("profile.upcomingSchedule", {
+                en: "Upcoming schedule",
+                hu: "Közelgő időpontok",
+                it: "Calendario in arrivo",
+              })}
+              description={localText("profile.upcomingScheduleDescription", {
+                en: "Updated availability in the next seven days when available.",
+                hu: "Frissült közelgő elérhetőségek a következő hét napban, ha elérhetők.",
+                it: "Disponibilità aggiornata nei prossimi sette giorni, quando disponibile.",
+              })}
             >
               <Stack gap="md">
                 {nextOccurrenceLabel ? (
                   <Paper radius="lg" p="md" bg="teal.0" withBorder>
                     <Stack gap={4}>
                       <Text size="xs" fw={700} tt="uppercase" c="teal.7">
-                        Next up
+                        {localText("profile.nextUp", { en: "Next up", hu: "Következő", it: "Prossimo" })}
                       </Text>
                       <Text fw={600}>{provider.nextOccurrence?.title ?? provider.name}</Text>
                       <Text size="sm" c="dimmed">
@@ -448,7 +539,7 @@ export function ProviderProfile({
                           </Stack>
                           {occurrence.isDropIn ? (
                             <Badge radius="xl" color="teal" variant="light">
-                              Drop-in
+                              {localText("profile.dropIn", { en: "Drop-in", hu: "Beugrós", it: "Accesso libero" })}
                             </Badge>
                           ) : null}
                         </Group>
@@ -462,8 +553,16 @@ export function ProviderProfile({
 
           {provider.recurringPrograms?.length ? (
             <SectionPanel
-              title="Recurring programs"
-              description="Structured schedule details for ongoing classes, series, and repeating activities."
+              title={localText("profile.recurringPrograms", {
+                en: "Recurring programs",
+                hu: "Ismétlődő programok",
+                it: "Programmi ricorrenti",
+              })}
+              description={localText("profile.recurringProgramsDescription", {
+                en: "Structured schedule details for ongoing training, series, and repeating activities.",
+                hu: "Strukturált időpontadatok folyamatos képzésekhez, sorozatokhoz és ismétlődő aktivitásokhoz.",
+                it: "Dettagli strutturati per allenamenti, serie e attività ricorrenti.",
+              })}
             >
               <Stack gap="md">
                 {provider.recurringPrograms.map((program) => (
@@ -476,7 +575,7 @@ export function ProviderProfile({
                         </Badge>
                         {program.isDropIn ? (
                           <Badge radius="xl" color="teal" variant="light">
-                            Drop-in
+                            {localText("profile.dropIn", { en: "Drop-in", hu: "Beugrós", it: "Accesso libero" })}
                           </Badge>
                         ) : null}
                       </Group>
@@ -497,7 +596,7 @@ export function ProviderProfile({
                         ))}
                         {(program.ageRanges ?? []).map((age) => (
                           <Badge key={age} radius="xl" color="gray" variant="light">
-                            Audience {age}
+                            {localText("providerCard.audience", siteCopy.providerCard.audience)} {getLocalFilterValueLabel(site, age, locale)}
                           </Badge>
                         ))}
                       </Group>
@@ -505,17 +604,17 @@ export function ProviderProfile({
                         <Stack gap={4}>
                           {program.locationNote ? (
                             <Text size="xs" c="dimmed">
-                              Location: {program.locationNote}
+                              {localText("profile.location", { en: "Location", hu: "Helyszín", it: "Luogo" })}: {program.locationNote}
                             </Text>
                           ) : null}
                           {program.priceText ? (
                             <Text size="xs" c="dimmed">
-                              Pricing: {program.priceText}
+                              {localText("profile.pricing", { en: "Pricing", hu: "Árazás", it: "Prezzo" })}: {program.priceText}
                             </Text>
                           ) : null}
                           {program.startDate || program.endDate ? (
                             <Text size="xs" c="dimmed">
-                              {program.startDate ?? "Open"} to {program.endDate ?? "ongoing"}
+                              {program.startDate ?? localText("profile.openStart", { en: "Open", hu: "Nyitott", it: "Aperto" })} - {program.endDate ?? localText("profile.ongoing", { en: "ongoing", hu: "folyamatos", it: "continuativo" })}
                             </Text>
                           ) : null}
                           {program.registrationUrl ? (
@@ -529,7 +628,11 @@ export function ProviderProfile({
                               justify="flex-start"
                               px={0}
                             >
-                              Registration details
+                              {localText("profile.registrationDetails", {
+                                en: "Registration details",
+                                hu: "Regisztrációs részletek",
+                                it: "Dettagli registrazione",
+                              })}
                             </Button>
                           ) : null}
                         </Stack>
@@ -544,10 +647,18 @@ export function ProviderProfile({
           <ProviderMap address={provider.address} borough={provider.borough} />
 
           {similar.length ? (
-            <SectionPanel title="Similar providers nearby" description="More options in the same country and category.">
+            <SectionPanel title={localText("profile.similarProviders", {
+              en: "Similar providers nearby",
+              hu: "Hasonló szolgáltatók a közelben",
+              it: "Operatori simili nelle vicinanze",
+            })} description={localText("profile.similarProvidersDescription", {
+              en: "More options in the same country and category.",
+              hu: "További lehetőségek ugyanabban az országban és kategóriában.",
+              it: "Altre opzioni nello stesso paese e categoria.",
+            })}>
               <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                 {similar.map((item) => (
-                  <ProviderCard key={item.id} provider={item} onOpen={onOpenAnother} onShare={onShare} />
+                  <ProviderCard key={item.id} provider={item} onOpen={onOpenAnother} onShare={onShare} locale={locale} copySource={site} />
                 ))}
               </SimpleGrid>
             </SectionPanel>

@@ -76,7 +76,7 @@ export interface ResolvedDraftResult {
 }
 
 const ADAPTER_VERSION = "compare-range-adapter@v1";
-const CATEGORIES: Category[] = ["Classes", "Camps", "Birthday Parties", "Drop-In Activities"];
+const CATEGORIES: Category[] = ["Classes", "Camps", "Competitions", "Drop-In Activities"];
 const AGE_RANGES: AgeRange[] = ["0–2", "3–5", "6–8", "9–12", "Teens", "Youth", "Beginner", "Licensed Adult", "Competition", "Hunter Prep"];
 const FEATURED_BADGES: FeaturedBadge[] = [
   "Featured",
@@ -177,6 +177,9 @@ function deriveScheduleSignals(scheduleBlocks: NormalizedScheduleBlock[]) {
     if (textSupports(text, [/\b(?:12|1|2|3|4)(?::\d{2})?\s*pm\b/, /\bafternoon\b/])) timeTags.add("Afternoon");
     if (textSupports(text, [/\b(?:5|6|7|8)(?::\d{2})?\s*pm\b/, /\bevening\b/])) timeTags.add("Evening");
     if (textSupports(text, [/\b(?:3|4|5)(?::\d{2})?\s*pm\b/, /\bafter-school\b/])) timeTags.add("After-school");
+    if (textSupports(text, [/\bseasonal\b/, /\bofficial source\b/, /\bcalendar\b/, /\bcompetition\b/, /\bregistration\b/])) {
+      timeTags.add("Seasonal");
+    }
   }
 
   return {
@@ -273,14 +276,15 @@ function collectDiagnostics(input: NormalizedListingInput, resolved: ResolvedDra
 }
 
 function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
-  const borough = normalizeBorough(input.boroughRaw) ?? "Germany";
+  const borough = normalizeBorough(input.boroughRaw) ?? "Hungary";
   const neighborhood = normalizeNeighborhood(borough, input.neighborhoodRaw) ?? NEIGHBORHOODS[borough][0];
   const category = resolveCategory(input.categoryHint) ?? "Classes";
   const scheduleSignals = deriveScheduleSignals(input.scheduleBlocks ?? []);
   const activityTypes = (input.activityTypesRaw ?? []).filter(Boolean);
   const image = input.imageCandidates?.find((candidate) => candidate.uploadedUrl)?.uploadedUrl ?? "";
-  const baseDescription = input.descriptionFacts?.join(" ") || `${input.title.trim()} is an officially sourced compare listing in ${neighborhood}.`;
-  const longDescription = `${baseDescription} ${input.title.trim()} supports verified schedule and contact details captured from the source.`.slice(0, 140);
+  const neighborhoodLine = normalizeNeighborhood(borough, input.neighborhoodRaw) ?? borough;
+  const baseDescription = (input.descriptionFacts ?? []).filter(Boolean).join(" ") || `${input.title.trim()} in ${neighborhoodLine}.`;
+  const longDescription = `${baseDescription} ${input.title.trim()} offers details in ${neighborhoodLine}.`.slice(0, 140);
 
   return {
     id: `prov-${slugify(input.title)}`,
@@ -294,7 +298,7 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
     dayTimeTags: scheduleSignals.timeTags,
     pricePerClass: 0,
     shortDescription: (input.descriptionFacts?.[0] ?? `${input.title.trim()} in ${neighborhood}.`).slice(0, 400),
-    longDescription: longDescription.length >= 40 ? longDescription : `${longDescription} This listing includes verified discovery metadata.`,
+    longDescription: longDescription.length >= 40 ? longDescription : `${input.title.trim()} in ${neighborhoodLine}.`,
     rating: 0,
     reviewCount: 0,
     badges: scheduleSignals.badges.filter((badge): badge is FeaturedBadge => FEATURED_BADGES.includes(badge)),
@@ -307,7 +311,7 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
 }
 
 function resolveMeetupDraft(input: NormalizedListingInput): CuratedMeetup {
-  const borough = normalizeBorough(input.boroughRaw) ?? "Germany";
+  const borough = normalizeBorough(input.boroughRaw) ?? "Hungary";
   const neighborhood = normalizeNeighborhood(borough, input.neighborhoodRaw) ?? NEIGHBORHOODS[borough][0];
   const groupType = inferMeetupGroupType(input);
   const icon = inferMeetupIcon(input);

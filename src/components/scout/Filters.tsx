@@ -3,6 +3,8 @@ import { AGE_RANGES, DAY_TIME_TAGS, ACTIVITY_TYPES } from "@/data/providers";
 import type { AgeRange, DayTimeTag } from "@/types/provider";
 import { SlidersHorizontal } from "@/lib/appIcons";
 import { useState } from "react";
+import type { AppLocale } from "@/lib/i18n/config";
+import { getLocalFilterValueLabel, getLocalText, siteCopy, type LocalCopySource } from "@/lib/i18n/messages";
 
 export interface FilterState {
   ages: AgeRange[];
@@ -12,7 +14,17 @@ export interface FilterState {
 
 export const EMPTY_FILTERS: FilterState = { ages: [], times: [], activity: null };
 
-export function Filters({ value, onChange }: { value: FilterState; onChange: (v: FilterState) => void }) {
+export function Filters({
+  value,
+  onChange,
+  locale = "en",
+  copySource = null,
+}: {
+  value: FilterState;
+  onChange: (v: FilterState) => void;
+  locale?: AppLocale;
+  copySource?: LocalCopySource;
+}) {
   const [open, setOpen] = useState(false);
   const has = value.ages.length + value.times.length + (value.activity ? 1 : 0);
 
@@ -26,7 +38,7 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
           leftSection={<SlidersHorizontal size={16} />}
           onClick={() => setOpen((o) => !o)}
         >
-          Filters {has > 0 && <Badge color="teal" variant="filled">{has}</Badge>}
+          {getLocalText(copySource, locale, "filters.button", siteCopy.filters.button)} {has > 0 && <Badge color="teal" variant="filled">{has}</Badge>}
         </Button>
         {has > 0 && (
           <Button
@@ -35,7 +47,7 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
             size="compact-sm"
             onClick={() => onChange(EMPTY_FILTERS)}
           >
-            Clear all
+            {getLocalText(copySource, locale, "filters.clearAll", siteCopy.filters.clearAll)}
           </Button>
         )}
       </Group>
@@ -45,7 +57,7 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
           <Stack gap="lg">
             <Stack gap="xs">
               <Text size="xs" fw={700} tt="uppercase" c="dimmed" style={{ letterSpacing: "0.18em" }}>
-                Audience
+                {getLocalText(copySource, locale, "filters.audience", siteCopy.filters.audience)}
               </Text>
               <Group gap="xs">
                 {AGE_RANGES.map((a) => (
@@ -58,14 +70,14 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
                     variant={value.ages.includes(a) ? "filled" : "outline"}
                     color={value.ages.includes(a) ? "teal" : "gray"}
                   >
-                    {a}
+                    {getLocalFilterValueLabel(copySource, a, locale)}
                   </Chip>
                 ))}
               </Group>
             </Stack>
             <Stack gap="xs">
               <Text size="xs" fw={700} tt="uppercase" c="dimmed" style={{ letterSpacing: "0.18em" }}>
-                Availability
+                {getLocalText(copySource, locale, "filters.availability", siteCopy.filters.availability)}
               </Text>
               <Group gap="xs">
                 {DAY_TIME_TAGS.map((d) => (
@@ -78,14 +90,14 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
                     variant={value.times.includes(d) ? "filled" : "outline"}
                     color={value.times.includes(d) ? "teal" : "gray"}
                   >
-                    {d}
+                    {getLocalFilterValueLabel(copySource, d, locale)}
                   </Chip>
                 ))}
               </Group>
             </Stack>
             <Stack gap="xs">
               <Text size="xs" fw={700} tt="uppercase" c="dimmed" style={{ letterSpacing: "0.18em" }}>
-                Activity
+                {getLocalText(copySource, locale, "filters.activity", siteCopy.filters.activity)}
               </Text>
               <Group gap="xs">
                 <Chip
@@ -96,7 +108,7 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
                   variant={value.activity === null ? "filled" : "outline"}
                   color={value.activity === null ? "teal" : "gray"}
                 >
-                  Any
+                  {getLocalText(copySource, locale, "filters.any", siteCopy.filters.any)}
                 </Chip>
                 {ACTIVITY_TYPES.map((t) => (
                   <Chip
@@ -108,7 +120,7 @@ export function Filters({ value, onChange }: { value: FilterState; onChange: (v:
                     variant={value.activity === t ? "filled" : "outline"}
                     color={value.activity === t ? "teal" : "gray"}
                   >
-                    {t}
+                    {getLocalFilterValueLabel(copySource, t, locale)}
                   </Chip>
                 ))}
               </Group>

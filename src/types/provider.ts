@@ -1,4 +1,4 @@
-export type Category = "Classes" | "Camps" | "Birthday Parties" | "Drop-In Activities";
+export type Category = "Classes" | "Camps" | "Competitions" | "Drop-In Activities";
 
 export type Borough =
   | "Hungary"
@@ -115,6 +115,12 @@ export interface UpcomingOccurrence {
   isDropIn?: boolean;
 }
 
+export type ProviderLocalizedCopy = Partial<Record<"en" | "hu" | "it", {
+  shortDescription?: string;
+  longDescription?: string;
+  announcementBadge?: string;
+}>>;
+
 export interface Provider {
   id: string;
   catalogProject?: string;
@@ -140,6 +146,7 @@ export interface Provider {
   announcementTitle?: string;
   announcementDescription?: string;
   announcementBadge?: string;
+  localized?: ProviderLocalizedCopy;
   galleryImages?: string[];
   recurringPrograms?: RecurringProgram[];
   scheduledInstances?: ScheduledInstance[];

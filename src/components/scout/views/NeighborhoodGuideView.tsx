@@ -1,4 +1,5 @@
 import { Button, Group, Paper, SimpleGrid, Stack, Text, Title } from "@mantine/core";
+import { usePathname } from "next/navigation";
 import { MapPin } from "@/lib/appIcons";
 import { EmptyState } from "@/components/scout/EmptyState";
 import { CdnImage } from "@/components/media/CdnImage";
@@ -8,16 +9,12 @@ import { formatBoroughLabel } from "@/data/locations";
 import type { MeetupGroup } from "@/types/meetup";
 import type { BoroughChoice, Category, Provider } from "@/types/provider";
 import type { SiteGuide } from "@/types/site";
+import { useSiteCatalog } from "@/hooks/useCatalog";
+import { normalizeLocale } from "@/lib/i18n/config";
+import { parseLocaleFromPathname } from "@/lib/i18n/paths";
+import { getLocalCategoryLabel, getLocalText, siteCopy } from "@/lib/i18n/messages";
 
-const CATEGORY_ORDER: Category[] = ["Classes", "Camps", "Birthday Parties", "Drop-In Activities"];
-
-const DISPLAY_LABELS: Record<Category | "Meet-Up Groups", string> = {
-  Classes: "Training",
-  Camps: "Ranges",
-  "Birthday Parties": "Competitions",
-  "Drop-In Activities": "Hunting Grounds",
-  "Meet-Up Groups": "Clubs",
-};
+const CATEGORY_ORDER: Category[] = ["Classes", "Camps", "Competitions", "Drop-In Activities"];
 
 interface Props {
   borough: BoroughChoice;
@@ -44,12 +41,24 @@ export function NeighborhoodGuideView({
   onShareGroup,
   onOpenCategory,
 }: Props) {
+  const pathname = usePathname();
+  const locale = normalizeLocale(parseLocaleFromPathname(pathname));
+  const { data: site } = useSiteCatalog(locale);
+  const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
+    getLocalText(site, locale, path, fallback);
+  const displayLabel = (category: Category | "Meet-Up Groups") =>
+    category === "Meet-Up Groups" ? localText("nav.clubs", siteCopy.nav.clubs) : getLocalCategoryLabel(site, category, locale);
+
   if (!neighborhood || borough === "All") {
     return (
       <EmptyState
         icon={MapPin}
-        title="Region guide unavailable"
-        message="Pick a specific country and region to view all listings for that location."
+        title={localText("regionGuide.unavailableTitle", { en: "Region guide unavailable", hu: "A régiótérkép nem elérhető", it: "Guida regionale non disponibile" })}
+        message={localText("regionGuide.unavailableMessage", {
+          en: "Pick a specific country and region to view all listings for that location.",
+          hu: "Válassz konkrét országot és régiót az ottani listák megtekintéséhez.",
+          it: "Scegli un paese e una regione specifici per vedere gli annunci.",
+        })}
       />
     );
   }
@@ -70,8 +79,16 @@ export function NeighborhoodGuideView({
     return (
       <EmptyState
         icon={MapPin}
-        title={`Nothing listed in ${neighborhood} yet`}
-        message="No training lanes, ranges, competitions, hunting grounds, or clubs are available for this region yet."
+        title={localText("regionGuide.emptyTitle", {
+          en: "Nothing listed in {region} yet",
+          hu: "Még nincs lista ebben a régióban: {region}",
+          it: "Nessun annuncio in {region}",
+        }).replace("{region}", neighborhood)}
+        message={localText("regionGuide.emptyMessage", {
+          en: "No verified training, ranges, competitions, hunting grounds, or clubs are available for this region yet.",
+          hu: "Ehhez a régióhoz még nincs ellenőrzött képzés, lőtér, verseny, vadászati lehetőség vagy klub.",
+          it: "Non ci sono ancora allenamenti, poligoni, gare, aree venatorie o club verificati per questa regione.",
+        })}
       />
     );
   }
@@ -82,11 +99,19 @@ export function NeighborhoodGuideView({
         <SimpleGrid cols={{ base: 1, lg: guide?.imageUrl?.trim() ? 2 : 1 }} spacing="xl" verticalSpacing="xl">
           <Stack gap="md" justify="center">
               <Text size="xs" fw={700} tt="uppercase" c="teal.6" style={{ letterSpacing: "0.2em" }}>
-              {neighborhood} • {formatBoroughLabel(borough)}
+              {neighborhood} • {formatBoroughLabel(borough, locale)}
             </Text>
-            <Title order={1}>{guide?.title ?? `${neighborhood} sport shooting guide`}</Title>
+            <Title order={1}>{guide?.title ?? localText("regionGuide.defaultTitle", {
+              en: "{region} sport shooting guide",
+              hu: "{region} lősport régiótérkép",
+              it: "Guida tiro sportivo {region}",
+            }).replace("{region}", neighborhood)}</Title>
             <Text size="md" c="dimmed" maw={760}>
-              {guide?.desc ?? `Browse all listing types in ${neighborhood}, from training and ranges to competitions, hunting grounds, and clubs.`}
+              {guide?.desc ?? localText("regionGuide.defaultDescription", {
+                en: "Browse all verified listing types in {region}, from training and ranges to competitions, hunting grounds, and clubs.",
+                hu: "Böngészd az ellenőrzött listákat ebben a régióban: {region}; képzések, lőterek, versenyek, vadászati lehetőségek és klubok.",
+                it: "Sfoglia gli annunci verificati in {region}: allenamenti, poligoni, gare, aree venatorie e club.",
+              }).replace("{region}", neighborhood)}
             </Text>
             <Group gap="sm" wrap="wrap">
               {CATEGORY_ORDER.map((category) => (
@@ -96,11 +121,11 @@ export function NeighborhoodGuideView({
                   color="dark"
                   onClick={() => onOpenCategory(category, { borough, neighborhood })}
                 >
-                  {DISPLAY_LABELS[category]}
+                  {displayLabel(category)}
                 </Button>
               ))}
               <Button variant="light" color="dark" onClick={() => onOpenCategory("Meet-Up Groups", { borough, neighborhood })}>
-                Clubs
+                {displayLabel("Meet-Up Groups")}
               </Button>
             </Group>
           </Stack>
@@ -126,15 +151,15 @@ export function NeighborhoodGuideView({
         <Stack key={group.category} gap="md">
           <Group justify="space-between" align="baseline">
             <Title order={2} size="h3">
-              {DISPLAY_LABELS[group.category]}
+              {displayLabel(group.category)}
             </Title>
             <Button variant="subtle" color="dark" onClick={() => onOpenCategory(group.category, { borough, neighborhood })}>
-              View all {DISPLAY_LABELS[group.category].toLowerCase()}
+              {localText("regionGuide.viewAll", { en: "View all {label}", hu: "Összes megtekintése: {label}", it: "Vedi tutti: {label}" }).replace("{label}", displayLabel(group.category).toLowerCase())}
             </Button>
           </Group>
           <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="lg">
             {group.items.map((provider) => (
-              <ProviderCard key={provider.id} provider={provider} onOpen={onOpenProvider} onShare={onShareProvider} />
+              <ProviderCard key={provider.id} provider={provider} onOpen={onOpenProvider} onShare={onShareProvider} locale={locale} copySource={site} />
             ))}
           </SimpleGrid>
         </Stack>
@@ -144,15 +169,15 @@ export function NeighborhoodGuideView({
         <Stack gap="md">
           <Group justify="space-between" align="baseline">
             <Title order={2} size="h3">
-              Clubs
+              {displayLabel("Meet-Up Groups")}
             </Title>
             <Button variant="subtle" color="dark" onClick={() => onOpenCategory("Meet-Up Groups", { borough, neighborhood })}>
-              View all clubs
+              {localText("regionGuide.viewAll", { en: "View all {label}", hu: "Összes megtekintése: {label}", it: "Vedi tutti: {label}" }).replace("{label}", displayLabel("Meet-Up Groups").toLowerCase())}
             </Button>
           </Group>
           <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="lg">
             {localGroups.map((group) => (
-              <MeetupGroupCard key={group.id} group={group} onOpen={onOpenGroup} onShare={onShareGroup} />
+              <MeetupGroupCard key={group.id} group={group} onOpen={onOpenGroup} onShare={onShareGroup} locale={locale} copySource={site} />
             ))}
           </SimpleGrid>
         </Stack>

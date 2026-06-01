@@ -36,7 +36,7 @@ type ImageSiteState = Pick<
 const CATEGORY_VIEWS: Array<Category | "Meet-Up Groups"> = [
   "Classes",
   "Camps",
-  "Birthday Parties",
+  "Competitions",
   "Drop-In Activities",
   "Meet-Up Groups",
 ];

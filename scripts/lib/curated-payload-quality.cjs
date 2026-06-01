@@ -1,7 +1,6 @@
 const WEEKDAY_DAYS = new Set(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]);
 const WEEKEND_DAYS = new Set(["Saturday", "Sunday"]);
-const FAMILY_FIT_REGEX = /\b(family|families|parent|parents|parenting|caregiver|caregivers|child|children|kid|kids|youth|student|school|playdate|toddler|baby|infant|guardian)\b/i;
-const NEIGHBORHOOD_COMMUNITY_REGEX = /\b(neighborhood|community|resident|residents|local)\b/i;
+const SHOOTING_FIT_REGEX = /\b(shooting|sport shooting|range|rifle|pistol|shotgun|clay|ipsc|idpa|hunter|hunting|competition|federation|club|academy|firearm|lőtér|lövész|vadász|verseny|fegyver)\b/i;
 
 function parseClockTimes(timeText) {
   const matches = [...String(timeText || "").matchAll(/(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)/gi)];
@@ -45,10 +44,6 @@ function checkProviderDocument(doc) {
   const tags = new Set(doc.dayTimeTags || []);
   const badges = new Set(doc.badges || []);
 
-  if (!String(doc.image || "").trim()) {
-    issues.push("provider image is empty; curated production payloads must store an official ImgBB image");
-  }
-
   if (badges.has("Weekend Friendly") && !tags.has("Weekend")) {
     issues.push("Weekend Friendly badge without Weekend tag");
   }
@@ -77,17 +72,9 @@ function checkProviderDocument(doc) {
 
 function checkMeetupDocument(doc) {
   const issues = [];
-  if (!String(doc.coverImageUrl || "").trim()) {
-    issues.push("meetup coverImageUrl is empty; curated production payloads must store an official ImgBB image");
-  }
-
   const description = String(doc.description || "");
-  if (!FAMILY_FIT_REGEX.test(description)) {
-    const relaxedNeighborhoodFit =
-      doc.groupType === "Neighborhood Families" && NEIGHBORHOOD_COMMUNITY_REGEX.test(description);
-    if (!relaxedNeighborhoodFit) {
-      issues.push("meetup description does not clearly support family / parent / child relevance");
-    }
+  if (!SHOOTING_FIT_REGEX.test(description)) {
+    issues.push("meetup description does not clearly support sport shooting, hunting, club, or competition relevance");
   }
 
   if (doc.cadence === "Weekend" && !/\b(weekend|saturday|sunday)\b/i.test(description)) {

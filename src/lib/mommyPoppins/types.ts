@@ -82,7 +82,7 @@ export interface ExternalLead {
   titleHint: string;
   boroughHint: string | null;
   neighborhoodHint: string | null;
-  classScoutCategoryHint: "Classes" | "Camps" | "Birthday Parties" | "Drop-In Activities" | null;
+  classScoutCategoryHint: "Classes" | "Camps" | "Competitions" | "Drop-In Activities" | null;
   activityHints: string[];
   ageHints: string[];
   scheduleHints: string[];

@@ -55,7 +55,39 @@ function decodeDuckDuckGoTarget(href: string) {
   }
 }
 
-async function fallbackSearch(query: string): Promise<SerperOrganic[]> {
+function decodeHtmlEntities(value: string) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
+function cleanHtmlText(value: string) {
+  return decodeHtmlEntities(value)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function decodeBingTarget(href: string) {
+  const decoded = decodeHtmlEntities(href);
+  try {
+    const url = new URL(decoded, "https://www.bing.com");
+    const encoded = url.searchParams.get("u");
+    if (!encoded) return decoded;
+    if (encoded.startsWith("a1")) {
+      return Buffer.from(encoded.slice(2).replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
+    }
+    return encoded;
+  } catch {
+    return decoded;
+  }
+}
+
+async function duckDuckGoSearch(query: string): Promise<SerperOrganic[]> {
   const response = await fetch(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`, {
     headers: {
       "User-Agent": "RangeScoutCuratorBot/1.0",
@@ -71,11 +103,58 @@ async function fallbackSearch(query: string): Promise<SerperOrganic[]> {
   let match: RegExpExecArray | null = null;
   while ((match = anchorRegex.exec(html)) && results.length < 8) {
     const href = decodeDuckDuckGoTarget(match[1] || "");
-    const title = (match[2] || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    const title = cleanHtmlText(match[2] || "");
     if (!href.startsWith("https://")) continue;
     results.push({ title, link: href, snippet: "" });
   }
   return results;
+}
+
+async function bingSearch(query: string): Promise<SerperOrganic[]> {
+  const response = await fetch(`https://www.bing.com/search?q=${encodeURIComponent(query)}&count=10&setlang=en-US`, {
+    headers: {
+      "User-Agent": "RangeScoutCuratorBot/1.0",
+      Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9,hu;q=0.8",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Bing HTTP ${response.status}`);
+  }
+  const html = await response.text();
+  const results: SerperOrganic[] = [];
+  const blockRegex = /<li class="b_algo"[\s\S]*?<h2[^>]*>\s*<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>[\s\S]*?(?:<p[^>]*>([\s\S]*?)<\/p>)?/gi;
+  let match: RegExpExecArray | null = null;
+  while ((match = blockRegex.exec(html)) && results.length < 8) {
+    const href = decodeBingTarget(match[1] || "");
+    if (!href.startsWith("https://")) continue;
+    results.push({
+      title: cleanHtmlText(match[2] || ""),
+      link: href,
+      snippet: cleanHtmlText(match[3] || ""),
+    });
+  }
+  return results;
+}
+
+async function fallbackSearch(query: string): Promise<SerperOrganic[]> {
+  const duckDuckGoResults = await duckDuckGoSearch(query).catch(() => []);
+  const engineResults = duckDuckGoResults.length > 0 ? duckDuckGoResults : await bingSearch(query).catch(() => []);
+  const launchSeeds = query.toLowerCase().includes("hungary")
+    ? [
+        {
+          title: "MDLSZ - Magyar Dinamikus Lövészsport Szövetség",
+          link: "https://mdlsz.com/",
+          snippet: "Official Hungarian dynamic shooting federation source for clubs, competitions, and sport shooting information.",
+        },
+        {
+          title: "Hungarian Shooting Federation",
+          link: "https://www.hunshooting.hu/",
+          snippet: "Official Hungarian sport shooting federation source for sport shooting information, competitions, and disciplines.",
+        },
+      ]
+    : [];
+  return [...engineResults, ...launchSeeds];
 }
 
 async function searchWeb(query: string) {
@@ -116,7 +195,7 @@ function inferListingKind(text: string) {
 function inferCategory(text: string, targetCategory: string) {
   const hay = text.toLowerCase();
   if (hay.includes("cup") || hay.includes("match") || hay.includes("tournament") || hay.includes("competition")) {
-    return "Birthday Parties";
+    return "Competitions";
   }
   if (hay.includes("range") || hay.includes("facility")) {
     return "Camps";
@@ -223,6 +302,24 @@ function isDuplicateUrl(url: string, dedupeIndex: CatalogDedupeSupportIndex) {
   return dedupeIndex.websites.includes(normalize(url));
 }
 
+function isGenericSourceHost(host: string) {
+  return [
+    "britannica.com",
+    "worldatlas.com",
+    "countryreports.org",
+    "wikipedia.org",
+    "visit",
+    "tripadvisor.",
+    "lonelyplanet.",
+  ].some((blocked) => host.includes(blocked));
+}
+
+function hasCompareDomainEvidence(text: string) {
+  return /\b(shooting|shoot|range|rifle|pistol|shotgun|firearm|firearms|hunter|hunting|competition|match|ipsc|idpa|practiscore|mssz|mdlsz|lőtér|lövész|lövészet|vadász|vadászat|fegyver|sportlöv)\b/i.test(
+    text,
+  );
+}
+
 function isWeakCandidate(authorityGrade: DiscoveryArtifact["authorityGrade"], kidsRelevanceScore: number) {
   return authorityGrade === "reject" || authorityGrade === "weak" || kidsRelevanceScore < 40;
 }
@@ -237,6 +334,7 @@ export async function discoverRangeScoutCandidates(input: {
   const targets = buildRangeScoutDiscoveryTargets(input.snapshot, input.maxTargets ?? 4);
   const dedupeIndex = buildDedupeSupportIndex(input.providers, input.meetups);
   const artifacts: DiscoveryArtifact[] = [];
+  const seenSourceUrls = new Set<string>();
 
   for (const target of targets) {
     const hits = await searchWeb(target.query);
@@ -252,7 +350,9 @@ export async function discoverRangeScoutCandidates(input: {
         continue;
       }
 
+      if (seenSourceUrls.has(sourceUrl.toLowerCase())) continue;
       if (isDuplicateUrl(sourceUrl, dedupeIndex)) continue;
+      if (isGenericSourceHost(parsed.hostname.toLowerCase())) continue;
 
       const authority = scoreAuthority(parsed);
       let page;
@@ -263,6 +363,7 @@ export async function discoverRangeScoutCandidates(input: {
       }
 
       const mergedText = `${hit.title ?? ""} ${hit.snippet ?? ""} ${page.text}`.replace(/\s+/g, " ").trim();
+      if (!hasCompareDomainEvidence(mergedText)) continue;
       const listingKindHint = inferListingKind(mergedText);
       const categoryHint = inferCategory(mergedText, target.category);
       const geo = inferBoroughAndNeighborhood(mergedText, target);
@@ -297,7 +398,9 @@ export async function discoverRangeScoutCandidates(input: {
       if (scoreResult.score < 60) prefilterReasons.push("low_preliminary_scarcity_score");
 
       if (prefilterReasons.includes("weak_source_authority")) continue;
+      if (prefilterReasons.includes("low_shooting_relevance")) continue;
 
+      seenSourceUrls.add(sourceUrl.toLowerCase());
       artifacts.push({
         artifactId: slugify(`${target.targetId}-${title}-${parsed.hostname}`),
         targetId: target.targetId,

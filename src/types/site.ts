@@ -1,5 +1,6 @@
 import type { Borough, BoroughChoice, Category } from "@/types/provider";
 import { CMS_MEDIA } from "@/config/defaultMedia";
+import type { AppLocale } from "@/lib/i18n/config";
 
 /** Lucide icon keys used by home marketing blocks (stored in Mongo). */
 export type SiteIconKey =
@@ -53,7 +54,7 @@ export interface SiteTrustPillar {
 }
 
 /** Saved-tab filter chip; `categoryFilter` must match `badgeFor(provider).filter` / meetup row. */
-export type AccountSavedCategoryFilter = "All" | "Classes" | "Camps" | "Birthdays" | "Drop-Ins" | "Meet-Up Groups";
+export type AccountSavedCategoryFilter = "All" | "Classes" | "Camps" | "Competitions" | "Drop-Ins" | "Meet-Up Groups";
 
 export interface SiteAccountSavedFilterChip {
   label: string;
@@ -159,6 +160,14 @@ export interface SiteCalculatorCopy {
   estimatedTotalLabel: string;
 }
 
+/**
+ * Local-owned public UI dictionary.
+ *
+ * CHECK Local writes these path-keyed overrides through the authenticated ingest/site document path.
+ * Code fallback copy exists only as safety net; live public language should be maintained here.
+ */
+export type SitePublicCopy = Partial<Record<AppLocale, Record<string, string>>>;
+
 export interface SiteDoc {
   _id: "main";
   logoUrl: string;
@@ -201,6 +210,16 @@ export interface SiteDoc {
   calculator: SiteCalculatorCopy;
   /** My Account + related dashboard copy and option lists (CMS). */
   account: SiteAccountSettings;
+  /** Local-managed i18n overrides for public labels, helper text, empty states, and action copy. */
+  publicCopy?: SitePublicCopy;
+  /** Local-managed language set exposed by the public selector for this miniapp. */
+  publicLocales?: AppLocale[];
+  /** Local-managed default public language for this miniapp. */
+  publicDefaultLocale?: AppLocale;
+  /** Audit stamp written by CHECK Local when refreshing publicCopy. */
+  publicCopyMaintainedAt?: string;
+  /** Human-readable owner/source for the last publicCopy refresh. */
+  publicCopyMaintainedBy?: string;
 }
 
 export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
@@ -217,50 +236,9 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
   neighborhoodSectionTitle: "Find venues in your region",
   popularNeighborhoodsCaption: "Popular regions in {borough}",
   guidesSectionTitle: "Regional guides worth opening",
-  guidesViewAllLabel: "Browse all neighborhoods",
+  guidesViewAllLabel: "Browse all regions",
   guidesViewAllHref: "",
-  guides: [
-    {
-      id: "guide-uws",
-      title: "Bavaria competition and hunting mix",
-      desc: "Member clubs, alpine hunting access, and practical training stops across southern Germany.",
-      borough: "Germany",
-      neighborhood: "Bavaria",
-      imageUrl: "https://i.ibb.co/PGSLX2hj/site-guide-uws-v2.jpg",
-      tone: "orange",
-      ctaLabel: "Explore guide",
-    },
-    {
-      id: "guide-bk-heights",
-      title: "Andalusia clay and field guide",
-      desc: "Dry-weather clay venues, hosted competitions, and field-focused operators with destination appeal.",
-      borough: "Spain",
-      neighborhood: "Andalusia",
-      imageUrl: "https://i.ibb.co/9kgQVvB2/site-guide-bkheights-v2.jpg",
-      tone: "teal",
-      ctaLabel: "Explore guide",
-    },
-    {
-      id: "guide-chelsea",
-      title: "Lombardy range access guide",
-      desc: "Indoor and outdoor facilities, match-heavy clubs, and easy training access near northern Italian hubs.",
-      borough: "Italy",
-      neighborhood: "Lombardy",
-      imageUrl: "https://i.ibb.co/LXssDpjV/site-guide-chelsea-v2.jpg",
-      tone: "pink",
-      ctaLabel: "Explore guide",
-    },
-    {
-      id: "guide-park-slope",
-      title: "Masovian club and licence guide",
-      desc: "Practical training lanes, licensing prep, and fast-growing club infrastructure around Warsaw.",
-      borough: "Poland",
-      neighborhood: "Masovian",
-      imageUrl: "https://i.ibb.co/hFh8xRnZ/site-guide-parkslope-v2.jpg",
-      tone: "blue",
-      ctaLabel: "Explore guide",
-    },
-  ],
+  guides: [],
   locationHeroImages: [],
   howItWorksSectionTitle: "How RangeScout EU works",
   howItWorksSteps: [
@@ -294,8 +272,8 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
       icon: "compass",
     },
     {
-      title: "Source-backed details",
-      desc: "Useful operator details gathered into one easier browse experience.",
+      title: "Verified details",
+      desc: "Useful operator details, schedules, and practical context in one place.",
       tone: "teal",
       icon: "shield-check",
     },
@@ -312,7 +290,7 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
       icon: "calculator",
     },
   ],
-  trustLines: ["Curated EU listings", "Country-first search", "Source-backed details"],
+  trustLines: ["Curated EU listings", "Country-first search", "Verified details"],
   popularPicksSectionTitle: "Popular picks to get you started",
   popularPicksViewAllLabel: "View all",
   newsletterTitle: "Get the latest shooting venue updates for your region",
@@ -358,7 +336,7 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
         { label: "All", categoryFilter: "All" },
         { label: "Training", categoryFilter: "Classes" },
         { label: "Ranges", categoryFilter: "Camps" },
-        { label: "Competitions", categoryFilter: "Birthdays" },
+        { label: "Competitions", categoryFilter: "Competitions" },
         { label: "Hunting Grounds", categoryFilter: "Drop-Ins" },
         { label: "Clubs", categoryFilter: "Meet-Up Groups" },
       ],
@@ -427,13 +405,13 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
       addressLine2: "",
       detectedLabelPrefix: "Detected region:",
       detectedNeighborhood: "",
-      detectedBorough: "Germany",
+      detectedBorough: "Hungary",
       updateAddressCtaLabel: "Update address",
       nearbySectionLabel: "Nearby neighborhoods",
       nearbyNeighborhoods: [],
-      nearbyNavigateBorough: "Germany",
+      nearbyNavigateBorough: "Hungary",
       browseCtaLabel: "Browse venues near me",
-      browseNavigateBorough: "Germany",
+      browseNavigateBorough: "Hungary",
       browseNavigateNeighborhood: "",
       updateAddressToast: "Update address coming soon",
     },
@@ -463,4 +441,9 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
       supportTextAfter: "",
     },
   },
+  publicCopy: {},
+  publicLocales: ["en", "hu", "it"],
+  publicDefaultLocale: "en",
+  publicCopyMaintainedAt: "",
+  publicCopyMaintainedBy: "",
 };

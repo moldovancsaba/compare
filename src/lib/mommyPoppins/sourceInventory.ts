@@ -154,7 +154,7 @@ export function buildTaxonomyMap(records: MommyPoppinsSourceRecord[]): MommyPopp
         : categoryId === 645
           ? "Classes"
           : categoryId === 648
-            ? "Birthday Parties"
+            ? "Competitions"
             : categoryId === 1365 || categoryId === 1667 || categoryId === 2471 || categoryId === 1709
               ? "Drop-In Activities"
               : null;

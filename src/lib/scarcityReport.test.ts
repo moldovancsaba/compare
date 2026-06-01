@@ -28,7 +28,7 @@ const providers: Provider[] = [
   {
     id: "prov-2",
     name: "Catalonia Birthday",
-    category: "Birthday Parties",
+    category: "Competitions",
     borough: "Spain",
     neighborhood: "Catalonia",
     address: "2 Example St",

@@ -1,4 +1,4 @@
-import { Badge, Button, Chip, Group, SimpleGrid, Stack, Text, TextInput as Input, ThemeIcon, Title } from "@mantine/core";
+import { Badge, Box, Button, Chip, Group, SimpleGrid, Stack, Text, TextInput as Input, ThemeIcon, Title } from "@mantine/core";
 import { useState } from "react";
 import {
   GraduationCap,
@@ -21,6 +21,7 @@ import { ProviderCard } from "@/components/scout/ProviderCard";
 import { MeetupGroupCard } from "@/components/scout/MeetupGroupCard";
 import { getNeighborhoodGuideHref } from "@/lib/scoutRoutes";
 import { type AppLocale } from "@/lib/i18n/config";
+import { getLocalCategoryLabel, getLocalText, siteCopy } from "@/lib/i18n/messages";
 
 const HOME_BOROUGH_CHOICES: BoroughChoice[] = ["All", ...BOROUGHS];
 
@@ -44,23 +45,60 @@ function openMarketingLink(href: string | undefined, inApp: () => void) {
 const CATEGORIES: {
   key: Category | "Meet-Up Groups";
   icon: React.ComponentType<{ className?: string; size?: string | number }>;
-  description: string;
+  description: Record<AppLocale, string>;
   tone: "orange" | "teal" | "pink" | "amber" | "blue";
 }[] = [
-  { key: "Classes", icon: GraduationCap, description: "Safety courses, pistol fundamentals, youth academies, and licence preparation", tone: "orange" },
-  { key: "Camps", icon: Tent, description: "Indoor ranges, outdoor complexes, clay facilities, and long-range lanes", tone: "teal" },
-  { key: "Birthday Parties", icon: PartyPopper, description: "Match calendars, club events, open qualifiers, and hosted shooting days", tone: "pink" },
-  { key: "Drop-In Activities", icon: Sparkles, description: "Managed hunting grounds, stalking weekends, field practice, and seasonal access", tone: "amber" },
-  { key: "Meet-Up Groups", icon: Users, description: "Sport shooting clubs, hunting associations, and regional member communities", tone: "blue" },
+  {
+    key: "Classes",
+    icon: GraduationCap,
+    description: {
+      en: "Safety courses, pistol fundamentals, youth academies, and licence preparation",
+      hu: "Biztonsági képzések, pisztoly alapok, junior akadémiák és engedélyfelkészítés",
+      it: "Corsi di sicurezza, basi di pistola, accademie junior e preparazione licenza",
+    },
+    tone: "orange",
+  },
+  {
+    key: "Camps",
+    icon: Tent,
+    description: {
+      en: "Indoor ranges, outdoor complexes, clay facilities, and long-range lanes",
+      hu: "Beltéri lőterek, kültéri komplexumok, koronglövő helyszínek és távlövő pályák",
+      it: "Poligoni indoor, complessi outdoor, strutture per piattello e linee lunga distanza",
+    },
+    tone: "teal",
+  },
+  {
+    key: "Competitions",
+    icon: PartyPopper,
+    description: {
+      en: "Match calendars, club events, open qualifiers, and hosted shooting days",
+      hu: "Versenynaptárak, klubesemények, nyílt kvalifikációk és szervezett lőnapok",
+      it: "Calendari gara, eventi dei club, qualificazioni aperte e giornate di tiro organizzate",
+    },
+    tone: "pink",
+  },
+  {
+    key: "Drop-In Activities",
+    icon: Sparkles,
+    description: {
+      en: "Managed hunting grounds, stalking weekends, field practice, and seasonal access",
+      hu: "Kezelt vadászterületek, vadászati hétvégék, terepgyakorlatok és szezonális hozzáférés",
+      it: "Aree venatorie gestite, weekend di caccia, pratica sul campo e accesso stagionale",
+    },
+    tone: "amber",
+  },
+  {
+    key: "Meet-Up Groups",
+    icon: Users,
+    description: {
+      en: "Sport shooting clubs, hunting associations, and regional member communities",
+      hu: "Sportlövő klubok, vadászegyesületek és regionális tagsági közösségek",
+      it: "Club di tiro sportivo, associazioni venatorie e comunità regionali",
+    },
+    tone: "blue",
+  },
 ];
-
-const DISPLAY_LABELS: Record<Category | "Meet-Up Groups", string> = {
-  Classes: "Training",
-  Camps: "Ranges",
-  "Birthday Parties": "Competitions",
-  "Drop-In Activities": "Hunting Grounds",
-  "Meet-Up Groups": "Clubs",
-};
 
 const TONE_BG: Record<string, string> = {
   orange: "orange",
@@ -102,6 +140,9 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
   if (siteLoading || siteError || !siteData) return null;
 
   const s = siteData;
+  const localText = <T extends Record<AppLocale, string>>(path: string, fallback: T) => getLocalText(s, locale, path, fallback);
+  const categoryLabel = (key: Category | "Meet-Up Groups") =>
+    key === "Meet-Up Groups" ? localText("nav.clubs", siteCopy.nav.clubs) : getLocalCategoryLabel(s, key, locale);
 
   const popularPicks = s.homePopularPickProviderNames
     .map((name) => providers.find((p) => p.name === name))
@@ -110,6 +151,11 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
   const popularGroup = s.homePopularMeetupGroupId.trim()
     ? meetups.find((g) => g.id === s.homePopularMeetupGroupId.trim())
     : undefined;
+  const visibleGuides = (s.guides ?? []).filter((guide) => {
+    const hasProvider = providers.some((provider) => provider.borough === guide.borough && provider.neighborhood === guide.neighborhood);
+    const hasMeetup = meetups.some((group) => group.borough === guide.borough && group.neighborhood === guide.neighborhood);
+    return hasProvider || hasMeetup;
+  });
 
   return (
     <Stack gap="2.75rem">
@@ -123,13 +169,29 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         ]}
         meta={[{ id: "hero-tagline", label: s.homeHeroTagline, icon: <Sparkles size={14} /> }]}
         media={
-          <CdnImage
-            src={s.homeHeroUrl}
-            alt="Sport shooter on an outdoor range"
-            width={1280}
-            height={1024}
-            style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
-          />
+          s.homeHeroUrl?.trim() ? (
+            <CdnImage
+              src={s.homeHeroUrl}
+              alt={localText("home.heroImageAlt", {
+                en: "Sport shooting venue image",
+                hu: "Lősport helyszín képe",
+                it: "Immagine sede tiro sportivo",
+              })}
+              width={1280}
+              height={1024}
+              style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <Box h="100%" p="xl" bg="teal.0" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Text size="xs" fw={700} tt="uppercase" ta="center" c="teal.8" style={{ letterSpacing: "0.14em" }}>
+                {localText("providerCard.imageUnavailable", {
+                  en: "Image not available",
+                  hu: "Kép nem elérhető",
+                  it: "Immagine non disponibile",
+                })}
+              </Text>
+            </Box>
+          )
         }
       />
 
@@ -137,7 +199,11 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <Stack gap="sm" align="center" ta="center">
           <Title order={2}>{s.homeCategoriesTitle}</Title>
           <Text size="sm" c="dimmed" maw={720}>
-            Discover trainers, ranges, competitions, and hunting access by country and region.
+            {localText("home.categoryIntro", {
+              en: "Discover trainers, ranges, competitions, and hunting access by country and region.",
+              hu: "Fedezz fel képzéseket, lőtereket, versenyeket és vadászati lehetőségeket ország és régió szerint.",
+              it: "Scopri allenamenti, poligoni, gare e accessi venatori per paese e regione.",
+            })}
           </Text>
         </Stack>
         <SimpleGrid mt="lg" cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg">
@@ -149,17 +215,17 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
               <Stack align="center" ta="center" gap="md" h="100%" justify="space-between">
                 <Stack gap="xs" w="100%" align="flex-start">
                   <Text fw={700} size="1.05rem" lh={1.2} ta="left">
-                    {DISPLAY_LABELS[key]}
+                    {categoryLabel(key)}
                   </Text>
                   <Badge variant="filled" color={TONE_BG[tone]} radius="xl">
-                    Explore
+                    {localText("home.explore", siteCopy.home.explore)}
                   </Badge>
                 </Stack>
                 <ThemeIcon size={64} radius="xl" variant="light" color={TONE_BG[tone]}>
                   <Icon size={28} />
                 </ThemeIcon>
                 <Text size="sm" c="dimmed">
-                  {description}
+                  {localText(`home.categoryDescriptions.${key}`, description)}
                 </Text>
                 <Button
                   variant="light"
@@ -167,9 +233,9 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
                   radius="xl"
                   rightSection={<ArrowRight size={14} />}
                   onClick={() => onNavigate(key === "Meet-Up Groups" ? "Meet-Up Groups" : (key as Category))}
-                  aria-label={`Explore ${DISPLAY_LABELS[key]}`}
+                  aria-label={`${localText("home.explore", siteCopy.home.explore)} ${categoryLabel(key)}`}
                 >
-                  Explore
+                  {localText("home.explore", siteCopy.home.explore)}
                 </Button>
               </Stack>
             </AccentPanel>
@@ -181,7 +247,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <AccentPanel
           tone="amber"
           title={s.neighborhoodSectionTitle}
-          badge={borough === "All" ? "All countries" : formatBoroughLabel(borough)}
+          badge={borough === "All" ? localText("home.neighborhoodFallback", siteCopy.home.neighborhoodFallback) : formatBoroughLabel(borough, locale)}
         >
           <Stack gap="lg">
             <Group gap="xs" wrap="wrap">
@@ -194,19 +260,23 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
                   variant={choice === borough ? "filled" : "outline"}
                   color={choice === borough ? "dark" : "gray"}
                 >
-                  {choice === "All" ? "All" : formatBoroughLabel(choice)}
+                  {choice === "All" ? localText("common.fallbackAll", siteCopy.common.fallbackAll) : formatBoroughLabel(choice, locale)}
                 </Chip>
               ))}
             </Group>
             <Text size="sm" c="dimmed">
               {borough === "All"
-                ? "Browse every EU region, or pick a country above to narrow down operators and clubs."
-                : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, formatBoroughLabel(borough))}
+                ? localText("home.allRegionsDescription", {
+                  en: "Browse every EU region, or pick a country above to narrow down operators and clubs.",
+                  hu: "Böngéssz minden EU-régiót, vagy válassz országot a szolgáltatók és klubok szűkítéséhez.",
+                  it: "Sfoglia ogni regione UE oppure scegli un paese per restringere operatori e club.",
+                })
+                : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, formatBoroughLabel(borough, locale))}
             </Text>
             <Group gap="xs" wrap="wrap">
               {borough === "All" ? (
                 <Chip checked={false} onChange={() => onNavigate("Classes", { borough: "All" })} radius="xl" variant="outline" color="gray">
-                  Open Discover (all EU)
+                  {localText("discover.browseAllEu", siteCopy.discover.browseAllEu)}
                 </Chip>
               ) : (
                 <>
@@ -223,7 +293,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
                     </Chip>
                   ))}
                   <Chip checked={false} onChange={() => onNavigate("Classes", { borough })} radius="xl" variant="outline" color="gray">
-                    View all
+                    {localText("home.explore", siteCopy.home.explore)}
                   </Chip>
                 </>
               )}
@@ -232,7 +302,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         </AccentPanel>
       </section>
 
-      {s.guides.length > 0 && (
+      {visibleGuides.length > 0 && (
         <section>
           <Group mb="lg" justify="space-between" align="flex-end">
             <Stack gap={4}>
@@ -255,21 +325,31 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
             </Button>
           </Group>
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="lg">
-            {s.guides.map((g) => (
+            {visibleGuides.map((g) => (
               <EditorialCard
                 key={g.id ?? g.title}
-                media={
+                media={g.imageUrl?.trim() ? (
                   <CdnImage
                     src={g.imageUrl}
                     alt={g.title}
                     style={{ display: "block", width: "100%", height: 180, objectFit: "cover" }}
                   />
-                }
-                eyebrow={formatBoroughLabel(g.borough)}
+                ) : (
+                  <Box h={180} p="lg" bg="teal.0" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Text size="xs" fw={700} tt="uppercase" ta="center" c="teal.8" style={{ letterSpacing: "0.14em" }}>
+                      {localText("providerCard.imageUnavailable", {
+                        en: "Image not available",
+                        hu: "Kép nem elérhető",
+                        it: "Immagine non disponibile",
+                      })}
+                    </Text>
+                  </Box>
+                )}
+                eyebrow={formatBoroughLabel(g.borough, locale)}
                 title={g.title}
                 description={g.desc}
                 tone={g.tone === "amber" ? "warm" : g.tone === "blue" ? "cool" : "default"}
-                ctaLabel={g.ctaLabel?.trim() || "Explore guide"}
+                ctaLabel={g.ctaLabel?.trim() || localText("home.explore", siteCopy.home.explore)}
                 onClick={() =>
                   openMarketingLink(g.ctaHref, () => {
                     window.location.assign(
@@ -287,7 +367,11 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
         <Stack gap="sm" align="center" ta="center">
           <Title order={2}>{s.howItWorksSectionTitle}</Title>
           <Text size="sm" c="dimmed" maw={640}>
-            Use RangeScout to scan regional competitions, ranges, clubs, and training lanes, save your best fits, and act fast.
+            {localText("home.howItWorksDescription", {
+              en: "Use RangeScout to scan regional competitions, ranges, clubs, and training lanes, save your best fits, and act fast.",
+              hu: "A RangeScout segít áttekinteni a regionális versenyeket, lőtereket, klubokat és képzéseket, elmenteni a legjobb találatokat, majd gyorsan továbblépni.",
+              it: "Usa RangeScout per esaminare gare, poligoni, club e allenamenti regionali, salvare le opzioni migliori e agire rapidamente.",
+            })}
           </Text>
         </Stack>
         <FeatureBand
@@ -296,7 +380,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
             id: String(step.step),
             title: step.title,
             description: step.desc,
-            meta: `Step ${step.step}`,
+            meta: locale === "hu" ? `${step.step}. lépés` : locale === "it" ? `Passo ${step.step}` : `Step ${step.step}`,
             icon: <SiteLucideIcon name={step.icon} size={20} />,
           }))}
         />
@@ -312,7 +396,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
           </Group>
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }}>
             {popularPicks.map((p) => (
-              <ProviderCard key={p.id} provider={p} onOpen={onOpenProvider} onShare={() => {}} />
+              <ProviderCard key={p.id} provider={p} onOpen={onOpenProvider} onShare={() => {}} locale={locale} copySource={s} />
             ))}
             {popularGroup && (
               <MeetupGroupCard key={popularGroup.id} group={popularGroup} onOpen={onOpenGroup} onShare={() => {}} />

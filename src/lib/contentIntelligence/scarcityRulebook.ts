@@ -69,7 +69,7 @@ function inferCategory(input: NormalizedListingInput): ScarcityCategory | null {
   const normalized = normalize(input.categoryHint);
   if (normalized === "classes") return "Classes";
   if (normalized === "camps") return "Camps";
-  if (normalized === "birthday parties") return "Birthday Parties";
+  if (normalized === "birthday parties") return "Competitions";
   if (normalized === "drop-in activities") return "Drop-In Activities";
   if (input.listingKindHint === "meetupGroup") return "Meet-Up Groups";
   return null;

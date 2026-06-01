@@ -4,7 +4,7 @@ import { Badge, Button, Stack, Text } from "@mantine/core";
 import { GraduationCap, Tent, PartyPopper, Sparkles, Heart, Calculator, Users, Home, UserCircle, CalendarClock } from "@/lib/appIcons";
 import { getHrefForView, type ScoutPageKey } from "@/lib/scoutRoutes";
 import { discoveryFeatureFlags } from "@/lib/discoveryConfig";
-import { siteCopy, getText } from "@/lib/i18n/messages";
+import { siteCopy, getLocalText, type LocalCopySource } from "@/lib/i18n/messages";
 import type { AppLocale } from "@/lib/i18n/config";
 
 export type ViewKey = ScoutPageKey;
@@ -15,7 +15,7 @@ const ITEMS: NavItem[] = [
   { key: "Home", icon: Home },
   { key: "Classes", icon: GraduationCap },
   { key: "Camps", icon: Tent },
-  { key: "Birthday Parties", icon: PartyPopper },
+  { key: "Competitions", icon: PartyPopper },
   { key: "Drop-In Activities", icon: Sparkles },
   { key: "This Week", icon: CalendarClock },
   { key: "Meet-Up Groups", icon: Users },
@@ -28,38 +28,40 @@ interface Props {
   active: ViewKey;
   locale: AppLocale;
   sidebarPromo?: { title: string; body: string; cta: string; href?: string };
+  copySource?: LocalCopySource;
 }
 
-export function Sidebar({ active, locale, sidebarPromo }: Props) {
+export function Sidebar({ active, locale, sidebarPromo, copySource = null }: Props) {
+  const localText = <T extends Record<AppLocale, string>>(path: string, fallback: T) => getLocalText(copySource, locale, path, fallback);
   const primaryItems = ITEMS.filter(({ key }) => key !== "This Week" || discoveryFeatureFlags.thisWeekEnabled).slice(0, 7);
   const utilityItems = ITEMS.filter(({ key }) => key !== "This Week" || discoveryFeatureFlags.thisWeekEnabled).slice(7);
   const badgeFor = (key: ViewKey) => {
     if (key === "Saved") {
-      return <Badge variant="light">{getText(siteCopy.nav.badges.saved, locale)}</Badge>;
+      return <Badge variant="light">{localText("nav.badges.saved", siteCopy.nav.badges.saved)}</Badge>;
     }
     if (key === "Calculator") {
-      return <Badge variant="light">{getText(siteCopy.nav.badges.plan, locale)}</Badge>;
+      return <Badge variant="light">{localText("nav.badges.plan", siteCopy.nav.badges.plan)}</Badge>;
     }
     return undefined;
   };
 
   const navLabels = {
-    home: getText(siteCopy.nav.home, locale),
-    classes: getText(siteCopy.nav.classes, locale),
-    camps: getText(siteCopy.nav.camps, locale),
-    competitions: getText(siteCopy.nav.competitions, locale),
-    hunting: getText(siteCopy.nav.hunting, locale),
-    thisWeek: getText(siteCopy.nav.thisWeek, locale),
-    meetupGroups: getText(siteCopy.nav.clubs, locale),
-    saved: getText(siteCopy.nav.saved, locale),
-    calculator: getText(siteCopy.nav.calculator, locale),
-    account: getText(siteCopy.nav.account, locale),
-    regionGuide: getText(siteCopy.nav.neighborhoodGuide, locale),
+    home: localText("nav.home", siteCopy.nav.home),
+    classes: localText("nav.classes", siteCopy.nav.classes),
+    camps: localText("nav.camps", siteCopy.nav.camps),
+    competitions: localText("nav.competitions", siteCopy.nav.competitions),
+    hunting: localText("nav.hunting", siteCopy.nav.hunting),
+    thisWeek: localText("nav.thisWeek", siteCopy.nav.thisWeek),
+    meetupGroups: localText("nav.clubs", siteCopy.nav.clubs),
+    saved: localText("nav.saved", siteCopy.nav.saved),
+    calculator: localText("nav.calculator", siteCopy.nav.calculator),
+    account: localText("nav.account", siteCopy.nav.account),
+    regionGuide: localText("nav.neighborhoodGuide", siteCopy.nav.neighborhoodGuide),
   };
 
   return (
     <SidebarNav ariaLabel="RangeScout navigation" gap="lg">
-      <SidebarNavSection label="Discover">
+      <SidebarNavSection label={localText("sidebar.discoverLabel", siteCopy.sidebar.discoverLabel)}>
         {primaryItems.map(({ key, icon: Icon, disabled }) => (
           <SidebarNavItem
             key={key}
@@ -70,7 +72,7 @@ export function Sidebar({ active, locale, sidebarPromo }: Props) {
               Home: navLabels.home,
               Classes: navLabels.classes,
               Camps: navLabels.camps,
-              "Birthday Parties": navLabels.competitions,
+              "Competitions": navLabels.competitions,
               "Drop-In Activities": navLabels.hunting,
               "This Week": navLabels.thisWeek,
               "Meet-Up Groups": navLabels.meetupGroups,
@@ -88,7 +90,7 @@ export function Sidebar({ active, locale, sidebarPromo }: Props) {
         ))}
       </SidebarNavSection>
 
-      <SidebarNavSection label="My tools" pushToBottom>
+      <SidebarNavSection label={localText("sidebar.toolsLabel", siteCopy.sidebar.toolsLabel)} pushToBottom>
         {utilityItems.map(({ key, icon: Icon, disabled }) => (
           <SidebarNavItem
             key={key}
@@ -99,7 +101,7 @@ export function Sidebar({ active, locale, sidebarPromo }: Props) {
               Home: navLabels.home,
               Classes: navLabels.classes,
               Camps: navLabels.camps,
-              "Birthday Parties": navLabels.competitions,
+              "Competitions": navLabels.competitions,
               "Drop-In Activities": navLabels.hunting,
               "This Week": navLabels.thisWeek,
               "Meet-Up Groups": navLabels.meetupGroups,
@@ -121,11 +123,11 @@ export function Sidebar({ active, locale, sidebarPromo }: Props) {
       <Stack gap="sm">
         <AccentPanel
           tone="amber"
-          title={sidebarPromo?.title ?? getText(siteCopy.sidebar.promoTitle, locale)}
+          title={sidebarPromo?.title ?? localText("sidebar.promoTitle", siteCopy.sidebar.promoTitle)}
         >
           <Stack gap="xs">
             <Text size="xs" c="dimmed">
-              {sidebarPromo?.body ?? getText(siteCopy.sidebar.promoBody, locale)}
+              {sidebarPromo?.body ?? localText("sidebar.promoBody", siteCopy.sidebar.promoBody)}
             </Text>
             <Button
               component="a"
@@ -135,13 +137,13 @@ export function Sidebar({ active, locale, sidebarPromo }: Props) {
               mt="xs"
               fullWidth
             >
-              {sidebarPromo?.cta ?? getText(siteCopy.sidebar.promoCta, locale)}
+              {sidebarPromo?.cta ?? localText("sidebar.promoCta", siteCopy.sidebar.promoCta)}
             </Button>
           </Stack>
         </AccentPanel>
       </Stack>
       <Text size="xs" c="dimmed">
-        {getText(siteCopy.sidebar.promoCopy, locale)}
+        {localText("sidebar.promoCopy", siteCopy.sidebar.promoCopy)}
       </Text>
     </SidebarNav>
   );

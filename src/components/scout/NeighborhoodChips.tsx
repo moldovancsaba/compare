@@ -1,18 +1,24 @@
 import { Chip, Group, Stack, Text } from "@mantine/core";
+import type { AppLocale } from "@/lib/i18n/config";
+import { getLocalText, getText, siteCopy, type LocalCopySource } from "@/lib/i18n/messages";
 
 export function NeighborhoodChips({
   options,
   value,
   onChange,
+  locale = "en",
+  copySource = null,
 }: {
   options: string[];
   value: string | null;
   onChange: (n: string | null) => void;
+  locale?: AppLocale;
+  copySource?: LocalCopySource;
 }) {
   return (
     <Stack gap="xs">
       <Text size="xs" fw={700} tt="uppercase" c="dimmed" style={{ letterSpacing: "0.18em" }}>
-        Region
+        {getLocalText(copySource, locale, "discover.regionLabel", siteCopy.discover.regionLabel)}
       </Text>
       <Group gap="xs">
         <Chip
@@ -22,7 +28,7 @@ export function NeighborhoodChips({
           variant={value === null ? "filled" : "outline"}
           color={value === null ? "dark" : "gray"}
         >
-          All
+          {getText(siteCopy.common.fallbackAll, locale)}
         </Chip>
         {options.map((n) => {
           return (

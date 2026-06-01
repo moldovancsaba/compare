@@ -5,7 +5,7 @@ import type { AgeRange, DayTimeTag, Provider } from "@/types/provider";
 export type ScarcityCategory =
   | "Classes"
   | "Camps"
-  | "Birthday Parties"
+  | "Competitions"
   | "Drop-In Activities"
   | "Meet-Up Groups";
 
@@ -53,7 +53,7 @@ export function buildCategoryRows(providers: Provider[], meetups: MeetupGroup[])
   const rows: { category: ScarcityCategory; count: number }[] = [
     { category: "Classes", count: providers.filter((p) => p.category === "Classes").length },
     { category: "Camps", count: providers.filter((p) => p.category === "Camps").length },
-    { category: "Birthday Parties", count: providers.filter((p) => p.category === "Birthday Parties").length },
+    { category: "Competitions", count: providers.filter((p) => p.category === "Competitions").length },
     { category: "Drop-In Activities", count: providers.filter((p) => p.category === "Drop-In Activities").length },
     { category: "Meet-Up Groups", count: meetups.length },
   ];

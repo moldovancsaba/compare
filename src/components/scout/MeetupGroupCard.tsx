@@ -1,20 +1,23 @@
-import { ActionIcon, Button, Group } from "@mantine/core";
+import { ActionIcon, Box, Button, Group, Text } from "@mantine/core";
 import { PublicProductCard } from "@doneisbetter/gds-core/client";
 import { Heart, Share2, Instagram } from "@/lib/appIcons";
 import { useSaved } from "@/store/useScout";
 import { toast } from "@/lib/notify";
 import type { MeetupGroup } from "@/types/meetup";
 import { CdnImage } from "@/components/media/CdnImage";
-import { CMS_MEDIA } from "@/config/defaultMedia";
 import { formatBoroughLabel } from "@/data/locations";
+import type { AppLocale } from "@/lib/i18n/config";
+import { getLocalText, siteCopy, type LocalCopySource } from "@/lib/i18n/messages";
 
 interface Props {
   group: MeetupGroup;
   onOpen: (g: MeetupGroup) => void;
   onShare: (g: MeetupGroup) => void;
+  locale?: AppLocale;
+  copySource?: LocalCopySource;
 }
 
-export function MeetupGroupCard({ group, onOpen, onShare }: Props) {
+export function MeetupGroupCard({ group, onOpen, onShare, locale = "en", copySource = null }: Props) {
   const { isSaved, toggle } = useSaved();
   const saved = isSaved(group.id);
   const instagramHandle = normalizeInstagramHandle(group.instagram);
@@ -24,26 +27,38 @@ export function MeetupGroupCard({ group, onOpen, onShare }: Props) {
   return (
     <PublicProductCard
       image={
-        <CdnImage
-          resolveBase={group.coverImageUrl?.trim() ? group.website : undefined}
-          src={group.coverImageUrl?.trim() ? group.coverImageUrl : CMS_MEDIA.fallbackMeetup}
-          alt={group.name}
-          style={{ display: "block", height: 144, width: "100%", objectFit: "cover" }}
-        />
+        group.coverImageUrl?.trim() ? (
+          <CdnImage
+            resolveBase={group.website}
+            src={group.coverImageUrl}
+            alt={group.name}
+            style={{ display: "block", height: 144, width: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <Box h={144} p="lg" bg="teal.0" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Text size="xs" fw={700} tt="uppercase" ta="center" c="teal.8" style={{ letterSpacing: "0.14em" }}>
+              {getLocalText(copySource, locale, "providerCard.imageUnavailable", {
+                en: "Image not available",
+                hu: "Kép nem elérhető",
+                it: "Immagine non disponibile",
+              })}
+            </Text>
+          </Box>
+        )
       }
       title={group.name}
       description={group.description}
-      helperText={`${group.neighborhood}, ${formatBoroughLabel(group.borough)}`}
+      helperText={`${group.neighborhood}, ${formatBoroughLabel(group.borough, locale)}`}
       helperKind="supporting"
       metadata={[
-        { label: "Type", value: group.groupType },
-        { label: "Audience", value: group.ageRange },
-        { label: "Cadence", value: group.cadence },
-        { label: "Channel", value: instagramLabel },
+        { label: getLocalText(copySource, locale, "meetupCard.type", { en: "Type", hu: "Típus", it: "Tipo" }), value: group.groupType },
+        { label: getLocalText(copySource, locale, "providerCard.audience", siteCopy.providerCard.audience), value: group.ageRange },
+        { label: getLocalText(copySource, locale, "meetupCard.cadence", { en: "Cadence", hu: "Ütemezés", it: "Cadenza" }), value: group.cadence },
+        { label: getLocalText(copySource, locale, "meetupCard.channel", { en: "Channel", hu: "Csatorna", it: "Canale" }), value: instagramLabel },
       ]}
       primaryAction={
         <Button onClick={() => onOpen(group)} color="dark">
-          View details
+          {getLocalText(copySource, locale, "providerCard.viewDetails", siteCopy.providerCard.viewDetails)}
         </Button>
       }
       secondaryAction={
@@ -79,9 +94,13 @@ export function MeetupGroupCard({ group, onOpen, onShare }: Props) {
             size="lg"
             onClick={() => {
               toggle(group.id);
-              toast.success(saved ? "Removed from saved" : "Saved");
+              toast.success(saved
+                ? getLocalText(copySource, locale, "providerCard.removedToast", siteCopy.providerCard.removedToast)
+                : getLocalText(copySource, locale, "providerCard.savedToast", siteCopy.providerCard.savedToast));
             }}
-            aria-label={saved ? "Remove from saved" : "Save group"}
+            aria-label={saved
+              ? getLocalText(copySource, locale, "meetupCard.removeSaved", { en: "Remove club from saved", hu: "Klub eltávolítása a mentettekből", it: "Rimuovi club dai salvati" })
+              : getLocalText(copySource, locale, "meetupCard.save", { en: "Save club", hu: "Klub mentése", it: "Salva club" })}
           >
             <Heart
               size={16}
@@ -89,7 +108,13 @@ export function MeetupGroupCard({ group, onOpen, onShare }: Props) {
               fill={saved ? "currentColor" : "none"}
             />
           </ActionIcon>
-          <ActionIcon variant="default" size="lg" radius="xl" aria-label="Share group" onClick={() => onShare(group)}>
+          <ActionIcon
+            variant="default"
+            size="lg"
+            radius="xl"
+            aria-label={getLocalText(copySource, locale, "meetupCard.share", { en: "Share club", hu: "Klub megosztása", it: "Condividi club" })}
+            onClick={() => onShare(group)}
+          >
             <Share2 size={16} />
           </ActionIcon>
         </Group>
