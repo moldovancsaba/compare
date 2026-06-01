@@ -1,7 +1,7 @@
 import { fetchPageText } from "@/lib/curator/fetchPageText";
 import { serperSearch, type SerperOrganic } from "@/lib/curator/serperSearch";
 import { buildDedupeSupportIndex, type CatalogDedupeSupportIndex, type CatalogSnapshot } from "@/lib/catalogIntelligence";
-import { buildRangeScoutDiscoveryTargets, type DiscoveryTarget } from "@/lib/contentIntelligence/discoveryTargets";
+import { buildCompareDiscoveryTargets, type DiscoveryTarget } from "@/lib/contentIntelligence/discoveryTargets";
 import { scoreRangeScoutCandidate, type ScarcityScoreResult } from "@/lib/contentIntelligence/scarcityRulebook";
 import type { NormalizedListingInput } from "@/lib/contentIntelligence/rangeScoutAdapter";
 import type { MeetupGroup } from "@/types/meetup";
@@ -90,7 +90,7 @@ function decodeBingTarget(href: string) {
 async function duckDuckGoSearch(query: string): Promise<SerperOrganic[]> {
   const response = await fetch(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`, {
     headers: {
-      "User-Agent": "RangeScoutCuratorBot/1.0",
+      "User-Agent": "CompareCuratorBot/1.0",
       Accept: "text/html",
     },
   });
@@ -113,7 +113,7 @@ async function duckDuckGoSearch(query: string): Promise<SerperOrganic[]> {
 async function bingSearch(query: string): Promise<SerperOrganic[]> {
   const response = await fetch(`https://www.bing.com/search?q=${encodeURIComponent(query)}&count=10&setlang=en-US`, {
     headers: {
-      "User-Agent": "RangeScoutCuratorBot/1.0",
+      "User-Agent": "CompareCuratorBot/1.0",
       Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
       "Accept-Language": "en-US,en;q=0.9,hu;q=0.8",
     },
@@ -194,6 +194,7 @@ function inferListingKind(text: string) {
 
 function inferCategory(text: string, targetCategory: string) {
   const hay = text.toLowerCase();
+  const normalizedTarget = targetCategory.toLowerCase();
   if (hay.includes("cup") || hay.includes("match") || hay.includes("tournament") || hay.includes("competition")) {
     return "Competitions";
   }
@@ -206,6 +207,11 @@ function inferCategory(text: string, targetCategory: string) {
   if (hay.includes("course") || hay.includes("training") || hay.includes("class")) {
     return "Classes";
   }
+  if (normalizedTarget.includes("course") || normalizedTarget.includes("training")) return "Classes";
+  if (normalizedTarget.includes("range")) return "Camps";
+  if (normalizedTarget.includes("competition")) return "Competitions";
+  if (normalizedTarget.includes("club") || normalizedTarget.includes("association")) return "Meet-Up Groups";
+  if (normalizedTarget.includes("hunting")) return "Drop-In Activities";
   if (targetCategory === "Meet-Up Groups") return "Meet-Up Groups";
   return "Classes";
 }
@@ -313,6 +319,9 @@ function isGenericSourceHost(host: string) {
     "visit",
     "tripadvisor.",
     "lonelyplanet.",
+    "nomadicmatt.",
+    "wikitravel.",
+    "theculturetrip.",
   ].some((blocked) => host.includes(blocked));
 }
 
@@ -333,7 +342,7 @@ export async function discoverRangeScoutCandidates(input: {
   maxTargets?: number;
   maxCandidates?: number;
 }) {
-  const targets = buildRangeScoutDiscoveryTargets(input.snapshot, input.maxTargets ?? 4);
+  const targets = buildCompareDiscoveryTargets(input.snapshot, input.maxTargets ?? 4);
   const dedupeIndex = buildDedupeSupportIndex(input.providers, input.meetups);
   const artifacts: DiscoveryArtifact[] = [];
   const seenSourceUrls = new Set<string>();

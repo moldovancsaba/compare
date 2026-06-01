@@ -13,7 +13,7 @@ export async function generateMetadata({
   const dynamicMetadata = getMetadata(resolvedLocale);
   return {
     ...dynamicMetadata,
-    authors: [{ name: "RangeScout EU" }],
+    authors: [{ name: "Compare" }],
     openGraph: {
       ...dynamicMetadata.openGraph,
       type: "website",

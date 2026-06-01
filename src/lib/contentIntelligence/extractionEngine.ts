@@ -88,10 +88,16 @@ function inferActivityTypes(text: string, fallback: string[]) {
 
 function inferCategory(text: string, fallback: string) {
   const lower = text.toLowerCase();
+  const normalizedFallback = fallback.toLowerCase();
   if (lower.includes("competition") || lower.includes("match") || lower.includes("cup")) return "Competitions";
   if (lower.includes("range") || lower.includes("facility") || lower.includes("facility")) return "Camps";
   if (lower.includes("club") || lower.includes("hunting") || lower.includes("membership")) return "Drop-In Activities";
   if (lower.includes("meetup") || lower.includes("association") || lower.includes("group")) return "Meet-Up Groups";
+  if (normalizedFallback.includes("course") || normalizedFallback.includes("training")) return "Classes";
+  if (normalizedFallback.includes("range")) return "Camps";
+  if (normalizedFallback.includes("competition")) return "Competitions";
+  if (normalizedFallback.includes("club") || normalizedFallback.includes("association")) return "Meet-Up Groups";
+  if (normalizedFallback.includes("hunting")) return "Drop-In Activities";
   return fallback || "Classes";
 }
 

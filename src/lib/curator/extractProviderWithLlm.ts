@@ -13,13 +13,13 @@ type LlmOut = { skip?: boolean; reason?: string; provider?: unknown };
 
 function buildSystemPrompt(): string {
   const hoods = JSON.stringify(NEIGHBORHOODS, null, 0);
-  return `You are a careful data curator for RangeScout, a Hungary-first European sport shooting directory.
+  return `You are a careful data curator for Compare, a Hungary-first sport shooting and hunting directory.
 
 Your job: decide if the page describes ONE concrete sport shooting provider, event, or organizer-facing listing in an official source context (competition host, range, club, course, hunting ground, training venue, or related federation page). If not, return {"skip":true,"reason":"..."}.
 
 Rules:
 - ONLY output JSON. No markdown.
-- If skip is false, include key "provider" with a single object matching the RangeScout provider schema EXACTLY.
+- If skip is false, include key "provider" with a single object matching the Compare provider schema EXACTLY.
 - Reject directory hubs, generic portals, social profiles without organizer details, and unrelated commercial pages.
 - Never invent prices, hours, addresses, or phone numbers. Use only facts supported by the PAGE TEXT and SOURCE URL.
 - If a field is unknown, use sensible empties: email may be "". image must be "" unless you have an **https ImgBB** direct image URL (see project rules); never put a venue CDN URL in image. rating 0 and reviewCount 0 unless explicit ratings appear in the text.

@@ -27,7 +27,7 @@ export async function fetchPageText(url: string, allowedHost: string): Promise<{
   const r = await fetch(url, {
     signal: ctrl.signal,
     headers: {
-      "User-Agent": "RangeScoutCuratorBot/1.0",
+      "User-Agent": "CompareCuratorBot/1.0",
       Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
     },
     redirect: "follow",

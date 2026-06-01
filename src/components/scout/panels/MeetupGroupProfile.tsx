@@ -116,7 +116,7 @@ export function MeetupGroupProfile({
       locale,
     )}.\n\n${group.description}\n\n${group.website}`;
     window.open(
-      `mailto:?subject=${encodeURIComponent(`${group.name} / RangeScout EU`)}&body=${encodeURIComponent(body)}`,
+      `mailto:?subject=${encodeURIComponent(`${group.name} / Compare`)}&body=${encodeURIComponent(body)}`,
     );
   };
 

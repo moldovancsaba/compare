@@ -49,7 +49,7 @@ function decodeBingTarget(href: string) {
 async function fallbackSearch(query: string): Promise<SearchHit[]> {
   const response = await fetch(`https://www.bing.com/search?q=${encodeURIComponent(query)}&count=10&setlang=en-US`, {
     headers: {
-      "User-Agent": "RangeScoutCuratorBot/1.0",
+      "User-Agent": "CompareCuratorBot/1.0",
       Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
       "Accept-Language": "en-US,en;q=0.9,hu;q=0.8",
     },

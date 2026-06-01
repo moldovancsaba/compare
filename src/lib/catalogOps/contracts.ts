@@ -67,7 +67,7 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
     runtimeFlow: [
       "Refresh the Hungary-first shooting source inventory on schedule and when freshness incidents open.",
       "Generate normalized competition, event, course, club, and range leads for the compare-owned intelligence unit.",
-      "Build RangeScout-standard drafts from official sources and route them into Checklist review packets.",
+      "Build Compare-standard drafts from official sources and route them into Checklist review packets.",
       "Publish approved drafts and verify both private and public visibility.",
       "Continuously audit freshness, compliance, taxonomy drift, accessibility regressions, and pipeline silence.",
     ],
@@ -172,9 +172,9 @@ export function buildCatalogOpsMissionSpec(nowIso = new Date().toISOString()): C
         timeoutSeconds: 1800,
         maxAttempts: 5,
         retryBackoffSeconds: [60, 180, 600, 1800, 3600],
-        inputs: ["Lead artifact", "Official source pages", "RangeScout schema constraints"],
+        inputs: ["Lead artifact", "Official source pages", "Compare schema constraints"],
         outputs: ["Draft payloads", "Evidence summaries", "Diagnostics"],
-        successCriteria: ["Draft payload validates against the target RangeScout schema.", "Evidence points to official source material rather than third-party copy."],
+        successCriteria: ["Draft payload validates against the target Compare schema.", "Evidence points to official source material rather than third-party copy."],
         failureSignals: [
           "Schema validation rejection.",
           "Source page no longer accessible.",

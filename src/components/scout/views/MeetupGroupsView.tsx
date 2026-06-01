@@ -138,7 +138,7 @@ export function MeetupGroupsView({
               {neighborhood
                 ? `${localText("nav.clubs", siteCopy.nav.clubs)}: ${neighborhood}`
                 : borough === "All"
-                  ? localText("meetups.clubsAcrossEu", { en: "Clubs across the EU", hu: "Klubok Európa-szerte", it: "Club in tutta l'UE" })
+                  ? localText("meetups.clubsAcrossEu", { en: "Clubs in Hungary", hu: "Klubok Magyarországon", it: "Club in Ungheria" })
                   : `${localText("nav.clubs", siteCopy.nav.clubs)}: ${formatBoroughLabel(borough, locale)}`}
             </Text>
           </Stack>

@@ -13,43 +13,43 @@ type PublicCopyFields = {
 
 const METADATA = {
   title: {
-    en: "RANGESCOUT EU — Discover Shooting and Hunting Venues Across Europe",
-    hu: "RangeScout EU — Fedezd fel a lősport helyszíneket Európában",
-    it: "RANGESCOUT EU — Scopri le migliori location per tiro sportivo e caccia in Europa",
+    en: "Compare — Discover Shooting and Hunting Venues in Hungary",
+    hu: "Compare — Fedezd fel a lősport és vadászati helyszíneket Magyarországon",
+    it: "Compare — Scopri luoghi di tiro sportivo e caccia in Ungheria",
   },
   description: {
-    en: "Find curated sport shooting venues, competitions, ranges, hunting grounds, and clubs across Europe with country-first browsing for EU operators and members.",
-    hu: "Összegyűjtöttünk európai lősport- és vadászati helyszíneket: tréningeket, tartózkodási helyszíneket, versenyeket és klubokat régiónként.",
-    it: "Scopri palestre e campi per lo shooting sport, club e accessi venatori in tutta Europa con filtro per paese e regione.",
+    en: "Find curated sport shooting venues, competitions, ranges, hunting grounds, and clubs in Hungary.",
+    hu: "Ellenőrzött magyarországi lősport- és vadászati helyszínek, képzések, lőterek, versenyek és klubok.",
+    it: "Scopri sedi di tiro sportivo, competizioni, poligoni, accessi venatori e club in Ungheria.",
   },
   openGraphTitle: {
-    en: "RANGESCOUT EU — Shooting & Hunting Directory",
-    hu: "RangeScout EU — Lősport címtár",
-    it: "RANGESCOUT EU — Directory sportivo venatorio",
+    en: "Compare — Shooting & Hunting Directory",
+    hu: "Compare — Lősport és vadászati címtár",
+    it: "Compare — Directory tiro e caccia",
   },
   openGraphDescription: {
-    en: "A curated EU catalog of shooting training, ranges, competitions, hunting areas, and clubs arranged country-first.",
-    hu: "Összegyűjtött európai lősport-térképek ország és régió szerint.",
-    it: "Selezione curata di allenamenti, poligoni, competizioni, aree venatorie e club per paese e regione.",
+    en: "A curated Hungary catalog of shooting training, ranges, competitions, hunting areas, and clubs.",
+    hu: "Ellenőrzött magyarországi lősport- és vadászati katalógus.",
+    it: "Catalogo curato in Ungheria di allenamenti, poligoni, competizioni, aree venatorie e club.",
   },
 } as const satisfies { [K in keyof typeof METADATA | string]: LocaleRecord };
 
 export const siteCopy = {
   shell: {
     brandName: {
-      en: "RangeScout EU",
-      hu: "RangeScout EU",
-      it: "RangeScout EU",
+      en: "Compare",
+      hu: "Compare",
+      it: "Compare",
     },
     brandTagline: {
-      en: "Your EU catalog for shooting and hunting venues.",
+      en: "Selected shooting and hunting venues in Hungary.",
       hu: "Kiválasztott lő- és vadászati helyszínek",
-      it: "Il tuo catalogo UE per luoghi di tiro e caccia",
+      it: "Sedi selezionate per tiro e caccia in Ungheria",
     },
     brandSubtitle: {
-      en: "Rangescout EU — Fast, country-first browsing for training, ranges, competitions, hunting access, and clubs.",
-      hu: "RANGESCOUT EU\nGyors, ország szerint felépülő böngészés tréningekhez, pályákhoz, versenyekhez, vadászati helyekhez és klubokhoz.",
-      it: "Rangescout EU — Navigazione rapida per paese per allenamenti, poligoni, gare, accessi venatori e club.",
+      en: "Compare - Hungary-focused browsing for training, ranges, competitions, hunting access, and clubs.",
+      hu: "Compare - Magyarországra fókuszáló böngészés képzésekhez, lőterekhez, versenyekhez, vadászati lehetőségekhez és klubokhoz.",
+      it: "Compare - Navigazione focalizzata sull'Ungheria per allenamenti, poligoni, gare, accessi venatori e club.",
     },
   },
   sidebar: {
@@ -69,7 +69,7 @@ export const siteCopy = {
       it: "Registra la tua sede",
     },
     promoBody: {
-      en: "Tell us about your range, club, training lane, or hunting venue and we’ll follow up about the right listing path for EU operators.",
+      en: "Tell us about your range, club, training lane, or hunting venue and we will follow up about the right listing path in Hungary.",
       hu: "Írd le a helyszínedet, klubodat vagy a vadászati lehetőségedet, és felvesszük veled a kapcsolatot a megfelelő listázási lépésekhez.",
       it: "Indicaci la tua pista, club o struttura venatoria e ti risponderemo con la corretta procedura di pubblicazione.",
     },
@@ -79,9 +79,9 @@ export const siteCopy = {
       it: "Richiedi informazioni",
     },
     promoCopy: {
-      en: "Curated shooting and hunting venues and clubs across the EU.",
-      hu: "Ellenőrzött, hitelesített lősport-válogatás Európa-szerte.",
-      it: "Sedi e club per lo shooting sport verificati e curati in tutta l'UE.",
+      en: "Curated shooting and hunting venues and clubs in Hungary.",
+      hu: "Ellenőrzött lősport- és vadászati helyszínek Magyarországon.",
+      it: "Sedi e club di tiro e caccia verificati in Ungheria.",
     },
   },
   nav: {
@@ -192,9 +192,9 @@ export const siteCopy = {
       it: "Questa settimana",
     },
     thisWeekAllTitle: {
-      en: "Sessions in the next 7 days across the EU catalog",
-      hu: "Programok a következő 7 napban az EU-katalógusban",
-      it: "Sessioni nei prossimi 7 giorni nel catalogo UE",
+      en: "Sessions in the next 7 days in Hungary",
+      hu: "Programok a következő 7 napban Magyarországon",
+      it: "Sessioni nei prossimi 7 giorni in Ungheria",
     },
     thisWeekCountryTitle: {
       en: "Sessions in the next 7 days in {country}",
@@ -312,9 +312,9 @@ export const siteCopy = {
       it: "Cancella lo stato di ricerca",
     },
     allEu: {
-      en: "All EU",
-      hu: "Teljes EU",
-      it: "Tutta l'UE",
+      en: "Hungary",
+      hu: "Magyarország",
+      it: "Ungheria",
     },
     nextSevenDays: {
       en: "Next 7 days only",
@@ -397,9 +397,9 @@ export const siteCopy = {
       it: "Cancella ricerca e filtri",
     },
     browseAllEu: {
-      en: "Browse all EU",
-      hu: "Teljes EU böngészése",
-      it: "Sfoglia tutta l'UE",
+      en: "Browse Hungary",
+      hu: "Magyarország böngészése",
+      it: "Sfoglia l'Ungheria",
     },
     searchBadgePrefix: {
       en: "Search",
@@ -555,9 +555,9 @@ export const siteCopy = {
       it: "Esplora",
     },
     neighborhoodFallback: {
-      en: "All EU",
-      hu: "Teljes Európa",
-      it: "Tutta l'UE",
+      en: "Hungary",
+      hu: "Magyarország",
+      it: "Ungheria",
     },
   },
   errors: {
@@ -693,7 +693,7 @@ export function localizeSiteDocument(site: SiteDoc & PublicCopyFields, locale: A
     popularNeighborhoodsCaption: locale === "hu" ? "Népszerű régiók itt: {borough}" : "Regioni popolari in {borough}",
     guidesSectionTitle: locale === "hu" ? "Hasznos régiós útmutatók" : "Guide regionali utili",
     guidesViewAllLabel: locale === "hu" ? "Összes régió böngészése" : "Sfoglia tutte le regioni",
-    howItWorksSectionTitle: locale === "hu" ? "Hogyan működik a RangeScout EU" : "Come funziona RangeScout EU",
+    howItWorksSectionTitle: locale === "hu" ? "Hogyan működik a Compare" : "Come funziona Compare",
     popularPicksSectionTitle: locale === "hu" ? "Kiemelt induló találatok" : "Scelte consigliate per iniziare",
     popularPicksViewAllLabel: locale === "hu" ? "Összes megtekintése" : "Vedi tutto",
     newsletterTitle: locale === "hu" ? "Kapj friss lősport-helyszín híreket a régiódból" : "Ricevi aggiornamenti sulle sedi di tiro nella tua regione",

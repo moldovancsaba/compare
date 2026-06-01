@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
         <form onSubmit={submit}>
           <Stack gap="md">
             <Title order={1} size="h3">
-              RangeScout Admin
+              Compare Admin
             </Title>
             <Text size="sm" c="dimmed">
               Use the value of <Code>ADMIN_PASSWORD</Code> from <Code>.env</Code> or <Code>.env.local</Code> locally, or from your

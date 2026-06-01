@@ -412,9 +412,9 @@ export default function ClassScoutShell() {
             {view !== "Home" && <TrustStrip />}
             <PublicSiteFooter
               meta={localText("footer.meta", {
-                en: "RangeScout EU · Trusted sport shooting and hunting catalog across Europe.",
-                hu: "RangeScout EU · Megbízható lősport- és vadászati katalógus Európában.",
-                it: "RangeScout EU · Catalogo europeo affidabile per tiro sportivo e caccia.",
+                en: "Compare · Trusted sport shooting and hunting catalog in Hungary.",
+                hu: "Compare · Megbízható lősport- és vadászati katalógus Magyarországon.",
+                it: "Compare · Catalogo affidabile di tiro sportivo e caccia in Ungheria.",
               })}
             >
               <Group gap="xs">

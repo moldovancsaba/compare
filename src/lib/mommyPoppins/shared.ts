@@ -1,4 +1,4 @@
-const DEFAULT_USER_AGENT = "RangeScoutResearchBot/1.0 (+https://rangescout.vercel.app)";
+const DEFAULT_USER_AGENT = "CompareResearchBot/1.0 (+https://compare.messmass.com)";
 
 export function slugify(value: string) {
   return value

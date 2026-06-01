@@ -1,7 +1,7 @@
 import type { Borough } from "@/types/provider";
 import { DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n/config";
 
-/** Active operating regions for compare (EU rollout). */
+/** Active operating country for Compare. Regions must come from published catalog content. */
 export const BOROUGHS: Borough[] = [
   "Hungary",
 ];
@@ -31,7 +31,7 @@ export function formatGeoRow(borough: string, neighborhood: string) {
   return `${neighborhood}, ${prettyBorough}`;
 }
 
-/** Recognized regions per country (Discover / Clubs chips, admin locations, seed). */
+/** Empty by design: public region chips are derived from published catalog content. */
 export const NEIGHBORHOODS: Record<string, string[]> = {
-  Hungary: ["Budapest", "Pest", "Bács-Kiskun", "Heves", "Borsod-Abaúj-Zemplén", "Zala"],
+  Hungary: [],
 };

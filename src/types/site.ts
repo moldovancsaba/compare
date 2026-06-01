@@ -226,9 +226,9 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
   logoUrl: "",
   homeHeroUrl: CMS_MEDIA.homeHero,
   discoverHeroUrl: CMS_MEDIA.discoverHero,
-  homeHeroTitle: "Find sport shooting venues, clubs, and hunting access across Europe",
+  homeHeroTitle: "Find sport shooting venues, clubs, and hunting access in Hungary",
   homeHeroSubtitle:
-    "Browse training, ranges, competitions, hunting grounds, and clubs with country-first filters built for operators, members, and hunting communities in the EU.",
+    "Browse training, ranges, competitions, hunting grounds, and clubs in Hungary.",
   homeHeroPrimaryCta: "Start exploring",
   homeHeroSecondaryCta: "Browse by region",
   homeHeroTagline: "Country-first. Curated. Operator-useful.",
@@ -240,7 +240,7 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
   guidesViewAllHref: "",
   guides: [],
   locationHeroImages: [],
-  howItWorksSectionTitle: "How RangeScout EU works",
+  howItWorksSectionTitle: "How Compare works",
   howItWorksSteps: [
     {
       step: 1,
@@ -274,7 +274,7 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
   newsletterCta: "Sign me up!",
   newsletterFinePrint: "No spam. Unsubscribe anytime.",
   sidebarTitle: "List your venue",
-  sidebarBody: "Reach more EU shooters and hunting communities with a featured listing, club profile, or regional discovery presence.",
+  sidebarBody: "Reach Hungarian shooters and hunting communities with a featured listing, club profile, or regional discovery presence.",
   sidebarCtaLabel: "Request listing info",
   homePopularPickProviderNames: [],
   homePopularMeetupGroupId: "",
@@ -412,7 +412,7 @@ export const DEFAULT_SITE: Omit<SiteDoc, "_id"> = {
     privacy: {
       headline: "We respect your privacy and handle inquiry data under EU GDPR expectations.",
       supportTextBefore: "Questions about listings, consent, or data requests? Email us at",
-      supportEmail: "privacy@rangescout.eu",
+      supportEmail: "privacy@compare.messmass.com",
       supportTextAfter: "",
     },
   },

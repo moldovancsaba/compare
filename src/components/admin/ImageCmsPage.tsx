@@ -74,13 +74,13 @@ function slotKey(view: SiteLocationHeroImage["view"], borough: BoroughChoice, ne
 
 function defaultAlt(view: SiteLocationHeroImage["view"], borough: BoroughChoice, neighborhood = ""): string {
   if (neighborhood.trim()) return `${view} in ${neighborhood}`;
-  if (borough === "All") return `${view} across Europe`;
+  if (borough === "All") return `${view} in Hungary`;
   return `${view} in ${borough}`;
 }
 
 function slotTitle(view: SiteLocationHeroImage["view"], borough: BoroughChoice, neighborhood = ""): string {
   if (neighborhood.trim()) return `${view} in ${neighborhood}`;
-  if (borough === "All") return `${view} across Europe`;
+  if (borough === "All") return `${view} in Hungary`;
   return `${view} in ${borough}`;
 }
 
@@ -331,7 +331,7 @@ export default function ImageCmsPage() {
           <form onSubmit={signIn}>
             <Stack gap="md">
               <Title order={1} size="h3">
-                RangeScout Image CMS
+                Compare Image CMS
               </Title>
               <Text size="sm" c="dimmed">
                 Sign in with the admin password to edit site imagery.

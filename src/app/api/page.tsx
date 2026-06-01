@@ -3,9 +3,9 @@ import { headers } from "next/headers";
 import { ApiDocsPage } from "@/components/api/ApiDocsPage";
 
 export const metadata: Metadata = {
-  title: "HTTP API reference | RangeScout",
+  title: "HTTP API reference | Compare",
   description:
-    "RangeScout HTTP APIs: public catalog, machine ingest, and admin session endpoints for EU shooting discovery.",
+    "Compare HTTP APIs: public catalog, machine ingest, and admin session endpoints for Hungary shooting discovery.",
   robots: { index: true, follow: true },
 };
 

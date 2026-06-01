@@ -404,12 +404,12 @@ const nav = [
 ];
 
 export function ApiDocsPage({ origin }: { origin: string }) {
-  const base = origin || "https://rangescout.vercel.app";
+  const base = origin || "https://compare.messmass.com";
 
   return (
     <DocsPageShell
       title="HTTP API reference"
-      eyebrow="RangeScout EU"
+      eyebrow="Compare"
       lead={`Catalog, machine ingest, and admin endpoints for sport shooting discovery. All paths are relative to your deployment (for example ${base}).`}
       meta={
         <Group gap="sm">
@@ -434,7 +434,7 @@ export function ApiDocsPage({ origin }: { origin: string }) {
     >
           <Section id="overview" title="Overview">
             <p>
-              RangeScout exposes JSON APIs for the public catalog, a <strong>machine ingest</strong> pipeline secured by{" "}
+              Compare exposes JSON APIs for the public catalog, a <strong>machine ingest</strong> pipeline secured by{" "}
               <InlineCode>INGEST_API_KEY</InlineCode>, and{" "}
               <strong>browser session</strong> APIs for the admin console. Unless noted, request and response bodies use{" "}
               <InlineCode>application/json</InlineCode> with UTF-8.

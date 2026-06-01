@@ -136,7 +136,7 @@ export function ProviderProfile({
   const saved = isSaved(provider.id);
   const current = gallery[Math.min(photoIdx, Math.max(gallery.length - 1, 0))] ?? null;
   const websiteUrl = normalizeExternalUrl(provider.website);
-  const appOrigin = typeof window !== "undefined" ? window.location.origin : "https://rangescout.vercel.app";
+  const appOrigin = typeof window !== "undefined" ? window.location.origin : "https://compare.messmass.com";
   const providerUrl = `${appOrigin}/p/${provider.id}`;
   const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
     getLocalText(site, locale, path, fallback);
@@ -163,7 +163,7 @@ export function ProviderProfile({
       locale,
     )}.\n\n${providerCopy.shortDescription}\n${priceLabel}.\n\n${providerUrl}`;
     window.open(
-      `mailto:?subject=${encodeURIComponent(`${provider.name} / RangeScout EU`)}&body=${encodeURIComponent(body)}`,
+      `mailto:?subject=${encodeURIComponent(`${provider.name} / Compare`)}&body=${encodeURIComponent(body)}`,
     );
   };
 

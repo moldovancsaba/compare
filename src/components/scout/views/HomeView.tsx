@@ -160,7 +160,7 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
   return (
     <Stack gap="2.75rem">
       <EditorialHero
-        eyebrow="RangeScout EU"
+        eyebrow="Compare"
         title={s.homeHeroTitle}
         description={s.homeHeroSubtitle}
         actions={[
@@ -267,9 +267,9 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
             <Text size="sm" c="dimmed">
               {borough === "All"
                 ? localText("home.allRegionsDescription", {
-                  en: "Browse every EU region, or pick a country above to narrow down operators and clubs.",
-                  hu: "Böngéssz minden EU-régiót, vagy válassz országot a szolgáltatók és klubok szűkítéséhez.",
-                  it: "Sfoglia ogni regione UE oppure scegli un paese per restringere operatori e club.",
+                  en: "Browse Hungary, or pick a region from the published listings.",
+                  hu: "Böngéssz Magyarországon, vagy válassz régiót a publikált találatok alapján.",
+                  it: "Sfoglia l'Ungheria oppure scegli una regione dagli annunci pubblicati.",
                 })
                 : s.popularNeighborhoodsCaption.replace(/\{borough\}/g, formatBoroughLabel(borough, locale))}
             </Text>
@@ -368,9 +368,9 @@ export function HomeView({ onNavigate, onOpenProvider, onOpenGroup, locale }: Pr
           <Title order={2}>{s.howItWorksSectionTitle}</Title>
           <Text size="sm" c="dimmed" maw={640}>
             {localText("home.howItWorksDescription", {
-              en: "Use RangeScout to scan regional competitions, ranges, clubs, and training lanes, save your best fits, and act fast.",
-              hu: "A RangeScout segít áttekinteni a regionális versenyeket, lőtereket, klubokat és képzéseket, elmenteni a legjobb találatokat, majd gyorsan továbblépni.",
-              it: "Usa RangeScout per esaminare gare, poligoni, club e allenamenti regionali, salvare le opzioni migliori e agire rapidamente.",
+              en: "Use Compare to scan competitions, ranges, clubs, and training lanes in Hungary, save your best fits, and act fast.",
+              hu: "A Compare segít áttekinteni a magyarországi versenyeket, lőtereket, klubokat és képzéseket, elmenteni a legjobb találatokat, majd gyorsan továbblépni.",
+              it: "Usa Compare per esaminare gare, poligoni, club e allenamenti in Ungheria, salvare le opzioni migliori e agire rapidamente.",
             })}
           </Text>
         </Stack>

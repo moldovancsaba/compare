@@ -15,14 +15,14 @@ const EMPTY_COMPARE_LAUNCH_TARGETS: Array<Pick<DiscoveryTarget, "borough" | "nei
   {
     borough: "Hungary",
     neighborhood: "Budapest",
-    category: "Classes",
+    category: "Shooting Courses",
     query: "Hungary Budapest shooting range firearms training official",
     rationale: "Empty Compare catalog launch coverage should start with source-backed Budapest training and range providers.",
   },
   {
     borough: "Hungary",
     neighborhood: "Pest",
-    category: "Drop-In Activities",
+    category: "Shooting Ranges",
     query: "Hungary Pest county shooting club hunting range official",
     rationale: "Pest county coverage is important for real regional Compare discovery outside central Budapest.",
   },
@@ -36,24 +36,64 @@ const EMPTY_COMPARE_LAUNCH_TARGETS: Array<Pick<DiscoveryTarget, "borough" | "nei
   {
     borough: "Hungary",
     neighborhood: "Heves",
-    category: "Drop-In Activities",
+    category: "Hunting Associations",
     query: "Hungary Heves hunting association shooting club official",
     rationale: "Hunting and shooting association coverage fills Compare field-activity discovery.",
   },
   {
     borough: "Hungary",
     neighborhood: "Borsod-Abaúj-Zemplén",
-    category: "Meet-Up Groups",
+    category: "Sport Shooting Clubs",
     query: "Hungary Borsod-Abaúj-Zemplén shooting club association official",
     rationale: "Club and association coverage gives Compare social/group discovery without fake rows.",
   },
   {
     borough: "Hungary",
     neighborhood: "Zala",
-    category: "Camps",
+    category: "Shooting Ranges",
     query: "Hungary Zala shooting range training venue official",
     rationale: "Western Hungary range and training coverage rounds out launch discovery.",
   },
+];
+
+const COMPARE_FORBIDDEN_TARGET_TERMS = [
+  "birthday",
+  "birthdays",
+  "kids",
+  "children",
+  "child",
+  "family",
+  "families",
+  "parent",
+  "parents",
+  "toddler",
+  "camp",
+  "after-school",
+  "play",
+  "travel guide",
+  "nomadicmatt",
+];
+
+const COMPARE_DOMAIN_TERMS = [
+  "shooting",
+  "range",
+  "rifle",
+  "pistol",
+  "shotgun",
+  "firearms",
+  "sport shooting",
+  "hunting",
+  "hunter",
+  "competition",
+  "match",
+  "club",
+  "association",
+  "expo",
+  "ipsc",
+  "idpa",
+  "lőtér",
+  "lövészet",
+  "vadász",
 ];
 
 function slugify(value: string) {
@@ -66,59 +106,49 @@ function slugify(value: string) {
 }
 
 function keywordForRecommendation(recommendation: ScarcityRecommendation) {
-  if (recommendation.category === "Meet-Up Groups") {
-    return "shooting club association official";
-  }
-
   const activity = recommendation.details?.activity.find((item) => item.count === 0)?.name ?? recommendation.details?.activity[0]?.name;
-  if (activity) return activity;
+  const normalizedActivity = String(activity ?? "").trim().toLowerCase();
+  if (normalizedActivity && isCompareSafeTargetText(normalizedActivity)) return `${normalizedActivity} official`;
 
   switch (recommendation.category) {
     case "Classes":
-      return "shooting course firearms training";
+      return "shooting course firearms training official";
     case "Camps":
-      return "shooting range training venue";
+      return "shooting range training venue official";
     case "Competitions":
-      return "shooting competition match calendar";
+      return "shooting competition match calendar official";
     case "Drop-In Activities":
-      return "hunting shooting range club";
+      return "hunting shooting range club official";
+    case "Meet-Up Groups":
+      return "shooting club association official";
     default:
-      return "sport shooting club";
+      return "sport shooting club official";
   }
+}
+
+function isCompareSafeTargetText(value: string) {
+  const normalized = value.toLowerCase();
+  if (COMPARE_FORBIDDEN_TARGET_TERMS.some((term) => normalized.includes(term))) return false;
+  return COMPARE_DOMAIN_TERMS.some((term) => normalized.includes(term));
+}
+
+function normalizeCompareCategory(value: string) {
+  const normalized = value.toLowerCase();
+  if (normalized.includes("competition") || normalized.includes("match")) return "Competitions";
+  if (normalized.includes("hunt")) return "Hunting Associations";
+  if (normalized.includes("club") || normalized.includes("association") || normalized.includes("meet")) return "Sport Shooting Clubs";
+  if (normalized.includes("course") || normalized.includes("class") || normalized.includes("training")) return "Shooting Courses";
+  return "Shooting Ranges";
 }
 
 function queryForRecommendation(recommendation: ScarcityRecommendation) {
   const keyword = keywordForRecommendation(recommendation);
   const country = recommendation.borough;
   const region = recommendation.neighborhood;
-
-  if (recommendation.category === "Meet-Up Groups") {
-    return `${country} ${region} ${keyword}`;
-  }
-  return `${country} ${region} ${keyword} official`;
+  return `${country} ${region} ${keyword}`;
 }
 
-function buildScarcityTargets(recommendation: ScarcityRecommendation) {
-  const targets = [
-    `category:${recommendation.category}`,
-    `borough:${recommendation.borough}`,
-    `neighborhood:${recommendation.neighborhood}`,
-  ];
-
-  const lowAge = recommendation.details?.age.find((item) => item.count === 0)?.name ?? recommendation.details?.age[0]?.name;
-  const lowDayTime =
-    recommendation.details?.dayTime.find((item) => item.count === 0)?.name ?? recommendation.details?.dayTime[0]?.name;
-  const lowActivity =
-    recommendation.details?.activity.find((item) => item.count === 0)?.name ?? recommendation.details?.activity[0]?.name;
-
-  if (lowAge) targets.push(`age:${lowAge}`);
-  if (lowDayTime) targets.push(`dayTime:${lowDayTime}`);
-  if (lowActivity) targets.push(`activity:${lowActivity}`);
-
-  return targets;
-}
-
-export function buildRangeScoutDiscoveryTargets(snapshot: CatalogSnapshot, maxTargets = 5): DiscoveryTarget[] {
+export function buildCompareDiscoveryTargets(snapshot: CatalogSnapshot, maxTargets = 5): DiscoveryTarget[] {
   const emptyCatalog = snapshot.providerCountPrivate === 0 && snapshot.meetupCountPrivate === 0;
   const uniqueQueries = new Set<string>();
   const targets: DiscoveryTarget[] = [];
@@ -139,18 +169,34 @@ export function buildRangeScoutDiscoveryTargets(snapshot: CatalogSnapshot, maxTa
 
   for (const recommendation of recommendations) {
     const query = queryForRecommendation(recommendation);
+    if (!isCompareSafeTargetText(query)) continue;
     if (uniqueQueries.has(query)) continue;
     uniqueQueries.add(query);
+    const category = normalizeCompareCategory(query);
     targets.push({
-      targetId: slugify(`${recommendation.category}-${recommendation.borough}-${recommendation.neighborhood}`),
-      scarcityTargets: buildScarcityTargets(recommendation),
+      targetId: slugify(`${category}-${recommendation.borough}-${recommendation.neighborhood}`),
+      scarcityTargets: [
+        `category:${category}`,
+        `borough:${recommendation.borough}`,
+        `neighborhood:${recommendation.neighborhood}`,
+      ],
       borough: recommendation.borough,
       neighborhood: recommendation.neighborhood,
-      category: recommendation.category,
+      category,
       query,
       rationale: recommendation.rationale,
     });
   }
 
-  return targets;
+  if (targets.length > 0) return targets;
+
+  return EMPTY_COMPARE_LAUNCH_TARGETS.slice(0, maxTargets).map((target) => ({
+    ...target,
+    targetId: slugify(`${target.category}-${target.borough}-${target.neighborhood}`),
+    scarcityTargets: [
+      `category:${target.category}`,
+      `borough:${target.borough}`,
+      `neighborhood:${target.neighborhood}`,
+    ],
+  }));
 }

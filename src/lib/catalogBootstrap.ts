@@ -25,7 +25,7 @@ function sanitize(value: string | undefined): string {
 function getBootstrapPayloadPath(): string {
   const configured = sanitize(process.env.CATALOG_LAUNCH_PAYLOAD_PATH);
   if (configured) return configured;
-  return path.join(process.cwd(), "scripts/ingest-payloads/operations/rangescout-eu-launch-content.json");
+  return path.join(process.cwd(), "scripts/ingest-payloads/operations/compare-hungary-launch-content.json");
 }
 
 function getBootstrapEnabled(): boolean {

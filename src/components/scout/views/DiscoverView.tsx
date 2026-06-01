@@ -98,12 +98,12 @@ export function DiscoverView({
         ? neighborhood
           ? locale === "hu" ? `Ezen a héten itt: ${neighborhood}` : locale === "it" ? `Questa settimana a ${neighborhood}` : `This week in ${neighborhood}`
           : borough === "All"
-            ? locale === "hu" ? "Ezen a héten Európában" : locale === "it" ? "Questa settimana in Europa" : "This week across Europe"
+            ? locale === "hu" ? "Ezen a héten Magyarországon" : locale === "it" ? "Questa settimana in Ungheria" : "This week in Hungary"
             : locale === "hu" ? `Ezen a héten itt: ${formatBoroughLabel(borough, locale)}` : locale === "it" ? `Questa settimana in ${formatBoroughLabel(borough, locale)}` : `This week in ${formatBoroughLabel(borough, locale)}`
     : neighborhood
       ? locale === "hu" ? `${listingLabel} itt: ${neighborhood}` : locale === "it" ? `${listingLabel} a ${neighborhood}` : `${listingLabel} in ${neighborhood}`
       : borough === "All"
-        ? locale === "hu" ? `${listingLabel} Európában` : locale === "it" ? `${listingLabel} in Europa` : `${listingLabel} across Europe`
+        ? locale === "hu" ? `${listingLabel} Magyarországon` : locale === "it" ? `${listingLabel} in Ungheria` : `${listingLabel} in Hungary`
         : locale === "hu" ? `${listingLabel} itt: ${formatBoroughLabel(borough, locale)}` : locale === "it" ? `${listingLabel} in ${formatBoroughLabel(borough, locale)}` : `${listingLabel} in ${formatBoroughLabel(borough, locale)}`;
   const hasDuplicateTopHeading = mode !== "this-week" && borough === "All" && !neighborhood && !q.trim() && !filters.activity && filters.ages.length === 0 && filters.times.length === 0;
   const sectionTitle = hasDuplicateTopHeading

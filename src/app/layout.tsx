@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const dynamicMetadata = getMetadata(locale);
   return {
     ...dynamicMetadata,
-    authors: [{ name: "RangeScout EU" }],
+    authors: [{ name: "Compare" }],
     icons: {
       icon: "/images/class_scout_logo_favicon.png",
       shortcut: "/images/class_scout_logo_favicon.png",

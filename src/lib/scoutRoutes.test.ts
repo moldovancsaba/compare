@@ -14,7 +14,7 @@ describe("scoutRoutes", () => {
       dateMode: "this-week",
     });
 
-    const params = new URL(href, "https://rangescout.example.com").searchParams;
+    const params = new URL(href, "https://compare.example.com").searchParams;
     const parsed = parseDiscoverState(params);
     expect(parsed).toMatchObject({
       borough: "Hungary",

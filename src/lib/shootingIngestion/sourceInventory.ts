@@ -7,7 +7,7 @@ import type {
 } from "@/lib/shootingIngestion/types";
 import { classifyShootingSource } from "@/lib/shootingIngestion/sourceClassifier";
 
-const DEFAULT_USER_AGENT = "RangeScoutIngestion/1.0 (+https://rangescout.vercel.app)";
+const DEFAULT_USER_AGENT = "CompareIngestion/1.0 (+https://compare.messmass.com)";
 const DEFAULT_FETCH_TIMEOUT_MS = 12_000;
 
 export interface SourceValidationError {

@@ -67,10 +67,11 @@ function clamp(value: number, min = 0, max = 100) {
 
 function inferCategory(input: NormalizedListingInput): ScarcityCategory | null {
   const normalized = normalize(input.categoryHint);
-  if (normalized === "classes") return "Classes";
-  if (normalized === "camps") return "Camps";
-  if (normalized === "birthday parties") return "Competitions";
-  if (normalized === "drop-in activities") return "Drop-In Activities";
+  if (normalized === "classes" || normalized.includes("course") || normalized.includes("training")) return "Classes";
+  if (normalized === "camps" || normalized.includes("range")) return "Camps";
+  if (normalized === "drop-in activities" || normalized.includes("hunting")) return "Drop-In Activities";
+  if (normalized.includes("competition")) return "Competitions";
+  if (normalized.includes("club") || normalized.includes("association")) return "Meet-Up Groups";
   if (input.listingKindHint === "meetupGroup") return "Meet-Up Groups";
   return null;
 }

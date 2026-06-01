@@ -63,85 +63,85 @@ const CATEGORY_LINES: Record<HeroKind, Record<AppLocale, { eyebrow: string; city
   Classes: {
     en: {
       eyebrow: "Training directory",
-      cityTitle: "Find shooting training across Europe",
-      cityDescription: "Compare pistol, rifle, shotgun, and safety courses with filters anchored to country and region.",
+      cityTitle: "Find shooting training in Hungary",
+      cityDescription: "Compare pistol, rifle, shotgun, and safety courses with filters anchored to published Hungarian locations.",
     },
     hu: {
       eyebrow: "Képzési katalógus",
-      cityTitle: "Találj lősportképzéseket Európában",
-      cityDescription: "Hasonlíts össze pisztoly-, puska-, sörétes és biztonsági képzéseket ország- és régióalapú szűrőkkel.",
+      cityTitle: "Találj lősportképzéseket Magyarországon",
+      cityDescription: "Hasonlíts össze pisztoly-, puska-, sörétes és biztonsági képzéseket publikált magyarországi helyszínek alapján.",
     },
     it: {
       eyebrow: "Directory allenamenti",
-      cityTitle: "Trova allenamenti di tiro in Europa",
-      cityDescription: "Confronta corsi di pistola, carabina, fucile e sicurezza con filtri per paese e regione.",
+      cityTitle: "Trova allenamenti di tiro in Ungheria",
+      cityDescription: "Confronta corsi di pistola, carabina, fucile e sicurezza in base alle sedi ungheresi pubblicate.",
     },
   },
   Camps: {
     en: {
       eyebrow: "Range directory",
-      cityTitle: "Compare shooting ranges across Europe",
-      cityDescription: "See indoor, outdoor, clay, and long-range facilities by country first, then narrow to the region you can actually reach.",
+      cityTitle: "Compare shooting ranges in Hungary",
+      cityDescription: "See indoor, outdoor, clay, and long-range facilities from the published Hungarian catalog.",
     },
     hu: {
       eyebrow: "Lőtérkatalógus",
-      cityTitle: "Hasonlíts össze európai lőtereket",
-      cityDescription: "Nézd át a beltéri, kültéri, korong- és távlövő helyszíneket ország szerint, majd szűkíts a valóban elérhető régióra.",
+      cityTitle: "Hasonlíts össze magyarországi lőtereket",
+      cityDescription: "Nézd át a beltéri, kültéri, korong- és távlövő helyszíneket a publikált magyar katalógusból.",
     },
     it: {
       eyebrow: "Directory poligoni",
-      cityTitle: "Confronta poligoni in Europa",
-      cityDescription: "Vedi strutture indoor, outdoor, piattello e lunga distanza prima per paese, poi per regione raggiungibile.",
+      cityTitle: "Confronta poligoni in Ungheria",
+      cityDescription: "Vedi strutture indoor, outdoor, piattello e lunga distanza dal catalogo ungherese pubblicato.",
     },
   },
   "Competitions": {
     en: {
       eyebrow: "Competition calendar",
-      cityTitle: "Track competitions across Europe",
+      cityTitle: "Track competitions in Hungary",
       cityDescription: "Compare hosted matches, open qualifiers, and club events without bouncing between federation calendars and club pages.",
     },
     hu: {
       eyebrow: "Versenynaptár",
-      cityTitle: "Kövess európai lősportversenyeket",
+      cityTitle: "Kövess magyarországi lősportversenyeket",
       cityDescription: "Hasonlíts össze versenyeket, nyílt kvalifikációkat és klubeseményeket anélkül, hogy szövetségi naptárak és kluboldalak között ugrálnál.",
     },
     it: {
       eyebrow: "Calendario gare",
-      cityTitle: "Segui competizioni di tiro in Europa",
+      cityTitle: "Segui competizioni di tiro in Ungheria",
       cityDescription: "Confronta match, qualificazioni aperte ed eventi dei club senza saltare tra calendari federali e pagine dei club.",
     },
   },
   "Drop-In Activities": {
     en: {
       eyebrow: "Hunting access",
-      cityTitle: "Find hunting grounds across Europe",
+      cityTitle: "Find hunting grounds in Hungary",
       cityDescription: "Review managed hunting territories, field practice operators, and seasonal access options in one browse flow.",
     },
     hu: {
       eyebrow: "Vadászati hozzáférés",
-      cityTitle: "Találj vadászterületeket Európában",
+      cityTitle: "Találj vadászterületeket Magyarországon",
       cityDescription: "Nézd át a kezelt vadászterületeket, terepgyakorlati szolgáltatókat és szezonális hozzáféréseket egy böngészési folyamatban.",
     },
     it: {
       eyebrow: "Accesso venatorio",
-      cityTitle: "Trova aree venatorie in Europa",
+      cityTitle: "Trova aree venatorie in Ungheria",
       cityDescription: "Rivedi territori gestiti, operatori di pratica sul campo e opzioni stagionali in un unico flusso.",
     },
   },
   "Meet-Up Groups": {
     en: {
       eyebrow: "Club network",
-      cityTitle: "Find shooting clubs across Europe",
+      cityTitle: "Find shooting clubs in Hungary",
       cityDescription: "Browse sport shooting clubs, hunting associations, and regional member communities with location filters that match real travel patterns.",
     },
     hu: {
       eyebrow: "Klubhálózat",
-      cityTitle: "Találj lősportklubokat Európában",
+      cityTitle: "Találj lősportklubokat Magyarországon",
       cityDescription: "Böngéssz sportlövő klubokat, vadászegyesületeket és regionális közösségeket valós utazási mintákhoz igazodó helyszínszűrőkkel.",
     },
     it: {
       eyebrow: "Rete club",
-      cityTitle: "Trova club di tiro in Europa",
+      cityTitle: "Trova club di tiro in Ungheria",
       cityDescription: "Sfoglia club di tiro sportivo, associazioni venatorie e comunità regionali con filtri coerenti con spostamenti reali.",
     },
   },

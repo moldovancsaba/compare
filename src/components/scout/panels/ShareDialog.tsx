@@ -15,7 +15,7 @@ export function ShareDialog({ provider, onClose }: { provider: Provider | null; 
   const locale = normalizeLocale(parseLocaleFromPathname(pathname));
   const { data: site } = useSiteCatalog(locale);
   if (!provider) return null;
-  const origin = typeof window !== "undefined" ? window.location.origin : "https://rangescout.vercel.app";
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://compare.messmass.com";
   const url = `${origin}/p/${provider.id}`;
   const localText = <T extends Record<"en" | "hu" | "it", string>>(path: string, fallback: T) =>
     getLocalText(site, locale, path, fallback);

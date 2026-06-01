@@ -20,7 +20,7 @@ export function Logo({
       <Avatar radius="xl" size={size} color="white">
         <Image
           src={DEFAULT_LOGO_URL}
-          alt="RangeScout logo"
+          alt="Compare logo"
           fill
           sizes={`${size}px`}
           style={{ objectFit: "cover" }}
@@ -30,7 +30,7 @@ export function Logo({
       {withWordmark && (
         <Stack gap={0}>
           <Text ff="heading" fw={700} fz="xl" c="inherit" lh={1.05}>
-            RangeScout
+            Compare
           </Text>
           <Text ff="heading" fw={700} fz="xs" c="teal.6" tt="uppercase" style={{ letterSpacing: "0.2em" }}>
             EU Sport Shooting

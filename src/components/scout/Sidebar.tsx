@@ -60,7 +60,7 @@ export function Sidebar({ active, locale, sidebarPromo, copySource = null }: Pro
   };
 
   return (
-    <SidebarNav ariaLabel="RangeScout navigation" gap="lg">
+    <SidebarNav ariaLabel="Compare navigation" gap="lg">
       <SidebarNavSection label={localText("sidebar.discoverLabel", siteCopy.sidebar.discoverLabel)}>
         {primaryItems.map(({ key, icon: Icon, disabled }) => (
           <SidebarNavItem
@@ -131,7 +131,7 @@ export function Sidebar({ active, locale, sidebarPromo, copySource = null }: Pro
             </Text>
             <Button
               component="a"
-              href={sidebarPromo?.href ?? "mailto:hello@rangescout.eu?subject=Request%20listing%20info"}
+              href={sidebarPromo?.href ?? "mailto:hello@compare.messmass.com?subject=Request%20listing%20info"}
               color="dark"
               variant="light"
               mt="xs"

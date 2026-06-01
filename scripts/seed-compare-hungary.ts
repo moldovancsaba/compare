@@ -19,7 +19,7 @@ if (!uri) {
   process.exit(1);
 }
 
-const payloadPath = process.argv[2] || path.join(process.cwd(), "scripts/ingest-payloads/operations/rangescout-eu-launch-content.json");
+const payloadPath = process.argv[2] || path.join(process.cwd(), "scripts/ingest-payloads/operations/compare-hungary-launch-content.json");
 
 function readPayload(filePath: string) {
   const raw = fs.readFileSync(filePath, "utf8");
