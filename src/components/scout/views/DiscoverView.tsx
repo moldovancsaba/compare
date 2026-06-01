@@ -1,5 +1,5 @@
 import { PageHeader } from "@doneisbetter/gds-core/client";
-import { Badge, Box, Button, Group, Loader, Select, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Badge, Box, Button, Group, Loader, Select, SimpleGrid, Stack, Text, TextInput, Title, VisuallyHidden } from "@mantine/core";
 import { useEffect, useMemo } from "react";
 import { BoroughBar } from "../BoroughBar";
 import { NeighborhoodChips } from "../NeighborhoodChips";
@@ -112,6 +112,7 @@ export function DiscoverView({
   const browseSectionDescription = mode === "this-week"
     ? localText("discover.thisWeekBrowseDescription", d.thisWeekBrowseDescription).trim()
     : localText("discover.browseDescription", d.browseDescription).trim();
+  const showBrowseHeading = !hasDuplicateTopHeading || browseSectionDescription.length > 0;
   const hasActiveStructuredFilters = filters.ages.length > 0 || filters.times.length > 0 || Boolean(filters.activity);
   const hasActiveFilters = hasActiveStructuredFilters || Boolean(neighborhood) || Boolean(q.trim()) || borough !== "All";
   const activeFilterBadges = [
@@ -206,17 +207,27 @@ export function DiscoverView({
         <Stack gap="lg">
           <Group justify="space-between" align="flex-start" gap="md">
             <Box>
-              <Text size="xs" fw={700} c="dimmed" tt="uppercase" style={{ letterSpacing: "0.32em" }}>
-                {localText("discover.browseEyebrow", d.browseEyebrow)}
-              </Text>
-              <Title id="compare-discover-results-title" order={1} mt="xs">
-                {sectionTitle}
-              </Title>
-              {browseSectionDescription ? (
-                <Text size="lg" c="dimmed" maw={760} mt="sm">
-                  {browseSectionDescription}
-                </Text>
-              ) : null}
+              {showBrowseHeading ? (
+                <>
+                  <Text size="xs" fw={700} c="dimmed" tt="uppercase" style={{ letterSpacing: "0.32em" }}>
+                    {localText("discover.browseEyebrow", d.browseEyebrow)}
+                  </Text>
+                  <Title id="compare-discover-results-title" order={2} mt="xs">
+                    {sectionTitle}
+                  </Title>
+                  {browseSectionDescription ? (
+                    <Text size="lg" c="dimmed" maw={760} mt="sm">
+                      {browseSectionDescription}
+                    </Text>
+                  ) : null}
+                </>
+              ) : (
+                <VisuallyHidden>
+                  <Title id="compare-discover-results-title" order={2}>
+                    {listingLabel}
+                  </Title>
+                </VisuallyHidden>
+              )}
             </Box>
             <Badge size="lg" radius="xl" variant="light" color="violet">
               {filtered.length} {localText("discover.resultLabel", d.resultLabel)}
