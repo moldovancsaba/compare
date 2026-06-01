@@ -16,7 +16,7 @@ for (const file of files) {
   const doc = op.document || {};
   const label = path.relative(process.cwd(), file);
 
-  issues.push(...checkPayloadQuality(payload, { label }));
+  issues.push(...checkPayloadQuality(payload, { label, skipObsoleteFamilyContent: true }));
 
   if (op.resource === "provider") {
     const tags = new Set(doc.dayTimeTags || []);

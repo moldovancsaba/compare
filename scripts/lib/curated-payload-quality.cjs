@@ -1,6 +1,33 @@
 const WEEKDAY_DAYS = new Set(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]);
 const WEEKEND_DAYS = new Set(["Saturday", "Sunday"]);
 const SHOOTING_FIT_REGEX = /\b(shooting|sport shooting|range|rifle|pistol|shotgun|clay|ipsc|idpa|hunter|hunting|competition|federation|club|academy|firearm|lőtér|lövész|vadász|verseny|fegyver)\b/i;
+const FAMILY_KEYWORDS = [
+  "baby",
+  "babies",
+  "birthday",
+  "child",
+  "children",
+  "daycare",
+  "family",
+  "families",
+  "kid",
+  "kids",
+  "parent",
+  "party",
+  "playdate",
+  "playground",
+  "preschool",
+  "school",
+  "toddler",
+];
+const LEGACY_CHILD_CATEGORIES = new Set(["Birthday Parties"]);
+const LEGACY_CHILD_MEETUP_TYPES = new Set([
+  "Parent Meetup",
+  "Mom Group",
+  "Playdate Group",
+  "New Parents",
+  "Neighborhood Families",
+]);
 
 function parseClockTimes(timeText) {
   const matches = [...String(timeText || "").matchAll(/(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)/gi)];
@@ -37,6 +64,42 @@ function deriveTagsFromRecurringPrograms(programs) {
 
 function describeIssues(prefix, issues) {
   return issues.map((issue) => `${prefix}\t${issue}`);
+}
+
+function normalizeText(value) {
+  return String(value || "")
+    .replace(/[^a-z0-9\s-]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function hasWord(value, token) {
+  return new RegExp(`\\b${token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(value);
+}
+
+function hasFamilyKeyword(text) {
+  return FAMILY_KEYWORDS.some((keyword) => hasWord(text, keyword));
+}
+
+function hasShootingKeyword(text) {
+  return SHOOTING_FIT_REGEX.test(text);
+}
+
+function isObsoleteFamilyProvider(doc) {
+  const text = normalizeText([
+    doc.name,
+    doc.shortDescription,
+    doc.longDescription,
+    doc.category,
+    ...(Array.isArray(doc.activityTypes) ? doc.activityTypes : []),
+  ].join(" "));
+  return LEGACY_CHILD_CATEGORIES.has(doc.category) || (hasFamilyKeyword(text) && !hasShootingKeyword(text));
+}
+
+function isObsoleteFamilyMeetup(doc) {
+  const text = normalizeText(`${doc.name || ""} ${doc.description || ""} ${doc.groupType || ""} ${doc.ageRange || ""}`);
+  return LEGACY_CHILD_MEETUP_TYPES.has(doc.groupType) || (hasFamilyKeyword(text) && !hasShootingKeyword(text));
 }
 
 function checkProviderDocument(doc) {
@@ -92,6 +155,10 @@ function checkPayloadQuality(payload, options = {}) {
   operations.forEach((op, index) => {
     if (!op || typeof op !== "object" || op.action !== "upsert" || !op.document) return;
     const prefix = `${label}\t${op.document.id || `op-${index}`}`;
+    if (options.skipObsoleteFamilyContent) {
+      if (op.resource === "provider" && isObsoleteFamilyProvider(op.document)) return;
+      if (op.resource === "meetupGroup" && isObsoleteFamilyMeetup(op.document)) return;
+    }
     if (op.resource === "provider") {
       issues.push(...describeIssues(prefix, checkProviderDocument(op.document)));
     }
@@ -106,5 +173,7 @@ function checkPayloadQuality(payload, options = {}) {
 module.exports = {
   checkPayloadQuality,
   deriveTagsFromRecurringPrograms,
+  isObsoleteFamilyMeetup,
+  isObsoleteFamilyProvider,
   parseClockTimes,
 };
