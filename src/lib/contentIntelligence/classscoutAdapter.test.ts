@@ -55,6 +55,25 @@ describe("RangeScout adapter resolver", () => {
     expect(result.blockingIssues.some((issue) => issue.code === "missing_uploaded_image")).toBe(true);
   });
 
+  it("blocks generic fallback descriptions instead of publishing placeholder card copy", () => {
+    const result = resolveRangeScoutDraft({
+      title: "Ranger Sport Budapest",
+      listingKindHint: "provider",
+      categoryHint: "Classes",
+      boroughRaw: "Hungary",
+      neighborhoodRaw: "Budapest",
+      activityTypesRaw: ["Rifle"],
+      ageRangesRaw: ["Beginner"],
+      descriptionFacts: ["Listing for Ranger Sport Budapest."],
+      contactFacts: { website: "https://example.com/ranger" },
+      imageCandidates: [{ uploadedUrl: "https://i.ibb.co/example-provider.jpg" }],
+    });
+
+    expect(result.blockingIssues.some((issue) => issue.code === "missing_content_summary")).toBe(true);
+    if (result.entityKind !== "provider") return;
+    expect(result.draft.shortDescription).not.toMatch(/^Listing for/i);
+  });
+
   it("does not infer afternoon tags from morning schedules", () => {
     const result = resolveRangeScoutDraft({
       title: "Park Slope Morning Art",

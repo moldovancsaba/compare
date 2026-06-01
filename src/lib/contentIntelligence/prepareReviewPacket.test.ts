@@ -14,13 +14,13 @@ describe("prepareRangeScoutReviewPacket", () => {
       {
         draftId: "draft-1",
         normalizedListing: {
-          title: "Neighborhood Art Club",
+          title: "Neighborhood Rifle Club",
           listingKindHint: "provider",
           categoryHint: "Classes",
           boroughRaw: "Brooklyn",
           neighborhoodRaw: "Park Slope",
           addressRaw: "123 Example St, Brooklyn, NY",
-          activityTypesRaw: ["Art"],
+          activityTypesRaw: ["Rifle"],
           ageRangesRaw: ["3–5"],
           scheduleBlocks: [
             {
@@ -28,14 +28,14 @@ describe("prepareRangeScoutReviewPacket", () => {
               timeText: "10:00 AM - 11:00 AM",
             },
           ],
-          descriptionFacts: ["Weekend art classes for children in Park Slope."],
+          descriptionFacts: ["Weekend rifle fundamentals classes run at a supervised Park Slope range."],
           contactFacts: {
-            website: "https://example.com/art-club",
+            website: "https://example.com/rifle-club",
           },
           imageCandidates: [{ uploadedUrl: "https://i.ibb.co/example-upload.jpg" }],
         },
         evidenceSummary: {
-          sources: ["https://example.com/art-club"],
+          sources: ["https://example.com/rifle-club"],
         },
         workflowMetadata: {
           checklistCompanyId: "company-1",
@@ -85,5 +85,38 @@ describe("prepareRangeScoutReviewPacket", () => {
     expect(result.status).toBe("blocked");
     expect(result.gateResult.approved).toBe(false);
     expect(result.diagnostics.some((item) => item.includes("unsupported_borough"))).toBe(true);
+  });
+
+  it("uses normalized Visitor source image candidates when no explicit media request is supplied", async () => {
+    const result = await prepareRangeScoutReviewPacket(
+      {
+        draftId: "draft-3",
+        normalizedListing: {
+          title: "Budapest Range Training",
+          listingKindHint: "provider",
+          categoryHint: "Classes",
+          boroughRaw: "Hungary",
+          neighborhoodRaw: "Budapest",
+          activityTypesRaw: ["Rifle"],
+          ageRangesRaw: ["Beginner"],
+          descriptionFacts: ["Budapest range training covers supervised rifle practice and beginner safety instruction."],
+          contactFacts: {
+            website: "https://example.com/range-training",
+          },
+          imageCandidates: [{ sourceUrl: "notaurl", sourceDocumentUrl: "https://example.com/range-training" }],
+        },
+        evidenceSummary: {},
+        workflowMetadata: {},
+      },
+      {
+        providers,
+        meetups,
+        uploadImage: async () => ({ url: "https://i.ibb.co/example-upload.jpg" }),
+      },
+    );
+
+    expect(result.status).toBe("blocked");
+    expect(result.mediaResult?.originalUrl).toBe("notaurl");
+    expect(result.diagnostics.some((item) => item.includes("invalid_source_url"))).toBe(true);
   });
 });

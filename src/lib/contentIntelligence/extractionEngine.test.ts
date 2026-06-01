@@ -53,6 +53,7 @@ describe("extractRangeScoutCandidate", () => {
     expect(result.normalizedListing.ageRangesRaw).toContain("3–5");
     expect(result.normalizedListing.scheduleBlocks?.[0]?.daysOfWeek).toContain("Saturday");
     expect(result.mediaRequest?.sourceImageUrl).toBe("https://example.org/image.jpg");
+    expect(result.normalizedListing.imageCandidates?.[0]?.sourceUrl).toBe("https://example.org/image.jpg");
     expect(result.evidenceMap.title?.[0]?.sourceUrl).toBe("https://example.org/classes");
   });
 });

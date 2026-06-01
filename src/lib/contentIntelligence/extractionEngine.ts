@@ -175,7 +175,15 @@ export function extractRangeScoutCandidate(discoveryArtifact: DiscoveryArtifact)
       email: findEmail(text),
       phone: findPhone(text),
     },
-    imageCandidates: [],
+    imageCandidates: discoveryArtifact.ogImageUrl
+      ? [
+          {
+            sourceUrl: discoveryArtifact.ogImageUrl,
+            sourceDocumentUrl: discoveryArtifact.sourceUrl,
+            alt: `${discoveryArtifact.title} image`,
+          },
+        ]
+      : [],
     sourceUrls: {
       canonical: discoveryArtifact.sourceUrl,
     },

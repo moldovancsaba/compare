@@ -30,6 +30,10 @@ const SUSPICIOUS_PHRASE_PATTERNS = [
   /\bofficial\s+source\b/i,
   /\bverified\s+discovery\s+metadata\b/i,
   /\bfor\s+source[-\s]?backed\b/i,
+  /^listing\s+for\b/i,
+  /\bis\s+listed\s+(?:from|in)\b/i,
+  /\boffers\s+(?:activities|details)\b/i,
+  /\bpublic\s+catalog\b/i,
 ];
 
 const BLOCKED_PUBLIC_BADGE_PATTERNS = [

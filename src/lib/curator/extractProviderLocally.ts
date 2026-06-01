@@ -119,8 +119,7 @@ function inferBadges(activityTypes: string[], dayTimeTags: DayTag[]): Badge[] {
 }
 
 function buildDescription(sentences: string[], sourceUrl: string) {
-  const facts = sentences.length > 0 ? sentences : ["Official source page for a European sport shooting organization or activity."];
-  return `${facts.join(" ")}\n\nSources: ${sourceUrl}`;
+  return `${sentences.join(" ")}\n\nSources: ${sourceUrl}`;
 }
 
 export function extractProviderLocally(args: {
@@ -151,6 +150,9 @@ export function extractProviderLocally(args: {
   if (name.length < 2) return { ok: false, reason: "local extractor could not derive a truthful title" };
 
   const descriptionSentences = splitSentences(pageText);
+  if (descriptionSentences.length === 0) {
+    return { ok: false, reason: "local extractor could not derive a truthful content summary from source facts" };
+  }
   const longDescription = buildDescription(descriptionSentences, args.sourceUrl);
   const category = inferCategory(evidenceText);
   const neighborhood = inferNeighborhood(evidenceText, borough);
@@ -165,7 +167,7 @@ export function extractProviderLocally(args: {
     ageRanges,
     dayTimeTags,
     pricePerClass: 0,
-    shortDescription: descriptionSentences[0]?.slice(0, 380) || `${name} is listed from an official Compare source.`,
+    shortDescription: descriptionSentences[0].slice(0, 380),
     longDescription,
     rating: 0,
     reviewCount: 0,

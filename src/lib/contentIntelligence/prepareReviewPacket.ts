@@ -66,6 +66,20 @@ function hasUploadedImage(input: NormalizedListingInput) {
   return (input.imageCandidates ?? []).some((candidate) => Boolean(candidate.uploadedUrl));
 }
 
+function buildMediaRequestFromListing(input: PrepareReviewPacketInput): ImageProcessingRequest | null {
+  if (input.mediaRequest) return input.mediaRequest;
+  const sourceCandidate = input.normalizedListing.imageCandidates?.find((candidate) => candidate.sourceUrl);
+  if (!sourceCandidate?.sourceUrl) return null;
+  return {
+    candidateId: input.draftId,
+    sourceImageUrl: sourceCandidate.sourceUrl,
+    sourceDocumentUrl:
+      sourceCandidate.sourceDocumentUrl ?? input.normalizedListing.sourceUrls?.canonical ?? input.normalizedListing.contactFacts?.website ?? "",
+    destinationEntityKind: input.normalizedListing.listingKindHint === "meetupGroup" ? "meetupGroup" : "provider",
+    requestedBy: "compare-visitor-normalized-listing",
+  };
+}
+
 function appendUploadedImage(
   input: NormalizedListingInput,
   mediaResult: UploadedImageResult | null,
@@ -121,18 +135,19 @@ export async function prepareRangeScoutReviewPacket(
   },
 ): Promise<PrepareReviewPacketResult> {
   let mediaResult: UploadedImageResult | null = null;
-  if (!hasUploadedImage(input.normalizedListing) && input.mediaRequest) {
+  const mediaRequest = buildMediaRequestFromListing(input);
+  if (!hasUploadedImage(input.normalizedListing) && mediaRequest) {
     try {
-      mediaResult = await processOfficialImage(input.mediaRequest, {
+      mediaResult = await processOfficialImage(mediaRequest, {
         fetchImpl: deps.fetchImpl,
         uploadImage: deps.uploadImage,
         hashBuffer: deps.hashBuffer,
       });
     } catch (error) {
       mediaResult = {
-        candidateId: input.mediaRequest.candidateId,
-        originalUrl: input.mediaRequest.sourceImageUrl,
-        sourceDocumentUrl: input.mediaRequest.sourceDocumentUrl,
+        candidateId: mediaRequest.candidateId,
+        originalUrl: mediaRequest.sourceImageUrl,
+        sourceDocumentUrl: mediaRequest.sourceDocumentUrl,
         uploadedUrl: "",
         uploadedAt: new Date().toISOString(),
         mimeType: "",
@@ -172,12 +187,12 @@ export async function prepareRangeScoutReviewPacket(
 
   if (
     !gateResult.approved &&
-    input.mediaRequest &&
+    mediaRequest &&
     mediaResult?.status === "ready" &&
     gateResult.errors.some((issue) => issue.code === "duplicate_image_exact" || issue.code === "duplicate_image_near")
   ) {
     const reselection = await findAlternateOfficialImage({
-      request: input.mediaRequest,
+      request: mediaRequest,
       entityId: draftPayload.id,
       index: imageUniquenessIndex,
       fetchImpl: deps.fetchImpl,

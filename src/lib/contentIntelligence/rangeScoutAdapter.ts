@@ -45,6 +45,9 @@ export interface NormalizedListingInput {
   };
   imageCandidates?: {
     uploadedUrl?: string;
+    sourceUrl?: string;
+    sourceDocumentUrl?: string;
+    alt?: string;
   }[];
   sourceUrls?: {
     canonical?: string;
@@ -102,6 +105,18 @@ const MEETUP_GROUP_TYPES: MeetupGroupType[] = [
 ];
 const MEETUP_CADENCES: MeetupCadence[] = ["Weekly", "Monthly", "Weekend", "Pop-up", "Seasonal", "Competition Calendar"];
 const MEETUP_ICONS: MeetupIcon[] = ["stroller", "skyline", "heart", "coffee", "playground", "community", "target", "forest", "shield", "trophy", "scope"];
+const GENERIC_DESCRIPTION_PATTERNS = [
+  /^listing\s+for\b/i,
+  /\bis\s+listed\s+(?:from|in)\b/i,
+  /\boffers\s+(?:activities|details)\b/i,
+  /\bpublic\s+catalog\b/i,
+  /\bofficial\s+source\b/i,
+  /\bsource[-\s]?backed\b/i,
+  /\boperators?\s+must\s+review\b/i,
+  /\bsee\s+official\s+source\b/i,
+];
+const DESCRIPTION_DOMAIN_PATTERN =
+  /\b(shooting|range|rifle|pistol|shotgun|clay|ipsc|idpa|hunter|hunting|competition|match|course|training|academy|club|federation|calendar|licen[cs]e|registration|lőtér|lövész|vadász|verseny|fegyver)\b/i;
 
 function slugify(value: string) {
   return value
@@ -203,10 +218,35 @@ function buildRecurringPrograms(input: NormalizedListingInput): RecurringProgram
   }));
 }
 
+function normalizeDescriptionFact(value: string) {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function isUsefulDescriptionFact(value: string) {
+  const fact = normalizeDescriptionFact(value);
+  if (fact.length < 40) return false;
+  if (GENERIC_DESCRIPTION_PATTERNS.some((pattern) => pattern.test(fact))) return false;
+  return DESCRIPTION_DOMAIN_PATTERN.test(fact);
+}
+
+function collectDescriptionFacts(input: NormalizedListingInput) {
+  const seen = new Set<string>();
+  const facts: string[] = [];
+  for (const value of input.descriptionFacts ?? []) {
+    const fact = normalizeDescriptionFact(value);
+    const key = fact.toLowerCase();
+    if (!fact || seen.has(key) || !isUsefulDescriptionFact(fact)) continue;
+    seen.add(key);
+    facts.push(fact);
+  }
+  return facts.slice(0, 4);
+}
+
 function collectDiagnostics(input: NormalizedListingInput, resolved: ResolvedDraft) {
   const diagnostics: ResolutionDiagnostic[] = [];
   const borough = normalizeBorough(input.boroughRaw);
   const neighborhood = normalizeNeighborhood(borough, input.neighborhoodRaw);
+  const descriptionFacts = collectDescriptionFacts(input);
 
   if (!borough) {
     diagnostics.push({
@@ -235,6 +275,16 @@ function collectDiagnostics(input: NormalizedListingInput, resolved: ResolvedDra
       message: "No verified uploaded destination image is attached to this draft.",
       fieldPath: resolved.entityKind === "provider" ? "image" : "coverImageUrl",
       recommendedAction: "Run the compare media pipeline and attach a verified uploaded image URL.",
+    });
+  }
+
+  if (descriptionFacts.length === 0) {
+    diagnostics.push({
+      code: "missing_content_summary",
+      severity: "error",
+      message: "No real content description could be derived from source facts.",
+      fieldPath: resolved.entityKind === "provider" ? "shortDescription" : "description",
+      recommendedAction: "Extract at least one factual sentence that explains the actual listing content before publishing.",
     });
   }
 
@@ -282,9 +332,9 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
   const scheduleSignals = deriveScheduleSignals(input.scheduleBlocks ?? []);
   const activityTypes = (input.activityTypesRaw ?? []).filter(Boolean);
   const image = input.imageCandidates?.find((candidate) => candidate.uploadedUrl)?.uploadedUrl ?? "";
-  const neighborhoodLine = normalizeNeighborhood(borough, input.neighborhoodRaw) ?? borough;
-  const baseDescription = (input.descriptionFacts ?? []).filter(Boolean).join(" ") || `${input.title.trim()} in ${neighborhoodLine}.`;
-  const longDescription = `${baseDescription} ${input.title.trim()} offers details in ${neighborhoodLine}.`.slice(0, 140);
+  const descriptionFacts = collectDescriptionFacts(input);
+  const shortDescription = descriptionFacts[0] ?? "";
+  const longDescription = descriptionFacts.join(" ");
 
   return {
     id: `prov-${slugify(input.title)}`,
@@ -297,8 +347,8 @@ function resolveProviderDraft(input: NormalizedListingInput): CuratedProvider {
     ageRanges: normalizeAgeRanges(input.ageRangesRaw),
     dayTimeTags: scheduleSignals.timeTags,
     pricePerClass: 0,
-    shortDescription: (input.descriptionFacts?.[0] ?? `${input.title.trim()} in ${neighborhood}.`).slice(0, 400),
-    longDescription: longDescription.length >= 40 ? longDescription : `${input.title.trim()} in ${neighborhoodLine}.`,
+    shortDescription: shortDescription.slice(0, 400),
+    longDescription: longDescription.slice(0, 900),
     rating: 0,
     reviewCount: 0,
     badges: scheduleSignals.badges.filter((badge): badge is FeaturedBadge => FEATURED_BADGES.includes(badge)),
@@ -319,6 +369,7 @@ function resolveMeetupDraft(input: NormalizedListingInput): CuratedMeetup {
   const hasRecurring = recurringPrograms.length > 0;
   const recurringContainsWeekends = recurringPrograms.some((program) => program.cadence === "Weekends");
   const cadence = recurringContainsWeekends ? "Weekend" : hasRecurring ? "Weekly" : "Weekly";
+  const descriptionFacts = collectDescriptionFacts(input);
 
   return {
     id: `meetup-${slugify(input.title)}`,
@@ -330,7 +381,7 @@ function resolveMeetupDraft(input: NormalizedListingInput): CuratedMeetup {
     cadence: MEETUP_CADENCES.includes(cadence) ? cadence : "Weekly",
     instagram: input.contactFacts?.instagram ?? "",
     website: input.contactFacts?.website ?? input.sourceUrls?.canonical ?? "https://example.com",
-    description: input.descriptionFacts?.join(" ") || `${input.title.trim()} brings together local members in ${neighborhood}.`,
+    description: descriptionFacts.join(" "),
     initials: input.title
       .split(/\s+/)
       .slice(0, 2)

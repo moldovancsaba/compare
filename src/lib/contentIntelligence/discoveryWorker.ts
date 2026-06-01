@@ -293,7 +293,9 @@ function buildProvisionalNormalizedListing(input: {
     ageRangesRaw: input.ageRangesRaw,
     descriptionFacts: [input.text.slice(0, 280)],
     contactFacts: { website: input.sourceUrl },
-    imageCandidates: input.ogImageUrl ? [{ uploadedUrl: undefined }] : [],
+    imageCandidates: input.ogImageUrl
+      ? [{ sourceUrl: input.ogImageUrl, sourceDocumentUrl: input.sourceUrl, alt: `${input.title} image` }]
+      : [],
     sourceUrls: { canonical: input.sourceUrl },
   };
 }
